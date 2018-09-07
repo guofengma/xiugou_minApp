@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var bmap = require('../libs/baidu-map/bmap-wx.min');
+// var bmap = require('../libs/baidu-map/bmap-wx.min');
 
 
 

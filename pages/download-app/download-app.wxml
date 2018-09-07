@@ -1,0 +1,7 @@
+<view  class='downloadPage flexC'>
+   <view class='font-30 gray'>
+      <view class='flexR'>小程序端暂未开放该业务</view>
+      <view class='flexR'>请下载APP</view>
+   </view>
+   <view class='loginBtn flexR'>去下载app</view>
+</view>

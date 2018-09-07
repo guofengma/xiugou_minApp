@@ -5,44 +5,15 @@
 
 import RequestQueue from './request-queue';
 import RequestStatus from './request-status';
+import config from '../../config.js'
 //请求基类
 export default class Request {
-  getBaseUrl(bParam) {
-    // 开发 
-    // this.baseUrl = 'http://172.16.10.7:'
-    // this.baseUrl = 'http://172.16.10.21:'
-    // this.baseUrl = 'http://172.16.10.41:'
-    // this.baseUrl = 'http://172.16.10.88:'
-    // this.baseUrl = 'http ://172.16.10.12:'
-    // this.baseUrl = 'http://172.16.10.29:'
-    // this.baseUrl = 'http://172.16.10.19:'
-    // this.baseUrl = 'http://172.16.10.7:'
-    // this.baseUrl = 'http://172.16.10.253:'
-    
-    // 配置端口号
-    let url = bParam.url
-    let port = ''
-    if (url.startsWith('/order/')) {
-      port = '8103'
-    } else if (url.startsWith('/user/')) {
-      port = '8102'
-    }
-
-    this.baseUrl = this.baseUrl + port
-
-    // 正式
-    // this.baseUrl = 'https://test.dnvhot.tech';
-    // this.baseUrl = 'https://nc.hzjure.xyz';
-    this.baseUrl = 'https://sg.dnvhot.tech';
-    
-    return this.baseUrl
-  }
   constructor(bParam) {
     //request自己控制loading提示
     
     this.manageLoadingPrompt = bParam.isShowLoading
 
-    this.baseUrl = this.getBaseUrl(bParam)
+    this.baseUrl = config.baseUrl
 
     //拼接了bodyParam的最终url
     this._url = '';
