@@ -1,0 +1,4 @@
+<!-- 适配iPhone X -->
+<template name="iPhoneX-line">
+  <view class='iPhoneX-line fixed-bottom'></view>
+</template>

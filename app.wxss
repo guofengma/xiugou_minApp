@@ -1,0 +1,12 @@
+@import "/components/iPhoneX-line/iPhoneX-line";
+
+@import "/css/app.wxss";
+
+page{
+  height: 100%;
+  background-color:#F8F8F8;
+}
+button[disabled]:not([type]) {
+  background-color: rgba(213,18,67,0.5);
+  color: #fff;
+}
