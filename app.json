@@ -1,11 +1,53 @@
 {
-  "pages":[
-    "pages/index/index"
+  "pages": [
+    "pages/index/index",
+    "pages/my/my",
+    "pages/download-app/download-app",
+    "pages/shopping-cart/shopping-cart"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "秀购",
+    "backgroundColor": "#F8F8F8",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "selectedColor": "#D51243",
+    "color": "#999999",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/img/tabbar/index_unselected.png",
+        "selectedIconPath": "/img/tabbar/index_selected.png"
+      },
+      {
+        "pagePath": "pages/download-app/download-app",
+        "text": "拼店",
+        "iconPath": "/img/tabbar/group_tab_unselected.png",
+        "selectedIconPath": "/img/tabbar/group_tab_selected.png"
+      },
+      {
+        "pagePath": "pages/download-app/download-app",
+        "text": "发现",
+        "iconPath": "/img/tabbar/discover_unselected.png",
+        "selectedIconPath": "/img/tabbar/discover_selected.png"
+      },
+      {
+        "pagePath": "pages/shopping-cart/shopping-cart",
+        "text": "购物车",
+        "iconPath": "/img/tabbar/cart_unselected.png",
+        "selectedIconPath": "/img/tabbar/cart_selected.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "/img/tabbar/my_tab_unselected.png",
+        "selectedIconPath": "/img/tabbar/my_tab_selected.png"
+      }
+    ]
   }
 }

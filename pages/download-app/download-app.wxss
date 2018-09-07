@@ -1,0 +1,8 @@
+.downloadPage{
+  height: 100%;
+}
+.loginBtn{
+  width: 300rpx;
+  border-radius: 10rpx;
+  margin-top: 60rpx;
+}
