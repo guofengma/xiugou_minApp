@@ -3,9 +3,9 @@
  */
 'use strict';
 
-// var bmap = require('../libs/baidu-map/bmap-wx.min');
+let bmap = require('../libs/baidu-map/bmap-wx.min');
 
-
+import config from '../config.js'
 
 //工具类
 
@@ -599,7 +599,7 @@ export default class Tool {
                 /* 获取定位地理位置 */
                 // 新建bmap对象
                 var BMap = new bmap.BMapWX({
-                    ak: global.TCGlobal.BaiduMapKey
+                    ak: config.BaiduMapKey
                 });
                 var fail = function (data) {
                     console.log(data);

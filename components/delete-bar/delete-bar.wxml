@@ -1,0 +1,8 @@
+<block>
+  <view class="touch-item {{item[index].isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend='touchend' >
+    <view class="content">
+      <slot></slot>
+    </view>
+    <view class="del redBg flexC" catchtap="itemDelete" data-index="{{index}}">删除</view>
+  </view>
+</block>

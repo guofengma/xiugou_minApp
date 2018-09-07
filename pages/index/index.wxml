@@ -1,1 +1,62 @@
-<!--index.wxml-->
+<view style='height:100%'>
+  <!--广告位  -->
+  <view class='ad'>
+    <view class='search-bar boxSize flexR-sb'>
+      <view class='bar flexR-sb' catchtap='searchClicked'><image src='/img/search.png' mode='widthFix'></image></view>
+      <image src='/img/index-msg.png' mode='widthFix' catchtap='msgClicked'></image>
+    </view>
+    <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:{{imgheights[0]}}rpx;' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff'>
+    <block wx:for="{{imgUrls}}" wx:key='unique'>
+      <swiper-item>
+        <image src="{{item.img_url}}" class="slide-image" catchtap='adListClicked' data-type='{{item.link_type}}' data-val='{{item.link_type_value}}' bindload="imageLoad" />
+      </swiper-item>
+    </block>
+    </swiper>
+    <view class='ad-bg'></view>
+  </view>
+
+  <!--产品分类  -->
+  <view class='classify flexR whiteBg'>
+    <block wx:for="{{classify}}" wx:key='unique'>
+    <view class=''>
+        <image mode='widthFix' src='{{url+item.imgurl}}'></image>
+        <view>{{item.name}}</view>
+    </view>
+    </block>
+  </view>
+
+  <!-- 推荐-->
+  <view class='recommend'>
+    <view class='title-recommend flexR'>
+      <image src='/img/index-title-1.png' mode='widthFix' ></image>
+    </view>
+    <view class='recommend-content whiteBg flexR-sb'>
+      <view class='recommend-img-0 overflow flexR'>
+        <image mode='widthFix' src='{{recommendImgUrl[0].img_url}}' catchtap="adListClicked" data-type='{{recommendImgUrl[0].link_type}}' data-val='{{recommendImgUrl[0].link_type_value}}' class='recommend-img'></image>
+      </view>
+      <view class='right boxSize overflow '>
+        <view class='recommend-img-1 overflow flexR'>
+          <image mode='widthFix' src='{{recommendImgUrl[1].img_url}}' catchtap="adListClicked" data-type='{{recommendImgUrl[1].link_type}}' data-val='{{recommendImgUrl[1].link_type_value}}' class='recommend-img'></image>
+        </view>
+        <view class='recommend-img-2 overflow flexR'>
+          <image mode='widthFix' src='{{recommendImgUrl[2].img_url}}' catchtap="adListClicked" data-type='{{recommendImgUrl[2].link_type}}' data-val='{{recommendImgUrl[2].link_type_value}}' class='recommend-img'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--专题  -->
+
+  <view class='topic'>
+    <view class='title-topic flexR'>
+      <image src='/img/index-title-2.png' mode='widthFix'></image>
+    </view>
+    <block wx:for="{{topicImgUrl}}" wx:key='unique'>
+      <view class='img-view' catchtap='topicClicked' data-id="{{item.link_type_value}}">
+        <image src='{{item.img_url}}' mode='widthFix'></image>
+      </view>
+    </block>
+  </view>
+
+
+</view>

@@ -1,0 +1,104 @@
+.ad{
+  position: relative;
+}
+.ad-bg{
+  height: 28rpx;
+  background: transparent url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/index-ad-bg.png) no-repeat left bottom;
+  background-size: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+  bottom: -1rpx;
+  left: 0;
+}
+.search-bar{
+  position: absolute;
+  top: 18rpx;
+  left: 0;
+  width: 100%;
+  padding:0 42rpx;
+  z-index: 999;
+}
+.bar{
+  width: 597rpx;
+	height: 64rpx;
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius: 28rpx;
+}
+.bar image{
+  width:40rpx; 
+  margin-left: 20rpx;
+  margin-top: 5rpx;
+}
+.search-bar image{
+  width: 42rpx;
+}
+.slide-image{
+  width: 100%;
+  height:100%;
+}
+.classify image{
+  width: 112rpx;
+}
+.classify{
+  font-size: 24rpx;
+  text-align: center;
+  padding: 50rpx 0;
+}
+.classify>view{
+  margin-left: 70rpx;
+}
+.classify>view:first-child{
+  margin-left:0;
+}
+.title-topic,.title-recommend{
+  height: 144rpx;
+}
+.title-topic image{
+  width: 200rpx;
+}
+.title-recommend image{
+  width: 352rpx;
+}
+.recommend-img-1{
+  height: 194rpx;
+  position: relative
+}
+.recommend-img-2{
+  height: 130rpx;
+}
+.recommend-img-1:after{
+  content: '';
+  position: absolute;
+  height: 2rpx;
+  width: 340rpx;
+  background: #eee;
+  bottom: 0;
+  left:10rpx;
+}
+.recommend-img-0{
+  height: 325rpx;
+  width: 50%;
+}
+.recommend-content{
+  padding: 14rpx 20rpx 27rpx 20rpx; 
+}
+.recommend .right{
+  border-left: 1rpx solid #eee;
+  width: 50%;
+}
+.topic{
+  margin-bottom: 100rpx;
+}
+.recommend-img{
+  vertical-align: middle;
+}
+/* .topic image{
+  height: 236rpx;
+} */
+.img-view{
+  margin-bottom: 10rpx;
+}
+.img-view image{
+  width: 100%;
+}

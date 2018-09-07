@@ -9,8 +9,8 @@ import config from '../../config.js'
 //请求基类
 export default class Request {
   constructor(bParam) {
+    console.log(bParam)
     //request自己控制loading提示
-    
     this.manageLoadingPrompt = bParam.isShowLoading
 
     this.baseUrl = config.baseUrl
@@ -158,6 +158,7 @@ export default class Request {
 
   //拼接url
   url() {
+    console.log(this.baseUrl,this.bodyParam.url)
     this._url = this.baseUrl + this.bodyParam.url
     return this._url;
   }

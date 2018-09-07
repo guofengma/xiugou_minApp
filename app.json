@@ -3,13 +3,16 @@
     "pages/index/index",
     "pages/my/my",
     "pages/download-app/download-app",
-    "pages/shopping-cart/shopping-cart"
+    "pages/shopping-cart/shopping-cart",
+    "pages/login-wx/login-wx",
+    "pages/search/search",
+    "pages/search/search-result/search-result"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "秀购",
-    "backgroundColor": "#F8F8F8",
+    "backgroundColor": "#F7F7F7",
     "backgroundTextStyle": "light"
   },
   "tabBar": {

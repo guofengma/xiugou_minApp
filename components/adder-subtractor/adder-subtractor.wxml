@@ -1,0 +1,6 @@
+<!--数量选择器 count 数量  coutSize 大小 -->
+    <view class="adder-subtractor" style='height:{{countSize}}rpx'>
+        <image class="subtractor" mode="aspectFit"src="/img/adder-subtractor-sub.png" style='width:{{countSize}}rpx;height:{{countSize}}rpx'   catchtap="subClicked" data-index='{{index}}' data-name='reduce'/>
+        <input value="{{count}}" style='width:{{countSize+20}}rpx' bindinput="inputOnChange" data-index='{{index}}' type="number" confirm-type='done' bindblur='inputOnblur'/>
+        <image class="adder"  mode="aspectFit"  src="/img/adder-subtractor-adder.png"  style='width:{{countSize}}rpx;height:{{countSize}}rpx'   catchtap="addClicked" data-index='{{index}}'/>
+    </view>

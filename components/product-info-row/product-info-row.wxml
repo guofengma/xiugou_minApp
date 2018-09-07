@@ -1,0 +1,13 @@
+<!--商品信息  -->
+<import src='/components/product-info/product-info.wxml' />
+
+<template name="product-row">
+  <view class="product-row" wx:for='{{productInfo}}' bindtap='productCliked' wx:key='unique'  data-id='{{item.id}}'>
+    <view class='view-prd-img'>
+      <image src='{{item.img_url}}'></image>
+    </view>
+    <view class='cell-line'>
+      <template is="product-info" data='{{...item}}'/>
+    </view> 
+  </view>
+</template>

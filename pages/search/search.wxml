@@ -1,0 +1,22 @@
+<!--搜索  -->
+<!-- <import src='/components/search-bar/search-bar.wxml' /> -->
+
+<view class="search-container">
+   <!-- <template is="search-field" data='{{keyWord}}'/> -->
+   <search-bar bind:getKeyword='getKeyword' bind:searchKeyword='searchKeyword' placeholder='{{placeholder}}' keyWord='{{keyWord}}'/>
+   <view class='history-search'>
+     <view class='cell-line' wx:if="{{history.length>0}}">
+        <text>历史搜索</text>
+        <image src='/img/delete.png' mode='widthFix' bindtap='deleteKeyword'></image>
+     </view>
+     <view class='cell-result'>
+       <view wx:for='{{historyArr}}' wx:key="unique" bindtap='getHotkeyword' data-keyword='{{item.name}}' >{{item.showName }}</view>
+     </view>
+   </view>
+   <view class='hotwords' wx:if='{{door==0}}'>
+      <view  class='cell-line'>热门搜索</view>
+      <view class='cell-result'>
+         <view wx:for='{{hotWords}}' wx:key="unique" bindtap='getHotkeyword' data-keyword='{{item.wordName}}'>{{item.wordShowName}}</view> 
+      </view>
+   </view>
+</view>

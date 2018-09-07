@@ -1,0 +1,14 @@
+<template name="product-info">
+  <view class='info'>{{name}}</view>
+  <!-- <view class='tips'>6月1号大酬宾</view> -->
+  <view class='label'>
+    <text wx:if='{{freight_type==2}}' class='label-by'>包邮</text>
+    <text wx:if='{{freight_type==3}}' class='label-by'>满包邮</text>
+    <text wx:if='{{min_payment}}' class='label-jf'>积分</text>
+  </view>
+  <view class='price red'>
+    <text class='now'>￥{{price}}</text>
+    <text class='gray font-24'>起</text>
+    <!-- <text class='old'>￥{{original_price}}</text> -->
+  </view>
+</template>

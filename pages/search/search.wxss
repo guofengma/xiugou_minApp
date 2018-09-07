@@ -1,0 +1,29 @@
+.cell-line{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30rpx;
+  margin-bottom: 20rpx;
+  font-size: 26rpx;
+  color: #666;
+  padding: 0 30rpx;
+}
+.cell-result view{
+  padding:0 22rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+	background-color: #eeeeee;
+	border-radius: 6rpx;
+  font-size: 30rpx;
+  margin-right: 20rpx;
+  display: inline-block;
+  margin-bottom:20rpx;
+
+}
+.history-search .cell-line image{
+  width: 44rpx;
+}
+.cell-result{
+  margin-bottom:50rpx;
+  padding-left: 30rpx;
+}

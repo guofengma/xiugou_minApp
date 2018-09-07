@@ -1,3 +1,8 @@
 {
-  "navigationBarTitleText": "购物车"
+  "navigationBarTitleText": "购物车",
+  "component": true,
+  "usingComponents": {
+    "adder-subtractor": "/components/adder-subtractor/adder-subtractor",
+    "delete-bar":"/components/delete-bar/delete-bar"
+  }
 }

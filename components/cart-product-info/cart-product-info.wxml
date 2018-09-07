@@ -1,0 +1,18 @@
+<template name="cart-product-info">
+  <view class="cart-product-info flexR" catchtap='cartProductClicked' data-id = '{{product_id}}' data-state='{{productStatus}}'>
+    <view class='leftbar'>
+      <image src='{{showImg}}' class='search-img' style='width:{{imgSize}}rpx;height:{{imgSize}}rpx'></image>
+    </view>
+    <view class='right-bar' style='width:{{480}}rpx'>
+      <view class='ellipsis-2'>{{showName}}</view>
+      <view class='gray ellipsis'>{{showType}} </view>
+      <view class='prd-count-box flexR' wx:if='{{productStatus==4 && stock>0}}' >
+        <view class='red'>¥ {{showPrice}}</view>
+        <view wx:if="{{showQnt}}" class='gray' >×{{showQnt}}</view>
+        <view wx:else catchtap='test' >
+           <adder-subtractor  count="{{innerCount}}" index="{{index}}" countSize='{{countSize}}' bind:countChange="counterInputOnChange"/>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

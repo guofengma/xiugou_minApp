@@ -1,0 +1,11 @@
+.tips-img-view image{
+  width: 350rpx;
+  margin-bottom: 20rpx;
+}
+.tips-img-view {
+  height: 100%;
+  text-align: center;
+  margin-top: 75rpx;
+  font-size: 30rpx;
+  color: #999;
+}

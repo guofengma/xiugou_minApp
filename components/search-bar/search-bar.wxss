@@ -1,0 +1,49 @@
+@import "/css/app";
+
+input{
+  font-size:26rpx;
+  width:460rpx;
+  height:60rpx;
+  background-color:#eeeeee;
+  border-top-left-radius: 6rpx;
+  border-bottom-left-radius: 6rpx;
+  box-sizing:border-box;
+}
+.search{
+  width: 100rpx;
+	height: 60rpx;
+	background-color: #eeeeee;
+	border-radius: 30rpx;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 60rpx;
+}
+.search-field{
+  padding: 16rpx 0;
+}
+.search-img,.search-img-close image{
+  
+  width: 30rpx;
+}
+.search-img{
+  position: absolute;
+  top:12rpx;
+  left: 20rpx;
+  height: 30rpx;
+}
+.search-img-close{
+  background-color:#eeeeee;
+  width:60rpx;
+  height: 60rpx;
+  margin-right:25rpx;
+  border-top-right-radius: 6rpx;
+  border-bottom-right-radius: 6rpx;
+}
+.search-bar{
+  position: relative;
+}
+.input-view{
+  padding-left: 60rpx;
+  background-color:#eeeeee;
+  border-radius:6rpx;
+}

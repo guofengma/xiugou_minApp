@@ -1,0 +1,25 @@
+/*商品展示信息字段  */
+@import "/components/product-info/product-info";
+
+.product-column{
+  display: flex;
+  flex-wrap:wrap;
+  justify-content: space-between;
+}
+.product-column>view{
+  width: 370rpx;
+  box-sizing: border-box;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+.product-column .view-prd-img-c{
+  width: 370rpx;
+  height: 370rpx;
+}
+.view-prd-img-c image{
+  width: 100%;
+  height: 100%;
+}
+.cell-line-c{
+  padding: 18rpx 30rpx;
+}
