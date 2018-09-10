@@ -9,7 +9,6 @@ import config from '../../config.js'
 //请求基类
 export default class Request {
   constructor(bParam) {
-    console.log(bParam)
     //request自己控制loading提示
     this.manageLoadingPrompt = bParam.isShowLoading
 
@@ -87,7 +86,7 @@ export default class Request {
       dataType: 'json',
       method: this.requestMethod,
       header: {
-        'content-type': 'application/x-www-form-urlencoded',
+        'content-type': 'application/json',
         'Cookie': this.hasCookie()
       },
       success: function (res) {
@@ -102,7 +101,7 @@ export default class Request {
         //成功
         that.responseObject = res.data;
         //成功
-        if (res.data.code == '200') {
+        if (res.data.code == '10000') {
           let Datas = that.responseObject.data;
           let firstData = {};
           firstData = Datas

@@ -8,24 +8,13 @@
   -webkit-line-clamp:2;
   line-height:38rpx;
 }
-/* .tips{
-  font-size: 26rpx;
-  color: #999999;
-  margin-top: 10rpx;
-  margin-bottom: 14rpx;
-} */
-.label{
-  height: 50rpx;
-}
 .price{
   margin-top: 10rpx;
   font-size: 30rpx;
 }
 .price .gray{
-  margin-left: 6rpx;
+  margin-left: 10rpx;
 }
-.old{
-  text-decoration: line-through;
-  color: #999999;
-  margin-left: 25rpx;
+.prd-info image{
+  width: 30rpx;
 }

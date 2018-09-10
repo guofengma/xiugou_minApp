@@ -18,9 +18,13 @@
   display: flex;
   align-items: center;
 }
-.cell-line{
+.cell-line-r{
   width:430rpx;
   padding-left: 30rpx;
+  height: 240rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .search-result>.product-row{
   padding-bottom: 20rpx;

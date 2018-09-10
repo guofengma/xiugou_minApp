@@ -5,24 +5,23 @@ input{
   width:460rpx;
   height:60rpx;
   background-color:#eeeeee;
-  border-top-left-radius: 6rpx;
-  border-bottom-left-radius: 6rpx;
+  border-top-left-radius: 35rpx;
+  border-bottom-left-radius: 35rpx;
   box-sizing:border-box;
 }
 .search{
   width: 100rpx;
 	height: 60rpx;
-	background-color: #eeeeee;
-	border-radius: 30rpx;
+	border-radius:6rpx;
   font-size: 30rpx;
   text-align: center;
   line-height: 60rpx;
 }
 .search-field{
+  border-top: 1rpx solid #ddd;
   padding: 16rpx 0;
 }
 .search-img,.search-img-close image{
-  
   width: 30rpx;
 }
 .search-img{
@@ -36,8 +35,8 @@ input{
   width:60rpx;
   height: 60rpx;
   margin-right:25rpx;
-  border-top-right-radius: 6rpx;
-  border-bottom-right-radius: 6rpx;
+  border-top-right-radius: 35rpx;
+  border-bottom-right-radius: 35rpx;
 }
 .search-bar{
   position: relative;
@@ -45,5 +44,5 @@ input{
 .input-view{
   padding-left: 60rpx;
   background-color:#eeeeee;
-  border-radius:6rpx;
+  border-radius:35rpx;
 }

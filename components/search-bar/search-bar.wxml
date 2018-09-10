@@ -1,16 +1,3 @@
-<!-- <template name="search-field">
-  <view class="search-field flexR">
-    <view class='search-bar'>
-      <image src='/img/search.png' class='search-img' mode='widthFix'></image>
-      <view class='input-view'>
-        <input value='{{keyWord}}' disabled='{{disabled}}' placeholder='搜索商品' bindinput='getKeyword' value='{{keyword}}'></input>
-      </view>
-      <image src='/img/close-2.png' class='search-img-close' mode='widthFix' wx:if='{{showClose}}' catchtap='deleteWords'></image>
-    </view>
-    <view class='search' bindtap='searchKeyword'>搜索</view>
-  </view>
-</template> -->
-
 <view class="search-field flexR">
   <view class='search-bar flexR'>
     <image src='/img/search.png' class='search-img' mode='widthFix'></image>
@@ -30,5 +17,5 @@
         <image src='/img/close-2.png'  mode='widthFix' wx:if='{{showClose}}'></image> 
     </view>
   </view>
-  <view class='search' bindtap='searchKeyword'>搜索</view>
+  <view class='search redBg' bindtap='searchKeyword'>搜索</view>
 </view>

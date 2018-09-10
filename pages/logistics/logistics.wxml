@@ -1,0 +1,53 @@
+<view class='logistics' wx:if="{{list.length>0}}">
+  <view class="title flexR-sb font-30">
+    <text>{{expTextName}}：{{mailNo}}</text>
+    <image src='/img/wuliu-icon.png' mode='widthFix'></image>
+  </view>
+  <view class='font-26'>
+    <view class='company'>
+      <view class='flexR'>
+        <image src='/img/wuliu-icon-de.png' mode='widthFix' class='logo-w'></image>
+        <!--<view>本数据由 <text class='blue'>百世汇通</text> 提供</view>-->
+        <view>物流状态 <text class='blue'><span wx:if="{{status==0}}">查询异常</span>
+          <span wx:if="{{status==1}}">暂无记录</span>
+          <span wx:if="{{status==2}}">在途中</span>
+          <span wx:if="{{status==3}}">派送中</span>
+          <span wx:if="{{status==4}}">已签收</span>
+          <span wx:if="{{status==5}}">用户拒签</span>
+          <span wx:if="{{status==6}}">疑难件</span>
+          <span wx:if="{{status==7}}">无效单</span>
+          <span wx:if="{{status==8}}">超时单</span>
+          <span wx:if="{{status==9}}">签收失败</span>
+          <span wx:if="{{status==10}}">退回</span></text></view>
+      </view>
+    </view>
+    <view class='infos'>
+      <view>
+        <block wx:for='{{list}}' wx:key='unique'>
+          <view class='flexR-sb gray'>
+            <view class='time-line'>
+              <view class='font-28'>{{item.showDate}}</view>
+              <view class='font-20'>{{item.showTime}}</view>
+            </view>
+            <view class='time-content'>
+              <!--<image src='{{item.middleImage}}' mode='widthFix' class='state-icon'></image>-->
+              <view class='dian'><view></view></view>
+              <!--<view class='font-30 state-title'>{{item.title}}</view>-->
+              <view>
+                {{item.context}}
+                <!--<text class='orange'>{{item.content2}}</text>-->
+                <!--{{item.content3}}-->
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>  
+  </view>
+</view>
+
+<view class='no-logistics flexC' wx:else>
+  <image src='/img/wuliu-tips.png' mode='widthFix'></image>
+  <view class='gray font-30'>{{tips}}</view>
+</view>
+ 

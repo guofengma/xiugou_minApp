@@ -1,0 +1,10 @@
+<template name="cell-line">
+  <view class='cell-line-view flexR-sb font-26 whiteBg boxSize'>
+    {{name}}
+    <view class='cell-line-view-right boxSize flexR-sb'>
+      <view class='cell-content' wx:if='{{content}}'>{{content}}</view>
+      <view class='gray' wx:else>{{placeholder || '请选择'}}</view>
+      <image mode='widthFix' src='/img/common-accessory-icon.png' class='jiantou'></image>
+    </view>
+  </view>  
+</template>

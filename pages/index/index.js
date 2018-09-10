@@ -20,9 +20,9 @@ Page({
         ysf: { title: '首页' }
     },
     onLoad: function () {
-      this.queryAdList();
-      this.querySpeList();
-      this.queryFeaturedList()
+      // this.queryAdList();
+      // this.querySpeList();
+      // this.queryFeaturedList()
       Event.on('didLogin', this.didLogin, this);
     },
     imageLoad(e){

@@ -37,6 +37,9 @@ Page({
   onShow: function () {
     
   },
+  addShoppingCart(e){
+    //加入购物车
+  },
   getKeyword(e){
     this.setData({
       keyword: e.detail.keyWord

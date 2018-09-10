@@ -1,0 +1,55 @@
+<!--pages/my/account.wxml-->
+<view class="order">
+    <view class="wrap">
+        <view class="item line" bindtap="phone">
+            <view>
+                <text>修改手机号</text>
+            </view>
+            <view>
+                <text>{{userInfos.phone || ''}}</text>
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+            </view>
+        </view>
+        <view class="item line" bindtap="password">
+            <view>
+                <text>修改密码</text>
+            </view>
+            <view>
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+            </view>
+        </view>
+        <view class="item" bindtap="account">
+            <view>
+                <text>微信账号</text>
+            </view>
+            <view>
+                <!--<text>1111</text>-->
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+            </view>
+        </view>
+    </view>
+    <!-- <view class="img-area">
+        <image src="/img/icon_05@2x.png"></image>
+    </view> -->
+    <!--确认弹窗-->
+    <view class="tips-delete-order model-view-bg " wx:if='{{unBinded}}'>
+        <view class='flexR'>
+            <view class='tips-box '>
+                <view class='tips-icon flexR'>
+                    <view>
+                        <image src="/img/tktx_03@2x.png"></image>
+                    </view>
+                </view>
+                <view class='content'>
+                    <view class='big'>确定解绑微信账号？</view>
+                    <view class='big' style="text-align:left">解绑微信号后、将无法继续使用其他登录方式登录该账号</view>
+                </view>
+                <view class='flexR-sb btn-content'>
+                    <view class='redBg deleteBtn flexR' bindtap='sure'>确定</view>
+                    <view class='deleteBtn leftBtn gray flexR' bindtap='cancel'>取消</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+

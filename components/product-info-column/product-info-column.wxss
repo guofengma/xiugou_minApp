@@ -22,4 +22,5 @@
 }
 .cell-line-c{
   padding: 18rpx 30rpx;
+  /* height: 240rpx; */
 }

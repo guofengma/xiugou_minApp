@@ -1,0 +1,22 @@
+<import src='/components/my-order-product-info/my-order-product-info.wxml'/>
+
+<view class='after-sale-type flexR-sb font-32'>服务联系</view>
+
+<view class='group group1 ' catchtap='goPage' data-index='0'>
+   <view class='font-32'>退款</view>
+   <view class='font-30'>未收到货（包含未签收）</view>
+</view>
+
+<view class='group group2' catchtap='goPage' data-index='1'>
+   <view class='font-32'>退货退款</view>
+   <view class='font-30'>已收到货，需要退换已收到的货物</view>
+</view >
+
+<view class='group group3' catchtap='goPage' data-index='2'>
+   <view class='font-32'>换货</view>
+   <view class='font-30'>未收到货（包含未签收）</view>
+</view>
+
+<view class='cell-line whiteBg font-26 flexR-sb'>订单编号：{{list.orderNum}}</view>
+<template is="my-order-product-info" data="{{...list}}"/>
+<view class='cell-line whiteBg font-26 flexR-sb'>下单时间：{{list.createTime}}</view>

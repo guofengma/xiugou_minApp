@@ -1,0 +1,34 @@
+@import "/components/my-order-product-info/my-order-product-info";
+/*搜索产品异常显示  */
+
+@import  "/components/result-tips/result-tips";
+
+.order-line{
+  border-top: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+}
+.after-sale-bottom{
+  padding: 12rpx 30rpx;
+  justify-content: flex-end;
+  border-bottom: 1rpx solid #eee;
+  margin-bottom: 20rpx;
+}
+.after-sale-btn{
+  width: 160rpx;
+	height: 60rpx;
+	border-radius: 30rpx;
+	border: 1rpx solid #dddddd;
+}
+.search-result{
+  height: 100%;
+  padding-top: 92rpx;
+  padding-bottom: 20rpx;
+}
+.sale-bar{
+  position: fixed;
+  width: 100%;
+  top:0;
+  left: 0;
+  z-index: 999;
+  background: #f7f7f7;
+}

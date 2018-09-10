@@ -1,0 +1,55 @@
+<view class='address'>
+    <form bindsubmit="formSubmit">
+    <view class="main-area">
+        <view class="wrap">
+            <view class="item line" bindtap="showActInf">
+                <view>
+                    <text>收货人</text>
+                </view>
+                <view>
+                    <input type="text" name="receiver" value='{{receiver}}' placeholder="请输入收货人姓名" placeholder-style='color:#c8c8c8'></input>
+                </view>
+            </view>
+            <view class="item" bindtap="showActInf">
+                <view>
+                    <text>联系电话</text>
+                </view>
+                <view>
+                    <input type="text" name="recevicePhone" value='{{recevicePhone}}' placeholder="请输入联系人电话" placeholder-style='color:#c8c8c8'></input>
+                </view>
+            </view>
+        </view>
+        <view class="wrap">
+            <city-picker bind:pickerClicked="pickerClicked" id='picker' region='{{region}}'>
+              <view  class="item mar-top2 line">
+                <view>
+                    <text>收货地址</text>
+                </view>
+                <view class="right">
+                    <text wx:if='{{region.length==0}}'>选择区域</text>
+                    <view wx:if='{{region.length>0}}' class='region boxSize' style='width:96%;display:inline-block'>
+                      {{region[0].name + " - "+ region[1].name+ " - "+ region[2].name}}
+                    </view>
+                    <image wx-if="!isAddress" src='/img/common-accessory-icon.png' mode='widthFix'></image>
+                </view>
+            </view>
+            </city-picker>
+            <view class="item special">
+                <textarea name='address' wx:if="{{!hidden}}" value='{{address}}' placeholder='请输入详细地址' placeholder-style='color:#c8c8c8' class='textarea' />
+                <view wx:else class='textarea'></view>
+            </view>
+        </view>
+       <!-- <view class="wrap">
+            <view class="default mar-top2">
+                <view>
+                    <text>是否设为默认地址</text>
+                </view>
+                <view>
+                    <image bindtap="setDefault" src='{{ isDefault? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
+                </view>
+            </view>
+        </view>-->
+    </view>
+    <button formType="submit" class='loginBtn' >保存</button>
+    </form>
+</view>

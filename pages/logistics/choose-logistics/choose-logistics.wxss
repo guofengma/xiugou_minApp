@@ -1,0 +1,18 @@
+.label-log{
+  width: 72rpx;
+  margin-right: 30rpx;
+}
+.logistics{
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  border-bottom:  1rpx solid #eeeeee;
+}
+
+.classification,.logistics{
+  padding: 0 30rpx;
+  border-bottom:  1rpx solid #eeeeee;
+}
+.classification{
+  height: 64rpx;
+}

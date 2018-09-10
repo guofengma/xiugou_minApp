@@ -1,0 +1,16 @@
+<view class='content' wx:if='{{hidden}}'>
+  <view class='after-sale-reason font-32'>
+    <view class='title flexR'>
+      <view class='close-view flexR' bindtap='closeClicked'>X</view>
+      {{reason.title}}
+    </view>
+    <scroll-view scroll-y style='height:380rpx;'>
+      <block wx:for='{{reason.list}}' wx:key='unique' >
+        <view class='reason-cell' bindtap='reasonClicked' data-content='{{item}}' data-index='{{index}}' data-id='{{item.dKey}}'>
+          <view class='{{activeIndex===index? "active":""}}'>{{item.dValue}}</view>
+        </view>
+      </block>
+    </scroll-view>
+    <view class='loginBtn font-32 flexR' bindtap='makeSure'>确认</view>
+  </view>
+</view>

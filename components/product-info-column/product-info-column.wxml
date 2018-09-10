@@ -7,7 +7,7 @@
         <view class='view-prd-img-c'>
           <image src='{{item.img_url}}'></image>
         </view>
-        <view class='cell-line-c'>
+        <view class='cell-line-c boxSize'>
           <template is="product-info" data='{{...item}}'/>
         </view>
       </view>

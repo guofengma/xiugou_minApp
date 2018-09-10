@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "退货退款详情",
+  "usingComponents": {
+    "contact-seller": "/components/contact-seller/contact-seller"
+  }
+}

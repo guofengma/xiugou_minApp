@@ -1,0 +1,111 @@
+<view>
+    <view class='cash'>
+        <view class="item">
+            <view class="title">
+                待提现（元）
+            </view>
+            <view class="num">
+                {{account}}
+            </view>
+            <view class="btn" bindtap="change">兑换代币</view>
+            <view class="explain" bindtap="explain">
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon01_07@2x.png"></image>
+                <text>提现说明</text>
+            </view>
+        </view>
+    </view>
+    <view class="list-area">
+        <view class="list-item" wx:for="{{list}}" wx:key='unique'>
+          <image src="{{iconArr[item.iconIndex].icon}}"></image>
+          <view class="detail">
+              <view class="style">
+                {{iconArr[item.iconIndex].name}}
+                <text class='red' wx:if="{{item.showName}}">({{item.showName}})</text>
+              </view>
+              <view class="time">{{item.createTime}}</view>
+              <view class="number" bindtap="limit" wx:if='{{item.status==2}}'>
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon001_03@2x.png"></image>备注：等级受限？
+              </view>
+          </view>
+          <view class="money fr {{item.add?'red':''}}">
+             {{item.add? "+":"-" }} {{item.balance}}
+          </view>
+        </view>
+       
+    </view>
+    <!--提现说明弹窗-->
+    <tips-info isShoW='{{isExplain}}' header='待提现账户说明' bind:closeMask='closeMask'>
+      <view class="info">
+          <view class="question">
+              什么是待提现账户？
+          </view>
+          <view class="answer">
+              待提现账户为用户收益明细账户，可通过
+              待提现账户查看收益情况。
+          </view>
+      </view>
+      <view class="info">
+          <view class="question">
+              为何不能马上提现？
+          </view>
+          <view class="answer">
+              1.因为您下级或下下级的交易并未完全完成
+              所以账户中的金额暂时不可提现，当交易完
+              成之后，系统将会自动提现至您的余额账户
+          </view>
+          <view class="answer">
+              2.为什么有些金额无法提现，因为您的等级
+              过底或者您尚未参与拼店，所以，这些金额
+              无法即刻提现。
+          </view>
+          <view class="answer">
+              <text class='red'>3.赠送代币，即为平台特殊奖励</text>
+          </view>
+      </view>
+    </tips-info>
+    <!--等级受限弹窗-->
+    <tips-info isShoW='{{isLevel}}' header='什么是等级受限' bind:closeMask='closeMask'>
+      <view class="info">
+        <view class="question">
+            该收入为您的下级和下下级给您带来
+            的收益，你可进行提取，但因为您的
+            等级未达到要求，受到限制，无法提
+            现
+        </view>
+      </view>
+      <view class="info">
+          <view class="question">
+              如何解除限制？
+          </view>
+          <view class="answer">
+              1.您需要晋升等级，达到下级或者下下级当
+              时购买时的等级即可解冻该部分金额。
+          </view>
+          <view class="answer">
+              2.参与拼店，即可立即解冻金额，提现至余
+              额账户。
+          </view>
+          <view class="answer">
+              3.您现现阶段可无条件提现至代币账户，代
+              币等同于余额价值，代币可不提现。
+          </view>
+      </view>
+    </tips-info>
+    <!-- <view class="mask" wx-if="{{isExplain}}">
+        <view class="content">
+            
+        </view>
+        <image class="close" bindtap="closeMask" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/sc_03@2x.png"></image>
+    </view> -->
+    
+    <!-- <view class="mask" wx-if="{{isLevel}}">
+        <view class="content">
+            <view class="header">
+                什么是等级受限
+            </view>
+            
+        </view>
+        <image class="close" bindtap="closeMask" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/sc_03@2x.png"></image>
+    </view> -->
+</view>
+

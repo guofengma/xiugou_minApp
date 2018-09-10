@@ -1,0 +1,19 @@
+<template name="tips-delete-order">
+  <view class="tips-delete-order model-view-bg " wx:if='{{isDelete}}'>   
+    <view>
+     <view class='tips-box '>
+      <view class='tips-icon flexR'>
+        <view></view>
+      </view>
+      <view class='content'>
+        <view class='big'>删除订单</view>
+        <view >确认删除此订单吗</view>
+      </view>
+      <view class='flexR-sb btn-content'>
+        <view class='deleteBtn leftBtn gray flexR' bindtap='dismissCancel'>取消</view>
+        <view class='redBg deleteBtn flexR' bindtap='deleteOrder'>确定</view>
+      </view>
+    </view>
+    </view>
+  </view>
+</template>

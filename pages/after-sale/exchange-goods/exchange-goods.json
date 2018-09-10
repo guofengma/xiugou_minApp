@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "换货详情",
+  "usingComponents": {
+    "contact-seller": "/components/contact-seller/contact-seller"
+  }
+}

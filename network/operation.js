@@ -20,28 +20,19 @@ export default class Operation {
     /*************  注册登录相关接口 *********************/
        
         // 验证openid是否注册
-        this.verifyWechat = '/user/memberLogin/verifyWechat'
+        this.verifyWechat = '/user/userLogin/verifyWechat'
 
         // 微信登陆
-        this.wechatLogin = '/user/memberLogin/wechatLogin'
+        this.wechatLogin = '/user/userLogin/wechatLogin'
 
         // 判断手机号是否可用
-        this.findMemberByPhone = '/user/memberSign/findMemberByPhone'
+        this.findMemberByPhone = '/user/userSign/findMemberByPhone'
 
         // 注册
         this.signMember = '/user/memberSign/signMember'
 
         // 获取推荐人列表
         this.queryInviterList = '/user/memberSign/queryInviterList'
-
-        // 使用账号密码手动登录
-        this.passwordLogin = '/user/memberLogin/passwordLogin'
-
-        // 忘记密码 
-        this.resetPassword = '/user/memberLogin/resetPassword'
-        
-        // 实名制
-        this.signMemberInfo = '/user/memberSign/signMemberInfo'
 
 
     /**********  获取省市区 *******************/

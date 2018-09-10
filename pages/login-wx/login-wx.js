@@ -72,10 +72,9 @@ Page({
       }
     }
     r.failBlock = (req) => {
-      console.log(req)
-      if (req.responseObject.code == 600){
+      if (req.responseObject.code == 31401){
         Tool.navigateTo('/pages/register/register')
-      } else if (req.responseObject.code == 215){
+      } else if (req.responseObject.code == 40000){
         Tool.navigateTo('/pages/download-app/download-app?door=1')
       } else {
         Tool.showAlert(req.responseObject.msg)

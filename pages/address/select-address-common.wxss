@@ -1,0 +1,43 @@
+/*地址选择的样式*/
+
+.select-address-box{
+  width: 690rpx;
+  margin: 0 auto;
+  margin-top: 20rpx;
+  box-shadow: 0px 0px 20rpx 0px rgba(102, 102, 102, 0.1);
+  border-radius: 20rpx;
+  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/line-bg-dark.png) no-repeat left bottom; 
+  background-size: 100%;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+.select-selfLifting-address .select-address-box{
+  padding-right: 15%;
+}
+.select-address-box.active, .select-selfLifting-address .select-address-box{
+  background-image: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/line-bg.png);
+}
+.select-address-box .address-info{
+  box-sizing: border-box;
+  /* padding-left: 34rpx; */
+  padding: 40rpx 0 40rpx 34rpx;
+}
+.select-address-box .leftbar{
+  height: 100%;
+  width: 15%;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.select-address-box.active .leftbar,.select-address-box.active .topBar {
+  background:url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/default-text.png) no-repeat right top;
+  background-size: 70rpx 70rpx; 
+}
+.topBar {
+  padding-right: 44rpx;
+  background-size: 64rpx 64rpx; 
+}
+.leftbar image{
+  width: 44rpx;
+}

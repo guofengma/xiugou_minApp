@@ -1,0 +1,20 @@
+<template name="msg-tips">
+  <view class='msg-tips' wx:if='{{msgShow}}'>
+    <view class='flexR' data-index='1' bindtap='msgTipsClicked'>
+      <image src='/img/msg-tips-icon.png' mode='widthFix'></image>
+      <view>消息</view>
+    </view>
+    <view class='flexR' data-index='2' bindtap='msgTipsClicked'>
+      <image src='/img/home-icon.png' mode='widthFix'></image>
+        <view>首页</view>
+    </view>
+    <view class='flexR' data-index='3' bindtap='msgTipsClicked'>
+      <view>
+        <button class='share'  open-type="share" >
+        <image src='/img/share-icon.png' mode='widthFix'></image>
+        分享
+        </button>
+      </view>
+    </view>
+  </view>
+</template>

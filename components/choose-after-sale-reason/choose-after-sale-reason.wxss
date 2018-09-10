@@ -1,0 +1,59 @@
+@import "/css/app";
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100002;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.5);
+}
+.reason-cell,.title{
+  border-bottom: 1rpx solid #eee;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding: 0 30rpx;
+  position: relative;
+  font-size:26rpx;
+}
+.reason-cell>view{
+  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/choose-circle.png) no-repeat center right;
+  background-size: 44rpx 44rpx;
+}
+.reason-cell>view.active{
+  background-image: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/choose-right-icon.png)
+}
+.after-sale-reason{
+  width: 100%;
+  height: 622rpx;
+  background: #fff;
+}
+.font-32{
+  font-size: 32rpx;
+}
+.close-view{
+  position: absolute;
+  /* height: 100%; */
+  width: 80rpx;
+  right:0;
+  color: #bbb;
+}
+.loginBtn{
+  margin: 0 auto;
+  width: 690rpx;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  height:96rpx;
+  line-height: 96rpx;
+  font-size: 28rpx;
+}
+
+.flexR{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center; 
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "订单详情",
+  "usingComponents": {
+    "tips-cancel-order": "/components/tips-cancel-order/tips-cancel-order"
+  }
+}

@@ -1,0 +1,41 @@
+
+<view class='pagesize'>
+    <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+        <view class="tab-item {{currentTab==0?'red':''}}"  data-current="0" bindtap="swichNav">未使用</view>
+        <view class="tab-item {{currentTab==1?'red':''}}" data-current="1" bindtap="swichNav">已失效</view>
+        <view class="tab-item {{currentTab==2?'red':''}}" data-current="2" bindtap="swichNav">已使用</view>
+    </scroll-view>
+    <swiper class="tab-content {{currentTab==0&&door==1? 'tab-active':''}}" current="{{currentTab}}" duration="300" bindchange="switchTab">
+        <swiper-item wx:for="{{lists}}" wx:for-index="key" wx:for-item="list"  wx:key="{{key}}">
+            <scroll-view scroll-y class="scoll-h" bindscrolltolower="onScroll" wx:if='{{currentTab==key}}'>
+              <block wx:for="{{list}}" wx:key="{{index}}">
+                <view class="item-ans {{item.active? 'active':''}}" data-index='{{index}}' bindtap="toDetail" data-id="{{item.id}}" data-btn = '{{item.left}}' data-canuse='{{item.canUse}}'>
+                    <view class='coupon-left'>
+                      <view class='{{item.active? "red":"gray"}} font-30'>
+                        {{item.type !='ZK'? "¥":''}}
+                        <text >{{item.value}}</text>
+                        {{item.type =='ZK'? "折":''}}
+                      </view>
+                      <view class='gray' >{{item.typeName}}</view>
+                      <view class='gray'>满{{item.useConditions}}可用</view>
+                    </view>
+                    <view class='coupon-center'>
+                      <view class='font-30'>{{item.nickname}}</view>
+                      <view class='gray'>限品类：{{item.name}}</view>
+                      <view class='gray' >有效期：{{item.start_time}} - {{item.outTime}}</view>
+                    </view>
+                    <view class='coupon-right flexC font-30' >
+                       <text wx:for="{{item.left}}" wx:for-item="left"  wx:key="{{index}}">{{left}}</text> 
+                      <!-- <text>{{item.left}}</text> -->
+                    </view>
+                </view>
+              </block>
+              <view wx:if='{{list.length==0}}' class='flexC coupon-img'>
+                <image src='/img/coupon-icon.png' mode='widthFix'></image>
+                <view class='gray font-30'>暂无优惠券~</view>
+              </view>
+            </scroll-view>
+        </swiper-item>
+    </swiper>
+    <view class='btn-view flexR fixed-bottom font-30 whiteBg' wx:if="{{currentTab==0&door==1}}" catchtap='giveUpUse'>放弃使用优惠券</view> 
+</view>

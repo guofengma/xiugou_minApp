@@ -1,0 +1,22 @@
+@import "/pages/product-detail/product-detail.wxss";
+
+.tips-content{
+  color: #666;
+  padding: 60rpx;
+}
+
+.tips-title{
+  margin: 60rpx 50rpx 0 50rpx; 
+  text-align: center;
+  font-size: 26rpx;
+}
+.tips-line{
+  text-align: center;
+}
+.first-tips{
+  margin-bottom: 28rpx;
+}
+.dismiss{
+  background: #ddd;
+}
+

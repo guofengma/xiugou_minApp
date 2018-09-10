@@ -1,0 +1,18 @@
+<!--pages/my/account.wxml-->
+<view class="aboutUs">
+   <view class="logo-area">
+       <image class="logo-img" src="/img/logo-img.png"></image>
+       <view>当前版本：1.0</view>
+   </view>
+    <view class="content-area">
+        <view class="title">公司简介</view>
+        <view class="content">
+            杭州名融网络有限公司是一家以移动社交零售平台为主的互联网公司。目前，公司以雄厚的资金规模和全球知名时尚品牌共同打造全新的互联网流量经济平台和网红经济平台。公司以强大的资源体系和行业成功案例为依托，不断突破和创新，短短几年多时间已具有百万在线用户！
+        </view>
+    </view>
+    <view class="footer">
+        <view>杭州名融网络有限公司版权所有</view>
+        <view>Copyright © 2018 杭州名融网络有限公司</view>
+    </view>
+</view>
+

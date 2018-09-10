@@ -1,0 +1,40 @@
+.my-account{
+    padding: 20rpx 30rpx;
+}
+.item{
+    width: 100%;
+    height: 220rpx;
+    color: #fff;
+    margin-bottom: 20rpx;
+    position: relative;
+}
+.title{
+    font-size: 30rpx;
+    position: absolute;
+    top: 35rpx;
+    left: 90rpx;
+}
+.num{
+    font-size: 48rpx;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    margin-top: 20rpx;
+}
+.cash{
+    background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon02_03@2x.png") no-repeat top center;
+    background-size: cover;
+}
+.token{
+    background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon03_06@2x.png") no-repeat top center;
+    background-size: cover;
+}
+.deposit{
+    background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon04_08@2x.png") no-repeat top center;
+    background-size: cover;
+}
+.integral{
+    background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon05_10@2x.png") no-repeat top center;
+    background-size: cover;
+}

@@ -27,3 +27,6 @@
   margin-bottom:50rpx;
   padding-left: 30rpx;
 }
+.search-bar-view{
+  padding-bottom: 6rpx;
+}

@@ -1,0 +1,20 @@
+.codeBtn{
+  color: #ff979f;
+}
+.view-box{
+  font-size: 26rpx;
+}
+.codeView{
+  height: 90rpx;
+  background: #fff;
+  padding: 0 30rpx;
+}
+.view-box>view:first-child{
+  padding: 20rpx 30rpx;
+}
+.loginBtn {
+  border-radius: 10px;
+  margin: 160rpx auto;
+  text-align: center;
+  font-size: 28rpx;
+}

@@ -70,7 +70,7 @@ App({
     toLogin(code) {
       if (!code) return
       let params = {
-        code: code,
+        wechatCode: code,
         reqName:'获取openid和是否注册',
         url: Operation.verifyWechat,
         hasCookie:false
@@ -78,13 +78,13 @@ App({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         Tool.loginOpt(req)
-      }
-      r.failBlock = (req) => {
-        if (req.responseObject.code == 600) {
-          global.Storage.setWxOpenid(req.responseObject.data)
-          Tool.navigateTo('/pages/login/login-wx/login-wx')
+        let datas = req.responseObject.data
+        Storage.setWxOpenid(datas.openid)
+        if (!datas.id){
+          Tool.navigateTo('/pages/login-wx/login-wx')
         }
       }
+      Tool.showErrMsg(r)
       r.addToQueue();
     },
     /**

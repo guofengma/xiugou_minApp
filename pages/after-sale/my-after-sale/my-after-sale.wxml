@@ -1,0 +1,23 @@
+<import src='/components/my-order-product-info/my-order-product-info.wxml'/>
+
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
+
+<view wx:if='{{!tipVal}}' class='sub-page'>
+  <view class='sale-bar'>
+    <search-bar bind:getKeyword='getKeyword' bind:searchKeyword='searchKeyword'/>
+  </view>
+  <scroll-view class="search-result" scroll-y bindscrolltolower='onScroll'>
+    <block wx:for='{{lists}}' wx:key='unique'>
+      <view class='order-line'>
+        <template is="my-order-product-info" data="{{...item,isSaleAfter:true}}"/>
+      </view>
+      <view class='after-sale-bottom flexR whiteBg'>
+        <view class='after-sale-btn flexR font-26' catchtap='goPage' data-prdid='{{item.returnProductId}}' data-id='{{item.returnProductType}}'>查看详情</view> 
+      </view>
+    </block>
+  </scroll-view>
+</view>
+
+<!--搜索结果异常显示 tipVal  -->
+<template is="result-tips" wx-if='{{tipVal}}' data="{{tipVal}}" />

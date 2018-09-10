@@ -1,0 +1,110 @@
+.logistics>view{
+  box-shadow: 0 0 20rpx 0rpx rgba(0, 0, 0, 0.1);
+	border-radius: 20rpx;
+  width:690rpx;
+  margin: 0 auto;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.title{
+  height: 96rpx;
+  color: #ff7e00;
+  padding: 0 30rpx;
+}
+.title image{
+  width: 34rpx;
+}
+.logistics{
+  padding-top: 20rpx;
+  padding-bottom: 70rpx;
+}
+.no-logistics{
+  height: 100%;
+}
+.no-logistics image{
+  width: 186rpx;
+}
+.logo-w{
+  width: 54rpx;
+  margin-right: 16rpx;
+  vertical-align: top;
+}
+.blue{
+  color: #0186f5;
+}
+.company{
+  height: 112rpx;
+  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/wuliu-bg.png) no-repeat left top;
+  background-size:690rpx 112rpx;
+  border-top-left-radius:20rpx;
+  border-top-right-radius:20rpx;
+  margin-top: 20rpx;
+  box-sizing: border-box;
+  padding:18rpx 30rpx 0 30rpx;
+}
+.company>view{
+  justify-content: flex-start;
+}
+.flexR-sb.gray{
+  align-items: flex-start
+}
+.infos{
+  min-height: 300rpx;
+  padding: 30rpx;
+}
+.infos>view{
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: #999;
+}
+.time-line{
+  width: 100rpx;
+  margin-right:10rpx;
+  text-align: right;
+}
+.time-content{
+  width: 500rpx;
+  /* padding-top: 10rpx; */
+  padding-bottom:34rpx; 
+  min-height:120rpx;
+  border-left: 2rpx solid #ddd; 
+  box-sizing: border-box;
+  padding-left:56rpx;
+  position: relative;
+}
+.dian{
+  position: absolute;
+  width: 16rpx;
+	height: 16rpx;
+	background-color: #fff;
+  left: -5rpx;
+  top:22rpx;
+  border-radius: 15rpx;
+  z-index: 10;
+}
+.dian>view{
+  width: 10rpx;
+	height: 10rpx;
+	background-color: #cccccc;
+  border-radius: 10rpx;
+  position: absolute;
+  top:3.5rpx;
+  z-index: 20;
+}
+.infos>view:first-child{
+  color: #222;
+}
+.state-icon{
+  width: 56rpx;
+  position: absolute;
+  left: -28rpx;
+  top:0rpx;
+  z-index: 999;
+}
+.infos>view:last-child .time-content{
+  /* border-left:2rpx solid transparent; */
+  /* padding-top:0; */
+}
+.orange{
+  color: #ff7e00;
+}

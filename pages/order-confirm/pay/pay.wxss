@@ -1,0 +1,115 @@
+/* pages/pay/pay.wxss */
+.pay{
+  border-top:1rpx solid #eee;
+}
+.wrap {
+    display: flex;
+    justify-content: space-around;
+    padding:30rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    background: #fff;
+    margin-bottom: 20rpx
+}
+
+.wrap image {
+    width: 70rpx;
+    height: 70rpx;
+    margin-top: -5rpx;
+}
+
+.left {
+    float: left;
+    width: 50%;
+    display: flex;
+    justify-content: left
+}
+.left view{
+  margin-left: 10rpx
+}
+
+.right {
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+.right image{
+  width: 44rpx;
+	height: 44rpx;
+  vertical-align: middle;
+  margin-left: 30rpx;
+  margin-top: -5rpx;
+}
+.clearfix {
+    clear: both;
+}
+.inf{
+    height: 80rpx;
+    line-height: 80rpx;
+    padding: 0 30rpx;
+    color:  #999999;
+    font-size: 26rpx;
+    margin-top: -20rpx;
+}
+.footer{
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    display: flex;
+    justify-content: space-between;
+    border-top: solid 1rpx #dddddd;
+}
+.footer view:first-child{
+    margin-left: 30rpx;
+}
+.footer view:nth-child(2){
+    width: 220rpx;
+    color: #fff;
+    font-size: 32rpx;
+    background: #D51243;
+    text-align: center;
+}
+
+.tips-box{
+  width: 490rpx;
+  height: 470rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  font-size: 26rpx;
+}
+.tips-box  image{
+  width: 142rpx;
+}
+.tips-title{
+  font-size: 30rpx;
+  margin: 20rpx 0;
+}
+.pay-tips .flexC{
+  justify-content: flex-end
+}
+.btn{
+  width: 100%;
+  height: 80rpx;
+  background-color: #eeeeee;
+  margin-top: 50rpx;
+}
+.useBalance{
+  position: relative
+}
+.nowUse{
+  position: absolute;
+  right: 50rpx;
+  bottom: 0;
+  font-size: 20rpx;
+}
+.btn-sm{
+  width: 186rpx;
+	height: 60rpx;
+	border-radius: 10rpx;
+	border:  1rpx solid #d51243;
+}
+.btn-sm-veiw{
+  margin: 50rpx 0 35rpx 0;
+  width: 74%
+}

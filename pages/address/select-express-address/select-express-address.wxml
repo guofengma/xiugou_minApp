@@ -1,0 +1,29 @@
+<import src='/components/address-info/address-info.wxml' />
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<view class='select-express-address sub-page' >
+  <block wx:for='{{addressList}}' wx:key='unique'>
+    <view class='select-address-box  {{item.defaultStatus == 1? "active":""}}'>
+      <view class='topBar' bindtap='addressClicked' data-index='{{index}}'>
+        <template is="address-info" data='{{addressType,...item}}'/>
+      </view>
+      <view class='address-edit-choose flexR-sb gray'>
+        <view class='choose-leftbar boxSize' bindtap='setDefault' data-index='{{index}}'>
+          {{item.defaultStatus? '':"设为"}}默认地址
+        </view>
+        <view class='choose-rightbar flexR'>
+          <view class='edit' bindtap='editAddress' data-index='{{index}}'>编辑</view>
+          <view class='del' bindtap='deleteAddress' data-index='{{index}}'>删除</view>
+        </view>
+      </view>
+    </view> 
+  </block>
+
+  <!--新增按钮  -->
+  <view class='add-address-btn  flexR redBg {{isIPhoneX.className}}' bindtap='newAddress'>
+    + 添加新的收货地址
+  </view>
+
+  <!--适配iPhone X  -->
+  <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
+</view>

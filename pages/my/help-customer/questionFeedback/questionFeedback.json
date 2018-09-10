@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "问题反馈",
+  "usingComponents": {
+    "update-img": "/components/update-img/update-img"
+  }
+}

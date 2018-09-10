@@ -3,7 +3,9 @@
 
 <view class="search-container">
    <!-- <template is="search-field" data='{{keyWord}}'/> -->
+  <view class='whiteBg search-bar-view'>
    <search-bar bind:getKeyword='getKeyword' bind:searchKeyword='searchKeyword' placeholder='{{placeholder}}' keyWord='{{keyWord}}'/>
+  </view>
    <view class='history-search'>
      <view class='cell-line' wx:if="{{history.length>0}}">
         <text>历史搜索</text>

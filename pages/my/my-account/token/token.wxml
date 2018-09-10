@@ -1,0 +1,45 @@
+<view>
+    <view class='cash'>
+        <view class="item">
+            <view class="title">
+                代币账户（币）
+            </view>
+            <view class="num">
+                {{account}}
+            </view>
+            <view class="btn" bindtap="buy">购买</view>
+        </view>
+    </view>
+    <view class="list-area">
+        <view class="list-item" wx:for="{{list}}" wx:key="unique">
+            <image wx:if="{{item.use_type==1}}" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon1_03@2x.png"></image>
+            <image wx:elif="{{item.use_type==3}}" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon9_03@2x.png"></image>
+            <image wx:elif="{{item.use_type==4}}" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon3_03-04@2x.png"></image>
+            <image wx:else src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon8_03@2x.png"></image>
+            <view class="detail">
+                <view class="style" wx:if="{{item.use_type==1}}">购买代币</view>
+                <view class="style" wx:elif="{{item.use_type==2}}">提现奖励</view>
+                <view class="style" wx:elif="{{item.use_type==3}}">收益奖励</view>
+                <view class="style" wx:elif="{{item.use_type==4}}">提现兑换</view>
+                <view class="style" wx:else>消费</view>
+                <view class="time">{{item.create_time}}</view>
+                <view class="number">订单号：{{item.order_no}}</view>
+            </view>
+            <view class="money {{item.add?'red':''}}">
+                <text>{{item.add?'+':'-'}}</text>{{item.token_coin}}
+            </view>
+        </view>
+       <!-- <view class="list-item">
+            <image src="/img/avatar.jpg"></image>
+            <view class="detail">
+                <view class="style">店主分红</view>
+                <view class="time">2018-05-25 12:15:45</view>
+                <view class="number">订单号：123456789012345678</view>
+            </view>
+            <view class="money {{add?'add':''}}">
+                <text>{{add?'+':'-'}}</text>100.50
+            </view>
+        </view>-->
+    </view>
+</view>
+

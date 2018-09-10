@@ -1,0 +1,15 @@
+<!--无数据-->
+<import src='/components/nodata-tips/nodata-tips.wxml' />
+<view class="information-item sub-page" wx:if="{{time}}">
+    <view class="time">{{time}}</view>
+    <view class="title">拼店消息提醒：</view>
+    <view class="content">
+        <view class="info">有拼店消息，请下载APP进行处理和查看。</view>
+    </view>
+    <view class="opr">
+        <view class="btn red">去下载APP</view>
+    </view>
+</view>
+<view wx:else class='sub-page'>
+    <template is="nodata-tips" />
+</view>

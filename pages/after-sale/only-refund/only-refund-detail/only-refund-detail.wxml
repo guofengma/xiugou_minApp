@@ -1,0 +1,28 @@
+<import src='/components/after-sale-prd-info/after-sale-prd-info.wxml'/>
+
+<import src='/pages/after-sale/temp/temp-refund-info/temp-refund-info.wxml'/>
+
+<import src='/pages/after-sale/temp/refund-explain/refund-explain'/>
+
+<view class='flexC tips-exchange font-26'>
+  <view class='tips-title'>{{datas.statusName}}</view>
+  <!--退款中不需要要显示时间  -->
+  <view wx:if='{{datas.returnProduct.status==4}}'>{{datas.returnAmountsRecord.showRefundTime}}</view>
+  <view wx:if='{{datas.returnProduct.status==3}}'>{{datas.returnProduct.refusal_reason}}</view>
+</view>
+
+<!--退款成功以后才显示以下内容  -->
+
+<template is="temp-refund-info" data="{{...datas}}"/>
+
+<!--换货信息  -->
+
+<view class='exchange-info font-26 '>
+  <view class='flexR-sb after-sale-line gray'>退款订单</view>
+  <template is="after-sale-prd-info" data="{{...datas.returnProduct}}"/>
+  <template is="refund-explain" data="{{datas}}"/>
+</view>
+
+<!--联系卖家  -->
+
+ <contact-seller phone='{{18968047924}}'></contact-seller> 
