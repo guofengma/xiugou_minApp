@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 8,
 			"list": [
 				{
 					"id": -1,
@@ -68,7 +68,26 @@
 				{
 					"id": -1,
 					"name": "我的晋升",
-					"pathName": "pages/my/my-promotion/my-promotion"
+					"pathName": "pages/my/my-promotion/my-promotion",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "邀请者--选择",
+					"pathName": "pages/register/register-code/register-code",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "填写邀请码",
+					"pathName": "pages/register/write-invite-code/write-invite-code",
+					"query": ""
+				},
+				{
+					"id": 8,
+					"name": "申请售后",
+					"pathName": "pages/after-sale/apply-sale-after/apply-sale-after",
+					"query": "refundType=2"
 				}
 			]
 		}

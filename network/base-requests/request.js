@@ -101,7 +101,7 @@ export default class Request {
         //成功
         that.responseObject = res.data;
         //成功
-        if (res.data.code == '10000') {
+        if (res.data.code == '10000' || res.data.code=='200' ) {
           let Datas = that.responseObject.data;
           let firstData = {};
           firstData = Datas

@@ -29,10 +29,10 @@ export default class Operation {
         this.findMemberByPhone = '/user/userSign/findMemberByPhone'
 
         // 注册
-        this.signMember = '/user/memberSign/signMember'
+        this.signMember = '/user/userSign/signUser'
 
         // 获取推荐人列表
-        this.queryInviterList = '/user/memberSign/queryInviterList'
+        this.queryInviterList = '/user/userSign/queryInviterList'
 
 
     /**********  获取省市区 *******************/
@@ -92,27 +92,23 @@ export default class Operation {
     /********************** 购物车 *********************/
         // 新增
         
-        this.addToShoppingCart  = '/user/shoppingCart/addToShoppingCart'
+      this.addToShoppingCart = '/user/shoppingcart/addItem'
 
         // 修改
 
-        this.updateShoppingCart = '/user/shoppingCart/updateShoppingCartItemsByProductId'
+      this.updateShoppingCart = '/user/shoppingcart/updateItem'
 
         // 同步
 
-        this.shoppingCartFormCookieToSession ='/user/shoppingCart/shoppingCartFormCookieToSession'
+      this.shoppingCartFormCookieToSession ='/user/shoppingcart/loginArrange'
 
         // 查询
 
-        this.getShoppingCartList  ='/user/shoppingCart/getShoppingCartList'
+      this.getShoppingCartList ='/user/shoppingcart/list'
 
         // 删除
 
-        this.deleteFromShoppingCart = '/user/shoppingCart/deleteFromShoppingCartByProductId'
-
-        // 购物车超过上限
-
-        this.shoppingCartLimit = '/user/shoppingCart/shoppingCartFormCookieToSessionProductNumberIsAble'
+      this.deleteFromShoppingCart = '/user/shoppingcart/deleteItem'
 
 
     /********************** 地址管理 *********************/

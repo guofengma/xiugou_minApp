@@ -69,33 +69,9 @@ Page({
     // let r = RequestFactory.shoppingCartLimit(params);
     let params = {
       jsonString: isArrParams,
-      reqName: '最大数量同步购物车',
+      reqName: '登录合并购物车',
       url: Operation.shoppingCartLimit,
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      this.shoppingCartFormCookieToSession(params)
-    };
-    r.failBlock = (req) => {
-      if (req.responseObject.code == 600) {
-        // 本地购物车数量和服务器数量的和 超过上限
-        let that = this
-        let callBack = () =>{
-          that.shoppingCartFormCookieToSession(params)
-        }
-        Tool.showComfirm(req.responseObject.msg, callBack)
-      }
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
-
-  },
-  shoppingCartFormCookieToSession(params){
-
-    // 同步本地购物车到服务器
-    // let r = RequestFactory.shoppingCartFormCookieToSession(params);
-    params.reqName = '同步本地购物车到服务器'
-    params.url = Operation.shoppingCartLimit
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       Storage.clearShoppingCart()
@@ -103,7 +79,22 @@ Page({
     };
     Tool.showErrMsg(r)
     r.addToQueue();
+
   },
+  // shoppingCartFormCookieToSession(params){
+
+  //   // 同步本地购物车到服务器
+  //   // let r = RequestFactory.shoppingCartFormCookieToSession(params);
+  //   params.reqName = '同步本地购物车到服务器'
+  //   params.url = Operation.shoppingCartLimit
+  //   let r = RequestFactory.wxRequest(params);
+  //   r.successBlock = (req) => {
+  //     Storage.clearShoppingCart()
+  //     this.getShoppingCartList()
+  //   };
+  //   Tool.showErrMsg(r)
+  //   r.addToQueue();
+  // },
   getStorageShoppingCart(){   
     let list = Storage.getShoppingCart()
     if(list){
@@ -137,8 +128,8 @@ Page({
     // }
     // let r = RequestFactory.updateShoppingCart(params);
     let params = {
-      sareSpecId: prd.id,
-      productNumber: count,
+      specPriceId: prd.id,
+      amount: count,
       reqName: '更新购物车数量',
       isShowLoading: false,
       url: Operation.updateShoppingCart,
@@ -168,11 +159,11 @@ Page({
       if(data.length>0){
         data.forEach((item, index) => {
           item.isTouchMove = false  //是否移动 
-          item.showImg = item.spec_img
-          item.showPrice = item.levelPrice
-          item.showName = item.name
-          item.showType = item.spec
-          item.showCount = item.productNumber || 1  // 商品数量
+          item.showImg = item.imgUrl
+          item.showPrice = item.price
+          item.showName = item.productName
+          item.showType = item.specValues.join('—')
+          item.showCount = item.amount || 1  // 商品数量
           item.isSelect = false  //是否选择 
           if(this.data.items.length>0){
             let arr = this.data.items
@@ -323,7 +314,7 @@ Page({
     // }
     // let r = RequestFactory.deleteFromShoppingCart(params);
     let params = {
-      sareSpecId: items[index].id,
+      specPriceId: items[index].id,
       reqName: '删除购物车',
       url: Operation.deleteFromShoppingCart,
     }

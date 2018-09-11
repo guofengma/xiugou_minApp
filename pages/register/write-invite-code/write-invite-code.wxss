@@ -1,0 +1,12 @@
+.input-view{
+  border-bottom: 1rpx solid #ddd;
+  margin-bottom: 80rpx;
+}
+.sub-page{
+  width: 580rpx;
+  margin: 0 auto;
+}
+.tips-code{
+  margin-top: 170rpx;
+  margin-bottom: 100rpx;
+}

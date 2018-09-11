@@ -8,6 +8,7 @@
     "pages/search/search",
     "pages/search/search-result/search-result",
     "pages/register/register",
+    "pages/register/register-code/register-code",
     "pages/product-detail/product-detail",
     "pages/my/aboutUs/aboutUs",
     "pages/my/account/account",
@@ -49,7 +50,8 @@
     "pages/my/my-account/integral/integral",
     "pages/my/my-account/deposit/deposit",
     "pages/product-detail/gift-bag-detail/gift-bag-detail",
-    "pages/my/my-promotion/my-promotion"
+    "pages/my/my-promotion/my-promotion",
+    "pages/register/write-invite-code/write-invite-code"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

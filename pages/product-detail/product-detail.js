@@ -74,8 +74,8 @@ Page({
         }
       }
     }
-    params.productStatus =4
-    params.product_id = this.data.productInfo.id
+    params.status = 0
+    params.productId = this.data.productInfo.id
     params.stock = this.data.selectType.stock
     params.showName = this.data.productInfo.name
     params.showType = this.data.selectType.typeName
@@ -116,8 +116,9 @@ Page({
     }
     let params = {
       productId: this.data.productInfo.id,
-      productNumber: this.data.productBuyCount,
-      sareSpecId: this.data.selectType.id,
+      amount: this.data.productBuyCount,
+      priceId: this.data.selectType.id,
+      timestamp: new Date().getTime(),
       reqName: '加入购物车',
       url: Operation.addToShoppingCart
     }

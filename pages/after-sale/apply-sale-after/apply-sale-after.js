@@ -43,7 +43,7 @@ Page({
       {
         navbar: '申请换货',
         title: '请选择换货原因', // 换货
-        choose: '退换货原因',
+        choose: '换货原因',
         info: "换货说明",
         placeholder: "请填写退货说明",
         list: [
