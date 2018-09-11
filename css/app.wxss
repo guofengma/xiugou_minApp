@@ -206,6 +206,9 @@ button::after{
   font-size: 22rpx;
   margin-right: 20rpx;
 }
+.base-bar{
+  height: 96rpx;
+}
 /* wxparse 插件重写样式 */
 .wxParse-p image{
   width: 100%;

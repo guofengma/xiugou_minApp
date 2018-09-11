@@ -24,6 +24,7 @@
     "pages/my/help-customer/questionList/questionList",
     "pages/my/help-customer/questionDetail/questionDetail",
     "pages/my/my-order/my-order",
+    "pages/search/search-order/search-order",
     "pages/my/orderDetail/orderDetail",
     "pages/order-confirm/order-confirm",
     "pages/order-confirm/pay/pay",
@@ -47,7 +48,8 @@
     "pages/my/my-account/token/token",
     "pages/my/my-account/integral/integral",
     "pages/my/my-account/deposit/deposit",
-    "pages/product-detail/gift-bag-detail/gift-bag-detail"
+    "pages/product-detail/gift-bag-detail/gift-bag-detail",
+    "pages/my/my-promotion/my-promotion"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
