@@ -115,7 +115,7 @@ Component({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.getProvinceList();
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let data = req.responseObject.data
         this.setData({
           sheng: data
@@ -135,7 +135,7 @@ Component({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.getCityList({fatherZipcode:id});
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let data = req.responseObject.data
         this.setData({
           shi: data
@@ -161,7 +161,7 @@ Component({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.getAreaList({ fatherZipcode: id });
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         this.setData({
           qu: req.responseObject.data
         })

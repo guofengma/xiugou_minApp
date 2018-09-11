@@ -36,7 +36,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.fillInExpressInfoById(params)
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       Storage.setExpressNo(this.data.code)
       Event.emit('updataExpressNo')
       Tool.navigationPop()

@@ -68,7 +68,7 @@ Page({
         url: Operation.availableDiscountCouponForProduct
       }
       let r = RequestFactory.wxRequest(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let currentTime = new Date().getTime() // 获取当前时间
         for (let i in req.responseObject.data) {
           let item = req.responseObject.data[i];
@@ -105,7 +105,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.getDiscountCouponNoUse(this.data.params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
           if (req.responseObject.data.total==0) return
           let currentTime = new Date().getTime() // 获取当前时间
           for (let i in req.responseObject.data.data) {
@@ -142,25 +142,25 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
         // let r = RequestFactory.getDiscountCouponUserd(this.data.params);
-        r.finishBlock = (req) => {
-          if (req.responseObject.data.total == 0) return
-          for (let i in req.responseObject.data.data) {
-            let item = req.responseObject.data.data[i];
-            item.outTime = Tool.formatTime(item.outTime).slice(0, 10);
-            item.start_time = Tool.formatTime(item.startTime).slice(0, 10);
-              item.left = '已使用';
-              this.getCouponType(item)
-              //this.data.lists[2].push(item)
-          }
-          this.data.totalPageArr[2] = req.responseObject.data.total
-          this.data.lists[2] = this.data.lists[2].concat(req.responseObject.data.data)
-          this.setData({
-              lists: this.data.lists,
-              totalPageArr: this.data.totalPageArr
-          })
-        };
-        Tool.showErrMsg(r);
-        r.addToQueue();
+      r.successBlock = (req) => {
+        if (req.responseObject.data.total == 0) return
+        for (let i in req.responseObject.data.data) {
+          let item = req.responseObject.data.data[i];
+          item.outTime = Tool.formatTime(item.outTime).slice(0, 10);
+          item.start_time = Tool.formatTime(item.startTime).slice(0, 10);
+            item.left = '已使用';
+            this.getCouponType(item)
+            //this.data.lists[2].push(item)
+        }
+        this.data.totalPageArr[2] = req.responseObject.data.total
+        this.data.lists[2] = this.data.lists[2].concat(req.responseObject.data.data)
+        this.setData({
+            lists: this.data.lists,
+            totalPageArr: this.data.totalPageArr
+        })
+      };
+      Tool.showErrMsg(r);
+      r.addToQueue();
     },
     //失效优惠劵列表
     getDiscountCouponLosed() {
@@ -171,7 +171,7 @@ Page({
         url: Operation.getDiscountCouponLosed
       }
       let r = RequestFactory.wxRequest(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         if (req.responseObject.data.total == 0) return
           for (let i in req.responseObject.data.data) {
             let item = req.responseObject.data.data[i];

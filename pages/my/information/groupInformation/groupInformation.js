@@ -15,7 +15,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
         // let r = global.RequestFactory.queryStoreMessageList(params);
-        r.finishBlock = (req) => {
+      r.successBlock = (req) => {
           if (req.responseObject.data.resultCount > 0) {
               let datas = [];
               datas = req.responseObject.data.data;

@@ -16,7 +16,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.queryHelpQuestionList();
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let data = req.responseObject.data ? req.responseObject.data : {}
         let typeList = req.responseObject.data.typeList
         let list = req.responseObject.data.list

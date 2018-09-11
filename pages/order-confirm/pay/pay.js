@@ -108,7 +108,7 @@ Page({
       }
       // let r = RequestFactory.repay(params);
       let r = RequestFactory.wxRequest(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         // this.test(payType, req)
         this.wxPay(payType, req.responseObject.data.outTradeNo)
         if (payType==1){
@@ -133,7 +133,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.paySuccess(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         this.showResult(true)
       };
       Tool.showErrMsg(r)
@@ -177,7 +177,7 @@ Page({
       let r = RequestFactory.wxRequest(params);
 
       // let r = RequestFactory.continuePay(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         // this.test(payType, req)
         // this.wxPay(payType, req.responseObject.data.outTradeNo)
         if (payType == 1) {
@@ -199,7 +199,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.continueToPay(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let datas = req.responseObject.data
         let payList = this.data.payList
         payList.showTotalAmounts = datas.amounts
@@ -219,7 +219,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.againToPrePay(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let datas = req.responseObject.data
         let payList = this.data.payList
         payList.showTotalAmounts = datas.needPay
@@ -254,7 +254,7 @@ Page({
       //   totalFee: this.data.payList.showTotalAmounts
       // }
       // let r = RequestFactory.wxPay(params);
-      // r.finishBlock = (req) => {
+      // r.successBlock = (req) => {
       //   let that = this
       //   let payList = req.responseObject.data
        
@@ -270,7 +270,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.orderQuery(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         this.showResult(true)
       };
       Tool.showErrMsg(r)

@@ -41,7 +41,7 @@ Page({
       };
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.updateDealerOpenid();
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         this.setData({
           unBinded:false
         })

@@ -26,7 +26,7 @@ Page({
           let r = RequestFactory.wxRequest(params);
             // let r = global.RequestFactory.queryMessage(params);
             let list = this.data.list;
-            r.finishBlock = (req) => {
+          r.successBlock = (req) => {
                 let datas = [];
                 for (let i in req.responseObject.data.data) {
                     let item = req.responseObject.data.data[i];

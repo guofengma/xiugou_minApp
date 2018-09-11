@@ -94,7 +94,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.updateUserAddress(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       //跳转到地址列表页面
       this.successCallBack('修改成功')
     };
@@ -108,7 +108,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.addUserAddress(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       //跳转到地址列表页面
       this.successCallBack("添加成功")
     };

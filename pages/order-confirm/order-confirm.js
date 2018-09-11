@@ -75,7 +75,7 @@ Page({
       url: Operation.orderCalcDiscountCouponAndUseScore
     }
     let r = RequestFactory.wxRequest(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       this.setData({
         coupon: coupon
       })
@@ -120,7 +120,7 @@ Page({
       url: Operation.makeSureOrder
     }
     let r = RequestFactory.wxRequest(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       wx.stopPullDownRefresh() //停止下拉刷新
       let item = req.responseObject.data
       // 渲染地址列表
@@ -259,7 +259,7 @@ Page({
       preprocessCallback:true,
     }
     let r = RequestFactory.wxRequest(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       let data = req.responseObject.data
       data.forEach((item, index) => {
         item.addressInfo = item.province + item.city + item.area + item.address
@@ -306,7 +306,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.calcFreight(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       let data = req.responseObject.data
       orderInfos.totalAmounts = data.totalAmounts + data.totalFreightFee
       orderInfos.totalFreightFee = data.totalFreightFee
@@ -361,7 +361,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.submitOrder(params);
-    r.finishBlock = (req) => {        
+    r.successBlock = (req) => {        
       //Event.emit('updateStorageShoppingCart')
       Event.emit('updateShoppingCart')
       let data = req.responseObject.data
@@ -388,7 +388,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.availableDiscountCouponForProduct(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       let datas = req.responseObject.data
       if(datas.length==0){
         this.setData({

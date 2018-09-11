@@ -34,7 +34,7 @@ Page({
       
       // let r = RequestFactory.queryDictionaryDetailsType(params)
 
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         req.responseObject.data.unshift({ "dValue": "请选择问题类型", "dKey": "" })
         this.setData({
           typeArr: req.responseObject.data
@@ -88,15 +88,15 @@ Page({
         }
         let r = RequestFactory.wxRequest(params);
           // let r = RequestFactory.addFeedback(params);
-          r.finishBlock = (req) => {
-              if(req.responseObject.code==200){
-                  this.setData({
-                      success:true
-                  })
-              }
-          };
-          Tool.showErrMsg(r)
-          r.addToQueue();
+        r.successBlock = (req) => {
+          if(req.responseObject.code==200){
+            this.setData({
+                success:true
+            })
+          }
+        };
+        Tool.showErrMsg(r)
+        r.addToQueue();
       }
     },
     //确定

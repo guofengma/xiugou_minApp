@@ -25,7 +25,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params); 
         // let r = RequestFactory.findMessageDetail(params);
-        r.finishBlock = (req) => {
+      r.successBlock = (req) => {
             if(types==8){
                 let refuseDetail=req.responseObject.data;
                 this.setData({

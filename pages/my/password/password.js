@@ -70,7 +70,7 @@ Page({
       };
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.updateDealerPassword(params);
-      r.finishBlock = (req) => {
+      r.successBlock= (req) => {
         Tool.navigationPop()
       };
       r.failBlock = (req) => {

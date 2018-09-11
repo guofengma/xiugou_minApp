@@ -32,7 +32,7 @@ Page({
       };
       let r = RequestFactory.wxRequest(params);
       // let r = global.RequestFactory.exitLogin(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
           let data=req.responseObject;
           if(data.code==200){
             Tool.showSuccessToast(data.data);

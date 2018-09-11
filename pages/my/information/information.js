@@ -20,16 +20,16 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
         // let r = RequestFactory.queryPushNum(params);
-        r.finishBlock = (req) => {
-           let detail=req.responseObject.data;
-           this.setData({
-            noticeNum:detail.noticeNum,
-            messageNum:detail.messageNum,
-            storeMessageNum:detail.storeMessageNum,
-           })
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
+      r.successBlock = (req) => {
+        let detail=req.responseObject.data;
+        this.setData({
+        noticeNum:detail.noticeNum,
+        messageNum:detail.messageNum,
+        storeMessageNum:detail.storeMessageNum,
+        })
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
     },
     didLogin(){
       if (!Tool.didLogin(this)){

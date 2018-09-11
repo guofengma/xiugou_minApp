@@ -41,7 +41,7 @@ Page({
       let r = RequestFactory.wxRequest(params);
       // let r = global.RequestFactory.settlementTotalByDealerId(params);
       let list = this.data.list;
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let datas = req.responseObject.data
         if (datas.total>0){
           datas.data.forEach((item)=>{

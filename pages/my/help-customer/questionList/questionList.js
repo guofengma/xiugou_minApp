@@ -9,7 +9,7 @@ Page({
     },
     queryHelpQuestionList(params) {
       let r = RequestFactory.queryHelpQuestionList(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         this.setData({
           list: req.responseObject.data
         })

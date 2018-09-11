@@ -28,7 +28,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
         // let r = global.RequestFactory.findDealerAccountByIdAPP(params);
-        r.finishBlock = (req) => {
+      r.successBlock = (req) => {
             let data = req.responseObject.data;
             this.setData({
               available_balance: data.available_balance || '0.00',
@@ -47,7 +47,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
         // let r = global.RequestFactory.findSettlementTotalByBalance(params);
-        r.finishBlock = (req) => {
+      r.successBlock = (req) => {
             let data = req.responseObject.data;
             this.setData({
               blocked_balances: data || '0.00',

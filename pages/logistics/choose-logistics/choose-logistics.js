@@ -23,7 +23,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.findAllExpress();
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       let datas = req.responseObject.data
       let arr = []
       for (let i in datas) {

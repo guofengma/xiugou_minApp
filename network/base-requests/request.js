@@ -21,7 +21,7 @@ export default class Request {
     this.name = 'base request';
 
     //请求方法
-    this.requestMethod = 'POST';
+    this.requestMethod = bParam.requestMethod;
 
     //接收入参
     this.bodyParam = bParam;
@@ -167,6 +167,7 @@ export default class Request {
     delete this.bodyParam.url
     delete this.bodyParam.port
     delete this.bodyParam.isShowLoading
+    delete this.bodyParam.requestMethod
     this._body = this.bodyParam
     return this._body;
   }

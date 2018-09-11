@@ -82,7 +82,7 @@ Page({
           // r = RequestFactory.findDelivery(params);
         }
         let r = RequestFactory.wxRequest(params);
-        r.finishBlock = (req) => {
+        r.successBlock= (req) => {
           let datas = req.responseObject.data;
           if (datas) {
             if (datas.showapi_res_body && datas.showapi_res_body.data) {

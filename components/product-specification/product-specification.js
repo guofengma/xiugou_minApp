@@ -177,7 +177,7 @@ Component({
         url: Operation.findProductStockBySpec
       }
       let r = RequestFactory.wxRequest(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let datas = req.responseObject.data
         let isSelectAll = this.isSelectAll()
         // 已经选好所以的规格值以后 更换某个规格 但无库存的情况下置灰

@@ -96,7 +96,7 @@ Page({
 
     // let r = RequestFactory.checkGiftBagOrder(params)
 
-    r.finishBlock = (req) => { //能否可以购买礼包
+    r.successBlock = (req) => { //能否可以购买礼包
       this.setData({
         dismiss:false,
         isShowGiftTips: {
@@ -118,7 +118,7 @@ Page({
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.getGiftBagDetail(params)
 
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
 
       this.checkGiftBagOrder()
 

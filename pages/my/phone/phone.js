@@ -43,7 +43,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.updateDealerNewPhone(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       Storage.setUserAccountInfo(req.responseObject.data)
       Event.emit('refreshMemberInfoNotice');
       Tool.redirectTo('../account/account')
@@ -85,7 +85,7 @@ Page({
     let callBack = () => {
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.sendMessage(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         wx.showToast({
             title: '验证码已发送',
         })

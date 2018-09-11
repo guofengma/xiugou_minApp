@@ -32,7 +32,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.queryUserAddressList();
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       let data = req.responseObject.data
       data.forEach((item) => {
         item.addressInfo = item.province + item.city + item.area + item.address
@@ -55,7 +55,7 @@ Page({
       url: Operation.setDefaultAddress
     }
     let r = RequestFactory.wxRequest(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       this.queryUserAddressList()
     };
     Tool.showErrMsg(r)
@@ -76,7 +76,7 @@ Page({
         url: Operation.deleteUserAddress
       }
       let r = RequestFactory.wxRequest(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let list = this.data.addressList
         list.splice(item.index, 1)
         this.setData({

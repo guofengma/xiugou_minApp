@@ -35,7 +35,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.findReturnProductById(params)
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       Tool.findReturnProductById(req)
       let datas = req.responseObject.data
       datas.receive.recevicePhone = datas.receive.recevice_phone

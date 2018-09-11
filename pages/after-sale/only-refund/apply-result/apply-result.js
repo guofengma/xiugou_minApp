@@ -34,7 +34,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.findReturnProductById(params)
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       let datas = req.responseObject.data
       Tool.findReturnProductById(req)
       this.setData({

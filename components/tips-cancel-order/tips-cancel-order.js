@@ -18,7 +18,7 @@ Component({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.queryDictionaryDetailsType(params)
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         this.setData({
           reasonArr: req.responseObject.data
         })
@@ -51,7 +51,7 @@ Component({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.cancelOrder(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         if (req.responseObject.code == 200) {
           if(this.data.door==1){
             this.triggerEvent('cancelOrder', { ...this.data });

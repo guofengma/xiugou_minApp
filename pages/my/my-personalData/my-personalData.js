@@ -47,7 +47,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.updateDealerRegion(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         Storage.setUserAccountInfo(req.responseObject.data)
         Event.emit('refreshMemberInfoNotice');//发出通知
         //Tool.navigationPop()
@@ -64,7 +64,7 @@ Page({
         }
         let r = RequestFactory.wxRequest(params);
         // let r = RequestFactory.updateDealerHeadImg(params);
-        r.finishBlock = (req) => {
+        r.successBlock = (req) => {
           Storage.setUserAccountInfo(req.responseObject.data)
           Event.emit('refreshMemberInfoNotice');
         };

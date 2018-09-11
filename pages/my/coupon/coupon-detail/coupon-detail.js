@@ -23,18 +23,18 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.getDiscountCouponById(params);
-      r.finishBlock = (req) => {
-        if (!req.responseObject.data) return
-        let detail=req.responseObject.data;
-          detail.start_time = Tool.formatTime(detail.startTime).slice(0,10);
-          detail.out_time = Tool.formatTime(detail.outTime).slice(0,10);
-        this.getCouponType(detail)
-          this.setData({
-              detail: detail
-          })
-      };
-      Tool.showErrMsg(r);
-      r.addToQueue();
+    r.successBlock = (req) => {
+      if (!req.responseObject.data) return
+      let detail=req.responseObject.data;
+        detail.start_time = Tool.formatTime(detail.startTime).slice(0,10);
+        detail.out_time = Tool.formatTime(detail.outTime).slice(0,10);
+      this.getCouponType(detail)
+        this.setData({
+            detail: detail
+        })
+    };
+    Tool.showErrMsg(r);
+    r.addToQueue();
   },
   btnClicked(){
     let detail = this.data.detail

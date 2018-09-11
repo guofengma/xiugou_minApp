@@ -22,7 +22,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.findReturnProductById(params)
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       Tool.findReturnProductById(req)
       let datas = req.responseObject.data
       if (datas.returnProduct.status ==4){

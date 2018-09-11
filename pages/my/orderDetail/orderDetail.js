@@ -55,7 +55,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
         // r = global.RequestFactory.getOrderDetail(params);
-        r.finishBlock = (req) => {
+      r.successBlock = (req) => {
             let detail=req.responseObject.data;
             detail.createTime=detail.createTime?Tool.formatTime(detail.createTime):'';
             detail.sysPayTime=detail.sysPayTime?Tool.formatTime(detail.sysPayTime):'';
@@ -147,7 +147,7 @@ Page({
         url: url
       }
       let r = RequestFactory.wxRequest(params);
-        r.finishBlock = (req) => {
+      r.successBlock = (req) => {
             if(req.responseObject.code==200){
               this.setData({
                   isDelete:false,
@@ -178,7 +178,7 @@ Page({
           }
           let r = RequestFactory.wxRequest(params);
           // let r = RequestFactory.confirmReceipt(params);
-          r.finishBlock = (req) => {
+          r.successBlock = (req) => {
             if(req.responseObject.code==200){
               Tool.navigateTo('../my-order/my-order')
             }else{
@@ -312,7 +312,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.orderOneMore(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let datas = req.responseObject.data
         datas.forEach((item)=>{
           item.sareSpecId = item.id
@@ -460,7 +460,7 @@ Page({
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.findDelivery(params);
       let state = this.orderState(detail.status)
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let datas = req.responseObject.data;
         if (datas) {
           if (datas.showapi_res_body && datas.showapi_res_body.data) {

@@ -97,7 +97,7 @@ Page({
       url: Operation.queryDictionaryDetailsType
     }
     let r = RequestFactory.wxRequest(params);
-    r.finishBlock = (req) => {
+    r.successBlock= (req) => {
       this.data.reason[refundType].list = req.responseObject.data
       this.setData({
         reason: this.data.reason
@@ -114,7 +114,7 @@ Page({
       url: Operation.findOrderProductInfo
     }
     let r = RequestFactory.wxRequest(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       let data = req.responseObject.data
       data.imgUrl = data.specImg ? data.specImg : this.data.list.imgUrl
       data.createTime = Tool.formatTime(data.createTime)
@@ -175,7 +175,7 @@ Page({
       url: url
     }
     let r = RequestFactory.wxRequest(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       Tool.redirectTo(this.data.page[this.data.refundType] + '?returnProductId=' + req.responseObject.data.returnProductId)
     };
     Tool.showErrMsg(r)

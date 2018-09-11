@@ -74,7 +74,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.queryAftermarketOrderPageList(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       let lists = this.data.lists
       let datas = req.responseObject.data
       if (datas.total>0){

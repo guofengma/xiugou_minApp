@@ -23,7 +23,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.updateHelpQuestion(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         Tool.showSuccessToast('感谢您的评价')
       }
       Tool.showErrMsg(r)
@@ -37,7 +37,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.findHelpQuestionById(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         this.setData({
           list: req.responseObject.data
         })
