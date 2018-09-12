@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 9,
 			"list": [
 				{
 					"id": -1,
@@ -88,6 +88,12 @@
 					"name": "申请售后",
 					"pathName": "pages/after-sale/apply-sale-after/apply-sale-after",
 					"query": "refundType=2"
+				},
+				{
+					"id": -1,
+					"name": "退货详情",
+					"pathName": "pages/after-sale/return-goods/return-goods",
+					"query": ""
 				}
 			]
 		}

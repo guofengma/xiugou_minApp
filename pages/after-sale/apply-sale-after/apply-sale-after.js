@@ -92,7 +92,7 @@ Page({
   queryDictionaryDetailsType(refundType){
     // let r = RequestFactory.queryDictionaryDetailsType(params)
     let params = {
-      dType: this.data.queryReasonParams[refundType],
+      code: this.data.queryReasonParams[refundType],
       reqName: '获取数据字典',
       url: Operation.queryDictionaryDetailsType
     }

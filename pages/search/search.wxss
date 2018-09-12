@@ -30,3 +30,14 @@
 .search-bar-view{
   padding-bottom: 6rpx;
 }
+.search-words-line{
+  height:88rpx;
+  margin: 0 30rpx;
+  line-height: 88rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+.search-words-view{
+  position: absolute;
+  top:104rpx;
+  width: 100%;
+}

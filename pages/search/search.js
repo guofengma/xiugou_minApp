@@ -11,7 +11,7 @@ Page({
     hotWords:[],
     province:'',
     provinceCode:-1,
-    ysf: { title: '搜索' }
+    activeSearchLists:[]
   },
   onLoad: function (options) {
     if (options.door == 0){
@@ -84,6 +84,22 @@ Page({
     this.setData({
       keyWord: e.detail.keyWord
     })
+    this.requestKeywords()
+  },
+  requestKeywords(){
+    let params = {
+      keyword: this.data.keyWord,
+      reqName: '动态获得搜索词',
+      url: Operation.getKeywords,
+    }
+    let r = RequestFactory.wxRequest(params)
+    r.successBlock = (req) => {
+      let data = req.responseObject.data
+      this.setData({
+        activeSearchLists: req.responseObject.data || []
+      })
+    }
+    r.addToQueue();
   },
   deleteKeyword(){
     if(this.data.door==1){
@@ -97,14 +113,12 @@ Page({
     })
   },
   searchKeyword(){
-    if (!Tool.isEmptyStr(this.data.keyWord)) {
-      // let str = this.data.keyWord.length > 10 ? this.data.keyWord.slice(0, 10) + "..." : this.data.keyWord
+    if (!Tool.isEmptyStr(String(this.data.keyWord))) {
       let keywords = this.data.history
       if (keywords.length > 0) {
         keywords.length == 10 ? keywords.splice(9, 1) : keywords
         keywords.unshift(this.data.keyWord)
         let setArr = new Set(keywords)
-        // console.log(setArr)
         keywords=[...setArr]
         if (this.data.door == 1) {
           Storage.setSearchOrderHistory(keywords)
@@ -122,7 +136,6 @@ Page({
     } else {
       Tool.showAlert('请输入搜索内容')
     }
-    // this.getRequest()
   },
   requestKeyword(){
     Tool.redirectTo('/pages/search/search-result/search-result?keyword=' +this.data.keyWord+'&code=' + this.data.provinceCode)

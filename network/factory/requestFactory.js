@@ -4,6 +4,7 @@
 
 import Request from '../base-requests/request'
 import Operation from '../operation'
+import config from '../../config.js'
 
 //读取请求具体封装
 export default class RequestFactory {
@@ -72,12 +73,9 @@ export default class RequestFactory {
   
   // 上传图片的地址 
   static aliyunOSSUploadImage() {
-    let params = {
-      port: 8100
-    }
-    let baseUrl = new Request(params).getBaseUrl(params)
+    // let baseUrl = new Request(params).getBaseUrl(params)
     let url = Operation.sharedInstance().aliyunOSSUploadImage;
-    return baseUrl + url
+    return config.baseUrl + url
   }
 }
 

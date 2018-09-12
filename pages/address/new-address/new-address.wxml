@@ -15,7 +15,7 @@
                     <text>联系电话</text>
                 </view>
                 <view>
-                    <input type="text" name="recevicePhone" value='{{recevicePhone}}' placeholder="请输入联系人电话" placeholder-style='color:#c8c8c8'></input>
+                    <input type="text" name="receiverPhone" value='{{receiverPhone}}' placeholder="请输入联系人电话" placeholder-style='color:#c8c8c8'></input>
                 </view>
             </view>
         </view>
@@ -39,7 +39,7 @@
                 <view wx:else class='textarea'></view>
             </view>
         </view>
-       <!-- <view class="wrap">
+       <view class="wrap">
             <view class="default mar-top2">
                 <view>
                     <text>是否设为默认地址</text>
@@ -48,7 +48,7 @@
                     <image bindtap="setDefault" src='{{ isDefault? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
                 </view>
             </view>
-        </view>-->
+        </view>
     </view>
     <button formType="submit" class='loginBtn' >保存</button>
     </form>

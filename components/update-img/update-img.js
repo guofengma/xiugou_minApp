@@ -1,5 +1,5 @@
 let { Tool, RequestFactory } = global;
-
+import config from '../../config.js'
 Component({
   properties: {
     
@@ -12,6 +12,7 @@ Component({
   methods: {
     //添加图片
     uploadImg() {
+      console.log(config.m_fill)
       let clickedNum = this.data.clickedNum
       clickedNum++
       if (clickedNum > 3) return
@@ -19,10 +20,9 @@ Component({
         clickedNum: clickedNum
       })
       let callBack = (fileInfo) => {
-        let tempUrl = fileInfo.data.imageUrl;
-        let tempThumbUrl = fileInfo.data.imageThumbUrl;
+        let tempUrl = fileInfo.data;
         this.data.originalImg.push(tempUrl);
-        this.data.smallImg.push(tempThumbUrl);
+        this.data.smallImg.push(tempUrl + config.imgSizeParams.m_fill);
         this.setData({
           originalImg: this.data.originalImg,
           smallImg: this.data.smallImg

@@ -9,7 +9,8 @@ Page({
     address:'',
     addressList:{},
     id:'',
-    hidden:false
+    hidden:false,
+    isDefault:false
   },
   onLoad: function (options) {
     // 如果有参数 就编辑地址 无参数就创建地址
@@ -22,7 +23,7 @@ Page({
       region[2] = { name: list.city, zipcode: list.areaCode }
       this.setData({
         receiver: list.receiver,
-        recevicePhone: list.recevicePhone,
+        receiverPhone: list.receiverPhone,
         address: list.address,
         region: region,
         id:list.id
@@ -36,21 +37,22 @@ Page({
 
   },
   pickerClicked(e) {
-    console.log(e)
     this.setData({
       region: e.detail.result,
       hidden: e.detail.hidden,
     })
   },
   formSubmit(e) {
+    // 测试数据
+      // this.setData({
+      //   region: [{ zipcode: 110000 }, { zipcode: 110100 }, { zipcode: 110101 }]
+      // })
       let params = e.detail.value;
-      // 获取用户ID
-      // params.id = Storage.memberId();
       if (!(params.receiver.length >1 && params.receiver.length<17)) {
           Tool.showAlert("收货人姓名长度需在2-16位之间");
           return
       }
-      if (!Tool.checkPhone(params.recevicePhone)) {
+      if (!Tool.checkPhone(params.receiverPhone)) {
           Tool.showAlert("请输入正确的电话号码");
           return
       }
@@ -76,41 +78,27 @@ Page({
       } else {
         params.areaCode = ''
       }
-      if(this.data.id){
-        // 更新地址
-        this.updateUserAddress(params)
-      } else {
-        this.requestAddUserAddress(params)
-      }
+      this.requestAddUserAddress(params)
       
-  },
-  updateUserAddress(params){
-    // params.id = this.data.id
-    params = {
-      ...params,
-      id: this.data.id,
-      reqName: '更新地址',
-      url: Operation.updateUserAddress
-    }
-    let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.updateUserAddress(params);
-    r.successBlock = (req) => {
-      //跳转到地址列表页面
-      this.successCallBack('修改成功')
-    };
-    r.addToQueue();
   },
   requestAddUserAddress(params) {
     params = {
       ...params,
-      reqName: '添加地址',
+      defaultStatus:this.data.isDefault? 1:2,
+      reqName: '添加地址/修改地址',
       url: Operation.addUserAddress
     }
+    if (this.data.id) params.id = this.data.id
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.addUserAddress(params);
     r.successBlock = (req) => {
       //跳转到地址列表页面
-      this.successCallBack("添加成功")
+      let tips = ''
+      if (this.data.id){
+        tips ='修改成功'
+      } else {
+        tips ='添加成功'
+      }
+      this.successCallBack(tips)
     };
     Tool.showErrMsg(r)
     r.addToQueue();
@@ -121,5 +109,10 @@ Page({
       Tool.navigationPop()
     }  
     Tool.showSuccessToast(title, callBack)
+  },
+  setDefault(){
+    this.setData({
+      isDefault: !this.data.isDefault
+    })
   }  
 })

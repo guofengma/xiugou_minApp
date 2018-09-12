@@ -23,6 +23,8 @@ Page({
       pageSize: this.data.pageSize,
       page: this.data.currentPage,
       keyword: options.keyword || '',
+      sortType:1,
+      time:'',
       areaCode: options.code || -1,
     }
     this.setData({
@@ -142,7 +144,9 @@ Page({
       pageSize: this.data.pageSize,
       page: 1,
       keyword: this.data.keyword || '',
+      sortType:n,
       areaCode: this.data.code || -1,
+      time: '', // 每页最后一条数据的排序时间(第一个传空)
     }
     switch (n) {
       case 1:

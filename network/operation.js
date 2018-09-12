@@ -48,34 +48,41 @@ export default class Operation {
     
     /**********  获取数据字典 *******************/
 
-        // dType 1 取消订单 2 退款理由 3 换货理由 4 退货退款 5 问题类型 
+     /* QXDD  取消订单
+      TKLY  退款理由
+      HHLY  换货理由
+      THYK  退货退款
+      WTLX  问题类型
+      SMBH  实名驳回
+      JJTK  拒接退款
+      CPBS  产品报损
+      GGW  广告位
+      JSBH  结算驳回 */
 
-        this.queryDictionaryDetailsType = '/user/dictionary/queryDictionaryDetailsType'
+      this.queryDictionaryDetailsType = '/config/sysDictionary/queryDictionaryTypeList'
 
     /********************** 搜索 *********************/  
     
         this.getHotWordsListActive = '/user/hotWord/getHotWordListActive'
+
+        // 动态搜索框关键词匹配
+
+        this.getKeywords = '/product/getKeywords'
           
     /********************** 产品 *********************/
 
-        // 产品列表
-        this.queryProductListAPP = '/user/product/queryProductList'
-
         // 产品详情
 
-        this.findProductByIdApp = '/user/product/findProductById'
+        this.findProductByIdApp = '/product/getProductDetail'
 
         // 搜索产品
 
-        this.searchProduct ='/user/search/searchProduct'
-        
-        // 根据code获取产品详情
+        this.searchProduct ='/product/productList'
 
-        this.findProductByProdCodeString = '/user/product/findProductByProdCodeString'
+        // 获取产品规格
 
-        // 获取产品规格有误
+        this.findProductStockBySpec = '/product/getProductSpec'
 
-        this.findProductStockBySpec = '/user/product/findProductStockBySpec'
 
         // 礼包规格
 
@@ -112,29 +119,25 @@ export default class Operation {
 
 
     /********************** 地址管理 *********************/
-        // 新增地址
+        // 新增地址 或 修改地址(传id)
 
-        this.addUserAddress  ='/user/userAddress/addUserAddress';
+        this.addUserAddress ='/user/userAddress/save';
 
         // 获取列表
         
-        this.queryUserAddressList  ='/user/userAddress/queryUserAddressList'
-        
-        // 更新地址
-
-        this.updateUserAddress = '/user/userAddress/updateUserAddress'
+        this.queryUserAddressList ='/user/userAddress/query'
 
         // 设置默认地址
 
-        this.setDefaultAddress ='/user/userAddress/setDefaultAddress'
+        this.setDefaultAddress ='/user/userAddress/setDefault'
 
         // 删除地址 
 
-        this.deleteUserAddress  ='/user/userAddress/deleteUserAddress'
+        this.deleteUserAddress ='/user/userAddress/delete'
 
         // 自提地址
 
-        this.queryStoreHouseList = '/user/userAddress/queryStoreHouseList'
+        // this.queryStoreHouseList = '/user/userAddress/queryStoreHouseList'
 
       /********************** 我的账户 *********************/
       
@@ -325,9 +328,9 @@ export default class Operation {
         
         this.updateDealerHeadImg = '/user/dealer/updateDealerHeadImgById';
 
-        // 上传图片的地址 commonAPI
+        // 上传图片的地址 
 
-        this.aliyunOSSUploadImage ='/user/ossClient/aliyunOSSUploadImage'
+        this.aliyunOSSUploadImage = '/common/upload/oss'
 
         // 修改用户昵称
 
@@ -410,15 +413,15 @@ export default class Operation {
 
         // 解决问题是否有用
 
-        this.updateHelpQuestion = '/user/helpQuestion/updateHelpQuestion'
+      this.updateHelpQuestion = '/help/helpQuestion/updateHelpQuestionToClick'
 
         // 根据ID查询问题详情
 
-        this.findHelpQuestionById  = '/user/helpQuestion/findHelpQuestionById'
+      this.findHelpQuestionById = '/help/helpQuestion/findHelpQuestionById'
 
         // 问题列表 可传参 也可以不传
 
-        this.queryHelpQuestionList = '/user/helpQuestion/queryHelpQuestionList'
+      this.queryHelpQuestionList = '/help/helpQuestion/queryHelpQuestionList'
 
         // 添加反馈
 

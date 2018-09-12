@@ -1,6 +1,9 @@
 @import "/components/address-info/address-info";
 
 @import "/pages/address/select-address-common";
+.sub-page>.select-address-box:last-child{
+  margin-bottom: 130rpx;
+}
 .select-address-box {
   background-image: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/line-bg.png);
 }

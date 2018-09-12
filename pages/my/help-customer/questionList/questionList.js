@@ -1,4 +1,4 @@
-let {Tool, RequestFactory } = global;
+let { Tool, RequestFactory,Operation } = global;
 Page({
 
     /**
@@ -7,8 +7,13 @@ Page({
     data: {
       list:''
     },
-    queryHelpQuestionList(params) {
-      let r = RequestFactory.queryHelpQuestionList(params);
+    queryHelpQuestionList(id) {
+      let params = {
+        id: id,
+        reqName: '根据ID查询问题详情',
+        url: Operation.findHelpQuestionById
+      }
+      let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         this.setData({
           list: req.responseObject.data

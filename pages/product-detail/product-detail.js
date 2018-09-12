@@ -134,20 +134,20 @@ Page({
   },
   requestFindProductByIdApp(){
     // 查询商品信息
-    let url = ''
-    let reqName = ''
-    if (this.data.productId){
-      url = Operation.findProductByIdApp
-      reqName = '获取商品详情页'
-    } else{
-      url = Operation.findProductByProdCodeString
-      reqName = '根据code获取商品详情页'
-    }
+    // let url = ''
+    // let reqName = ''
+    // if (this.data.productId){
+    //   url = Operation.findProductByIdApp
+    //   reqName = '获取商品详情页'
+    // } else{
+    //   url = Operation.findProductByProdCodeString
+    //   reqName = '根据code获取商品详情页'
+    // }
     let params = {
-      prodCode: this.data.prodCode,
-      productId: this.data.productId,
-      reqName: reqName,
-      url: url
+      // prodCode: this.data.prodCode,
+      id: this.data.productId,
+      reqName: '获取商品详情页',
+      url: Operation.findProductByIdApp
     }
     let r = RequestFactory.wxRequest(params);
     let productInfo = this.data.productInfo
@@ -174,13 +174,11 @@ Page({
 
         })
       }
-      let isCollection = datas.product.dealer_id > 0 ? true:false
       this.setData({
-        imgUrls: datas.ImgUrl,
+        imgUrls: datas.productImgList,
         productInfo:datas.product,
         productTypeList: datas.saleSpecValueList,
         priceList: datas.priceList,
-        isCollection: isCollection,
         productId: datas.product.id
       })
       let tr = []

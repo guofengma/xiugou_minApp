@@ -1,0 +1,17 @@
+@import "/css/app";
+.amend-tips-view{
+  height: 90rpx;
+  padding: 0 30rpx;
+}
+.right{
+  margin-left: 20rpx;
+}
+.btn-veiw>view{
+  border:1rpx solid;
+  width: 166rpx;
+  height: 60rpx;
+}
+.btn-veiw{
+  padding: 30rpx;
+  border-top: 1rpx solid #ddd;
+}

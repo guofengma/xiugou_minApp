@@ -6,37 +6,29 @@ Page({
     },
     onLoad: function (options) {
       Tool.isIPhoneX(this)
-      Tool.getUserInfos(this)
+      // Tool.getUserInfos(this)
       this.queryHelpQuestionList()
     },
     queryHelpQuestionList(){
       let params = {
-        reqName: '根据ID查询问题详情',
+        reqName: '查询问题列表',
+        requestMethod: 'GET',
         url: Operation.queryHelpQuestionList
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.queryHelpQuestionList();
       r.successBlock = (req) => {
-        let data = req.responseObject.data ? req.responseObject.data : {}
-        let typeList = req.responseObject.data.typeList
-        let list = req.responseObject.data.list
-        let listArr =[]
-        for (let i = 0; i < typeList.length;i++){
-          typeList[i].list=[]
-          //let arr = []
-          for (let j = 0; j < list.length; j++) {
-            if (list[j].name == typeList[i].name){
-              //arr.push(list[j])
-              typeList[i].list.push(list[j])
-            }
-          }
-          // if(arr.length>0){
-          //   listArr.push({ name: typeList[i].name, list: arr, typeid: typeList[i].id})
-          // }         
+        let data = req.responseObject.data? req.responseObject.data : {}
+        let listArr = []
+        for (let key in data) {
+          listArr.push({ 
+            name: key, 
+            list:data[key], 
+            typeid: data[key][0].typeId
+          })
         }
         this.setData({
-          //list: listArr,
-          list: data.typeList
+          list: listArr
         })
       }
       Tool.showErrMsg(r)

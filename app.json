@@ -51,7 +51,8 @@
     "pages/my/my-account/deposit/deposit",
     "pages/product-detail/gift-bag-detail/gift-bag-detail",
     "pages/my/my-promotion/my-promotion",
-    "pages/register/write-invite-code/write-invite-code"
+    "pages/register/write-invite-code/write-invite-code",
+    "pages/address/select-express-address/select-express-address"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

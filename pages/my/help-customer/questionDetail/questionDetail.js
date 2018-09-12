@@ -10,21 +10,16 @@ Page({
       this.findHelpQuestionById(options.id)
     },
     isUseClicked(e){
+      let index = e.currentTarget.dataset.index
       let params = {
         id: this.data.list.id,
+        hadHelp: index == 1 ? 2 : 1,
         reqName: '解决问题是否有用',
         url: Operation.updateHelpQuestion
       }
-      let index = e.currentTarget.dataset.index
-      if(index==1){
-        params.helpNoNum = 1
-      } else {
-        params.helpYesNum = 1
-      }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.updateHelpQuestion(params);
       r.successBlock = (req) => {
-        Tool.showSuccessToast('感谢您的评价')
+        Tool.showSuccessToast(req.responseObject.data)
       }
       Tool.showErrMsg(r)
       r.addToQueue();
@@ -32,16 +27,16 @@ Page({
     findHelpQuestionById(id) {
       let params = {
         id: id,
-        reqName: '解决问题是否有用',
+        reqName: '根据ID查询问题详情',
+        requestMethod: 'GET',
         url: Operation.findHelpQuestionById
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.findHelpQuestionById(params);
       r.successBlock = (req) => {
         this.setData({
           list: req.responseObject.data
         })
-        let html = req.responseObject.data.content
+        let html = req.responseObject.data.content || ''
         WxParse.wxParse('article', 'html', html, this, 5);
       }
       Tool.showErrMsg(r)

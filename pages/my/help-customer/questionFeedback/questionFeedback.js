@@ -26,8 +26,9 @@ Page({
     },
     queryDictionaryDetailsType() {
       let params = {
-        dType: 5,
+        code:'WTLX',
         reqName: '获取数字字典',
+        requestMethod: 'GET',
         url: Operation.queryDictionaryDetailsType
       }
       let r = RequestFactory.wxRequest(params);
@@ -35,7 +36,7 @@ Page({
       // let r = RequestFactory.queryDictionaryDetailsType(params)
 
       r.successBlock = (req) => {
-        req.responseObject.data.unshift({ "dValue": "请选择问题类型", "dKey": "" })
+        req.responseObject.data.unshift({ "value": "请选择问题类型", "code": "" })
         this.setData({
           typeArr: req.responseObject.data
         })
@@ -76,24 +77,25 @@ Page({
     //提交成功
     addFeedback() {
       if (this.data.active) {
+        let originalImg = ''
+        let smallImg = ''
+        if (this.data.originalImg) {
+          originalImg = this.data.originalImg.join(',')
+          smallImg = this.data.smallImg.join(',')
+        }
         let params = {
+          originalImg: originalImg,
+          smallImg: smallImg,
+          typeKey: this.data.typeArr[this.data.activeIndex].id,
           content: this.data.content,
-          type: this.data.activeIndex,
           reqName: '添加反馈',
           url: Operation.addFeedback
         };
-        if(this.data.originalImg){
-          params.originalImg=this.data.originalImg.join(',');
-          params.smallImg=this.data.smallImg.join(',')
-        }
         let r = RequestFactory.wxRequest(params);
-          // let r = RequestFactory.addFeedback(params);
         r.successBlock = (req) => {
-          if(req.responseObject.code==200){
-            this.setData({
-                success:true
-            })
-          }
+          this.setData({
+            success: true
+          })
         };
         Tool.showErrMsg(r)
         r.addToQueue();

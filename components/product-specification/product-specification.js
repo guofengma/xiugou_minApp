@@ -211,7 +211,7 @@ Component({
             datas: datas
           })
         }
-        // console.log('渲染规格')
+
         // 渲染规格
         this.getTipsSpec(this.data.isActive)
         this.triggerEvent('productTypeListClicked', { productTypeList });

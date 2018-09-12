@@ -28,6 +28,7 @@ Page({
   queryUserAddressList(){
     let params = {
       reqName: '获取地址列表',
+      requestMethod:'GET',
       url: Operation.queryUserAddressList
     }
     let r = RequestFactory.wxRequest(params);
