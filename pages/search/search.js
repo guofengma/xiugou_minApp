@@ -21,7 +21,7 @@ Page({
         placeholder:"搜索商品"
       })
       this.requestGetHotWordsListActive()
-      this.getLocation()
+      //this.getLocation()
     } else {
       this.setData({
         history: Storage.getSearchOrderHistory() || [],
@@ -88,6 +88,7 @@ Page({
   },
   requestKeywords(){
     let params = {
+      requestMethod: 'GET',
       keyword: this.data.keyWord,
       reqName: '动态获得搜索词',
       url: Operation.getKeywords,

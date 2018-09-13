@@ -1,15 +1,11 @@
 let { Tool, RequestFactory, Storage, Operation} = global
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     show:false, //展示形式  false：网状 
     keyword:'', 
     tipVal:'', // 默认是无 取值 1 2 3 
-    productInfo:[], // 商品信息
+    productInfo: [], // 商品信息
     totalPage:'', // 页面总页数
     currentPage:1, // 当前的页数
     pageSize: 10, // 每次加载请求的条数 默认10 
@@ -25,15 +21,12 @@ Page({
       keyword: options.keyword || '',
       sortType:1,
       time:'',
-      areaCode: options.code || -1,
     }
     this.setData({
       keyword: options.keyword || '',
       params: params,
       code: options.code
     })
-
-    // this.getRequestUrl(params)
     this.requestQueryProductList(params)
   },
   onShow: function () {
@@ -41,6 +34,8 @@ Page({
   },
   addShoppingCart(e){
     //加入购物车
+    let id = e.currentTarget.dataset.id
+    this.findProductStockBySpec(id)
   },
   getKeyword(e){
     this.setData({
@@ -83,37 +78,45 @@ Page({
     })
     this.requestQueryProductList(this.data.params)
   },
-  requestQueryProductList(params){
-    let url = ''
-    let reqName = ''
-    if (this.data.keyword){
-      // r = RequestFactory.searchProduct(params)
-      url = Operation.searchProduct
-      reqName = '关键字搜索'
-    } else {
-      // r = RequestFactory.queryProductListAPP(params);
-      url = Operation.queryProductListAPP
-      reqName = '获取商品列表'
+  findProductStockBySpec(id) {
+    let params = {
+      id:id,
+      requestMethod: 'GET',
+      url: Operation.findProductStockBySpec,
+      reqName: "规格搜索"
     }
-    let productInfo = this.data.productInfo
-    params.reqName = reqName
-    params.url = url
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
+      this.setData({
+        productSpec: req.responseObject.data
+      })
+    }
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  requestQueryProductList(params){
+    params = {
+      ...params,
+      url: Operation.searchProduct,
+      reqName: "关键字搜索"
+    } 
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let productInfo = this.data.productInfo
       let datas = req.responseObject.data
-      if (datas.resultCount > 0) {
+      if (datas.totalNum > 0) {
+        datas.data.forEach((item) => {
+          item.product.price = Tool.formatNum(item.price)
+          item.product.originalPrice = Tool.formatNum(item.originalPrice)
+        })
         this.setData({
           productInfo: productInfo.concat(datas.data),
-          totalPage: datas.total,
-          tipVal:''
+          totalPage: datas.totalPage,
+          tipVal: ''
         })
-      } else if (datas.resultCount == 0) {
+      } else if (datas.totalNum == 0) {
         this.setData({
           tipVal: 2
-        })
-      } else {
-        this.setData({
-          tipVal: 1
         })
       }
     }
@@ -123,13 +126,6 @@ Page({
   productCliked(e){
     Tool.navigateTo('/pages/product-detail/product-detail?productId='+ e.currentTarget.dataset.id+'&door=1')
   },
-  // getRequestUrl(params){
-  //   if (this.data.keyword) {
-  //     this.searchProduct(params)
-  //   } else {
-  //     this.requestQueryProductList(params)
-  //   }
-  // },
   navbarClicked(e){
     // 1 综合 2销量 3价格 不是数字为变化排版
     let n = e.detail.n
@@ -145,18 +141,17 @@ Page({
       page: 1,
       keyword: this.data.keyword || '',
       sortType:n,
-      areaCode: this.data.code || -1,
       time: '', // 每页最后一条数据的排序时间(第一个传空)
     }
     switch (n) {
       case 1:
         break;
       case 2:
-        params.saleNum = 2
+        params.sortModel = 2
         break;
       case 3:
         let sortType = sort? 1:2
-        params.sort = sortType
+        params.sortModel = sortType
         break;
     }
     this.setData({

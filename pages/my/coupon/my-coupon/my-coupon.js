@@ -58,10 +58,6 @@ Page({
       item.value = item.type == 'ZK'?  Tool.mul(item.value,0.1):item.value
     },
     availableDiscountCouponForProduct(){
-      // let params = {
-      //   orderParam: this.data.productIds
-      // }
-      // let r = RequestFactory.availableDiscountCouponForProduct(params);
       let params = {
         orderParam: this.data.productIds,
         reqName: '产品可用优惠劵列表',
@@ -74,9 +70,6 @@ Page({
           let item = req.responseObject.data[i];
           item.outTime = Tool.formatTime(item.outTime).slice(0, 10);
           item.start_time = Tool.formatTime(item.startTime).slice(0, 10);
-          // let nickname = item.name
-          // item.name = item.nickname
-          // item.nickname = nickname
           if (currentTime > item.startTime) {
             item.left = '';
             item.canUse =1
@@ -86,8 +79,6 @@ Page({
           this.getCouponType(item)
           this.data.lists[0].push(item)
         }
-        // this.data.totalPageArr[0] = req.responseObject.data.total
-        // this.data.lists[0] = this.data.lists[0].concat(req.responseObject.data.data)
         this.data.lists[0] = req.responseObject.data
         this.setData({
           lists: this.data.lists
@@ -104,7 +95,6 @@ Page({
         url: Operation.getDiscountCouponNoUse
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.getDiscountCouponNoUse(this.data.params);
       r.successBlock = (req) => {
           if (req.responseObject.data.total==0) return
           let currentTime = new Date().getTime() // 获取当前时间
@@ -141,7 +131,6 @@ Page({
         url: Operation.getDiscountCouponUserd
       }
       let r = RequestFactory.wxRequest(params);
-        // let r = RequestFactory.getDiscountCouponUserd(this.data.params);
       r.successBlock = (req) => {
         if (req.responseObject.data.total == 0) return
         for (let i in req.responseObject.data.data) {
@@ -164,7 +153,6 @@ Page({
     },
     //失效优惠劵列表
     getDiscountCouponLosed() {
-      // let r = RequestFactory.getDiscountCouponLosed(this.data.params);
       let params = {
         ...this.data.params,
         reqName: '失效优惠劵列表',
@@ -235,23 +223,6 @@ Page({
         }
     },
       onLoad: function (options) {
-        let that = this;
-        //  高度自适应
-        wx.getSystemInfo({
-          success: function (res) {
-            let clientHeight = res.windowHeight,
-                clientWidth = res.windowWidth,
-                rpxR = 750 / clientWidth;
-            let calc = clientHeight * rpxR;
-            let calc0 = clientHeight * rpxR
-            if (that.data.currentTab == 0 & options.door == 1 ){
-              calc -= 100 * rpxR
-            }
-            that.setData({
-              winHeight: [calc, calc0, calc0],
-            });
-          }
-        });
         this.setData({
           door: options.door || '',
           productIds: options.productIds || '',

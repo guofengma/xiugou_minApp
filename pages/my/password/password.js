@@ -69,7 +69,6 @@ Page({
         url: Operation.updateDealerPassword
       };
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.updateDealerPassword(params);
       r.successBlock= (req) => {
         Tool.navigationPop()
       };

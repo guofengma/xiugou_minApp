@@ -13,7 +13,9 @@ Page({
     code: "",
   },
   onLoad: function (options) {
-
+    this.setData({
+      oldCode: options.code
+    })
   },
   //下一步
   next() {
@@ -36,15 +38,17 @@ Page({
   //确定
   sure() {
     let params = {
-      code: this.data.code,
+      verificationCode: this.data.code,
+      oldVerificationCode: this.data.oldCode,
       phone: this.data.phone,
       reqName: '修改手机账号',
       url: Operation.updateDealerNewPhone
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.updateDealerNewPhone(params);
     r.successBlock = (req) => {
-      Storage.setUserAccountInfo(req.responseObject.data)
+      let infos = Storage.getUserAccountInfo()
+      infos.phone = this.data.phone
+      Storage.setUserAccountInfo(infos)
       Event.emit('refreshMemberInfoNotice');
       Tool.redirectTo('../account/account')
     };
@@ -84,7 +88,6 @@ Page({
     
     let callBack = () => {
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.sendMessage(params);
       r.successBlock = (req) => {
         wx.showToast({
             title: '验证码已发送',

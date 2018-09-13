@@ -6,14 +6,14 @@ Page({
       region:''
     },
     nickname(){
-      Tool.navigateTo('/pages/my/nickname/nickname')
-     
+      Tool.navigateTo('/pages/my/nickname/nickname?nickname=' + this.data.userInfos.nickname)
     },
     onLoad: function (options) {
       Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
       this.refreshMemberInfoNotice()
     },
     refreshMemberInfoNotice(){
+      console.log(1111)
       Tool.getUserInfos(this)
       let userInfos = this.data.userInfos
       let isRealName = ''
@@ -22,7 +22,7 @@ Page({
       } else if (userInfos.realnameStatus == 1){
         isRealName = '已实名制'
       } else {
-        isRealName = '未实名制'
+        isRealName = '请下载app进行实名制'
       }
       userInfos.isRealName = isRealName
       this.setData({
@@ -39,43 +39,47 @@ Page({
     },
     updateDealerRegion(e){
       let params = {
-        provinceId: this.data.region[0].zipcode,
-        cityId: this.data.region[1] ? this.data.region[1].zipcode : '',
-        areaId: this.data.region[2] ? this.data.region[2].zipcode : '',
-        reqName: '修改所在区域',
-        url: Operation.updateDealerRegion
+        provinceId: this.data.region[0].code,
+        cityId: this.data.region[1] ? this.data.region[1].code : '',
+        areaId: this.data.region[2] ? this.data.region[2].code : '',
+        'type': 3
       }
-      let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.updateDealerRegion(params);
-      r.successBlock = (req) => {
-        Storage.setUserAccountInfo(req.responseObject.data)
-        Event.emit('refreshMemberInfoNotice');//发出通知
-        //Tool.navigationPop()
-      };
-      r.addToQueue();
+      let callBack = (infos) => {
+        infos.showRegion = this.data.region[0].name + this.data.region[1].name+this.data.region[2].name
+      }
+      this.updateUserInfo(params, callBack)
     },
     modifyImageTap: function () {
       let callBack = (fileInfo) => {
-        let temporaryId = fileInfo.data.imageUrl;//临时Id
+        let temporaryId = fileInfo.data;//临时Id
         let params = {
           headImg: temporaryId,
-          reqName: '修改用户头像',
-          url: Operation.updateDealerHeadImg
+          'type':1
         }
-        let r = RequestFactory.wxRequest(params);
-        // let r = RequestFactory.updateDealerHeadImg(params);
-        r.successBlock = (req) => {
-          Storage.setUserAccountInfo(req.responseObject.data)
-          Event.emit('refreshMemberInfoNotice');
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
+        let callBack = (infos)=>{
+          infos.headImg = temporaryId
+        }
+        this.updateUserInfo(params, callBack)
       }
       Tool.uploadImage(1, callBack)
     },
-    realName(){
-      // if (!this.data.userInfos.isRealname){
-      //   Tool.redirectTo('/pages/real-name/real-name')
-      // }
+    updateUserInfo(params, callBack){
+      params = {
+        ...params,
+        reqName: '修改用户信息',
+        url: Operation.updateUserById
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let infos = Storage.getUserAccountInfo()
+        callBack(infos)
+        Storage.setUserAccountInfo(infos)
+        Event.emit('refreshMemberInfoNotice');
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    },
+    onUnload: function () {
+      Event.off('refreshMemberInfoNotice', this.refreshMemberInfoNotice);
     }
 })

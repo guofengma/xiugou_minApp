@@ -23,4 +23,8 @@
    </scroll-view>
   <!--搜索结果异常显示 tipVal  -->
   <template is="result-tips" wx-if='{{tipVal}}' data="{{tipVal}}" />
+
+  <product-specification
+    productSpec='{{productSpec}}'
+  />
 </view>

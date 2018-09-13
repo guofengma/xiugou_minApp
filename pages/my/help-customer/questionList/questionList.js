@@ -1,22 +1,18 @@
 let { Tool, RequestFactory,Operation } = global;
 Page({
-
-    /**
-     * 页面的初始数据
-     */
     data: {
       list:''
     },
     queryHelpQuestionList(id) {
       let params = {
-        id: id,
-        reqName: '根据ID查询问题详情',
-        url: Operation.findHelpQuestionById
+        reqName: '查询问题列表',
+        requestMethod: 'GET',
+        url: Operation.queryHelpQuestionList
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         this.setData({
-          list: req.responseObject.data
+          list: req.responseObject.data[id]
         })
       }
       Tool.showErrMsg(r)

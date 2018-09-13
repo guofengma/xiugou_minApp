@@ -52,7 +52,8 @@
     "pages/product-detail/gift-bag-detail/gift-bag-detail",
     "pages/my/my-promotion/my-promotion",
     "pages/register/write-invite-code/write-invite-code",
-    "pages/address/select-express-address/select-express-address"
+    "pages/address/select-express-address/select-express-address",
+    "pages/my/nickname/nickname"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

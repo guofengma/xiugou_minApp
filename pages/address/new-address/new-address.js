@@ -18,9 +18,9 @@ Page({
     if (list !== undefined){
       list = JSON.parse(options.address)
       let region = this.data.region
-      region[0] = { name: list.province, zipcode: list.provinceCode}
-      region[1] = { name: list.city, zipcode: list.cityCode }
-      region[2] = { name: list.city, zipcode: list.areaCode }
+      region[0] = { name: list.province, code: list.provinceCode}
+      region[1] = { name: list.city, code: list.cityCode }
+      region[2] = { name: list.city, code: list.areaCode }
       this.setData({
         receiver: list.receiver,
         receiverPhone: list.receiverPhone,
@@ -66,15 +66,15 @@ Page({
       }
       
       if (this.data.region[0]) {
-        params.provinceCode = this.data.region[0].zipcode;
+        params.provinceCode = this.data.region[0].code;
       }
       if (this.data.region[1]) {
-        params.cityCode = this.data.region[1].zipcode;
+        params.cityCode = this.data.region[1].code;
       } else {
         params.cityCode = ''
       }
       if (this.data.region[2]) {
-        params.areaCode = this.data.region[2].zipcode;
+        params.areaCode = this.data.region[2].code;
       } else {
         params.areaCode = ''
       }

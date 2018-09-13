@@ -37,14 +37,8 @@ export default class Operation {
 
     /**********  获取省市区 *******************/
 
-        // 获取省
-        this.getProvinceList = '/user/area/getProvinceList'
-
-        // 获取市
-        this.getCityList = '/user/area/getCityList'
-
-        // 获取区
-        this.getAreaList = '/user/area/getAreaList'
+      // 获取省
+      this.queryAreaList = '/config/sysArea/queryAreaList'
     
     /**********  获取数据字典 *******************/
 
@@ -308,53 +302,44 @@ export default class Operation {
 
         //退出登录
 
-        this.exitLogin ='/user/memberLogin/exitLogin';
+        this.exitLogin ='/user/untiedWechat';
 
-        // 实时更新用户等级
+        // 获取用户信息
 
-        this.getLevel = '/user/userInfo/getLevel'
+        this.getLevel = '/user/getUser'
 
         /******************我的---通讯录*********************** */
 
         //通讯录列表
-
         this.queryDealerAddressBook ='/user/dealer/queryDealerAddressBook';
 
         //通讯录详情
 
         this.findDealerAddressBookDetails ='/user/dealer/findDealerAddressBookDetails';
 
-        // 修改用户头像
+        // 修改用户信息 type:1:修改头像 2:修改名字 3:修改省市区
         
-        this.updateDealerHeadImg = '/user/dealer/updateDealerHeadImgById';
+        this.updateUserById = '/user/updateUserById';
 
         // 上传图片的地址 
 
         this.aliyunOSSUploadImage = '/common/upload/oss'
 
-        // 修改用户昵称
-
-        this.updateDealerNickname = '/user/dealer/updateDealerNicknameById';
-
-        // 修改所在区域
-
-        this.updateDealerRegion = '/user/dealer/updateDealerRegionById';
-
         //  修改密码
 
-        this.updateDealerPassword = '/user/dealer/updateDealerPassword';
+        this.updateDealerPassword = '/user/updateLoginPassword';
 
         // 微信账号解绑 
 
-        this.updateDealerOpenid ='/user/dealer/updateDealerOpenidById'
+        this.updateDealerOpenid ='/user/untiedWechat'
 
         //  修改手机号
 
-        this.updateDealerNewPhone = '/user/dealer/updateDealerNewPhoneById'
+        this.updateDealerNewPhone = '/user/updatePhone'
 
         // 验证旧手机短信是否正确
 
-        this.updateDealerPhoneById = '/user/dealer/updateDealerPhoneById'
+        this.updateDealerPhoneById = '/user/judgePhoneCode'
 
 
         // 邀请码
@@ -379,20 +364,6 @@ export default class Operation {
         */
 
         this.sendMessage = '/user/phoneCode/sendMessage'
-
-        /*************** 收藏 ******************************/ 
-
-        // 收藏列表
-
-        this.queryProductFaviconList = '/user/productFavicon/queryProductFaviconList'
-
-        //删除
-
-        this.deleteProductFavicon = '/user/productFavicon/deleteProductFavicon'
-
-        // 新增
-
-        this.addProductFavicon = '/user/productFavicon/addProductFavicon'
 
         /************************** 首页 *******************************/ 
 
@@ -429,17 +400,9 @@ export default class Operation {
 
         /************************** 优惠券 *******************************/
 
-        // 未使用优惠劵列表
+        // 未使用优惠劵列表 status 优惠券状态 0-未使用 1-已使用 2-已失效 3-未激活
 
-        this.getDiscountCouponNoUse = '/user/discountCouponDealer/getDiscountCouponNoUse';
-
-        // 已经优惠劵列表
-
-        this.getDiscountCouponUserd  = '/user/discountCouponDealer/getDiscountCouponUserd';
-
-        // 失效优惠劵列表
-
-        this.getDiscountCouponLosed = '/user/discountCouponDealer/getDiscountCouponLosed';
+        this.couponList = '/user/coupon/list';
 
         // 优惠劵详情
 
@@ -447,7 +410,7 @@ export default class Operation {
 
         // 产品可用优惠劵列表
 
-        this.availableDiscountCouponForProduct = '/order/order/availableDiscountCouponForProduct';
+        this.availableDiscountCouponForProduct = '/user/coupon/listAvailable';
 
 
         /************************** 我的消息 *******************************/

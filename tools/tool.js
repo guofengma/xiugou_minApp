@@ -412,7 +412,6 @@ export default class Tool {
               name: 'file',
               success: function (res) {
                 let fileInfo = JSON.parse(res.data);
-                // console.log(fileInfo)
                 successCallback(fileInfo)
               }
             })
@@ -809,6 +808,7 @@ export default class Tool {
 
     static showErrMsg(r,callBack=()=>{}) {
       r.failBlock = (req) => {
+        console.log(req)
         // let page = this.getCurrentPageUrlWithArgs() //获取当前额页面
         if (req.responseObject.code==210){ // 超时登录
           // callBack =()=>{
@@ -1017,7 +1017,29 @@ export default class Tool {
       that.setData({ 
         imgheights: imgheights,
       })
-
     }
+
+  static formatNum(num) { // 保留两位小数不四舍五入
+    num = num < 0 ? 0 : num
+    let index = String(num).lastIndexOf('.')
+    if (index != -1) {
+      let num2 = num.toFixed(3);
+      num2 = num2.substring(0, num2.lastIndexOf('.') + 3)
+      return num2
+    }
+    return num
+  }
+
+  static bubbleSort(array){
+    let i = 0, len = array.length, j, d; 
+    for (; i < len; i++) {
+      for (j = 0; j < len; j++) {
+        if (array[i] < array[j]) {
+          d = array[j]; array[j] = array[i]; array[i] = d;
+        }
+      }
+    }
+    return array;
+  }
 }
 

@@ -1,10 +1,6 @@
 // pages/my/account.js
 let { Tool, RequestFactory, Event, Storage, Operation } = global;
 Page({
-
-    /**
-     * 页面的初始数据
-     */
     data: {
         unBinded:false,
         userInfos:''
@@ -40,13 +36,16 @@ Page({
         url: Operation.updateDealerOpenid
       };
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.updateDealerOpenid();
       r.successBlock = (req) => {
-        this.setData({
-          unBinded:false
-        })
-        Storage.setUserAccountInfo(req.responseObject.data)
+        let infos = Storage.getUserAccountInfo()
+        infos.openid = null
+        Storage.setUserAccountInfo(infos)
         Event.emit('refreshMemberInfoNotice');//发出通知
+      }
+      r.completeBlock = (req) => {
+        this.setData({
+          unBinded: false
+        })
       }
       Tool.showErrMsg(r)
       r.addToQueue();

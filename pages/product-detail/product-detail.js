@@ -133,19 +133,9 @@ Page({
     r.addToQueue();
   },
   requestFindProductByIdApp(){
-    // 查询商品信息
-    // let url = ''
-    // let reqName = ''
-    // if (this.data.productId){
-    //   url = Operation.findProductByIdApp
-    //   reqName = '获取商品详情页'
-    // } else{
-    //   url = Operation.findProductByProdCodeString
-    //   reqName = '根据code获取商品详情页'
-    // }
     let params = {
-      // prodCode: this.data.prodCode,
       id: this.data.productId,
+      requestMethod: 'GET',
       reqName: '获取商品详情页',
       url: Operation.findProductByIdApp
     }
@@ -153,37 +143,18 @@ Page({
     let productInfo = this.data.productInfo
     r.successBlock = (req) => {
       let datas = req.responseObject.data
-      let typeList = datas.saleSpecValueList;
-      // let typeList = datas.priceList
-      typeList.forEach((item)=>{
-        item.typeList = item.spec_values.split(',')
-        item.typeId = item.ids.split(',')
-        if (datas.product.stock>0){
-          item.types = item.typeId
-        } else {
-          item.types = false
-        }
-      })
-      if (typeList.length == 1 && datas.product.stock > 0){
-        datas.priceList.forEach((item,index)=>{
-          if(item.stock==0){
-            let index = typeList[0].typeList.indexOf(item.spec)
-            typeList[0].types[index] = false
-            typeList[0].typeId[index]= false
-          }
-
-        })
-      }
       this.setData({
         imgUrls: datas.productImgList,
-        productInfo:datas.product,
-        productTypeList: datas.saleSpecValueList,
-        priceList: datas.priceList,
-        productId: datas.product.id
+        productInfo: datas.product,
+        productInfoList: datas,
+        priceList: datas.priceList, // 价格表
+        productSpec: datas.specMap, // 规格描述
+        specGroups: datas.specGroups, // 规格组
       })
+      // 渲染表格
       let tr = []
       let tbody = this.data.nodes
-      for (let i = 0; i < datas.infoValue.length;i++){ 
+      for (let i = 0; i < datas.paramList.length;i++){ 
         tr.push(
           {
             name: "tr",
@@ -193,7 +164,7 @@ Page({
               attrs: { class:'td frist-td'},
               children: [{
                 type: "text",
-                text: datas.infoValue[i].parm
+                text: datas.paramList[i].paramName
               }]
             },
             {
@@ -201,7 +172,7 @@ Page({
               attrs: { class: 'td td2'},
               children: [{
                 type: "text",
-                text: datas.infoValue[i].parm_value
+                text: datas.paramList[i].paramValue
               }]
             }
             ]

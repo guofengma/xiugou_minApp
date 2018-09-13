@@ -61,7 +61,6 @@ Page({
       hasCookie: false
     };
     let r = RequestFactory.wxRequest(params);
-    // let r = global.RequestFactory.wechatLogin(params);
     r.successBlock= (req) => {
       // 存相关信息
       Tool.loginOpt(req)
@@ -72,7 +71,7 @@ Page({
       }
     }
     r.failBlock = (req) => {
-      if (req.responseObject.code == 31401){
+      if (req.responseObject.code == 34005){
         Tool.navigateTo('/pages/register/register')
       } else if (req.responseObject.code == 40000){
         Tool.navigateTo('/pages/download-app/download-app?door=1')

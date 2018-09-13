@@ -1,11 +1,6 @@
 let { Tool, RequestFactory, Event, Operation } = global
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    ysf: { title: '修改手机号' },
     getCodeBtEnable: true,
     second: '59',
     showSecond: false,
@@ -37,8 +32,7 @@ Page({
         url: Operation.sendMessage
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.sendMessage(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         wx.showToast({
           title: '验证码已发送',
         })
@@ -54,16 +48,15 @@ Page({
       return
     } 
     let params = {
-      code: this.data.code,
+      verificationCode: this.data.code,
       phone: this.data.userInfos.phone,
       reqName:'验证旧手机验证码是否正确',
       url: Operation.updateDealerPhoneById
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.updateDealerPhone(params);
-    r.finishBlock = (req) => {
+    r.successBlock = (req) => {
       // Tool.redirectTo('/pages/my/phone/phone?phone=' + this.data.userInfos.phone)
-      Tool.navigateTo('/pages/my/phone/phone?phone=' + this.data.userInfos.phone)
+      Tool.navigateTo('/pages/my/phone/phone?phone=' + this.data.userInfos.phone + '&code=' + this.data.code)
     };
     r.failBlock = (req) => {
       Tool.showAlert(req.responseObject.msg)

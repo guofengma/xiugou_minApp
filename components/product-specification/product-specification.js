@@ -1,13 +1,12 @@
 let { Tool, RequestFactory, Operation } = global
 Component({
   properties: {
-    productTypeList:Array,
-    priceList: Array,
-    productInfo:Object,
-    imgUrl:String,
-    types:Number,
+    // productSpec:Object,// 规格描述
+    // specGroups:Array,
+    // priceList:Array,
     showImgs:Boolean,
-    isIphoneX: Boolean
+    imgUrl:String,
+    price:Number,
   },
   data: {
     visiable:false,
@@ -18,8 +17,23 @@ Component({
     selectPrdList:{}, //已选的类型的商品价格等信息
     tips:'',// 提示语
     typeClicked:0, // 0 规格栏点击 1 加入购物车点击 2 立即购买点击
+    productSpec: { "重量": [{ "id": 3, "specName": "重量", "specValue": "1KG" }, { "id": 4, "specName": "重量", "specValue": "2KG" }], "颜色": [{ "id": 1, "specName": "颜色", "specValue": "红色" }, { "id": 2, "specName": "颜色", "specValue": "金色" }, { "id": 8, "specName": "颜色", "specValue": "蓝色" }], "内存": [{ "id": 5, "specName": "内存", "specValue": "32G" }, { "id": 6, "specName": "内存", "specValue": "64G" }, { "id": 7, "specName": "内存", "specValue": "128G" }] },
+    specGroups: [{ "specId": 2, "specGroup": null }, { "specId": 5, "specGroup": [{ "specId": 1, "specGroup": [{ "specId": 3, "specGroup": [] }] }, { "specId": 3, "specGroup": [{ "specId": 1, "specGroup": [] }] }] }, { "specId": 8, "specGroup": null }, { "specId": 4, "specGroup": null }, { "specId": 1, "specGroup": [{ "specId": 6, "specGroup": [{ "specId": 3, "specGroup": [] }] }, { "specId": 3, "specGroup": [{ "specId": 6, "specGroup": [] }] }] }, { "specId": 7, "specGroup": null }, { "specId": 6, "specGroup": [{ "specId": 3, "specGroup": [{ "specId": 1, "specGroup": [] }] }, { "specId": 1, "specGroup": [{ "specId": 3, "specGroup": [] }] }] }, { "specId": 3, "specGroup": [{ "specId": 6, "specGroup": [{ "specId": 1, "specGroup": [] }] }, { "specId": 1, "specGroup": [{ "specId": 6, "specGroup": [] }] }] }]
   },
   methods: {
+    formatSpecList(){
+      let lists = []
+      for (let key in this.data.productSpec) {
+        lists.push({
+          name: key,
+          list: this.data.productSpec[key]
+        })
+      }
+      this.setData({
+        productSpec: lists
+      }) 
+      console.log(this.data.productSpec)     
+    },
     makeSureType(show){
       // 点击确定 
       if (!this.isSelectAll()) return
@@ -63,16 +77,16 @@ Component({
     },
     typeListClicked(e){
       // 选择的类型 使其 active
-      let key = e.currentTarget.dataset.type
+      let key = e.currentTarget.dataset.key 
       let index = e.currentTarget.dataset.index
-      let val = e.currentTarget.dataset.typename
+      let specValue = e.currentTarget.dataset.specvalue
       let id = e.currentTarget.dataset.id
 
       // 深复制数组
       let obj = [...this.data.isActive]
-      let canclick = e.currentTarget.dataset.canclick
-      if (!canclick) return
-      obj[key] = { key, spec:this.data.productTypeList[key].spec,index,val,id}
+      // let canclick = e.currentTarget.dataset.canclick
+      // if (!canclick) return
+      obj[key] = {specValue,id,key,index}
       let spec_id = []
       for (let i = 0; i < obj.length; i++) {
         if (obj[i] !== undefined) {
@@ -85,20 +99,57 @@ Component({
         if(item){
           if (item.id == obj[key].id) {
             spec_id[index] = undefined
-            obj[key] = { key, spec: this.data.productTypeList[key].spec}
+            obj[key] = {key}
           }
         }
       })
+
       // 数组长度等于规格清单数组长度
-      spec_id.length = this.properties.productTypeList.length
-      this.findProductStockBySpec(spec_id, key, index,obj)
+      // spec_id.length = this.data.productSpec.length
+      this.getMySpec(spec_id, key, index, obj, id)
+      // this.findProductStockBySpec(spec_id, key, index,obj)
+    },
+    getMySpec(specIdArr, key, index, obj, id){
+      if (obj.length === this.data.productSpec.length){
+        this.setData({
+          isActive: obj
+        })
+      } 
+      let datas = this.data.currentSpecList ? this.data.currentSpecList.specGroup : this.data.specGroups
+      // console.log(datas)
+      // console.log(this.data.currentSpecList)
+      datas.forEach((item)=>{
+        if (item.specId == id && item.specGroup !== null && item.specGroup.length>0){
+          console.log(item)
+          this.setData({
+            currentSpecList:item
+          })
+          item.specGroup.forEach((list)=>{
+            console.log(list)
+            let arrIndex = list.specGroup.indexOf(id)
+            if (arrIndex!=-1){
+              this.setData({
+                isActive: obj
+              })
+            } else {
+              console.log(key, index)
+              let productSpec = this.data.productSpec
+              console.log(productSpec)
+              productSpec[key].list[index].noStock = true
+              this.setData({
+                productSpec: productSpec
+              })
+            }
+          })
+        }
+      })
     },
     getTipsSpec(chooseTypes=[]){
       // 规格提示
       let tips = []
       let chooseArr = []
-      for (let i = 0; i < this.data.productTypeList.length; i++) {
-        tips.push(this.data.productTypeList[i].spec)
+      for (let i = 0; i < this.data.productSpec.length; i++) {
+        tips.push(this.data.productSpec[i].name)
       }
       chooseTypes.forEach((item,index)=>{
         if(item.val){
@@ -118,11 +169,12 @@ Component({
       this.setData({
         tips: tips
       })
-
+      console.log(tips)
     },
     isVisiableClicked(n){
       // 规格选择提示拼接
       let types = n || 0
+      this.formatSpecList()
       this.getTipsSpec()
       // let tips = []
       // for (let i = 0; i < this.data.productTypeList.length;i++){

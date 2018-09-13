@@ -5,7 +5,7 @@ Page({
       userInfos:'',
       tabClicked:1,
       num:0,
-      ysf: { title: '我的' }
+      imgUrl:'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/'
     },
     onLoad: function (options) {
       this.refreshMemberInfoNotice()
@@ -37,16 +37,14 @@ Page({
       let params = {
         isShowLoading:false,
         reqName: '获取用户等级',
+        requestMethod: 'GET',
         url: Operation.getLevel
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.getLevel({});
-      r.finishBlock = (req) => {
-        let datas = req.responseObject.data
-        this.data.userInfos.levelName = datas.name
-        Storage.setUserAccountInfo(this.data.userInfos)
+      r.successBlock = (req) => {
+        Storage.setUserAccountInfo(req.responseObject.data)
         this.setData({
-          userInfos: this.data.userInfos
+          userInfos: req.responseObject.data
         })
       };
       Tool.showErrMsg(r)
@@ -102,7 +100,7 @@ Page({
     },
     //跳到我的信息页面
     personalData() {
-      if (!this.didLogin(true)) return
+      // if (!this.didLogin(true)) return
       Tool.navigateTo('my-personalData/my-personalData')
     },
     //跳到设置页面
@@ -112,7 +110,7 @@ Page({
     },
     //跳到帮助与客服页面
     helpCustomer() {
-      // if (!this.didLogin(true)) return
+      if (!this.didLogin(true)) return
       Tool.navigateTo('help-customer/help-customer')
     },
     //我的消息

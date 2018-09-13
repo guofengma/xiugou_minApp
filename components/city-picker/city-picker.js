@@ -109,29 +109,31 @@ Component({
     // 获取省份
     getProvinceList() {
       let params = {
+        fatherCode: 0,
         isShowLoading: false,
-        reqName: '获取省份',
-        url: Operation.getProvinceList
+        requestMethod: 'GET',
+        reqName: '获取省',
+        url: Operation.queryAreaList
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.getProvinceList();
       r.successBlock = (req) => {
         let data = req.responseObject.data
         this.setData({
           sheng: data
         })
         // 默认请求第一个
-        this.getCityList(data[0].zipcode) 
+        this.getCityList(data[0].code) 
       }
       r.addToQueue();
     },
     // 获取市
     getCityList(id) {
       let params = {
-        fatherZipcode: id,
+        fatherCode: id,
         isShowLoading: false,
         reqName: '获取市',
-        url: Operation.getCityList
+        requestMethod: 'GET',
+        url: Operation.queryAreaList
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.getCityList({fatherZipcode:id});
@@ -142,7 +144,7 @@ Component({
         })
         // 默认请求第一个
         if (data.length>0){
-          this.getAreaList(data[0].zipcode)
+          this.getAreaList(data[0].code)
         } else {
           this.setData({
             qu:[]
@@ -154,13 +156,13 @@ Component({
     // 获取区
     getAreaList(id) {
       let params = {
-        fatherZipcode: id,
+        fatherCode: id,
         isShowLoading: false,
         reqName: '获取区',
-        url: Operation.getAreaList
+        requestMethod: 'GET',
+        url: Operation.queryAreaList
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.getAreaList({ fatherZipcode: id });
       r.successBlock = (req) => {
         this.setData({
           qu: req.responseObject.data

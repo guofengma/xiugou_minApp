@@ -11,7 +11,7 @@
   <view class='prduct-detail-view'>
     <!--topbar  -->
     <view class='topbar flexR' wx:if='{{floorstatus}}' >
-      <image src='{{imgUrls[0].original_img}}' ></image>
+      <image src='{{productInfo.imgUrl}}' ></image>
       <view class='msg-view fr' bindtap='msgClicked'></view>
       <template is="msg-tips" data="{{msgShow}}" /> 
     </view>
@@ -25,7 +25,7 @@
       <swiper autoplay="true" interval='3000' bindchange='sliderChange'>
         <block wx:for="{{imgUrls}}" wx:key="unique">
           <swiper-item>
-            <image src="{{item.original_img}}" class="slide-image" bindload="imageLoad"/>
+            <image src="{{item.smallImg}}" class="slide-image" bindload="imageLoad"/>
           </swiper-item>
         </block>
       </swiper>
@@ -37,14 +37,14 @@
     <view class='prd-info boxSize'>
       <view class='prd-name ellipsis-2'>{{productInfo.name}}</view>
       <view class='price'>
-        <text class='price1 red'>¥ {{productInfo.levelPrice}} <text class='font-24'>起</text></text>
-        <text class='price2 gray'>¥ {{productInfo.original_price}}</text>
-        <text class='label-pd redBg'>拼店价：¥{{productInfo.group_price}}</text>
+        <text class='price1 red'>¥ {{productInfoList.price}} <text class='font-24'>起</text></text>
+        <text class='price2 gray'>¥ {{productInfoList.originalPrice}}</text>
+        <!-- <text class='label-pd redBg'>拼店价：¥{{productInfo.group_price}}</text> -->
         <!-- <text class='price3 red'>积分价：¥ {{productInfo.min_payment}}</text> -->
       </view>
       <view class='shippingInfo gray'>
-        <text style='margin-right:158rpx'>快递：{{productInfo.start_price}}</text> 
-        <text>月销售{{productInfo.saleNum}}笔</text>
+        <text style='margin-right:158rpx'>快递：{{productInfoList.freight}}</text> 
+        <text>月销售{{productInfoList.monthSaleTotal}}笔</text>
       </view>
     </view>
     <!--产品规格选择  -->
@@ -52,11 +52,13 @@
       <!-- <view> -->
         <product-specification id='prd-info-type' 
             bind:subClicked="typeSubClicked"  
-            productTypeList='{{productTypeList}}' 
+            productSpec='{{productSpec}}' 
+            specGroups ='{{specGroups}}'
+            price = '{{productInfoList.price}}'
             priceList='{{priceList}}' 
             productInfo='{{productInfo}}' 
             bind:counterInputOnChange='counterInputOnChange' 
-            imgUrl="{{imgUrls[0].original_img}}" 
+            imgUrl="{{productInfo.imgUrl}}" 
             showImgs='{{true}}' 
             bind:productTypeListClicked='productTypeListClicked'
             bind:hiddenTips='hiddenTips'
@@ -68,7 +70,7 @@
       <!-- </view> -->
       <view class='gray'>
         <text class='label red' >服务</text>
-        正品保障·急速发货 <text wx:if='{{productInfo.afer_service_days>0}}'>{{productInfo.afer_service_days>30? 30:productInfo.afer_service_days}}天无理由退换货</text>
+        正品保障·急速发货 <text wx:if='{{productInfo.afterSaleServiceDays>0}}'>{{productInfo.afterSaleServiceDays>30? 30:productInfo.afterSaleServiceDays}}天无理由退换货</text>
       </view>
     </view>
     <!--产品图文详情切换  -->

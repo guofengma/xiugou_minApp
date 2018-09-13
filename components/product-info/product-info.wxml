@@ -5,6 +5,6 @@
       <text class='now'>￥{{price}}</text>
       <text class='font-24'>起</text>
     </view>
-    <image src='/img/cart-small.png' mode="widthFix" bindtap='addShoppingCart' data-id='' ></image>
+    <image src='/img/cart-small.png' mode="widthFix" catchtap='addShoppingCart' data-id='{{id}}' ></image>
   </view>
 </template>
