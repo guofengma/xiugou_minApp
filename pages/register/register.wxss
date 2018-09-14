@@ -42,11 +42,13 @@
 }
 .rule{
   margin-top: 20rpx;
+  text-align: center;
 }
 .rule image{
   width: 36rpx;
   margin-right: 10rpx;
+  vertical-align:middle;
 }
-.rule.flexR{
+/* .rule.flexR{
   justify-content: center;
-}
+} */

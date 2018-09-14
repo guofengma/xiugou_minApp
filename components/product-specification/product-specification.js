@@ -9,6 +9,7 @@ Component({
     price:Number,
   },
   data: {
+    isInit:true,
     visiable:false,
     innerCount: 1, //数量
     isSelect:false,// 是否选择了商品类型
@@ -77,6 +78,9 @@ Component({
     },
     typeListClicked(e){
       // 选择的类型 使其 active
+      this.setData({
+        isInit:false
+      })
       let key = e.currentTarget.dataset.key 
       let index = e.currentTarget.dataset.index
       let specValue = e.currentTarget.dataset.specvalue
@@ -105,41 +109,62 @@ Component({
       })
 
       // 数组长度等于规格清单数组长度
-      // spec_id.length = this.data.productSpec.length
+      spec_id.length = this.data.productSpec.length
       this.getMySpec(spec_id, key, index, obj, id)
       // this.findProductStockBySpec(spec_id, key, index,obj)
     },
     getMySpec(specIdArr, key, index, obj, id){
       if (obj.length === this.data.productSpec.length){
-        this.setData({
-          isActive: obj
-        })
+       
       } 
+      let productSpec = this.data.productSpec
       let datas = this.data.currentSpecList ? this.data.currentSpecList.specGroup : this.data.specGroups
-      // console.log(datas)
-      // console.log(this.data.currentSpecList)
       datas.forEach((item)=>{
         if (item.specId == id && item.specGroup !== null && item.specGroup.length>0){
-          console.log(item)
           this.setData({
             currentSpecList:item
           })
-          item.specGroup.forEach((list)=>{
-            console.log(list)
-            let arrIndex = list.specGroup.indexOf(id)
-            if (arrIndex!=-1){
-              this.setData({
-                isActive: obj
-              })
-            } else {
-              console.log(key, index)
-              let productSpec = this.data.productSpec
-              console.log(productSpec)
-              productSpec[key].list[index].noStock = true
-              this.setData({
-                productSpec: productSpec
+          for (let i = 0; i < specIdArr.length;i++){
+            let selectId = specIdArr[i]
+            if (selectId === undefined) {
+              this.data.productSpec[i].list.forEach((productSpecList, productSpecListIndex) => {
+                // 默认都没有库存先
+                productSpec[i].list[productSpecListIndex].hasStock = false
+                item.specGroup.forEach((list) => {
+                  list.specGroup.forEach((subItem)=>{
+                    if (subItem.specId == productSpecList.id) {
+                      productSpec[i].list[productSpecListIndex].hasStock = true
+                      this.setData({
+                        productSpec: productSpec
+                      })
+                      console.log(productSpec)
+                    }
+                  })
+                })
               })
             }
+          }
+          // specIdArr.forEach((selectId)=>{
+          //   console.log(selectId)
+            
+          // })
+          this.setData({
+            isActive: obj
+          })
+          item.specGroup.forEach((list)=>{
+            
+            // let arrIndex = list.specGroup.indexOf(id)
+            // if (arrIndex!=-1){
+            //   this.setData({
+            //     isActive: obj
+            //   })
+            // } else {
+            //   let productSpec = this.data.productSpec
+            //   productSpec[key].list[index].noStock = true
+            //   this.setData({
+            //     productSpec: productSpec
+            //   })
+            // }
           })
         }
       })
@@ -174,7 +199,7 @@ Component({
     isVisiableClicked(n){
       // 规格选择提示拼接
       let types = n || 0
-      this.formatSpecList()
+      // this.formatSpecList()
       this.getTipsSpec()
       // let tips = []
       // for (let i = 0; i < this.data.productTypeList.length;i++){
@@ -289,6 +314,7 @@ Component({
   },
   
   ready: function () {
-    
+    this.formatSpecList()
+    console.log(this.data.specGroups)
   }
 })

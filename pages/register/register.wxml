@@ -26,8 +26,8 @@
     <button wx:else open-type="getUserInfo" class="loginBtn" bindgetuserinfo="agreeGetUser" lang="zh_CN" disabled='{{disabled}}'>下一步</button>
   </view>
 
-  <view class='rule flexR'>
-      <image src='{{isAgree? "../../../img/select-icon.png":"../../../img/no-select.png"}}' 
+  <view class='rule'>
+      <image src='{{isAgree? "/img/select-icon.png":"/img/no-select.png"}}' 
              mode="widthFix" 
              bindtap='agreeCilcked'>
       </image>

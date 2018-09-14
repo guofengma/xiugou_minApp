@@ -30,8 +30,8 @@
           <block  wx:for='{{list.list}}' wx:key='unique'> 
             <view bindtap='typeListClicked' 
                   data-index='{{index}}' data-key='{{key}}' data-specvalue='{{item.specValue}}' data-id='{{item.id}}'
-                  data-canclick = '{{item.noStock}}'
-                  class='{{(item.noStock? "no-store":"") +" " +(isActive[key].index === index ? "active":"")}}' 
+                  data-canclick = '{{item.hasStock}}'
+                  class='{{(item.hasStock || isInit? "":"no-store") +" " +(isActive[key].index === index ? "active":"")}}' 
             >
                   {{item.specValue}}
             </view>
