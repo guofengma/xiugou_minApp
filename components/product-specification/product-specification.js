@@ -25,6 +25,9 @@ Component({
     formatSpecList(){
       let lists = []
       for (let key in this.data.productSpec) {
+        // this.data.productSpec[key].forEach((item)=>{
+        //   item.hasStock = false
+        // })
         lists.push({
           name: key,
           list: this.data.productSpec[key]
@@ -107,7 +110,7 @@ Component({
           }
         }
       })
-
+      console.log(obj)
       // 数组长度等于规格清单数组长度
       spec_id.length = this.data.productSpec.length
       this.getMySpec(spec_id, key, index, obj, id)
@@ -115,59 +118,71 @@ Component({
     },
     getMySpec(specIdArr, key, index, obj, id){
       if (obj.length === this.data.productSpec.length){
-       
+        this.setData({
+          isActive: obj
+        })
       } 
       let productSpec = this.data.productSpec
-      let datas = this.data.currentSpecList ? this.data.currentSpecList.specGroup : this.data.specGroups
-      datas.forEach((item)=>{
-        if (item.specId == id && item.specGroup !== null && item.specGroup.length>0){
-          this.setData({
-            currentSpecList:item
-          })
-          for (let i = 0; i < specIdArr.length;i++){
+      // let datas = this.data.currentSpecList ? this.data.currentSpecList.specGroup : this.data.specGroups
+      let datas = this.data.specGroups
+      // console.log(this.data.specGroups)
+      for (let i = 0; i < specIdArr.length; i++) {
+        let selectId = specIdArr[i]
+        if (selectId !== undefined) {
+          if(datas){
+            datas.forEach((item) => {
+              if (item.specId == selectId) {
+                datas = item.specGroup
+              }
+            }) 
+          }else{
+            datas = datas
+          }
+        }
+      }
+      console.log(datas)
+      if (datas != null && datas.length > 0){
+        datas.forEach((item) => {
+          // console.log(item)
+          for (let i = 0; i < specIdArr.length; i++) {
             let selectId = specIdArr[i]
             if (selectId === undefined) {
               this.data.productSpec[i].list.forEach((productSpecList, productSpecListIndex) => {
                 // 默认都没有库存先
-                productSpec[i].list[productSpecListIndex].hasStock = false
-                item.specGroup.forEach((list) => {
-                  list.specGroup.forEach((subItem)=>{
-                    if (subItem.specId == productSpecList.id) {
-                      productSpec[i].list[productSpecListIndex].hasStock = true
-                      this.setData({
-                        productSpec: productSpec
-                      })
-                      console.log(productSpec)
-                    }
+                if (item.specId == productSpecList.id) {
+                  productSpec[i].list[productSpecListIndex].hasStock = true
+                  this.setData({
+                    productSpec: productSpec
                   })
-                })
+                  console.log(productSpec)
+                }
               })
             }
           }
-          // specIdArr.forEach((selectId)=>{
-          //   console.log(selectId)
-            
-          // })
           this.setData({
             isActive: obj
           })
-          item.specGroup.forEach((list)=>{
-            
-            // let arrIndex = list.specGroup.indexOf(id)
-            // if (arrIndex!=-1){
-            //   this.setData({
-            //     isActive: obj
-            //   })
-            // } else {
-            //   let productSpec = this.data.productSpec
-            //   productSpec[key].list[index].noStock = true
-            //   this.setData({
-            //     productSpec: productSpec
-            //   })
-            // }
-          })
-        }
-      })
+        })
+      } else if (datas === null) {
+            productSpec[key].list.forEach((list)=>{
+              list.hasStock = true
+            })
+            for (let i = 0; i < specIdArr.length; i++) {
+              let selectId = specIdArr[i]
+              if (selectId === undefined) {
+                productSpec[i].list.forEach((list)=>{
+                  list.hasStock = false
+                })
+              }
+            }
+            this.setData({
+              productSpec: productSpec
+            })
+            this.setData({
+              isActive: obj
+            })
+          }
+      
     },
     getTipsSpec(chooseTypes=[]){
       // 规格提示
