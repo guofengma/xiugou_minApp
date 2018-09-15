@@ -8,11 +8,11 @@
     <view class='header {{showImgs? "":"active"}}'>
       <view wx:if='{{showImgs}}'>
         <view class='img-view'>
-          <image src='{{selectPrdList.spec_img || imgUrl}}'></image>
+          <image src='{{selectPrdList.specImg || imgUrl}}'></image>
         </view>
         <!--产品信息  -->
         <view class='header-content'>
-          <view class='price red'>¥ {{selectPrdList.levelPrice || price}}</view>
+          <view class='price red'>¥ {{selectPrdList.price || price}}</view>
           <view>库存{{selectPrdList.stock!==undefined?  selectPrdList.stock: productInfo.stock}}件</view>
           <view class='tips ellipsis'>{{tips}}</view>
         </view>
@@ -31,7 +31,7 @@
             <view bindtap='typeListClicked' 
                   data-index='{{index}}' data-key='{{key}}' data-specvalue='{{item.specValue}}' data-id='{{item.id}}'
                   data-canclick = '{{item.hasStock}}'
-                  class='{{(item.hasStock || isInit? "":"no-store") +" " +(isActive[key].index === index ? "active":"")}}' 
+                  class='{{item.hasStock? "":"no-store"}} {{isActive[key].index === index ? "active":""}} {{item.hasStock==undefined? "block":""}}' 
             >
                   {{item.specValue}}
             </view>

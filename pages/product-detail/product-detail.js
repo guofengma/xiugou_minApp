@@ -226,6 +226,7 @@ Page({
   btnClicked(e){
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
+    this.selectComponent("#prd-info-type").formatSpecList()
   },
   goTop: function (e) {
     this.setData({
