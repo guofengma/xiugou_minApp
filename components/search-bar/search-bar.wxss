@@ -1,6 +1,6 @@
 @import "/css/app";
 
-input{
+.search-field input{
   font-size:26rpx;
   width:460rpx;
   height:60rpx;

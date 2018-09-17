@@ -23,6 +23,7 @@ Page({
   },
   getLoginCart(){
     Tool.didLogin(this)
+    this.getRichItemList()
     if (this.data.didLogin) {
       let hasStorageShoppingCart = this.hasStorageShoppingCart()
       if (hasStorageShoppingCart){
@@ -31,6 +32,7 @@ Page({
         this.getShoppingCartList()
       }
     } else {
+      this.getFormCookieToSessionParams()
       this.getStorageShoppingCart()
     }
   },
@@ -57,20 +59,31 @@ Page({
     let isArrParams = []
     for (let i = 0; i < list.length; i++) {
       isArrParams.push({
-        productId: list[i].productId, sareSpecId: list[i].sareSpecId, productNumber: list[i].showCount
+        productId: list[i].productId, priceId: list[i].priceId, amount: list[i].showCount
       })
     }
     return JSON.stringify(isArrParams)
   },
+  getRichItemList(){
+    let isArrParams = this.getFormCookieToSessionParams()
+    let params = {
+      frontItemListCache: isArrParams,
+      reqName: '未登录时，获取购物车详细信息列表',
+      url: Operation.getRichItemList,
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
   shoppingCartLimit(){
     let isArrParams = this.getFormCookieToSessionParams()
-    // let params = { jsonString: isArrParams}
-
-    // let r = RequestFactory.shoppingCartLimit(params);
     let params = {
-      jsonString: isArrParams,
+      frontItemListCache: isArrParams,
       reqName: '登录合并购物车',
-      url: Operation.shoppingCartLimit,
+      url: Operation.shoppingCartFormCookieToSession,
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
@@ -79,22 +92,7 @@ Page({
     };
     Tool.showErrMsg(r)
     r.addToQueue();
-
   },
-  // shoppingCartFormCookieToSession(params){
-
-  //   // 同步本地购物车到服务器
-  //   // let r = RequestFactory.shoppingCartFormCookieToSession(params);
-  //   params.reqName = '同步本地购物车到服务器'
-  //   params.url = Operation.shoppingCartLimit
-  //   let r = RequestFactory.wxRequest(params);
-  //   r.successBlock = (req) => {
-  //     Storage.clearShoppingCart()
-  //     this.getShoppingCartList()
-  //   };
-  //   Tool.showErrMsg(r)
-  //   r.addToQueue();
-  // },
   getStorageShoppingCart(){   
     let list = Storage.getShoppingCart()
     if(list){
@@ -122,13 +120,8 @@ Page({
   updateShoppingCart(count,index){
     // 更新购物车
     let prd = this.data.items[index]
-    // let params = {
-    //   sareSpecId: prd.id,
-    //   productNumber: count
-    // }
-    // let r = RequestFactory.updateShoppingCart(params);
     let params = {
-      specPriceId: prd.id,
+      priceId: prd.priceId,
       amount: count,
       reqName: '更新购物车数量',
       isShowLoading: false,
@@ -309,12 +302,8 @@ Page({
   },
   deleteCart(items,index){
     // 删除购物车
-    // let params = {
-    //   sareSpecId: items[index].id,
-    // }
-    // let r = RequestFactory.deleteFromShoppingCart(params);
     let params = {
-      specPriceId: items[index].id,
+      priceId: items[index].priceId,
       reqName: '删除购物车',
       url: Operation.deleteFromShoppingCart,
     }

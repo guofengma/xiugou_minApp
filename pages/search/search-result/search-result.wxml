@@ -24,7 +24,15 @@
   <!--搜索结果异常显示 tipVal  -->
   <template is="result-tips" wx-if='{{tipVal}}' data="{{tipVal}}" />
 
-  <product-specification
-    productSpec='{{productSpec}}'
+  <product-specification id='prd-info-type' 
+            bind:subClicked="addToShoppingCart"  
+            productSpec='{{productSpec}}' 
+            price = '{{selectPrice}}'
+            priceList='{{priceList}}' 
+            bind:counterInputOnChange='counterInputOnChange' 
+            isInit ="{{isInit}}"
+            imgUrl="{{imgUrl}}" 
+            showImgs='{{true}}' 
+            isIphoneX='{{isIPhoneX.isIPhoneX}}'
   />
 </view>

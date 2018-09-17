@@ -1,15 +1,14 @@
 let { Tool, RequestFactory, Operation } = global
 Component({
   properties: {
-    // productSpec:Object,// 规格描述
-    // specGroups:Array,
-    // priceList:Array,
+    productSpec:Object,// 规格描述
+    priceList:Array,
     showImgs:Boolean,
     imgUrl:String,
     price:Number,
+    isInit:Boolean,
   },
   data: {
-    isInit:true,
     visiable:false,
     innerCount: 1, //数量
     isSelect:false,// 是否选择了商品类型
@@ -18,19 +17,20 @@ Component({
     selectPrdList:{}, //已选的类型的商品价格等信息
     tips:'',// 提示语
     typeClicked:0, // 0 规格栏点击 1 加入购物车点击 2 立即购买点击
-    productSpec: { "重量": [{ "id": 3, "specName": "重量", "specValue": "1KG" }, { "id": 4, "specName": "重量", "specValue": "2KG" }], "颜色": [{ "id": 1, "specName": "颜色", "specValue": "红色" }, { "id": 2, "specName": "颜色", "specValue": "金色" }, { "id": 8, "specName": "颜色", "specValue": "蓝色" }], "内存": [{ "id": 5, "specName": "内存", "specValue": "32G" }, { "id": 6, "specName": "内存", "specValue": "64G" }, { "id": 7, "specName": "内存", "specValue": "128G" }] },
-    // specGroups: [{ "specId": 2, "specGroup": null }, { "specId": 5, "specGroup": [{ "specId": 1, "specGroup": [{ "specId": 3, "specGroup": [] }] }, { "specId": 3, "specGroup": [{ "specId": 1, "specGroup": [] }] }] }, { "specId": 8, "specGroup": null }, { "specId": 4, "specGroup": null }, { "specId": 1, "specGroup": [{ "specId": 6, "specGroup": [{ "specId": 3, "specGroup": [] }] }, { "specId": 3, "specGroup": [{ "specId": 6, "specGroup": [] }] }] }, { "specId": 7, "specGroup": null }, { "specId": 6, "specGroup": [{ "specId": 3, "specGroup": [{ "specId": 1, "specGroup": [] }] }, { "specId": 1, "specGroup": [{ "specId": 3, "specGroup": [] }] }] }, { "specId": 3, "specGroup": [{ "specId": 6, "specGroup": [{ "specId": 1, "specGroup": [] }] }, { "specId": 1, "specGroup": [{ "specId": 6, "specGroup": [] }] }] }],
-    priceList: [{ "id": 1, "productId": 1, "specIds": "1,3,5", "spec": "红色-32G-1KG", "barCode": "bc001", "weight": 0.50000000, "volume": 0.30000000, "specImg": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/pms_1528718750.15896438!560x560.jpg", "originalPrice": 1000.00000000, "price": 1000.00000000, "stock": 10, "stockUnit": "个" }, { "id": 2, "productId": 1, "specIds": "1,3,6", "spec": "红色-64G-1KG", "barCode": "bc002", "weight": 0.50000000, "volume": 0.30000000, "specImg": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/pms_1528718750.15896438!560x560.jpg", "originalPrice": 1010.00000000, "price": 1010.00000000, "stock": 20, "stockUnit": "个" }, { "id": 3, "productId": 1, "specIds": "4,8,7", "spec": "蓝色-2KG-128G", "barCode": "bc001", "weight": 0.50000000, "volume": 0.30000000, "specImg": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/pms_1528718750.15896438!560x560.jpg", "originalPrice": 1000.00000000, "price": 1000.00000000, "stock": 10, "stockUnit": "个" },]
   },
   methods: {
-    makeSureType() { 
-      
-      if (!this.isSelectAll()) return
+    makeSureType() { // 点击确认
+      if (!this.isSelectAll()){
+        Tool.showAlert(this.data.tips)
+        return
+      }
+      this.prdCanBuyAmount(this.data.innerCount)
       let isActive = this.data.isActive
-      this.triggerEvent('subClicked', { ...this.data.selectPrdList, typeClicked: this.data.typeClicked });
+      this.triggerEvent('subClicked', { ...this.data.selectPrdList, typeClicked: this.data.typeClicked, buyCount: this.data.innerCount });
       this.isVisiableClicked()
     },
     formatSpecList(){ // 格式化规格数组
+      if (this.data.isInit) return
       let lists = []
       for (let key in this.data.productSpec) {
         lists.push({
@@ -38,9 +38,18 @@ Component({
           list: this.data.productSpec[key]
         })
       }
+      // 渲染总库存
+      let totalStock = 0
+      this.data.priceList.forEach((item)=>{
+        totalStock += item.stock
+      })
       this.setData({
-        productSpec: lists
+        productSpec: lists,
+        totalStock: totalStock,
+        isInit:true
       }) 
+      // 渲染提示语
+      this.getTipsSpec()
       // console.log(this.data.productSpec)     
     },
     typeListClicked(e) { // 规格点击事件
@@ -56,7 +65,7 @@ Component({
 
       // 深复制数组
       let obj = [...this.data.isActive]
-      obj[key] = { specValue, id, key, index }
+      obj[key] = { specValue, id, key, index,name:this.data.productSpec[key].name }
       let spec_id = []
       for (let i = 0; i < obj.length; i++) {
         if (obj[i] !== undefined) {
@@ -95,7 +104,8 @@ Component({
         this.update_2(item0.list, index,obj,key)
         console.log('*************来自已选择规格组****************')
       })
-
+      // 渲染提示语
+      this.getTipsSpec(this.data.isActive)
       // 如果全部选择好了 渲染对应的价格和库存
       this.isSelectAllTypes()
       
@@ -228,8 +238,7 @@ Component({
     },
     // 去除 数组 arr中的 val ，返回一个新数组
     del_array_val(arr, val) {
-      console.log(arr,val)
-      var a = [];
+      let a = [];
       for (let k in arr) {
         if (arr[k] != val) {
           a.push(arr[k]);
@@ -249,6 +258,7 @@ Component({
       }
     },
     getTipsSpec(chooseTypes=[]){
+      console.log(chooseTypes)
       // 规格提示
       let tips = []
       let chooseArr = []
@@ -256,12 +266,12 @@ Component({
         tips.push(this.data.productSpec[i].name)
       }
       chooseTypes.forEach((item,index)=>{
-        if(item.val){
-          let index = tips.indexOf(item.spec)
+        if (item.specValue){
+          let index = tips.indexOf(item.name)
           if(index!=1){
             tips.splice(index,1)
           }
-          chooseArr.push(item.val)
+          chooseArr.push(item.specValue)
         }
       })
       // tips = "请选择"+tips.join(',')
@@ -278,8 +288,7 @@ Component({
     isVisiableClicked(n){
       // 规格选择提示拼接
       let types = n || 0
-      // this.formatSpecList()
-      this.getTipsSpec()
+      this.formatSpecList()
       let tips = []
       for (let i = 0; i < this.data.productSpec.length;i++){
         tips.push(this.data.productSpec[i].name)
@@ -295,13 +304,16 @@ Component({
       }
     },
     counterInputOnChange(e) {
+      this.prdCanBuyAmount(e.detail.innerCount)
+    },
+    prdCanBuyAmount(count){
       //监督数量选择的改变
-      if (this.properties.productInfo.stock==0){
+      if (this.data.totalStock == 0) {
         Tool.showAlert('库存不足,请选择其他产品')
         return
       }
-      let count = e.detail.innerCount;
-      if (this.data.selectPrdList.stock < count){
+      // let count = e.detail.innerCount;
+      if (this.data.selectPrdList.stock < count) {
         Tool.showAlert('当前产品最多只能购买' + this.data.selectPrdList.stock + '件哦~')
         count = this.data.selectPrdList.stock
       }
@@ -325,7 +337,6 @@ Component({
   },
   
   ready: function () {
-    // this.formatSpecList()
-    // console.log(this.data.specGroups)
+   
   }
 })

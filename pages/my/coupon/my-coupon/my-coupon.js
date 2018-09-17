@@ -1,22 +1,23 @@
 let { Tool, RequestFactory, Storage, Event, Operation} = global;
 Page({
     data: {
-        winHeight: "",//窗口高度
-        currentTab: 0, //预设当前项的值
-        scrollLeft: 0, //tab标题的滚动条位置
-        lists: [ // 0是未使用 1：失效 2：已使用
-            [  ],
-            [  ],
-            [  ]
-        ],
-        types:{
-          MJ: "满减劵", ZK: "折扣劵", DK: "抵扣劵", DJ:"抵价劵"
-        },
-        totalPageArr:[], //保存页数 
-        params:{
-          page:1,
-          size:10
-        }
+      winHeight: "",//窗口高度
+      currentTab: 0, //预设当前项的值
+      scrollLeft: 0, //tab标题的滚动条位置
+      lists: [ // 0是未使用 1：失效 2：已使用
+          [  ],
+          [  ],
+          [  ]
+      ],
+      types:{
+        MJ: "满减劵", ZK: "折扣劵", DK: "抵扣劵", DJ:"抵价劵"
+      },
+      totalPageArr:[], //保存页数 
+      params:{
+        page:1,
+        pageSize:10
+      },
+      // pageSize:10
     },
     // 上拉加载更多
     onScroll(e) {
@@ -33,7 +34,7 @@ Page({
       })
       if (currentTab==0){
         if(this.data.door==1){
-          //this.availableDiscountCouponForProduct()
+          this.availableDiscountCouponForProduct()
         } else {
           this.getDiscountCouponNoUse();
         }
@@ -59,6 +60,7 @@ Page({
     },
     availableDiscountCouponForProduct(){
       let params = {
+        ...this.data.params,
         orderParam: this.data.productIds,
         reqName: '产品可用优惠劵列表',
         url: Operation.availableDiscountCouponForProduct
@@ -87,12 +89,14 @@ Page({
       Tool.showErrMsg(r);
       r.addToQueue();
     },
+    
     //未使用
     getDiscountCouponNoUse() {
       let params = {
         ...this.data.params,
         reqName: '未使用优惠劵列表',
-        url: Operation.getDiscountCouponNoUse
+        url: Operation.couponList,
+        status:1
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
@@ -114,7 +118,7 @@ Page({
             this.getCouponType(item)
           }
           this.data.lists[0] = this.data.lists[0].concat(req.responseObject.data.data)
-          this.data.totalPageArr[0] = req.responseObject.data.total
+          this.data.totalPageArr[0] = req.responseObject.data.totalPage
           this.setData({
             lists: this.data.lists,
             totalPageArr: this.data.totalPageArr
@@ -127,8 +131,9 @@ Page({
     getDiscountCouponUserd() {
       let params = {
         ...this.data.params,
+        status: 2,
         reqName: '已经优惠劵列表',
-        url: Operation.getDiscountCouponUserd
+        url: Operation.couponList
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
@@ -141,7 +146,7 @@ Page({
             this.getCouponType(item)
             //this.data.lists[2].push(item)
         }
-        this.data.totalPageArr[2] = req.responseObject.data.total
+        this.data.totalPageArr[2] = req.responseObject.data.totalPage
         this.data.lists[2] = this.data.lists[2].concat(req.responseObject.data.data)
         this.setData({
             lists: this.data.lists,
@@ -156,7 +161,8 @@ Page({
       let params = {
         ...this.data.params,
         reqName: '失效优惠劵列表',
-        url: Operation.getDiscountCouponLosed
+        status:3,
+        url: Operation.couponList
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
@@ -168,12 +174,12 @@ Page({
             item.left = '已过期';
             //this.data.lists[1].push(item)
           }
-          this.data.totalPageArr[1] = req.responseObject.data.total
-          this.data.lists[1] = this.data.lists[1].concat(req.responseObject.data.data)
-          this.setData({
-            lists: this.data.lists,
-            totalPageArr: this.data.totalPageArr
-          })
+        this.data.totalPageArr[1] = req.responseObject.data.totalPage
+        // this.data.lists[1] = this.data.lists[1].concat(req.responseObject.data.data)
+        // this.setData({
+        //   lists: this.data.lists,
+        //   totalPageArr: this.data.totalPageArr
+        // })
       };
       Tool.showErrMsg(r);
       r.addToQueue();

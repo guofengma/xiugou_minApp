@@ -6,7 +6,7 @@
 <scroll-view class="search-result" scroll-y >
   <view class='shopping-cart'>
     <view class='shopping-cart-line flexR-sb'  data-index='{{index}}' wx:for='{{items}}' wx:key='' >
-      <view class='chooseImg' wx:if="{{item.status==0}}" bindtap='chooseClicked' data-index='{{index}}' >
+      <view class='chooseImg' wx:if="{{item.status==1&&item.stock>0}}" bindtap='chooseClicked' data-index='{{index}}' >
        <image src='{{ item.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
       </view>
       <view wx:else class='statusLabel flexR'>

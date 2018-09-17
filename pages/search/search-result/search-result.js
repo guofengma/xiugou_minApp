@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation} = global
+let { Tool, RequestFactory, Storage, Operation, Event} = global
 
 Page({
   data: {
@@ -11,7 +11,7 @@ Page({
     pageSize: 10, // 每次加载请求的条数 默认10 
     params:{},
     code:'',
-    ysf: { title: '搜索结果' }
+    isInit: false,
   },
   onLoad: function (options) {
     
@@ -27,15 +27,16 @@ Page({
       params: params,
       code: options.code
     })
+    Tool.isIPhoneX(this)
+    this.didLogin()
+    Event.on('didLogin', this.didLogin, this);
     this.requestQueryProductList(params)
   },
   onShow: function () {
     
   },
-  addShoppingCart(e){
-    //加入购物车
-    let id = e.currentTarget.dataset.id
-    this.findProductStockBySpec(id)
+  didLogin() {
+    Tool.didLogin(this)
   },
   getKeyword(e){
     this.setData({
@@ -78,7 +79,40 @@ Page({
     })
     this.requestQueryProductList(this.data.params)
   },
-  findProductStockBySpec(id) {
+  addToShoppingCart(e) {
+    this.setData({
+      selectType: e.detail
+    })
+    // 加入购物车
+    if (!this.data.didLogin) {
+      // this.setStoragePrd(params, this.data.selectType.index)
+      return
+    }
+    let params = {
+      productId: this.data.selectType.productId,
+      amount: this.data.selectType.buyCount,
+      priceId: this.data.selectType.id,
+      timestamp: new Date().getTime(),
+      reqName: '加入购物车',
+      url: Operation.addToShoppingCart
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      this.getShoppingCartList()
+      Event.emit('updateShoppingCart')
+      Tool.showSuccessToast('添加成功')
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  addShoppingCartClicked(e) {
+    //加入购物车
+    let id = e.currentTarget.dataset.id
+    let imgurl = e.currentTarget.dataset.imgurl
+    let price = e.currentTarget.dataset.price
+    this.findProductStockBySpec(id, imgurl, price)
+  },
+  findProductStockBySpec(id, imgurl, price) {
     let params = {
       id:id,
       requestMethod: 'GET',
@@ -87,9 +121,15 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
+      let datas = req.responseObject.data
       this.setData({
-        productSpec: req.responseObject.data
+        productSpec: datas.specMap,
+        priceList: datas.priceList,
+        selectPrice: price,
+        isInit:false,
+        imgUrl: imgurl
       })
+      this.selectComponent("#prd-info-type").isVisiableClicked()
     }
     Tool.showErrMsg(r)
     r.addToQueue();

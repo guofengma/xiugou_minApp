@@ -53,14 +53,12 @@
         <product-specification id='prd-info-type' 
             bind:subClicked="typeSubClicked"  
             productSpec='{{productSpec}}' 
-            specGroups ='{{specGroups}}'
             price = '{{productInfoList.price}}'
             priceList='{{priceList}}' 
-            productInfo='{{productInfo}}' 
             bind:counterInputOnChange='counterInputOnChange' 
             imgUrl="{{productInfo.imgUrl}}" 
-            showImgs='{{true}}' 
-            bind:productTypeListClicked='productTypeListClicked'
+            showImgs='{{true}}'
+            isInit="{{false}}" 
             bind:hiddenTips='hiddenTips'
             isIphoneX='{{isIPhoneX.isIPhoneX}}'
         >

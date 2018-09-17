@@ -111,6 +111,10 @@ export default class Operation {
 
       this.deleteFromShoppingCart = '/user/shoppingcart/deleteItem'
 
+        // 未登录时，获取购物车详细信息列表
+
+      this.getRichItemList  ='/user/shoppingcart/getRichItemList'
+
 
     /********************** 地址管理 *********************/
         // 新增地址 或 修改地址(传id)

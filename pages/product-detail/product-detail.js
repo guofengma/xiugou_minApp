@@ -66,7 +66,7 @@ Page({
       list = []
     } else {
       for (let i = 0; i < list.length; i++) {
-        if (list[i].sareSpecId === params.sareSpecId) {
+        if (list[i].priceId === params.priceId) {
           console.log(list[i].showCount, this.data.productBuyCount)
           list[i].showCount += this.data.productBuyCount
           this.updateStorageShoppingCart(list)
@@ -74,14 +74,15 @@ Page({
         }
       }
     }
-    params.status = 0
-    params.productId = this.data.productInfo.id
+    params.status = 1
+    params.productId = this.data.selectType.productId
+    params.priceId = this.data.selectType.id
     params.stock = this.data.selectType.stock
     params.showName = this.data.productInfo.name
-    params.showType = this.data.selectType.typeName
-    params.showPrice = this.data.priceList[index].levelPrice
+    params.showType = this.data.selectType.spec
+    params.showPrice = this.data.selectType.price
     params.isSelect = false
-    params.showImg = this.data.imgUrls[0].small_img
+    params.showImg = this.data.productInfo.imgUrl
     params.showCount = this.data.productBuyCount
     list.push(params)
     this.updateStorageShoppingCart(list)
@@ -109,11 +110,6 @@ Page({
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params)+'&type='+this.data.door )
   },
   addToShoppingCart(){
-    // 加入购物车
-    if(!this.data.didLogin){
-      this.setStoragePrd(params, this.data.selectType.index)
-      return 
-    }
     let params = {
       productId: this.data.productInfo.id,
       amount: this.data.productBuyCount,
@@ -122,8 +118,12 @@ Page({
       reqName: '加入购物车',
       url: Operation.addToShoppingCart
     }
+    // 加入购物车
+    if (!this.data.didLogin) {
+      this.setStoragePrd(params, this.data.selectType.index)
+      return
+    }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.addToShoppingCart(params);
     r.successBlock = (req) => {
       this.getShoppingCartList()
       Event.emit('updateShoppingCart')
@@ -149,7 +149,6 @@ Page({
         productInfoList: datas,
         priceList: datas.priceList, // 价格表
         productSpec: datas.specMap, // 规格描述
-        specGroups: datas.specGroups, // 规格组
       })
       // 渲染表格
       let tr = []
@@ -184,14 +183,6 @@ Page({
       this.setData({
         nodes: tbody
       })
-      /**
-      * WxParse.wxParse(bindName , type, data, target,imagePadding)
-      * 1.bindName绑定的数据名(必填)
-      * 2.type可以为html或者md(必填)
-      * 3.data为传入的具体数据(必填)
-      * 4.target为Page对象,一般为this(必填)
-      * 5.imagePadding为当图片自适应是左右的单一padding(默认为0,可选)
-      */
       let html = datas.product.content 
       WxParse.wxParse('article', 'html', html, this, 5);
     }
@@ -199,6 +190,7 @@ Page({
     r.addToQueue();
   },
   typeSubClicked(e){
+    console.log(e)
     this.setData({
       selectType: e.detail
     })
@@ -226,7 +218,6 @@ Page({
   btnClicked(e){
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
-    this.selectComponent("#prd-info-type").formatSpecList()
   },
   goTop: function (e) {
     this.setData({
@@ -272,11 +263,11 @@ Page({
       imageUrl: imgUrl
     }
   },
-  productTypeListClicked(e){
-    this.setData({
-      productTypeList: e.detail.productTypeList
-    })
-  },
+  // productTypeListClicked(e){
+  //   this.setData({
+  //     productTypeList: e.detail.productTypeList
+  //   })
+  // },
   wxParseTagATap: function (e) {
     let link = e.currentTarget.dataset.src
     console.log(link)
