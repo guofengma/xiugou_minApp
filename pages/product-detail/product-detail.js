@@ -74,15 +74,8 @@ Page({
         }
       }
     }
-    params.status = 1
     params.productId = this.data.selectType.productId
     params.priceId = this.data.selectType.id
-    params.stock = this.data.selectType.stock
-    params.showName = this.data.productInfo.name
-    params.showType = this.data.selectType.spec
-    params.showPrice = this.data.selectType.price
-    params.isSelect = false
-    params.showImg = this.data.productInfo.imgUrl
     params.showCount = this.data.productBuyCount
     list.push(params)
     this.updateStorageShoppingCart(list)

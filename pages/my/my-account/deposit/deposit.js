@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event, Operation } = global;
+let { Tool, RequestFactory, Event, Operation, Config } = global;
 
 Page({
     data: {
@@ -6,9 +6,15 @@ Page({
       add:false,
       isExplain:false,
       isLevel:false,
-      iconArr: [
-        { name: "推广提成", icon:"/img/tixian-icon-1.png"},
-        { name: "销售提成", icon: "/img/tixian-icon-2.png" }
+      types: [
+        { name: "其他" },
+        { name: "用户收益", icon: "yhsy-icon.png" },
+        { name: "提现支出", icon: "txzc-icon.png" },
+        { name: "消费支出", icon: "xdxf-icon.png" },
+        { name: "店主分红", icon: "yhsy-icon.png" },
+        { name: "店员分红", icon: "yhsy-icon.png" },
+        { name: "销售提成", icon: "tixian-icon-2.png" },
+        { name: "推广提成", icon: "tg_03-04@2x.png" },
       ],
       totalPage: '', // 页面总页数
       currentPage: 1, // 当前的页数
@@ -34,30 +40,26 @@ Page({
     getData() {
       let params = {
         page: this.data.currentPage,
-        pageSize: this.data.pageSize,
+        size: this.data.pageSize,
+        requestMethod: 'GET',
+        'type': 1,
         reqName: '分页查询待提现账户',
-        url: Operation.settlementTotalByDealerId
+        url: Operation.getuserBalance
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = global.RequestFactory.settlementTotalByDealerId(params);
       let list = this.data.list;
       r.successBlock = (req) => {
         let datas = req.responseObject.data
-        if (datas.total>0){
+        if (datas.totalPage>0){
           datas.data.forEach((item)=>{
             item.createTime = Tool.formatTime(item.createTime);
-            if(item.calcType==4){
-              item.iconIndex = 1
-            } else if(item.calcType == 8) {
-              item.iconIndex = 0
-            }
-            item.add = item.type ==2?  true:false
+            item.add = item.type ==1?  true:false
             item.showName = item.add ? "" : "退款"
             item.showName = item.status == 2? "已冻结":item.showName
           })
           this.setData({
             list: list.concat(datas.data),
-            totalPage: datas.total,
+            totalPage: datas.totalPage,
           })
         }
       };
@@ -85,7 +87,8 @@ Page({
     },
     onLoad: function (options) {
       this.setData({
-        account:options.account
+        account: options.query || '',
+        imgBaseUrl: Config.imgBaseUrl
       })
       this.getData()
     },

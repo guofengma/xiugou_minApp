@@ -12,6 +12,10 @@
   width: 210rpx;
   height: 210rpx;
 }
+.img-area image{
+  width: 140rpx;
+  border-radius: 140rpx;
+}
 .levelName{
   font-size: 26rpx;
   color: #fff;

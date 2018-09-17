@@ -12,13 +12,14 @@ import config from './config.js'
 
 App({
     onLaunch: function () {
-        //设置全局变量
-        global.Storage = Storage;
-        global.Tool = Tool;
-        global.Event = Event;
-        global.RequestFactory = RequestFactory;
-        global.Operation = Operation
-        this.wxLogin()
+      //设置全局变量
+      global.Storage = Storage;
+      global.Tool = Tool;
+      global.Event = Event;
+      global.RequestFactory = RequestFactory;
+      global.Operation = Operation
+      global.Config = config
+      this.wxLogin()
     },
     onShow: function () {
       // 比如记录小程序启动时长

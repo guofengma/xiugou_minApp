@@ -44,16 +44,15 @@
     "pages/my/information/informationDetail/informationDetail",
     "pages/my/information/groupInformation/groupInformation",
     "pages/my/information/notice/notice",
-    "pages/my/my-account/my-account",
     "pages/my/my-account/cash/cash",
-    "pages/my/my-account/token/token",
     "pages/my/my-account/integral/integral",
     "pages/my/my-account/deposit/deposit",
     "pages/product-detail/gift-bag-detail/gift-bag-detail",
     "pages/my/my-promotion/my-promotion",
     "pages/register/write-invite-code/write-invite-code",
     "pages/address/select-express-address/select-express-address",
-    "pages/my/nickname/nickname"
+    "pages/my/nickname/nickname",
+    "pages/my/invite/invite"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

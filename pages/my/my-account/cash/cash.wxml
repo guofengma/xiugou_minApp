@@ -1,29 +1,27 @@
 <view>
     <view class='cash'>
-        <view class="item">
-            <view class="title">
+        <view class="item boxSize flexR-sb">
+          <view>
+           <view class="font-26">
                 现金账户（元）
             </view>
             <view class="num">
-                {{account||''}}
+              {{account}}
             </view>
-            <view class="btn" bindtap="beCash">提现</view>
+          </view>
+          <view class="btn flexR" bindtap="beCash">提现</view>
         </view>
     </view>
     <view class="list-area">
-        <view class="list-item" wx:for="{{list}}" wx:key="unique">
-            <image wx:if="{{item.bi_type==1}}" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/dp_03-02@2x.png"></image>
-            <image wx:if="{{item.bi_type==2}}" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon9_03@2x.png"></image>
-            <image wx:if="{{item.bi_type==3}}" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/tg_03-04@2x.png"></image>
-            <image wx:if="{{item.bi_type==4}}" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon8_03@2x.png"></image>
+        <view class="list-item flexR-sb" wx:for="{{list}}" wx:key="unique">
+          <view class='flexR-sb list-first'>
+            <image src="{{imgBaseUrl+types[item.useType].icon}}"></image>
             <view class="detail">
-                <view class="style" wx:if="{{item.use_type==1}}">店主分红</view>
-                <view class="style" wx:elif="{{item.use_type==2}}">提现</view>
-                <view class="style" wx:elif="{{item.use_type==3}}">交易提成</view>
-                <view class="style" wx:else>消费</view>
-                <view class="time">{{item.create_time}}</view>
-                <view class="number">流水号：{{item.serial_no}}</view>
+              <view class="style">{{types[item.useType].name}}</view>
+              <view class="time">{{item.createTime}}</view>
+              <view class="number">流水号：{{item.serialNo}}</view>
             </view>
+          </view>
             <view class="money {{item.add?'red':''}}">
                 <text>{{item.add?'+':'-'}}</text>{{item.balance}}
             </view>

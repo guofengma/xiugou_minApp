@@ -8,7 +8,7 @@ Page({
   getList(e) {
     let index = e.currentTarget.dataset.index;
     this.setData({
-        num: index,
+      num: index,
     });
     this.selectComponent("#orderList").getList();
   },
@@ -19,7 +19,7 @@ Page({
   onLoad: function (options) {
     if (options.index) {
       this.setData({
-        num: options.index
+        num: options.query
       });
     }
     this.selectComponent("#orderList").getData(this.data.num);

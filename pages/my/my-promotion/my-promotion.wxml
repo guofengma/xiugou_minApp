@@ -2,11 +2,11 @@
 
 
 <view class='bg-area boxSize'>
-  <view class="img-area">
-    <image class="avatar-img" src="{{userInfos.headImg||'/img/default-userImg.png'}}" alt=""></image>
+  <view class="img-area flexR">
+    <image class="avatar-img" src="{{userLevelInfo.headImg||'/img/default-userImg.png'}}" alt="" mode='widthFix'></image>
   </view>
   <view class='levelName boxSize flexR'>
-    <text>荣誉总监</text>
+    <text>{{userLevelInfo.levelName}}</text>
   </view>
 </view>
 
@@ -17,28 +17,28 @@
   </view>
   <view class='growing-value'>
     <view>
-      <text class='red'>4500</text>
-      <text class='gray'>/6000</text>
+      <text class='red'>{{userLevelInfo.experience}}</text>
+      <text class='gray'>/{{userLevelInfo.levelExperience}}</text>
     </view>
     <view class='growing-bar'>
-      <view class='growing-bar-value' style='width:{{width}};'></view>
+      <view class='growing-bar-value' style='width:{{userLevelInfo.width}};'></view>
     </view>
     <view>
       距离晋升还差
-      <text class='font-30'>1000分</text>
+      <text class='font-30'>{{userLevelInfo.surpluslExperience}}分</text>
     </view>
   </view>
 </view>
 </view>
 
 <view class='growing-question whiteBg'>
-  <view class='title ellipsis font-28'>题目</view>
-  <view class='ellipsis gray font-26'>哈哈哈哈</view>
+  <view class='title ellipsis font-28'>题目：没有掉接口</view>
+  <view class='ellipsis gray font-26'>去问产品这块是干啥的</view>
 </view>
 
 <view class='base-bar flexR {{isIPhoneX.className}}'>
-  <view class='flexR'>邀请好友</view>
-  <view class='redBg flexR'>去购物</view>
+  <view class='flexR' catchtap='goPage' data-index='0'>邀请好友</view>
+  <view class='redBg flexR' catchtap='goPage' data-index='1'>去购物</view>
 </view>
 
 <!--适配iPhone X  -->

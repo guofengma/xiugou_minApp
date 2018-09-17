@@ -5,7 +5,22 @@ Page({
       userInfos:'',
       tabClicked:1,
       num:0,
-      imgUrl:'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/'
+      imgUrl:'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/',
+      pageArr:[
+        "/pages/my/my-account/cash/cash",// 现金账户
+        "/pages/my/my-account/integral/integral",// 秀豆账户
+        "/pages/my/my-account/deposit/deposit",// 待提现账户
+        "/pages/my/my-order/my-order",//我的订单
+        "/pages/after-sale/my-after-sale/my-after-sale", //我的售后
+        "/pages/my/invite/invite",//邀请好友
+        "",// 活动日历
+        '/pages/my/coupon/my-coupon/my-coupon',//优惠卷
+        '', //我的数据
+        "",//收藏店铺
+        '/pages/my/help-customer/help-customer',//帮助
+        '/pages/address/select-express-address/select-express-address',//地址
+        '',//足迹
+      ]
     },
     onLoad: function (options) {
       this.refreshMemberInfoNotice()
@@ -65,6 +80,20 @@ Page({
         num: 2
       })
     },
+    itemClicked(e){
+      if (!this.didLogin(true)) return;
+      let pageIndex = e.currentTarget.dataset.page
+      let query = e.currentTarget.dataset.query
+      let page = this.data.pageArr[pageIndex]
+      if (page==''){
+        Tool.showAlert("小程序暂未开放此功能")
+        return
+      }
+      if (query){
+        page = page + "?query=" + query
+      }
+      Tool.navigateTo(page)
+    },
     didLogin(isGoLogin){
       if (!Tool.didLogin(this)){
         if (isGoLogin){
@@ -73,21 +102,6 @@ Page({
         return false
       }
       return true
-    },
-    //跳到我的订单页面
-    allOrder(e) {
-      if (!this.didLogin(true)) return;
-      let index = e.currentTarget.dataset.index;
-      if(index==4){
-        Tool.navigateTo('/pages/after-sale/my-after-sale/my-after-sale');
-        return
-      }
-      Tool.navigateTo('my-order/my-order?index=' + index)
-    },
-    //跳到我的账户页面
-    myAccount() {
-      if (!this.didLogin(true)) return
-      Tool.navigateTo('my-account/my-account')
     },
     //跳到我的优惠券页面
     coupon() {

@@ -14,7 +14,7 @@ Page({
   onLoad: function (options) {
     this.getLoginCart()
     Event.on('updateShoppingCart', this.getShoppingCartList, this)
-    Event.on('updateStorageShoppingCart', this.getStorageShoppingCart, this)
+    Event.on('updateStorageShoppingCart', this.getRichItemList, this)
     Event.on('didLogin', this.getLoginCart, this);
     Event.on('continueBuy', this.shoppingCartLimit, this);
   },
@@ -23,7 +23,6 @@ Page({
   },
   getLoginCart(){
     Tool.didLogin(this)
-    this.getRichItemList()
     if (this.data.didLogin) {
       let hasStorageShoppingCart = this.hasStorageShoppingCart()
       if (hasStorageShoppingCart){
@@ -32,7 +31,6 @@ Page({
         this.getShoppingCartList()
       }
     } else {
-      this.getFormCookieToSessionParams()
       this.getStorageShoppingCart()
     }
   },
@@ -62,18 +60,18 @@ Page({
         productId: list[i].productId, priceId: list[i].priceId, amount: list[i].showCount
       })
     }
-    return JSON.stringify(isArrParams)
+    return isArrParams
   },
   getRichItemList(){
     let isArrParams = this.getFormCookieToSessionParams()
     let params = {
-      frontItemListCache: isArrParams,
+      cacheList: isArrParams,
       reqName: '未登录时，获取购物车详细信息列表',
       url: Operation.getRichItemList,
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      
+      this.formatShoppingListData(req)
     };
     Tool.showErrMsg(r)
     r.addToQueue();
@@ -81,14 +79,15 @@ Page({
   shoppingCartLimit(){
     let isArrParams = this.getFormCookieToSessionParams()
     let params = {
-      frontItemListCache: isArrParams,
+      cacheList: isArrParams,
       reqName: '登录合并购物车',
       url: Operation.shoppingCartFormCookieToSession,
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       Storage.clearShoppingCart()
-      this.getShoppingCartList()
+      // this.getShoppingCartList()
+      this.formatShoppingListData(req)
     };
     Tool.showErrMsg(r)
     r.addToQueue();
@@ -96,12 +95,7 @@ Page({
   getStorageShoppingCart(){   
     let list = Storage.getShoppingCart()
     if(list){
-      this.setData({
-        items:list,
-        tipVal: ''
-      }) 
-      this.isSelectAllPrd(list)
-      this.getTotalPrice()
+      this.getRichItemList()
     } else {
       this.setData({
         tipVal: 2
@@ -147,40 +141,43 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      let data = req.responseObject.data
-      data = data ===null? []:data
-      if(data.length>0){
-        data.forEach((item, index) => {
-          item.isTouchMove = false  //是否移动 
-          item.showImg = item.imgUrl
-          item.showPrice = item.price
-          item.showName = item.productName
-          item.showType = item.specValues.join('—')
-          item.showCount = item.amount || 1  // 商品数量
-          item.isSelect = false  //是否选择 
-          if(this.data.items.length>0){
-            let arr = this.data.items
-            for(let i=0;i<arr.length;i++){
-              if(arr[i].id==item.id){
-                item.isSelect = arr[i].isSelect
-              }
-            }
-          }
-        })
-        this.setData({
-          items: data,
-          tipVal:''
-        })
-        this.isSelectAllPrd(data)
-        this.getTotalPrice()
-      } else {
-        this.setData({
-          tipVal: 2,
-          items:[]
-        })
-      }
+      this.formatShoppingListData(req)
     };
     r.addToQueue();
+  },
+  formatShoppingListData(req){ // 格式化购物车的数据
+    let data = req.responseObject.data
+    data = data === null ? [] : data
+    if (data.length > 0) {
+      data.forEach((item, index) => {
+        item.isTouchMove = false  //是否移动 
+        item.showImg = item.imgUrl
+        item.showPrice = item.price
+        item.showName = item.productName
+        item.showType = item.specValues.join('—')
+        item.showCount = item.amount || 1  // 商品数量
+        item.isSelect = false  //是否选择 
+        if (this.data.items.length > 0) {
+          let arr = this.data.items
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i].id == item.id) {
+              item.isSelect = arr[i].isSelect
+            }
+          }
+        }
+      })
+      this.setData({
+        items: data,
+        tipVal: ''
+      })
+      this.isSelectAllPrd(data)
+      this.getTotalPrice()
+    } else {
+      this.setData({
+        tipVal: 2,
+        items: []
+      })
+    }
   },
   deleteClicked(e){
     let items = e.detail.items
@@ -228,7 +225,7 @@ Page({
     let totalPrice = 0
     for (let i = 0; i<items.length;i++){
       // 选中的 且有效的 且库存大于0 的计算价格
-      if (items[i].isSelect && items[i].productStatus == 4 && items[i].stock>0){
+      if (items[i].isSelect && items[i].status == 1 && items[i].stock>0){
         // totalPrice += items[i].showCount * items[i].showPrice
         let unitPrice = Tool.mul(items[i].showCount,items[i].showPrice)
         totalPrice = Tool.add(totalPrice, unitPrice)
@@ -236,8 +233,8 @@ Page({
         
         orderProducts.push({
           num: items[i].showCount,
-          priceId: items[i].id,
-          productId: items[i].product_id
+          priceId: items[i].priceId,
+          productId: items[i].productId
         })
         // selectList.push(orderProducts)
       }

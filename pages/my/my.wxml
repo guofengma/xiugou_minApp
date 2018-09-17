@@ -16,7 +16,7 @@
         </view>
     </view>
     <view class="my-order">
-        <view class="title" bindtap="allOrder" data-index="0">
+        <view class="title" bindtap="itemClicked" data-query="0" data-page="3">
             <view><text class='flexR'>我的订单</text></view>
             <view>
                 <text>全部订单</text>
@@ -25,29 +25,49 @@
         </view>
         <view class="clearfix"></view>
         <view class="body">
-            <view bindtap="allOrder" data-index="1">
+            <view bindtap="itemClicked" data-query="1" data-page="3">
                 <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/dfk_03@2x.png" alt=""></image>
                 <view>待付款</view>
             </view>
-            <view bindtap="allOrder" data-index="2">
+            <view bindtap="itemClicked" data-query="2" data-page="3">
                 <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/wfh_03-02@2x.png" alt=""></image>
                 <view>待发货</view>
             </view>
-            <view bindtap="allOrder" data-index="3">
+            <view bindtap="itemClicked" data-query="3" data-page="3">
                 <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/yfh_03-03@2x.png" alt=""></image>
                 <view>待收货</view>
             </view>
-            <view bindtap="allOrder" data-index="4">
+            <view bindtap="itemClicked" data-page="4">
                 <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/ywc_03-05@2x.png" alt=""></image>
                 <view>售后/退款</view>
             </view>
         </view>
     </view>
     <view class="wrap">
-        <view class="item line" bindtap="myAccount">
+      <view class="item line" bindtap="itemClicked" data-page="0" data-query='{{userInfos.blockedBalance}}'>
             <view>
                 <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/wdzh_18@2x.png" alt=""></image>
-                <text>我的账户</text>
+                <text>待提现账户{{userInfos.blockedBalance}}</text>
+            </view>
+            <view>
+                <!-- <text>更多</text> -->
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+            </view>
+        </view>
+        <view class="item line" bindtap="itemClicked" data-page="1" data-query='{{userInfos.userScore}}'>
+            <view>
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/coupon.png" alt=""></image>
+                <text>秀豆账户{{userInfos.userScore}}</text>
+            </view>
+            <view>
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+            </view>
+        </view>
+
+        <view class="item line" bindtap="itemClicked" data-page="2" data-query='{{userInfos.availableBalance}}'>
+            <view>
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/wdzh_18@2x.png" alt=""></image>
+                <text>余额账户{{userInfos.availableBalance}}</text>
             </view>
             <view>
                 <!-- <text>更多</text> -->
