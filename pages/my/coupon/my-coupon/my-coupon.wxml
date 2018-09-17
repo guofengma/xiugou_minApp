@@ -12,16 +12,16 @@
                 <view class="item-ans {{item.active? 'active':''}}" data-index='{{index}}' bindtap="toDetail" data-id="{{item.id}}" data-btn = '{{item.left}}' data-canuse='{{item.canUse}}'>
                     <view class='coupon-left'>
                       <view class='{{item.active? "red":"gray"}} font-30'>
-                        {{item.type !='ZK'? "¥":''}}
+                        {{item.type !=3? "¥":''}}
                         <text >{{item.value}}</text>
-                        {{item.type =='ZK'? "折":''}}
+                        {{item.type ==3? "折":''}}
                       </view>
                       <view class='gray' >{{item.typeName}}</view>
                       <view class='gray'>满{{item.useConditions}}可用</view>
                     </view>
                     <view class='coupon-center'>
-                      <view class='font-30'>{{item.nickname}}</view>
-                      <view class='gray'>限品类：{{item.name}}</view>
+                      <view class='font-30'>{{item.name}}</view>
+                      <view class='gray'>限品类：</view>
                       <view class='gray' >有效期：{{item.start_time}} - {{item.outTime}}</view>
                     </view>
                     <view class='coupon-right flexC font-30' >

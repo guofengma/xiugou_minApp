@@ -9,9 +9,10 @@ Page({
           [  ],
           [  ]
       ],
-      types:{
-        MJ: "满减劵", ZK: "折扣劵", DK: "抵扣劵", DJ:"抵价劵"
-      },
+      types: ["其他", "满减劵", "抵价劵", "抵扣劵","折扣劵"],
+      // types:{
+      //   MJ: "满减劵", ZK: "折扣劵", DK: "抵扣劵", DJ:"抵价劵"
+      // },
       totalPageArr:[], //保存页数 
       params:{
         page:1,
@@ -55,8 +56,8 @@ Page({
     getCouponType(item){
       let typeObj = this.data.types
       item.typeName = typeObj[item.type]
-      item.showTypeName = item.type == 'DK' || item.type == 'DJ'? true:false
-      item.value = item.type == 'ZK'?  Tool.mul(item.value,0.1):item.value
+      item.showTypeName = item.type == 4 || item.type == 2? true:false
+      item.value = item.type == 3?  Tool.mul(item.value,0.1):item.value
     },
     availableDiscountCouponForProduct(){
       let params = {
@@ -104,17 +105,18 @@ Page({
           let currentTime = new Date().getTime() // 获取当前时间
           for (let i in req.responseObject.data.data) {
             let item = req.responseObject.data.data[i];
-            item.outTime = Tool.formatTime(item.outTime).slice(0, 10);
+            item.outTime = Tool.formatTime(item.expireTime).slice(0, 10);
             item.start_time = Tool.formatTime(item.startTime).slice(0, 10);
-            if (currentTime > item.startTime){
-              item.left = '';
-              item.active = true;
-              item.canUse = 1
-              item.canUseStart = true
-            } else {
-              item.left = '待激活';
-              item.active = false
-            }
+            item.left = '';
+            item.active = true;
+            item.canUse = 1
+            item.canUseStart = true
+            // if (currentTime > item.startTime){
+              
+            // } else {
+            //   item.left = '待激活';
+            //   item.active = false
+            // }
             this.getCouponType(item)
           }
           this.data.lists[0] = this.data.lists[0].concat(req.responseObject.data.data)
