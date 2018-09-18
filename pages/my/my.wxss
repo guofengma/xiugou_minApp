@@ -1,125 +1,226 @@
-/* pages/my/account.wxss */
-.order{
-    font-size:26rpx;
-    color: #222222;
-    margin-bottom:40rpx;
+.my{
+  font-size: 24rpx;
 }
-.bg-area{
-    background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/dbj_02@2x.png") no-repeat top center;
-    background-size: cover;
-    color: #fff;
-    font-weight: 600;
-    width: 100%;
-    height: 350rpx;
-    display: flex;
-}
-.info{
-    height: 100rpx;
-    margin-top: 100rpx;
-}
-.bg-area view:nth-child(3){
-    height: 100rpx;
-    margin-top: 116rpx;
-    position: absolute;
-    right: 3%;
-}
-.img-area{
-    background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/tx_03@2x.png") no-repeat top center;
-    background-size: cover;
-    width: 210rpx;
-    height: 210rpx;
-    margin: 25rpx 3%;
-}
-.wrap{margin-top: 30rpx}
-.item{
-  background: #fff;
-  height: 96rpx;
-  line-height: 96rpx;
-  padding: 0 30rpx;
+.my-info{
   display: flex;
+  align-content: center;
+  padding-top: 17rpx;
 }
-.item view:first-child{
-  width: 75%;
+.content-top{
+  position: relative;
+  background: #ffffff;
+}
+.my-info-item{
+  padding-top: 12rpx;
+}
+.my-avatar{
+  padding-bottom: 85rpx;
   display: flex;
   align-items: center;
 }
-.item view:nth-child(2){width: 25%;text-align: right;margin-right: 20rpx}
-.line{border-bottom: 1px solid #eee}
-.item image{
-    width:30rpx;
-    height:30rpx;
-    /* vertical-align:top; */
-    margin-right:5rpx;
+.my-name{
+color: #666;
+margin-right: 13rpx;
+height:34px;
+font-size:36rpx;
+font-weight:500;
+line-height:38rpx;
+ 
 }
-.my-order{
-    width: 94%;
-    margin: -90rpx 3% 0;
-    height: 256rpx;
-    background-color: #ffffff;
-    box-shadow: 0 0 20rpx 0 rgba(0, 0, 0, 0.1);
-    border-radius: 20rpx;
-}
-.title{
-    height: 90rpx;
-    border-bottom: 1px solid #eee;
-}
-.title view{
-    display: inline-block;
-}
-.title view:first-child{
-    margin: 30rpx 40rpx;
-}
-.title view:first-child text{
-  position: relative
-}
-.title view:first-child text:after{
-  content:'';
-  position: absolute;
+.my-info-arrow{
+  width: 14rpx;
   height: 24rpx;
-  width: 4rpx;
-  background: #D51243;
-  left: -10rpx;
-}
-.title view:first-child text{
-    margin-left: 10rpx;
-}
-.title view:nth-child(2){
-    float: right;
-    margin: 30rpx;
-}
-.clearfix{
-    clear: both;
-}
-.body{
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    padding-top:36rpx;
-}
-.body image{
-    width: 45rpx;
-    height: 45rpx;
-}
-.smrz-img{
-    width:129rpx ;
-    height: 32rpx;
-    vertical-align: middle;
-    margin-left: 15rpx;
-}
-.jt-img{
-    width:15rpx !important;
-    height: 20rpx !important;
-    vertical-align: middle;
-    margin-left: 10rpx;
+  margin-left:12rpx; 
+  
 }
 .avatar-img{
     width: 130rpx;
     height: 130rpx;
-    background-color: #ffffff;
+    background-color: red;
     border: solid 4rpx #ffffff;
     border-radius: 50%;
     margin: 38rpx;
+    
 }
-.setting{
-  margin-bottom: 20rpx;
+.my-rank{
+   position: relative;
+  width:88rpx;
+  margin-top: 22rpx;
+}
+.my-rank image{
+  position: relative;
+  width:88rpx;
+  height:48rpx;
+  
+}
+.my-rank-no{
+  position: absolute;
+  top: 0;
+  left:37rpx;
+  bottom: 0;
+  margin: auto;
+  color: #ffffff;
+}
+.my-save{
+  position: absolute;
+  right: 0;
+  width: 199rpx;
+  height: 67rpx;
+  background: #FFC079;
+  border-top-left-radius:34rpx;
+  border-bottom-left-radius:34rpx;
+  bottom: 76rpx;
+  text-align: center;
+  color: #ffffff;
+
+}
+.my-account{
+  background: #ffffff;
+  margin-top: 21rpx;
+  padding:0 30rpx 10rpx 30rpx;
+  
+}
+.my-account-item{
+   height: 88rpx;
+   line-height: 88rpx;
+   color: #666;
+   font-size: 32rpx;
+   font-weight:400;
+   border-bottom: 1rpx solid #ddd;
+}
+.my-account-list{
+  display: flex;
+  height: 206rpx;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+}
+.my-account-list>view{
+  width: 221rpx;
+  height: 123rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  
+}
+.account-num{
+  font-size:37rpx; 
+  line-height:76rpx;
+  font-weight:600;
+
+}
+.my-account-coin{
+background:rgba(255,79,110,1);
+border-radius:10rpx;
+box-shadow:5rpx 0px 10rpx rgba(255,79,110,0.54);
+}
+.my-account-xiudou{
+background:rgba(255,192,121,1);
+border-radius:10rpx;
+box-shadow:5rpx 0px 10rpx rgba(255,192,121,0.54);
+}
+.my-account-leave{
+background:rgba(142,199,255,1);
+border-radius:10rpx;
+box-shadow:5rpx 0px 10rpx rgba(142,199,255,0.54);
+}
+.my-order{
+  width: 100%;
+  margin-top:20rpx;
+  background: #ffffff; 
+}
+.my-order-item{
+   margin:0 30rpx; 
+   display: flex;
+   justify-content: space-between;
+   height: 88rpx;
+   color: #666;
+   line-height: 88rpx;
+   border-bottom: 1rpx solid #ddd;
+}
+.my-order-list{
+  padding: 0 30rpx;
+  display: flex;
+  justify-content: space-between;
+  height: 206rpx;
+  align-items: center;
+  text-align: center;
+}
+.my-tools-cont{
+  width: 25%;
+  text-align: center;
+}
+
+.forsale{
+  width: 48rpx;
+  height: 45rpx;
+}
+.my-tools{
+  margin-top: 20rpx;
+  background: #ffffff;
+}
+.my-tools-item{
+  margin: 0 30rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-bottom: 1rpx solid #ddd;
+  
+}
+.my-tools-list{
+  padding: 30rpx;
+  display: flex;
+  justify-content:space-between;
+  flex-wrap: wrap;
+  height: 366rpx;
+  align-items: center;
+  color: #666;
+  
+}
+.my-tools-list image{
+  margin-bottom: 26rpx;
+}
+.my-invite{
+width:34rpx;
+height:33rpx
+}
+.my-calendar{
+width:35rpx;
+height:33rpx;
+}
+.my-voucher{
+  width:35rpx;
+height:29rpx;
+}
+.my-data{
+  width:35rpx;
+height:28rpx;
+}
+.my-collect{
+  width:35rpx;
+height:29rpx;
+}
+.my-help{
+  width:34rpx;
+height:34rpx;
+}
+.my-address{
+width:33rpx;
+height:35rpx;
+}
+.my-track{
+width:27rpx;
+height:35rpx;
+}
+.my-wait-pay{
+  position: relative;
+}
+.reddot{
+  position: absolute;
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 50%;
+  background: red;
+  text-align: center;
+  color: white;
+  right: 0;
+  top: -10rpx;
 }
