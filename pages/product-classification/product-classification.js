@@ -27,6 +27,10 @@ Page({
     Tool.navigateTo('/pages/search/search?door=0')
   },
   leftBarClicked(e){
-
+    let index = e.currentTarget.dataset.index
+    let id = e.currentTarget.dataset.id
+    this.setData({
+      activeIndex:index
+    })
   }
 })
