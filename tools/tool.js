@@ -128,6 +128,20 @@ export default class Tool {
         return (time);
     }
 
+      static timeStringForDateString(string, formate) {
+        if ('1900-01-01 00:00:00' === string) {
+          // return '空';
+        }
+        let date = Tool.dateFromString(string);
+        let timeString = Tool.timeStringForDate(date, formate);
+        return timeString;
+      }
+
+      static timeStringForDate(date, formate) {
+        let timeString = Date.format(date, formate);
+        return timeString;
+      }
+
     static dayCountFromInterval(interval) {
         let days = 0;
         let duration = interval - this.timeIntervalFromNow(0);

@@ -9,7 +9,7 @@
         <swiper-item wx:for="{{lists}}" wx:for-index="key" wx:for-item="list"  wx:key="{{key}}">
             <scroll-view scroll-y class="scoll-h" bindscrolltolower="onScroll" wx:if='{{currentTab==key}}'>
               <block wx:for="{{list}}" wx:key="{{index}}">
-                <view class="item-ans {{item.active? 'active':''}}" data-index='{{index}}' bindtap="toDetail" data-id="{{item.id}}" data-btn = '{{item.left}}' data-canuse='{{item.canUse}}'>
+                <view class="item-ans {{item.active? 'active':''}}"  bindtap="toDetail" data-id="{{item.id}}" data-index='{{index}}' data-key="{{key}}">
                     <view class='coupon-left'>
                       <view class='{{item.active? "red":"gray"}} font-30'>
                         {{item.type !=3? "¥":''}}
@@ -21,8 +21,8 @@
                     </view>
                     <view class='coupon-center'>
                       <view class='font-30'>{{item.name}}</view>
-                      <view class='gray'>限品类：</view>
-                      <view class='gray' >有效期：{{item.start_time}} - {{item.outTime}}</view>
+                      <view class='gray'>限品类：{{item.nickname}}</view>
+                      <view class='gray time' >有效期：{{item.start_time}}-{{item.outTime}}</view>
                     </view>
                     <view class='coupon-right flexC font-30' >
                        <text wx:for="{{item.left}}" wx:for-item="left"  wx:key="{{index}}">{{left}}</text> 

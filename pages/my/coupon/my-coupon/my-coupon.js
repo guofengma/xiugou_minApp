@@ -9,16 +9,12 @@ Page({
           [  ],
           [  ]
       ],
-      types: ["其他", "满减劵", "抵价劵", "抵扣劵","折扣劵"],
-      // types:{
-      //   MJ: "满减劵", ZK: "折扣劵", DK: "抵扣劵", DJ:"抵价劵"
-      // },
+      types: ["其他", "满减劵", "抵价劵", "折扣劵","抵扣劵"],
       totalPageArr:[], //保存页数 
       params:{
         page:1,
         pageSize:10
       },
-      // pageSize:10
     },
     // 上拉加载更多
     onScroll(e) {
@@ -54,41 +50,73 @@ Page({
       this.checkCor();
     },
     getCouponType(item){
+      // 优惠卷的类型
       let typeObj = this.data.types
       item.typeName = typeObj[item.type]
       item.showTypeName = item.type == 4 || item.type == 2? true:false
       item.value = item.type == 3?  Tool.mul(item.value,0.1):item.value
-    },
-    availableDiscountCouponForProduct(){
-      let params = {
-        ...this.data.params,
-        orderParam: this.data.productIds,
-        reqName: '产品可用优惠劵列表',
-        url: Operation.availableDiscountCouponForProduct
+
+      //优惠卷的使用范围
+      
+      let length = item.length
+    
+      if (length==0){
+        // 单产品和多产品的判断
+        item.nickname = item.products.length == 1 ? "限" + item.products[0] + "可用" :"限指定商品可使用"
+      } else if (length>1){
+        // 多品类
+        item.nickname = "限指定商品可使用" 
+      } else if (length==1){
+        // 单品类
+        if (item.products.length==0){
+          item.nickname = item[item.key].length > 0 ? "限指定商品可使用" : "限" + item[item.key][0] + "可用"
+        } else if (item.products.length==1) {
+          item.nickname = "限" + item.products[0] + "可用" 
+        } else {
+          item.nickname = "限指定商品可使用" 
+        }
       }
+      
+    },
+    formatCouponInfos(params,index,isActive=false,leftName,){
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
-        let currentTime = new Date().getTime() // 获取当前时间
-        for (let i in req.responseObject.data) {
-          let item = req.responseObject.data[i];
-          item.outTime = Tool.formatTime(item.outTime).slice(0, 10);
-          item.start_time = Tool.formatTime(item.startTime).slice(0, 10);
-          if (currentTime > item.startTime) {
-            item.left = '';
-            item.canUse =1
-            item.active = true;
-            item.canUseStart = true
-          }
+        let datas = req.responseObject.data
+        if (req.responseObject.data.totalPage == 0) return
+        datas.data.forEach((item,index)=>{
+          item.outTime = Tool.timeStringForDateString(Tool.formatTime(item.expireTime),"YYYY.MM.DD");
+          item.start_time = Tool.timeStringForDateString(Tool.formatTime(item.startTime), "YYYY.MM.DD");
+          let length = 0,key=""
+          length += (item.cat1.length>0? 0:1)
+          length += (item.cat2.length > 0 ? 0 : 1)
+          length += (item.cat3.length> 0 ? 0 : 1)
+          key = (item.cat1.length > 0 ? 'cat1' : key)
+          key = (item.cat2.length > 0 ? 'cat2' : key)
+          key = (item.cat3.length > 0 ? 'cat3' : key)
+          item.length =length
+          item.key = key
+          item.left = leftName;
+          item.active = isActive;
           this.getCouponType(item)
-          this.data.lists[0].push(item)
-        }
-        this.data.lists[0] = req.responseObject.data
+        })
+        this.data.lists[index] = this.data.lists[index].concat(datas.data)
+        this.data.totalPageArr[index] = datas.totalPage
         this.setData({
-          lists: this.data.lists
+          lists: this.data.lists,
+          totalPageArr: this.data.totalPageArr
         })
       };
       Tool.showErrMsg(r);
       r.addToQueue();
+    },
+    availableDiscountCouponForProduct(){
+      let params = {
+        ...this.data.params,
+        productIds: this.data.productIds,
+        reqName: '产品可用优惠劵列表',
+        url: Operation.availableDiscountCouponForProduct
+      }
+      this.formatCouponInfos(params, 0, true, '')
     },
     
     //未使用
@@ -99,64 +127,29 @@ Page({
         url: Operation.couponList,
         status:1
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-          if (req.responseObject.data.total==0) return
-          let currentTime = new Date().getTime() // 获取当前时间
-          for (let i in req.responseObject.data.data) {
-            let item = req.responseObject.data.data[i];
-            item.outTime = Tool.formatTime(item.expireTime).slice(0, 10);
-            item.start_time = Tool.formatTime(item.startTime).slice(0, 10);
-            item.left = '';
-            item.active = true;
-            item.canUse = 1
-            item.canUseStart = true
-            // if (currentTime > item.startTime){
-              
-            // } else {
-            //   item.left = '待激活';
-            //   item.active = false
-            // }
-            this.getCouponType(item)
-          }
-          this.data.lists[0] = this.data.lists[0].concat(req.responseObject.data.data)
-          this.data.totalPageArr[0] = req.responseObject.data.totalPage
-          this.setData({
-            lists: this.data.lists,
-            totalPageArr: this.data.totalPageArr
-          })
-        };
-        Tool.showErrMsg(r);
-        r.addToQueue();
+      params.pageSize = 5
+      this.formatCouponInfos(params, 0,true,'')
+    },
+    // 待激活
+    getDiscountCouponNoActive() {
+      let params = {
+        ...this.data.params,
+        reqName: '未使用优惠劵列表',
+        url: Operation.couponList,
+        status: 4
+      }
+      params.pageSize = 5
+      this.formatCouponInfos(params, 0, false, '待激活')
     },
     //已经优惠劵列表
     getDiscountCouponUserd() {
       let params = {
         ...this.data.params,
         status: 2,
-        reqName: '已经优惠劵列表',
+        reqName: '已使用优惠劵列表',
         url: Operation.couponList
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        if (req.responseObject.data.total == 0) return
-        for (let i in req.responseObject.data.data) {
-          let item = req.responseObject.data.data[i];
-          item.outTime = Tool.formatTime(item.outTime).slice(0, 10);
-          item.start_time = Tool.formatTime(item.startTime).slice(0, 10);
-            item.left = '已使用';
-            this.getCouponType(item)
-            //this.data.lists[2].push(item)
-        }
-        this.data.totalPageArr[2] = req.responseObject.data.totalPage
-        this.data.lists[2] = this.data.lists[2].concat(req.responseObject.data.data)
-        this.setData({
-            lists: this.data.lists,
-            totalPageArr: this.data.totalPageArr
-        })
-      };
-      Tool.showErrMsg(r);
-      r.addToQueue();
+      this.formatCouponInfos(params, 2, false, '已使用')
     },
     //失效优惠劵列表
     getDiscountCouponLosed() {
@@ -166,25 +159,7 @@ Page({
         status:3,
         url: Operation.couponList
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        if (req.responseObject.data.total == 0) return
-          for (let i in req.responseObject.data.data) {
-            let item = req.responseObject.data.data[i];
-            item.outTime = Tool.formatTime(item.outTime).slice(0, 10);
-            item.start_time = Tool.formatTime(item.startTime).slice(0, 10);
-            item.left = '已过期';
-            //this.data.lists[1].push(item)
-          }
-        this.data.totalPageArr[1] = req.responseObject.data.totalPage
-        // this.data.lists[1] = this.data.lists[1].concat(req.responseObject.data.data)
-        // this.setData({
-        //   lists: this.data.lists,
-        //   totalPageArr: this.data.totalPageArr
-        // })
-      };
-      Tool.showErrMsg(r);
-      r.addToQueue();
+      this.formatCouponInfos(params, 1, false, '已失效')
     },
 
     // 点击标题切换当前页时改变样式
@@ -201,20 +176,22 @@ Page({
     },
     //优惠券详情
     toDetail(e){
-      let id=e.currentTarget.dataset.id
-      let btn = e.currentTarget.dataset.btn
-      let canUse = e.currentTarget.dataset.canuse
+
+      // let id=e.currentTarget.dataset.id
       let index = e.currentTarget.dataset.index
-      if (canUse != 1 || this.data.door != 1){
-        Tool.navigateTo('../coupon-detail/coupon-detail?id=' + id + "&btn=" + btn)
-      } else if (canUse == 1 && this.data.lists[0][index].canUseStart && this.data.door==1) {
-        Storage.setCoupon(this.data.lists[0][index])
-        Event.emit("updateCoupon")
+      let key = e.currentTarget.dataset.key
+      Storage.setCoupon(this.data.lists[key][index])
+      Tool.navigateTo('../coupon-detail/coupon-detail')
+      if(this.data.door==1&&key==0){
+        console.log(11111)
+        // Event.emit("updateCoupon")
         Tool.navigationPop()
+      } else{
+        Tool.navigateTo('../coupon-detail/coupon-detail')
       }
     },
     giveUpUse(){
-      Storage.setCoupon({ id: "", nickname: '未使用优惠劵' })
+      Storage.setCoupon({ id: "", name: '未使用优惠劵' })
       Event.emit("updateCoupon")
       Tool.navigationPop()
     },
@@ -232,12 +209,13 @@ Page({
     },
       onLoad: function (options) {
         this.setData({
-          door: options.door || '',
-          productIds: options.productIds || '',
+          door: options.door || 1,
+          productIds: options.productIds || [1],
         })
         if(this.data.door==1){
           this.availableDiscountCouponForProduct()
         } else {
+          this.getDiscountCouponNoActive()
           this.getDiscountCouponNoUse();
         }
         this.getDiscountCouponUserd();
