@@ -20,6 +20,6 @@ Page({
     ]
   },
   onLoad: function (options) {
-
+    
   }
 })

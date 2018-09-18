@@ -6,7 +6,8 @@
   width: 100%;
 }
 .leftBar{
-  height: calc(100% - 94rpx)
+  height: calc(100% - 200rpx);
+  width: 180rpx;
 }
 .bottomBar{
   width: 100%;
