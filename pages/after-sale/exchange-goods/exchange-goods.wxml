@@ -1,0 +1,61 @@
+<import src='/components/address-info/address-info.wxml'/>
+
+<import src='/components/cell-line/cell-line.wxml'/>
+
+<import src='/components/after-sale-prd-info/after-sale-prd-info.wxml'/>
+
+<import src='/components/address-saler/address-saler.wxml'/>
+
+<!--提示语  -->
+<view class='redBg font-26 flexR tips' wx:if='{{expressNo.id==0}}'>
+  商家已同意换货申请，请尽快发货
+</view>
+<view class='flexC tips-exchange font-26'>
+  <view class='tips-title'>{{result[resultIndex].state}}</view>
+  <view>{{result[resultIndex].info}}</view>
+  <view>{{distanceTime}}</view>
+</view>
+<!--地址信息  -->
+<view class='address active whiteBg'>
+  <template is="address-info" data="{{addressType,...datas.receive,hasData:true}}"/>
+</view>
+
+<!--商家地址  -->
+<template is="address-saler" data="{{addressType,src,datas,hasData:true}}"/>
+
+<!--物流  -->
+<view>
+  <view bindtap='logClicked' data-express='{{expressNo}}' data-type='1'>
+    <template is="cell-line" data="{{name:'退货物流',placeholder:expressNo.content}}"/>
+  </view>
+  <view wx:if='{{expressNo.id!=0}}' bindtap='logClicked' data-express='{{SaleExpressNo}}' data-type='2'>
+    <template is="cell-line" data="{{name:'商家物流',placeholder:SaleExpressNo.content}}"/>
+  </view>
+</view>
+
+<!--换货信息  -->
+
+<view class='exchange-info font-26 '>
+  <view class='flexR-sb after-sale-line gray'>换货订单</view>
+  <template is="after-sale-prd-info" data="{{...datas.returnProduct}}"/>
+  <view class='exchange-content whiteBg gray'>
+    <view>换货原因：{{datas.returnProduct.return_reason}}</view>
+    <!-- <view>换货金额：¥{{list.showRefund}}</view> -->
+    <view>换货说明：{{datas.returnProduct.remark}}</view>
+    <view>
+      <view>凭证图片</view>
+      <view class='userImg'>
+         <block wx:for='{{datas.imgList}}' wx:key='unique'>
+          <image src='{{item.smallImg}}'></image>
+        </block>
+      </view>
+    </view>
+    <view>申请时间：{{datas.returnProduct.applyTime}}</view>
+    <!-- <view>更换型号： 32G 黑色</view> -->
+    <view>数量：X{{datas.returnProduct.num}}</view>
+  </view>
+</view>
+
+<!--联系卖家  -->
+
+ <contact-seller phone='{{13336092569}}'></contact-seller> 

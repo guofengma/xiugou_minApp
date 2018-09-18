@@ -1,0 +1,22 @@
+<view class='coupon-detail flexR-sb {{detail.active? "active":""}}'>
+  <view class='left'>
+    <view class='{{detail.active? "red":"gray"}} font-30'>
+      {{detail.type !=3? "¥":''}}
+      <text >{{detail.value}}</text>
+      {{detail.type ==3? "折":''}}
+    </view>
+    <view class='gray' >{{detail.typeName}}</view>
+    <view>满{{detail.useConditions}}可用</view>
+  </view>
+  <view class='center boxSize'>
+    <view class='font-30 '>{{detail.name}}</view>
+    <view class='gray'>限品类：{{detail.nickname}}</view>
+    <view class='gray'>有效期：{{detail.start_time}} - {{detail.outTime}}</view>
+  </view>
+</view>
+
+<view class='tips'>
+  <view>使用说明：</view>
+  <view>{{detail.remarks}}</view>
+</view>
+<button class='loginBtn'  disabled='{{detail.left}}' bindtap='btnClicked'>{{detail.left|| "立即使用"}}</button>

@@ -1,0 +1,26 @@
+.search-bar{
+  position: absolute;
+  top: 18rpx;
+  left: 0;
+  width: 100%;
+  padding:0 42rpx;
+  z-index: 999;
+}
+.bar{
+  width: 597rpx;
+	height: 64rpx;
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius: 28rpx;
+}
+.bar image{
+  width:40rpx; 
+  margin-left: 20rpx;
+  margin-top: 5rpx;
+}
+.search-bar image{
+  width: 42rpx;
+}
+.slide-image{
+  width: 100%;
+  height:100%;
+}

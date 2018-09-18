@@ -1,0 +1,16 @@
+@import "/components/address-info/address-info";
+
+.address-view{
+  padding: 30rpx ;
+  margin: 20rpx 0;
+  width: 100%;
+}
+.address-right>view{
+  font-size: 24rpx;
+  width:85rpx;
+  height: 72rpx; 
+  border-radius: 4rpx;
+}
+.address-left{
+  width: 81.4%;
+}

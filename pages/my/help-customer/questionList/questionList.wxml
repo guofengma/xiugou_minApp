@@ -1,0 +1,21 @@
+<view class="order">
+    <view class="wrap">
+        <block wx:for="{{list}}" wx:key="unique">
+            <view class="item line" catchtap='toDetail' data-id="{{item.id}}">
+                <view>
+                    <text>{{item.title}}</text>
+                </view>
+                <view>
+                    <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+                </view>
+            </view>
+        </block>
+
+    <view class="contact">
+        <view>联系客服8888-8888</view>
+        <view>09:00-18:00</view>
+    </view>
+    </view>
+
+</view>
+

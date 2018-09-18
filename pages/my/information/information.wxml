@@ -1,0 +1,58 @@
+<!--pages/my/account.wxml-->
+<view class="order">
+    <view class="">
+        <view class="item" bindtap="notice">
+            <view class="left">
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/information-notice.png" alt="" mode='widthFix'></image>
+                <text>通知</text>
+            </view>
+            <view>
+                <view class="num redBg" wx:if="{{noticeNum!=0}}">{{noticeNum}}</view>
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/packup-btn.png' mode='widthFix'></image>
+            </view>
+        </view>
+    </view>
+    <view class="wrap">
+        <view class="item" bindtap="information">
+            <view class="left">
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/infomation.png" alt="" mode='widthFix'></image>
+                <text>消息</text>
+            </view>
+            <view>
+                <view class="num redBg" wx:if="{{messageNum!=0}}">{{messageNum}}</view>
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/packup-btn.png' mode='widthFix'></image>
+            </view>
+        </view>
+    </view>
+    <view class="wrap">
+        <view class="item" bindtap="groupInformation">
+            <view class="left">
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/group-information.png" alt="" mode='widthFix'></image>
+                <text>拼店消息</text>
+            </view>
+            <view>
+                <view class="num redBg" wx:if="{{storeMessageNum!=0}}">{{storeMessageNum}}</view>
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/packup-btn.png' mode='widthFix'></image>
+            </view>
+        </view>
+    </view>
+    <view class="tips-delete-order model-view-bg " wx:if='{{isNew}}'>
+        <view>
+            <view class='tips-box '>
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/close-icon.png" bindtap='dismissCancel'></image>
+                <view class='tips-icon flexR'>
+                    <view></view>
+                </view>
+                <view class='content'>
+                    <view class='big'>新客送百元礼包</view>
+                    <view>首单满500立减160</view>
+                    <view>价值688元的新手礼包</view>
+                </view>
+                <view class='flexR-sb btn-content'>
+                    <view class='redBg deleteBtn flexR' bindtap=''>马上去领</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+

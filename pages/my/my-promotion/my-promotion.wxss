@@ -1,0 +1,95 @@
+.bg-area{
+  background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/dbj_02@2x.png") no-repeat top center;
+  background-size: cover;
+  color: #fff;
+  height: 364rpx;
+  padding: 30rpx;
+  display: flex;
+}
+.img-area{
+  background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/tx_03@2x.png") no-repeat top center;
+  background-size: cover;
+  width: 210rpx;
+  height: 210rpx;
+}
+.img-area image{
+  width: 140rpx;
+  border-radius: 140rpx;
+}
+.levelName{
+  font-size: 26rpx;
+  color: #fff;
+  height: 210rpx;
+  margin-left: 30rpx;
+}
+.levelName text{
+  padding: 0rpx 30rpx;
+  border:1rpx solid #fff;
+  border-radius: 30rpx;
+}
+.base-bar>view {
+  height: 100%;
+  width: 50%;
+  font-size: 28rpx;
+}
+.base-bar>view:first-child{
+  border-top: 1rpx solid #ddd;
+}
+.growing-view-bg{
+  position: absolute;
+  top:266rpx;
+  width: 100%;
+}
+.growing-view{
+  width:690rpx;
+  height:259rpx;
+  margin: 0 auto;
+  background: transparent url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/promotion-bg.png") no-repeat;
+  background-size: 100%;
+  border-radius:20px;
+  box-shadow:0px 0px 20px 0px rgba(0,0,0,0.1);
+  padding: 0 30rpx;
+}
+.growing-question{
+  margin-bottom: 115rpx;
+}
+.icon-growing{
+  height: 88rpx;
+  padding-left: 40rpx;
+  background: transparent url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/my-promotion-icon.png") no-repeat left 28rpx;
+  background-size: 30rpx;
+}
+.growing-value{
+  text-align: center;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+}
+.growing-bar{
+  width:100%;
+  height:16rpx;
+  background:#ddd;
+  border-radius:8px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom:26rpx;
+}
+.growing-bar-value{
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-image: linear-gradient(90deg, #FFAC00 0%, #FF6B84 100%), 
+	linear-gradient(#ffffff, #ffffff);
+}
+.growing-question{
+  margin-top: 186rpx;
+}
+.growing-question>view{
+  height: 88rpx;
+  line-height: 88rpx;
+  padding: 0 50rpx;
+  border-top: 1rpx solid #eee;
+}
+.growing-question>view:first-child{
+  border-top:0;
+}

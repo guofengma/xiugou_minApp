@@ -1,1 +1,65 @@
-/* pages/shopping-cart/shopping-cart.wxss */
+@import "/components/cart-product-info/cart-product-info.wxss";
+
+/*搜索产品异常显示  */
+
+@import  "/components/result-tips/result-tips";
+
+
+.shopping-cart-line{
+  margin-bottom: 20rpx;
+}
+.shopping-cart{
+  padding-top: 5rpx;
+  padding-bottom: 30rpx;
+}
+.shopping-cart-line.flexR-sb{
+  box-sizing: border-box;
+  background: #fff;
+}
+.chooseImg image,.leftBar image{
+  width: 46rpx;
+}
+.move-box{
+  width: 88%;
+}
+.chooseImg{
+  width:11%;
+  text-align: right;
+}
+.search-result{
+  height:calc(100% - 100rpx);
+}
+/*底部bar  */
+.cart-bar{
+  height:100rpx;
+  background:#fff;
+  z-index:9999;
+  border-top: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+  font-size: 26rpx;
+}
+.cart-btn{
+  width: 30%;
+  text-align: center;
+  color: #fff;
+  height: 100%;
+  line-height: 100rpx;
+  font-size: 32rpx;
+}
+.leftBar{
+  width: 70%;
+  padding-left: 38rpx;
+  padding-right: 15rpx;
+}
+.leftBar image{
+  margin-right: 22rpx;
+}
+.statusLabel{
+  width: 76rpx;
+	height: 39rpx;
+	background-color: #999999;
+	border-radius: 19rpx;
+  color: #fff;
+  font-size: 24rpx;
+  margin-left:30rpx; 
+}

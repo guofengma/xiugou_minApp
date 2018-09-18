@@ -1,0 +1,24 @@
+image{
+  width: 100%;
+}
+.address-icon{
+  width:6.7%; 
+  margin-right: 20rpx;
+}
+.consignee{
+  font-size: 30rpx;
+}
+.address-content{
+  font-size: 26rpx;
+  text-align: justify;
+}
+.address-info-leftbar{
+  width: 93.3%;
+}
+.no-address{
+  font-size: 26rpx;
+  color: #c8c8c8;
+}
+.consignee{
+  margin-bottom: 10rpx;
+}

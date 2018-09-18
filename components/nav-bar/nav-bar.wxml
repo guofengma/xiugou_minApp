@@ -1,0 +1,13 @@
+<view class='nav-bar' >
+  <view data-index='1' class='{{activeIndex == 1? "red":""}}' catchtap='navbarClicked'>综合</view>
+  <view data-index='2' class='{{activeIndex == 2? "red":""}}' catchtap='navbarClicked'>销量</view>
+  <view data-index='3' class='{{activeIndex == 3? "red":""}}' catchtap='navbarClicked'>
+    价格
+    <image wx:if='{{!priceShow.clicked}}' src='/img/up-down.png' mode='widthFix' class='up-down' data-index='3' catchtap='navbarClicked'></image>
+    <image wx:else src='{{ (priceShow.up) ? "/img/up.png":"/img/down.png" }}'mode='widthFix' class='up-down' data-index='3' catchtap='navbarClicked'></image>
+  </view>
+  <!--bindtap='changeShow'  -->
+  <view class='img-view' data-index='4' catchtap='navbarClicked'>
+    <image src='{{show? "/img/nav-icon-2.png":"/img/nav-icon-1.png"}}' mode='widthFix' data-index='4'></image>
+  </view>
+</view>

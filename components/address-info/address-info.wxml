@@ -1,0 +1,23 @@
+<template name="address-info">
+  <view class="address-info flexR-sb">
+    <view class='address-icon'>
+      <image src='{{ src? src:"/img/adress-icon-1.png"}}' mode='widthFix'></image>
+    </view>
+    <!--addressType 1为快递 2为自提  -->
+    <view class='address-info-leftbar'>
+      <view class='no-address' wx:if='{{!hasData}}' >
+        {{addressType==1?  "请选择一个收货地址":"请选择自提地址"}}
+      </view>
+      <!--姓名 电话  -->
+      <view wx:else>
+        <view wx:if='{{addressType==1}}' class='flexR-sb consignee'>
+           <text>{{receiver}}</text>
+           <text>{{recevicePhone}}</text>
+        </view>
+      </view>
+      <view class='address-content gray'>
+        {{addressInfo}}
+      </view>
+    </view>
+  </view>
+</template>

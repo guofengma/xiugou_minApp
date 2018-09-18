@@ -1,0 +1,45 @@
+.contact-seller{
+  width: 100%;
+  height: 138rpx;
+  border-top: 1rpx solid #eee;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  background: #fff;
+  align-items: center;
+}
+.contact-seller>view,.go-cart-view{
+  width: 50%;
+  font-size: 32rpx;
+  box-sizing: border-box;
+  padding-left: 160rpx;
+  position: relative;
+  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/chart-phone.png) no-repeat 90rpx top; 
+  background-size: 45rpx 45rpx;
+}
+.go-cart-view{
+  background-image: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/chart-msg.png)
+}
+.contact-seller>view:last-child:after{
+  content: '';
+  width: 2rpx;
+	height: 60rpx;
+	background-color: #eeeeee;
+  position: absolute;
+  left: 0;
+  top:8rpx;
+}
+.gray{
+  font-size: 24rpx;
+  color: #999;
+}
+.go-cart-view{
+  background-color: transparent;
+  /* padding: 0; */
+  margin: 0;
+  line-height: inherit;
+  box-sizing: border-box;
+   text-align: left;
+  /* width: 100%;
+  height: 100%; */
+}

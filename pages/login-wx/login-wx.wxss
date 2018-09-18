@@ -1,0 +1,47 @@
+.loginContainer{
+  position: relative;
+  padding-bottom:83rpx;
+  box-sizing: border-box;
+  height: 100%;
+}
+.logoView{
+  position: absolute;
+  top: 154rpx;
+  width: 100%;
+}
+
+.loginBg{
+  width: 100%;
+  position: absolute;
+  top:0;
+  left: 0;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80rpx;
+    width:100%;
+    color: #252525;
+    font-size: 28rpx;
+    border-bottom:1rpx solid #eee;
+}
+.content{
+  height: 150rpx;
+  line-height: 150rpx
+}
+.my-award-filter{
+  width: 75%;
+  background: #fff;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 10rpx;
+}
+.login-2{
+  margin-top: 40rpx;
+  text-align: center;
+}
+.loginImg-wx{
+  width: 100%
+}

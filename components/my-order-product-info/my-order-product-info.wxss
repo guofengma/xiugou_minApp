@@ -1,0 +1,46 @@
+.my-order-product-info{
+  background: #fff;
+  font-size: 26rpx;
+  padding:20rpx 30rpx;
+}
+.my-order-product-info.flexR{
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.right-bar .gray.ellipsis-2{
+  margin-top: 5rpx;
+  margin-bottom: 20rpx;
+}
+.my-order-product-info image{
+  vertical-align:middle;
+  width: 160rpx !important;
+  height: 160rpx !important;
+}
+.leftbar{
+  margin-right: 30rpx;
+  width: 160rpx;
+}
+.right-bar{
+  width: 500rpx;
+  padding-top: 15rpx;
+  box-sizing: border-box;
+  height: 160rpx;
+  position: relative;
+}
+.right-bar .topbar{
+  width: 400rpx;
+}
+.my-order-product-info .flexR-sb{
+  align-items: flex-start
+}
+.cost-price{
+  text-decoration: line-through;
+  color: #999;
+  margin: 6rpx
+}
+.isSaleAfter{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}

@@ -4,6 +4,7 @@
 
 import Request from '../base-requests/request'
 import Operation from '../operation'
+import config from '../../config.js'
 
 //读取请求具体封装
 export default class RequestFactory {
@@ -16,6 +17,7 @@ export default class RequestFactory {
       let params = {
         url:'', //请求的地址 必写 
         reqName:'xxx', //请求的中文名称 可以不写 只是打印用
+        requestMethod:'POST/GET',//  请求的方式 默认post
         isShowLoading:Boolean, // 是否展示loading 默认ture
         hasCookie:Boolean, // 是否携带cookie
         otherParams:其他参数 即后端接口约定的参数 如 name:'XXX'
@@ -48,6 +50,8 @@ export default class RequestFactory {
 
     if (params.isShowLoading === undefined) params.isShowLoading = true
 
+    if (params.requestMethod === undefined) params.requestMethod = 'POST'
+
     if (sysInfo) {
       // 手机型号
       params.device = sysInfo.model
@@ -69,12 +73,9 @@ export default class RequestFactory {
   
   // 上传图片的地址 
   static aliyunOSSUploadImage() {
-    let params = {
-      port: 8100
-    }
-    let baseUrl = new Request(params).getBaseUrl(params)
+    // let baseUrl = new Request(params).getBaseUrl(params)
     let url = Operation.sharedInstance().aliyunOSSUploadImage;
-    return baseUrl + url
+    return config.baseUrl + url
   }
 }
 

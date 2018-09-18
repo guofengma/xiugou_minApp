@@ -1,0 +1,26 @@
+.cart-product-info{
+  background: #fff;
+  font-size: 26rpx;
+  box-sizing: border-box;
+  padding: 20rpx 36rpx 20rpx 24rpx;
+}
+.cart-product-info.flexR{
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.cart-product-info .flexR{
+  justify-content: space-between
+}
+.right-bar{
+  padding-top: 15rpx;
+}
+.right-bar .gray.ellipsis-2{
+  margin-top: 5rpx;
+  margin-bottom: 20rpx;
+}
+.cart-product-info image{
+  vertical-align:middle;
+}
+.leftbar{
+  margin-right: 30rpx;
+}

@@ -1,0 +1,20 @@
+.product-classification{
+  align-items: flex-start;
+  justify-content: flex-start
+}
+.searchOrder{
+  width: 100%;
+}
+.leftBar{
+  height: calc(100% - 94rpx)
+}
+.bottomBar{
+  width: 100%;
+}
+.leftItem{
+  width: 180rpx;
+  height: 90rpx;
+}
+.rightBar{
+  width: calc(100% - 180rpx)
+}

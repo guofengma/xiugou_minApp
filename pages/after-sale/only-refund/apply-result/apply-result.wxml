@@ -1,0 +1,35 @@
+<import src='/components/after-sale-prd-info/after-sale-prd-info.wxml'/>
+
+<view class='state flexR whiteBg'>
+   <image src='{{state.icon}}' mode='widthFix' class='icon'></image>
+   <view>
+    <view class='{{state.className}} stateTitle'>{{state.state}}</view>
+    <view class='gray font-26'>{{state.content}}</view>
+   </view>
+</view>
+
+<view class='exchange-info font-26 '>
+  <view class='flexR-sb after-sale-line gray'>退款订单</view>
+  <view class='after-sale-line whiteBg orderno'>订单编号：{{list.orderNum}}</view>
+  <template is="after-sale-prd-info" data="{{...list}}"/>
+  <view class='after-sale-line whiteBg time'>下单时间：{{list.createTime}}</view>
+  <view class='exchange-content whiteBg gray'>
+    <view>退款原因：{{datas.returnProduct.return_reason}}</view>
+    <view>退款金额：¥{{datas.returnProduct.return_amounts}}</view>
+    <view>退款说明：{{datas.returnProduct.remark}}</view>
+    <view>
+      <view>凭证图片</view>
+      <view class='userImg'>
+        <block wx:for='{{datas.imgList}}' wx:key='unique'>
+          <image src='{{item.smallImg}}'></image>
+        </block>
+      </view>
+    </view>
+    <view>申请时间：{{datas.returnProduct.applyTime}}</view>
+    <view>售后编号： {{datas.returnProduct.refund_no}}</view>
+  </view>
+</view>
+
+<!--联系卖家  -->
+
+ <contact-seller phone='{{18968047924}}'></contact-seller> 

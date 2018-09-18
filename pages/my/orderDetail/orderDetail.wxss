@@ -1,0 +1,175 @@
+@import "/components/my-order-product-info/my-order-product-info";
+
+@import "/components/address-info/address-info";
+
+/* @import "/components/tips-cancel-order/tips-cancel-order"; */
+
+@import "/components/tips-delete-order/tips-delete-order";
+
+.orderDetail{
+  font-size: 26rpx;
+  position: relative;
+  padding-bottom: 110rpx;
+}
+.order-state{
+  height: 200rpx;
+  background: transparent url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/myOrder-detail-bg.png) no-repeat; 
+  color: #fff;
+  padding-top: 35rpx;
+  padding-left: 50rpx;
+  background-size: 100%;
+  /*display: flex*/
+}
+.order-status{
+  font-size: 36rpx;
+}
+.order-state-icon{
+  padding-left: 70rpx;
+  /*background: transparent url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/order-state-1.png) no-repeat 10rpx center;*/
+  /*background-size: 42rpx 42rpx;*/
+    /*width: 42rpx;*/
+    /*height: 42rpx;*/
+    /*margin: 5rpx 5rpx 0 0*/
+}
+.order-state-info>view{
+  width: 690rpx;
+  margin: 0 auto;
+	background-color: #fff;
+	box-shadow: 0 0 20rpx 0 rgba(102, 102, 102, 0.1);
+	border-radius: 20rpx;
+  padding: 60rpx 40rpx;
+  position:relative;
+  top:-60rpx;
+}
+.container{
+  position: relative;
+  top: -40rpx;
+}
+.order-prd-info{
+  margin: 20rpx 0;
+}
+.order-pay-info,.order-create-info{
+  background: #fff;
+}
+.order-pay-info{
+  padding-top: 20rpx;
+}
+.order-pay-info>view,.order-create-info .content>view{
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 0 30rpx;
+}
+.my-order-address{
+  background: #fff;
+  padding: 30rpx;
+  padding-left: 40rpx;
+}
+.order-pay-info .totalPay{
+ position: relative;
+ height: 100rpx;
+ line-height: 100rpx;
+ border-top: 1rpx solid #eee;
+ border-bottom: 1rpx solid #eee;
+ padding: 0 30rpx;
+ margin-top: 10rpx;
+}
+.total{
+  font-size: 30rpx;
+  color: #222;
+}
+.order-create-info{
+  padding: 30rpx 0;
+  margin: 20rpx 0;
+  position: relative;
+}
+.order-btn{
+  width: 160rpx;
+	height: 60rpx;
+	border-radius: 30rpx;
+	border: 1rpx solid;
+  margin-left: 22rpx;
+}
+.order-prd-info .btn-left{
+  margin-right: 0;
+}
+.btn-left{
+  color: #666;
+  border-color: #ddd;
+  /* margin-right: 22rpx; */
+}
+.order-bar,.sale-after{
+  justify-content:flex-end;
+  height: 100rpx;
+  border-top: 1rpx solid #eee;
+  background: #fff;
+  padding: 0 30rpx;
+}
+.sale-after{
+  border-bottom: 1rpx solid #eee;
+}
+/* .order-bar{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+} */
+.copy-btn{
+  width: 100rpx;
+	height: 44rpx;
+	background-color: #ffffff;
+	border-radius: 4rpx;
+	border:  1rpx solid #dddddd;
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+}
+/*三角形样式  */
+.popup{
+    display:block; 
+    width:0; 
+    height:0; 
+    border-width:0 20rpx 20rpx; 
+    border-style:solid; 
+    border-color:transparent transparent #eee; 
+    position:absolute; 
+    top:-10px; 
+    right: 30rpx;
+}
+.popup>view{
+    display:block; 
+    width:0; 
+    height:0; 
+    border-width:0 20rpx 20rpx; 
+    border-style:solid; 
+    border-color:transparent transparent #fff; 
+    position:absolute; 
+    top:3rpx; 
+    left:-19rpx;
+}
+/*重写地址的样式  */
+
+.address-content{
+  font-size: 30rpx;
+  color: #222;
+}
+
+.my-order-address .address-content, .my-order-address .consignee{
+  color: #999;
+}
+
+/*已发货的物流信息  */
+.logistics{
+  padding-left: 70rpx;
+  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/order-state-3-dark.png) no-repeat 10rpx center;
+  background-size: 40rpx 40rpx
+}
+.logistics .info{
+  font-size: 30rpx;
+}
+.right-icon{
+  width: 22rpx;
+}
+
+
+.gift-view{
+  padding:15rpx 30rpx 0 30rpx;
+}

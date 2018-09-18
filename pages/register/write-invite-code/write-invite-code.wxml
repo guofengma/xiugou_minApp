@@ -1,0 +1,7 @@
+<view class='sub-page'>
+  <view class='tips-code flexR'>请输入邀请码</view>
+  <view class='input-view'>
+    <input placeholder='邀请码为英文数字字母11位' class='font-26' value='{{code}}' bindinput='changeInput'></input>
+  </view>
+  <button class='loginBtn' disabled='{{disabled}}' bindtap='next'>下一步</button>
+</view>

@@ -1,0 +1,49 @@
+<import src='/components/cell-line/cell-line.wxml'/>
+
+<import src='/components/my-order-product-info/my-order-product-info.wxml'/>
+
+<import src='/components/update-img/update-img.wxml'/>
+
+<import src='/components/address-info/address-info.wxml'/>
+
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+
+<view class='apply-sale-after-page'>
+  <view class='redBg flexR tips font-26'>退回商品需由买家承担运费，请确保不影响商品完好</view>
+
+  <view class='order-info'>
+    <view class='cell-line whiteBg'>订单编号：{{orderInfos.orderNum}}</view>
+    <template is="my-order-product-info" data="{{...orderInfos}}"/>
+    <view class='cell-line whiteBg'>下单时间：{{orderInfos.createTime}}</view>
+  </view>
+
+  <view>
+    <view bindtap='chooseReason'>
+      <template is="cell-line" data="{{name:reason[refundType].choose,content:reason[refundType].list[activeIndex].dValue}}"/> 
+    </view>
+    <view class='cell-line refund-num whiteBg' wx:if='{{refundType!=2}}'>
+      退款金额： <text class='red'>¥{{orderInfos.returnMoney}}</text>
+    </view>
+    <view class='address active whiteBg' wx:if='{{refundType==2}}'>
+      <template is="address-info" data="{{addressType:1,...list.address,hasData:true}}"/>
+    </view>
+    <view class='cell-line'>{{reason[refundType].info}}</view>
+    <textarea wx:if='{{!hidden}}'   class='textarea' placeholder="{{placeholder.placeholder}}" disabled='{{placeholder.disabled}}' placeholder-class='textarea gray' bindinput='inputChange'/>
+    <view class='textarea' wx:else></view>
+  </view>
+  <view class='cell-line'>上传凭证</view>
+
+  <view class='update-img-view whiteBg'>
+    <update-img bind:uploadImage='uploadImage'/>
+  </view>
+</view>
+
+<!--确认按钮  -->
+
+<view class='{{isIPhoneX.className}} redBg font-32 flexR btn-view' catchtap='orderRefund'>确认</view>
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
+
+<choose-after-sale-reason hidden='{{hidden}}'  bind:makeSureReason="makeSureReason" reason="{{reason[refundType]}}" />

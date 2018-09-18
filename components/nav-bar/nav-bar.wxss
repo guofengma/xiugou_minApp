@@ -1,0 +1,34 @@
+@import "/css/app";
+.img-view image{
+  vertical-align:middle;
+  width: 50rpx;
+}
+.nav-bar{
+  display: flex;
+  background: #fff;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 30rpx;
+  color: #999999;
+  box-sizing: border-box;
+  /* padding-left: 40rpx;  */
+  border-top: 1px  solid #eeeeee;
+  border-bottom: 1px  solid #eeeeee;
+  overflow: hidden;
+}
+.nav-bar>view{
+   height: 96rpx;
+   line-height: 96rpx;
+   box-sizing: border-box;
+   width:26%;
+   text-align:center;
+}
+.nav-bar>view:first-child{
+  width: 30%;
+}
+.nav-bar>view:last-child{
+  width: 18%;
+}
+.up-down{
+  width: 20rpx;
+}

@@ -1,0 +1,133 @@
+<view class="order">
+   <!--支付详情/支付详情退款成功-->
+    <view class="detail" wx:if="{{status!=8}}">
+        <view class="header red font-30" wx:if="{{status==1}}">
+            <view class="title">支付订单</view>
+            <view class="money">-{{detail.amounts}}</view>
+            <view class="result">{{detail.status==1?'待支付':'交易成功'}}</view>
+        </view>
+        <view class="header red font-30" wx:else>
+            <view class="title">订单退款</view>
+            <view class="money">+{{detail.total_price}}</view>
+            <view class="result success">退款成功</view>
+        </view>
+        <view class="wrap">
+            <block>
+                <view class="item line" bindtap="myAccount">
+                    <view>
+                        <text>付款方式</text>
+                    </view>
+                    <view>
+                        <text wx:if="{{detail.type==1||detail.pay_type==1}}">平台支付</text>
+                        <text wx:if="{{detail.type==2||detail.pay_type==2}}">微信支付</text>
+                        <text wx:if="{{detail.type==8||detail.pay_type==8}}">支付宝支付</text>
+                        <text wx:if="{{detail.type==16||detail.pay_type==16}}">银联支付</text>
+                    </view>
+                </view>
+                <!--<view class="item line" bindtap="information">-->
+                    <!--<view>-->
+                        <!--<text>付款方式</text>-->
+                    <!--</view>-->
+                    <!--<view>-->
+                        <!--<text>余额支付 ￥ 80.50</text>-->
+                    <!--</view>-->
+                <!--</view>-->
+            </block>
+           <!--<block wx:else>
+               <view class="item line" bindtap="myAccount">
+                   <view>
+                       <text>退款账户</text>
+                   </view>
+                   <view>
+                       <text>现金账户 ￥ {{detail.actual_amounts}}</text>
+                   </view>
+               </view>
+               <view class="item line" bindtap="information">
+                   <view>
+                       <text>退款账户</text>
+                   </view>
+                   <view>
+                       <text>余额账户 ￥ {{detail.actual_balance}}</text>
+                   </view>
+               </view>
+               <view class="item line" bindtap="myAccount">
+                   <view>
+                       <text>退款账户</text>
+                   </view>
+                   <view>
+                       <text>代币账户 {{detail.actual_token_coin}}</text>
+                   </view>
+               </view>
+               <view class="item line" bindtap="information">
+                   <view>
+                       <text>退款账户</text>
+                   </view>
+                   <view>
+                       <text>积分账户 {{detail.actual_user_score}}</text>
+                   </view>
+               </view>
+           </block>-->
+            <!-- <view class="item" bindtap="information">
+                <view>
+                    <text>商品说明</text>
+                </view>
+                <view>
+                    <text>男士短袖</text>
+                </view>
+            </view> -->
+        </view>
+        <view class="wrap">
+            <view class="item line" bindtap="information">
+                <view>
+                    <text>创建时间</text>
+                </view>
+                <view>
+                    <text wx:if='{{status==1}}'>{{detail.pay_time}}</text>
+                    <text wx:else>{{detail.create_time}}</text>
+                </view>
+            </view>
+            <view class="item" bindtap="information">
+                <view>
+                    <text>订单号</text>
+                </view>
+                <view>
+                    <text>{{detail.order_num}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="wrap">
+            <view class="item line" bindtap="order">
+                <view>
+                    <text>订单疑问</text>
+                </view>
+                <view>
+                    <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+                </view>
+            </view>
+            <view class="item">
+              <button class="go-cart-view contact-btn flexR-sb" 
+                session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"
+                open-type="contact"
+              >
+              <view>
+                  <text>投诉</text>
+              </view>
+              <view>
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+              </view>
+            </button>
+
+            </view>
+        </view>
+    </view>
+    <!--提现驳回详情-->
+    <view class="back-detail wrap" wx:if="{{status==8}}">
+        <view class="header">
+            提现驳回详情
+        </view>
+        <view class="content">
+            {{refuseDetail}}
+        </view>
+    </view>
+</view>
+

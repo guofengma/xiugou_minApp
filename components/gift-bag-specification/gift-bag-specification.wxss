@@ -1,0 +1,6 @@
+@import "/css/app";
+@import "/components/product-specification/product-specification";
+
+.model-view-bg {
+  line-height: 28rpx;
+}

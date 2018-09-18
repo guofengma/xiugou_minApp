@@ -1,0 +1,29 @@
+@import "/pages/after-sale/after-sale";
+
+.after-sale-prd-info{
+  background: #f7f7f7;
+}
+.after-sale-line{
+  border-bottom: 1rpx solid #eee;
+}
+.after-sale-line.orderno{
+  border-bottom:0
+}
+.exchange-content{
+  padding-top: 26rpx;
+}
+.icon{
+  width: 80rpx;
+  margin-right: 36rpx;
+}
+.state{
+  justify-content: flex-start;
+  padding: 30rpx 0 30rpx 65rpx;
+  border-top: 1rpx solid #eee;
+}
+.green{
+  color: #47c546;
+}
+.stateTitle{
+  font-size: 34rpx;
+}

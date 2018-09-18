@@ -1,0 +1,88 @@
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<view class="pay">
+    <view class="wrap gray" wx:if='{{!isContinuePay}}'>
+        <view class="left">
+            <image src="/img/icon_03@2x.png"></image>
+            <view>代币支付</view>
+        </view>
+        <view class="right">
+            <text>可用代币：{{payList.dealer.tokenCoin || 0}}枚</text>
+            <image bindtap="changePrice" data-index='0' src="{{useAmount[0]?'/img/choose-icon-c.png':'/img/choose-icon.png'}}"></image>
+        </view>
+        <view class="clearfix"></view>
+    </view>
+    <view class="wrap gray " wx:if='{{!isContinuePay}}'>
+        <view class="left">
+            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon_03-03@2x.png"></image>
+            <view>余额支付</view>
+        </view>
+        <view class="right useBalance">
+            <text>可用金额：{{payList.dealer.availableBalance || 0}}</text>
+            <!-- <view wx:if="{{useBalance>0}}" class='nowUse gray'>本次使用：{{useBalance}}</view>  -->
+            <image bindtap="changePrice" data-index='1' src="{{useAmount[1]?'/img/choose-icon-c.png':'/img/choose-icon.png'}}"></image>
+        </view>
+        <view class="clearfix"></view>
+    </view>
+    <view class="inf">平台支付仅限APP使用</view>
+    <!-- <view class="wrap" bindtap="payWay" data-index='0' data-val='16'>
+        <view class="left">
+            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon_03-05@2x.png"></image>
+            <view>银行卡支付</view>
+        </view>
+        <view class="right">
+            <image src="{{payWayActive[0]?'/img/choose-icon-c.png':'/img/choose-icon.png'}}" ></image>
+        </view>
+        <view class="clearfix"></view>
+    </view> -->
+    <view class="wrap" bindtap="payWay"  data-index='1' data-val='16'>
+        <view class="left">
+            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon_03-08@2x.png"></image>
+            <view>微信支付</view>
+        </view>
+        <view class="right">
+            <image src="{{payWayActive[1]?'/img/choose-icon-c.png':'/img/choose-icon.png'}}"></image>
+        </view>
+        <view class="clearfix"></view>
+    </view>
+    <!-- <view class="wrap">
+        <view class="left">
+            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon_03-09@2x.png"></image>
+            <view>支付宝支付</view>
+        </view>
+        <view class="right">
+            <image bindtap="payWay"  src="{{payWayActive[2]?'/img/choose-icon-c.png':'/img/choose-icon.png'}}" data-index='2'></image>
+        </view>
+        <view class="clearfix"></view>
+    </view> -->
+    <view class="footer {{isIPhoneX.className}} whiteBg">
+        <!--{{payList.scorePrice? '积分抵扣'+payList.scorePrice+'元,':""}}  -->
+        <view>{{!isContinuePay ? '合计':'还需支付'}}：<text class='red'>￥{{payList.showTotalAmounts}}</text></view>
+        <view bindtap='payBtnCliked'>立即支付</view>
+    </view>
+    <!--适配iPhone X  -->
+    <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
+</view>
+
+<view class="pay-tips boxSize model-view-bg " wx:if='{{isShow}}'>
+  <view class='tips-box overflow flexC'>
+    <block wx:if='{{result}}'>
+      <image src='/img/pay-right.png' mode='widthFix'></image>
+      <view class='tips-title'>支付成功！</view>
+      <view class='gray'>已通知商家，会给你尽快发货</view>
+      <view class='gray'>请耐心等待</view>
+      <!-- <view class='btn flexR' bindtap='goPage'>确认</view> -->
+      <view class='font-30 red flexR-sb btn-sm-veiw'>
+        <view class='btn-sm flexR' bindtap='goPage' data-index='1'>返回首页</view>
+        <view class='btn-sm flexR' bindtap='goPage' data-index='2'>查看订单</view>
+      </view>
+    </block>
+    <block wx:else>
+      <image src='/img/pay-err.png' mode='widthFix'></image>
+        <view class='tips-title'>支付失败！</view>
+        <view class='gray'>请重新支付，以免订单超时</view>
+        <view class='gray'>交易失败</view>
+        <view class='btn flexR' bindtap='goPage' data-index='2'>去支付</view>
+    </block>
+  </view>
+</view>

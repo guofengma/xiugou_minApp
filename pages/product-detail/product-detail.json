@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "商品详情",
+  "usingComponents": {
+    "product-specification": "/components/product-specification/product-specification",
+    "tips-info": "/components/tips-info/tips-info"
+  }
+}

@@ -3,7 +3,7 @@
  */
 
 import Tool from './tool';
-import RequestFactory from '../network/factory/request-read-factory';
+import RequestFactory from '../network/factory/requestFactory';
 import Operation from '../network/operation';
 import Storage from './storage';
 import Event from './event';

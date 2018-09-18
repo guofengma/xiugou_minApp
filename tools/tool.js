@@ -3,9 +3,9 @@
  */
 'use strict';
 
-// var bmap = require('../libs/baidu-map/bmap-wx.min');
+let bmap = require('../libs/baidu-map/bmap-wx.min');
 
-
+import config from '../config.js'
 
 //工具类
 
@@ -127,6 +127,20 @@ export default class Tool {
 
         return (time);
     }
+
+      static timeStringForDateString(string, formate) {
+        if ('1900-01-01 00:00:00' === string) {
+          // return '空';
+        }
+        let date = Tool.dateFromString(string);
+        let timeString = Tool.timeStringForDate(date, formate);
+        return timeString;
+      }
+
+      static timeStringForDate(date, formate) {
+        let timeString = Date.format(date, formate);
+        return timeString;
+      }
 
     static dayCountFromInterval(interval) {
         let days = 0;
@@ -412,7 +426,6 @@ export default class Tool {
               name: 'file',
               success: function (res) {
                 let fileInfo = JSON.parse(res.data);
-                // console.log(fileInfo)
                 successCallback(fileInfo)
               }
             })
@@ -599,7 +612,7 @@ export default class Tool {
                 /* 获取定位地理位置 */
                 // 新建bmap对象
                 var BMap = new bmap.BMapWX({
-                    ak: global.TCGlobal.BaiduMapKey
+                    ak: config.BaiduMapKey
                 });
                 var fail = function (data) {
                     console.log(data);
@@ -809,12 +822,13 @@ export default class Tool {
 
     static showErrMsg(r,callBack=()=>{}) {
       r.failBlock = (req) => {
+        console.log(req)
         // let page = this.getCurrentPageUrlWithArgs() //获取当前额页面
         if (req.responseObject.code==210){ // 超时登录
-          callBack =()=>{
-            let page = global.Storage.getWxOpenid() ? '/pages/login/login-wx/login-wx' :'/pages/login/login'  
-            this.navigateTo(page+'?isBack='+true)
-          }
+          // callBack =()=>{
+          //   let page = global.Storage.getWxOpenid() ? '/pages/login-wx/login-wx' :'/pages/login/login'  
+          //   this.navigateTo(page+'?isBack='+true)
+          // }
         } 
         this.showAlert(req.responseObject.msg, callBack)
       }
@@ -1017,7 +1031,29 @@ export default class Tool {
       that.setData({ 
         imgheights: imgheights,
       })
-
     }
+
+  static formatNum(num) { // 保留两位小数不四舍五入
+    num = num < 0 ? 0 : num
+    let index = String(num).lastIndexOf('.')
+    if (index != -1) {
+      let num2 = num.toFixed(3);
+      num2 = num2.substring(0, num2.lastIndexOf('.') + 3)
+      return num2
+    }
+    return num
+  }
+
+  static bubbleSort(array){
+    let i = 0, len = array.length, j, d; 
+    for (; i < len; i++) {
+      for (j = 0; j < len; j++) {
+        if (array[i] < array[j]) {
+          d = array[j]; array[j] = array[i]; array[i] = d;
+        }
+      }
+    }
+    return array;
+  }
 }
 

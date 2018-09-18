@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的售后",
+  "usingComponents": {
+    "search-bar": "/components/search-bar/search-bar"
+  }
+}

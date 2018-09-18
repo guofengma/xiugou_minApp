@@ -1,0 +1,27 @@
+<view>
+    <view class='cash'>
+        <view class="item boxSize">
+          <view class="font-26">
+            秀豆账户（分）
+          </view>
+          <view class="num">
+            {{account}}
+          </view>
+        </view>
+    </view>
+    <view class="list-area">
+        <view class="list-item flexR-sb" wx:for="{{list}}" wx:key="unique">
+          <view class='flexR-sb detail-content'>
+            <image src="{{imgBaseUrl+useTypeArr[item.usType].icon}}"></image>
+            <view class="detail">
+              <view class="style">{{useTypeArr[item.usType].name}}</view>
+              <view class="time">{{item.createTime}}</view>
+            </view>
+          </view>
+          <view class="money {{item.add?'red':''}}">
+              <text>{{item.add?'+':'-'}}</text>{{item.userScore}}
+          </view>
+        </view>
+    </view>
+</view>
+

@@ -1,0 +1,58 @@
+/*无数据  */
+
+@import  "/components/nodata-tips/nodata-tips";
+.time{
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    font-size: 26rpx;
+    color: #999999;
+}
+.title{
+    height: 97rpx;
+    line-height: 97rpx;
+    padding:0 20rpx;
+    background-color: #ffffff;
+    border-bottom: solid 1rpx #eeeeee;
+    font-size: 30rpx;
+    color: #222222;
+    text-indent: 20rpx;
+}
+.content{
+    padding: 30rpx;
+    background: #fff;
+    font-size: 26rpx;
+    color: #999999;
+}
+.money-area{
+    text-align: center;
+    margin: 30rpx 0;
+}
+.money{
+    font-size: 48rpx;
+}
+.item{
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 26rpx;
+}
+.watch-detail{
+    height: 81rpx;
+    line-height: 81rpx;
+    background-color: #ffffff;
+    border-top: solid 1px #eeeeee;
+    padding:0 20rpx;
+    text-align: center;
+    color: #999999;
+    font-size: 26rpx;
+}
+.watch-detail image{
+    width: 22rpx;
+    height: 20rpx;
+}
+.info{
+    font-size: 30rpx;
+    color: #222222;
+    width: 100%;
+    margin-bottom: 20rpx;
+}

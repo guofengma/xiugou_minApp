@@ -1,0 +1,29 @@
+<import src='/components/my-order-product-info/my-order-product-info.wxml'/>
+
+<import src='/components/cell-line/cell-line.wxml'/>
+
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<template is="my-order-product-info" data="{{...list.returnProduct}}"/>
+
+<view catchtap='logLineClicked'>
+  <template is="cell-line" data="{{name:'物流公司',placeholder:'请选择物流公司',content:company.name}}"/>
+</view>
+
+<view class='cell-line font-26 flexR-sb'>
+  物流单号
+  <view class='flexR-sb '>
+    <input type='text' value='{{code}}' placeholder='请填写单号' class='input' style=' text-align: right' placeholder-class='gary' bindinput='inputOnchange'></input>
+    <image src='/img/saomiao.png' mode='widthFix' class='log-img' bindtap='onCodeClickListener'></image>
+  </view>
+</view>
+
+<!-- <view class='cell-line font-26 flexR'>
+  联系电话
+  <input type='text' value='{{phone}}' placeholder='请填写手机号' class='input' placeholder-class='gary' bindinput='inputOnPhonechange'></input>
+</view> -->
+
+<view class='loginBtn {{isIPhoneX.className}} font-32 flexR' bindtap='fillInExpressInfoById'>提交</view>
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

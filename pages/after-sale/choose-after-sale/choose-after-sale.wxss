@@ -1,0 +1,38 @@
+@import "/components/my-order-product-info/my-order-product-info";
+
+
+.my-order-product-info{
+  background-color: #f7f7f7;
+}
+.cell-line{
+  height: 88rpx;
+  
+}
+.cell-line,.after-sale-type{
+  padding: 0 30rpx;
+}
+.after-sale-type{
+  height: 96rpx;
+}
+.group{
+  height: 158rpx;
+  border-top: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+  padding-left: 170rpx;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20rpx;
+  background: #fff url('https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/after-sale-2.png') no-repeat 40rpx center;
+  background-size: 100rpx 100rpx;
+}
+.group .font-30{
+  color: #666;
+}
+.group2{
+  background-image: url('https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/after-sale-1.png')
+}
+
+.group3{
+  background-image: url('https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/after-sale-3.png')
+}

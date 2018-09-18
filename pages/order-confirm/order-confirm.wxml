@@ -1,0 +1,87 @@
+<import src='/components/address-info/address-info.wxml' />
+
+<import src='/components/cart-product-info/cart-product-info.wxml' />
+
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<view class='orderComfirm sub-page'>
+  <!--订单地址类型  -->
+  <view class='choose-addressType flexR'>
+    <view data-index='1' 
+          class='flexR {{addressType==1? "active":""}}' 
+          style='width:{{!orderInfos.hasSelfLifting? "100%":"50%"}}'
+          bindtap='changeAddressType'>快递</view>
+    <view wx:if='{{orderInfos.hasSelfLifting}}' 
+          data-index='2' 
+          class='flexR addressType2 {{addressType==2? "active":""}}' 
+          bindtap='changeAddressType'
+          >自提</view>
+  </view>
+  <!--订单地址信息  -->
+  <view class='address-view' bindtap='addressClicked'>
+    <template is="address-info" data='{{addressType,...addressList[addressType]}}'/>
+    <view class='choose-address-icon flexC'>
+     <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
+    </view>
+  </view>
+  <!--商品信息  -->
+  <view class='order-prd-info'>
+    <view  wx:if='{{door==0}}' class='gift-view whiteBg'>
+      <text class='label-red-border'>礼包</text>
+      <text class='gray font-24'>{{orderInfos.orderProductList[0].name}}</text>
+    </view> 
+    <block wx:for="{{orderInfos.showProduct}}" wx:key='unique'>
+       <template is="cart-product-info" data='{{innerCount,imgSize:180,...item}}'/>
+    </block>
+  </view>
+  <!--购买支付信息  -->
+  <view  class='order-info-other'>
+    <view class='flexR-sb' bindtap='couponClicked'>
+      <view>优惠券</view>
+      <view class='gray'>
+        <!-- 不支持使用优惠券 -->
+        <text wx:if='{{door!=0}}'>{{coupon.nickname}}</text>
+        <text wx:else>不支持使用优惠劵</text>
+        <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
+      </view>
+    </view>
+    <view class='flexR-sb user_score' >
+      <!-- <view>
+        商品积分：{{orderInfos.totalScore}},用户可用积分：{{orderInfos.dealer.user_score}}
+        <text class='red'>抵 ¥ {{orderInfos.reducePrice}}</text>
+      </view> -->
+      <view class='reducePrice' >
+        <view wx:if='{{orderInfos.canUseScore}}'>
+          共{{orderInfos.dealer.userScore}}积分,可用积分: {{orderInfos.showTotalScore}}
+          <text class='red'>抵 ¥ {{orderInfos.reducePrice}}</text>
+        </view>
+        <view wx:else>{{orderInfos.showTipsName}}</view>
+      </view>
+      <image class='switch' 
+          src='{{ isUseIntegral? "/img/switch-2.png":"/img/switch-1.png"}}'  
+          mode='widthFix' bindtap='switchChange'  >
+      </image>
+      <!-- <view class='gray' wx:if='{{!orderInfos.canUseScore}}'>{{orderInfos.showTipsName}} </view> 
+      <image class='switch' wx:else 
+        src='{{ isUseIntegral? "/img/switch-2.png":"/img/switch-1.png"}}'  
+        mode='widthFix' bindtap='switchChange'  >
+      </image> -->
+    </view>
+    <view class='flexR-sb'>
+      <view>运费</view>
+      <view class='gray'>¥ {{addressType==1? orderInfos.totalFreightFee:0}}</view>
+    </view>
+    <view class='flexR-sb leaving-msg'>
+      <view>买家留言：</view>
+      <input placeholder='选填:填写内容已与卖家协商确认(140字内)' value='{{remark}}' bindinput='remarkChange'></input>
+    </view>
+  </view>
+  <!--支付bar  -->
+  <view class='flexR payBar {{isIPhoneX.className}}'>
+    <view>应付款 <text class='red'>：¥{{orderInfos.totalAmounts}}</text></view>
+    <view class='btn redBg flexR' bindtap='payBtnClicked'>提交订单</view>
+  </view>
+</view>
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

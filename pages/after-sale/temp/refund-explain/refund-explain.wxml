@@ -1,0 +1,17 @@
+<template name="refund-explain">
+  <view class='exchange-content whiteBg gray'>
+    <view>退款原因：{{datas.returnProduct.return_reason}}</view>
+    <view>退款金额：¥{{datas.returnProduct.return_amounts}}</view>
+    <view>退款说明：{{datas.returnProduct.remark}}</view>
+    <view>
+      <view>凭证图片</view>
+      <view class='userImg'>
+        <block wx:for='{{datas.imgList}}' wx:key='unique'>
+          <image src='{{item.smallImg}}'></image>
+        </block>
+      </view>
+    </view>
+    <view>申请时间：{{datas.returnProduct.applyTime}}</view>
+    <view>退款编号：{{datas.returnProduct.refund_no}}</view>
+  </view>
+</template>

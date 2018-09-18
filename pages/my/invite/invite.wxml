@@ -1,0 +1,30 @@
+<view>
+  <view class="bg">
+    <view class="area">
+        <view class="detail">
+            <image class="avature-img red" src="{{ userInfos.headImg || '/img/default-userImg.png'}}"></image>
+            <view class="info">
+              <view class="title1">您的好友({{userInfos.nickname}})</view>
+              <view class="title1">邀请您参加活动</view>
+              <view class="title2">免费领取福利</view>
+              <view class="title3">专属你的惊喜福利活动</view>
+              <view class="title3">数量有限赶快参与吧</view>
+            </view>
+            <image class="code" bindtap="press" src="{{imgUrl}}"></image>
+        </view>
+      </view>
+      <view class="footer">
+        <image src="/img/invite-footer.png"></image>
+        <view class="footer-area">
+            <view class="tip">长按识别二维码参与活动免费领取</view>
+            <view class="opr flexR-sb">
+              <!-- <view>分享</view> -->
+              <view>
+                <button class='share'  open-type="share" >分享</button>
+              </view>
+              <view catchtap='saveImgToPhotosAlbumTap'>保存图片</view>
+            </view>
+        </view>
+      </view>
+  </view>
+</view>

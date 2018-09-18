@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -24,13 +24,108 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 14,
+			"list": [
+				{
+					"id": 0,
+					"name": "注册",
+					"pathName": "pages/register/register",
+					"query": "code=111"
+				},
+				{
+					"id": -1,
+					"name": "产品详情页",
+					"pathName": "pages/product-detail/product-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "关于我们",
+					"pathName": "pages/my/aboutUs/aboutUs",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "设置",
+					"pathName": "pages/my/setting/setting",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的订单",
+					"pathName": "pages/my/my-order/my-order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的晋升",
+					"pathName": "pages/my/my-promotion/my-promotion",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "邀请者--选择",
+					"pathName": "pages/register/register-code/register-code",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "填写邀请码",
+					"pathName": "pages/register/write-invite-code/write-invite-code",
+					"query": ""
+				},
+				{
+					"id": 8,
+					"name": "申请售后",
+					"pathName": "pages/after-sale/apply-sale-after/apply-sale-after",
+					"query": "refundType=2"
+				},
+				{
+					"id": -1,
+					"name": "退货详情",
+					"pathName": "pages/after-sale/return-goods/return-goods",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的首页",
+					"pathName": "pages/my/my",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "详情页",
+					"pathName": "pages/product-detail/product-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的秀豆",
+					"pathName": "pages/my/my-account/integral/integral",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的礼包",
+					"pathName": "pages/product-detail/gift-bag-detail/gift-bag-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "全部分类",
+					"pathName": "pages/product-classification/product-classification",
+					"query": ""
+				}
+			]
 		}
 	}
 }

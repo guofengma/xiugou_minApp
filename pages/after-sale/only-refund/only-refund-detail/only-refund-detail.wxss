@@ -1,0 +1,8 @@
+@import "/pages/after-sale/after-sale";
+
+.suc-refound{
+  margin-bottom: 20rpx;
+}
+.after-sale-line{
+  border-bottom: 1rpx solid #f7f7f7;
+}

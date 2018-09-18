@@ -1,0 +1,21 @@
+<view class="search-field flexR">
+  <view class='search-bar flexR'>
+    <image src='/img/search.png' class='search-img' mode='widthFix'></image>
+    <view class='input-view'>
+      <input value='{{keyWord}}' 
+          disabled='{{disabled}}' 
+          placeholder='{{placeholder || "搜索商品"}}' 
+          bindfocus='bindfocus'
+          bindblur='bindblur'
+          bindinput='getKeyword'
+          confirm-type="search"
+          bindconfirm="searchKeyword"
+      >
+     </input>
+    </view>
+    <view class='search-img-close flexR' bindtap='deleteWords'>
+        <image src='/img/close-2.png'  mode='widthFix' wx:if='{{showClose}}'></image> 
+    </view>
+  </view>
+  <view class='search redBg' bindtap='searchKeyword'>搜索</view>
+</view>

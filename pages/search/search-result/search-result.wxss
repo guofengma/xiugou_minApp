@@ -1,0 +1,33 @@
+/*商品展示竖向  */
+@import "/components/product-info-column/product-info-column";
+
+/*商品展示横向  */
+@import "/components/product-info-row/product-info-row";
+
+/*搜索产品异常显示  */
+
+@import  "/components/result-tips/result-tips";
+
+.search-result-container{
+  display:flex;
+  width:100%;
+  height:100%;
+  flex-direction:column;
+}
+.search-result {
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  height:100%;
+  box-sizing: border-box;
+}
+
+.search-result>.product-row:last-child{
+  padding-bottom: 20rpx;
+}
+.content{
+  padding-top: 20rpx;
+}
+.product-row .view-prd-img{
+  background: #ddd;
+}

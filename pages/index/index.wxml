@@ -1,1 +1,19 @@
-<!--index.wxml-->
+<view class='sub-page'>
+  <!--广告位  -->
+  <view class='ad'>
+    <view class='search-bar boxSize flexR-sb'>
+      <view class='bar flexR-sb' catchtap='searchClicked'><image src='/img/search.png' mode='widthFix'></image></view>
+      <image src='/img/index-msg.png' mode='widthFix' catchtap='msgClicked'></image>
+    </view>
+    <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:{{imgheights[0]}}rpx;' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff'>
+    <block wx:for="{{imgUrls}}" wx:key='unique'>
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" catchtap='adListClicked' data-type='{{item.link_type}}' data-val='{{item.link_type_value}}' bindload="imageLoad" />
+      </swiper-item>
+    </block>
+    </swiper>
+  </view>
+
+  
+  
+</view>

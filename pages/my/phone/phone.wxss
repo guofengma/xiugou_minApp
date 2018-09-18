@@ -1,0 +1,98 @@
+/* pages/my/account.wxss */
+.phone{
+    font-size:26rpx;
+    color: #222222;
+    padding-top: 30rpx;
+}
+.tips{
+    height: 66rpx;
+    line-height: 36rpx;
+    padding:0 30rpx;
+    color: #c8c8c8;
+}
+.section{
+    display: flex;
+    height: 96rpx;
+    line-height: 96rpx;
+    background: #fff
+}
+.item{
+    width: 20%;
+    padding-left: 30rpx;
+}
+.inp{
+    height: 96rpx;
+    line-height: 96rpx;
+    background-color: #ffffff;
+    padding: 0 30rpx;
+}
+.lar-inp{
+    width: 80%;
+}
+.small-inp{
+    width: 50%
+}
+.code{
+  text-align: right;
+  width: 30%;
+  margin-right: 30rpx;
+  color: #ff979f;
+}
+.btn{
+    width: 80%;
+    margin-left: 10%;
+    height: 97rpx;
+    line-height: 97rpx;
+    text-align: center;
+    border-radius: 10rpx;
+    border: solid 1rpx #dddddd;
+    margin-top: 50rpx;
+}
+
+
+.tips-icon{
+    position: absolute;
+    top: -83rpx;
+    left:0;
+    width: 100%;
+}
+.tips-icon image{
+    width: 166rpx;
+    height: 166rpx;
+    background-color: #ffffff;
+    margin-left: 30rpx;
+    border-radius: 50%;
+}
+.tips-delete-order .tips-box{
+    position: relative;
+    padding: 150rpx 50rpx 50rpx 50rpx;
+    background: #fff;
+    border-radius: 10rpx;
+}
+.tips-delete-order .content{
+    font-size:30rpx;
+    text-align: center;
+}
+.btn-content{
+    margin-top:70rpx;
+}
+.content .big{
+    font-size: 30rpx;
+    color: #666;
+    margin-bottom: 24rpx
+}
+.tips-delete-order .btn-content>view{
+    width: 198rpx;
+    height: 69rpx;
+    line-height: 69rpx;
+    border-radius: 10rpx;
+    font-size: 28rpx;
+    margin-right: 10rpx;
+}
+.tips-delete-order .leftBtn{
+    background-color: #eee;
+    color: #999;
+}
+.tips-delete-order>view{
+    padding-top: 100rpx
+}

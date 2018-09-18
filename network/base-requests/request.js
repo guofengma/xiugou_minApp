@@ -10,7 +10,6 @@ import config from '../../config.js'
 export default class Request {
   constructor(bParam) {
     //request自己控制loading提示
-    
     this.manageLoadingPrompt = bParam.isShowLoading
 
     this.baseUrl = config.baseUrl
@@ -22,7 +21,7 @@ export default class Request {
     this.name = 'base request';
 
     //请求方法
-    this.requestMethod = 'POST';
+    this.requestMethod = bParam.requestMethod;
 
     //接收入参
     this.bodyParam = bParam;
@@ -87,7 +86,7 @@ export default class Request {
       dataType: 'json',
       method: this.requestMethod,
       header: {
-        'content-type': 'application/x-www-form-urlencoded',
+        'content-type': 'application/json',
         'Cookie': this.hasCookie()
       },
       success: function (res) {
@@ -102,7 +101,7 @@ export default class Request {
         //成功
         that.responseObject = res.data;
         //成功
-        if (res.data.code == '200') {
+        if (res.data.code == '10000') {
           let Datas = that.responseObject.data;
           let firstData = {};
           firstData = Datas
@@ -158,6 +157,7 @@ export default class Request {
 
   //拼接url
   url() {
+    console.log(this.baseUrl,this.bodyParam.url)
     this._url = this.baseUrl + this.bodyParam.url
     return this._url;
   }
@@ -167,6 +167,7 @@ export default class Request {
     delete this.bodyParam.url
     delete this.bodyParam.port
     delete this.bodyParam.isShowLoading
+    delete this.bodyParam.requestMethod
     this._body = this.bodyParam
     return this._body;
   }

@@ -1,0 +1,30 @@
+
+@import "/components/tips-cancel-order/tips-cancel-order";
+
+@import "/components/tips-delete-order/tips-delete-order";
+/*搜索产品异常显示  */
+@import  "/components/result-tips/result-tips";
+.searchOrder{
+  height: 80rpx;
+  overflow: hidden
+}
+.search-field{
+  padding-bottom: 0
+}
+.my-order{
+  padding-top: 170rpx;
+  padding-bottom: 40rpx;
+}
+.tab-area{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    font-size: 30rpx;
+    height: 96rpx;
+    line-height: 96rpx;
+    background: #fff;
+    padding-top: 2rpx;
+}
+.tab-area .active{
+  border-bottom:6rpx solid;
+}

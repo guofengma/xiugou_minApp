@@ -1,0 +1,103 @@
+<!-- <import src='/components/tips-cancel-order/tips-cancel-order.wxml' /> -->
+
+<import src='/components/tips-delete-order/tips-delete-order.wxml' />
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
+
+<import src='/components/search-bar/search-bar.wxml' />
+
+
+<view class="order-list" wx:for="{{list}}" wx:key="unique" wx:for-item="item">
+  <view class="header" bindtap="toOrderDetail" data-id="{{item.id}}" data-status="{{item.orderStatus}}">
+    <view class="left">
+      订单编号：{{item.orderNum}}
+    </view>
+    <view class="order-status red right">
+      <text wx:if="{{num==1}}">待支付</text>
+      <text wx:elif="{{num==2}}">待发货</text>
+      <text wx:elif="{{num==3}}">
+              <text wx:if="{{item.orderStatus==3}}">待收货</text>
+      <text wx:elif="{{item.orderStatus==4}}">待自提</text>
+      </text>
+      <text wx:elif="{{num==4}}">已完成</text>
+      <text wx:else>
+                <text wx:if="{{item.orderStatus==1}}">待支付</text>
+      <text wx:elif="{{item.orderStatus==2}}">待发货</text>
+      <text wx:elif="{{item.orderStatus==3}}">待收货</text>
+      <text wx:elif="{{item.orderStatus==4}}">待自提</text>
+      <text wx:elif="{{item.orderStatus==5||item.orderStatus==7}}">已完成</text>
+      <text wx:elif="{{item.orderStatus==6||item.orderStatus==10}}">已关闭</text>
+      <text wx:elif="{{item.orderStatus==8}}">已取消</text>
+      </text>
+    </view>
+  </view>
+  <view class="clearfix"></view>
+  <view class="body">
+    <view class="item-area" bindtap="toOrderDetail" data-id="{{item.id}}" data-status="{{item.orderStatus}}">
+      <view class="item" wx:for="{{item.orderProduct}}" wx:key="item" wx:for-item="oItem">
+        <image src="{{oItem.imgUrl}}" alt=""></image>
+        <view class="goods-inf">
+          <view class="ellipsis-2">
+            <text class='label-red-border' wx:if='{{oItem.orderType==98}}'>礼包</text> {{oItem.productName}}
+          </view>
+          <view class="color-classify">{{oItem.spec}} </view>
+        </view>
+        <view>
+          <view class="price">￥{{oItem.price}}</view>
+          <!--<view class="org-price">￥{{item.price}}</view>-->
+          <view class="num">x{{oItem.num}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="amount">
+      <text>共{{item.orderProduct.length}}件商品 合计：</text>
+      <text class="red font-30">￥{{item.amounts}}</text>
+      <text class="freight">(含运费￥{{item.freightPrice}})</text>
+    </view>
+    <view class="time">
+  <text wx:if="{{num==4 ||(num==0&&item.orderStatus==7)}}">完成时间：{{item.finishTime}}</text>
+      <text wx:elif="{{num==3&&item.orderStatus==3 ||(num==0&&item.orderStatus==3)}}">发货时间：{{item.sendTime}}</text>
+      <text wx:else>创建时间：{{item.createTime}}</text>
+    </view>
+    <view wx:if="{{num!=2&&item.orderStatus!=2&&item.orderStatus!=9}}">
+      <view class="footer">
+        <!-- 倒计时 后面取消了  -->
+        <view class="left red" wx:if="{{num==1||(num==0&&item.orderStatus==1)}}">
+          {{item.countDownTime}}
+        </view>
+        <view class="right" wx:if="{{num==4||(num==0&&(item.orderStatus==6 || item.orderStatus==7||item.orderStatus==5 ||item.orderStatus==8 ||item.orderStatus==10))}}">
+          <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.id}}" data-orderstatus="{{item.orderStatus}}">删除订单</view>
+          <view class="pay-btn red" bindtap='continueBuy' data-id="{{item.id}}" wx:if='{{item.orderProduct[0].orderType!=98}}'>再次购买</view>
+        </view>
+        <view class="right" wx:elif="{{num==1||(num==0&&item.orderStatus==1)}}">
+          <view class="cancel-btn" bindtap="cancelItem" data-ordernum="{{item.orderNum}}">取消订单</view>
+          <view class="pay-btn red" bindtap='continuePay' data-item="{{item}}">
+            {{item.outTrandNo? "继续支付":"去支付"}}
+          </view>
+        </view>
+        <view class="right" wx:elif="{{num==3||(num==0&&item.orderStatus==3)}}">
+          <view class="cancel-btn" bindtap="logistics" data-id="{{item.id}}" wx:if="{{item.orderStatus!=4}}">查看物流</view>
+          <view class="pay-btn red" bindtap="confirmReceipt" data-id="{{item.id}}">确认收货</view>
+        </view>
+        <view class="right" wx:elif="{{num==0&&item.orderStatus==8&&item.orderStatus==10}}">
+          <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.id}}" data-orderstatus="{{item.orderStatus}}">删除订单</view>
+          <view class="pay-btn red" bindtap='continueBuy' data-id="{{item.id}}" wx:if='{{item.orderProduct[0].orderType!=98}}'>再次购买</view>
+        </view>
+        <view class="right" wx:elif="{{num==0&&item.orderStatus==4}}">
+          <view class="pay-btn red" bindtap="confirmReceipt" data-id="{{item.id}}">确认收货</view>
+        </view>
+      </view>
+      <view class="clearfix"></view>
+    </view>
+  </view>
+</view>
+<!--搜索结果异常显示 tipVal  -->
+<template is="result-tips" wx-if='{{tipVal}}' data="{{tipVal}}" />
+
+<!--提示框  -->
+<!-- <template is="tips-cancel-order" data='{{isCancel,reason,content}}'/> -->
+
+<tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{orderNum}}' door='{{1}}' bind:cancelOrder='cancelOrder' />
+
+<template is="tips-delete-order" data='{{isDelete}}' />

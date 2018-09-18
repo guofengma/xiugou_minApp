@@ -1,0 +1,120 @@
+@import "/css/app";
+.isIphoneX{
+  margin-bottom:34rpx
+}
+.prd-info-type{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.product-specification{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  justify-content: flex-end;
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  padding-top:35rpx;
+  position: relative;
+}
+.scroll-y{
+  box-sizing: border-box;
+  max-height: 680rpx;
+  min-height: 200rpx;
+}
+.prd-type-info,.counter{
+  padding: 0 40rpx;
+}
+.header{
+  padding-left: 280rpx;
+  position: relative;
+  height: 150rpx;
+}
+.img-view{
+  width: 222rpx;
+  height: 222rpx;
+  box-sizing:border-box;
+  padding: 4rpx;
+  border-radius: 6rpx;
+  background: #fff;
+  position: absolute;
+  left:22rpx;
+  top:-86rpx;
+  border:1rpx solid #eee;
+}
+.header-content>view{
+  margin-bottom: 16rpx;
+}
+.cancel{
+  position: absolute;
+  right: 30rpx;
+  top: -8rpx;
+}
+.img-view image{
+  width: 214rpx;
+  height: 214rpx;
+}
+.prd-type-info{
+  font-size: 26rpx;
+  border-bottom: 1rpx solid #eee;
+  padding-bottom: 10rpx;
+  padding-top: 25rpx
+}
+.prd-info-type image{
+  width: 16rpx;
+  margin-left: 58rpx;
+  position: absolute;
+  right: 30rpx;
+}
+.type-name{
+  margin-bottom: 60rpx;
+}
+.prd-type-info,.counter{
+  color: #666;
+}
+.price{
+  font-size: 36rpx;
+}
+.type-list>view{
+  display: inline-block;
+  padding: 20rpx 30rpx;
+  color: #222222;
+  background-color: #eeeeee;
+  border-radius: 6rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+.counter{
+  height: 180rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+.btn{
+  height: 97rpx;
+  line-height: 97rpx;
+	border: 1px  solid #eeeeee;
+  text-align: center;
+  font-size: 32rpx;
+}
+
+.tips{
+  width: 400rpx;
+}
+.type-list .no-store{
+  color: #b4b4b4;
+  background-color: #eeeeee;
+}
+.type-list .block{
+  color:#222222;
+  background-color:#eeeeee;
+}
+.type-list .active{
+  background-color: #D51243 !important;
+  color: #fff;
+}
+.header.active{
+  height:70rpx;
+  border-bottom:1rpx solid #eee;
+}
