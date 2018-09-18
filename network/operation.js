@@ -342,7 +342,7 @@ export default class Operation {
 
         // 邀请码是否过期
 
-        this.sweepCode ='/user/invite/sweepCode'
+        this.sweepCode ='/user/invite/checkValid'
 
         /*************** 短信 ******************************/
 
@@ -378,15 +378,15 @@ export default class Operation {
 
         // 解决问题是否有用
 
-      this.updateHelpQuestion = '/help/helpQuestion/updateHelpQuestionToClick'
+        this.updateHelpQuestion = '/help/helpQuestion/updateHelpQuestionToClick'
 
         // 根据ID查询问题详情
 
-      this.findHelpQuestionById = '/help/helpQuestion/findHelpQuestionById'
+        this.findHelpQuestionById = '/help/helpQuestion/findHelpQuestionById'
 
         // 问题列表 可传参 也可以不传
 
-      this.queryHelpQuestionList = '/help/helpQuestion/queryHelpQuestionList'
+        this.queryHelpQuestionList = '/help/helpQuestion/queryHelpQuestionList'
 
         // 添加反馈
 

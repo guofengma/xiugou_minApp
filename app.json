@@ -52,7 +52,8 @@
     "pages/register/write-invite-code/write-invite-code",
     "pages/address/select-express-address/select-express-address",
     "pages/my/nickname/nickname",
-    "pages/my/invite/invite"
+    "pages/my/invite/invite",
+    "pages/download-app/oldUser-downLoad/oldUser-downLoad"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

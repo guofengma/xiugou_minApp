@@ -23,7 +23,7 @@ Page({
     },
     //兑换代币
     change(){
-      Tool.navigateTo('../../../download-app/download-app')
+      Tool.navigateTo('/pages/download-app/oldUser-downLoad/oldUser-downLoad')
     },
     // 提现说明
     explain(){

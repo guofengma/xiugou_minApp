@@ -87,12 +87,12 @@ Page({
           item.outTime = Tool.timeStringForDateString(Tool.formatTime(item.expireTime),"YYYY.MM.DD");
           item.start_time = Tool.timeStringForDateString(Tool.formatTime(item.startTime), "YYYY.MM.DD");
           let length = 0,key=""
-          length += (item.cat1.length>0? 0:1)
-          length += (item.cat2.length > 0 ? 0 : 1)
-          length += (item.cat3.length> 0 ? 0 : 1)
-          key = (item.cat1.length > 0 ? 'cat1' : key)
-          key = (item.cat2.length > 0 ? 'cat2' : key)
-          key = (item.cat3.length > 0 ? 'cat3' : key)
+          length += (item.cat1? 0:1)
+          length += (item.cat2? 0 : 1)
+          length += (item.cat3? 0 : 1)
+          key = (item.cat1? 'cat1' : key)
+          key = (item.cat2? 'cat2' : key)
+          key = (item.cat3? 'cat3' : key)
           item.length =length
           item.key = key
           item.left = leftName;
@@ -176,15 +176,12 @@ Page({
     },
     //优惠券详情
     toDetail(e){
-
-      // let id=e.currentTarget.dataset.id
       let index = e.currentTarget.dataset.index
       let key = e.currentTarget.dataset.key
       Storage.setCoupon(this.data.lists[key][index])
       Tool.navigateTo('../coupon-detail/coupon-detail')
       if(this.data.door==1&&key==0){
-        console.log(11111)
-        // Event.emit("updateCoupon")
+        Event.emit("updateCoupon")
         Tool.navigationPop()
       } else{
         Tool.navigateTo('../coupon-detail/coupon-detail')
@@ -209,8 +206,8 @@ Page({
     },
       onLoad: function (options) {
         this.setData({
-          door: options.door || 1,
-          productIds: options.productIds || [1],
+          door: options.door || '',
+          productIds: options.productIds || '',
         })
         if(this.data.door==1){
           this.availableDiscountCouponForProduct()

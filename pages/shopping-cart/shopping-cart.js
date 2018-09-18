@@ -154,7 +154,7 @@ Page({
         item.showImg = item.imgUrl
         item.showPrice = item.price
         item.showName = item.productName
-        item.showType = item.specValues.join('—')
+        item.showType = item.specValues? item.specValues.join('—'):''
         item.showCount = item.amount || 1  // 商品数量
         item.isSelect = false  //是否选择 
         if (this.data.items.length > 0) {

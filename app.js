@@ -81,6 +81,9 @@ App({
         Tool.loginOpt(req)
         let datas = req.responseObject.data
         Storage.setWxOpenid(datas.openid)
+        setTimeout(function(){
+          Event.emit('getOpenid')
+        }, 500)
         if (!datas.id){
           Tool.navigateTo('/pages/login-wx/login-wx')
         }

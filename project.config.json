@@ -33,13 +33,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 12,
+			"current": 0,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "注册",
 					"pathName": "pages/register/register",
-					"query": ""
+					"query": "code=111"
 				},
 				{
 					"id": -1,
@@ -110,7 +110,8 @@
 				{
 					"id": -1,
 					"name": "我的秀豆",
-					"pathName": "pages/my/my-account/integral/integral"
+					"pathName": "pages/my/my-account/integral/integral",
+					"query": ""
 				}
 			]
 		}

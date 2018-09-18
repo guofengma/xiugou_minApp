@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation } = global;
+let { Tool, RequestFactory, Storage, Operation,Event } = global;
 
 Page({
   data: {
@@ -23,40 +23,46 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      id: options.id || '',
+      codeId: options.inviteCode || '',
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
     })
-    if (options.id){
-      //this.sweepCode(options.id)
-    }
+    // if (options.code){
+    //   this.sweepCode(options.id)
+    // }
+    Event.on('getOpenid', this.getOpenid,this)
   },
   onShow: function () {
     
   },
+  getOpenid(){
+    // console.log(11111)
+    if (this.data.codeId) {
+      this.sweepCode()
+    }
+  },
   sweepCode(id){ // 判断邀请码是否过期等
+    if (!this.data.codeId){
+      return
+    }
     let params = {
-      id: id,
+      code: this.data.codeId,
+      identity: Storage.getWxOpenid(),
       reqName: '邀请码是否过期',
       url: Operation.sweepCode
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.sweepCode(params);
     r.successBlock = (req) => {
       
     }
     r.failBlock = (req) => {
       let msg = req.responseObject.msg
-      if (req.responseObject.code == 600) {
-        this.setData({
-          invalidTips: {
-            invalid: true,
-            tips: msg
-          }
-        })
-      } else {
-        Tool.showAlert(msg)
-      }
+      this.setData({
+        invalidTips: {
+          invalid: true,
+          tips: msg
+        }
+      })
     }
     r.addToQueue();
   },
@@ -97,7 +103,6 @@ Page({
       hasCookie: false
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.findMemberByPhone(params);
     r.successBlock = (req) => {
       let callBack = () => {
         Tool.switchTab('/pages/index/index')
@@ -227,4 +232,7 @@ Page({
       isAgree: !this.data.isAgree
     })
   },
+  onUnload: function () {
+    Event.off('getOpenid', this.sweepCode)
+  }
 })
