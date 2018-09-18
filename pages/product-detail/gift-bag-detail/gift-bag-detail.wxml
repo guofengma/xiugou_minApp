@@ -99,7 +99,7 @@
     </view>
   
     <view class="bottom-bar gift-btn-view flexR {{isIPhoneX.className}}">
-  <view class='buy-btn gift-btn {{dismiss? "dismiss":""}}' bindtap='btnClicked' data-key='1'>
+      <view class='buy-btn flexR redBg {{dismiss? "dismiss":""}}' bindtap='btnClicked' data-key='1'>
         立即购买
       </view>
     </view>

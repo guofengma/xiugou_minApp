@@ -1,12 +1,46 @@
 <!--pages/my/account.wxml-->
-<view class="my sub-page">
-  <view class='content-top'>
-   <view class='my-avatar'>
-       <image src='{{userInfo.avatarUrl}}' class='avatar-img'></image>
-    <view>
-          <view class='my-info-item'>
-           <text class='my-name'> 你很哇瑟 </text>
-           <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix' class='my-info-arrow'></image>
+<view class="order sub-page">
+    <view class="bg-area" bindtap="personalData">
+        <view class="img-area">
+            <image class="avatar-img" src="{{userInfos.headImg||'/img/default-userImg.png'}}" alt=""></image>
+        </view>
+        <view class="info">
+            <view>
+                <text>{{userInfos.nickname}}</text>
+                <image class="smrz-img" wx:if='{{userInfos.realnameStatus == 1}}' src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/smyh_03@2x.png" alt=""></image>
+            </view>
+            <view>{{userInfos.levelName || ''}}</view>
+        </view>
+        <view>
+            <image class="jt-img" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/jt_06@2x.png" alt=""></image>
+        </view>
+    </view>
+    <view class="my-order">
+        <view class="title" bindtap="itemClicked" data-query="0" data-page="3">
+            <view><text class='flexR'>我的订单</text></view>
+            <view>
+                <text>全部订单</text>
+                <image class="jt-img" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png" alt=""></image>
+            </view>
+        </view>
+        <view class="clearfix"></view>
+        <view class="body">
+            <view bindtap="itemClicked" data-query="1" data-page="3">
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/dfk_03@2x.png" alt=""></image>
+                <view>待付款</view>
+            </view>
+            <view bindtap="itemClicked" data-query="2" data-page="3">
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/wfh_03-02@2x.png" alt=""></image>
+                <view>待发货</view>
+            </view>
+            <view bindtap="itemClicked" data-query="3" data-page="3">
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/yfh_03-03@2x.png" alt=""></image>
+                <view>待收货</view>
+            </view>
+            <view bindtap="itemClicked" data-page="4">
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/ywc_03-05@2x.png" alt=""></image>
+                <view>售后/退款</view>
+            </view>
         </view>
         
           <view class='my-rank'>
@@ -38,52 +72,36 @@
          <view>待提取账户</view>
        </view>
     </view>
-  </view>
-  <!-- 我的订单 -->
-  <view class='my-order'>
-     <view class='my-order-item'>
-       <view>我的订单</view>
-       <view>
-          <text>查看全部</text>
-          <!-- 右边的见头 -->
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix' class='my-info-arrow'></image>
-       </view>
-     </view>
-     <!-- 订单列表 -->
-     <view class='my-order-list'>
-       <view class='list-cont my-wait-pay'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForsale.png'  mode='widthFix' class='forsale'></image>
-          <view>待付款</view>
-          <view class='reddot'>1</view>
-       </view>
-       <!-- 代发货 -->
-        <view class='list-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForsend.png'  mode='widthFix' class='forsale'></image>
-          <view>待发货</view>
-       </view>
-       <!-- 待收货 -->
-        <view class='list-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForobtain.png'  mode='widthFix' class='forsale'></image>
-          <view>待收获</view>
-       </view>
-       <!-- 售后 -->
-        <view class='list-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconAftersale.png'  mode='widthFix' class='forsale'></image>
-          <view>售后/付款</view>
-       </view>
-     </view>
-  </view>
-  <!-- 常用工具 -->
+    <view class="wrap">
+      <view class="item line" bindtap="itemClicked" data-page="0" data-query='{{userInfos.blockedBalance}}'>
+            <view>
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/wdzh_18@2x.png" alt=""></image>
+                <text>待提现账户{{userInfos.blockedBalance}}</text>
+            </view>
+            <view>
+                <!-- <text>更多</text> -->
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+            </view>
+        </view>
+        <view class="item line" bindtap="itemClicked" data-page="1" data-query='{{userInfos.userScore}}'>
+            <view>
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/coupon.png" alt=""></image>
+                <text>秀豆账户{{userInfos.userScore}}</text>
+            </view>
+            <view>
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+            </view>
+        </view>
 
-  <view class='my-tools'>
-     <view class='my-tools-item'>
-       常用工具
-     </view>
-     <!-- 工具列表 -->
-     <view class='my-tools-list'>
-        <view class='my-tools-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconInvite.png' mode='widthFix' class='my-invite'></image>
-          <view>邀请好友</view>
+        <view class="item line" bindtap="itemClicked" data-page="2" data-query='{{userInfos.availableBalance}}'>
+            <view>
+                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/wdzh_18@2x.png" alt=""></image>
+                <text>余额账户{{userInfos.availableBalance}}</text>
+            </view>
+            <view>
+                <!-- <text>更多</text> -->
+                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+            </view>
         </view>
         <view class='my-tools-cont'>
           <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconCalendar.png' mode='widthFix' class='my-calendar'></image>

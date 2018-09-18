@@ -90,6 +90,7 @@ Page({
     let params = {
       requestMethod: 'GET',
       keyword: this.data.keyWord,
+      isShowLoading: false,
       reqName: '动态获得搜索词',
       url: Operation.getKeywords,
     }

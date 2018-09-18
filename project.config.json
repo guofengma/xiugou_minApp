@@ -33,13 +33,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 11,
+			"current": 14,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "注册",
 					"pathName": "pages/register/register",
-					"query": ""
+					"query": "code=111"
 				},
 				{
 					"id": -1,
@@ -104,7 +104,26 @@
 				{
 					"id": -1,
 					"name": "详情页",
-					"pathName": "pages/product-detail/product-detail"
+					"pathName": "pages/product-detail/product-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的秀豆",
+					"pathName": "pages/my/my-account/integral/integral",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的礼包",
+					"pathName": "pages/product-detail/gift-bag-detail/gift-bag-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "全部分类",
+					"pathName": "pages/product-classification/product-classification",
+					"query": ""
 				}
 			]
 		}

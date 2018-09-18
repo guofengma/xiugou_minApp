@@ -40,6 +40,9 @@
   width: 328rpx;
   margin: 100rpx auto 10rpx auto;
 }
+.invalid-view image{
+  width: 320rpx;
+}
 .rule{
   margin-top: 20rpx;
   text-align: center;

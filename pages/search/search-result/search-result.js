@@ -14,7 +14,6 @@ Page({
     isInit: false,
   },
   onLoad: function (options) {
-    
     let params = {
       pageSize: this.data.pageSize,
       page: this.data.currentPage,
@@ -83,11 +82,6 @@ Page({
     this.setData({
       selectType: e.detail
     })
-    // 加入购物车
-    if (!this.data.didLogin) {
-      // this.setStoragePrd(params, this.data.selectType.index)
-      return
-    }
     let params = {
       productId: this.data.selectType.productId,
       amount: this.data.selectType.buyCount,
@@ -95,6 +89,11 @@ Page({
       timestamp: new Date().getTime(),
       reqName: '加入购物车',
       url: Operation.addToShoppingCart
+    }
+    // 加入购物车
+    if (!this.data.didLogin) {
+      this.setStoragePrd(params, this.data.selectType.index)
+      return
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
@@ -104,6 +103,31 @@ Page({
     };
     Tool.showErrMsg(r)
     r.addToQueue();
+  },
+  setStoragePrd(params, index) {
+    let list = Storage.getShoppingCart()
+    if (!list) {
+      list = []
+    } else {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].priceId === params.priceId) {
+          list[i].showCount += this.data.selectType.buyCount
+          this.updateStorageShoppingCart(list)
+          return
+        }
+      }
+    }
+    params.productId = this.data.selectType.productId
+    params.priceId = this.data.selectType.id
+    params.showCount = this.data.selectType.buyCount
+    list.push(params)
+    this.updateStorageShoppingCart(list)
+  },
+  updateStorageShoppingCart(list) {
+    Storage.setShoppingCart(list)
+    this.getShoppingCartList()
+    Tool.showSuccessToast('添加成功')
+    Event.emit('updateStorageShoppingCart')
   },
   addShoppingCartClicked(e) {
     //加入购物车
@@ -115,6 +139,7 @@ Page({
   findProductStockBySpec(id, imgurl, price) {
     let params = {
       id:id,
+      isShowLoading: false,
       requestMethod: 'GET',
       url: Operation.findProductStockBySpec,
       reqName: "规格搜索"
@@ -200,5 +225,8 @@ Page({
       productInfo: []
     }) 
     this.requestQueryProductList(params)
-  }
+  },
+  onUnload: function () {
+    
+  },
 })

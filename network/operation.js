@@ -6,7 +6,7 @@ let __instance = (function () {
     let instance;
     return (newInstance) => {
         if (newInstance) instance = newInstance;
-        return instance;
+        return instance;Ï
     }
 }());
 
@@ -138,29 +138,19 @@ export default class Operation {
         // this.queryStoreHouseList = '/user/userAddress/queryStoreHouseList'
 
       /********************** 我的账户 *********************/
-      
-        // 分页查询现金账户收支明细
 
-        this.queryDetailBalanceListAPP  ='/user/detailBalance/queryDetailBalanceListAPP';
+        // 我的晋升
 
-        // 分页查询代币账户收支明细
+        this.getUserLevelInfo = '/user/getUserLevelInfo'
 
-        this.queryDetailTokenCoinListAPP  ='/user/detailTokenCoin/queryDetailTokenCoinListAPP';
+        // 我的秀豆明细
 
-        // 分页查询积分账户收支明细
+        this.getUserrScore = '/user/userScore/query'
 
-        this.queryDetailUserScorePageListAPP  ='/user/detailUserScore/queryDetailUserScorePageListAPP';
+        // 我的余额
 
-        // 查询经销商账户信息
+        this.getuserBalance= '/user/userBalance/query'
 
-        this.findDealerAccountByIdAPP  ='/user/dealer/findDealerAccountByIdAPP';
-
-        // 分页查询待提现账户
-
-        this.settlementTotalByDealerId = '/user/settlementTotal/querySettlementTotalByDealerId';
-        // 查询待提现账户
-
-        this.findSettlementTotalByBalance = '/user/settlementTotal/findSettlementTotalByBalance';
 
         /********************** 我的订单 *********************/
 
@@ -306,7 +296,7 @@ export default class Operation {
 
         //退出登录
 
-        this.exitLogin ='/user/untiedWechat';
+        this.exitLogin ='/user/userLogin/signOut';
 
         // 获取用户信息
 
@@ -352,7 +342,7 @@ export default class Operation {
 
         // 邀请码是否过期
 
-        this.sweepCode ='/user/invite/sweepCode'
+        this.sweepCode ='/user/invite/checkValid'
 
         /*************** 短信 ******************************/
 
@@ -388,15 +378,15 @@ export default class Operation {
 
         // 解决问题是否有用
 
-      this.updateHelpQuestion = '/help/helpQuestion/updateHelpQuestionToClick'
+        this.updateHelpQuestion = '/help/helpQuestion/updateHelpQuestionToClick'
 
         // 根据ID查询问题详情
 
-      this.findHelpQuestionById = '/help/helpQuestion/findHelpQuestionById'
+        this.findHelpQuestionById = '/help/helpQuestion/findHelpQuestionById'
 
         // 问题列表 可传参 也可以不传
 
-      this.queryHelpQuestionList = '/help/helpQuestion/queryHelpQuestionList'
+        this.queryHelpQuestionList = '/help/helpQuestion/queryHelpQuestionList'
 
         // 添加反馈
 

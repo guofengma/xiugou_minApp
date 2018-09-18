@@ -20,6 +20,7 @@ const config = {
   imgSizeParams:{
     m_fixed:'?x-oss-process=image/resize,m_fixed,h_100,w_100', // 正方形
     m_fill:'?x-oss-process=image/resize,m_fill,h_100,w_100', // 固定宽度 自裁剪
-  }
+  },
+  imgBaseUrl:"https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/"
 }
 export default config

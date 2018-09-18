@@ -28,25 +28,21 @@ Page({
     outSure(){
       let params = {
         reqName: '退出登录',
+        requestMethod: 'GET',
         url: Operation.exitLogin
       };
       let r = RequestFactory.wxRequest(params);
-      // let r = global.RequestFactory.exitLogin(params);
       r.successBlock = (req) => {
           let data=req.responseObject;
-          if(data.code==200){
-            Tool.showSuccessToast(data.data);
-            app.globalData.flag=true;
-            // Storage.setUserCookie('out')
-            Storage.setUserCookie(null)
-            Storage.setUserAccountInfo(null)
-            Event.emit('didLogin');
-            this.cancel()
-            wx.reLaunch({
-                url:'../../index/index'
-            })
-          }
-
+          Tool.showSuccessToast(data.data);
+          app.globalData.flag=true;
+          Storage.setUserCookie(null)
+          Storage.setUserAccountInfo(null)
+          Event.emit('didLogin');
+          this.cancel()
+          wx.reLaunch({
+            url:'../../index/index'
+          })
       };
       r.addToQueue();
     },

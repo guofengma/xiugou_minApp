@@ -1,31 +1,37 @@
 <view>
     <view class='cash'>
-        <view class="item">
-            <view class="title">
-                待提现（元）
+      <view class="item boxSize flexR-sb">
+        <view >
+            <view class="font-26">
+              待提现（元）
             </view>
             <view class="num">
-                {{account}}
+              {{account}}
             </view>
-            <view class="btn" bindtap="change">兑换代币</view>
+          </view>
+          <view>
+            <view class="btn flexR" bindtap="change">兑换代币</view>
             <view class="explain" bindtap="explain">
-                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon01_07@2x.png"></image>
-                <text>提现说明</text>
+                <image src="{{imgBaseUrl+'icon01_07@2x.png'}}"></image>
+                <text class='font-22'>提现说明</text>
             </view>
+          </view>
         </view>
     </view>
     <view class="list-area">
-        <view class="list-item" wx:for="{{list}}" wx:key='unique'>
-          <image src="{{iconArr[item.iconIndex].icon}}"></image>
-          <view class="detail">
-              <view class="style">
-                {{iconArr[item.iconIndex].name}}
-                <text class='red' wx:if="{{item.showName}}">({{item.showName}})</text>
-              </view>
-              <view class="time">{{item.createTime}}</view>
-              <view class="number" bindtap="limit" wx:if='{{item.status==2}}'>
-                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon001_03@2x.png"></image>备注：等级受限？
-              </view>
+        <view class="list-item flexR-sb" wx:for="{{list}}" wx:key='unique'>
+          <view class='flexR-sb detail-content'>
+            <image src="{{imgBaseUrl+types[item.useType].icon}}"></image>
+            <view class="detail">
+                <view class="style">
+                  {{types[item.useType].name}}
+                  <text class='red' wx:if="{{item.showName}}">({{item.showName}})</text>
+                </view>
+                <view class="time">{{item.createTime}}</view>
+                <view class="number" bindtap="limit" wx:if='{{item.status==2}}'>
+                  <image src="{{imgBaseUrl+'icon001_03@2x.png'}}"></image>备注：等级受限？
+                </view>
+            </view>
           </view>
           <view class="money fr {{item.add?'red':''}}">
              {{item.add? "+":"-" }} {{item.balance}}

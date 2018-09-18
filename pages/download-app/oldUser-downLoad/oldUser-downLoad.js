@@ -1,11 +1,11 @@
-let { Storage } = global;
+let { Config } = global
 Page({
   data: {
-    
+
   },
   onLoad: function (options) {
     this.setData({
-      detail: Storage.getCoupon() || ""
+      imgUrl: Config.imgBaseUrl
     })
   },
 })

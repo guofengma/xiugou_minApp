@@ -1,0 +1,15 @@
+<view class='flexC sub-page product-classification'>  
+  <view catchtap='searchOrder'  class='searchOrder' >
+    <search-bar  placeholder='搜索订单' disabled='{{true}}'/>
+  </view>
+  <view class='flexR-sb bottomBar'>
+    <scroll-view scroll-y  class='leftBar'>
+      <block wx:for='{{leftBarLists}}' wx:key='unique'>
+        <view data-id='{{item.id}}' class='flexR ellipsis leftItem'>{{item.name}}</view>
+      </block>
+    </scroll-view>
+    <view class='rightBar'>
+      
+    </view>
+  </view>
+</view>

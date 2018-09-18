@@ -16,7 +16,13 @@
 .first-tips{
   margin-bottom: 28rpx;
 }
+.buy-btn{
+  width:  100% !important;
+}
+
 .dismiss{
   background: #ddd;
 }
-
+.gift-btn-view{
+  justify-content: center;
+}
