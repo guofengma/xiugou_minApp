@@ -6,16 +6,30 @@
   width: 100%;
 }
 .leftBar{
-  height: calc(100% - 200rpx);
+  height: 100%;
   width: 180rpx;
 }
 .bottomBar{
   width: 100%;
+  height: calc(100% - 94rpx);
 }
 .leftItem{
   width: 180rpx;
   height: 90rpx;
+  background: #eee;
+  border-left: 4rpx solid transparent;
+}
+.leftItem.active{
+  background: #fff;
+  border-left:4rpx solid #D51243
 }
 .rightBar{
-  width: calc(100% - 180rpx)
+  width: calc(100% - 180rpx);
+  height: 100%;
+}
+/* 不显示滚动条 */
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
 }
