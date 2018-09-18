@@ -13,7 +13,7 @@ Page({
       totalPageArr:[], //保存页数 
       params:{
         page:1,
-        pageSize:10
+        pageSize:5
       },
     },
     // 上拉加载更多

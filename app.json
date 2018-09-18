@@ -53,7 +53,8 @@
     "pages/address/select-express-address/select-express-address",
     "pages/my/nickname/nickname",
     "pages/my/invite/invite",
-    "pages/download-app/oldUser-downLoad/oldUser-downLoad"
+    "pages/download-app/oldUser-downLoad/oldUser-downLoad",
+    "pages/product-classification/product-classification"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 14,
 			"list": [
 				{
 					"id": 0,
@@ -111,6 +111,18 @@
 					"id": -1,
 					"name": "我的秀豆",
 					"pathName": "pages/my/my-account/integral/integral",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的礼包",
+					"pathName": "pages/product-detail/gift-bag-detail/gift-bag-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "全部分类",
+					"pathName": "pages/product-classification/product-classification",
 					"query": ""
 				}
 			]

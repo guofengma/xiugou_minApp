@@ -170,15 +170,7 @@
 .buy-btn{
   border-right: 0;
 }
-.gift-btn{
-  width: 440rpx;
-  border-radius: 40rpx;
-  background-image: linear-gradient(90deg, #D51243 0%, #FF6C00 50%, #D51243 100%), 
-	linear-gradient(#ffffff, #ffffff);
-}
-.gift-btn-view{
-  justify-content: center;
-}
+
 /*置顶  */
 .goTop{
   position: fixed;
