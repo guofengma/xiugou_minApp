@@ -224,9 +224,10 @@ Page({
       }
     })
   },
-  toLogin(){
-    Tool.navigateTo('/pages/login/login')
+  toPage(){
+    Tool.navigateTo('/pages/register/agreement/agreement')
   },
+
   agreeCilcked() {
     this.setData({
       isAgree: !this.data.isAgree

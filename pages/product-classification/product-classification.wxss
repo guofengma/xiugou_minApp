@@ -9,6 +9,9 @@
   height: 100%;
   width: 180rpx;
 }
+.leftBar{
+  background: #eee;
+}
 .bottomBar{
   width: 100%;
   height: calc(100% - 94rpx);
@@ -16,7 +19,6 @@
 .leftItem{
   width: 180rpx;
   height: 90rpx;
-  background: #eee;
   border-left: 4rpx solid transparent;
 }
 .leftItem.active{

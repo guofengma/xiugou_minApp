@@ -28,10 +28,10 @@
 
   <view class='rule'>
       <image src='{{isAgree? "/img/select-icon.png":"/img/no-select.png"}}' 
-             mode="widthFix" 
-             bindtap='agreeCilcked'>
+            mode="widthFix" 
+            bindtap='agreeCilcked'>
       </image>
-      <text class='gray font-22'>阅读并接受<text class='red'>《用户协议》</text></text>
+      <text class='gray font-22' catchtap='toPage'>阅读并接受<text class='red'>《用户协议》</text></text>
     </view>
 </form>
 

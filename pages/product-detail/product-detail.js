@@ -256,11 +256,6 @@ Page({
       imageUrl: imgUrl
     }
   },
-  // productTypeListClicked(e){
-  //   this.setData({
-  //     productTypeList: e.detail.productTypeList
-  //   })
-  // },
   wxParseTagATap: function (e) {
     let link = e.currentTarget.dataset.src
     console.log(link)
@@ -275,7 +270,6 @@ Page({
       })
       return
     }
-    // let r = RequestFactory.getShoppingCartList();
     let params = {
       reqName: '获取购物车',
       url: Operation.getShoppingCartList,

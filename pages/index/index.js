@@ -19,6 +19,9 @@ Page({
       // this.queryFeaturedList()
       Event.on('didLogin', this.didLogin, this);
     },
+    goPages(){
+      Tool.navigateTo("/pages/product-classification/product-classification")
+    },
     imageLoad(e){
       Tool.getAdaptHeight(e, this)
     },
