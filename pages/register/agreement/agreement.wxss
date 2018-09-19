@@ -1,0 +1,12 @@
+.top-view{
+  height:150rpx;
+  font-size: 32rpx;
+}
+.content{
+  font-size: 24rpx;
+  padding: 30rpx;
+  line-height: 40rpx;
+}
+.line{
+  text-indent:2em;
+}
