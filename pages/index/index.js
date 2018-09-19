@@ -17,6 +17,7 @@ Page({
       // this.queryAdList();
       // this.querySpeList();
       // this.queryFeaturedList()
+      app.wxLogin()
       Event.on('didLogin', this.didLogin, this);
     },
     goPages(){

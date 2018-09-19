@@ -1,8 +1,7 @@
 let { Tool, RequestFactory, Storage, Operation,Event } = global;
-
+const app = getApp()
 Page({
   data: {
-    ysf: { title: '注册' },
     getCodeBtEnable: true,
     second: '59',
     showSecond: false,
@@ -27,26 +26,19 @@ Page({
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
     })
-    // if (options.code){
-    //   this.sweepCode(options.id)
-    // }
-    Event.on('getOpenid', this.getOpenid,this)
+    if (options.inviteCode){
+      let callBack = () => {
+        this.sweepCode(options.inviteCode)
+      }
+      app.wxLogin(false, callBack)
+    }
   },
   onShow: function () {
     
   },
-  getOpenid(){
-    // console.log(11111)
-    if (this.data.codeId) {
-      this.sweepCode()
-    }
-  },
   sweepCode(id){ // 判断邀请码是否过期等
-    if (!this.data.codeId){
-      return
-    }
     let params = {
-      code: this.data.codeId,
+      code: id,
       identity: Storage.getWxOpenid(),
       reqName: '邀请码是否过期',
       url: Operation.sweepCode
@@ -232,8 +224,5 @@ Page({
     this.setData({
       isAgree: !this.data.isAgree
     })
-  },
-  onUnload: function () {
-    Event.off('getOpenid', this.sweepCode)
   }
 })

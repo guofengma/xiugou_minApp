@@ -838,7 +838,8 @@ export default class Tool {
 
     static didLogin(that) {
       // let didLogin = global.Storage.getUserCookie() !='out' ? true : false
-      let didLogin = global.Storage.getUserCookie()? true : false
+      let userInfo = global.Storage.setUserAccountInfo ? global.Storage.setUserAccountInfo:{}
+      let didLogin = global.Storage.getUserCookie() && global.Storage.setUserAccountInfo.id? true : false
       that.setData({
         didLogin: didLogin
       })
