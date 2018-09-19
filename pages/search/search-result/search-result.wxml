@@ -25,14 +25,18 @@
   <template is="result-tips" wx-if='{{tipVal}}' data="{{tipVal}}" />
 
   <product-specification id='prd-info-type' 
-            bind:subClicked="addToShoppingCart"  
-            productSpec='{{productSpec}}' 
-            price = '{{selectPrice}}'
-            priceList='{{priceList}}' 
-            bind:counterInputOnChange='counterInputOnChange' 
-            isInit ="{{isInit}}"
-            imgUrl="{{imgUrl}}" 
-            showImgs='{{true}}' 
-            isIphoneX='{{isIPhoneX.isIPhoneX}}'
+    bind:subClicked="addToShoppingCart"  
+    productSpec='{{productSpec}}' 
+    price = '{{selectPrice}}'
+    priceList='{{priceList}}' 
+    bind:counterInputOnChange='counterInputOnChange' 
+    isInit ="{{isInit}}"
+    imgUrl="{{imgUrl}}" 
+    showImgs='{{true}}' 
+    isIphoneX='{{isIPhoneX.isIPhoneX}}'
   />
+  <view class='go-cart flexR' catchtap='goPage'>
+    <image src='/img/cart-big.png' mode='widthFix'></image>
+    <view class='cart-label redBg flexR' wx:if="{{size}}">{{size}}</view>
+  </view>
 </view>

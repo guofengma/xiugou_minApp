@@ -1,6 +1,13 @@
 .my{
   font-size: 24rpx;
 }
+.top-view image{
+  width: 40rpx;
+  margin-left: 20rpx;
+}
+.top-view {
+  padding:  20rpx 30rpx 0 30rpx;
+}
 .my-info{
   display: flex;
   align-content: center;
@@ -8,7 +15,10 @@
 }
 .content-top{
   position: relative;
-  background: #ffffff;
+  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/bg_img_user@2x.png) no-repeat left bottom; 
+  background-size: 100% 100%;
+  border-top: 1prx solid #eee;
+  
 }
 .my-info-item{
   padding-top: 12rpx;
@@ -19,13 +29,12 @@
   align-items: center;
 }
 .my-name{
-color: #666;
-margin-right: 13rpx;
-height:34px;
-font-size:36rpx;
-font-weight:500;
-line-height:38rpx;
- 
+  color: #666;
+  margin-right: 13rpx;
+  height:34px;
+  font-size:36rpx;
+  font-weight:500;
+  line-height:38rpx;
 }
 .my-info-arrow{
   width: 14rpx;
@@ -36,7 +45,7 @@ line-height:38rpx;
 .avatar-img{
     width: 130rpx;
     height: 130rpx;
-    background-color: red;
+    /* background-color: red; */
     border: solid 4rpx #ffffff;
     border-radius: 50%;
     margin: 38rpx;
@@ -106,7 +115,7 @@ line-height:38rpx;
   font-size:37rpx; 
   line-height:76rpx;
   font-weight:600;
-
+  height: 76rpx;
 }
 .my-account-coin{
 background:rgba(255,79,110,1);

@@ -20,7 +20,7 @@ Page({
       let region = this.data.region
       region[0] = { name: list.province, code: list.provinceCode}
       region[1] = { name: list.city, code: list.cityCode }
-      region[2] = { name: list.city, code: list.areaCode }
+      region[2] = { name: list.area, code: list.areaCode }
       this.setData({
         receiver: list.receiver,
         receiverPhone: list.receiverPhone,

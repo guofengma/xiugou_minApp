@@ -143,6 +143,7 @@ Page({
     r.successBlock = (req) => {
       this.formatShoppingListData(req)
     };
+    Tool.showErrMsg(r)
     r.addToQueue();
   },
   formatShoppingListData(req){ // 格式化购物车的数据

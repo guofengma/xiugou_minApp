@@ -5,16 +5,58 @@
 .searchOrder{
   width: 100%;
 }
+.leftBar,.rightBar{
+  height: 100%;
+  width: 180rpx;
+}
 .leftBar{
-  height: calc(100% - 94rpx)
+  background: #eee;
 }
 .bottomBar{
   width: 100%;
+  height: calc(100% - 94rpx);
 }
 .leftItem{
   width: 180rpx;
   height: 90rpx;
+  border-left: 4rpx solid transparent;
+}
+.leftItem.active{
+  background: #fff;
+  border-left:4rpx solid #D51243
 }
 .rightBar{
-  width: calc(100% - 180rpx)
+  width: calc(100% - 180rpx);
+  /* height: 100%; */
+ 
+}
+.rightBar-content{
+  padding: 30rpx;
+}
+/* 不显示滚动条 */
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.list-name{
+  margin: 20rpx 0;
+}
+.banner image{
+  width: 100%;
+  border-radius: 10rpx;
+}
+.classification-info{
+  width: 120rpx;
+  margin-left: 40rpx;
+  margin-bottom: 10rpx;
+}
+.classification-info image{
+  width: 100%;
+  height: 120rpx;
+  margin-bottom:10rpx; 
+}
+.classification-content{
+  display: flex;
+  flex-wrap:wrap;
 }

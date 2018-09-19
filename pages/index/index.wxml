@@ -13,7 +13,8 @@
     </block>
     </swiper>
   </view>
-
+  
+  <view catchtap='goPages'>分类</view>
   
   
 </view>

@@ -1,15 +1,28 @@
 <view class='flexC sub-page product-classification'>  
-  <view catchtap='searchOrder'  class='searchOrder' >
-    <search-bar  placeholder='搜索订单' disabled='{{true}}'/>
+  <view catchtap='search'  class='searchOrder' >
+    <search-bar  placeholder='搜索商品' disabled='{{true}}'/>
   </view>
-  <view class='flexR-sb bottomBar'>
+  <view class='flexR-sb bottomBar' style=''>
     <scroll-view scroll-y  class='leftBar'>
       <block wx:for='{{leftBarLists}}' wx:key='unique'>
-        <view data-id='{{item.id}}' class='flexR ellipsis leftItem'>{{item.name}}</view>
+        <view data-id='{{item.id}}' class='flexR ellipsis leftItem font-26 boxSize {{activeIndex==index? "active":""}}' catchtap='leftBarClicked' data-index='{{index}}'>{{item.name}}</view>
       </block>
     </scroll-view>
-    <view class='rightBar'>
-      
+    <scroll-view scroll-y class='rightBar whiteBg boxSize'>
+     <view class='rightBar-content'>
+      <view class='banner'>
+        <image src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' mode='widthFix' ></image>
+      </view>
+      <view wx:for='{{content}}' wx:for-index="key" wx:for-item="list"  wx:key="{{key}}">
+        <view class='font-26 list-name'>{{list.name}}</view>
+        <view class='classification-content'>
+          <view class='classification-info flexC' wx:for='{{list.productCategoryList}}' wx:key='{{index}}' catchtap='itemClicked'  data-id="{{item.id}}" data-name='{{item.name}}'>
+            <image src='{{item.img || "/img/Invalid.png"}}'></image>
+            <view class='ellipsis font-26'>{{item.name}}</view>
+          </view>
+        </view>
+      </view>
     </view>
+    </scroll-view>
   </view>
 </view>

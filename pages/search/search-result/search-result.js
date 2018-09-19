@@ -10,29 +10,43 @@ Page({
     currentPage:1, // 当前的页数
     pageSize: 10, // 每次加载请求的条数 默认10 
     params:{},
-    code:'',
+    categoryId:'',
     isInit: false,
   },
   onLoad: function (options) {
+    this.getInitRequest(options)
+    this.getShoppingCartList()
+    Tool.isIPhoneX(this)
+    this.didLogin()
+    Event.on('didLogin', this.didLogin, this);
+  },
+  onShow: function () {
+    
+  },
+  getInitRequest(options){
     let params = {
       pageSize: this.data.pageSize,
       page: this.data.currentPage,
       keyword: options.keyword || '',
-      sortType:1,
-      time:'',
+      categoryId: Number(options.categoryId) || '',
+      hotWordId: Number(options.hotWordId) || '',
+      sortType: 1
+    }
+    if (options.categoryId || options.hotWordId) {
+      delete params.keyword
+      if (options.hotWordId){
+        delete params.categoryId
+      }else{
+        delete params.hotWordId
+      }
     }
     this.setData({
       keyword: options.keyword || '',
       params: params,
-      code: options.code
+      categoryId: options.categoryId || '',
+      hotWordId: options.categoryId || ''
     })
-    Tool.isIPhoneX(this)
-    this.didLogin()
-    Event.on('didLogin', this.didLogin, this);
     this.requestQueryProductList(params)
-  },
-  onShow: function () {
-    
   },
   didLogin() {
     Tool.didLogin(this)
@@ -60,6 +74,10 @@ Page({
       Tool.showAlert('请输入搜索内容')
       return
     }
+    this.data.params.keyword = this.data.keyword
+    this.setData({
+      params: this.data.params
+    })
     this.navbarClicked({detail:{n:1}})
   },
   reloadNet(){
@@ -77,6 +95,32 @@ Page({
       params: params
     })
     this.requestQueryProductList(this.data.params)
+  },
+  getShoppingCartList() {
+    // 查询购物车
+    if (!this.data.didLogin) {
+      let data = Storage.getShoppingCart() || []
+      let size = data.length
+      this.setData({
+        size: size
+      })
+      return
+    }
+    let params = {
+      reqName: '获取购物车',
+      url: Operation.getShoppingCartList,
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let data = req.responseObject.data
+      data = data === null ? [] : data
+      let size = data.length > 99 ? 99 : data.length
+      this.setData({
+        size: size
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
   addToShoppingCart(e) {
     this.setData({
@@ -191,6 +235,9 @@ Page({
   productCliked(e){
     Tool.navigateTo('/pages/product-detail/product-detail?productId='+ e.currentTarget.dataset.id+'&door=1')
   },
+  goPage(){
+    Tool.switchTab('/pages/shopping-cart/shopping-cart')
+  },
   navbarClicked(e){
     // 1 综合 2销量 3价格 不是数字为变化排版
     let n = e.detail.n
@@ -202,12 +249,13 @@ Page({
       return
     }
     let params = {
-      pageSize: this.data.pageSize,
-      page: 1,
-      keyword: this.data.keyword || '',
-      sortType:n,
-      time: '', // 每页最后一条数据的排序时间(第一个传空)
+      // pageSize: this.data.pageSize,
+      // page: 1,
+      // keyword: this.data.keyword || '',
+      ...this.data.params,
+      sortType:n
     }
+    params.page =1
     switch (n) {
       case 1:
         break;

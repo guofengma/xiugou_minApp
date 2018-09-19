@@ -54,7 +54,8 @@
     "pages/my/nickname/nickname",
     "pages/my/invite/invite",
     "pages/download-app/oldUser-downLoad/oldUser-downLoad",
-    "pages/product-classification/product-classification"
+    "pages/product-classification/product-classification",
+    "pages/register/agreement/agreement"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

@@ -13,7 +13,6 @@ Page({
       this.refreshMemberInfoNotice()
     },
     refreshMemberInfoNotice(){
-      console.log(1111)
       Tool.getUserInfos(this)
       let userInfos = this.data.userInfos
       let isRealName = ''
@@ -75,6 +74,9 @@ Page({
         callBack(infos)
         Storage.setUserAccountInfo(infos)
         Event.emit('refreshMemberInfoNotice');
+        this.setData({
+          userInfos: infos
+        })
       };
       Tool.showErrMsg(r)
       r.addToQueue();
