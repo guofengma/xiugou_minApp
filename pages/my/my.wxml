@@ -1,120 +1,119 @@
-<!--pages/my/account.wxml-->
+<!--pages/my/account.wxml发话人它还具有-->
 <view class="my sub-page">
   <view class='content-top'>
-   <view class='my-avatar'>
-       <image src='{{userInfo.avatarUrl}}' class='avatar-img'></image>
-    <view>
-          <view class='my-info-item'>
-           <text class='my-name'> 你很哇瑟 </text>
-           <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix' class='my-info-arrow'></image>
+    <view class='my-avatar'>
+      <image src='{{userInfo.avatarUrl}}' class='avatar-img'></image>
+      <view>
+        <view class='my-info-item'>
+          <text class='my-name'> 你很哇瑟 </text>
+          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix' class='my-info-arrow'></image>
         </view>
-        
-          <view class='my-rank'>
-             <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconRank.png' mode='widthFix'></image>
-             <text class='my-rank-no'>V1</text>
-          </view>
-       </view>
-   </view>
-   <!--  -->
-   <view class='my-save'>
+
+        <view class='my-rank'>
+          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconRank.png' mode='widthFix'></image>
+          <text class='my-rank-no'>V1</text>
+        </view>
+      </view>
+    </view>
+    <!--  -->
+    <view class='my-save'>
       <view>21.00元</view>
       <view>已帮你省</view>
-   </view>
+    </view>
   </view>
   <!-- 我的资产 -->
   <view class='my-account'>
     <view class='my-account-item'>我的资产</view>
     <view class='my-account-list'>
-       <view class='my-account-coin'>
-         <view class='account-num'>3639.123</view>
-         <view>现金账户</view>
-       </view>
-        <view class='my-account-xiudou'>
-         <view class='account-num'>3639.123</view>
-         <view>秀逗账户</view>
-       </view>
-        <view class='my-account-leave'>
-         <view class='account-num'>3639.123</view>
-         <view>待提取账户</view>
-       </view>
+      <view class='my-account-coin'>
+        <view class='account-num'>3639.123</view>
+        <view>现金账户</view>
+      </view>
+      <view class='my-account-xiudou'>
+        <view class='account-num'>3639.123</view>
+        <view>秀逗账户</view>
+      </view>
+      <view class='my-account-leave'>
+        <view class='account-num'>3639.123</view>
+        <view>待提取账户</view>
+      </view>
     </view>
   </view>
   <!-- 我的订单 -->
   <view class='my-order'>
-     <view class='my-order-item'>
-       <view>我的订单</view>
-       <view>
-          <text>查看全部</text>
-          <!-- 右边的见头 -->
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix' class='my-info-arrow'></image>
-       </view>
-     </view>
-     <!-- 订单列表 -->
-     <view class='my-order-list'>
-       <view class='list-cont my-wait-pay'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForsale.png'  mode='widthFix' class='forsale'></image>
-          <view>待付款</view>
-          <view class='reddot'>1</view>
-       </view>
-       <!-- 代发货 -->
-        <view class='list-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForsend.png'  mode='widthFix' class='forsale'></image>
-          <view>待发货</view>
-       </view>
-       <!-- 待收货 -->
-        <view class='list-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForobtain.png'  mode='widthFix' class='forsale'></image>
-          <view>待收获</view>
-       </view>
-       <!-- 售后 -->
-        <view class='list-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconAftersale.png'  mode='widthFix' class='forsale'></image>
-          <view>售后/付款</view>
-       </view>
-     </view>
+    <view class='my-order-item'>
+      <view>我的订单</view>
+      <view>
+        <text>查看全部</text>
+        <!-- 右边的见头 -->
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix' class='my-info-arrow'></image>
+      </view>
+    </view>
+    <!-- 订单列表 -->
+    <view class='my-order-list'>
+      <view class='list-cont my-wait-pay'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForsale.png' mode='widthFix' class='forsale'></image>
+        <view>待付款</view>
+        <view class='reddot'>1</view>
+      </view>
+      <!-- 代发货 -->
+      <view class='list-cont'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForsend.png' mode='widthFix' class='forsale'></image>
+        <view>待发货</view>
+      </view>
+      <!-- 待收货 -->
+      <view class='list-cont'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForobtain.png' mode='widthFix' class='forsale'></image>
+        <view>待收获</view>
+      </view>
+      <!-- 售后 -->
+      <view class='list-cont'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconAftersale.png' mode='widthFix' class='forsale'></image>
+        <view>售后/付款</view>
+      </view>
+    </view>
   </view>
   <!-- 常用工具 -->
 
   <view class='my-tools'>
-     <view class='my-tools-item'>
-       常用工具
-     </view>
-     <!-- 工具列表 -->
-     <view class='my-tools-list'>
-        <view class='my-tools-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconInvite.png' mode='widthFix' class='my-invite'></image>
-          <view>邀请好友</view>
-        </view>
-        <view class='my-tools-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconCalendar.png' mode='widthFix' class='my-calendar'></image>
-          <view>活动日历</view>
-        </view>
-        <view class='my-tools-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconVoucher.png' mode='widthFix' class='my-voucher'></image>
-          <view>优惠券</view>
-        </view>
-        <view class='my-tools-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconData.png' mode='widthFix' class='my-data'></image>
-          <view>我的数据</view>
-        </view>
-        <view class='my-tools-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconCollect.png' mode='widthFix' class='my-collect'></image>
-          <view>收藏店铺</view>
-        </view>
-        <view class='my-tools-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconHelp.png' mode='widthFix' class='my-help'></image>
-          <view>帮助</view>
-        </view>
-        <view class='my-tools-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconAddress.png' mode='widthFix' class='my-address'></image>
-          <view>地址</view>
-        </view>
-        <view class='my-tools-cont'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconTrack.png' mode='widthFix' class='my-track'></image>
-          <view>足迹</view>
-        </view>
-     </view>
-     
+    <view class='my-tools-item'>
+      常用工具
+    </view>
+    <!-- 工具列表 -->
+    <view class='my-tools-list'>
+      <view class='my-tools-cont'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconInvite.png' mode='widthFix' class='my-invite'></image>
+        <view>邀请好友</view>
+      </view>
+      <view class='my-tools-cont'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconCalendar.png' mode='widthFix' class='my-calendar'></image>
+        <view>活动日历</view>
+      </view>
+      <view class='my-tools-cont'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconVoucher.png' mode='widthFix' class='my-voucher'></image>
+        <view>优惠券</view>
+      </view>
+      <view class='my-tools-cont'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconData.png' mode='widthFix' class='my-data'></image>
+        <view>我的数据</view>
+      </view>
+      <view class='my-tools-cont'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconCollect.png' mode='widthFix' class='my-collect'></image>
+        <view>收藏店铺</view>
+      </view>
+      <view class='my-tools-cont'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconHelp.png' mode='widthFix' class='my-help'></image>
+        <view>帮助</view>
+      </view>
+      <view class='my-tools-cont'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconAddress.png' mode='widthFix' class='my-address'></image>
+        <view>地址</view>
+      </view>
+      <view class='my-tools-cont'>
+        <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconTrack.png' mode='widthFix' class='my-track'></image>
+        <view>足迹</view>
+      </view>
+    </view>
+
   </view>
 </view>
-
