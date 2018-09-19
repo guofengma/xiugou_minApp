@@ -90,6 +90,21 @@ export default class Operation {
 
         this.checkGiftBagOrder = '/order/order/checkGiftBagOrder'
 
+
+    /********************** 分类 *********************/
+
+        // 热门分类列表
+
+        this.findHotList = '/product/productCategory/findHotList'
+
+        // 一级分类列表
+
+        this.findNameList = '/product/productCategory/findNameList'
+
+        // 二、三级列表
+
+        this.findProductCategoryList = '/product/productCategory/findProductCategoryList'
+
     /********************** 购物车 *********************/
         // 新增
         

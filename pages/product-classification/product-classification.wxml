@@ -1,6 +1,6 @@
 <view class='flexC sub-page product-classification'>  
   <view catchtap='search'  class='searchOrder' >
-    <search-bar  placeholder='搜索订单' disabled='{{true}}'/>
+    <search-bar  placeholder='搜索商品' disabled='{{true}}'/>
   </view>
   <view class='flexR-sb bottomBar' style=''>
     <scroll-view scroll-y  class='leftBar'>
@@ -24,6 +24,5 @@
       </view>
     </view>
     </scroll-view>
-    
   </view>
 </view>
