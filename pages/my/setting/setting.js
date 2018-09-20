@@ -40,9 +40,7 @@ Page({
           Storage.setUserAccountInfo(null)
           Event.emit('didLogin');
           this.cancel()
-          wx.reLaunch({
-            url:'../../index/index'
-          })
+          Tool.switchTab("/pages/index/index")
       };
       r.addToQueue();
     },

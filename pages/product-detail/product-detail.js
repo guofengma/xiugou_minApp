@@ -89,7 +89,7 @@ Page({
   makeSureOrder(){
     // 立即购买
     if (!this.data.didLogin) {
-      Tool.navigateTo('/pages/login/login-wx/login-wx?isBack='+true)
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack='+true)
       return
     }
     let params = {

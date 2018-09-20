@@ -86,7 +86,6 @@ App({
           Tool.navigateTo('/pages/login-wx/login-wx')
         }
         callBack()
-        // return true
       }
       Tool.showErrMsg(r)
       r.addToQueue();
