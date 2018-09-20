@@ -20,7 +20,7 @@ App({
       global.Operation = Operation
       global.Config = config
       this.getSystemInfo();
-      //this.wxLogin()
+      // this.wxLogin()
     },
     onShow: function () {
       // 比如记录小程序启动时长
@@ -47,7 +47,7 @@ App({
         }
       })
     },
-    getUserInfos(code, callBack) {
+    getUserInfos(code, callBack = () => { }) {
       let self = this
       this.toLogin(code, callBack)
       wx.getSetting({
@@ -69,7 +69,7 @@ App({
         }
       })
     },
-    toLogin(code, callBack) {
+    toLogin(code, callBack = () => { }) {
       if (!code) return
       let params = {
         wechatCode: code,
@@ -82,9 +82,9 @@ App({
         Tool.loginOpt(req)
         let datas = req.responseObject.data
         Storage.setWxOpenid(datas.openid)
-        if (!datas.id && this.globalData.isGoLogin){
-          Tool.navigateTo('/pages/login-wx/login-wx')
-        }
+        // if (!datas.id && this.globalData.isGoLogin){
+        //   Tool.navigateTo('/pages/login-wx/login-wx')
+        // }
         callBack()
       }
       Tool.showErrMsg(r)

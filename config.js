@@ -9,6 +9,7 @@ const config = {
   },
   baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 小程序发布的显示地址
   // baseUrl: 'http://172.16.10.42:8180/gateway',
+  // baseUrl: 'http://172.16.10.29:8180/gateway', 
   // baseUrl:'http://172.16.10.238:8180/gateway',
   // baseUrl:'http://172.16.10.100:8 180/gateway',
   // baseUrl: 'http://172.16.10.41:8180/gateway',

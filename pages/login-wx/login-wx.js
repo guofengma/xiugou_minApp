@@ -1,4 +1,7 @@
 let { Tool, RequestFactory, Storage, Operation } = global
+
+const app = getApp()
+
 Page({
   data: {
     userInfo:'',
@@ -16,12 +19,14 @@ Page({
       userInfo: Storage.wxUserInfo() || '',
       isBack: options.isBack || false
     })
+    if (!this.data.openid){
+      app.wxLogin()
+    }
   },
   onShow: function () {
   
   },
   getPhoneNumber(e){  // 获取手机号
-    console.log(e)
     if (e.detail.errMsg == 'getPhoneNumber:ok'){
       this.setData({
         encryptedData: e.detail.encryptedData,
@@ -53,7 +58,7 @@ Page({
     let params = {
       encryptedData: this.data.encryptedData,
       iv: this.data.iv,
-      openid: this.data.openid,
+      openid: Storage.getWxOpenid() || '',
       nickname: this.data.userInfo.nickName,
       headImg: this.data.userInfo.avatarUrl,
       reqName: '用户微信登陆',

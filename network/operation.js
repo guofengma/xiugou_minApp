@@ -56,8 +56,10 @@ export default class Operation {
       this.queryDictionaryDetailsType = '/config/sysDictionary/queryDictionaryTypeList'
 
     /********************** 搜索 *********************/  
+
+        // 获取热搜词语
     
-        this.getHotWordsListActive = '/user/hotWord/getHotWordListActive'
+        this.getHotWordsListActive = '/config/sysHotWord/queryHotName'
 
         // 动态搜索框关键词匹配
 
@@ -104,6 +106,8 @@ export default class Operation {
         // 二、三级列表
 
         this.findProductCategoryList = '/product/productCategory/findProductCategoryList'
+
+      
 
     /********************** 购物车 *********************/
         // 新增

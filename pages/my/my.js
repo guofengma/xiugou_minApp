@@ -18,7 +18,7 @@ Page({
         "/pages/my/invite/invite",//邀请好友
         "",// 活动日历
         '/pages/my/coupon/my-coupon/my-coupon',//优惠卷
-        '', //我的数据
+        '/pages/my/my-promotion/my-promotion', //我的数据
         "",//收藏店铺
         '/pages/my/help-customer/help-customer',//帮助
         '/pages/address/select-express-address/select-express-address',//地址
