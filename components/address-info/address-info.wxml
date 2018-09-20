@@ -12,7 +12,7 @@
       <view wx:else>
         <view wx:if='{{addressType==1}}' class='flexR-sb consignee'>
            <text>{{receiver}}</text>
-           <text>{{recevicePhone}}</text>
+           <text>{{receiverPhone}}</text>
         </view>
       </view>
       <view class='address-content gray'>

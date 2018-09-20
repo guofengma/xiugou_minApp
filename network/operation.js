@@ -173,56 +173,41 @@ export default class Operation {
 
         /********************** 我的订单 *********************/
 
-        // 全部订单
+        // 订单 1.待支付 2：待发货 3：待收货 4：确认收货 5：已完成 6：退货关闭 7：用户关闭 8：超时关闭
 
-        this.queryAllOrderPageList  ='/order/order/queryAllOrderPageList';
+        this.queryOrderPageList ='/order/queryPage';
 
-        // 已完成订单
+      
+        // 订单详情
 
-        this.queryCompletedOrderPageList  ='/order/order/queryCompletedOrderPageList';
-
-        // 待支付订单
-
-        this.queryUnPaidOrderPageList  ='/order/order/queryUnPaidOrderPageList';
-
-        // 待发货订单
-
-        this.queryUnSendOutOrderPageList  ='/order/order/queryUnSendOutOrderPageList';
-
-        // 待收货订单
-
-        this.queryWaitReceivingOrderPageList  ='/order/order/queryWaitReceivingOrderPageList';
-
-        // 已完成订单详情
-
-        this.getOrderDetail  ='/order/order/getOrderDetail';
+        this.getOrderDetail ='/order/lookDetail';
 
         // 确认收货
 
-        this.confirmReceipt  ='/order/order/confirmReceipt';
+        this.confirmReceipt ='/order/confirmReceipt';
 
         // 删除已完成订单
 
-        this.deleteOrder  ='/order/order/deleteOrder';
+        this.deleteOrder ='/order/deleteCompletedOrder';
 
         // 删除已关闭(取消) 订单
 
-        this.deleteClosedOrder  ='/order/order/deleteClosedOrder';
+        this.deleteClosedOrder ='/order/deleteClosedOrder';
 
         // 取消订单
 
-        this.cancelOrder  ='/order/order/cancelOrder';
+        this.cancelOrder ='/order/cancelOrder';
 
 
         /******************提交订单 订单结算*********************** */
 
         // 购物车结算
         
-        this.makeSureOrder = '/order/order/makeSureOrder'
+        this.makeSureOrder = '/order/makeSureOrder'
 
         // 提交订单
 
-        this.submitOrder ='/order/order/submitOrder'
+        this.submitOrder ='/order/submitOrder'
 
         // 订单修改地址 邮费计算
 
@@ -230,7 +215,7 @@ export default class Operation {
 
         // 预支付
 
-        this.repay = '/order/order/prePay'
+        this.repay = '/order/prePay'
 
         // 第三方支付回调接口
 

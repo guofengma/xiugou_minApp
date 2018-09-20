@@ -824,11 +824,11 @@ export default class Tool {
       r.failBlock = (req) => {
         console.log(req)
         // let page = this.getCurrentPageUrlWithArgs() //获取当前额页面
-        if (req.responseObject.code==210){ // 超时登录
-          // callBack =()=>{
-          //   let page = global.Storage.getWxOpenid() ? '/pages/login-wx/login-wx' :'/pages/login/login'  
-          //   this.navigateTo(page+'?isBack='+true)
-          // }
+        if (req.responseObject.code==1009){ // 超时登录
+          callBack =()=>{
+            let page = '/pages/login-wx/login-wx'
+            this.navigateTo(page+'?isBack='+true)
+          }
         } 
         this.showAlert(req.responseObject.msg, callBack)
       }

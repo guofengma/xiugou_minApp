@@ -115,7 +115,7 @@
     <!--置顶的按钮-->
     <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
       <image src='/img/top-icon.png' mode='widthFix'></image>
-      <view>顶部</view>
+      <!-- <view>顶部</view> -->
     </view>
   </view>
 

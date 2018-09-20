@@ -31,14 +31,14 @@
 .product-row .view-prd-img{
   background: #ddd;
 }
-.go-cart{
+.go-cart,.goTop{
   position: absolute;
   right: 30rpx;
   bottom: 220rpx;
   width: 100rpx;
 }
-.go-cart image{
-  width: 90rpx;
+.go-cart image,.goTop image{
+  width: 70rpx;
 }
 .cart-label{
   position:absolute;
@@ -48,4 +48,7 @@
   top:0rpx;
   left:3px;
   border-radius:50rpx;
+}
+.goTop{
+  bottom: 120rpx;
 }

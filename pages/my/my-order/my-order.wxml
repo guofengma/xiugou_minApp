@@ -12,7 +12,7 @@
             <search-bar  placeholder='搜索订单' disabled='{{true}}'/>
           </view>
           <view class="tab-area">
-              <view class="{{num==0?'active red':''}}" bindtap="getList" data-index="0">全部</view>
+              <view class="{{num==''?'active red':''}}" bindtap="getList" data-index="0">全部</view>
               <view class="{{num==1?'active red':''}}" bindtap="getList" data-index="1">待支付</view>
               <view class="{{num==2?'active red':''}}" bindtap="getList" data-index="2">待发货</view>
               <view class="{{num==3?'active red':''}}" bindtap="getList" data-index="3">待收货</view>
