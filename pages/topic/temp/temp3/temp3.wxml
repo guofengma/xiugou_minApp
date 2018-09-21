@@ -1,0 +1,19 @@
+<import src='/pages/topic/temp/topic-prd-info/topic-prd-info.wxml'/>
+
+<import src='/pages/topic/temp/topic-bar/topic-bar.wxml'/>
+
+<template name="topic-temp3">
+  <!--导航  -->
+  <template is="topic-bar" data="{{topicDetailList,scrollLeft,currentTab}}"/>
+  
+  <block wx:for='{{topicDetailList[currentTab].banner}}'  wx:key='unique'>
+    <view class='topic-banner topic-temp3' >
+      <image src='{{item.img}}' mode='widthFix'></image>
+    </view>
+    <view class='topic-prd-content' style='justify-content:flex-start'>
+      <block wx:for='{{item.product}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
+        <template is="topic-prd-info" data="{{width:'220',...list,key}}"/>
+      </block>
+    </view>
+  </block>
+</template>

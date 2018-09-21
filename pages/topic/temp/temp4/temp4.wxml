@@ -1,0 +1,14 @@
+<import src='/pages/topic/temp/topic-prd-info/topic-prd-info.wxml'/>
+
+<template name="topic-temp4">
+  <block wx:for='{{topicDetailList.banner}}' wx:key='unique'>
+    <view class='topic-banner topic-temp4'>
+      <image src='{{item.img}}' mode='widthFix'></image>
+    </view>
+    <view class='topic-prd-content' style='justify-content:flex-start'>
+      <block wx:for='{{item.product}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
+        <template is="topic-prd-info" data="{{width:'220',...list,key}}"/>
+      </block>
+    </view>
+  </block>
+</template>

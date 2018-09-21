@@ -55,7 +55,8 @@
     "pages/my/invite/invite",
     "pages/download-app/oldUser-downLoad/oldUser-downLoad",
     "pages/product-classification/product-classification",
-    "pages/register/agreement/agreement"
+    "pages/register/agreement/agreement",
+    "pages/topic/topic"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

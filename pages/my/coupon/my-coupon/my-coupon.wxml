@@ -17,7 +17,7 @@
                         {{item.type ==3? "折":''}}
                       </view>
                       <view class='gray' >{{item.typeName}}</view>
-                      <view class='gray'>满{{item.useConditions}}可用</view>
+                      <view class='gray'>满{{item.useConditions || 0}}可用</view>
                     </view>
                     <view class='coupon-center'>
                       <view class='font-30'>{{item.name}}</view>
