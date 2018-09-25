@@ -2,7 +2,7 @@ let { Tool, RequestFactory, Operation } = global;
 Page({
   data: {
     topicImgUrl:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-    topicTemplateId:3, // 模板id 
+    topicTemplateId:5, // 模板id 
     isShowBar:false,//是否显示导航
     topicInfos:{}, //专题信息
     topicDetailList:[], //换题产品信息
@@ -34,7 +34,6 @@ Page({
       url: Operation.getTopicDetail
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.getTopicDetail(params);
     r.finishBlock = (req) => {
       let data = req.responseObject.data
       if (data){

@@ -2,6 +2,7 @@
 <import src='/pages/topic/temp/temp2/temp2.wxml'/>
 <import src='/pages/topic/temp/temp3/temp3.wxml'/>
 <import src='/pages/topic/temp/temp4/temp4.wxml'/>
+<import src='/pages/topic/temp/temp-reducePrice/temp-reducePrice.wxml'/>
 
 <view class='topic-page'>
   <!-- 轮播 -->
@@ -23,6 +24,8 @@
     <template wx:elif="{{topicTemplateId==3}}" is="topic-temp3" data="{{topicDetailList,scrollLeft,currentTab}}"/>
 
     <template wx:elif="{{topicTemplateId==4}}" is="topic-temp4" data="{{topicDetailList}}"/> 
+
+    <template wx:elif="{{topicTemplateId==5}}" is="temp-reducePrice" data="{{topicDetailList}}"/> 
     
   <!-- </block> -->
 
