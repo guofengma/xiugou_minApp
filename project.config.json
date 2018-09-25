@@ -33,13 +33,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 16,
+			"current": 17,
 			"list": [
 				{
 					"id": 0,
 					"name": "注册",
 					"pathName": "pages/register/register",
-					"query": "code=111"
+					"query": "inviteCode=111"
 				},
 				{
 					"id": -1,
@@ -134,7 +134,14 @@
 				{
 					"id": -1,
 					"name": "用户协议",
-					"pathName": "pages/register/agreement/agreement"
+					"pathName": "pages/register/agreement/agreement",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "专题",
+					"pathName": "pages/topic/topic",
+					"query": ""
 				}
 			]
 		}

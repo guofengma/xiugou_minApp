@@ -65,7 +65,7 @@ Page({
         item.nickname = item.products.length == 1 ? "限" + item.products[0] + "可用" :"限指定商品可使用"
       } else if (length>1){
         // 多品类
-        item.nickname = "限指定商品可使用" 
+        item.nickname = "限指定分类商品使用" 
       } else if (length==1){
         // 单品类
         if (item.products.length==0){
@@ -87,9 +87,9 @@ Page({
           item.outTime = Tool.timeStringForDateString(Tool.formatTime(item.expireTime),"YYYY.MM.DD");
           item.start_time = Tool.timeStringForDateString(Tool.formatTime(item.startTime), "YYYY.MM.DD");
           let length = 0,key=""
-          length += (item.cat1? 0:1)
-          length += (item.cat2? 0 : 1)
-          length += (item.cat3? 0 : 1)
+          length += (item.cat1? 1:0)
+          length += (item.cat2? 1 : 0)
+          length += (item.cat3? 1 : 0)
           key = (item.cat1? 'cat1' : key)
           key = (item.cat2? 'cat2' : key)
           key = (item.cat3? 'cat3' : key)
@@ -125,7 +125,7 @@ Page({
         ...this.data.params,
         reqName: '未使用优惠劵列表',
         url: Operation.couponList,
-        status:1
+        status:0
       }
       params.pageSize = 5
       this.formatCouponInfos(params, 0,true,'')
@@ -134,9 +134,9 @@ Page({
     getDiscountCouponNoActive() {
       let params = {
         ...this.data.params,
-        reqName: '未使用优惠劵列表',
+        reqName: '待激活',
         url: Operation.couponList,
-        status: 4
+        status: 3
       }
       params.pageSize = 5
       this.formatCouponInfos(params, 0, false, '待激活')
@@ -145,7 +145,7 @@ Page({
     getDiscountCouponUserd() {
       let params = {
         ...this.data.params,
-        status: 2,
+        status: 1,
         reqName: '已使用优惠劵列表',
         url: Operation.couponList
       }
@@ -156,7 +156,7 @@ Page({
       let params = {
         ...this.data.params,
         reqName: '失效优惠劵列表',
-        status:3,
+        status:2,
         url: Operation.couponList
       }
       this.formatCouponInfos(params, 1, false, '已失效')

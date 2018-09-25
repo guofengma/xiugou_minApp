@@ -1,0 +1,14 @@
+<import src='/pages/topic/temp/topic-prd-info/topic-prd-info.wxml'/>
+<!-- 模板1 -->
+<template name="topic-temp2">
+  <block wx:for='{{topicDetailList.banner}}' wx:key='unique'>
+    <view class='topic-banner topic-temp2'>
+      <image src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' mode='widthFix'></image>
+    </view>
+    <view class='topic-prd-content'>
+      <block wx:for='{{item.product}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
+        <template is="topic-prd-info" data="{{width:'335',...list,key}}"/>
+      </block>
+    </view>
+  </block>
+</template>

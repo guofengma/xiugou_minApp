@@ -16,11 +16,7 @@ Page({
     onLoad: function (options) {
       Tool.isIPhoneX(this) 
       // 提交订单时返回的数据
-      // let payList = JSON.parse(options.data)
       let payList = Storage.getPayOrderList() || {}
-      payList.showTotalAmounts = payList.totalAmounts
-      payList.dealer.availableBalance = this.formatNum(payList.dealer.availableBalance)
-      payList.dealer.tokenCoin = this.formatNum(payList.dealer.tokenCoin)
       this.setData({
         payList: payList,
         isContinuePay: options.isContinuePay || false
@@ -41,34 +37,6 @@ Page({
         return num2
       }
       return num
-    },
-    changePrice(e){
-      // 使用代币支付 和余额支付 
-      // let index = e.currentTarget.dataset.index
-      // let useAmount = this.data.useAmount222
-      // useAmount[index] = !useAmount[index]
-      // let payList = this.data.payList
-      // let totalAmounts = payList.totalAmounts
-      // let usePrice = ''
-      // let useBalance = ''
-      // useAmount.forEach((item,key)=>{
-      //   if(item && key==0){
-      //     usePrice = payList.dealer.token_coin * payList.tokenCoinToBalance
-      //     totalAmounts = totalAmounts - usePrice > 0 ? (totalAmounts - usePrice) : 0
-      //   } else if (item && key == 1) {
-      //     usePrice = payList.dealer.available_balance
-      //     let n = totalAmounts - usePrice
-      //     useBalance = n > 0 ? usePrice : Math.abs(parseInt(n * 100) / 100)
-      //     totalAmounts = n > 0 ? n : 0
-      //   }
-    
-      // })
-      // payList.showTotalAmounts = parseInt(totalAmounts * 100) / 100
-      // this.setData({
-      //   useAmount: useAmount,
-      //   payList: payList,
-      //   useBalance: useBalance
-      // })
     },
     payWay(e){
       let index = e.currentTarget.dataset.index
@@ -109,14 +77,14 @@ Page({
       // let r = RequestFactory.repay(params);
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
-        // this.test(payType, req)
-        this.wxPay(payType, req.responseObject.data.outTradeNo)
-        if (payType==1){
-          this.showResult(true)
-        } else {
-          let datas = req.responseObject.data
-          this.wxPay(payType, datas.outTradeNo, datas.prePayStr)
-        }
+        this.test(payType, req)
+        // this.wxPay(payType, req.responseObject.data.outTradeNo)
+        // if (payType==1){
+        //   this.showResult(true)
+        // } else {
+        //   let datas = req.responseObject.data
+        //   this.wxPay(payType, datas.outTradeNo, datas.prePayStr)
+        // }
       };
       Tool.showErrMsg(r)
       r.addToQueue();

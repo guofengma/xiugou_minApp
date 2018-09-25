@@ -4,7 +4,6 @@ import WxParse from '../../libs/wxParse/wxParse.js';
 
 Page({
   data: {
-    ysf: { title: '商品详情' },
     didLogin:false,
     imgUrls: [],
     activeIndex:1, // 轮播图片的index 
@@ -89,7 +88,7 @@ Page({
   makeSureOrder(){
     // 立即购买
     if (!this.data.didLogin) {
-      Tool.navigateTo('/pages/login/login-wx/login-wx?isBack='+true)
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack='+true)
       return
     }
     let params = {

@@ -34,38 +34,13 @@ Component({
     },
     //获取数据
     getData(index) {
-      let url = ''
-      let reqName = ''
-      if (index == 0) {//全部订单
-        url = Operation.queryAllOrderPageList
-        reqName = '全部订单'
-      } else if (index == 1) {//待支付
-        url = Operation.queryUnPaidOrderPageList
-        reqName = '待支付订单'
-      } else if (index == 2) {//待发货
-        url = Operation.queryUnSendOutOrderPageList
-        reqName = '待发货订单'
-      } else if (index == 3) {//待收货
-        url = Operation.queryWaitReceivingOrderPageList
-        reqName = '待收货订单'
-      } else if (index == 4) {//已完成
-        url = Operation.queryCompletedOrderPageList
-        reqName = '已完成订单'
-      }
-      // let params = {
-      //   pageSize: this.data.pageSize,
-      //   page: this.data.currentPage,
-      // };
-      // if (this.properties.condition) {
-      //   params.condition = this.properties.condition
-      // }
-      
       let params = {
         pageSize: this.data.pageSize,
         page: this.data.currentPage,
+        status:index,
         condition:this.properties.condition || '',
-        reqName: reqName,
-        url: url
+        reqName: "获取我的订单列表"+index,
+        url: Operation.queryOrderPageList
       }
       let list = this.data.list;
       this.setData({
@@ -143,8 +118,9 @@ Component({
       this.setData({
         isDelete: true,
         orderId: id,
-        status: status
+        status: status,
       });
+      this.deleteOrder()
     },
     dismissCancel() {
       //取消取消订单
@@ -166,7 +142,8 @@ Component({
         reqName = '删除订单'
       }
       let params = {
-        orderId: this.data.orderId,
+        id: this.data.orderId,
+        // orderNum:
         url: url,
         reqName: reqName
       };

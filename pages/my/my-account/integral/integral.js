@@ -67,7 +67,7 @@ Page({
     onLoad: function (options) {
       this.getData();
       this.setData({
-        account: options.query || '',
+        account: options.query || 0,
         imgBaseUrl: Config.imgBaseUrl
       })
     },

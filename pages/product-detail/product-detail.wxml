@@ -37,7 +37,7 @@
     <view class='prd-info boxSize'>
       <view class='prd-name ellipsis-2'>{{productInfo.name}}</view>
       <view class='price'>
-        <text class='price1 red'>¥ {{productInfoList.price}} <text class='font-24'>起</text></text>
+        <text class='price1 red'>¥ {{productInfoList.price}}<text class='font-24'>起</text></text>
         <text class='price2 gray'>¥ {{productInfoList.originalPrice}}</text>
         <!-- <text class='label-pd redBg'>拼店价：¥{{productInfo.group_price}}</text> -->
         <!-- <text class='price3 red'>积分价：¥ {{productInfo.min_payment}}</text> -->
@@ -115,7 +115,7 @@
     <!--置顶的按钮-->
     <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
       <image src='/img/top-icon.png' mode='widthFix'></image>
-      <view>顶部</view>
+      <!-- <view>顶部</view> -->
     </view>
   </view>
 

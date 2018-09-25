@@ -17,8 +17,8 @@
   </view>
   <view class='growing-value'>
     <view>
-      <text class='red'>{{userLevelInfo.experience}}</text>
-      <text class='gray'>/{{userLevelInfo.levelExperience}}</text>
+      <text class='red'>{{userLevelInfo.experience||0}}</text>
+      <text class='gray'>/{{userLevelInfo.levelExperience||0}}</text>
     </view>
     <view class='growing-bar'>
       <view class='growing-bar-value' style='width:{{userLevelInfo.width}};'></view>

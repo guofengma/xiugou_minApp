@@ -56,6 +56,22 @@ Page({
       keyword: e.detail.keyWord
     })
   },
+  scroll(e, res) {
+    if (e.detail.scrollTop > 200) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
+  },
+  goTop: function (e) {
+    this.setData({
+      scrollTop: 0
+    })
+  },
   searchKeyword(){
     if (!Tool.isEmpty(this.data.keyword)){
       let history = Storage.getHistorySearch()

@@ -1,0 +1,12 @@
+<template name="topic-bar2">
+  <view class='tab-h-view'>
+    <scroll-view scroll-x="true" class="tab-h font-26 boxSize whiteBg" scroll-left="{{scrollLeft}}">
+      <block wx:for='{{topicDetailList}}' wx:key='unique'>
+        <view class="tab-item {{currentTab==index?'red':''}}"  data-current="{{index}}" catchtap="swichNav">
+          <view>00:00</view>
+          <view>已开拍</view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</template>

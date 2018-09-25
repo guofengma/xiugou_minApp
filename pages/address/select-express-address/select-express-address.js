@@ -32,9 +32,8 @@ Page({
       url: Operation.queryUserAddressList
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.queryUserAddressList();
     r.successBlock = (req) => {
-      let data = req.responseObject.data
+      let data = req.responseObject.data || []
       data.forEach((item) => {
         item.addressInfo = item.province + item.city + item.area + item.address
         item.hasData = true

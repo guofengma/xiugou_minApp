@@ -176,20 +176,11 @@
   position: fixed;
   right: 30rpx;
   bottom: 120rpx;
-  background-color: rgba(255, 255, 255, 0.9);
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 100rpx;
-  border: 1rpx solid #eee;
-  overflow: hidden;
-  text-align: center;
-  font-size: 22rpx;
-  box-sizing: border-box;
-  padding-top: 14rpx;
+  background-color:transparent !important;
+  
 }
 .goTop image{
-  vertical-align: middle;
-  width: 40rpx;
+  width: 90rpx;
 }
 
 /*topbar  */

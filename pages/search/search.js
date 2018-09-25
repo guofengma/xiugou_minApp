@@ -55,9 +55,9 @@ Page({
     Tool.queryLocation(callBack)
   },
   requestGetHotWordsListActive(){
-    // let r = RequestFactory.getHotWordsListActive();
     let params = {
       reqName: '获取热搜词',
+      requestMethod: 'GET',
       url: Operation.getHotWordsListActive,
     }
     let r = RequestFactory.wxRequest(params);
@@ -74,9 +74,10 @@ Page({
     }
     r.addToQueue();
   },
-  getHotkeyword(e){
+  getHotkeyword(e) {
     this.setData({
-      keyWord: e.currentTarget.dataset.keyword
+      keyWord: e.currentTarget.dataset.keyword,
+      hotWordId:e.currentTarget.dataset.id || ''
     })
     this.searchKeyword()
   },
@@ -140,7 +141,7 @@ Page({
     }
   },
   requestKeyword(){
-    Tool.redirectTo('/pages/search/search-result/search-result?keyword=' +this.data.keyWord+'&code=' + this.data.provinceCode)
+    Tool.redirectTo('/pages/search/search-result/search-result?keyword=' + this.data.keyWord + '&hotWordId=' + this.data.hotWordId)
   },
   requestOrder() {
     Tool.redirectTo('/pages/search/search-order/search-order?condition=' + this.data.keyWord)
