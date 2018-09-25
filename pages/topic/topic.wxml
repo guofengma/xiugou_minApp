@@ -3,19 +3,27 @@
 <import src='/pages/topic/temp/temp3/temp3.wxml'/>
 <import src='/pages/topic/temp/temp4/temp4.wxml'/>
 <import src='/pages/topic/temp/temp-reducePrice/temp-reducePrice.wxml'/>
+<import src='/pages/topic/temp/temp-time-quantum/temp-time-quantum.wxml' />
+<import src='/pages/topic/temp/good-item/good-item.wxml' />
 
 <view class='topic-page'>
   <!-- 轮播 -->
   <view class='ad-view' style='margin-bottom:{{isShowBar? "0":"20"}}rpx;'>
     <image src="{{'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'}}" class="slide-image" catchtap='adListClicked'  class='ad-img' mode='widthFix'/>
     <!-- 专题文字介绍 -->
-    <!-- <view class='infos gray font-24 ellipsis-2 boxSize'>
+     <!-- <view class='infos gray font-24 ellipsis-2 boxSize'>
       shdkjahdkajsdjkahsdkashdjkabdsjka嘎嘎嘎嘎嘎嘎嘎嘎叫大受打击AV硕大的
-    </view> -->
+    </view>  -->
   </view>
-  
+  <template is='time-quantum'></template>
   <!-- 产品模块 -->
   <!-- <block wx:for="{{topicDetailList}}"  wx:key='unique' > -->
+
+  <view class='goods-container'>
+    <template is='good-item'></template>
+    <template is='good-item'></template>
+    <template is='good-item'></template>
+  </view>
 
     <template wx:if="{{topicTemplateId==1}}" is="topic-temp1" data="{{topicDetailList,scrollLeft,currentTab}}"/>
 
