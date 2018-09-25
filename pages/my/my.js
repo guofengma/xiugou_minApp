@@ -30,6 +30,8 @@ Page({
         imgUrl: Config.imgBaseUrl
       })
       this.didLogin()
+      this.refreshMemberInfoNotice()
+      Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
       Event.on('didLogin', this.didLogin, this);
     },
     onShow: function () {
@@ -50,6 +52,10 @@ Page({
     },
     onHide: function() {
 
+    },
+    refreshMemberInfoNotice() {
+      console.log(11111)
+      Tool.getUserInfos(this)
     },
     getLevel(){
       if (!this.data.didLogin) return

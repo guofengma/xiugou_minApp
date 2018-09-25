@@ -97,6 +97,8 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let callBack = () => {
+        Storage.setMemberId(req.responseObject.data.id)
+        Tool.loginOpt(req)
         Tool.switchTab('/pages/index/index')
       }
       Tool.showSuccessToast('注册成功', callBack)
