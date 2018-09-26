@@ -860,7 +860,7 @@ export default class Tool {
 
     static loginOpt(req){
       // 获取 cookies
-      let cookies = req.header['Set-Cookie']
+      let cookies = req.header['Set-Cookie'] || req.header['set-cookie'] 
       this.formatCookie(cookies)
       global.Storage.setUserAccountInfo(req.responseObject.data)
       global.Event.emit('didLogin');

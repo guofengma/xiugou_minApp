@@ -54,7 +54,6 @@ Page({
 
     },
     refreshMemberInfoNotice() {
-      console.log(11111)
       Tool.getUserInfos(this)
     },
     getLevel(){
