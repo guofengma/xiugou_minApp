@@ -159,7 +159,7 @@
   
 }
 .good-type-ing .good-loot-already{
-  width: 50%;
+  min-width: 50%;
   background: #D51243;
   border-radius: 20rpx;
   padding: 0 12rpx;
