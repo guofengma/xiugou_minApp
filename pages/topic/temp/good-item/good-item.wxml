@@ -1,0 +1,32 @@
+<template name='good-item'>
+  <view class='good-item'>
+    <view class='good-item-thumb-contaner'>
+      <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"
+        class='good-item-thumb'
+      ></image>
+      <view class='good-soldout'></view>
+    </view>
+    
+    <view class='good-detail'>
+      <view class='good-title'>UL2018春夏新款青春女春夏新款青春女春夏新款青akjhdkajhds</view>
+      <view class='good-type good-type-tip'>123761关注</view>
+      <view class='good-type good-type-out'>抢光了11111件</view>
+      <view class='good-type good-type-ing'>
+        <view class='flexR-sb'>
+          <view class='good-loot-already'>已抢抢11111件</view>
+          <view class='good-loot-progress'>49%</view>
+        </view>
+      </view>
+      <view class='good-foot'>
+        <view class='good-price'>
+          <view class='good-price-discount'>¥52</view>
+          <view class='good-price-origin'>¥159.00</view>
+        </view>
+        <!-- <view class='good-operate loot'>这里是按钮</view> -->
+        <!-- <view class='good-operate out'>这里是按钮</view> -->
+        <!-- <view class='good-operate tip'>这里是按钮</view> -->
+        <view class='good-operate cancel-tip'>按钮啊</view>
+      </view>
+    </view>
+  </view>
+</template>
