@@ -1,5 +1,5 @@
 <view class='sub-page'>
-  <!--广告位  -->
+  <!--轮播  -->
   <view class='ad'>
     <view class='search-bar boxSize flexR-sb'>
       <view class='bar flexR-sb' catchtap='searchClicked'><image src='/img/search.png' mode='widthFix'></image></view>
@@ -14,7 +14,71 @@
     </swiper>
   </view>
   
-  <view catchtap='goPages'>分类</view>
-  <view catchtap='goPages'>分类</view>
+  <!-- icon图标 -->
+ 
+  <view  class='index-items-view boxSize whiteBg flexR'>
+    <block wx:for='{{iconArr}}' wx:key='unique'>
+      <view class='flexC items-sub' catchtap='goPages' data-index='{{index}}'>
+        <image-sub imgStyle='{{"width:96rpx"}}' imgSrc="{{item.icon}}"/>
+        <text class='font-24 gray item-name'>{{item.name}}</text>
+      </view>
+    </block>
+  </view>
   
+  <!-- 我的等级 -->
+  
+  <view class='index-level-view whiteBg'>
+    <view>
+      <view>尊敬的V2会员您好</view>
+      <view>
+        <view class='level-line-view'>
+          
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 广告位 -->
+
+  <view class='index-ad-banner-view flexC whiteBg'>
+    <block wx:for='{{adArr}}' wx:key='unique'>
+      <view class='overflow'>
+        <image-sub imgStyle='{{"width:100%"}}' imgSrc="{{item.imgUrl}}"/>
+      </view>
+    </block>
+  </view>
+  
+  <!-- 头条 -->
+
+  <view class='index-notice-view whiteBg flexR-sb'>
+    <view class='notice-leftBar font-32'>
+      <view>秀场</view>
+      <view>头条</view>
+    </view>
+    <view class='notice-rightBar boxSize'>
+      <swiper autoplay="true" interval='3000' vertical='true'  style='height:80rpx;' >
+        <block wx:for="{{noticeArr}}" wx:for-item="list" wx:for-index='key' wx:key='{{key}}' >
+          <swiper-item class='swiper-item-notice'>
+            <block wx:for="{{list}}" wx:key='{{index}}'>
+              <view class='ellipsis font-22 gray notice-line'>
+                <text class='notice-label red font-22'>最热</text>
+                {{item.content}}
+              </view>
+            </block>
+            <view class='notice-img'>
+              <image src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' mode='widthFix'></image>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+
+  <!-- 明星店铺 -->
+  <view class='star-shop-view'>
+    <view class='index-item-title flexR font-38'>明星店铺</view>
+    <view>
+     <image src=''></image>
+    </view>
+  </view>
 </view>

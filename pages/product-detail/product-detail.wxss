@@ -47,7 +47,7 @@
 .prd-info{
   color: #bbb;
   font-size: 22rpx;
-  height: 255rpx;
+  /* height: 255rpx; */
   padding: 30rpx;
 }
 .prd-name{

@@ -1,7 +1,7 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
-
+const app = getApp()
 Page({
   data: {
     didLogin:false,
@@ -30,9 +30,13 @@ Page({
       productId: options.productId || '',
       prodCode: options.prodCode || '',
     })
+   
     this.didLogin()
+    if (!this.data.didLogin){
+      app.wxLogin()
+    }
     this.requestFindProductByIdApp()
-    this.getShoppingCartList()
+    
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -44,6 +48,9 @@ Page({
   },
   didLogin() {
     Tool.didLogin(this)
+    if (this.data.didLogin){
+      this.getShoppingCartList()
+    }
   },
   msgTipsClicked(e){
     let n = parseInt(e.currentTarget.dataset.index) 

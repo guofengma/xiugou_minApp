@@ -3,6 +3,7 @@
 }
 image{
   height: auto;
+  vertical-align: middle;
 }
 .flexR{
   display: flex;
@@ -170,6 +171,9 @@ button::after{
 }
 .font-32{
   font-size: 32rpx;
+}
+.font-38{
+  font-size: 38rpx;
 }
 .font-22{
   font-size: 22rpx;

@@ -1047,7 +1047,8 @@ export default class Tool {
     }
     return num
   }
-
+  
+  // 冒泡排序
   static bubbleSort(array){
     let i = 0, len = array.length, j, d; 
     for (; i < len; i++) {
@@ -1058,6 +1059,15 @@ export default class Tool {
       }
     }
     return array;
+  }
+
+  // 平均分割数字
+  static sliceArray(array,num) {
+    let result = [];
+    for (let i = 0, len = array.length; i < len; i += num) {
+      result.push(array.slice(i, i + num));
+    }
+    return result
   }
 }
 
