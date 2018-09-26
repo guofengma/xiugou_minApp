@@ -1,0 +1,95 @@
+.good-item {
+  width: 335rpx;
+  display: inline-block;
+  background: #fff;
+  margin-bottom: 27rpx;
+}
+.good-item:nth-child(odd){
+  margin-right: 20rpx;
+}
+.good-item-thumb{
+  width: 100%;
+  height: 335rpx;
+}
+.good-detail {
+  padding: 20rpx 20rpx 30rpx;
+}
+.good-title {
+  display: -webkit-box;
+  font-size:24rpx;
+  word-break: break-all;
+}
+.good-type {
+  font-size: 22rpx;
+  margin: 21rpx 0 29rpx;
+}
+/* 关注  */
+.good-type-tip {
+  color: #33B4FF;
+}
+/* 抢光  */
+.good-type-out{
+  color: #999;
+}
+/* 已抢  */
+.good-type-ing{
+  color: #fff;
+  background: #f2b7c6;
+  border-radius: 20rpx;
+  padding-right: 12rpx;
+  
+}
+.good-type-ing .good-loot-already{
+  min-width: 50%;
+  background: #D51243;
+  border-radius: 20rpx;
+  padding: 0 12rpx;
+}
+
+.good-foot{
+  display:flex;
+  flex-direction:row;
+  align-items:flex-end;
+  justify-content:space-between;
+}
+.good-price-discount{
+  color: #E60012;
+  font-size: 32rpx;
+}
+.good-price-origin {
+  color: #999;
+  font-size: 22rpx;
+  text-decoration: line-through;
+}
+.good-operate{
+  width: 160rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius:10rpx;
+  font-size: 24rpx;
+  text-align: center;
+}
+/* 马上抢  */
+.good-operate.loot {
+  color: #fff;
+  background:#D51243;
+}
+/* 抢光了  */
+.good-operate.out{
+  color: #999;
+  background:#f7f7f7;
+}
+/* 提醒  */
+.good-operate.cancel-tip,.good-operate.tip{
+  color: #fff;
+  background:#33B4FF;
+}
+.good-operate.cancel-tip::before{
+  content: '';
+  display: inline-block;
+  width: 28rpx;
+  height: 28rpx;
+  background: url('http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg') no-repeat center;
+  background-size: contain;
+  vertical-align: middle;
+}

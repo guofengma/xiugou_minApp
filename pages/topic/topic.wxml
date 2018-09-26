@@ -2,9 +2,10 @@
 <import src='/pages/topic/temp/temp2/temp2.wxml'/>
 <import src='/pages/topic/temp/temp3/temp3.wxml'/>
 <import src='/pages/topic/temp/temp4/temp4.wxml'/>
+<!-- 降价拍 -->
 <import src='/pages/topic/temp/temp-reducePrice/temp-reducePrice.wxml'/>
-<import src='/pages/topic/temp/temp-time-quantum/temp-time-quantum.wxml' />
-<import src='/pages/topic/temp/good-item/good-item.wxml' />
+<!-- 秒杀拍 -->
+<import src='/pages/topic/temp/temp-secKill/temp-secKill.wxml'/>
 
 <view class='topic-page'>
   <!-- 轮播 -->
@@ -15,15 +16,8 @@
       shdkjahdkajsdjkahsdkashdjkabdsjka嘎嘎嘎嘎嘎嘎嘎嘎叫大受打击AV硕大的
     </view>  -->
   </view>
-  <template is='time-quantum'></template>
   <!-- 产品模块 -->
   <!-- <block wx:for="{{topicDetailList}}"  wx:key='unique' > -->
-
-  <view class='goods-container'>
-    <template is='good-item'></template>
-    <template is='good-item'></template>
-    <template is='good-item'></template>
-  </view>
 
     <template wx:if="{{topicTemplateId==1}}" is="topic-temp1" data="{{topicDetailList,scrollLeft,currentTab}}"/>
 
@@ -34,6 +28,8 @@
     <template wx:elif="{{topicTemplateId==4}}" is="topic-temp4" data="{{topicDetailList}}"/> 
 
     <template wx:elif="{{topicTemplateId==5}}" is="temp-reducePrice" data="{{topicDetailList}}"/> 
+
+    <template wx:elif="{{topicTemplateId==6}}" is="temp-secKill" data="{{topicDetailList}}"/> 
     
   <!-- </block> -->
 
