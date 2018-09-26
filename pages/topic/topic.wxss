@@ -209,5 +209,12 @@
   width: 28rpx;
   height: 28rpx;
   background: url('http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg') no-repeat center;
-  background-size: contain
+  background-size: contain;
+  vertical-align: middle;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }
