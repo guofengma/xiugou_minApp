@@ -32,16 +32,15 @@ App({
         flag: false,//退出登录使用参数
         isGoLogin:true
     },
-    wxLogin(isGoLogin=true,callBack=()=>{}){
+    wxLogin(callBack=()=>{}){
       // 小程序登录
-      this.globalData.isGoLogin = isGoLogin
+      // this.globalData.isGoLogin = isGoLogin
       wx.login({
         success: res => {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
           let code = res.code
           if (code) {
             this.globalData.code = code;
-            // this.getSystemInfo();
             this.getUserInfos(this.globalData.code, callBack)
           }
         }

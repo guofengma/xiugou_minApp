@@ -32,8 +32,12 @@ Page({
     })
    
     this.didLogin()
+    let callBack = ()=>{
+      this.getShoppingCartList()
+    }
     if (!this.data.didLogin){
-      app.wxLogin()
+      app.getSystemInfo()
+      app.wxLogin(callBack)
     }
     this.requestFindProductByIdApp()
     
@@ -48,9 +52,6 @@ Page({
   },
   didLogin() {
     Tool.didLogin(this)
-    if (this.data.didLogin){
-      this.getShoppingCartList()
-    }
   },
   msgTipsClicked(e){
     let n = parseInt(e.currentTarget.dataset.index) 
@@ -266,14 +267,17 @@ Page({
     let link = e.currentTarget.dataset.src
     console.log(link)
   },
+  getStorageCartList() {
+    let data = Storage.getShoppingCart() || []
+    let size = data.length
+    this.setData({
+      size: size
+    })
+    return
+  },
   getShoppingCartList() {
-    // 查询购物车
     if (!this.data.didLogin){
-      let data = Storage.getShoppingCart() || []
-      let size = data.length
-      this.setData({
-        size: size
-      })
+      this.getStorageCartList()
       return
     }
     let params = {

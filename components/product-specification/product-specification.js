@@ -7,6 +7,7 @@ Component({
     imgUrl:String,
     price:Number,
     isInit:Boolean,
+    commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包
   },
   data: {
     visiable:false,
@@ -50,7 +51,13 @@ Component({
       }) 
       // 渲染提示语
       this.getTipsSpec()
-      // console.log(this.data.productSpec)     
+      this.initTypeSelected()
+    },
+    initTypeSelected(){ // 默认第一个选中
+      let productSpec = this.data.productSpec[0].list
+      let specValue = productSpec[0].specValue
+      let id = productSpec[0].id
+      this.renderSpecVeiw(0, 0, specValue, id)
     },
     typeListClicked(e) { // 规格点击事件
 
@@ -63,9 +70,13 @@ Component({
       let specValue = e.currentTarget.dataset.specvalue // 中文描述
       let id = e.currentTarget.dataset.id
 
+      this.renderSpecVeiw(key, index, specValue, id)
+      
+    },
+    renderSpecVeiw(key, index, specValue, id){ // 开始渲染
       // 深复制数组
       let obj = [...this.data.isActive]
-      obj[key] = { specValue, id, key, index,name:this.data.productSpec[key].name }
+      obj[key] = { specValue, id, key, index, name: this.data.productSpec[key].name }
       let spec_id = []
       for (let i = 0; i < obj.length; i++) {
         if (obj[i] !== undefined) {
@@ -81,9 +92,8 @@ Component({
           }
         }
       })
-      // console.log(obj)
       this.setData({
-        isActive:obj,
+        isActive: obj,
       })
       // 获取已选规格
       let selectIds = this.getSelectIds(obj)
@@ -92,7 +102,7 @@ Component({
       let selectGroup = this.getSelectGroup(obj)
       let unselectGroup = this.getUnSelectGroup(selectGroup)
 
-      unselectGroup.forEach((item,index)=>{
+      unselectGroup.forEach((item, index) => {
         console.log('*************************************************来自未选择规格组****************')
         this.set_block(item.list, all_ids)
         console.log(all_ids)
@@ -101,14 +111,14 @@ Component({
       selectGroup.forEach((item0, index0) => {
         console.log('*************************************************来自已选择规格组***************')
         console.log("来自已选的", item0)
-        this.update_2(item0.list, index,obj,key)
+        this.update_2(item0.list, index, obj, key)
         console.log('*************来自已选择规格组****************')
       })
       // 渲染提示语
       this.getTipsSpec(this.data.isActive)
       // 如果全部选择好了 渲染对应的价格和库存
       this.isSelectAllTypes()
-      
+
     },
     isSelectAllTypes(){ // 全部选择规格以后渲染页面
       if (this.isSelectAll()) {
@@ -118,7 +128,7 @@ Component({
           selectTypes.push(item.id)
         })
         selectTypes = Tool.bubbleSort(selectTypes)
-        let selectIds = selectTypes.join(',')
+        let selectIds = selectTypes.join('-')
         this.data.priceList.forEach((item, index) => {
           if (item.specIds == selectIds) {
             this.setData({
@@ -171,10 +181,10 @@ Component({
     getSelectIdsline(ids){ 
       let result = [];
       this.data.priceList.forEach((item, index) => {
-        let _attr = "," + item.specIds + ",";
+        let _attr = "-" + item.specIds + "-";
         let _all_ids_in = true;
         for (index in ids) {
-          if (_attr.indexOf("," + ids[index] + ",") == -1) {
+          if (_attr.indexOf("-" + ids[index] + "-") == -1) {
             _all_ids_in = false;
             break;
           }
@@ -192,7 +202,7 @@ Component({
       let products = this.getSelectIdsline(ids);
       let result = [];
       products.forEach((item,index)=>{
-        result = result.concat(item.specIds.split(","));
+        result = result.concat(item.specIds.split("-"));
       })
       console.log('余下还能选择的属性值',result)
       return result;

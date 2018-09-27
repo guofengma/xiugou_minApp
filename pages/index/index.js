@@ -44,6 +44,9 @@ Page({
       this.setData({
         noticeArr:Tool.sliceArray(this.data.noticeArr,2)
       })
+      if (!app.globalData.systemInfo){
+        app.getSystemInfo()
+      }
       app.wxLogin()
       Event.on('didLogin', this.didLogin, this);
     },

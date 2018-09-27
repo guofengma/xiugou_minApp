@@ -61,6 +61,7 @@
             isInit="{{false}}" 
             bind:hiddenTips='hiddenTips'
             isIphoneX='{{isIPhoneX.isIPhoneX}}'
+            commodityType = '1'
         >
         <!-- <view class='cell-name'>规格</view>
         <view class='cell-content'>{{selectType.productType? selectType.productType:'选择产品规格'}}</view> -->
