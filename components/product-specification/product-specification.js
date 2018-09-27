@@ -128,7 +128,7 @@ Component({
           selectTypes.push(item.id)
         })
         selectTypes = Tool.bubbleSort(selectTypes)
-        let selectIds = selectTypes.join('-')
+        let selectIds = selectTypes.join(',')
         this.data.priceList.forEach((item, index) => {
           if (item.specIds == selectIds) {
             this.setData({
@@ -181,10 +181,10 @@ Component({
     getSelectIdsline(ids){ 
       let result = [];
       this.data.priceList.forEach((item, index) => {
-        let _attr = "-" + item.specIds + "-";
+        let _attr = "," + item.specIds + ",";
         let _all_ids_in = true;
         for (index in ids) {
-          if (_attr.indexOf("-" + ids[index] + "-") == -1) {
+          if (_attr.indexOf("," + ids[index] + ",") == -1) {
             _all_ids_in = false;
             break;
           }
@@ -202,7 +202,7 @@ Component({
       let products = this.getSelectIdsline(ids);
       let result = [];
       products.forEach((item,index)=>{
-        result = result.concat(item.specIds.split("-"));
+        result = result.concat(item.specIds.split(","));
       })
       console.log('余下还能选择的属性值',result)
       return result;
