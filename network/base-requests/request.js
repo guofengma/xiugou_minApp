@@ -175,10 +175,10 @@ export default class Request {
   // 是否带上cookie 请求 
   hasCookie() {
     if (this.bodyParam.hasCookie) {
-      delete this.bodyParam.hasCookie
       this.cookie = global.Storage.getUserCookie() || ' '
       return this.cookie
     }
+    delete this.bodyParam.hasCookie
   }
 }
 
