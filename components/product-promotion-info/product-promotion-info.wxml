@@ -1,0 +1,30 @@
+<!--components/product-promotion-info/product-promotion-info.wxml-->
+<!-- comming  => 未开始；  ing     => 进行中  分别对应不同背景色  -->
+<!-- discount => 降价；    seckill => 秒杀   对应不同活动 -->
+<view class='promotion-info-container {{ status == 1 ? "comming" : "ing" }}'>
+  
+  <view class='promotion-info-left'>
+      <view class='promotion-price inline'>
+        <text class="symbol">¥</text>
+        <text class='promotion-price-current'>69</text>
+      </view>
+      <view class='promotion-detail inline'>
+        <view class='promotion-price-origin line-through'>¥129</view>
+        <view class='promotion-desc'>秒杀价</view>
+      </view>
+  </view>
+  <view class='promotion-info-right'>
+    <!-- 已结束 -->
+    <view class='end' wx:if="{{status == 4 || status == 5}}">活动已结束</view>
+
+    <!-- 即将开始或正在进行 -->
+    <view class='start' wx:else>
+        <view class="top">距结束  {{countdownTime}}</view>
+        <view class="bottom">
+          <view class='progress' style='width:100rpx' wx:if="{{status == 2}}"></view>
+          <view style='position:relative;z-index:2'>已抢50%</view>
+        </view>
+    </view>
+    
+  </view>
+</view>
