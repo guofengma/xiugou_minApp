@@ -77,8 +77,12 @@
   <!-- 明星店铺 -->
   <view class='star-shop-view'>
     <view class='index-item-title flexR font-38'>明星店铺</view>
-    <view>
-     <image src=''></image>
+    <view class='star-shop-item'>
+     <image-sub imgStyle='{{"width:100%"}}' imgSrc="{{item.imgUrl}}"/>
+     <view>
+       <!-- logo -->
+       <view></view>
+     </view>
     </view>
   </view>
 </view>
