@@ -35,7 +35,26 @@ Page({
           { content: '3手机号大手大脚熬枯受淡卡萨丁阖家安康三打哈科技收到货阿克苏较好的卡仕达' },
           { content: '4手机号大手大脚熬枯受淡卡萨丁阖家安康三打哈科技收到货阿克苏较好的卡仕达' },
           { content: '5手机号大手大脚熬枯受淡卡萨丁阖家安康三打哈科技收到货阿克苏较好的卡仕达' },
-        ]
+        ],
+        swiperList: [{//除了1，2之外，其它的swpClass都是swp-rightNo
+          aurl: "../start/start",
+          swpClass: "swp-center",
+          time: "2018年3月下11",
+          bname: "2018全球十大突破技术11",
+          imgsrc: "http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"
+        }, {
+          aurl: "#",
+          swpClass: "swp-right",
+          time: "2018年3月下22",
+          bname: "2018全球十大突破技术22",
+            imgsrc: "http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"
+        }, {
+          aurl: "#",
+          swpClass: "swp-rightNo",
+          time: "2018年3月下33",
+          bname: "2018全球十大突破技术33",
+          imgsrc: "http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"
+        }]
     },
     onLoad: function () {
       // this.queryAdList();
@@ -139,6 +158,12 @@ Page({
     topicClicked(e){
       let id = e.currentTarget.dataset.id
       Tool.navigateTo('/pages/topic/topic?id='+id)
+    },
+  /* 这里实现控制中间凸显图片的样式 */
+    handleChange: function (e) {
+      this.setData({
+        currentIndex: e.detail.current
+      })
     },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);

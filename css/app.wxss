@@ -84,7 +84,7 @@ button::after{
   display:-webkit-box;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:2;
-  line-height:38rpx;
+  /* line-height:38rpx; */
 }
 .pwdImg{
   width: 40rpx;
@@ -93,11 +93,14 @@ button::after{
   padding: 30rpx 40rpx;
   color: #c8c8c8;
 }
+.gold{
+  color: #C2A38D
+}
 .red{
   color: #D51243;
 }
 .gray {
-  color: #bbbbbb;
+  color: #666;
 }
 .redBg{
   background-color: #D51243;

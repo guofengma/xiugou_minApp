@@ -1,5 +1,5 @@
-<image  wx:if='{{baseImgUrl}}' 
-        src="{{baseImgUrl+imgSrc}}" 
+<image 
+        src="{{baseImgUrl? baseImgUrl+imgSrc:''}}" 
         mode='{{mode||"widthFix"}}' 
         style='{{imgStyle}}'>
 </image>
