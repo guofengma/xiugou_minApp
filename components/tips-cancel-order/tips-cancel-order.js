@@ -68,6 +68,6 @@ Component({
     },
   },
   ready: function () {
-    this.queryDictionaryDetailsType()
+    // this.queryDictionaryDetailsType()
   }
 })

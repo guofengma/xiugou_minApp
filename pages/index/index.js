@@ -14,10 +14,10 @@ Page({
         url: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/',
         iconArr:[ // icon 图标
           { name: '赚钱', icon:'home-icon-xueyuan.png',page:''},
-          { name: '省钱', icon: 'home_icon_shengqian.png', page: '' },
+          { name: '签到', icon: 'home_icon_shengqian.png', page: '' },
           { name: '分享', icon: 'home_icon_share.png', page: '' },
           { name: '学院', icon: 'home-icon-xueyuan.png', page: ''},
-          { name: '促销', icon: 'home_icon_chuxiao.png', page: ''},
+          { name: '秒杀', icon: 'home_icon_chuxiao.png', page: ''},
           { name: '手机相机', icon: 'iconForobtain.png', page: '' },
           { name: '电脑家电', icon: 'iconForobtain.png', page: '' },
           { name: '品质男装', icon: 'iconForobtain.png', page: ''},

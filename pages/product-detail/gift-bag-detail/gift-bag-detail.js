@@ -80,10 +80,10 @@ Page({
         productId: this.data.productInfo.id,
         priceList: this.data.selectType.priceList
       }],
-      orderType: 98
+      orderType: 5
     }
 
-    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&type=0")
+    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&type=5")
   },
   checkGiftBagOrder(){
     let params = {

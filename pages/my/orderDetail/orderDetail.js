@@ -49,7 +49,7 @@ Page({
     //获取详情
     getDetail() {
       let params = {
-        orderId: this.data.orderId,
+        id: this.data.orderId,
         reqName: '订单详情',
         url: Operation.getOrderDetail
       }

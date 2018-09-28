@@ -215,19 +215,19 @@ export default class Operation {
 
         // 预支付
 
-        this.repay = '/order/prePay'
+        this.prePay = '/order/prePay'
 
         // 第三方支付回调接口
 
-        this.paySuccess = '/order/order/paySuccess'
+        this.paySuccess = '/order/paySuccess'
 
         // 继续去支付
 
-        this.continueToPay  = '/order/order/continueToPay'
+        this.continueToPay = '/order/payRecord/continueToPay'
 
         // 继续支付
 
-        this.continuePay = '/order/order/continuePay'
+        this.continuePay = '/order/payRecord/continuePay'
         
         // 继续去预支付
 
@@ -257,15 +257,23 @@ export default class Operation {
 
         // 申请退款
         
-        this.orderRefund = '/order/order/orderRefund'
+        this.orderRefund = '/order/returnProduct/applyRefund'
 
         // 申请换货
 
-        this.applyExchangeProduct = '/order/order/applyExchangeProduct'
+        this.applyExchangeProduct = '/order/returnProduct/applyExchangeGoods'
 
         // 申请退货
 
-        this.applyReturnGoods  = '/order/order/applyReturnGoods'
+        this.applyReturnGoods = '/order/returnProduct/applyReturnGoods'
+
+        // 撤销申请
+
+        this.revokeApply = '/order/returnProduct/revokeApply'
+
+        // 修改申请
+
+        this.updateApply = '/order/returnProduct/updateApply'
 
         // 查看申请退款子订单详情
 
@@ -273,11 +281,11 @@ export default class Operation {
 
         // 查看退款退货换货情况
 
-        this.findReturnProductById = '/order/order/findReturnProductById'
+        this.findReturnProductById = '/order/returnProduct/lookDetail'
 
         // 退货换货填写物流信息
 
-        this.fillInExpressInfoById ='/order/order/fillInExpressInfoById'
+        this.fillInExpressInfoById ='/order/returnProduct/fillSendInfo'
 
         // 退换货物流查看
 

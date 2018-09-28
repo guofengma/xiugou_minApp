@@ -71,10 +71,9 @@ Page({
         openid: Storage.getWxOpenid(),
         tokenCoin: 0, // 先按照0 写死
         "type": payType,
-        url: Operation.repay,
+        url: Operation.prePay,
         reqName: '预支付',
       }
-      // let r = RequestFactory.repay(params);
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         this.test(payType, req)
@@ -91,7 +90,7 @@ Page({
     },
     paySuccess(payway,outTradeNo){
       let params ={
-        amounts: this.data.payList.showTotalAmounts,
+        amounts: this.data.payList.totalAmounts,
         outTradeNo:outTradeNo,
         payTime: Tool.timeStringForDate(new Date(), "YYYY-MM-DD HH:mm:ss"),
         tradeNo:'',

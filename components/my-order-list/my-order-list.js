@@ -35,9 +35,9 @@ Component({
     //获取数据
     getData(index) {
       let params = {
-        pageSize: this.data.pageSize,
+        size: this.data.pageSize,
         page: this.data.currentPage,
-        status:index,
+        status:index || '',
         condition:this.properties.condition || '',
         reqName: "获取我的订单列表"+index,
         url: Operation.queryOrderPageList
@@ -47,20 +47,22 @@ Component({
         params: params
       });
       let r = RequestFactory.wxRequest(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let datas = [];
         let secondMap = new Map();
         let key = this.data.key;
+        console.log(list)
+        
         for (let i in req.responseObject.data.data) {
           let item = req.responseObject.data.data[i];
-          item.createTime = Tool.formatTime(item.orderCreateTime);
+          item.createTime = Tool.formatTime(item.createTime);
           item.finishTime = Tool.formatTime(item.finishTime);
           item.sendTime = Tool.formatTime(item.sendTime);
           // item.createTime = Tool.formatTime(item.orderCreateTime);
           // 礼包不显示产品描述
-          if (item.orderProduct[0].orderType == 98) item.orderProduct[0].spec=''
+          if (item.orderProductList[0].orderType == 98) item.orderProduct[0].spec=''
           // 这块是倒计时 
-          if (item.orderStatus == 1) {
+          if (item.status == 1) {
             let now = Tool.timeStringForDate(new Date(), "YYYY-MM-DD HH:mm:ss");
             secondMap.set(key, 1);
           }
@@ -69,12 +71,12 @@ Component({
         }
         this.setData({
           list: list.concat(datas),
-          totalPage: req.responseObject.data.total,
+          totalPage: req.responseObject.data.totalPage,
           secondArry: secondMap,
           key: key
         });
-
-        if (!req.responseObject.data.total) {
+        
+        if (!req.responseObject.data.totalPage) {
           this.setData({
             tipVal: 2
           });
@@ -114,7 +116,7 @@ Component({
     //删除订单
     deleteItem(e) {
       let id = e.currentTarget.dataset.id;
-      let status = e.currentTarget.dataset.orderstatus;
+      let status = e.currentTarget.dataset.status;
       this.setData({
         isDelete: true,
         orderId: id,
@@ -249,18 +251,18 @@ Component({
       let orderArry = that.data.list;
       for (let i = 0; i < orderArry.length; i++) {
         let order = orderArry[i];
-        if (order.orderStatus == 1) {
+        if (order.status == 1) {
           let second = mapArry.get(i);
           if (second) {//秒数>0
             // let countDownTime = Tool.timeStringForTimeCount(second);
-            let endTime = Tool.formatTime(order.overtimeClosedTime)
+            let endTime = Tool.formatTime(order.shutOffTime)
             let countdown = Tool.getDistanceTime(endTime, this,1)
             order.countDownTime = countdown + '后自动取消订单';
             mapArry.set(i, countdown);
           } else {
             //order.countDownTime = '交易关闭';
             clearTimeout(this.data.time);
-            order.orderStatus = 10
+            order.status = 8
             if(this.data.num==1){
               orderArry.splice(i,1)
             }

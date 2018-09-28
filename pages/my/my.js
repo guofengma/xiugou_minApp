@@ -1,5 +1,5 @@
 // pages/my/account.js
-let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
+let { Tool, RequestFactory, Storage, Event, Operation} = global
 Page({
     data: {
       userInfos:'',
@@ -26,9 +26,6 @@ Page({
       ]
     },
     onLoad: function (options) {
-      this.setData({
-        imgUrl: Config.imgBaseUrl
-      })
       this.didLogin()
       this.refreshMemberInfoNotice()
       Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);

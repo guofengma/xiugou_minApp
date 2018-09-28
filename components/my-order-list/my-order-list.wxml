@@ -8,34 +8,24 @@
 
 
 <view class="order-list" wx:for="{{list}}" wx:key="unique" wx:for-item="item">
-  <view class="header" bindtap="toOrderDetail" data-id="{{item.id}}" data-status="{{item.orderStatus}}">
+  <view class="header" bindtap="toOrderDetail" data-id="{{item.id}}" data-status="{{item.status}}">
     <view class="left">
       订单编号：{{item.orderNum}}
     </view>
     <view class="order-status red right">
-      <text wx:if="{{num==1}}">待支付</text>
-      <text wx:elif="{{num==2}}">待发货</text>
-      <text wx:elif="{{num==3}}">
-              <text wx:if="{{item.orderStatus==3}}">待收货</text>
-      <text wx:elif="{{item.orderStatus==4}}">待自提</text>
-      </text>
-      <text wx:elif="{{num==4}}">已完成</text>
-      <text wx:else>
-                <text wx:if="{{item.orderStatus==1}}">待支付</text>
-      <text wx:elif="{{item.orderStatus==2}}">待发货</text>
-      <text wx:elif="{{item.orderStatus==3}}">待收货</text>
-      <text wx:elif="{{item.orderStatus==4}}">待自提</text>
-      <text wx:elif="{{item.orderStatus==5||item.orderStatus==7}}">已完成</text>
-      <text wx:elif="{{item.orderStatus==6||item.orderStatus==10}}">已关闭</text>
-      <text wx:elif="{{item.orderStatus==8}}">已取消</text>
-      </text>
+      <text wx:if="{{item.status==1}}">待支付</text>
+      <text wx:elif="{{item.status==2}}">待发货</text>
+      <text wx:elif="{{item.status==3}}">待收货</text>
+      <text wx:elif="{{item.status==4 || tem.status==5 }}">已完成</text>
+      <text wx:elif="{{item.status==6 || item.status== 8}}">已关闭</text>
+      <text wx:elif="{{item.status== 7}}">已取消</text>
     </view>
   </view>
   <view class="clearfix"></view>
   <view class="body">
-    <view class="item-area" bindtap="toOrderDetail" data-id="{{item.id}}" data-status="{{item.orderStatus}}">
-      <view class="item" wx:for="{{item.orderProduct}}" wx:key="item" wx:for-item="oItem">
-        <image src="{{oItem.imgUrl}}" alt=""></image>
+    <view class="item-area" bindtap="toOrderDetail" data-id="{{item.id}}" data-status="{{item.status}}">
+      <view class="item" wx:for="{{item.orderProductList}}" wx:key="item" wx:for-item="oItem">
+        <image src="{{oItem.specImg}}" alt=""></image>
         <view class="goods-inf">
           <view class="ellipsis-2">
             <text class='label-red-border' wx:if='{{oItem.orderType==98}}'>礼包</text> {{oItem.productName}}
@@ -51,40 +41,33 @@
     </view>
 
     <view class="amount">
-      <text>共{{item.orderProduct.length}}件商品 合计：</text>
-      <text class="red font-30">￥{{item.amounts}}</text>
+      <text>共{{item.orderProductList.length}}件商品 合计：</text>
+      <text class="red font-30">￥{{item.totalPrice}}</text>
       <text class="freight">(含运费￥{{item.freightPrice}})</text>
     </view>
     <view class="time">
-  <text wx:if="{{num==4 ||(num==0&&item.orderStatus==7)}}">完成时间：{{item.finishTime}}</text>
-      <text wx:elif="{{num==3&&item.orderStatus==3 ||(num==0&&item.orderStatus==3)}}">发货时间：{{item.sendTime}}</text>
+      <text wx:if="{{ item.status==4 || item.status==5}}">完成时间：{{item.finishTime}}</text>
+      <text wx:elif="{{ item.status==3 }}">发货时间：{{item.sendTime}}</text>
       <text wx:else>创建时间：{{item.createTime}}</text>
     </view>
-    <view wx:if="{{num!=2&&item.orderStatus!=2&&item.orderStatus!=9}}">
+    <view>
       <view class="footer">
-        <!-- 倒计时 后面取消了  -->
-        <view class="left red" wx:if="{{num==1||(num==0&&item.orderStatus==1)}}">
+        <!-- 倒计时  -->
+        <view class="left red" wx:if="{{item.status==1}}">
           {{item.countDownTime}}
         </view>
-        <view class="right" wx:if="{{num==4||(num==0&&(item.orderStatus==6 || item.orderStatus==7||item.orderStatus==5 ||item.orderStatus==8 ||item.orderStatus==10))}}">
-          <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.id}}" data-orderstatus="{{item.orderStatus}}">删除订单</view>
-          <view class="pay-btn red" bindtap='continueBuy' data-id="{{item.id}}" wx:if='{{item.orderProduct[0].orderType!=98}}'>再次购买</view>
+        <view class="right" wx:if="{{ item.status!=1 && item.status!=2 && item.status!=3 }}">
+          <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.id}}" data-status="{{item.status}}">删除订单</view>
+          <view class="pay-btn red" bindtap='continueBuy' data-id="{{item.id}}" wx:if='{{item.orderType==99}}'>再次购买</view>
         </view>
-        <view class="right" wx:elif="{{num==1||(num==0&&item.orderStatus==1)}}">
+        <view class="right" wx:elif="{{ item.status==1}}">
           <view class="cancel-btn" bindtap="cancelItem" data-ordernum="{{item.orderNum}}">取消订单</view>
           <view class="pay-btn red" bindtap='continuePay' data-item="{{item}}">
-            {{item.outTrandNo? "继续支付":"去支付"}}
+            {{item.outTradeNo? "继续支付":"去支付"}}
           </view>
         </view>
-        <view class="right" wx:elif="{{num==3||(num==0&&item.orderStatus==3)}}">
-          <view class="cancel-btn" bindtap="logistics" data-id="{{item.id}}" wx:if="{{item.orderStatus!=4}}">查看物流</view>
-          <view class="pay-btn red" bindtap="confirmReceipt" data-id="{{item.id}}">确认收货</view>
-        </view>
-        <view class="right" wx:elif="{{num==0&&item.orderStatus==8&&item.orderStatus==10}}">
-          <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.id}}" data-orderstatus="{{item.orderStatus}}">删除订单</view>
-          <view class="pay-btn red" bindtap='continueBuy' data-id="{{item.id}}" wx:if='{{item.orderProduct[0].orderType!=98}}'>再次购买</view>
-        </view>
-        <view class="right" wx:elif="{{num==0&&item.orderStatus==4}}">
+        <view class="right" wx:elif="{{item.status==3}}">
+          <view class="cancel-btn" bindtap="logistics" data-id="{{item.id}}">查看物流</view>
           <view class="pay-btn red" bindtap="confirmReceipt" data-id="{{item.id}}">确认收货</view>
         </view>
       </view>

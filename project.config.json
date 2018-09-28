@@ -138,10 +138,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
-					"name": "专题",
-					"pathName": "pages/topic/topic",
-					"query": ""
+					"id": 17,
+					"name": "订单确认页",
+					"pathName": "pages/order-confirm/order-confirm",
+					"query": "type=5"
 				}
 			]
 		}
