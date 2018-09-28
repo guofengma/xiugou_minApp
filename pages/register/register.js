@@ -30,7 +30,7 @@ Page({
       let callBack = () => {
         this.sweepCode(options.inviteCode)
       }
-      app.wxLogin(false, callBack)
+      app.wxLogin(callBack)
     }
   },
   onShow: function () {

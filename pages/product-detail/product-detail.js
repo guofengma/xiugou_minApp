@@ -1,7 +1,7 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
-
+const app = getApp()
 Page({
   data: {
     didLogin:false,
@@ -30,9 +30,17 @@ Page({
       productId: options.productId || '',
       prodCode: options.prodCode || '',
     })
+   
     this.didLogin()
+    let callBack = ()=>{
+      this.getShoppingCartList()
+    }
+    if (!this.data.didLogin){
+      app.getSystemInfo()
+      app.wxLogin(callBack)
+    }
     this.requestFindProductByIdApp()
-    this.getShoppingCartList()
+    
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -259,14 +267,17 @@ Page({
     let link = e.currentTarget.dataset.src
     console.log(link)
   },
+  getStorageCartList() {
+    let data = Storage.getShoppingCart() || []
+    let size = data.length
+    this.setData({
+      size: size
+    })
+    return
+  },
   getShoppingCartList() {
-    // 查询购物车
     if (!this.data.didLogin){
-      let data = Storage.getShoppingCart() || []
-      let size = data.length
-      this.setData({
-        size: size
-      })
+      this.getStorageCartList()
       return
     }
     let params = {

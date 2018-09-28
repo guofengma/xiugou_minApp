@@ -1,0 +1,5 @@
+<image 
+        src="{{baseImgUrl? baseImgUrl+imgSrc:''}}" 
+        mode='{{mode||"widthFix"}}' 
+        style='{{imgStyle}}'>
+</image>

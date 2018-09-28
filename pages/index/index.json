@@ -1,1 +1,6 @@
-{}
+{
+  "navigationBarTitleText": "秀购",
+  "usingComponents": {
+    "image-sub": "/components/image-sub/image-sub"
+  }
+}

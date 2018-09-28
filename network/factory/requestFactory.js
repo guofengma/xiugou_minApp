@@ -31,13 +31,13 @@ export default class RequestFactory {
 
       4. 失败的回调 以下2选1即可
 
-      （1）this.failBlock = (req) => {业务逻辑};
+      （1）r.failBlock = (req) => {业务逻辑};
 
        // 简化版的4（1）的失败回调 针对只打印后端传回的消息和超时登录
       （2）Tool.showErrMsg(r)
 
       5. 结束回调，不管成功or失败
-      this.completeBlock = (req) => {业务逻辑};
+      r.completeBlock = (req) => {业务逻辑};
 
       6. 加入队列请求中 一定要写 否则不能请求 小程序最大并发请求为5个 超过5个会请求不成功 故要加入队列
       r.addToQueue();
