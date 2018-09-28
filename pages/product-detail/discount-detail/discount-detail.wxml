@@ -37,16 +37,11 @@
      bind:countdown="timeout" 
      prop="{{proNavData}}" 
      promotionDesc="{{promotionDesc}}"
+     promotionType="discount"
      wx:if="{{proNavData.id}}"></product-promotion-info>
     <!-- 产品信息 -->
     <view class='prd-info boxSize'>
       <view class='prd-name ellipsis-2'>{{productInfo.name}}</view>
-      <view class='price'>
-        <text class='price1 red'>¥ {{productInfoList.price}}<text class='font-24'>起</text></text>
-        <text class='price2 gray'>¥ {{productInfoList.originalPrice}}</text>
-        <!-- <text class='label-pd redBg'>拼店价：¥{{productInfo.group_price}}</text> -->
-        <!-- <text class='price3 red'>积分价：¥ {{productInfo.min_payment}}</text> -->
-      </view>
       <view class='shippingInfo gray'>
         <text style='margin-right:158rpx'>快递：{{productInfoList.freight}}</text> 
         <text>月销售{{productInfoList.monthSaleTotal}}笔</text>
@@ -104,7 +99,11 @@
   </view>
     </view>
     <!-- 详情页 tabar  -->
-    <product-promotion-footbar promotionFootbar="{{promotionFootbar}}" bindtap="setTip"></product-promotion-footbar>
+    <product-promotion-footbar 
+      promotionFootbar="{{promotionFootbar}}"
+      bindtap="footbarReady"
+      data-key="2"
+    ></product-promotion-footbar>
     <!-- <view class="bottom-bar flexR boxSize {{isIPhoneX.className}}">
       <view class='cart font-22 flexC' bindtap='cartClicked'>
         <image src='/img/shoppingcart.png' mode='widthFix'></image>

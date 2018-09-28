@@ -1,14 +1,18 @@
 Component({
   properties: {
-    'promotionFootbar': {
+    promotionFootbar: {
       type: Object,
-      value: {}
+      value: {
+        className: 'footbar-primary',
+        text: '设置提醒',
+        textSmall: '',
+        disabled: false,
+      }
     }
   },
   data: {
 
   },
-  methods: {
-
+  methods: { 
   }
 })

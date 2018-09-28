@@ -1,5 +1,6 @@
 .footbar{
   border-top:1rpx solid #eee;
+  border-radius: 0;
   height:98rpx;
   font-size: 28rpx;
   line-height: 30rpx;

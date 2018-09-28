@@ -37,8 +37,9 @@ Page({
       "intervalTime": 1,
       "downPrice": 1.5,
       "floorPriceTime": 1,
-      "limitNumber": -1,
-      "status": 2,
+      "limitNumber": 1,
+      "status": 3,
+      "activityTime": new Date().getTime() + 2000000,
       "beginTime": new Date().getTime() + 2000000,
       "endTime": new Date().getTime() + 5000,
       "closeTime": 1537962985000,
@@ -50,14 +51,13 @@ Page({
       "spec": "红色-32G-1KG",
       "specImg": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/pms_1528718750.15896438!560x560.jpg",
       "originalPrice": 1000,
-      "markdownPrice": 1.5,
-      "activityTime": null,
+      "markdownPrice": 3,
       "limitFlag": 0,
       "notifyFlag": 0,
       "date": 1538034474246,
       "tip": false,
       "reseCount": 0,
-      "notifyFlag": 0,
+      "notifyFlag": 1,
     },
     promotionDesc:{
       commingDesc: '',
@@ -66,7 +66,9 @@ Page({
     },
     promotionFootbar: {
       className: 'footbar-primary',
-      text: '设置提醒'
+      text: '设置提醒',
+      textSmall: '',
+      disabled: false,
     }
   },
   onLoad: function (options) {
@@ -81,9 +83,12 @@ Page({
     console.log(commingDesc);
 
     let countdownDesc = '距开抢';
-    if( prop.status === 2){
-      countdownDesc = '距结束'; // 距下次降价 活动结束
+    if( prop.status === 2 ){
+      countdownDesc = '距下次降价'; // 距下次降价 活动结束
+      if (prop.markdownPrice == prop.floorPrice) 
+        countdownDesc = '距结束';
     }
+    this.checkPromotionFootbarInfo();
 
     // ==========
     this.setData({
@@ -102,20 +107,71 @@ Page({
   onShow: function () {
 
   },
+  checkPromotionFootbarInfo(){
+    let p = this.data.promotionFootbar;
+    let props = this.data.proNavData;
+  
+    // 以下是按钮文案相关
+    if( props.status === 1 && props.notifyFlag ){
+      p.text = '开始前3分钟提醒';
+    }
+
+    if(props.status === 2){
+      p.text = '立即拍';
+      p.className = 'footbar-main';
+      p.textSmall = '';
+    }
+
+    if ([3, 4, 5].includes(props.status)) {
+      p.text = '已结束';
+      if(props.status === 3)
+        p.text = '已抢光';
+      p.textSmall = '';
+    }
+
+    if (props.limitFlag >= props.limitNumber) {
+      p.text = `每人限购${props.limitNumber}次`;
+      p.textSmall = '(您已购买过本商品)';
+    }
+
+    if ( //什么情况下不允许点击按钮
+      (props.status === 1 && props.notifyFlag) ||  //未开始已设置提醒
+      [3, 4, 5].includes(props.status) || // 已售完、已结束、手动结束下
+      props.limitFlag >= props.limitNumber  // 购买数量大于等于限购数
+    ) {
+      p.disabled = true;
+      p.className = 'footbar-disabled';
+    }
+    console.log(p)
+    this.setData({
+      promotionFootbar: p      
+    })
+  },
   setTip: function() {
-    if (this.data.promotionFootbar.className == 'footbar-disabled') return;
-    let title = `已关注本商品,\n活动开始前3分钟会有消息通知您`;
+    let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
     wx.showToast({
       title: title,
-      icon: 'none'
+      icon: 'none',
+      duration: 3000
     })
     this.setData({
       promotionFootbar: {
         className: 'footbar-disabled',
-        text: '没人限购2次',
-        textSmall: '(您已购买过本商品)'
-      }
+        text: '每人限购2次',
+        textSmall: '(您已购买过本商品)',
+        disabled: true
+      },
+      "proNavData.notifyFlag": 1
     })
+  },
+  //根据不同状态有不同的事情处理
+  footbarReady(e){
+    if (this.data.promotionFootbar.disabled) return;    
+    if(this.data.proNavData.status === 1){
+      this.setTip();
+    } else {
+      this.btnClicked(e);
+    }
   },
   // 未开始 未设置提醒时： X月X日X:00开拍
   // 未开始 已设置提醒时： 明天X点开拍

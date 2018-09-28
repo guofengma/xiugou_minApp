@@ -24,19 +24,22 @@
     <view class='end' wx:if="{{prop.status == 4 || prop.status == 5}}">活动已结束</view>
     <!-- 即将开始 -->
     <view class='start' wx:elif="{{prop.status == 1}}">
-      <view class="top">距开抢  {{countdownTime}}</view>
+      <view class="top">{{promotionDesc.countdownDesc}} 
+      <text wx:for="{{countdownTime}}">{{item}}</text> 
+      </view>
         <view class="bottom">
           <view style='position:relative;z-index:2'>{{promotionDesc.commingDesc}}</view>
         </view>
     </view>
     <!-- 正在进行 -->
     <view class='start' wx:else>
-        <view class="top">{{promotionDesc.countdownDesc}}  {{countdownTime}}</view>
+        <view class="top">{{promotionDesc.countdownDesc}}  
+          <text wx:for="{{countdownTime}}">{{item}}</text>
+        </view>
         <view class="bottom">
           <view class='progress'
-           style='width:{{200 * ((prop.totalNumber - prop.surplusNumber)/prop.totalNumber)}}rpx'
-            wx:if="{{prop.status == 2}}"></view>
-          <view style='position:relative;z-index:2'>还剩{{prop.surplusNumber}}件</view>
+           style='width:{{200 * ((prop.totalNumber - prop.surplusNumber)/prop.totalNumber)}}rpx'></view>
+          <view style='position:relative;z-index:2'>{{prop.status === 3 ? "已抢100%" : "还剩" + prop.surplusNumber + "件"}}</view>
         </view>
     </view>
     

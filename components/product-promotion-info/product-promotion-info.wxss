@@ -52,9 +52,16 @@
 }
 .promotion-info-right .top{
   margin-bottom: 10rpx;
+  width: 250rpx;
+  text-align: center;
 }
-.promotion-info-right .top, .promotion-info-right .bottom {
+.promotion-info-right text{
+ display: inline-block;
+ width: 12rpx;
+}
+.promotion-info-right .bottom {
   width: 200rpx;
+  margin: 0 auto;
 }
 .promotion-info-container.ing .top {
   color: #FFFC00;
