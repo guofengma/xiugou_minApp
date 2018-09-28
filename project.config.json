@@ -47,6 +47,18 @@
 					"pathName": "pages/product-detail/product-detail",
 					"query": ""
 				},
+        {
+          "id": -1,
+          "name": "秒杀详情页",
+          "pathName": "pages/product-detail/seckill-detail/seckill-detail",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "降价拍详情页",
+          "pathName": "pages/product-detail/discount-detail/discount-detail",
+          "query": ""
+        },
 				{
 					"id": -1,
 					"name": "关于我们",

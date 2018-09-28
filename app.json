@@ -56,7 +56,9 @@
     "pages/download-app/oldUser-downLoad/oldUser-downLoad",
     "pages/product-classification/product-classification",
     "pages/register/agreement/agreement",
-    "pages/topic/topic"
+    "pages/topic/topic",
+    "pages/product-detail/discount-detail/discount-detail",
+    "pages/product-detail/seckill-detail/seckill-detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

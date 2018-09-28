@@ -1,0 +1,144 @@
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+<!--商品展示竖向  -->
+<!-- <import src='/components/product-info-column/product-info-column.wxml' /> -->
+
+<!-- 消息显示模板 -->
+<import src= "/components/msg-tips/msg-tips.wxml"/>
+
+<import src="../../../libs/wxParse/wxParse.wxml" />
+
+<scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%">
+  <view class='prduct-detail-view'>
+    <!--topbar  -->
+    <view class='topbar flexR' wx:if='{{floorstatus}}' >
+      <image src='{{productInfo.imgUrl}}' ></image>
+      <view class='msg-view fr' bindtap='msgClicked'></view>
+      <template is="msg-tips" data="{{msgShow}}" /> 
+    </view>
+    <view class='slider' style='height:{{imgheights[0]}}rpx'>
+      <!--广告轮播  -->
+      <view class='slider-nav boxSize'>
+        <!-- <image src='/img/back-icon.png' mode='widthFix' class='fl'></image> -->
+        <image src='/img/msg-icon.png' mode='widthFix' class='fr' bindtap='msgClicked'></image>
+        <template is="msg-tips" data="{{msgShow}}" /> 
+      </view>
+      <swiper autoplay="true" interval='3000' bindchange='sliderChange'>
+        <block wx:for="{{imgUrls}}" wx:key="unique">
+          <swiper-item>
+            <image src="{{item.smallImg}}" class="slide-image" bindload="imageLoad"/>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view wx:if='{{imgUrls.length>0}}' class="activeIndex">
+        {{activeIndex+"/"+ imgUrls.length}}
+      </view>
+    </view>
+     <product-promotion-info 
+     bind:countdown="timeout" 
+     prop="{{proNavData}}" 
+     promotionDesc="{{promotionDesc}}"
+     wx:if="{{proNavData.id}}"></product-promotion-info>
+    <!-- 产品信息 -->
+    <view class='prd-info boxSize'>
+      <view class='prd-name ellipsis-2'>{{productInfo.name}}</view>
+      <view class='price'>
+        <text class='price1 red'>¥ {{productInfoList.price}}<text class='font-24'>起</text></text>
+        <text class='price2 gray'>¥ {{productInfoList.originalPrice}}</text>
+        <!-- <text class='label-pd redBg'>拼店价：¥{{productInfo.group_price}}</text> -->
+        <!-- <text class='price3 red'>积分价：¥ {{productInfo.min_payment}}</text> -->
+      </view>
+      <view class='shippingInfo gray'>
+        <text style='margin-right:158rpx'>快递：{{productInfoList.freight}}</text> 
+        <text>月销售{{productInfoList.monthSaleTotal}}笔</text>
+      </view>
+    </view>
+    <!--产品规格选择  -->
+    <view class='chooseBox'>
+      <!-- <view> -->
+        <product-specification id='prd-info-type' 
+            bind:subClicked="typeSubClicked"  
+            productSpec='{{productSpec}}' 
+            price = '{{productInfoList.price}}'
+            priceList='{{priceList}}' 
+            bind:counterInputOnChange='counterInputOnChange' 
+            imgUrl="{{productInfo.imgUrl}}" 
+            showImgs='{{true}}'
+            isInit="{{false}}" 
+            bind:hiddenTips='hiddenTips'
+            isIphoneX='{{isIPhoneX.isIPhoneX}}'
+        >
+        <!-- <view class='cell-name'>规格</view>
+        <view class='cell-content'>{{selectType.productType? selectType.productType:'选择产品规格'}}</view> -->
+        </product-specification >
+      <!-- </view> -->
+      <view class='gray'>
+        <text class='label red' >服务</text>
+        正品保障·急速发货 <text wx:if='{{productInfo.afterSaleServiceDays>0}}'>{{productInfo.afterSaleServiceDays>30? 30:productInfo.afterSaleServiceDays}}天无理由退换货</text>
+      </view>
+    </view>
+    <!--产品图文详情切换  -->
+    <view  class='prd-info-box'>
+      <view class='prd-info-line'>
+        <view class='first-line' bindtap='infoChoose' data-show='1'>
+          <text class='{{show? "red":""}}'>详情</text>
+        </view>
+        <view bindtap='infoChoose' data-show='2'>
+          <text class='{{!show? "red":""}}'>参数</text>
+        </view>
+      </view>
+      <view  class='prd-info-cell'>
+        <view wx:if='{{show}}'>
+          <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        </view>
+        <view wx:else class='table-view'>
+           <rich-text nodes="{{nodes}}" bindtap="tap"></rich-text>
+        </view>
+      </view>
+    </view>
+    <!--价格说明  -->
+    <view class='price-tips-box'>
+      <view class='price-tips'>价格说明</view>
+      <view class='gray'>
+        <view style='margin-bottom:10rpx'>划线价格：指商品的专柜价、吊牌价、正品零售价、厂商指导价或该商品的曾经展示过销售价等，并非原价，仅供参考</view> 
+        <view>未划线价格：指商品的实时价格，不因表述的差异改变性质。具体成交价格根据商品参加活动，或会员使用优惠券、积分等发生变化最终以订单结算页价格为准。</view>
+  </view>
+    </view>
+    <!-- 详情页 tabar  -->
+    <product-promotion-footbar promotionFootbar="{{promotionFootbar}}" bindtap="setTip"></product-promotion-footbar>
+    <!-- <view class="bottom-bar flexR boxSize {{isIPhoneX.className}}">
+      <view class='cart font-22 flexC' bindtap='cartClicked'>
+        <image src='/img/shoppingcart.png' mode='widthFix'></image>
+        <view class='gray'>购物车</view>
+        <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
+      </view>
+      <view class='add-cart font-28 flexR' bindtap='btnClicked' data-key='1'>
+        加入购物车
+      </view>
+      <view class='buy-btn font-28 flexR redBg' bindtap='btnClicked'data-key='2'>
+        立即购买
+      </view>
+    </view> -->
+    <!--置顶的按钮-->
+    <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
+      <image src='/img/top-icon.png' mode='widthFix'></image>
+      <!-- <view>顶部</view> -->
+    </view>
+  </view>
+
+</scroll-view>
+
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
+
+<!-- <tips-info isShoW='{{isShowGiftTips}}' header='温馨提示' bind:closeMask=''>
+  <view class='tips-title'>XXX升级礼包为定制产品</view>
+  <view class='font-28 tips-content'>
+    <view class='first-tips'>
+      购买后即可升级成为V2级用户，可享受V2用户
+    </view>
+    <view>
+      消费权限，该礼包产品不可退换货，如有产品质量问题，可联系客服进行申诉
+    </view>
+  </view>
+</tips-info> -->

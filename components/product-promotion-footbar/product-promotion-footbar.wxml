@@ -1,0 +1,4 @@
+<view class="footbar {{promotionFootbar.className}}">
+  <view>{{promotionFootbar.text}}</view>
+  <view class="text-small">{{promotionFootbar.textSmall}}</view>
+</view>

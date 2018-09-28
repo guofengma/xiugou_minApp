@@ -1,0 +1,30 @@
+.footbar{
+  border-top:1rpx solid #eee;
+  height:98rpx;
+  font-size: 28rpx;
+  line-height: 30rpx;
+  text-align: center;
+  position:fixed;
+  bottom:0;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content: center;
+  z-index: 1;
+}
+.footbar-primary{
+  background: #33B4FF;
+  color: #fff;
+}
+.footbar-main{
+  background: #D51243;
+  color: #fff;
+}
+.footbar-disabled{
+  background: #ccc;
+  color: #fff;
+}
+.text-small{
+  font-size: 24rpx;
+}
