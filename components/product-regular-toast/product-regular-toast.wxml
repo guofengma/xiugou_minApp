@@ -1,0 +1,7 @@
+<view class='regular-wrapper'>
+  <view class='regular-body'>
+    <image bindtap='close' src='/img/close-2.png' class='regular-close-icon'></image>
+    <view class='regular-header'>{{title}}</view>
+    <view class='regular-content'>{{content}}</view>
+  </view>
+</view>

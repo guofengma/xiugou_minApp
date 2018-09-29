@@ -437,6 +437,11 @@ export default class Operation {
 
         this.findMessageDetail = '/user/message/findMessageDetail';
 
+      /************************** 降价秒杀 *******************************/
+      
+        // 订阅提醒
+        
+        this.addActivitySubscribe = '/activity/activityDepreciate/addActivitySubscribe'
 
         __instance(this);
 

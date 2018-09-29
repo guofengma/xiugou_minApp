@@ -1,1 +1,2 @@
 @import "/pages/product-detail/product-detail.wxss";
+@import "/components/cell-line/cell-line.wxss"

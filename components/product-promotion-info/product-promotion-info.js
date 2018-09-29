@@ -16,7 +16,7 @@ Component({
     }
   },
   data: {
-    countdownTime: '00000000',
+    countdownTime: '00:00:00:00',
     interval: null,
     endTime: 0,
   },
@@ -24,14 +24,12 @@ Component({
     // 倒计时 到毫秒
     countdown() {
       let time = this.data.endTime;
-      // console.log(time);
-      if (typeof time !== 'number' || time <= 0) {
+      if (typeof time !== 'number' || time <= 0 || !time) {
         clearInterval(this.data.interval);
         return time;
       }
-      let now = new Date().getTime();
-      let diff = time - now;
-      if( diff <= 90) {
+      time -= 90
+      if( time <= 90) {
         clearInterval(this.data.interval)
         this.setData({
           countdownTime: '00:00:00:00'
@@ -40,7 +38,8 @@ Component({
         return;
       } else {
         this.setData({
-          countdownTime: this.formatTime(diff)
+          countdownTime: this.formatTime(time),
+          endTime: time
         })
       }
     },
@@ -55,9 +54,9 @@ Component({
     
   },
   ready() {
+    //这段可以优化下到时候放到业务页面  这里只需要取倒计时所需的时间戳  promotionType就可以不要了
     let prop = this.data.prop;
     let t = prop.endTime;
-    console.log(prop)
     if (prop.status === 2 && this.data.promotionType === 'discount') {
       t = prop.activityTime;
       //如果拍卖价等于底价
@@ -68,15 +67,13 @@ Component({
     if(prop.status === 1){
       t = prop.beginTime;
     }
-    console.log(t);
+    let serverTime  = prop.date || +new Date();//万一取不到就用当前时间
     this.setData({
-      endTime: t
+      endTime: t - prop.date  //date为服务器时间 用new date()的话存在用户修改手机系统时间的情况
     });
-
     if([1,2,3].includes(prop.status)){
-      
       this.data.interval = setInterval( () => {
-        this.countdown(t);
+        this.countdown();
       },90)
     }
   }

@@ -25,7 +25,7 @@
     <!-- 即将开始 -->
     <view class='start' wx:elif="{{prop.status == 1}}">
       <view class="top">{{promotionDesc.countdownDesc}} 
-      <text wx:for="{{countdownTime}}">{{item}}</text> 
+      <text wx:for="{{countdownTime}}" wx:key="{{index}}">{{item}}</text> 
       </view>
         <view class="bottom">
           <view style='position:relative;z-index:2'>{{promotionDesc.commingDesc}}</view>
@@ -34,7 +34,7 @@
     <!-- 正在进行 -->
     <view class='start' wx:else>
         <view class="top">{{promotionDesc.countdownDesc}}  
-          <text wx:for="{{countdownTime}}">{{item}}</text>
+          <text wx:for="{{countdownTime}}" wx:key="{{index}}">{{item}}</text>
         </view>
         <view class="bottom">
           <view class='progress'

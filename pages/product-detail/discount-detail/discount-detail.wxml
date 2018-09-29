@@ -7,6 +7,8 @@
 
 <import src="../../../libs/wxParse/wxParse.wxml" />
 
+<import src='/components/cell-line/cell-line.wxml'/>
+
 <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%">
   <view class='prduct-detail-view'>
     <!--topbar  -->
@@ -65,6 +67,10 @@
         <!-- <view class='cell-name'>规格</view>
         <view class='cell-content'>{{selectType.productType? selectType.productType:'选择产品规格'}}</view> -->
         </product-specification >
+        <view bindtap='toggleShowRegular' style="padding: 0">
+          <template is="cell-line" data="{{name:'抢拍规则',placeholder:' '}}"  /> 
+        </view>
+          
       <!-- </view> -->
       <view class='gray'>
         <text class='label red' >服务</text>
@@ -104,19 +110,6 @@
       bindtap="footbarReady"
       data-key="2"
     ></product-promotion-footbar>
-    <!-- <view class="bottom-bar flexR boxSize {{isIPhoneX.className}}">
-      <view class='cart font-22 flexC' bindtap='cartClicked'>
-        <image src='/img/shoppingcart.png' mode='widthFix'></image>
-        <view class='gray'>购物车</view>
-        <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
-      </view>
-      <view class='add-cart font-28 flexR' bindtap='btnClicked' data-key='1'>
-        加入购物车
-      </view>
-      <view class='buy-btn font-28 flexR redBg' bindtap='btnClicked'data-key='2'>
-        立即购买
-      </view>
-    </view> -->
     <!--置顶的按钮-->
     <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
       <image src='/img/top-icon.png' mode='widthFix'></image>
@@ -129,6 +122,14 @@
 
 <!--适配iPhone X  -->
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
+
+<product-regular-toast
+ title='降价拍规则'
+ content="文案待定" 
+ bind:close="toggleShowRegular" 
+ catchtouchmove="regularTouch"
+ wx:if="{{showRegular}}"
+ ></product-regular-toast>
 
 <!-- <tips-info isShoW='{{isShowGiftTips}}' header='温馨提示' bind:closeMask=''>
   <view class='tips-title'>XXX升级礼包为定制产品</view>

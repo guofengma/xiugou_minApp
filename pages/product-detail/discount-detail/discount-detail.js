@@ -38,10 +38,10 @@ Page({
       "downPrice": 1.5,
       "floorPriceTime": 1,
       "limitNumber": 1,
-      "status": 3,
-      "activityTime": new Date().getTime() + 2000000,
-      "beginTime": new Date().getTime() + 2000000,
-      "endTime": new Date().getTime() + 5000,
+      "status": 1,
+      "activityTime": +new Date() + 2000000,
+      "beginTime": +new Date() + 2000000,
+      "endTime": +new Date() + 5000,
       "closeTime": 1537962985000,
       "createTime": 1537513053000,
       "modifiedTime": 1537962985000,
@@ -54,10 +54,10 @@ Page({
       "markdownPrice": 3,
       "limitFlag": 0,
       "notifyFlag": 0,
-      "date": 1538034474246,
+      "date": +new Date(),//1538034474246
       "tip": false,
       "reseCount": 0,
-      "notifyFlag": 1,
+      "notifyFlag": 0,
     },
     promotionDesc:{
       commingDesc: '',
@@ -69,7 +69,8 @@ Page({
       text: '设置提醒',
       textSmall: '',
       disabled: false,
-    }
+    },
+    showRegular: true
   },
   onLoad: function (options) {
     // 获取完数据再展示
@@ -77,7 +78,7 @@ Page({
 
     let commingDesc = this.decorateTime(
         prop.beginTime,
-        prop.date,
+        prop.date || (+new Date()),
         prop.notifyFlag
       ) 
     console.log(commingDesc);
@@ -85,9 +86,10 @@ Page({
     let countdownDesc = '距开抢';
     if( prop.status === 2 ){
       countdownDesc = '距下次降价'; // 距下次降价 活动结束
-      if (prop.markdownPrice == prop.floorPrice) 
-        countdownDesc = '距结束';
     }
+    if (prop.markdownPrice == prop.floorPrice || prop.status === 3)
+      countdownDesc = '距结束';
+
     this.checkPromotionFootbarInfo();
 
     // ==========
@@ -97,7 +99,6 @@ Page({
       "promotionDesc.commingDesc": commingDesc,
       "promotionDesc.countdownDesc": countdownDesc
     })
-    console.log(this.data.promotionDesc);
     this.didLogin()
     this.requestFindProductByIdApp()
     this.getShoppingCartList()
@@ -142,12 +143,32 @@ Page({
       p.disabled = true;
       p.className = 'footbar-disabled';
     }
-    console.log(p)
     this.setData({
       promotionFootbar: p      
     })
   },
   setTip: function() {
+    let userInfo = Storage.getUserAccountInfo();
+    console.log(userInfo);
+    // return;
+    let prop = this.data.proNavData;
+    let params = {
+      reqName: '订阅提醒',
+      url: Operation.addActivitySubscribe,
+      activityId: prop.id,
+      activityType: 2, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
+      type: 1, // 1订阅 0 取消订阅
+      userId: userInfo.id
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let data = req.responseObject || {};
+      console.log(data);
+      
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+    return;
     let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
     wx.showToast({
       title: title,
@@ -175,22 +196,20 @@ Page({
   },
   // 未开始 未设置提醒时： X月X日X:00开拍
   // 未开始 已设置提醒时： 明天X点开拍
-  decorateTime(t, c, isTip) {
+  decorateTime(beginDate, serverDate, isTip) {
     let str = '';
-    let targetDate = new Date(t);
+    let targetDate = new Date(beginDate);
     let targetM = targetDate.getMonth() + 1;
     let targetD = targetDate.getDate();
     let targetH = targetDate.getHours();
     let targetMi = targetDate.getMinutes();
-
-    let diff = t - c;
+    let diff = beginDate - serverDate;
     let diffHour = Math.floor(diff / 1000 / 60 / 60);
     let timeToTomorrow = 24 - new Date().getHours();
 
     let strHM = ([targetH, targetMi].map(Tool.formatNumber)).join(':') + '开拍'
 
     str = [targetM, '月', targetD, '日'].join('') + strHM;
-
     if (isTip) {
       if (diffHour - timeToTomorrow <= 0) {
         str = '今天' + strHM;
@@ -271,7 +290,7 @@ Page({
       productId: this.data.productInfo.id,
       amount: this.data.productBuyCount,
       priceId: this.data.selectType.id,
-      timestamp: new Date().getTime(),
+      timestamp: +new Date(),
       reqName: '加入购物车',
       url: Operation.addToShoppingCart
     }
@@ -458,7 +477,16 @@ Page({
   onUnload: function () {
     Event.off('didLogin', this.didLogin);
   },
-  timeout: function () {
+  timeout() {
     console.log('complete')
+  },
+  toggleShowRegular(){
+    console.log(22);
+    this.setData({
+      showRegular: !this.data.showRegular
+    })
+  },
+  regularTouch(){
+    return;
   }
 })
