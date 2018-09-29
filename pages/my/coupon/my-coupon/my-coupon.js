@@ -21,9 +21,11 @@ Page({
         name:'可叠加使用',
         isCoinCoupon:true,
         value:1,
-        num:0,
+        num:100,
         active:true,
-      }
+      },
+      show:false,
+      coinNum:1
     },
     // 上拉加载更多
     onScroll(e) {
@@ -196,6 +198,33 @@ Page({
         Tool.navigateTo('../coupon-detail/coupon-detail')
       }
     },
+    btnClicked(){
+      this.setData({
+        show:!this.data.show
+      })
+    },
+    bindKeyInput(e){
+      this.setData({
+        coinNum: Number(e.detail.value)
+      })
+      this.setInputValue()
+    },
+    setInputValue(){
+      this.data.coinNum = this.data.coinNum < 0 ? 0 : this.data.coinNum
+      this.data.coinNum = this.data.coinNum > this.data.coinData.num ? this.data.coinData.num : this.data.coinNum
+      this.setData({
+        coinNum: this.data.coinNum
+      })
+    },
+    addClicked(e){
+      let index = e.currentTarget.dataset.index
+      if(index==1){
+        this.data.coinNum--
+      }else{
+        this.data.coinNum++
+      }
+      this.setInputValue()
+    },
     giveUpUse(){
       Storage.setCoupon({ id: "", name: '未使用优惠劵' })
       Event.emit("updateCoupon")
@@ -213,18 +242,18 @@ Page({
             })
         }
     },
-      onLoad: function (options) {
-        this.setData({
-          door: options.door || '',
-          productIds: options.productIds || '',
-        })
-        if(this.data.door==1){
-          this.availableDiscountCouponForProduct()
-        } else {
-          this.getDiscountCouponNoActive()
-          this.getDiscountCouponNoUse();
-        }
-        this.getDiscountCouponUserd();
-        this.getDiscountCouponLosed();
-    },
+    onLoad: function (options) {
+      this.setData({
+        door: options.door || '',
+        productIds: options.productIds || '',
+      })
+      if(this.data.door==1){
+        this.availableDiscountCouponForProduct()
+      } else {
+        this.getDiscountCouponNoActive()
+        this.getDiscountCouponNoUse();
+      }
+      this.getDiscountCouponUserd();
+      this.getDiscountCouponLosed();
+  },
 })

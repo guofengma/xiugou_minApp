@@ -21,3 +21,25 @@
     </swiper>
     <view class='btn-view flexR fixed-bottom font-30 whiteBg' wx:if="{{currentTab==0&door==1}}" catchtap='giveUpUse'>放弃使用优惠券</view> 
 </view>
+
+
+<!-- 选择现金优惠卷弹框 -->
+
+<view class='model-view-bg' wx:if='{{show}}'>
+   <view class='use-container overflow boxSize'>
+    <view class='use-header flexR'>请选择劵数</view>
+    <view class='use-content flexR'>
+      <view catchtap='addClicked' data-index='1'>
+        <image-sub imgStyle='{{"width:48rpx;border:1rpx solid #ddd"}}' imgSrc="{{'youhuiquan_icon_jian_nor@3x.png'}}"/>
+      </view>
+      <input class='use-input whiteBg boxSize' value='{{coinNum}}' bindinput="bindKeyInput" type='number'></input>
+      <view catchtap='addClicked' data-index='2'>
+        <image-sub imgStyle='{{"width:48rpx;border:1rpx solid #ddd"}}' imgSrc="{{'youhuiquan_icon_jia_nor@3x.png'}}"/>
+      </view>
+    </view>
+    <view class='use-footer flexR'>
+      <view class='boxSize flexR' catchtap='btnClicked'>取消</view>
+      <view class='flexR' catchtap='btnClicked'>确定</view>
+    </view>
+   </view>
+</view>

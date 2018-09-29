@@ -56,3 +56,43 @@
   margin-top: 200rpx;
   margin-bottom: 20rpx;
 }
+/* <!-- 选择现金优惠卷弹框 --> */
+
+.use-container{
+  width: 540rpx;
+  height: 330rpx;
+  border-radius: 24rpx;
+  background: #FCFCFC;
+  font-size: 34rpx;
+  position: relative;
+  padding: 0 72rpx;
+}
+
+.use-input{
+  width: 270rpx;
+  border:1rpx solid #ddd;
+  margin: 0 10rpx;
+  min-height: 52rpx;
+  height: 52rpx;
+  font-size: 26rpx;
+  text-align: center;
+}
+.use-footer{
+  color: #0076FF;
+  border-top: 1rpx solid #ddd;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.use-header{
+  margin-top: 40rpx;
+  margin-bottom: 46rpx;
+}
+.use-footer>view{
+  height: 84rpx;
+  width: 50%;
+}
+.use-footer>view:first-child{
+  border-right: 1rpx solid #ddd;
+}

@@ -1,5 +1,3 @@
-
-
 <template name="after-sale-prd-info">
   <view class='after-sale-prd-info flexR-sb font-26 whiteBg'>
    <image src='{{imgUrl || spec_img}}' class='after-sale-prd-info-img'></image>
