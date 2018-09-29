@@ -1,11 +1,16 @@
 <view>
     <view class='cash'>
-        <view class="item boxSize">
-          <view class="font-26">
-            秀豆账户（分）
+        <view class="item boxSize flexR-sb">
+          <view>
+            <view class="font-26">
+              秀豆账户（分）
+            </view>
+            <view class="num">
+              {{account}}
+            </view>
           </view>
-          <view class="num">
-            {{account}}
+          <view class='coinBtn font-28 flexR'>
+            <view>兑换1元现金劵</view>
           </view>
         </view>
     </view>

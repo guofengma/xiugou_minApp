@@ -25,7 +25,7 @@
 <view class='order-state-info' >
     <view class='boxSize'>
         <!--等待付款的时候显示和待发货  -->
-        <template is="address-info" wx:if='{{status==1||status==4||status==10 ||status==8 }}' data="{{addressType,src,...address,hasData}}"/>
+        <template is="address-info" wx:if='{{status==1||status==2||status==7 ||status==8 }}' data="{{addressType,src,...address,hasData}}"/>
 
         <!-- 待发货/已发货/已完成的时候显示 -->
         <view class='logistics flexR-sb' wx:if="{{status==2||status==3||status==6 || status==7 ||status==5 }}" bindtap='logisticsClicked'>
@@ -42,7 +42,7 @@
 
 <view class='container'>
     <!--地址信息 如果发货了 显示地址 -->
-    <view class='my-order-address' wx:if='{{status!=1&&status!=4&&status!=10&&status!=8 }}'>
+    <view class='my-order-address' wx:if='{{status==3||status==4 ||status==5 ||status== 6 }}'>
         <template is="address-info" data="{{addressType,src,...address,hasData}}"/>
     </view>
 
@@ -52,7 +52,7 @@
         <text class='label-red-border'>套餐</text>
         <text class='gray font-24'>双十一套餐</text>
       </view> -->
-      <block wx:for="{{detail.list}}" wx:key="unique">
+      <block wx:for="{{detail.orderProductList}}" wx:key="unique">
           <view catchtap='productClicked' data-productid='{{item.productId}}'>
             <template is="my-order-product-info" data="{{...item}}"/>
           </view>
@@ -73,7 +73,7 @@
             <text>-¥{{detail.couponPrice}}</text>
         </view>
         <view class='flexR-sb'>
-            <text>积分抵扣</text>
+            <text>1元劵现金劵</text>
             <text>-¥{{detail.scorePrice? detail.scorePrice:'0'}}</text>
         </view>
         <view class='flexR-sb'>
@@ -102,11 +102,12 @@
             <text selectable="true">{{detail.orderNum}}</text>
           </view>
           <view>创建时间：{{detail.createTime}}</view>
-          <view wx:if='{{detail.sysPayTime}}'>平台付款时间：{{detail.sysPayTime}}</view>
+          <!-- <view wx:if='{{detail.sysPayTime}}'>平台付款时间：{{detail.sysPayTime}}</view> -->
           <view wx:if='{{detail.payTime}}'>三方付款时间：{{detail.payTime}}</view>
           <view wx:if='{{detail.outTradeNo}}'>三方交易号：{{detail.outTradeNo}}</view>
           <view wx:if='{{detail.sendTime}}'>发货时间：{{detail.sendTime}}</view>
           <view wx:if='{{detail.payTime}}'>成交时间：{{detail.payTime}}</view>
+          <view wx:if='{{detail.cancelTime}}'>取消时间：{{detail.cancelTime}}</view>
         </view>
     </view>
 
@@ -139,9 +140,6 @@
         <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='再次购买' && detail.orderType!=98}}" bindtap="continueBuy">
           {{state.bottomBtn[1]}}
         </view>
-        <!-- <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='订单退款'}}" bindtap="orderRefund">
-          {{state.bottomBtn[1]}}
-        </view>   -->
     </block>
 
 </view>

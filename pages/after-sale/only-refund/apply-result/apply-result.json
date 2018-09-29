@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "申请售后结果",
-  "usingComponents": {
-    "contact-seller": "/components/contact-seller/contact-seller"
-  }
-}

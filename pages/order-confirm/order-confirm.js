@@ -70,19 +70,6 @@ Page({
      
       //渲染产品信息列表
       let showProduct =[]
-      // if(this.data.door!=0){
-      //   item.orderProductList.forEach((item0) => {
-      //     showProduct.push({
-      //       showImg: item0.specImg,
-      //       showName: item0.productName,
-      //       showType: item0.spec,
-      //       showPrice: item0.price,
-      //       showQnt: item0.num,
-      //       status: 1,
-      //       stock: item0.stock,
-      //     })
-      //   })
-      // }
       if(this.data.door==99){
         item.orderProductList.forEach((item0,index)=>{
           showProduct.push({
@@ -96,13 +83,6 @@ Page({
           })
         })
       }
-
-      // 是否有自提的权限 礼包没有自提权限
-      // item.hasSelfLifting = (item.user.pickedUp==1&&this.data.door!=0? true:false)
-
-      // if (item.hasSelfLifting){
-      //   this.queryStoreHouseList()
-      // }
 
       item.showProduct = showProduct
       
@@ -155,7 +135,7 @@ Page({
   },
   changeAddressType(e){
     let index = e.currentTarget.dataset.index
-    console.log(index)
+
     let { orderInfos, isUseIntegral } = this.data
     this.setData({
       addressType: e.currentTarget.dataset.index
@@ -230,22 +210,17 @@ Page({
     }
     let storehouseId = this.data.addressType == 2? orderAddress.id : ''
     let params = {
-      // orderParam: JSON.stringify({
-        "address": orderAddress.address,
-        "areaCode": orderAddress.areaCode || '',
-        "buyerRemark": this.data.remark,
-        "cityCode": orderAddress.cityCode || '',
-        "couponId": this.data.coupon.id || '',
-        "orderProducts": this.data.params.orderProducts,
-        "orderType": this.data.params.orderType,
-        // "pickedUp": this.data.addressType,
-        "provinceCode": orderAddress.provinceCode || '',
-        "receiver": orderAddress.receiver || '',
-        "recevicePhone": orderAddress.receiverPhone || '',
-        // "storehouseId": storehouseId,
-        // "useScore":  score,
-        tokenCoin: this.data.useOneCoinNum, // 一元劵
-      // }),
+      "address": orderAddress.address,
+      "areaCode": orderAddress.areaCode || '',
+      "buyerRemark": this.data.remark,
+      "cityCode": orderAddress.cityCode || '',
+      "couponId": this.data.coupon.id || '',
+      "orderProducts": this.data.params.orderProducts,
+      "orderType": this.data.params.orderType,
+      "provinceCode": orderAddress.provinceCode || '',
+      "receiver": orderAddress.receiver || '',
+      "recevicePhone": orderAddress.receiverPhone || '',
+      tokenCoin: this.data.useOneCoinNum, // 一元劵
       reqName: '订单结算',
       url: Operation.submitOrder
     }
@@ -264,21 +239,24 @@ Page({
   },
   couponClicked(){ // 点击使用优惠卷跳转
     if(this.data.door==5) return
+    let productIds = this.getCouponProductPriceIds()
+    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&&productIds=" + JSON.stringify(productIds))
+  },
+  getCouponProductPriceIds(){ // 获取请求优惠卷的参数
     let productIds = []
-    let orderList = this.data.orderInfos.orderProductList
-    orderList.forEach((item)=>{
-      productIds.push(item.productId)
+    this.data.params.orderProducts.forEach((item) => {
+      productIds.push({
+        priceId: item.priceId,
+        productId: item.productId,
+      })
     })
-    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&&productIds=" + this.data.params)
+    return productIds
   },
   availableDiscountCouponForProduct() { // 产品可用优惠劵列表
     if(this.data.door!=99) return
-    let productIds = []
-    this.data.params.orderProducts.forEach((item)=>{
-      productIds.push(item.productId)
-    })
+    let productIds = this.getCouponProductPriceIds()
     let params = {
-      productIds: productIds,
+      productPriceIds: productIds,
       reqName: '产品可用优惠劵列表',
       url: Operation.availableDiscountCouponForProduct
     }

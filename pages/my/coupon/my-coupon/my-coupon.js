@@ -112,7 +112,7 @@ Page({
     availableDiscountCouponForProduct(){
       let params = {
         ...this.data.params,
-        productIds: this.data.productIds,
+        productPriceIds: JSON.parse(this.data.productIds),
         reqName: '产品可用优惠劵列表',
         url: Operation.availableDiscountCouponForProduct
       }

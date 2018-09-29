@@ -51,7 +51,6 @@ Component({
         let datas = [];
         let secondMap = new Map();
         let key = this.data.key;
-        console.log(list)
         
         for (let i in req.responseObject.data.data) {
           let item = req.responseObject.data.data[i];
@@ -134,7 +133,7 @@ Component({
     deleteOrder() {
       let url = ''
       let reqName = ''
-      if (this.data.status == 7 || this.data.status == 5 || this.data.status == 6) {//已完成订单/待确认
+      if (this.data.status == 4 || this.data.status == 5 || this.data.status == 6) {//已完成订单/待确认
         // r = RequestFactory.deleteOrder(params)
         url = Operation.deleteOrder
         reqName = '删除订单'
@@ -150,7 +149,7 @@ Component({
         reqName: reqName
       };
       let r = RequestFactory.wxRequest(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         if (req.responseObject.code == 200) {
           this.setData({
             list: []
@@ -194,8 +193,7 @@ Component({
           url: Operation.confirmReceipt,
         }
         let r = RequestFactory.wxRequest(params);
-        // let r = RequestFactory.confirmReceipt(params);
-        r.finishBlock = (req) => {
+        r.successBlock = (req) => {
           if (req.responseObject.code == 200) {
             that.setData({
               list: []
@@ -228,7 +226,7 @@ Component({
       }
       let r = RequestFactory.wxRequest(params);
       // let r = RequestFactory.orderOneMore(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let datas = req.responseObject.data;
         datas.forEach((item) => {
           item.sareSpecId = item.id;
@@ -286,20 +284,6 @@ Component({
         list: orderArry,
         time: time
       });
-    },
-    time() {
-      //待付款订单 倒计时处理
-      let detail = this.data.detail
-      let endTime = Tool.formatTime(detail.overtimeClosedTime)
-      let countdown = Tool.getDistanceTime(endTime, this)
-      if (countdown == null) {
-        detail.status = 10
-        clearTimeout(this.data.time);
-        this.setData({
-          detail: detail,
-          state: this.orderState(10)//订单状态相关信息
-        })
-      }
     },
     onUnload(){
       clearTimeout(this.data.time);

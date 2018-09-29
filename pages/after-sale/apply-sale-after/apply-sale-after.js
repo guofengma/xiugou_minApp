@@ -153,15 +153,12 @@ Page({
     let url = ''
     let reqName = ''
     if (this.data.refundType==0){
-      // r = RequestFactory.orderRefund(params)
       url = Operation.orderRefund
       reqName = '申请仅退款'
     } else if (this.data.refundType == 1) {
-      // r = RequestFactory.applyReturnGoods(params)
       url = Operation.applyReturnGoods
       reqName = '申请退货'
     } else {
-      // r = RequestFactory.applyExchangeProduct(params)
       url = Operation.applyExchangeProduct
       reqName = '申请换货'
     }

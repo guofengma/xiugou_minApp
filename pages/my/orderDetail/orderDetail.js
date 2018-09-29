@@ -35,15 +35,13 @@ Page({
         this.setData({
             orderId: options.orderId,
             status: options.status,
-            // state:
         });
         Tool.isIPhoneX(this)
         if(options.status==4){
             this.addressType=2
         }
         Event.on('getDetail', this.getDetail,this)
-        this.getDetail();//获取详情
-       
+        this.getDetail();//获取详情  
     },
     cancelOrder(){},
     //获取详情
@@ -54,38 +52,25 @@ Page({
         url: Operation.getOrderDetail
       }
       let r = RequestFactory.wxRequest(params);
-        // r = global.RequestFactory.getOrderDetail(params);
       r.successBlock = (req) => {
             let detail=req.responseObject.data;
             detail.createTime=detail.createTime?Tool.formatTime(detail.createTime):'';
             detail.sysPayTime=detail.sysPayTime?Tool.formatTime(detail.sysPayTime):'';
             detail.payTime=detail.payTime?Tool.formatTime(detail.payTime):'';
+            detail.cancelTime = detail.cancelTime ? Tool.formatTime(detail.cancelTime) : '';
             detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
             if (detail.expressNo){
               this.getDelivery(detail)
             }
-            let address={};
-            if(detail.status==4){
-              address.addressInfo = '自提点：' + detail.storehouseProvince + detail.storehouseCity + detail.storehouseArea + detail.storehouseAddress;
-            }else{
-                address.receiver=detail.receiver;
-                address.recevicePhone=detail.recevicePhone;
-                address.addressInfo= detail.province + detail.city + detail.area + detail.address;
-            }
+            let address = {}
+            address.receiver = detail.receiver;
+            address.recevicePhone = detail.recevicePhone;
+            address.addressInfo = detail.province + detail.city + detail.area + detail.address;
             if(detail.sendTime!=''&&detail.sendTime!=null){
                 detail.sendTime=Tool.formatTime(detail.sendTime);
                 this.data.state.time= detail.sendTime?detail.sendTime:'';
             }else{
                 detail.sendTime=''
-            }
-
-            if (detail.orderType == 98) {
-              detail.list = detail.list[0].orderProductPrices
-              detail.list.forEach((item)=>{
-                item.price = item.originalPrice
-                item.num = item.productNum
-                item.imgUrl = item.specImg
-              })
             }
             
             if (detail.status == 1 || detail.status == 3) { // 开始倒计时
@@ -101,7 +86,7 @@ Page({
                 address: address,
                 state: this.orderState(detail.status)//订单状态相关信息this.data.state
             })
-            if (detail.orderType != 98){
+            if (detail.orderType != 5){
               this.middleBtn()
             }
         };
@@ -132,12 +117,10 @@ Page({
     deleteOrder(){
       let url = ''
       let reqName = ''
-      if (this.data.status == 7 || this.data.status == 5 || this.data.status == 6){//已完成订单     
-        // r=RequestFactory.deleteOrder(params)
+      if (this.data.status == 4 || this.data.status == 5 || this.data.status == 6){//已完成订单     
         url = Operation.deleteOrder
         reqName = '删除订单'
-      } else if (this.data.status == 8 || this.data.status == 10 ){
-        // r=RequestFactory.deleteClosedOrder(params)
+      } else if (this.data.status == 7 || this.data.status == 8 ){
         url = Operation.deleteClosedOrder
         reqName = '删除订单'
       }
@@ -177,7 +160,6 @@ Page({
             url: Operation.confirmReceipt
           }
           let r = RequestFactory.wxRequest(params);
-          // let r = RequestFactory.confirmReceipt(params);
           r.successBlock = (req) => {
             if(req.responseObject.code==200){
               Tool.navigateTo('../my-order/my-order')
@@ -195,8 +177,6 @@ Page({
         wx.setClipboardData({
             data: that.data.detail.orderNum,
             success: function(res) {
-              // wx.hideToast();
-              // Tool.showSuccessToast('复制成功')
             }
         });
 
@@ -206,18 +186,18 @@ Page({
       let detail = this.data.detail
       let time = ''
       if (detail.status==3){
-        time = detail.autoConfirmTime
+        time = detail.autoReceiveTime
       } else {
-        time = detail.overtimeClosedTime
+        time = detail.shutOffTime
       }
       let endTime = Tool.formatTime(time) 
       let countdown = Tool.getDistanceTime(endTime, this)
       if (countdown ==0){
-        detail.status = 10
+        detail.status = detail.status==1? 8:4
         clearTimeout(this.data.time);
         this.setData({
           detail: detail,
-          state: this.orderState(10)//订单状态相关信息
+          state: this.orderState(detail.status)//订单状态相关信息
         })
       }
     },
@@ -245,26 +225,12 @@ Page({
             info: '仓库正在扫描出仓...',
             time: ''
           },
-          { status: '等待买家自提',
-            bottomBtn: ['', '确认收货'], 
-            bottomId: ['', 4],
-            orderIcon: "order-state-3.png",
-            info: '等待买家自提...',
-            time: ''
-          },
           { status: '交易已完成',
             bottomBtn: ['删除订单', '再次购买'], 
             bottomId: [6,5],
             orderIcon: "order-state-5.png",
             info: '仓库正在扫描出仓...',
             time: ''
-          },
-          { status: '退货中/退货完成',
-            bottomBtn: ['删除订单', '再次购买'],
-            bottomId: ['', 5], 
-            orderIcon: "order-state-5.png", 
-            info: '仓库正在扫描出仓...',
-            time: '' 
           },
           {
             status: '交易已完成',
@@ -274,6 +240,13 @@ Page({
             info: '仓库正在扫描出仓...',
             time: ''
           },
+          { status: '退换货完成',
+            bottomBtn: ['删除订单', '再次购买'],
+            bottomId: ['', 5], 
+            orderIcon: "order-state-5.png", 
+            info: '仓库正在扫描出仓...',
+            time: '' 
+          },
           { status: '交易关闭',
             bottomBtn: ['删除订单', '再次购买'], 
             bottomId: [6, 5], 
@@ -281,9 +254,6 @@ Page({
             info: '',
             time: ''
           },
-          { status: '删除订单',
-            bottomBtn: ['', ''], 
-          },// 不显示？？？？
           {
             status: '交易关闭',
             bottomBtn: ['删除订单', '再次购买'],
@@ -291,7 +261,7 @@ Page({
             orderIcon: "order-state-6.png",
             info: '',
             time: ''
-          },
+          }
         ]
         return stateArr[n-1]
     },
@@ -311,7 +281,6 @@ Page({
         url: Operation.orderOneMore
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.orderOneMore(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data
         datas.forEach((item)=>{
@@ -328,43 +297,35 @@ Page({
     },
     middleBtn(){
       let detail = this.data.detail
-      let outOrderState = detail.status
-      let childrenList = detail.list
+      let outOrderState = detail.status // 外订单状态
+      let childrenList = detail.orderProductList 
       let state = this.data.state
       let btnArr = []
       childrenList.forEach((item,index)=>{
         let middle = ''
-        let innerState = item.status
+        let innerState = item.status // 子订单状态
         let returnType = item.returnType
         let finishTime = item.finishTime
         let now = new Date().getTime()
-        if (outOrderState == 2 || outOrderState ==4 ){
+        if (outOrderState == 2){
           middle = { id: 1,content: '退款' }
         }
         if (outOrderState == 3 ){
-          // 确认收货的状态的订单售后截止时间和当前时间比
-          //if (finishTime - now > 0) {
-            middle = { id: 2, content: '退换' }
-          //} 
-         
+          middle = { id: 2, content: '退换' }
         }
-        if (outOrderState == 5) {
+        if (outOrderState == 4 ) {
           // 确认收货的状态的订单售后截止时间和当前时间比
           if (finishTime - now>0){
             middle = { id: 2, content: '退换' }
           }      
         }
         if (innerState == 4) {
-          middle = { id:3, inner: innerState,content: '退款中' } 
+          let arr = ["退款中",'退货中','换货中']
+          middle = { id: 3, inner: innerState, content: arr[returnType-1],returnType: returnType } 
           state.isHiddenComfirmBtn = true
         }
-        if (innerState == 5 || innerState == 6){
 
-          // 5 退货中 6 换货中
-          middle = { id:3, inner: innerState,content: '退换中' }
-          state.isHiddenComfirmBtn = true
-        }
-        if (innerState==8 && returnType) {
+        if (innerState==6 && returnType) {
           middle = { id: 0, inner: innerState, content: '售后完成', returnType: returnType}
         }
         item.middleBtn = middle
@@ -376,15 +337,15 @@ Page({
       })
     },
     subBtnClicked(e){
-      // returnProductStatus  1申请中 2已同意 3拒绝 4完成 5关闭 6超时
+      // returnProductStatus  1申请中 2已同意 3已拒绝 4买家发货中 5卖家云仓发货中 6已完成 7关闭 8超时
 
-      // getReturnProductType 1退款 2退货 3退货 
+      // getReturnProductType 1退款 2退货 3换货 
 
       let btnTypeId = e.currentTarget.dataset.id 
 
       let index = e.currentTarget.dataset.index
 
-      let list = this.data.detail.list[index]
+      let list = this.data.detail.orderProductList[index]
 
       list.orderNum = this.data.detail.orderNum
 
@@ -394,7 +355,7 @@ Page({
 
       list.address = this.data.address
 
-      Storage.setInnerOrderList(this.data.detail.list[index])
+      Storage.setInnerOrderList(this.data.detail.orderProductList[index])
 
       // 跳转页面
 
@@ -405,11 +366,8 @@ Page({
       let returnType = list.returnProductType
       let returnProductStatus = list.returnProductStatus
       let params = "?id=" + list.returnProductId
-      if (returnType == 1 && (returnProductStatus == 2 || returnProductStatus == 4 || returnProductStatus == 1)) {
 
-        page = '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail' + params 
-
-      } else if (returnType == 1 && returnProductStatus == 3) {
+       if (returnType == 1) {
 
         page = '/pages/after-sale/only-refund/apply-result/apply-result'
 
@@ -457,8 +415,6 @@ Page({
         reqName: '查看物流',
         url: Operation.findDelivery
       }
-      let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.findDelivery(params);
       let state = this.orderState(detail.status)
       r.successBlock = (req) => {
         let datas = req.responseObject.data;
