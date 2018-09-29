@@ -13,8 +13,17 @@ Page({
       totalPageArr:[], //保存页数 
       params:{
         page:1,
-        pageSize:5
+        pageSize:10
       },
+      coinData:{
+        nickname:'全场通用',
+        'type':0,
+        name:'可叠加使用',
+        isCoinCoupon:true,
+        value:1,
+        num:0,
+        active:true,
+      }
     },
     // 上拉加载更多
     onScroll(e) {
@@ -69,7 +78,7 @@ Page({
       } else if (length==1){
         // 单品类
         if (item.products.length==0){
-          item.nickname = item[item.key].length > 0 ? "限指定商品可使用" : "限" + item[item.key][0] + "可用"
+          item.nickname = item[item.key].length > 0 ? "限指定分类可使用" : "限" + item[item.key][0] + "可用"
         } else if (item.products.length==1) {
           item.nickname = "限" + item.products[0] + "可用" 
         } else {
@@ -78,7 +87,7 @@ Page({
       }
       
     },
-    formatCouponInfos(params,index,isActive=false,leftName,){
+    formatCouponInfos(params, index, isActive = false, couponClassName){
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data
@@ -95,7 +104,7 @@ Page({
           key = (item.cat3? 'cat3' : key)
           item.length =length
           item.key = key
-          item.left = leftName;
+          item.couponClassName = couponClassName;
           item.active = isActive;
           this.getCouponType(item)
         })
@@ -128,7 +137,7 @@ Page({
         status:0
       }
       params.pageSize = 5
-      this.formatCouponInfos(params, 0,true,'')
+      this.formatCouponInfos(params, 0, true,'')
     },
     // 待激活
     getDiscountCouponNoActive() {
@@ -139,7 +148,7 @@ Page({
         status: 3
       }
       params.pageSize = 5
-      this.formatCouponInfos(params, 0, false, '待激活')
+      this.formatCouponInfos(params, 0, false, 'coupon-right-unUsed')
     },
     //已经优惠劵列表
     getDiscountCouponUserd() {
@@ -149,7 +158,7 @@ Page({
         reqName: '已使用优惠劵列表',
         url: Operation.couponList
       }
-      this.formatCouponInfos(params, 2, false, '已使用')
+      this.formatCouponInfos(params, 2, false, 'coupon-right-used')
     },
     //失效优惠劵列表
     getDiscountCouponLosed() {
@@ -159,7 +168,7 @@ Page({
         status:2,
         url: Operation.couponList
       }
-      this.formatCouponInfos(params, 1, false, '已失效')
+      this.formatCouponInfos(params, 1, false, 'coupon-right-lose')
     },
 
     // 点击标题切换当前页时改变样式

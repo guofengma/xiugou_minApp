@@ -33,13 +33,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 19,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "注册",
 					"pathName": "pages/register/register",
-					"query": "inviteCode=111"
+					"query": ""
 				},
 				{
 					"id": -1,
@@ -152,7 +152,8 @@
 				{
 					"id": -1,
 					"name": "仅退款结果页",
-					"pathName": "pages/after-sale/only-refund/apply-result/apply-result"
+					"pathName": "pages/after-sale/only-refund/apply-result/apply-result",
+					"query": ""
 				}
 			]
 		}

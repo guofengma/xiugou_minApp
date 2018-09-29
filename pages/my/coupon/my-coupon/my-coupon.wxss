@@ -1,3 +1,5 @@
+@import "/pages/my/coupon/temp/coupon-temp";
+
 .tab-h{
   height: 80rpx;
   width: 100%; 
@@ -43,44 +45,7 @@
 .pagesize{
   height: 100%;
 }
-.item-ans{
-  width: 690rpx;
-  margin:20rpx auto;
-  display: flex; 
-  flex-grow: row no-wrap;
-  justify-content: space-between; 
-  box-sizing: border-box; 
-  height: 220rpx;
-  align-items: center;
-  border-radius: 20rpx;
-  font-size: 22rpx;
-  box-shadow: 0 0 20rpx 0 rgba(102, 102, 102, 0.1);
-  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/coupon-gray-2.png) no-repeat left top;
-  background-size: 100%;
-}
-.item-ans.active{
-  background-image: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/coupon-canuse.png)
-}
-.coupon-right{
-  width: 100rpx;
-  color: #fff; 
-}
-.coupon-left{
-  width: 210rpx;
-  box-sizing: border-box;
-  padding-left: 58rpx;
-}
-.coupon-center{
-  width: 380rpx;
-  box-sizing: border-box;
-  padding-left: 20rpx;
-}
-.coupon-left .red text,.coupon-left .gray text {
-  font-size: 40rpx;
-}
-.coupon-center>view{
-  margin-top: 14rpx;
-}
+
 .btn-view{
   height: 100rpx;
   width: 100%;

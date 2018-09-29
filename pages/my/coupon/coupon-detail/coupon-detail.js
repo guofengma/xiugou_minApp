@@ -8,4 +8,7 @@ Page({
       detail: Storage.getCoupon() || ""
     })
   },
+  toDetail(){
+    
+  }
 })
