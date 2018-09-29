@@ -107,6 +107,7 @@
     <!-- 详情页 tabar  -->
     <product-promotion-footbar 
       promotionFootbar="{{promotionFootbar}}"
+      promotionType="discount"
       bindtap="footbarReady"
       data-key="2"
     ></product-promotion-footbar>

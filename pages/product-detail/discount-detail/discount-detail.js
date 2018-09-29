@@ -70,7 +70,7 @@ Page({
       textSmall: '',
       disabled: false,
     },
-    showRegular: true
+    showRegular: false
   },
   onLoad: function (options) {
     // 获取完数据再展示

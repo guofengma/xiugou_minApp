@@ -14,8 +14,8 @@
 .font-20{
   font-size: 20rpx;
 }
-.pl10{
-  padding-left: 10rpx;
+.pr10{
+  padding-right: 10rpx;
 }
 .promotion-info-container{
   padding: 0rpx 20rpx;

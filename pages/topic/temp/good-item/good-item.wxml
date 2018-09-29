@@ -25,7 +25,10 @@
         <!-- <view class='good-operate loot'>这里是按钮</view> -->
         <!-- <view class='good-operate out'>这里是按钮</view> -->
         <!-- <view class='good-operate tip'>这里是按钮</view> -->
-        <view class='good-operate cancel-tip'>按钮啊</view>
+        <view class='good-operate tip flexR'>
+          <image src='/img/Clock.png' class="icon"></image>
+          <text>按钮啊</text> 
+         </view>
       </view>
     </view>
   </view>

@@ -13,8 +13,11 @@
         {{prop.status == 1 ? promotionDesc.typeDesc :'¥'+prop.originalPrice}}
         </view>
         <view class='promotion-desc' wx:if="{{ prop.status == 1}}">
-          {{prop.reseCount}}人关注            
-          <text class='line-through pl10 font-20 '>¥{{prop.originalPrice}}</text> 
+          <!-- 普通页面进来不显示价格 -->
+          <view class='font-20 inline' wx:if="{{promotionType}}">
+            <text class='line-through pr10'>原价¥ {{prop.originalPrice}} </text> |
+          </view>
+          {{prop.reseCount}}人关注             
         </view>
         <view class='promotion-desc' wx:else>{{promotionDesc.typeDesc}}</view>
       </view>
