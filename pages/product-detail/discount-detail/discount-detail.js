@@ -38,7 +38,7 @@ Page({
       "downPrice": 1.5,
       "floorPriceTime": 1,
       "limitNumber": 1,
-      "status": 1,
+      "status": 4,
       "activityTime": +new Date() + 2000000,
       "beginTime": +new Date() + 2000000,
       "endTime": +new Date() + 5000,
@@ -51,13 +51,12 @@ Page({
       "spec": "红色-32G-1KG",
       "specImg": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/pms_1528718750.15896438!560x560.jpg",
       "originalPrice": 1000,
-      "markdownPrice": 3,
+      "markdownPrice": 1.5,
       "limitFlag": 0,
-      "notifyFlag": 0,
+      "notifyFlag": 1,
       "date": +new Date(),//1538034474246
       "tip": false,
       "reseCount": 0,
-      "notifyFlag": 0,
     },
     promotionDesc:{
       commingDesc: '',
@@ -130,7 +129,7 @@ Page({
       p.textSmall = '';
     }
 
-    if (props.limitFlag >= props.limitNumber) {
+    if (props.limitFlag) { //1 已到限购数 0 未到
       p.text = `每人限购${props.limitNumber}次`;
       p.textSmall = '(您已购买过本商品)';
     }
@@ -138,7 +137,7 @@ Page({
     if ( //什么情况下不允许点击按钮
       (props.status === 1 && props.notifyFlag) ||  //未开始已设置提醒
       [3, 4, 5].includes(props.status) || // 已售完、已结束、手动结束下
-      props.limitFlag >= props.limitNumber  // 购买数量大于等于限购数
+      props.limitFlag  // 购买数量已到限购数
     ) {
       p.disabled = true;
       p.className = 'footbar-disabled';

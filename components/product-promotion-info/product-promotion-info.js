@@ -19,17 +19,19 @@ Component({
     countdownTime: '00:00:00:00',
     interval: null,
     endTime: 0,
+    delay: 90 //倒计时间隔
   },
   methods: {
     // 倒计时 到毫秒
     countdown() {
       let time = this.data.endTime;
+      let delay = this.data.delay;
       if (typeof time !== 'number' || time <= 0 || !time) {
         clearInterval(this.data.interval);
         return time;
       }
-      time -= 90
-      if( time <= 90) {
+      time -= delay;
+      if (time <= delay) {
         clearInterval(this.data.interval)
         this.setData({
           countdownTime: '00:00:00:00'
@@ -54,7 +56,7 @@ Component({
     
   },
   ready() {
-    //这段可以优化下到时候放到业务页面  这里只需要取倒计时所需的时间戳  promotionType就可以不要了
+    //这段可以优化下到时候放到业务页面  这里只需要取倒计时所需的时间戳
     let prop = this.data.prop;
     let t = prop.endTime;
     if (prop.status === 2 && this.data.promotionType === 'discount') {
@@ -74,7 +76,7 @@ Component({
     if([1,2,3].includes(prop.status)){
       this.data.interval = setInterval( () => {
         this.countdown();
-      },90)
+      }, this.data.delay)
     }
   }
 })

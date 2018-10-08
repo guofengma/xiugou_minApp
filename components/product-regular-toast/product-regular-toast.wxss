@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 99;
+  z-index: 110;
   background: rgba(0,0,0,0.5);
 }
 .regular-body{
@@ -38,6 +38,8 @@
 }
 .regular-content {
   padding: 20rpx;
+  height: 578rpx;
+  box-sizing: border-box;
 }
 .regular-close-icon {
   position: absolute;
