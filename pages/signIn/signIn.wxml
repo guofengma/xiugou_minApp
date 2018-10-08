@@ -1,0 +1,32 @@
+<view class='sign-page sub-page'>
+  <view class='gray-9 font-24 rule'>
+    <image-sub imgStyle='{{"width:30rpx"}}' imgSrc="{{'home_icon.png'}}"/>
+    <text> 签到规则</text>
+  </view>
+  <!-- 签到按钮 -->
+  <view class='sign-btn-view'>
+    <view class='sign-btn flexR'>
+      <text class='font-38'>签</text>
+    </view>
+    <view class='font-24 gray-9 flexR'>
+      <text>累计签到1天</text>
+    </view>
+  </view>
+  <!-- 签到日历 -->
+  <view class='sign-date-view'>
+  
+  </view>
+  <!-- 兑换1元劵 -->
+  <view class='coin-coupon-view whiteBg'>
+  
+  </view>
+  <!-- 备注 -->
+  <view class='font-24 gray-9 tips'>
+    注：100秀豆兑换1张劵，无兑换限制，点击即可兑换
+  </view>
+
+  <!-- 优惠卷张数 -->
+  <view class='font-24 gray-9 flexC'>
+     已有3张现金劵>
+  </view>
+</view>

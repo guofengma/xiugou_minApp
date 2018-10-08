@@ -70,7 +70,7 @@
       <!-- 待收货 -->
       <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='3'>
         <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForobtain.png'}}"/>
-        <view>待收获</view>
+        <view>待收货</view>
       </view>
       <!-- 售后 -->
       <view class='list-cont' catchtap='itemClicked' data-page='7'>

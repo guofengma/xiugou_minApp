@@ -373,9 +373,16 @@ export default class Operation {
 
         /************************** 首页 *******************************/ 
 
-        //轮播图
+      /* 
+        查询广告位列表 
+        type：1.APP首页banner广告位   2.APP首页推荐位   3.APP首页明星店铺推荐位    4.APP首页今日榜单广告位
+        5.APP首页精品推荐广告位  6.APP首页超值热卖广告位  7.APP首页专题广告位  8.APP首页为你推荐广告位
+        9.拼店首页banner推荐位  10.类目搜索banner广告位
+        status： 1.有效 2.无效
+        linkType：1.链接产品2.链接专题3.降价拍4.秒杀5.礼包
+      */
 
-        this.queryAdList = '/user/ad/queryAdList'
+        this.queryAdList = '/config/advertisement/queryAdvertisementList'
 
         // 获取专题详情页
 

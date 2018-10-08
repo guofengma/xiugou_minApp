@@ -160,7 +160,7 @@
 }
 .today-list-imageContainer{
  width: 100%;
- height: 350rpx;
+ height: 280rpx;
 }
 .today-list-item{
  height: 500rpx;
@@ -176,11 +176,11 @@
 .fine-quality-view .today-list-itemImg{
   height: 280rpx;
 }
-.fine-quality-tips{
+/* .fine-quality-tips{
   margin-top: 20rpx;
-}
+} */
 .fine-quality-view{
-  padding-bottom:14rpx;
+  padding-bottom:50rpx;
 }
 /* 超值热卖 */
 .hot-sale-view{

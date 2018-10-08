@@ -14,7 +14,7 @@
     <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:{{imgheights[0]}}rpx;' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff'>
     <block wx:for="{{imgUrls}}" wx:key='unique'>
       <swiper-item>
-        <image src="{{item}}" class="slide-image" catchtap='adListClicked' data-type='{{item.link_type}}' data-val='{{item.link_type_value}}' bindload="imageLoad" />
+        <image src="{{item.imgUrl}}" class="slide-image" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' bindload="imageLoad" />
       </swiper-item>
     </block>
     </swiper>
@@ -48,8 +48,8 @@
 
   <view class='index-ad-banner-view flexC whiteBg'>
     <block wx:for='{{adArr}}' wx:key='unique'>
-      <view class='overflow'>
-        <image src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'></image>
+      <view class='overflow' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' >
+        <image src='{{item.imgUrl}}'></image>
       </view>
     </block>
   </view>
@@ -83,8 +83,8 @@
   <!-- 明星店铺 -->
   <view class='star-shop-view'>
     <view class='index-item-title flexR font-38'>明星店铺</view>
-    <view class='star-shop-item whiteBg' wx:for='{{2}}' wx:key='{{index}}'>
-     <image src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' mode='widthFix'></image>
+    <view class='star-shop-item whiteBg' wx:for='{{starShop}}' wx:key='{{index}}'>
+     <image src='{{item.imgUrl}}' mode='widthFix'></image>
      <view class='flexR'>
        <!-- logo -->
        <view class='star-shop-logo flexR-sb'>
@@ -115,9 +115,9 @@
   <view class='today-list-view whiteBg'>
     <view class='index-item-title flexR font-38'>今日榜单</view>
     <swiper class="today-list-imageContainer" bindchange="handleChange" previous-margin="62rpx" next-margin="62rpx" circular autoplay>
-      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+      <block wx:for="{{todayList}}" wx:key="{{index}}">
         <swiper-item class="today-list-item boxSize">
-          <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item}}"></image>
+          <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item.imgUrl}}"></image>
         </swiper-item>
       </block>
     </swiper>
@@ -127,10 +127,10 @@
   <view class='today-list-view fine-quality-view whiteBg'>
     <view class='index-item-title flexR font-38'>精品推荐</view>
     <swiper class="today-list-imageContainer" bindchange="handleChange"  next-margin="150rpx" circular>
-      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+      <block wx:for="{{fineQuality}}" wx:key="{{index}}">
         <swiper-item class="today-list-item boxSize">
-          <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item}}"></image>
-          <view class='ellipsis font-26 fine-quality-tips'>华盛顿哈空间是的哈卡收到货卡仕达卡仕达卡收到货卡的很时代大厦多</view>
+          <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item.imgUrl}}"></image>
+          <!-- <view class='ellipsis font-26 fine-quality-tips'>华盛顿哈空间是的哈卡收到货卡仕达卡仕达卡收到货卡的很时代大厦多</view> -->
         </swiper-item>
       </block>
     </swiper>
@@ -140,9 +140,9 @@
 
   <view class='hot-sale-view whiteBg'>
     <view class='index-item-title flexR font-38'>超值热卖</view>
-    <view class='hot-sale-item'>
+    <view class='hot-sale-item' wx:for="{{hotSale}}" wx:key="{{index}}" >
       <view class='hot-sale-img'>
-        <image src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' mode='widthFix'></image>
+        <image src='{{item.imgUrl}}' mode='widthFix'></image>
       </view>
       <scroll-view scroll-x="true"   class='hot-sale-scroll'>
         <view class='hot-sale-content  boxSize'>
