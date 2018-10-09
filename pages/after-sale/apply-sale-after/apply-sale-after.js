@@ -1,8 +1,10 @@
 let { Tool, RequestFactory, Storage, Operation} = global;
+//this.selectComponent("#prd-info-type").isVisiableClicked()
 Page({
   data: {
     ysf: { title: '申请售后' },
     hidden:false,
+    selectType:{}, // 换货参数
     reason:[
       {
         navbar:'申请退款',
@@ -65,7 +67,7 @@ Page({
     smallImg:[],
     remark:'',
     page:[
-      '/pages/after-sale/only-refund/apply-result/apply-result',
+      '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail',
       '/pages/after-sale/return-goods/return-goods',
       '/pages/after-sale/exchange-goods/exchange-goods'
     ],
@@ -80,6 +82,7 @@ Page({
     this.setData({
       refundType: options.refundType,
       list: Storage.getInnerOrderList() || '',
+      returnProductId: options.returnProductId || '',
       placeholder: { placeholder: placeholder, disabled: false }
     })
     wx.setNavigationBarTitle({
@@ -110,13 +113,14 @@ Page({
     let params = {
       orderProductId: this.data.list.id,
       reqName: '查看申请退款子订单详情',
-      url: Operation.findOrderProductInfo
+      url: Operation.findOrderProductInfo,
+      requestMethod: 'GET'
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let data = req.responseObject.data
       data.imgUrl = data.specImg ? data.specImg : this.data.list.imgUrl
-      data.createTime = Tool.formatTime(data.createTime)
+      data.createTime = Tool.formatTime(data.orderCreateTime)
       this.setData({
         orderInfos: data
       })
@@ -140,14 +144,14 @@ Page({
     })
   },
   orderRefund(){
-    if (this.data.activeIndex===''){
-      Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
-      return
-    }
-    if (this.data.refundType == 2 && Tool.isEmptyStr(this.data.remark)){
-      Tool.showAlert(this.data.reason[this.data.refundType].placeholder)
-      return
-    }
+    // if (this.data.activeIndex===''){
+    //   Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
+    //   return
+    // }
+    // if (this.data.refundType == 2 && Tool.isEmptyStr(this.data.remark)){
+    //   Tool.showAlert(this.data.reason[this.data.refundType].placeholder)
+    //   return
+    // }
     let list = this.data.list
     let url = ''
     let reqName = ''
@@ -161,21 +165,41 @@ Page({
       url = Operation.applyExchangeProduct
       reqName = '申请换货'
     }
+    if (this.data.returnProductId) {
+      url = Operation.updateApply
+      reqName = '修改退换货申请'
+    }
+    let imgList = []
+    this.data.originalImg.forEach((item,index)=>{
+      imgList.push({
+        // height:item.height,
+        // width:
+        originalImg:item,
+        smallImg: this.data.smallImg[index]
+      })
+    })
     let params = {
-      imgUrls: this.data.originalImg.join(','),
+      exchangePriceId:'',
+      exchangeSpec:"",
+      exchangeSpecImg:'',
+      imgList: imgList,
       orderProductId: list.id,
       remark: this.data.remark,
-      returnReason: this.data.reason[this.data.refundType].list[this.data.activeIndex].dValue,
-      smallImgUrls: this.data.smallImg.join(','),
+      returnProductId:'',
+      returnReason:'无',
+      // returnReason: this.data.reason[this.data.refundType].list[this.data.activeIndex].dValue,
       reqName: reqName,
       url: url
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      Tool.redirectTo(this.data.page[this.data.refundType] + '?returnProductId=' + req.responseObject.data.returnProductId)
+      Tool.redirectTo(this.data.page[this.data.refundType] + '?returnProductId=' + req.responseObject.data.id)
     };
     Tool.showErrMsg(r)
     r.addToQueue();
+  },
+  updateApply(){
+    
   },
   uploadImage(e){
     this.setData({
@@ -186,6 +210,34 @@ Page({
   inputChange(e){
     this.setData({
       remark: e.detail.value
+    })
+  },
+  chooseType(){
+    let params = {
+      id: this.data.list.productId,
+      isShowLoading: false,
+      requestMethod: 'GET',
+      url: Operation.findProductStockBySpec,
+      reqName: "规格搜索"
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let datas = req.responseObject.data
+      this.setData({
+        productSpec: datas.specMap,
+        priceList: datas.priceList,
+        selectPrice: this.data.list.price,
+        isInit: false,
+        imgUrl: this.data.list.specImg
+      })
+      this.selectComponent("#prd-info-type").isVisiableClicked()
+    }
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  changeProdctType(e){
+    this.setData({
+      selectType: e.detail
     })
   }
 })

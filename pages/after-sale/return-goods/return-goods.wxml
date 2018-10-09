@@ -21,7 +21,7 @@
   <view>{{distanceTime}}</view>
 </view>
 
-<amend-application/>
+<amend-application />
 <!--退款成功以后才显示以下内容  -->
 
 <template is="temp-refund-info" data="{{...datas}}"/>

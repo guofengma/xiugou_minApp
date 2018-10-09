@@ -21,13 +21,12 @@ Page({
       url: Operation.findReturnProductById
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.findReturnProductById(params)
     r.successBlock = (req) => {
       Tool.findReturnProductById(req)
       let datas = req.responseObject.data
-      if (datas.returnProduct.status ==4){
+      if (datas.status ==6){
         datas.statusName = '退款成功'
-      } else if (datas.returnProduct.status == 3){
+      } else if (datas.status == 3){
         datas.statusName = '商家拒绝你的请求'
       } else{
         datas.statusName = '退款中'

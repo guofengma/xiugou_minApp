@@ -42,7 +42,7 @@
       <!--数量选择器  -->
       <view class='counter'>
         <text class='font-30'>购买数量</text>
-        <adder-subtractor    count="{{innerCount}}" countSize='{{60}}' bind:countChange="counterInputOnChange" commodityType="{{commodityType}}"/>
+        <adder-subtractor    count="{{exchangeNum || innerCount}}" countSize='{{60}}' bind:countChange="counterInputOnChange" commodityType="{{commodityType}}"/>
       </view>
     </scroll-view>
     

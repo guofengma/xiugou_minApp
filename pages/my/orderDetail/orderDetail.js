@@ -355,13 +355,13 @@ Page({
     },
     goPage(list,btnTypeId){
       let page = ''
-      let returnType = list.returnProductType
+      let returnType = list.returnType
       let returnProductStatus = list.returnProductStatus
       let params = "?id=" + list.returnProductId
-
+      console.log(list)
       if (returnType == 1) {
 
-        page = '/pages/after-sale/only-refund/apply-result/apply-result'
+        page = '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail'
 
       } else if (returnType == 2) {
 
@@ -375,8 +375,7 @@ Page({
         params = ''
         page = '/pages/after-sale/apply-sale-after/apply-sale-after?refundType=0'
 
-      } else if (btnTypeId == 2) {
-        
+      } else if (btnTypeId == 2) {   
         page = '/pages/after-sale/choose-after-sale/choose-after-sale'
       }
       Tool.navigateTo(page + params)

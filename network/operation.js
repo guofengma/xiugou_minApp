@@ -277,7 +277,7 @@ export default class Operation {
 
         // 查看申请退款子订单详情
 
-        this.findOrderProductInfo = '/order/orderProduct/findOrderProductInfo'
+        this.findOrderProductInfo = '/order/orderProduct/lookDetial'
 
         // 查看退款退货换货情况
 

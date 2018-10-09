@@ -2,7 +2,7 @@ let { Tool, RequestFactory, Storage, Event, Operation } = global;
 Component({
   properties: {
     num:Number,
-    condition:String
+    condition:String,
   },
   data: {
     num: 0,
@@ -59,7 +59,7 @@ Component({
           item.sendTime = Tool.formatTime(item.sendTime);
           // item.createTime = Tool.formatTime(item.orderCreateTime);
           // 礼包不显示产品描述
-          if (item.orderProductList[0].orderType == 98) item.orderProduct[0].spec=''
+          // if (item.orderProductList[0].orderType == 98) item.orderProduct[0].spec=''
           // 这块是倒计时 
           if (item.status == 1) {
             let now = Tool.timeStringForDate(new Date(), "YYYY-MM-DD HH:mm:ss");

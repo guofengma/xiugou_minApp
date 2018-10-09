@@ -7,7 +7,8 @@ Component({
     imgUrl:String,
     price:Number,
     isInit:Boolean,
-    commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包
+    commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包 5 换货
+    exchangeNum:Number, // 换货的数量
   },
   data: {
     visiable:false,

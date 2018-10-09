@@ -1001,20 +1001,20 @@ export default class Tool {
     // 退换货数据变换
 
     static findReturnProductById(req){
-      let data = req.responseObject.data
-      let returnProduct = data.returnProduct
-      returnProduct.applyTime = global.Tool.formatTime(returnProduct.apply_time)
-      returnProduct.imgUrl = returnProduct.spec_img
-      returnProduct.productName = returnProduct.product_name
-      if (data.returnAmountsRecord) {
-        returnProduct.showAmount = data.returnAmountsRecord.showAmount = returnProduct.price * returnProduct.num
-        if (data.returnAmountsRecord.refundTime)
-          data.returnAmountsRecord.showRefundTime = global.Tool.formatTime(data.returnAmountsRecord.refundTime)
-      }
-      if (data.returnAddress) {
-        data.returnAddress.addressInfo = data.returnAddress.address
-      }
-      data.receive.addressInfo = data.receive.address
+      // let data = req.responseObject.data
+      let returnProduct = req.responseObject.data
+      returnProduct.applyTime = global.Tool.formatTime(returnProduct.applyTime)
+      returnProduct.imgUrl = returnProduct.specImg
+      returnProduct.productName = returnProduct.productName
+      // if (data.returnAmountsRecord) {
+      //   returnProduct.showAmount = data.returnAmountsRecord.showAmount = returnProduct.price * returnProduct.num
+      //   if (data.returnAmountsRecord.refundTime)
+      //     data.returnAmountsRecord.showRefundTime = global.Tool.formatTime(data.returnAmountsRecord.refundTime)
+      // }
+      // if (data.returnAddress) {
+      //   data.returnAddress.addressInfo = data.returnAddress.address
+      // }
+      // data.receive.addressInfo = data.receive.address
       // return req
     }
 

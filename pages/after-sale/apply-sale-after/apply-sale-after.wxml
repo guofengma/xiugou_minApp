@@ -23,7 +23,10 @@
       <template is="cell-line" data="{{name:reason[refundType].choose,content:reason[refundType].list[activeIndex].dValue}}"/> 
     </view>
     <view class='cell-line refund-num whiteBg' wx:if='{{refundType!=2}}'>
-      退款金额： <text class='red'>¥{{orderInfos.returnMoney}}</text>
+      退款金额： <text class='red'>¥{{orderInfos.refundPrice}}</text>
+    </view>
+    <view  bindtap='chooseType' wx:if='{{refundType==2}}'>
+      <template is="cell-line" data="{{name:'更换型号',placeholder:selectType.spec}}"/> 
     </view>
     <view class='address active whiteBg' wx:if='{{refundType==2}}'>
       <template is="address-info" data="{{addressType:1,...list.address,hasData:true}}"/>
@@ -47,3 +50,16 @@
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
 
 <choose-after-sale-reason hidden='{{hidden}}'  bind:makeSureReason="makeSureReason" reason="{{reason[refundType]}}" />
+
+<product-specification id='prd-info-type' 
+  bind:subClicked="changeProdctType" 
+  productSpec='{{productSpec}}' 
+  price = '{{selectPrice}}'
+  priceList='{{priceList}}' 
+  exchangeNum='{{list.num}}'
+  isInit ="{{isInit}}"
+  imgUrl="{{imgUrl}}" 
+  showImgs='{{true}}' 
+  isIphoneX='{{isIPhoneX.isIPhoneX}}'
+  commodityType = '5'
+/>

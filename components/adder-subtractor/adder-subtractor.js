@@ -4,7 +4,7 @@ Component({
     count: Number,
     countSize: Number,
     index: Number,
-    commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包
+    commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包 5换货
   },
   data: {
     innerCount:0,
@@ -12,7 +12,7 @@ Component({
   },
   methods: {
     canClicked(){ // 是否可以点击
-      if (this.data.commodityType == 3 || this.data.commodityType ==2){
+      if (this.data.commodityType == 3 || this.data.commodityType == 2 || this.data.commodityType == 5){
         this.setData({
           canClicked:false
         })
