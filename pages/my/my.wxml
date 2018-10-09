@@ -75,7 +75,7 @@
       <!-- 售后 -->
       <view class='list-cont' catchtap='itemClicked' data-page='7'>
         <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconAftersale.png'}}"/>
-        <view>售后/付款</view>
+        <view>售后/退款</view>
       </view>
     </view>
   </view>

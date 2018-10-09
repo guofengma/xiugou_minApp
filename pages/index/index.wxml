@@ -88,24 +88,24 @@
      <view class='flexR'>
        <!-- logo -->
        <view class='star-shop-logo flexR-sb'>
-         <image src='/img/default-userImg.png' mode='widthFix'></image>
+         <image src='{{item.storeDTO.headUrl || "/img/default-userImg.png"}}' mode='widthFix'></image>
          <view>
           <view class='font-24'>
-            俞总 
-            <text class='start-shop-label flexR'>V5</text>
+            {{item.storeDTO.name}} 
+            <text class='start-shop-label flexR'>{{item.storeDTO.starName}}</text>
           </view>
-          <view class='font-20 gray'>成员：50+</view>
+          <view class='font-20 gray'>成员：{{item.storeDTO.storeUserNum}}</view>
          </view>
        </view>
        <!-- 店铺收入 -->
        <view class='flexC monthIncome'>
          <text class='font-20 gray'>店铺本月收入</text>
-         <view class='font-22'>111111.22</view>
+         <view class='font-22'>{{item.storeDTO.tradeBalance}}</view>
        </view>
        <!-- 累计收入 -->
        <view class='flexC totalIncome'>
         <text class='font-20 gray'>店铺累计收入</text>
-        <view class='font-22'>1002万元</view>
+        <view class='font-22'>{{item.storeDTO.totalTradeBalance}}</view>
        </view>
      </view>
     </view>    

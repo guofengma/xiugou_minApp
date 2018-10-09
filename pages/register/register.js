@@ -26,12 +26,12 @@ Page({
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
     })
-    if (options.inviteCode){
-      let callBack = () => {
-        this.sweepCode(options.inviteCode)
-      }
-      app.wxLogin(callBack)
-    }
+    // if (options.inviteCode){
+    //   let callBack = () => {
+    //     this.sweepCode(options.inviteCode)
+    //   }
+    //   app.wxLogin(callBack)
+    // }
   },
   onShow: function () {
     

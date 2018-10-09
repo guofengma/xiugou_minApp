@@ -115,13 +115,14 @@ Component({
     //删除订单
     deleteItem(e) {
       let id = e.currentTarget.dataset.id;
+      console.log(id)
       let status = e.currentTarget.dataset.status;
       this.setData({
         isDelete: true,
         orderId: id,
         status: status,
       });
-      this.deleteOrder()
+      // this.deleteOrder()
     },
     dismissCancel() {
       //取消取消订单
@@ -133,32 +134,24 @@ Component({
     deleteOrder() {
       let url = ''
       let reqName = ''
-      if (this.data.status == 4 || this.data.status == 5 || this.data.status == 6) {//已完成订单/待确认
-        // r = RequestFactory.deleteOrder(params)
+      if (this.data.status == 4 || this.data.status == 5 ) {//已完成订单/待确认
         url = Operation.deleteOrder
         reqName = '删除订单'
       } else {
-        // r = RequestFactory.deleteClosedOrder(params)
         url = Operation.deleteClosedOrder
         reqName = '删除订单'
       }
       let params = {
-        id: this.data.orderId,
-        // orderNum:
+        orderNum: this.data.orderId,
         url: url,
         reqName: reqName
       };
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
-        if (req.responseObject.code == 200) {
-          this.setData({
-            list: []
-          });
-          this.getData(this.data.num);
-        } else {
-          Tool.showSuccessToast(req.responseObject.msg)
-        }
-
+        this.setData({
+          list: []
+        });
+        this.getData(this.data.num);
       };
       r.completeBlock = (req) => {
         this.setData({
@@ -188,20 +181,16 @@ Component({
       let that = this;
       Tool.showComfirm('确认收货？', function () {
         let params = {
-          orderId: id,
+          orderNum: id,
           reqName: '确认收货',
           url: Operation.confirmReceipt,
         }
         let r = RequestFactory.wxRequest(params);
         r.successBlock = (req) => {
-          if (req.responseObject.code == 200) {
-            that.setData({
-              list: []
-            });
-            that.getData(that.data.num);
-          } else {
-            Tool.showSuccessToast(req.responseObject.msg)
-          }
+          that.setData({
+            list: []
+          });
+          that.getData(that.data.num);
         };
         Tool.showErrMsg(r);
         r.addToQueue();
@@ -211,10 +200,11 @@ Component({
     continuePay(e) {
       let item = e.currentTarget.dataset.item;
       let params = {
-        totalAmounts: item.totalPrice + item.freightPrice, //总价
+        totalAmounts: item.needPrice, //总价
         orderNum: item.orderNum, // 订单号
-        outTradeNo: item.outTrandNo  // 流水号
+        outTradeNo: item.outTradeNo  // 流水号
       };
+      Storage.setPayOrderList(params)
       Tool.navigateTo('/pages/order-confirm/pay/pay?isContinuePay=' + true + '&data=' + JSON.stringify(params))
     },
     //再次购买

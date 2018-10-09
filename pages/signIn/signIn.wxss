@@ -24,7 +24,7 @@
   
 }
 .sign-date-view{
-  background:#C2A38D;
+  background:#DBC79D;
 }
 .coin-coupon-view{
   height: 188rpx;

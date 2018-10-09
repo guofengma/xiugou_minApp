@@ -107,7 +107,6 @@ Page({
     r.addToQueue();
   },
   findOrderProductInfo(){
-    // let r = RequestFactory.findOrderProductInfo(params)
     let params = {
       orderProductId: this.data.list.id,
       reqName: '查看申请退款子订单详情',

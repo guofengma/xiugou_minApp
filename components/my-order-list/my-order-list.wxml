@@ -57,7 +57,7 @@
           {{item.countDownTime}}
         </view>
         <view class="right" wx:if="{{ item.status!=1 && item.status!=2 && item.status!=3 }}">
-          <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.id}}" data-status="{{item.status}}">删除订单</view>
+          <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.orderNum}}" data-status="{{item.status}}">删除订单</view>
           <view class="pay-btn red" bindtap='continueBuy' data-id="{{item.id}}" wx:if='{{item.orderType==99}}'>再次购买</view>
         </view>
         <view class="right" wx:elif="{{ item.status==1}}">
@@ -68,7 +68,7 @@
         </view>
         <view class="right" wx:elif="{{item.status==3}}">
           <view class="cancel-btn" bindtap="logistics" data-id="{{item.id}}">查看物流</view>
-          <view class="pay-btn red" bindtap="confirmReceipt" data-id="{{item.id}}">确认收货</view>
+          <view class="pay-btn red" bindtap="confirmReceipt" data-id="{{item.orderNum}}">确认收货</view>
         </view>
       </view>
       <view class="clearfix"></view>

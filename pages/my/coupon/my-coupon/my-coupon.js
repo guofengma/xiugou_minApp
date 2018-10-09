@@ -190,7 +190,6 @@ Page({
       let index = e.currentTarget.dataset.index
       let key = e.currentTarget.dataset.key
       Storage.setCoupon(this.data.lists[key][index])
-      Tool.navigateTo('../coupon-detail/coupon-detail')
       if(this.data.door==1&&key==0){
         Event.emit("updateCoupon")
         Tool.navigationPop()

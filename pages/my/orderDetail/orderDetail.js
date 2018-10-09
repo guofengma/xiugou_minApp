@@ -117,32 +117,27 @@ Page({
     deleteOrder(){
       let url = ''
       let reqName = ''
-      if (this.data.status == 4 || this.data.status == 5 || this.data.status == 6){//已完成订单     
+      if (this.data.status == 4 || this.data.status == 5 ){//已完成订单     
         url = Operation.deleteOrder
         reqName = '删除订单'
-      } else if (this.data.status == 7 || this.data.status == 8 ){
+      } else if (this.data.status == 7 || this.data.status == 8 || this.data.status == 6){
         url = Operation.deleteClosedOrder
         reqName = '删除订单'
       }
       let params = {
-        orderId: this.data.orderId,
+        orderNum: this.data.detail.orderNum,
         reqName: reqName,
         url: url
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
-            if(req.responseObject.code==200){
-              this.setData({
-                  isDelete:false,
-              });
-              Tool.navigateTo('../my-order/my-order')
-            }else{
-              Tool.showSuccessToast(req.responseObject.msg)
-            }
-
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
+        this.setData({
+          isDelete: false,
+        });
+        Tool.navigateTo('../my-order/my-order')
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
     },
     cancelItem() {
         this.setData({
@@ -155,17 +150,13 @@ Page({
         let that=this;
         Tool.showComfirm('确认收货？', function () {
           let params = {
-            orderId: id,
+            orderNum: that.data.detail.orderNum,
             reqName: '确认收货',
             url: Operation.confirmReceipt
           }
           let r = RequestFactory.wxRequest(params);
           r.successBlock = (req) => {
-            if(req.responseObject.code==200){
-              Tool.navigateTo('../my-order/my-order')
-            }else{
-              Tool.showSuccessToast(req.responseObject.msg)
-            }
+            Tool.navigateTo('../my-order/my-order')
           };
           Tool.showErrMsg(r)
           r.addToQueue();
@@ -267,11 +258,12 @@ Page({
     },
     continuePay() {
       let params = {
-        totalAmounts: this.data.detail.orderTotalPrice, //支付的钱
+        totalAmounts: this.data.detail.needPrice, //支付的钱
         orderNum: this.data.detail.orderNum,// 订单号
         outTradeNo: this.data.detail.outTradeNo||'', // 是否继续支付
       }
-      Tool.navigateTo('/pages/order-confirm/pay/pay?isContinuePay=' + true + '&data=' + JSON.stringify(params))
+      Storage.setPayOrderList(params)
+      Tool.navigateTo('/pages/order-confirm/pay/pay?isContinuePay=' + true)
     },
     //再次购买
     continueBuy(){
@@ -367,7 +359,7 @@ Page({
       let returnProductStatus = list.returnProductStatus
       let params = "?id=" + list.returnProductId
 
-       if (returnType == 1) {
+      if (returnType == 1) {
 
         page = '/pages/after-sale/only-refund/apply-result/apply-result'
 
