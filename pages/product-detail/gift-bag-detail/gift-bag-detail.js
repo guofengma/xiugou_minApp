@@ -29,7 +29,7 @@ Page({
       nextLevel:''
     }, //是否显示礼包升级提示
     size: 0,
-    dismiss:true, // 能否可以购买礼包 
+    dismiss:false, // 能否可以购买礼包 
   },
   onLoad: function (options) {
     this.setData({
@@ -86,38 +86,35 @@ Page({
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&type=5")
   },
   checkGiftBagOrder(){
-    let params = {
-      giftBagId: this.data.giftBagId,
-      isShowLoading:false,
-      reqName: '是否能购买礼包',
-      url: Operation.checkGiftBagOrder
-    }
-    let r = RequestFactory.wxRequest(params);
-
-    // let r = RequestFactory.checkGiftBagOrder(params)
-
-    r.successBlock = (req) => { //能否可以购买礼包
-      this.setData({
-        dismiss:false,
-        isShowGiftTips: {
-          show: true,
-          nextLevel: req.responseObject.data.nextLevel
-        }, //是否显示礼包升级提示
-      })
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    // let params = {
+    //   giftBagId: Number(this.data.giftBagId),
+    //   isShowLoading:false,
+    //   reqName: '是否能购买礼包',
+      
+    //   url: Operation.checkGiftBagOrder
+    // }
+    // let r = RequestFactory.wxRequest(params);
+    // r.successBlock = (req) => { //能否可以购买礼包
+    //   this.setData({
+    //     dismiss:false,
+    //     isShowGiftTips: {
+    //       show: true,
+    //       nextLevel: req.responseObject.data.nextLevel
+    //     }, //是否显示礼包升级提示
+    //   })
+    // }
+    // Tool.showErrMsg(r)
+    // r.addToQueue();
   },
   getGiftBagDetail() { //获取礼包详情
     let params = {
-      giftBagId: this.data.giftBagId,
+      id:Number(this.data.giftBagId),
       isShowLoading:false,
       reqName: '礼包详情',
+      requestMethod: 'GET',
       url: Operation.getGiftBagDetail
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.getGiftBagDetail(params)
-
     r.successBlock = (req) => {
 
       this.checkGiftBagOrder()
@@ -125,29 +122,42 @@ Page({
       let datas = req.responseObject.data
       // 渲染库存
       let giftStock = []
-      datas.specList.forEach((items) => {
-        let total = 0
-        items.value.forEach((item) => {
-          total += item.stock
+      let specPriceList = []
+      for (let key in datas.specPriceList) {
+        specPriceList.push({
+          name: key,
+          value: datas.specPriceList[key]
         })
-        giftStock.push(total)
-      })
+        let total = 0
+        datas.specPriceList[key].forEach((items, index) => {
+          total += items.surplusNumber
+          giftStock.push(total)
+        })
+      }
+      // datas.specPriceList.forEach((items,index) => {
+      //   console.log(index)
+      //   let total = 0
+      //   items.value.forEach((item) => {
+      //     total += item.stock
+      //   })
+      //   giftStock.push(total)
+      // })
 
       // 显示各礼包总库存里面的最小库存
 
-      datas.product.showStock = Math.min(...giftStock)
+      datas.showStock = Math.min(...giftStock)
 
       this.setData({
-        imgUrls: datas.ImgUrl,
-        productInfo: datas.product,
+        imgUrls: datas.imgFileList,
+        productInfo: datas,
         // priceList: datas.priceList,
-        productId: datas.product.id,
-        productTypeList: datas.specList
+        productId: datas.id,
+        productTypeList: specPriceList
       })
       // 渲染表格
       let tr = []
       let tbody = this.data.nodes
-      for (let i = 0; i < datas.infoValue.length; i++) {
+      for (let i = 0; i < datas.paramValueList.length; i++) {
         tr.push(
           {
             name: "tr",
@@ -157,7 +167,7 @@ Page({
               attrs: { class: 'td frist-td' },
               children: [{
                 type: "text",
-                text: datas.infoValue[i].param
+                text: datas.paramValueList[i].param
               }]
             },
             {
@@ -165,7 +175,7 @@ Page({
               attrs: { class: 'td td2' },
               children: [{
                 type: "text",
-                text: datas.infoValue[i].paramValue
+                text: datas.paramValueList[i].paramValue
               }]
             }
             ]
@@ -177,7 +187,7 @@ Page({
       this.setData({
         nodes: tbody
       })
-      let html = datas.product.content
+      let html = datas.content
       WxParse.wxParse('article', 'html', html, this, 5);
     }
     r.failBlock = (req) => {

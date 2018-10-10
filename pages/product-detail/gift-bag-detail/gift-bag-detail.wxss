@@ -1,5 +1,8 @@
 @import "/pages/product-detail/product-detail.wxss";
-
+.price2{
+  text-decoration: line-through;
+  margin: 0 10rpx;
+}
 .tips-content{
   color: #666;
   padding: 60rpx;

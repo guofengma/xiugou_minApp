@@ -38,7 +38,10 @@
   <view class='cell-line'>上传凭证</view>
 
   <view class='update-img-view whiteBg'>
-    <update-img bind:uploadImage='uploadImage'/>
+    <update-img id='update-img' bind:uploadImage='uploadImage' 
+       propsOriginalImg='{{originalImg}}'
+       propssmallImg ='{{smallImg}}'
+    />
   </view>
 </view>
 

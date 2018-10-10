@@ -33,6 +33,7 @@ Component({
     },
     formatSpecList(){ // 格式化规格数组
       if (this.data.isInit) return
+
       let lists = []
       for (let key in this.data.productSpec) {
         lists.push({
@@ -42,10 +43,19 @@ Component({
       }
       // 渲染总库存
       let totalStock = 0
+      let priceList = []
       this.data.priceList.forEach((item)=>{
         totalStock += item.stock
+        if (this.data.ommodityType == 5 & item.price == this.data.price){
+          priceList.push(item)
+        }
       })
+      if (priceList.length==0){
+        priceList = this.data.priceList
+      }
+      console.log("初始化中的价格" + priceList)
       this.setData({
+        priceList: priceList,
         productSpec: lists,
         totalStock: totalStock,
         isInit:true

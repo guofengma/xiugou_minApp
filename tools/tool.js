@@ -1011,9 +1011,9 @@ export default class Tool {
       //   if (data.returnAmountsRecord.refundTime)
       //     data.returnAmountsRecord.showRefundTime = global.Tool.formatTime(data.returnAmountsRecord.refundTime)
       // }
-      // if (data.returnAddress) {
-      //   data.returnAddress.addressInfo = data.returnAddress.address
-      // }
+      if (returnProduct.returnAddress) {
+        returnProduct.returnAddress.addressInfo = returnProduct.returnAddress.provinceName + returnProduct.returnAddress.cityName + returnProduct.returnAddress.areaName
+      }
       // data.receive.addressInfo = data.receive.address
       // return req
     }

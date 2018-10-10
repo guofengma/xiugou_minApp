@@ -7,8 +7,8 @@
 <view class='flexC tips-exchange font-26'>
   <view class='tips-title'>{{datas.statusName}}</view>
   <!--退款中不需要要显示时间  -->
-  <view wx:if='{{datas.returnProduct.status==4}}'>{{datas.returnAmountsRecord.showRefundTime}}</view>
-  <view wx:if='{{datas.returnProduct.status==3}}'>{{datas.returnProduct.refusal_reason}}</view>
+  <view wx:if='{{datas.status==6 || datas.status==3}}'>{{datas.showRefundTime}}</view>
+  <view wx:if='{{datas.status==3}}'>{{datas.refusalReason}}</view>
 </view>
 
 <!--退款成功以后才显示以下内容  -->

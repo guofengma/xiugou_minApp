@@ -85,12 +85,27 @@ Page({
       returnProductId: options.returnProductId || '',
       placeholder: { placeholder: placeholder, disabled: false }
     })
+    Tool.isIPhoneX(this) 
+    this.initData()
+  },
+  initData(){
+    let list = this.data.list
+    if (this.data.returnProductId) {
+      list.imgList.forEach((item) => {
+        this.data.originalImg.push(item.originalImg)
+        this.data.smallImg.push(item.smallImg)
+      })
+      this.setData({
+        originalImg: this.data.originalImg,
+        smallImg: this.data.smallImg
+      })
+      this.selectComponent("#update-img").initData()
+    }
     wx.setNavigationBarTitle({
-      title: this.data.reason[options.refundType].navbar
+      title: this.data.reason[this.data.refundType].navbar
     })
     this.findOrderProductInfo()
-    this.queryDictionaryDetailsType(options.refundType)
-    Tool.isIPhoneX(this) 
+    this.queryDictionaryDetailsType(this.data.refundType)
   },
   queryDictionaryDetailsType(refundType){
     // let r = RequestFactory.queryDictionaryDetailsType(params)
@@ -142,6 +157,7 @@ Page({
       hidden: e.detail.hidden,
       placeholder: { placeholder: placeholder, disabled: false }
     })
+    
   },
   orderRefund(){
     // if (this.data.activeIndex===''){
@@ -170,6 +186,7 @@ Page({
       reqName = '修改退换货申请'
     }
     let imgList = []
+    
     this.data.originalImg.forEach((item,index)=>{
       imgList.push({
         // height:item.height,
@@ -179,13 +196,13 @@ Page({
       })
     })
     let params = {
-      exchangePriceId:'',
-      exchangeSpec:"",
-      exchangeSpecImg:'',
+      exchangePriceId: this.data.selectType.id || '',
+      exchangeSpec: this.data.selectType.spec || '',
+      exchangeSpecImg: this.data.selectType.specImg || '',
       imgList: imgList,
       orderProductId: list.id,
       remark: this.data.remark,
-      returnProductId:'',
+      returnProductId: Number(this.data.returnProductId) || '',
       returnReason:'无',
       // returnReason: this.data.reason[this.data.refundType].list[this.data.activeIndex].dValue,
       reqName: reqName,

@@ -26,8 +26,10 @@ Page({
       let datas = req.responseObject.data
       if (datas.status ==6){
         datas.statusName = '退款成功'
+        datas.showRefundTime = Tool.formatTime(datas.orderReturnAmounts.refundTime)
       } else if (datas.status == 3){
-        datas.statusName = '商家拒绝你的请求'
+        datas.statusName = '商家拒绝你的请求' 
+        datas.showRefundTime = Tool.formatTime(datas.refusalTime)
       } else{
         datas.statusName = '退款中'
       }

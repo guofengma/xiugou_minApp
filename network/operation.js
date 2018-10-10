@@ -86,7 +86,7 @@ export default class Operation {
 
         // 礼包详情
 
-        this.getGiftBagDetail = '/order/giftBag/getGiftBagDetail'
+      this.getGiftBagDetail = '/operator/activitypackage/findActivityPackageDetail'
 
         // 是否能购买礼包
 

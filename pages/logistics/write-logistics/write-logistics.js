@@ -25,17 +25,16 @@ Page({
       backAddress: list.returnAddress.address,
       backPhone: list.returnAddress.recevicePhone,
       backReceiver: list.returnAddress.receiver,
-      expressName: this.data.company.name,
-      expressNo:this.data.code,
-      receiveAddress: list.receive.address,
-      receivePhone:list.receive.recevice_phone,
-      receiver: list.receive.receiver,
-      returnProductId: list.returnProduct.id,
+      expressName: this.data.company.name || '无',
+      expressNo:this.data.code || '0000000000000',
+      // receiveAddress: list.receive.address,
+      // receivePhone:list.receive.recevice_phone,
+      // receiver: list.receive.receiver,
+      id: list.id,
       reqName: '退货换货填写物流信息',
       url: Operation.fillInExpressInfoById
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.fillInExpressInfoById(params)
     r.successBlock = (req) => {
       Storage.setExpressNo(this.data.code)
       Event.emit('updataExpressNo')

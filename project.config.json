@@ -12,8 +12,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.2.5",
-	"appid": "wx228ac7ba52b9b1ed",
-	"projectname": "%E7%A7%80%E8%B4%AD%E5%B0%8F%E7%A8%8B%E5%BA%8F",
+	"appid": "wxa059b818226f8679",
+	"projectname": "%E7%A7%80%E8%B4%AD%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%90%8D%E8%9E%8D2",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 21,
+			"current": 8,
 			"list": [
 				{
 					"id": 0,
@@ -87,7 +87,7 @@
 					"id": 8,
 					"name": "申请售后",
 					"pathName": "pages/after-sale/apply-sale-after/apply-sale-after",
-					"query": "refundType=2"
+					"query": "refundType=2&returnProductId=1"
 				},
 				{
 					"id": -1,
@@ -166,6 +166,18 @@
 					"name": "登录",
 					"pathName": "pages/login-wx/login-wx",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "选择售后",
+					"pathName": "pages/after-sale/choose-after-sale/choose-after-sale",
+					"query": ""
+				},
+				{
+					"id": 23,
+					"name": "礼包",
+					"pathName": "pages/product-detail/gift-bag-detail/gift-bag-detail",
+					"query": "giftBagId=18"
 				}
 			]
 		}

@@ -10,6 +10,8 @@ Page({
           recevicePhone:'',
           addressInfo:''
       },
+      afterSaleTypeArr:[1,2,4,8,16],// 不支持优惠卷  不支持1元劵  不支持退款 不支持换货 不支持退货 
+      types:['退款','换货','退货','退换'],
       hasData:true,
       imgSrcUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/',
       logIcon: 'order-state-3-dark.png',
@@ -287,6 +289,26 @@ Page({
       Tool.showErrMsg(r)
       r.addToQueue();
     },
+    test(arr){
+      let afrerSaleType = []
+      this.data.afterSaleTypeArr.forEach((item)=>{
+        if (arr.includes(item)){
+          afrerSaleType.push(false)
+        } else{
+          afrerSaleType.push(true)
+        }
+      })
+      let arr2 = afrerSaleType.slice(2)
+      let num = 0;
+      arr2.forEach((item)=>{
+        if(item){
+          num++
+        }
+      })
+      arr2.push(num)
+      console.log(afrerSaleType)
+      return arr2
+    },
     middleBtn(){
       let detail = this.data.detail
       let outOrderState = detail.status // 外订单状态
@@ -299,18 +321,32 @@ Page({
         let returnType = item.returnType
         let finishTime = item.finishTime
         let now = new Date().getTime()
+        let arr = this.data.afterSaleTypeArr.filter((item0)=>{
+          return item0 & item.restrictions == item0
+        })
+        let btnArr = this.test(arr)
+        console.log(btnArr)
         if (outOrderState == 2){
-          middle = { id: 1,content: '退款' }
+          if (btnArr[0]) middle = {  id: 1, content: '退款' }
         }
-        if (outOrderState == 3 ){
-          middle = { id: 2, content: '退换' }
+        // 确认收货的状态的订单售后截止时间和当前时间比
+        if (outOrderState == 3 || (outOrderState == 4 && finishTime - now > 0) ){
+          if (btnArr[btnArr.length-1]>1){
+            middle = { id: 4, content: '退换' }
+          } else{
+            let index = btnArr.indexOf(true)
+            if(index!=-1){
+              middle = { id: index+1, content: this.data.types[index] }
+            }
+          }
+          
         }
-        if (outOrderState == 4 ) {
-          // 确认收货的状态的订单售后截止时间和当前时间比
-          if (finishTime - now>0){
-            middle = { id: 2, content: '退换' }
-          }      
-        }
+        // if (outOrderState == 4 ) {
+        //   // 确认收货的状态的订单售后截止时间和当前时间比
+        //   if (finishTime - now>0){
+        //     middle = { id: 2, content: '退换' }
+        //   }      
+        // }
         if (innerState == 4) {
           let arr = ["退款中",'退货中','换货中']
           middle = { id: 3, inner: innerState, content: arr[returnType-1],returnType: returnType } 
@@ -375,7 +411,7 @@ Page({
         params = ''
         page = '/pages/after-sale/apply-sale-after/apply-sale-after?refundType=0'
 
-      } else if (btnTypeId == 2) {   
+      } else if (btnTypeId == 4) {   
         page = '/pages/after-sale/choose-after-sale/choose-after-sale'
       }
       Tool.navigateTo(page + params)

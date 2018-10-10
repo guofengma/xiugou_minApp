@@ -5,12 +5,15 @@ Page({
     addressType:1,
     src:'/img/address-icon-gray.png',
     result:[ // 换货
+      { state:"其他"},
+      { state: "申请中", info: "等待商家通过", time: '' },
       { state: "商家已通过", info: "请在规定时间内退货给卖家", time: ''},
-      { state: "换货中", info: "等待商家确认" },
-      { state: "等待买家确认收货", info: "",time:'' },
-      { state: "换货完成", info: "" },
       { state: "商家拒绝您的请求", info: "请联系客服" },
-      { state: "订单异常", info: "请联系客服" }
+      { state: "换货中", info: "等待商家确认" },
+      { state: "换货中", info: "等待买家确认收货",time:'' },
+      { state: "换货完成", info: "" },
+      { state: "换货申请已撤销", info: "请联系客服" },
+      { state: "换货时间超时", info: "请联系客服" }
     ],
     resultIndex:0,
     expressNo: { id: 0, content:"填写寄回的物流信息"},
@@ -36,49 +39,44 @@ Page({
       url: Operation.findReturnProductById
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.findReturnProductById(params)
     r.successBlock = (req) => {
       Tool.findReturnProductById(req)
       let datas = req.responseObject.data
-      if (datas.returnProduct.type==2){
+      if (datas.type==2){
         Tool.redirectTo('/pages/after-sale/return-goods/return-goods?returnProductId=' + returnProductId)
         return
       }
-      datas.receive.recevicePhone = datas.receive.recevice_phone
-      // datas.returnProduct.
-      let resultIndex = 0
-      let status = datas.returnProduct.status
+      let status = datas.status
       let expressNo = this.data.expressNo
       let SaleExpressNo = this.data.SaleExpressNo
       let time =''
-      if (status == 1) {
+      if (status == 2) {
         let self = this
-        if (!datas.returnProduct.express_no) {
-          datas.endTime = Tool.formatTime(datas.returnProduct.out_time)
+        if (!datas.expressNo) {
+          datas.endTime = Tool.formatTime(datas.outTime)
           time = setInterval(function () { Tool.getDistanceTime(datas.endTime, self); }, 1000);
         }
       }
-      if (datas.returnProduct.express_no){
-        if (status == 1) resultIndex=1
-        expressNo = { id: 2, content: datas.returnProduct.express_no }
+      if (datas.expressNo){
+        expressNo = { id: 2, content: datas.expressNo }
       }
-      if (datas.returnProduct.ec_express_no) {
-        if (status == 1) resultIndex = 2
-        SaleExpressNo = { id: 2, content: datas.returnProduct.ec_express_no }
+      if (datas.ecExpressNo) {
+        SaleExpressNo = { id: 2, content: datas.ecExpressNo }
       }
-      if (status==4){
-        resultIndex = 3
-      } else if (status == 3 ){
-        resultIndex = 4
-      } else if (status == 6 || status == 5){
-        resultIndex = 5
+      
+      if(status==6){
+        this.data.result[status].time = Tool.formatTime(datas.backsendTime)
+      }
+      if (status == 3) {
+        this.data.result[status].info = datas.refusalReason
       }
       this.setData({
         datas: datas,
         SaleExpressNo: SaleExpressNo,
         expressNo: expressNo,
-        resultIndex: resultIndex,
-        time: time
+        resultIndex: status,
+        time: time,
+        result: this.data.result
       })
       Event.emit('getDetail')
     };
@@ -90,11 +88,11 @@ Page({
     let types = e.currentTarget.dataset.type
     let page = ''
     if (express.id==0){
-      page = '/pages/logistics/write-logistics/write-logistics?id=' + this.data.datas.returnProduct.id
+      page = '/pages/logistics/write-logistics/write-logistics?id=' + this.data.datas.id
     } else if (express.id == 1) {
       return
     } else {
-      page = '/pages/logistics/logistics?orderId=' + this.data.datas.returnProduct.id + '&door=1&type='+types
+      page = '/pages/logistics/logistics?orderId=' + this.data.datas.id + '&door=1&type='+types
     }
     Storage.setAfterSaleList(this.data.datas)
     Tool.navigateTo(page)

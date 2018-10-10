@@ -13,5 +13,6 @@
     </view>
     <view>申请时间：{{applyTime}}</view>
     <view>退款编号：{{refundNo}}</view>
+    <view>订单编号：{{orderNum}}</view>
   </view>
 </template>
