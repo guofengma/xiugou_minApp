@@ -7,9 +7,20 @@
 .good-item:nth-child(odd){
   margin-right: 20rpx;
 }
+.good-item-thumb-container {
+  position:relative;
+}
 .good-item-thumb{
   width: 100%;
   height: 335rpx;
+}
+.good-soldout {
+  width:238rpx;
+  height:238rpx;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
 }
 .good-detail {
   padding: 20rpx 20rpx 30rpx;

@@ -1,10 +1,15 @@
 <template name='good-item'>
-  <view class='good-item'>
-    <view class='good-item-thumb-contaner'>
+  <view class='good-item' 
+    bindtap="showGoodDetail" 
+    data-code="{{prodCode}}" 
+    data-status="{{status}}"
+    data-type="{{productType}}"
+  >
+    <view class='good-item-thumb-container'>
       <image src="{{specImg}}"
         class='good-item-thumb'
       ></image>
-      <view class='good-soldout'></view>
+      <image class='good-soldout' wx:if="{{status >= 3}}" src="/img/soldout.png"></image>
     </view>
     
     <view class='good-detail'>
@@ -26,15 +31,15 @@
           <view class='good-price-origin'>¥159.00</view>
         </view>
         
-        <view class='good-operate tip {{notifyFlag ? "flexR" : ""}}' 
+        <view class='good-operate tip {{!notifyFlag ? "flexR" : ""}}' 
           bindtap='toggleSubscribeItem' 
-          data-type="{{notifyFLag === 0 ? 1 : 0}}"
+          data-type="{{notifyFLag ? 0 : 1}}"
           data-index="{{index}}"
-          data-activity-id="{{productId}}"
+          data-activity-id="{{id}}"
           wx:if="{{status === 1}}"
         >
-          <image src='/img/Clock.png' class="icon" wx:if="{{notifyFlag}}"></image>
-          <text>{{notifyFlag ? '设置提醒' : '取消提醒'}} {{status}}</text>
+          <image src='/img/Clock.png' class="icon" wx:if="{{!notifyFlag}}"></image>
+          <text>{{!notifyFlag ? '设置提醒' : '取消提醒'}}</text>
         </view>
         <view class='good-operate loot' wx:elif="{{status === 2}}">马上抢</view>
         <view class='good-operate out' wx:else>抢光了</view>

@@ -46,7 +46,7 @@ Page({
     this.didLogin()
     this.requestFindProductByIdApp()
     this.getShoppingCartList()
-    this.getTopicActivityData();
+    this.getTopicActivityData(options.code);
 
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
@@ -55,68 +55,29 @@ Page({
 
   },
   //获取专题活动数据  JJP201810100001
-  getTopicActivityData() {
-    this.setData({
-      proNavData: {
-        "id": 1,
-        "activityCode": "JJP1809210001",
-        "productPriceId": 1,
-        "totalNumber": 100,
-        "surplusNumber": 10,
-        "freezeNumber": 1,
-        "startPrice": 2,
-        "floorPrice": 1.5,
-        "orderCloseTime": 1,
-        "intervalTime": 1,
-        "downPrice": 1.5,
-        "floorPriceTime": 1,
-        "limitNumber": 1,
-        "status": 2,
-        "activityTime": +new Date() + 2000000,
-        "beginTime": +new Date() + 2000000,
-        "endTime": +new Date() + 5000,
-        "closeTime": 1537962985000,
-        "createTime": 1537513053000,
-        "modifiedTime": 1537962985000,
-        "createUser": null,
-        "reseCount": 0,
-        "productName": "红米66",
-        "spec": "红色-32G-1KG",
-        "specImg": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/pms_1528718750.15896438!560x560.jpg",
-        "originalPrice": 1000,
-        "markdownPrice": 3,
-        "limitFlag": 0,
-        "notifyFlag": 0,
-        "date": +new Date(),//1538034474246
-        "tip": false,
-        "reseCount": 0,
-      }
-    });
-    this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
-    this.selectComponent('#promotion').init();
+  getTopicActivityData(code) {
+    let params = {
+      code: code,
+      reqName: '获取降价拍详情',
+      url: Operation.getActivityDepreciateById,
+      requestMethod: 'GET'
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let data = req.responseObject.data || {};
 
-    // let params = {
-    //   code: 'JJP1810100008',
-    //   reqName: '获取降价拍详情',
-    //   url: Operation.getActivityDepreciateById,
-    //   requestMethod: 'GET'
-    // }
-    // let r = RequestFactory.wxRequest(params);
-    // r.successBlock = (req) => {
-    //   let data = req.responseObject.data || {};
+      // let productSpec = this.refactorProductsData(data.productSpecValue);
 
-    //   // let productSpec = this.refactorProductsData(data.productSpecValue);
+      this.setData({
+        proNavData: data,
+        // productSpec: productSpec
+      })
 
-    //   this.setData({
-    //     proNavData: data,
-    //     // productSpec: productSpec
-    //   })
-
-    //   this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
-    //   this.selectComponent('#promotion').init();
-    // };
-    // Tool.showErrMsg(r)
-    // r.addToQueue();
+      this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
+      this.selectComponent('#promotion').init();
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
   // 根据降价拍返回的sku数据生成sku选择组件所需数据
   refactorProductsData(originData = []) {
