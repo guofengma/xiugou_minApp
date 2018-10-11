@@ -68,11 +68,13 @@ Page({
   },
   // 获取专题信息列表
   getTopicByCode(topicCode) {
+      let userInfo = Storage.getUserAccountInfo();
       let params = {
         code: topicCode,
         reqName: '获取专题列表',
         url: Operation.getTopicById,
-        requestMethod: 'GET'
+        requestMethod: 'GET',
+        userId: userInfo.id
       };
 
       let r = RequestFactory.wxRequest(params);
@@ -105,7 +107,7 @@ Page({
     let params = {
       reqName: '订阅提醒',
       url: Operation.addActivitySubscribe,
-      activityId: 1,
+      activityId: data.activityId,
       activityType: 1, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
       type: type, // 1订阅 0 取消订阅
       userId: userInfo.id
@@ -113,9 +115,9 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let data = req.responseObject || {};
-      let items = this.data.topicDetailList;
+      let items = this.data.topicDetailList[this.data.currentTopicListIndex];
       //是否通知值为0or1
-      items[itemIndex].notify = +!items[itemIndex].notify;
+      items[itemIndex].notifyFlag = +!items[itemIndex].notifyFlag;
       
       this.setData({
         topicDetailList: items
@@ -131,5 +133,17 @@ Page({
     this.setData({
       currentTopicListIndex: tabIndex
     })
+  },
+  //跳转到商品详情
+  showGoodDetail(e) {
+    const data = e.currentTarget.dataset;
+    console.log(data);
+    //data.type  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
+    if(data.status >= 3) return;
+    if(data.type == 1){
+      Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code='+data.code)
+    } else if(data.type == 2){
+      Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + data.code)
+    }
   }
 })

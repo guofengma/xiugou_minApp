@@ -40,15 +40,15 @@ Page({
   },
   onLoad: function (options) {
     
-    this.getTopicActivityData();
+    this.getTopicActivityData(options.code);
     
     this.setData({
       productId: options.productId || 1,
       prodCode: options.prodCode || ''
     })
     this.didLogin()
-    // this.requestFindProductByIdApp()
-    // this.getShoppingCartList()
+    this.requestFindProductByIdApp()
+    this.getShoppingCartList()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -56,18 +56,21 @@ Page({
 
   },
   //获取专题活动数据  JJP201810100001
-  getTopicActivityData() {
+  getTopicActivityData(code) {
     let params = {
-      code: 'JJP1809270006',
-      reqName: '获取降价拍详情',
-      url: Operation.getActivityDepreciateById,
+      code: code || 'MS1809300001',
+      reqName: '获取秒杀详情',
+      url: Operation.getActivitySeckillById,
       requestMethod: 'GET'
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let data = req.responseObject.data || {};
+      // let productSpec = this.refactorProductsData(data.productSpecValue);
+
       this.setData({
-        proNavData: data
+        proNavData: data,
+        // productSpec: productSpec
       })
 
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
@@ -76,6 +79,17 @@ Page({
     };
     Tool.showErrMsg(r)
     r.addToQueue();
+  },
+  // 根据降价拍返回的sku数据生成sku选择组件所需数据
+  refactorProductsData(originData = []) {
+    let newData = {};
+    originData.forEach(function (item) {
+      newData[item.specName] = {};
+      newData[item.specName].id = item.id;
+      newData[item.specName].specName = item.specName;
+      newData[item.specName].specValue = item.specValue;
+    })
+    return newData;
   },
   setTip: function () {
     let userInfo = Storage.getUserAccountInfo();
@@ -379,6 +393,13 @@ Page({
   //倒计时结束 执行下一步操作  刷新当前页面或跳转什么的
   timeout() {
     console.log('countdown complete');
-    this.getTopicActivityData();
+    let status = this.data.proNavData.status;
+    if (status === 4 || status === 5) {
+      //活动结束 5S后跳转到普通商品页
+
+    } else {
+      //重新获取最新数据
+      this.getTopicActivityData();
+    }
   },
 })
