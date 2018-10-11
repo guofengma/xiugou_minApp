@@ -46,7 +46,7 @@
       </view>
       <view class='shippingInfo gray'>
         <text style='margin-right:158rpx'>快递：'问产品怎么算'</text> 
-        <text>月销售{{productInfo.saleNum}}笔</text>
+        <text>月销售{{productInfo.saleNum || 0}}笔</text>
       </view>
     </view>
     <!--产品规格选择  -->

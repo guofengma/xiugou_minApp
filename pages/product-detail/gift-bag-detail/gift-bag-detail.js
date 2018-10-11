@@ -85,27 +85,6 @@ Page({
 
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&type=5")
   },
-  checkGiftBagOrder(){
-    // let params = {
-    //   giftBagId: Number(this.data.giftBagId),
-    //   isShowLoading:false,
-    //   reqName: '是否能购买礼包',
-      
-    //   url: Operation.checkGiftBagOrder
-    // }
-    // let r = RequestFactory.wxRequest(params);
-    // r.successBlock = (req) => { //能否可以购买礼包
-    //   this.setData({
-    //     dismiss:false,
-    //     isShowGiftTips: {
-    //       show: true,
-    //       nextLevel: req.responseObject.data.nextLevel
-    //     }, //是否显示礼包升级提示
-    //   })
-    // }
-    // Tool.showErrMsg(r)
-    // r.addToQueue();
-  },
   getGiftBagDetail() { //获取礼包详情
     let params = {
       id:Number(this.data.giftBagId),
@@ -116,9 +95,6 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-
-      this.checkGiftBagOrder()
-
       let datas = req.responseObject.data
       // 渲染库存
       let giftStock = []
