@@ -40,8 +40,8 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      productId: options.productId || 1,
-      prodCode: options.prodCode || ''
+      productId: options.productId,
+      prodCode: options.code
     })
     this.didLogin()
     this.requestFindProductByIdApp()
@@ -67,14 +67,14 @@ Page({
       let data = req.responseObject.data || {};
 
       // let productSpec = this.refactorProductsData(data.productSpecValue);
-
       this.setData({
         proNavData: data,
         // productSpec: productSpec
       })
 
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
-      this.selectComponent('#promotion').init();
+      console.log(this.selectComponent('#promotion'));
+      data.id && this.selectComponent('#promotion').init();
     };
     Tool.showErrMsg(r)
     r.addToQueue();
@@ -399,7 +399,7 @@ Page({
 
     } else {
       //重新获取最新数据
-      this.getTopicActivityData();
+      this.getTopicActivityData(this.data.prodCode);
     }
   },
   toggleShowRegular() {

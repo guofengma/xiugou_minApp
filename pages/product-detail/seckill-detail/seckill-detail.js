@@ -43,8 +43,8 @@ Page({
     this.getTopicActivityData(options.code);
     
     this.setData({
-      productId: options.productId || 1,
-      prodCode: options.prodCode || ''
+      productId: options.productId,
+      prodCode: options.code
     })
     this.didLogin()
     this.requestFindProductByIdApp()
@@ -58,7 +58,7 @@ Page({
   //获取专题活动数据  JJP201810100001
   getTopicActivityData(code) {
     let params = {
-      code: code || 'MS1809300001',
+      code: code,
       reqName: '获取秒杀详情',
       url: Operation.getActivitySeckillById,
       requestMethod: 'GET'
@@ -75,7 +75,7 @@ Page({
 
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
 
-      this.selectComponent('#promotion').init();
+      data.id && this.selectComponent('#promotion').init();
     };
     Tool.showErrMsg(r)
     r.addToQueue();
@@ -399,7 +399,7 @@ Page({
 
     } else {
       //重新获取最新数据
-      this.getTopicActivityData();
+      this.getTopicActivityData(this.data.prodCode);
     }
   },
 })
