@@ -41,7 +41,6 @@
   line-height: 26rpx;
 }
 .promotion-price-origin{
-  opacity: 0.7;
   margin-bottom:5rpx;
 }
 .promotion-price-origin, .promotion-info-right {

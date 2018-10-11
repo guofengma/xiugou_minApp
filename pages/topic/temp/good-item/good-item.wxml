@@ -1,19 +1,19 @@
 <template name='good-item'>
   <view class='good-item'>
     <view class='good-item-thumb-contaner'>
-      <image src="http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg"
+      <image src="{{specImg}}"
         class='good-item-thumb'
       ></image>
       <view class='good-soldout'></view>
     </view>
     
     <view class='good-detail'>
-      <view class='good-title ellipsis-2'>UL2018春夏新款青春女春夏新款青春女春夏新款青akjhdkajhds</view>
-      <view class='good-type good-type-tip' wx:if="status === 1">{{reseCount}}关注</view>
-      <view class='good-type good-type-ing' wx:elif="status === 2">
+      <view class='good-title ellipsis-2'>{{productName}}</view>
+      <view class='good-type good-type-tip' wx:if="{{status === 1}}">{{reseCount}}关注</view>
+      <view class='good-type good-type-ing' wx:elif="{{status === 2}}">
         <view class='flexR-sb'>
           <view class='good-loot-already'>已抢{{totalNumber - surplusNumber}}件</view>
-          <view class='good-loot-progress'>{{((prop.totalNumber - prop.surplusNumber)/prop.totalNumber)}}%</view>
+          <view class='good-loot-progress'>{{~~(((totalNumber - surplusNumber)/totalNumber)*100)}}%</view>
         </view>
       </view>
       <view class='good-type good-type-out' wx:else>抢光了{{totalNumber}}件</view>
@@ -28,15 +28,15 @@
         
         <view class='good-operate tip {{notifyFlag ? "flexR" : ""}}' 
           bindtap='toggleSubscribeItem' 
-          data-type="{{1}}"
+          data-type="{{notifyFLag === 0 ? 1 : 0}}"
           data-index="{{index}}"
           data-activity-id="{{productId}}"
-          wx:if="status === 1"
+          wx:if="{{status === 1}}"
         >
           <image src='/img/Clock.png' class="icon" wx:if="{{notifyFlag}}"></image>
-          <text>{{notifyFlag ? '设置提醒' : '取消提醒'}}</text>
+          <text>{{notifyFlag ? '设置提醒' : '取消提醒'}} {{status}}</text>
         </view>
-        <view class='good-operate loot' wx:elif="status === 2">马上抢</view>
+        <view class='good-operate loot' wx:elif="{{status === 2}}">马上抢</view>
         <view class='good-operate out' wx:else>抢光了</view>
       
       </view>

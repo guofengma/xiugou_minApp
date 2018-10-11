@@ -60,3 +60,28 @@ iphoneX底部适配  iPhoneX-line
 
 秒杀活动结束或已抢完时，'秒杀价'文案要改成'已抢X件'
 
+### 降价秒杀专题信息栏说明
+```
+  //组件用法
+  <product-promotion-info 
+     id="promotion"
+     bind:countdown="timeout" 
+     prop="{{proNavData}}"
+     promotionBg="{{proNavData.status == 1 ? 'comming' : 'ing'}}" 
+     promotionDesc="{{promotionDesc}}"
+     promotionType="discount"
+  ></product-promotion-info>
+```
+其中
+```
+  //prop为专题详情接口获取的数据  
+  //promotionBg控制信息栏背景色  
+  //promotionDesc 是信息栏中的文案描述
+  promotionDesc: {  //commingDesc和countdownDesc在组件中做了处理  typeDesc 是初始值  降价拍(起拍价)和秒杀(秒杀价)是不同的
+    commingDesc: '',
+    countdownDesc: '',
+    typeDesc: '起拍价'
+  }
+  
+  //promotionType  区分降价拍(discount)秒杀(seckill)  普通的为空
+```

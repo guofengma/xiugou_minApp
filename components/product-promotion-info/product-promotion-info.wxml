@@ -9,10 +9,10 @@
         <text class='promotion-price-current'>{{prop.markdownPrice}}</text>
       </view>
       <view class='promotion-detail inline'>
-        <view class='promotion-price-origin {{prop.status == 1 ? "": "line-through"}}'>
-        {{prop.status == 1 ? promotionDesc.typeDesc :'原价 ¥'+prop.originalPrice}}
+        <view class='promotion-price-origin {{prop.status == 1 || !promotionType ? "": "line-through"}}'>
+        {{prop.status == 1 || !promotionType ? promotionDesc.typeDesc :'原价 ¥'+prop.originalPrice}}
         </view>
-        <view class='promotion-desc' wx:if="{{ prop.status == 1}}">
+        <view class='promotion-desc' wx:if="{{ prop.status == 1 || promotionType === ''}}">
           <!-- 普通页面进来不显示价格 -->
           <view class='font-20 inline' wx:if="{{promotionType}}">
             <text class='line-through pr10'>原价¥ {{prop.originalPrice}} </text> |

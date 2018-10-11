@@ -17,15 +17,15 @@ Page({
     productBuyCount: 1, //商品购买数量
     priceList: [],
     nodes: [{
-            name: "table",
-            attrs: {
+      name: "table",
+      attrs: {
         class: "table"
-            },
-            children: [],
+      },
+      children: [],
     }],
     size: 0,
     proNavData: {},
-    promotionDesc:{
+    promotionDesc: {
       commingDesc: '',
       countdownDesc: '',
       typeDesc: '起拍价'
@@ -39,14 +39,15 @@ Page({
     showRegular: false
   },
   onLoad: function (options) {
-    this.getTopicActivityData();
     this.setData({
       productId: options.productId || 1,
       prodCode: options.prodCode || ''
     })
     this.didLogin()
-    // this.requestFindProductByIdApp()
-    // this.getShoppingCartList()
+    this.requestFindProductByIdApp()
+    this.getShoppingCartList()
+    this.getTopicActivityData();
+
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -91,8 +92,9 @@ Page({
         "reseCount": 0,
       }
     });
-      this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
-      this.selectComponent('#promotion').init();
+    this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
+    this.selectComponent('#promotion').init();
+
     // let params = {
     //   code: 'JJP1810100008',
     //   reqName: '获取降价拍详情',
@@ -102,8 +104,12 @@ Page({
     // let r = RequestFactory.wxRequest(params);
     // r.successBlock = (req) => {
     //   let data = req.responseObject.data || {};
+
+    //   // let productSpec = this.refactorProductsData(data.productSpecValue);
+
     //   this.setData({
-    //     proNavData: data
+    //     proNavData: data,
+    //     // productSpec: productSpec
     //   })
 
     //   this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
@@ -112,7 +118,18 @@ Page({
     // Tool.showErrMsg(r)
     // r.addToQueue();
   },
-  setTip: function() {
+  // 根据降价拍返回的sku数据生成sku选择组件所需数据
+  refactorProductsData(originData = []) {
+    let newData = {};
+    originData.forEach(function (item) {
+      newData[item.specName] = {};
+      newData[item.specName].id = item.id;
+      newData[item.specName].specName = item.specName;
+      newData[item.specName].specValue = item.specValue;
+    })
+    return newData;
+  },
+  setTip: function () {
     let userInfo = Storage.getUserAccountInfo();
     // console.log(userInfo);
     // return;
@@ -147,11 +164,13 @@ Page({
     r.addToQueue();
   },
   //根据不同状态有不同的事情处理
-  footbarReady(e){
-    if (this.data.promotionFootbar.disabled) return;    
-    if(this.data.proNavData.status === 1){
+  footbarReady(e) {
+    const data = this.data;
+    if (data.promotionFootbar.disabled || !data.proNavData.id) return;
+    if (data.proNavData.status === 1) {
       this.setTip();
     } else {
+      // console.log(this.data.productSpec)
       this.btnClicked(e);
     }
   },
@@ -324,6 +343,7 @@ Page({
     Tool.switchTab('/pages/shopping-cart/shopping-cart')
   },
   btnClicked(e) {
+    console.log(11);
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },
@@ -409,18 +429,25 @@ Page({
   onUnload: function () {
     Event.off('didLogin', this.didLogin);
   },
-  //倒计时结束 执行下一步操作  刷新当前页面或跳转什么的
+  //倒计时结束 执行下一步操作 
   timeout() {
     console.log('countdown complete');
-    this.getTopicActivityData();
+    let status = this.data.proNavData.status;
+    if(status === 4 || status === 5){
+      //活动结束 5S后跳转到普通商品页
+
+    } else {
+      //重新获取最新数据
+      this.getTopicActivityData();
+    }
   },
-  toggleShowRegular(){
+  toggleShowRegular() {
     console.log(22);
     this.setData({
       showRegular: !this.data.showRegular
     })
   },
-  regularTouch(){
+  regularTouch() {
     return;
   }
 })
