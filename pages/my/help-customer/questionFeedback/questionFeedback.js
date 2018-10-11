@@ -32,9 +32,6 @@ Page({
         url: Operation.queryDictionaryDetailsType
       }
       let r = RequestFactory.wxRequest(params);
-      
-      // let r = RequestFactory.queryDictionaryDetailsType(params)
-
       r.successBlock = (req) => {
         req.responseObject.data.unshift({ "value": "请选择问题类型", "code": "" })
         this.setData({

@@ -67,7 +67,7 @@
           </view>
         </view>
         <view class="right" wx:elif="{{item.status==3}}">
-          <view class="cancel-btn" bindtap="logistics" data-id="{{item.id}}">查看物流</view>
+          <view class="cancel-btn" bindtap="logistics" data-id="{{item.expressNo}}">查看物流</view>
           <view class="pay-btn red" bindtap="confirmReceipt" data-id="{{item.orderNum}}">确认收货</view>
         </view>
       </view>

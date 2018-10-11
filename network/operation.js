@@ -287,17 +287,21 @@ export default class Operation {
 
         this.fillInExpressInfoById ='/order/returnProduct/fillSendInfo'
 
+        // 物流查看
+
+        this.findLogisticsDetail = '/order/logistics/findLogisticsDetail'
+
         // 退换货物流查看
 
         this.findReturnProduct = '/user/delivery/findReturnProduct'
 
-        // 物流公司选择
-
-        this.findAllExpress = '/user/express/findAllExpress'
-
         // 根据订单id查询快递信息
 
-        this.findDelivery ='/user/delivery/find'
+        this.findDelivery = '/user/delivery/find'
+
+        // 物流公司选择
+
+        this.findAllExpress = '/sysExpress/findAllExpress'
 
         // 再次购买
 
@@ -390,7 +394,7 @@ export default class Operation {
 
         // 获取推荐产品
 
-        this.queryFeaturedList = '/user/featured/queryFeaturedList'
+        this.queryFeaturedList = '/config/advertisement/queryRecommendedPageList'
 
 
         /************************** 帮助中心 *******************************/

@@ -30,7 +30,7 @@
         <!-- 待发货/已发货/已完成的时候显示 -->
         <view class='logistics flexR-sb' wx:if="{{status==2||status==3||status==4||status==6 ||status==5 }}" bindtap='logisticsClicked'>
             <view>
-                <view class='info'>{{state.info}}</view>
+                <view class='info ellipsis'>{{state.info}}</view>
                 <view class='gray'>{{state.time}}</view>
             </view>
             <view class='right-icon'>
@@ -128,7 +128,7 @@
         </view>        
     </block>
     <block>
-        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='确认收货' && !state.isHiddenComfirmBtn}}" bindtap="confirmReceipt">
+        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='确认收货'}}" bindtap="confirmReceipt">
           {{state.bottomBtn[1]}}
         </view>
         <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='删除订单'}}" bindtap="deleteItem">
@@ -137,7 +137,7 @@
         <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='继续支付'}}" bindtap="continuePay">
           {{detail.outTradeNo? "继续支付":"去支付"}}
         </view>
-        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='再次购买' && detail.orderType!=98}}" bindtap="continueBuy">
+        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='再次购买' && detail.orderType!=5}}" bindtap="continueBuy">
           {{state.bottomBtn[1]}}
         </view>
     </block>

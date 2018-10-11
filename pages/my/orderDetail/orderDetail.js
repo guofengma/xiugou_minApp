@@ -61,9 +61,6 @@ Page({
             detail.payTime=detail.payTime?Tool.formatTime(detail.payTime):'';
             detail.cancelTime = detail.cancelTime ? Tool.formatTime(detail.cancelTime) : '';
             detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
-            if (detail.expressNo){
-              this.getDelivery(detail)
-            }
             let address = {}
             address.receiver = detail.receiver;
             address.recevicePhone = detail.recevicePhone;
@@ -82,12 +79,14 @@ Page({
                 time: time
               })
             } 
-
             this.setData({
                 detail: detail,
                 address: address,
                 state: this.orderState(detail.status)//订单状态相关信息this.data.state
             })
+            if (detail.expressNo) {
+              this.getDelivery(detail)
+            }
             if (detail.orderType != 5){
               this.middleBtn()
             }
@@ -424,8 +423,8 @@ Page({
       Tool.showAlert('目前只支持单件商品退款，请进行单件退款操作~')
     },
     seeLogistics(e){
-      let id = this.data.orderId;
-      Tool.navigateTo('/pages/logistics/logistics?orderId='+id)
+      let id = this.data.detail.expressNo;
+      Tool.navigateTo('/pages/logistics/logistics?id='+id)
     },
     logisticsClicked(){
       // 跳转查看物流信息
@@ -438,11 +437,13 @@ Page({
     getDelivery(detail) {
       // 查询物流信息最后一条数据
       let params = {
-        orderId: this.data.orderId,
-        reqName: '查看物流',
-        url: Operation.findDelivery
+        orderNum: this.data.detail.expressNo,
+        requestMethod: 'GET',
+        reqName: '物流查看',
+        url: Operation.findLogisticsDetail
       }
       let state = this.orderState(detail.status)
+      let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data;
         if (datas) {
@@ -450,8 +451,8 @@ Page({
             let list = datas.showapi_res_body.data;
             let tempList = [];
             if (list.length) {
-              state.info = list[list.length-1].context
-              state.info = list[list.length-1].time
+              state.info = list[0].context
+              state.time = list[0].time
             } 
           }
         }

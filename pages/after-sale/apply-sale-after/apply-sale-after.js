@@ -61,7 +61,7 @@ Page({
     activeIndex:'',
     refundType: 0, // 0为仅退款 1为退货退款  2为换货
     queryReasonParams:[
-      2,4,3
+      'TKLY', 'HHLY ','THYK'
     ], // 2 退款理由 3 换货理由 4 退货退款
     originalImg:[],
     smallImg:[],
@@ -108,10 +108,10 @@ Page({
     this.queryDictionaryDetailsType(this.data.refundType)
   },
   queryDictionaryDetailsType(refundType){
-    // let r = RequestFactory.queryDictionaryDetailsType(params)
     let params = {
       code: this.data.queryReasonParams[refundType],
-      reqName: '获取数据字典',
+      reqName: '获取数字字典',
+      requestMethod: 'GET',
       url: Operation.queryDictionaryDetailsType
     }
     let r = RequestFactory.wxRequest(params);
@@ -160,10 +160,10 @@ Page({
     
   },
   orderRefund(){
-    // if (this.data.activeIndex===''){
-    //   Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
-    //   return
-    // }
+    if (this.data.activeIndex===''){
+      Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
+      return
+    }
     // if (this.data.refundType == 2 && Tool.isEmptyStr(this.data.remark)){
     //   Tool.showAlert(this.data.reason[this.data.refundType].placeholder)
     //   return
@@ -203,8 +203,8 @@ Page({
       orderProductId: list.id,
       remark: this.data.remark,
       returnProductId: Number(this.data.returnProductId) || '',
-      returnReason:'无',
-      // returnReason: this.data.reason[this.data.refundType].list[this.data.activeIndex].dValue,
+      // returnReason:'无',
+      returnReason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
       reqName: reqName,
       url: url
     }

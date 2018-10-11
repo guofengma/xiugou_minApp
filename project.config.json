@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 26,
+			"current": 28,
 			"list": [
 				{
 					"id": 0,
@@ -196,6 +196,17 @@
 					"name": "专题",
 					"pathName": "pages/topic/topic",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "查看物流",
+					"pathName": "pages/logistics/logistics",
+					"query": "id=3378761371158"
+				},
+				{
+					"id": -1,
+					"name": "物流公司选择",
+					"pathName": "pages/logistics/choose-logistics/choose-logistics"
 				}
 			]
 		}

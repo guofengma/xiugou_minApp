@@ -92,7 +92,7 @@ Page({
     } else if (express.id == 1) {
       return
     } else {
-      page = '/pages/logistics/logistics?orderId=' + this.data.datas.id + '&door=1&type='+types
+      page = '/pages/logistics/logistics?id=' + express.content + '&door=1&type='+types
     }
     Storage.setAfterSaleList(this.data.datas)
     Tool.navigateTo(page)

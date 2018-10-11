@@ -110,7 +110,7 @@ Component({
     },
     //跳到物流页面
     logistics(e) {
-      Tool.navigateTo('/pages/logistics/logistics?orderId=' + e.currentTarget.dataset.id)
+      Tool.navigateTo('/pages/logistics/logistics?id=' + e.currentTarget.dataset.id)
     },
     //删除订单
     deleteItem(e) {

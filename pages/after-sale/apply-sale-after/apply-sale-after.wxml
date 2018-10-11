@@ -20,7 +20,7 @@
 
   <view>
     <view bindtap='chooseReason'>
-      <template is="cell-line" data="{{name:reason[refundType].choose,content:reason[refundType].list[activeIndex].dValue}}"/> 
+      <template is="cell-line" data="{{name:reason[refundType].choose,content:reason[refundType].list[activeIndex].value}}"/> 
     </view>
     <view class='cell-line refund-num whiteBg' wx:if='{{refundType!=2}}'>
       退款金额： <text class='red'>¥{{orderInfos.refundPrice}}</text>

@@ -12,8 +12,9 @@ Component({
   methods: {
     queryDictionaryDetailsType() { //获取取消订单的理由
       let params = {
-        dType: 1,
+        code: 'QXDD',
         reqName: '获取数字字典',
+        requestMethod: 'GET',
         url: Operation.queryDictionaryDetailsType,
       }
       let r = RequestFactory.wxRequest(params);
@@ -38,10 +39,10 @@ Component({
       this.triggerEvent('dismissCancel', {...this.data});
     },
     cancelOrder() { // 取消订单
-      // if (this.data.content == '') {
-      //   Tool.showAlert('请选择取消理由！');
-      //   return
-      // }
+      if (this.data.content == '') {
+        Tool.showAlert('请选择取消理由！');
+        return
+      }
       let params = {
         buyerRemark: this.data.content || '无',
         orderNum: this.data.orderNum,
@@ -61,6 +62,6 @@ Component({
     },
   },
   ready: function () {
-    // this.queryDictionaryDetailsType()
+    this.queryDictionaryDetailsType()
   }
 })

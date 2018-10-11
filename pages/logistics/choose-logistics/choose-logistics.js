@@ -19,10 +19,10 @@ Page({
   findAllExpress(){
     let params = {
       reqName: '物流公司选择',
-      url: Operation.findAllExpress
+      url: Operation.findAllExpress,
+      requestMethod: 'GET',
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.findAllExpress();
     r.successBlock = (req) => {
       let datas = req.responseObject.data
       let arr = []

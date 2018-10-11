@@ -65,7 +65,7 @@ Page({
   giftBagClicked() {
     // 立即购买
     if (!this.data.didLogin) { // 未登录
-      Tool.navigateTo('/pages/login/login-wx/login-wx?isBack=' + true)
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
       return
     }
     
@@ -96,6 +96,11 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let datas = req.responseObject.data
+      if (this.data.didLogin){
+        this.setData({
+          dismiss: !datas.userBuy
+        })
+      }
       // 渲染库存
       let giftStock = []
       let specPriceList = []

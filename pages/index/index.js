@@ -37,7 +37,12 @@ Page({
         { content: '3手机号大手大脚熬枯受淡卡萨丁阖家安康三打哈科技收到货阿克苏较好的卡仕达' },
         { content: '4手机号大手大脚熬枯受淡卡萨丁阖家安康三打哈科技收到货阿克苏较好的卡仕达' },
         { content: '5手机号大手大脚熬枯受淡卡萨丁阖家安康三打哈科技收到货阿克苏较好的卡仕达' },
-      ]
+      ],
+      recommendArr:[],
+      params:{
+        page:1,
+        pageSize:10
+      }
     },
     onLoad: function () {
       this.queryAdList(1,'轮播图片',(datas)=>{
@@ -76,7 +81,7 @@ Page({
         })
       });
       // this.querySpeList();
-      // this.queryFeaturedList()
+      this.queryFeaturedList()
       this.setData({
         noticeArr:Tool.sliceArray(this.data.noticeArr,2)
       })
@@ -99,7 +104,7 @@ Page({
     didLogin() {
       Tool.didLogin(this)
     },
-  queryAdList(types = 1, reqName='',callBack=()=>{}) {
+    queryAdList(types = 1, reqName='',callBack=()=>{}) {
       let params = {
         'type': types,
         reqName: reqName,
@@ -113,22 +118,6 @@ Page({
         Tool.showErrMsg(r)
         r.addToQueue();
     },
-    querySpeList() {
-      let params = {
-        pageType: 1,
-        type: 1,
-        reqName: '专题查询',
-        url: Operation.queryAdList
-      }
-      let r = RequestFactory.wxRequest(params);
-        r.successBlock = (req) => {
-          this.setData({
-              topicImgUrl: req.responseObject.data
-          })
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
-    },
     adListClicked(e) {
       let adType = e.currentTarget.dataset.type;
       let val = e.currentTarget.dataset.val;
@@ -137,17 +126,17 @@ Page({
     },
     queryFeaturedList() {
       let params = {
-        linkType: 1,
-        pageType: 1,
+        ...this.data.params,
         reqName: '获取推荐产品',
         url: Operation.queryFeaturedList
       }
       let r = RequestFactory.wxRequest(params);
         r.successBlock = (req) => {
-            let data = req.responseObject.data ? req.responseObject.data : []
-            this.setData({
-                recommendImgUrl: req.responseObject.data
-            })
+          let datas = req.responseObject.data
+          this.setData({
+            recommendArr: this.data.recommendArr.concat(datas.data),
+            recommendTotalPage: datas.totalPage,
+          })
         };
         Tool.showErrMsg(r)
         r.addToQueue();
@@ -167,11 +156,15 @@ Page({
       let id = e.currentTarget.dataset.id
       Tool.navigateTo('/pages/topic/topic?id='+id)
     },
-  /* 这里实现控制中间凸显图片的样式 */
-    handleChange: function (e) {
+    onReachBottom() {
+      this.data.params.page++;
+      if (this.data.params.page>this.data.recommendTotalPage){
+        return
+      }
       this.setData({
-        currentIndex: e.detail.current
+        params: this.data.params,
       })
+      this.queryFeaturedList()
     },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);

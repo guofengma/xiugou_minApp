@@ -167,15 +167,15 @@
   <view class='recommend-view whiteBg'>
     <view class='index-item-title flexR font-38'>为你推荐</view>
     <view class='recommend-prd-content flexR'>
-      <view class='recommend-prd-item boxSize' wx:for='{{10}}' wx:key='{{index}}' style='margin-right:{{index%2==1? "0":"10"}}rpx'>
+      <view class='recommend-prd-item boxSize' wx:for='{{recommendArr}}' wx:key='{{index}}' style='margin-right:{{index%2==1? "0":"10"}}rpx'>
         <view class='recommend-prd-img' >
-         <image src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' mode='widthFix'></image>
-         <view class='ellipsis font-24 gray'>哈哈哈哈哈哈哈哈哈哈速冻水饺对话框收到货时看到建设大街开始的</view>
+         <image src='{{item.imgUrl}}'></image>
+         <view class='ellipsis font-24 gray'>{{item.title}}</view>
         </view>
         <view class='recommend-prd-info'>
           <view class='font-20 gold'>自营 | 满减</view>
-          <view class='ellipsis-2 font-24'>哈哈哈哈哈哈哈哈哈哈速冻水饺对话框收到货时看到建设大街开始的哈哈哈哈哈哈哈哈哈哈速冻水饺对话框收到货时看到建设大街开始的</view>
-          <view class='red font-28'>¥188起</view>
+          <view class='ellipsis-2 font-24 prd-name'>{{item.name}}</view>
+          <view class='red font-28'>¥{{item.price || 0}}起</view>
         </view>
       </view>
     </view>

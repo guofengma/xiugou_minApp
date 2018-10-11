@@ -76,14 +76,14 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
-        this.test(payType, req)
+        // this.test(payType, req)
         // this.wxPay(payType, req.responseObject.data.outTradeNo)
-        // if (payType==1){
-        //   this.showResult(true)
-        // } else {
-        //   let datas = req.responseObject.data
-        //   this.wxPay(payType, datas.outTradeNo, datas.prePayStr)
-        // }
+        if (payType==1){
+          this.showResult(true)
+        } else {
+          let datas = req.responseObject.data
+          this.wxPay(payType, datas.outTradeNo, datas.prePayStr)
+        }
       };
       Tool.showErrMsg(r)
       r.addToQueue();
@@ -142,14 +142,14 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
-        this.test(payType, req)
+        // this.test(payType, req)
         // this.wxPay(payType, req.responseObject.data.outTradeNo)
-        // if (payType == 1) {
-        //   this.showResult(true)
-        // } else {
-        //   let datas = req.responseObject.data
-        //   this.wxPay(payType, datas.outTradeNo, datas.prePayStr)
-        // }
+        if (payType == 1) {
+          this.showResult(true)
+        } else {
+          let datas = req.responseObject.data
+          this.wxPay(payType, datas.outTradeNo, datas.prePayStr)
+        }
         
       };
       Tool.showErrMsg(r)
@@ -195,6 +195,7 @@ Page({
       r.addToQueue();
     },
     wxPay(payType, outTradeNo, payList){ //微信支付
+      payList = JSON.parse(payList)
       let that = this
       wx.requestPayment({
         'timeStamp': payList.timeStamp,
@@ -203,8 +204,8 @@ Page({
         'signType': 'MD5',
         'paySign': payList.paySign,
         'success': function (res) {
-          that.orderQuery(outTradeNo)
-          // that.showResult(true)
+          // that.orderQuery(outTradeNo)
+          that.showResult(true)
         },
         'fail': function (res) {
           that.showResult(false)

@@ -1,5 +1,5 @@
 <block wx:for='{{lists}}' wx:key='unique'>
-  <view class='classification font-32 flexR-sb'>{{item.name}}</view>
+  <view class='classification font-32 flexR-sb' wx:if='{{item.list.length>0}}'>{{item.name}}</view>
   <block wx:for='{{item.list}}' wx:key='unique' wx:for-item='list'>
     <view class='logistics whiteBg font-30' catchtap='logLineClicked' data-code='{{list.code}}'data-name='{{list.name}}'>
       <!-- <image mode='widthFix' src='/img/default-userImg.png' class='label-log'></image> -->
