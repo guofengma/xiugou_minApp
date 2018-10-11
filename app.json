@@ -56,7 +56,9 @@
     "pages/product-classification/product-classification",
     "pages/register/agreement/agreement",
     "pages/topic/topic",
-    "pages/signIn/signIn"
+    "pages/signIn/signIn",
+    "pages/product-detail/discount-detail/discount-detail",
+    "pages/product-detail/seckill-detail/seckill-detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

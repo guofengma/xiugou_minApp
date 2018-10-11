@@ -3,19 +3,33 @@
 
 <template name="temp-reducePrice">
   <!--导航  -->
-  <template is='time-quantum'></template>
+  <template is='time-quantum' 
+    data="{{topicNavbarList:topicList.topicNavbarList,currentTopicListIndex:currentTopicListIndex}}"
+  ></template>
   <!--产品 -->
-  <!-- <block wx:for='{{topicDetailList[currentTab].banner}}'  wx:key='unique'> -->
-    <view class='topic-banner topic-temp'>
-      <image src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' mode='widthFix'></image>
-    </view>
+  
     <view class='topic-prd-content topic-temp1'>
-      <!-- <block wx:for='{{item.product}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'> -->
-         <template is='good-item'></template>
-         <template is='good-item'></template>
-         <template is='good-item'></template>
-         <template is='good-item'></template>
-      <!-- </block> -->
+      <block 
+        wx:for="{{topicList.topicNavbarList[currentTopicListIndex].topicBannerProducts}}" 
+        wx:key="{{item.id}}">
+         <template is='good-item' data="{{...item,index:index}}"></template>
+      </block>
     </view>
-  <!-- </block> -->
+    <!-- 带banner的产品列表 S -->
+    <block 
+      wx:for="{{topicList.topicNavbarList[currentTopicListIndex].topicNavbarBannerList}}"
+      wx:key="index"
+    >
+      <view class='topic-banner topic-temp'>
+        <image src='{{item.bannerImg}}' mode='widthFix'></image>
+      </view>
+      <view class='topic-prd-content topic-temp1'>
+        <block 
+          wx:for="{{item.topicBannerProductList}}" 
+          wx:key="{{item.id}}">
+          <template is='good-item' data="{{...item,index:index}}"></template>
+        </block>
+      </view>
+    </block>
+    <!-- 带banner的产品列表 E -->
 </template>

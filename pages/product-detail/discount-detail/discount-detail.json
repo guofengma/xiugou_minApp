@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "降价拍详情",
+  "usingComponents": {
+    "product-specification": "/components/product-specification/product-specification",
+    "tips-info": "/components/tips-info/tips-info",
+    "product-promotion-info": "/components/product-promotion-info/product-promotion-info",
+    "product-promotion-footbar": "/components/product-promotion-footbar/product-promotion-footbar",
+    "product-regular-toast": "/components/product-regular-toast/product-regular-toast"
+  }
+}

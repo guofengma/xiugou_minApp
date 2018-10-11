@@ -27,9 +27,9 @@
         <view class='type-name'>{{list.name}}</view>
         <view class='type-list'>
           <block  wx:for='{{list.value}}' wx:key='unique'> 
-            <view class='{{(item.stock==0? "no-store":"") +" " +(isActive[key].index === index ? "active":"")}}'  bindtap='typeListClicked' 
-                  data-index='{{index}}' data-type='{{key}}' data-typename='{{item.spec}}' data-id='{{item.priceId}}' data-stock="{{item.stock}}">
-                  {{item.spec}}
+            <view class='{{(item.surplusNumber==0? "no-store":"") +" " +(isActive[key].index === index ? "active":"")}}'  bindtap='typeListClicked' 
+                  data-index='{{index}}' data-type='{{key}}' data-typename='{{item.specValues}}' data-id='{{item.priceId}}' data-stock="{{item.surplusNumber}}">
+                  {{item.specValues}}
             </view>
           </block>
           
