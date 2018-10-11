@@ -82,8 +82,12 @@ Component({
       }
 
       let typeDesc = this.data.promotionDesc.typeDesc;
+
+      if(this.data.promotionType == '') {
+        typeDesc = '秒杀价';
+      }
       // 秒杀活动结束或已抢完时，'秒杀价'文案要改成'已抢X件'
-      if ([3, 4, 5].includes(prop.status)) {
+      if ([3, 4, 5].includes(prop.status) && this.data.promotionType) {
         typeDesc = `已抢${prop.totalNumber - prop.surplusNumber}件`;
       }
 
