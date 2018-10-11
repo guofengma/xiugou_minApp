@@ -58,9 +58,9 @@ Page({
   //获取专题活动数据  JJP201810100001
   getTopicActivityData(code) {
     let params = {
-      code: code || 'JJP1810110014',
+      code: code || 'MS1809300001',
       reqName: '获取秒杀详情',
-      url: Operation.getActivityDepreciateById,
+      url: Operation.getActivitySeckillById,
       requestMethod: 'GET'
     }
     let r = RequestFactory.wxRequest(params);

@@ -466,6 +466,10 @@ export default class Operation {
 
         this.getActivityDepreciateById = '/operator/activityDepreciate/findById';
 
+        // 获取秒杀详情
+
+        this.getActivitySeckillById = '/operator/seckill/findByCode';
+
         __instance(this);
 
     }
