@@ -253,7 +253,7 @@ export default class Operation {
 
         // 我的售后
 
-        this.queryAftermarketOrderPageList  ='/order/order/queryAftermarketOrderPageList'
+        this.queryAftermarketOrderPageList ='/order/queryAftermarketOrderList'
 
         // 申请退款
         

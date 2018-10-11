@@ -38,7 +38,7 @@ Component({
         size: this.data.pageSize,
         page: this.data.currentPage,
         status:index || '',
-        condition:this.properties.condition || '',
+        orderNum:this.properties.condition || '',
         reqName: "获取我的订单列表"+index,
         url: Operation.queryOrderPageList
       }

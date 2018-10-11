@@ -767,7 +767,8 @@ export default class Tool {
         let idcard = userInfo.idcard
         userInfo.showName = idcard ? userInfo.realname : userInfo.nickname
         userInfo.isRealname = idcard ? true : false
-        userInfo.showPhone = userInfo.phone.slice(0, 3) + "*****" + userInfo.phone.slice(7)
+        // userInfo.showPhone = userInfo.phone.slice(0, 3) + "*****" + userInfo.phone.slice(7)
+        userInfo.showPhone = userInfo.phone
         if (userInfo.province) userInfo.showRegion = userInfo.province + userInfo.city + userInfo.area
         if (!userInfo.area) userInfo.showRegion = userInfo.province + userInfo.city
       }

@@ -85,7 +85,9 @@ Page({
     this.setData({
       keyWord: e.detail.keyWord
     })
-    this.requestKeywords()
+    if(this.data.door!=1){
+      this.requestKeywords()
+    }
   },
   requestKeywords(){
     let params = {
@@ -159,7 +161,6 @@ Page({
       url: Operation.getProvinceList,
     }
     let r = RequestFactory.wxRequest(params)
-    // let r = RequestFactory.getProvinceList();
     r.successBlock = (req) => {
       let data = req.responseObject.data
       let showProvince = ''

@@ -15,10 +15,10 @@
         <view class='cost-price' wx:if="{{showOriginalPrice}}">¥ {{showOriginalPrice}}</view>
         <view  class='gray'>x{{num}}</view>
       </view>
-      <view class='flexR-sb isSaleAfter' wx:if='{{isSaleAfter}}'>
+      <!-- <view class='flexR-sb isSaleAfter' wx:if='{{isSaleAfter}}'>
         <text class='red'>{{typeName}}</text>
         <text class='red'>{{typeState}}</text>
-      </view>
+      </view> -->
     </view>
   </view>
 </template>

@@ -7,8 +7,9 @@ Page({
     currentPage: 1, // 当前的页数
     pageSize: 5, // 每次加载请求的条数 默认10
     lists:[],
-    typeState: ['申请中', '申请中', '拒绝', '已完成','已完成','已超时'],
+    typeState: ["其他",'申请中', '已同意', '拒绝', '中','中','已完成','已关闭','已超时'],
     typeArr:[
+      { name: '其他'},
       { name: '仅退款', 
         page:'/pages/after-sale/only-refund/only-refund-detail/only-refund-detail'
       },
@@ -24,7 +25,7 @@ Page({
   onLoad: function (options) {
     let params = {
       page: this.data.currentPage,
-      pageSize: this.data.pageSize,
+      size: this.data.pageSize,
       productName: this.data.keyword
     }
     this.setData({
@@ -73,22 +74,25 @@ Page({
       url: Operation.queryAftermarketOrderPageList,
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.queryAftermarketOrderPageList(params);
     r.successBlock = (req) => {
       let lists = this.data.lists
       let datas = req.responseObject.data
-      if (datas.total>0){
+      if (datas.totalPage>0){
         datas.data.forEach((item)=>{
           item.imgUrl = item.specImg
-          item.typeName = this.data.typeArr[item.returnProductType-1].name
-          item.typeState = this.data.typeState[item.returnProductStatus]
+          item.typeName = this.data.typeArr[item.type].name
+          item.typeState = this.data.typeState[item.status]
+          console.log(item.type)
+          if (item.status == 4 || item.status ==5){
+            item.typeState = item.typeName + item.typeState
+          }
         })
         if (!Tool.isEmptyStr(this.data.keyword)){
           lists=[]
         }
         this.setData({
           lists: lists.concat(datas.data),
-          totalPage: req.responseObject.data.total,
+          totalPage: req.responseObject.data.totalPage,
         })
       }else{
         this.setData({
@@ -102,7 +106,8 @@ Page({
   goPage(e){
     let returnProductId = e.currentTarget.dataset.prdid
     let returnProductType = e.currentTarget.dataset.id
-    let page = this.data.typeArr[returnProductType - 1].page + "?returnProductId="+returnProductId
+    console.log(returnProductId)
+    let page = this.data.typeArr[returnProductType].page + "?returnProductId="+returnProductId
     Tool.navigateTo(page)
   }
 })
