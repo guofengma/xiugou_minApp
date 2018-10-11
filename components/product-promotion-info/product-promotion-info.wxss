@@ -48,7 +48,9 @@
   font-size: 22rpx;
 }
 .promotion-desc {
-  font-size: 24rpx;
+  font-size: 22rpx;
+  color: #f7f7f7;
+  font-weight: 500;
 }
 .promotion-info-right .top{
   margin-bottom: 10rpx;

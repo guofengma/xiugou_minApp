@@ -441,7 +441,15 @@ export default class Operation {
       
         // 订阅提醒
         
-        this.addActivitySubscribe = '/activity/activityDepreciate/addActivitySubscribe'
+        this.addActivitySubscribe = '/activity/activitySubscribe/addActivitySubscribe';
+
+        // 获取专题信息
+
+        this.getTopicById = '/topic/findByCode';
+
+        // 获取降价拍详情
+
+        this.getActivityDepreciateById = '/operator/activityDepreciate/findById';
 
         __instance(this);
 

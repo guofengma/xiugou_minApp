@@ -10,7 +10,7 @@
 <view class='topic-page'>
   <!-- 轮播 -->
   <view class='ad-view' style='margin-bottom:{{isShowBar? "0":"20"}}rpx;'>
-    <image src="{{'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'}}" class="slide-image" catchtap='adListClicked'  class='ad-img' mode='widthFix'/>
+    <image src="{{topicList.imgUrl}}" class="slide-image" catchtap='adListClicked'  class='ad-img' mode='widthFix'/>
     <!-- 专题文字介绍 -->
      <!-- <view class='infos gray font-24 ellipsis-2 boxSize'>
       shdkjahdkajsdjkahsdkashdjkabdsjka嘎嘎嘎嘎嘎嘎嘎嘎叫大受打击AV硕大的
@@ -27,7 +27,7 @@
 
     <template wx:elif="{{topicTemplateId==4}}" is="topic-temp4" data="{{topicDetailList}}"/> 
 
-    <template wx:elif="{{topicTemplateId==5}}" is="temp-reducePrice" data="{{topicDetailList}}"/> 
+    <template wx:elif="{{topicTemplateId==5}}" is="temp-reducePrice" data="{{topicList:topicList,currentTopicListIndex:currentTopicListIndex}}"/> 
 
     <template wx:elif="{{topicTemplateId==6}}" is="temp-secKill" data="{{topicDetailList}}"/> 
     

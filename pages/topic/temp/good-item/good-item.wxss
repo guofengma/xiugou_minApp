@@ -18,6 +18,7 @@
   display: -webkit-box;
   font-size:24rpx;
   word-break: break-all;
+  height: 64rpx;
 }
 .good-type {
   font-size: 22rpx;

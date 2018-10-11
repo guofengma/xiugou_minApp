@@ -36,8 +36,10 @@
       </view>
     </view>
      <product-promotion-info 
+     id="promotion"
      bind:countdown="timeout" 
-     prop="{{proNavData}}" 
+     prop="{{proNavData}}"
+     promotionBg="{{proNavData.status == 1 ? 'comming' : 'ing'}}" 
      promotionDesc="{{promotionDesc}}"
      promotionType="discount"
      wx:if="{{proNavData.id}}"></product-promotion-info>
@@ -106,6 +108,7 @@
     </view>
     <!-- 详情页 tabar  -->
     <product-promotion-footbar 
+      id="promotionFootbar"
       promotionFootbar="{{promotionFootbar}}"
       promotionType="discount"
       bindtap="footbarReady"

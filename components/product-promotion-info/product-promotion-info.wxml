@@ -1,7 +1,7 @@
 <!--components/product-promotion-info/product-promotion-info.wxml-->
 <!-- comming  => 未开始；  ing     => 进行中  以status区分对应不同背景色 -->
-<!-- discount => 降价；    seckill => 秒杀   promotionType对应不同活动 -->
-<view class='promotion-info-container {{ prop.status == 1 ? "comming" : "ing" }}'>
+<!-- discount => 降价；    seckill => 秒杀   promotionType对应不同活动 普通的为空 -->
+<view class='promotion-info-container {{ promotionBg }}'>
   
   <view class='promotion-info-left'>
       <view class='promotion-price inline'>
@@ -10,7 +10,7 @@
       </view>
       <view class='promotion-detail inline'>
         <view class='promotion-price-origin {{prop.status == 1 ? "": "line-through"}}'>
-        {{prop.status == 1 ? promotionDesc.typeDesc :'¥'+prop.originalPrice}}
+        {{prop.status == 1 ? promotionDesc.typeDesc :'原价 ¥'+prop.originalPrice}}
         </view>
         <view class='promotion-desc' wx:if="{{ prop.status == 1}}">
           <!-- 普通页面进来不显示价格 -->

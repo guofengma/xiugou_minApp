@@ -24,40 +24,7 @@ Page({
             children: [],
     }],
     size: 0,
-    proNavData: {
-      "id": 1,
-      "activityCode": "JJP1809210001",
-      "productPriceId": 1,
-      "totalNumber": 100,
-      "surplusNumber": 10,
-      "freezeNumber": 1,
-      "startPrice": 2,
-      "floorPrice": 1.5,
-      "orderCloseTime": 1,
-      "intervalTime": 1,
-      "downPrice": 1.5,
-      "floorPriceTime": 1,
-      "limitNumber": 1,
-      "status": 4,
-      "activityTime": +new Date() + 2000000,
-      "beginTime": +new Date() + 2000000,
-      "endTime": +new Date() + 5000,
-      "closeTime": 1537962985000,
-      "createTime": 1537513053000,
-      "modifiedTime": 1537962985000,
-      "createUser": null,
-      "reseCount": 0,
-      "productName": "红米66",
-      "spec": "红色-32G-1KG",
-      "specImg": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/pms_1528718750.15896438!560x560.jpg",
-      "originalPrice": 1000,
-      "markdownPrice": 1.5,
-      "limitFlag": 0,
-      "notifyFlag": 1,
-      "date": +new Date(),//1538034474246
-      "tip": false,
-      "reseCount": 0,
-    },
+    proNavData: {},
     promotionDesc:{
       commingDesc: '',
       countdownDesc: '',
@@ -72,83 +39,82 @@ Page({
     showRegular: false
   },
   onLoad: function (options) {
-    // 获取完数据再展示
-    let prop = this.data.proNavData;
-
-    let commingDesc = this.decorateTime(
-        prop.beginTime,
-        prop.date || (+new Date()),
-        prop.notifyFlag
-      ) 
-    console.log(commingDesc);
-
-    let countdownDesc = '距开抢';
-    if( prop.status === 2 ){
-      countdownDesc = '距下次降价'; // 距下次降价 活动结束
-    }
-    if (prop.markdownPrice == prop.floorPrice || prop.status === 3)
-      countdownDesc = '距结束';
-
-    this.checkPromotionFootbarInfo();
-
-    // ==========
+    this.getTopicActivityData();
     this.setData({
       productId: options.productId || 1,
-      prodCode: options.prodCode || '',
-      "promotionDesc.commingDesc": commingDesc,
-      "promotionDesc.countdownDesc": countdownDesc
+      prodCode: options.prodCode || ''
     })
     this.didLogin()
-    this.requestFindProductByIdApp()
-    this.getShoppingCartList()
+    // this.requestFindProductByIdApp()
+    // this.getShoppingCartList()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
   onShow: function () {
 
   },
-  checkPromotionFootbarInfo(){
-    let p = this.data.promotionFootbar;
-    let props = this.data.proNavData;
-  
-    // 以下是按钮文案相关
-    if( props.status === 1 && props.notifyFlag ){
-      p.text = '开始前3分钟提醒';
-    }
-
-    if(props.status === 2){
-      p.text = '立即拍';
-      p.className = 'footbar-main';
-      p.textSmall = '';
-    }
-
-    if ([3, 4, 5].includes(props.status)) {
-      p.text = '已结束';
-      if(props.status === 3)
-        p.text = '已抢光';
-      p.textSmall = '';
-    }
-
-    if (props.limitFlag) { //1 已到限购数 0 未到
-      p.text = `每人限购${props.limitNumber}次`;
-      p.textSmall = '(您已购买过本商品)';
-    }
-
-    if ( //什么情况下不允许点击按钮
-      (props.status === 1 && props.notifyFlag) ||  //未开始已设置提醒
-      [3, 4, 5].includes(props.status) || // 已售完、已结束、手动结束下
-      props.limitFlag  // 购买数量已到限购数
-    ) {
-      p.disabled = true;
-      p.className = 'footbar-disabled';
-    }
+  //获取专题活动数据  JJP201810100001
+  getTopicActivityData() {
     this.setData({
-      promotionFootbar: p      
-    })
+      proNavData: {
+        "id": 1,
+        "activityCode": "JJP1809210001",
+        "productPriceId": 1,
+        "totalNumber": 100,
+        "surplusNumber": 10,
+        "freezeNumber": 1,
+        "startPrice": 2,
+        "floorPrice": 1.5,
+        "orderCloseTime": 1,
+        "intervalTime": 1,
+        "downPrice": 1.5,
+        "floorPriceTime": 1,
+        "limitNumber": 1,
+        "status": 2,
+        "activityTime": +new Date() + 2000000,
+        "beginTime": +new Date() + 2000000,
+        "endTime": +new Date() + 5000,
+        "closeTime": 1537962985000,
+        "createTime": 1537513053000,
+        "modifiedTime": 1537962985000,
+        "createUser": null,
+        "reseCount": 0,
+        "productName": "红米66",
+        "spec": "红色-32G-1KG",
+        "specImg": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/pms_1528718750.15896438!560x560.jpg",
+        "originalPrice": 1000,
+        "markdownPrice": 3,
+        "limitFlag": 0,
+        "notifyFlag": 0,
+        "date": +new Date(),//1538034474246
+        "tip": false,
+        "reseCount": 0,
+      }
+    });
+      this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
+      this.selectComponent('#promotion').init();
+    // let params = {
+    //   code: 'JJP1810100008',
+    //   reqName: '获取降价拍详情',
+    //   url: Operation.getActivityDepreciateById,
+    //   requestMethod: 'GET'
+    // }
+    // let r = RequestFactory.wxRequest(params);
+    // r.successBlock = (req) => {
+    //   let data = req.responseObject.data || {};
+    //   this.setData({
+    //     proNavData: data
+    //   })
+
+    //   this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
+    //   this.selectComponent('#promotion').init();
+    // };
+    // Tool.showErrMsg(r)
+    // r.addToQueue();
   },
   setTip: function() {
     let userInfo = Storage.getUserAccountInfo();
-    console.log(userInfo);
+    // console.log(userInfo);
     // return;
     let prop = this.data.proNavData;
     let params = {
@@ -161,28 +127,24 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      let data = req.responseObject || {};
-      console.log(data);
-      
+      let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
+      wx.showToast({
+        title: title,
+        icon: 'none',
+        duration: 3000
+      })
+      this.setData({
+        promotionFootbar: {
+          className: 'footbar-disabled',
+          text: '活动开始前3分钟提醒',
+          textSmall: '',
+          disabled: true
+        },
+        "proNavData.notifyFlag": 1
+      })
     };
     Tool.showErrMsg(r)
     r.addToQueue();
-    return;
-    let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
-    wx.showToast({
-      title: title,
-      icon: 'none',
-      duration: 3000
-    })
-    this.setData({
-      promotionFootbar: {
-        className: 'footbar-disabled',
-        text: '每人限购2次',
-        textSmall: '(您已购买过本商品)',
-        disabled: true
-      },
-      "proNavData.notifyFlag": 1
-    })
   },
   //根据不同状态有不同的事情处理
   footbarReady(e){
@@ -192,35 +154,6 @@ Page({
     } else {
       this.btnClicked(e);
     }
-  },
-  // 未开始 未设置提醒时： X月X日X:00开拍
-  // 未开始 已设置提醒时： 明天X点开拍
-  decorateTime(beginDate, serverDate, isTip) {
-    let str = '';
-    let targetDate = new Date(beginDate);
-    let targetM = targetDate.getMonth() + 1;
-    let targetD = targetDate.getDate();
-    let targetH = targetDate.getHours();
-    let targetMi = targetDate.getMinutes();
-    let diff = beginDate - serverDate;
-    let diffHour = Math.floor(diff / 1000 / 60 / 60);
-    let timeToTomorrow = 24 - new Date().getHours();
-
-    let strHM = ([targetH, targetMi].map(Tool.formatNumber)).join(':') + '开拍'
-
-    str = [targetM, '月', targetD, '日'].join('') + strHM;
-    if (isTip) {
-      if (diffHour - timeToTomorrow <= 0) {
-        str = '今天' + strHM;
-      }
-      else if (diffHour - timeToTomorrow > 0 && diffHour - timeToTomorrow < 24) {
-        str = '明天' + strHM;
-      }
-    }
-    this.setData({
-      "promotionInfo.commingDesc": str
-    })
-    return str;
   },
   imageLoad(e) {
     Tool.getAdaptHeight(e, this)
@@ -476,8 +409,10 @@ Page({
   onUnload: function () {
     Event.off('didLogin', this.didLogin);
   },
+  //倒计时结束 执行下一步操作  刷新当前页面或跳转什么的
   timeout() {
-    console.log('complete')
+    console.log('countdown complete');
+    this.getTopicActivityData();
   },
   toggleShowRegular(){
     console.log(22);

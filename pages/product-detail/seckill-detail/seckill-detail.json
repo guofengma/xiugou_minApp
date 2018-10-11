@@ -3,6 +3,7 @@
   "usingComponents": {
     "product-specification": "/components/product-specification/product-specification",
     "tips-info": "/components/tips-info/tips-info",
-    "product-promotion-info": "/components/product-promotion-info/product-promotion-info"
+    "product-promotion-info": "/components/product-promotion-info/product-promotion-info",
+    "product-promotion-footbar": "/components/product-promotion-footbar/product-promotion-footbar"
   }
 }

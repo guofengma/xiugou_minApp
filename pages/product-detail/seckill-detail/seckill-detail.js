@@ -17,28 +17,110 @@ Page({
     productBuyCount: 1, //商品购买数量
     priceList: [],
     nodes: [{
-            name: "table",
-            attrs: {
+      name: "table",
+      attrs: {
         class: "table"
-            },
-            children: [],
+      },
+      children: [],
     }],
     size: 0,
-    proNavData: {}
+    proNavData: {},
+    promotionDesc: {
+      commingDesc: '',
+      countdownDesc: '',
+      typeDesc: '秒杀价'
+    },
+    promotionFootbar: {
+      className: 'footbar-primary',
+      text: '设置提醒',
+      textSmall: '',
+      disabled: false,
+    },
+    showRegular: false
   },
   onLoad: function (options) {
+    
+    this.getTopicActivityData();
+    
     this.setData({
       productId: options.productId || 1,
-      prodCode: options.prodCode || '',
+      prodCode: options.prodCode || ''
     })
     this.didLogin()
-    this.requestFindProductByIdApp()
-    this.getShoppingCartList()
+    // this.requestFindProductByIdApp()
+    // this.getShoppingCartList()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
   onShow: function () {
 
+  },
+  //获取专题活动数据  JJP201810100001
+  getTopicActivityData() {
+    let params = {
+      code: 'JJP1809270006',
+      reqName: '获取降价拍详情',
+      url: Operation.getActivityDepreciateById,
+      requestMethod: 'GET'
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let data = req.responseObject.data || {};
+      this.setData({
+        proNavData: data
+      })
+
+      this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
+
+      this.selectComponent('#promotion').init();
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  setTip: function () {
+    let userInfo = Storage.getUserAccountInfo();
+    console.log(userInfo);
+    // return;
+    let prop = this.data.proNavData;
+    let params = {
+      reqName: '订阅提醒',
+      url: Operation.addActivitySubscribe,
+      activityId: prop.id,
+      activityType: 1, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
+      type: 1, // 1订阅 0 取消订阅
+      userId: userInfo.id
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      
+      let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
+      wx.showToast({
+        title: title,
+        icon: 'none',
+        duration: 3000
+      })
+      this.setData({
+        promotionFootbar: {
+          className: 'footbar-disabled',
+          text: '活动开始前3分钟提醒',
+          textSmall: '',
+          disabled: true
+        },
+        "proNavData.notifyFlag": 1
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+    
+  },
+  //根据不同状态有不同的事情处理
+  footbarReady(e) {
+    if (this.data.promotionFootbar.disabled) return;
+    if (this.data.proNavData.status === 1) {
+      this.setTip();
+    } else {
+      this.btnClicked(e);
+    }
   },
   imageLoad(e) {
     Tool.getAdaptHeight(e, this)
@@ -107,7 +189,7 @@ Page({
       productId: this.data.productInfo.id,
       amount: this.data.productBuyCount,
       priceId: this.data.selectType.id,
-      timestamp: new Date().getTime(),
+      timestamp: +new Date(),
       reqName: '加入购物车',
       url: Operation.addToShoppingCart
     }
@@ -294,7 +376,9 @@ Page({
   onUnload: function () {
     Event.off('didLogin', this.didLogin);
   },
-  timeout: function () {
-    console.log('complete')
-  }
+  //倒计时结束 执行下一步操作  刷新当前页面或跳转什么的
+  timeout() {
+    console.log('countdown complete');
+    this.getTopicActivityData();
+  },
 })
