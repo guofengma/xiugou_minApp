@@ -117,7 +117,7 @@
     <swiper class="today-list-imageContainer" bindchange="handleChange" previous-margin="62rpx" next-margin="62rpx" circular autoplay>
       <block wx:for="{{todayList}}" wx:key="{{index}}">
         <swiper-item class="today-list-item boxSize">
-          <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item.imgUrl}}"></image>
+          <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item.imgUrl}}" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'></image>
         </swiper-item>
       </block>
     </swiper>
@@ -129,7 +129,7 @@
     <swiper class="today-list-imageContainer" bindchange="handleChange"  next-margin="150rpx" circular>
       <block wx:for="{{fineQuality}}" wx:key="{{index}}">
         <swiper-item class="today-list-item boxSize">
-          <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item.imgUrl}}"></image>
+          <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item.imgUrl}}" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'></image>
           <!-- <view class='ellipsis font-26 fine-quality-tips'>华盛顿哈空间是的哈卡收到货卡仕达卡仕达卡收到货卡的很时代大厦多</view> -->
         </swiper-item>
       </block>
@@ -167,7 +167,7 @@
   <view class='recommend-view whiteBg'>
     <view class='index-item-title flexR font-38'>为你推荐</view>
     <view class='recommend-prd-content flexR'>
-      <view class='recommend-prd-item boxSize' wx:for='{{recommendArr}}' wx:key='{{index}}' style='margin-right:{{index%2==1? "0":"10"}}rpx'>
+      <view class='recommend-prd-item boxSize' wx:for='{{recommendArr}}' wx:key='{{index}}' style='margin-right:{{index%2==1? "0":"10"}}rpx' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'>
         <view class='recommend-prd-img' >
          <image src='{{item.imgUrl}}'></image>
          <view class='ellipsis font-24 gray'>{{item.title}}</view>

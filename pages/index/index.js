@@ -9,9 +9,9 @@ Page({
       pageArr: [ // 1.链接产品2.链接专题3.降价拍4.秒杀5.礼包
         '其他',
         '/pages/product-detail/product-detail?productId=',
-        '/pages/topic/topic?id=',
-        '/pages/product-detail/product-detail',
-        '/pages/product-detail/product-detail',
+        '/pages/topic/topic?code=',
+        '/pages/product-detail/discount-detail/discount-detail?code=',
+        '/pages/product-detail/seckill-detail/seckill-detail?code=',
         '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
       ],
       iconArr:[ // icon 图标
@@ -121,6 +121,7 @@ Page({
     adListClicked(e) {
       let adType = e.currentTarget.dataset.type;
       let val = e.currentTarget.dataset.val;
+      console.log(adType)
       let page = this.data.pageArr[adType]+val;
       Tool.navigateTo(page)
     },
@@ -147,7 +148,7 @@ Page({
     msgClicked() {
       let cookie = Storage.getUserCookie() || ''
       if (!this.data.didLogin && !cookie ) {
-        Tool.navigateTo('/pages/login/login-wx/login-wx?isBack=' + true)
+        Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
         return
       }
       Tool.navigateTo('/pages/my/information/information')

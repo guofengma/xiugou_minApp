@@ -80,6 +80,7 @@ Page({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let data = req.responseObject.data;
+        if(!data) return
         console.log(data);
         // 设置专题标题
         wx.setNavigationBarTitle({
