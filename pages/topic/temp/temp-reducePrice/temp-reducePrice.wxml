@@ -32,4 +32,5 @@
       </view>
     </block>
     <!-- 带banner的产品列表 E -->
+    <view class='no-more'>已经到底啦~</view>
 </template>
