@@ -63,6 +63,7 @@
             imgUrl="{{productInfo.imgUrl}}" 
             showImgs='{{true}}'
             isInit="{{false}}" 
+            commodityType='3'
             bind:hiddenTips='hiddenTips'
             isIphoneX='{{isIPhoneX.isIPhoneX}}'
         >

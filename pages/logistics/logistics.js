@@ -65,7 +65,7 @@ Page({
     },
     getDelivery() {
         let params = {
-          orderNum: this.data.id,
+          expNum: this.data.id,
           requestMethod: 'GET',
           reqName: '物流查看',
           url: Operation.findLogisticsDetail

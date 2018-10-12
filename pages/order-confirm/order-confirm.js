@@ -53,9 +53,11 @@ Page({
     let url = ''
 
     if(this.data.door==1){
-
+      url = Operation.seckillMkeSureOrder
     } else if (this.data.door == 2){
       url = Operation.discountMakeSureOrder
+    } else if (this.data.door == 2) {
+      url = ''
     } else {
       url = Operation.makeSureOrder
     }
@@ -232,13 +234,19 @@ Page({
       reqName: '订单结算', 
     }
     let orderTypeParmas ={}
-    if(this.data.door==2){
+    if (this.data.door == 2){
       orderTypeParmas = {
         ...this.data.params,
-        "orderProducts": this.data.params.orderProducts,
+        // "orderProducts": this.data.params.orderProducts,
         url: Operation.discountSubmitOrder
       }
-    } else {
+    } else if (this.data.door == 1){
+      orderTypeParmas = {
+        ...this.data.params,
+        url: Operation.seckillSubmitOrder
+      }
+    }
+    else {
       orderTypeParmas = {
         "orderProducts": this.data.params.orderProducts,
         url: Operation.submitOrder

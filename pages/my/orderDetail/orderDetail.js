@@ -437,7 +437,7 @@ Page({
     getDelivery(detail) {
       // 查询物流信息最后一条数据
       let params = {
-        orderNum: this.data.detail.expressNo,
+        expNum: this.data.detail.expressNo,
         requestMethod: 'GET',
         reqName: '物流查看',
         url: Operation.findLogisticsDetail

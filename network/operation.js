@@ -217,6 +217,14 @@ export default class Operation {
 
         this.discountSubmitOrder = '/operator/activityDepreciate/submitOrder' 
 
+        // 秒杀结算
+
+        this.seckillMkeSureOrder = '/operator/seckill/makeSureOrder'
+
+        // 秒杀下订单
+
+        this.seckillSubmitOrder = '/operator/seckill/submitOrder'
+
         // 订单修改地址 邮费计算
 
         this.calcFreight  = '/order/order/calcFreight'

@@ -251,11 +251,7 @@ Page({
       show: show
     })
   },
-  cartClicked() {
-    Tool.switchTab('/pages/shopping-cart/shopping-cart')
-  },
   btnClicked(e) {
-    console.log(11);
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },

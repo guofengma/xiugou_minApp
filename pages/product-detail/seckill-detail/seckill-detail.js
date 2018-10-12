@@ -4,6 +4,7 @@ import WxParse from '../../../libs/wxParse/wxParse.js';
 
 Page({
   data: {
+    door:1,
     didLogin: false,
     imgUrls: [],
     activeIndex: 1, // 轮播图片的index 
@@ -42,7 +43,7 @@ Page({
     this.getTopicActivityData(options.code);
     
     this.setData({
-      productId: options.productId,
+      productId: options.productId || 1,
       prodCode: options.code
     })
     this.didLogin()
@@ -171,12 +172,9 @@ Page({
       return
     }
     let params = {
-      orderProducts: [{
-        num: this.data.productBuyCount,
-        priceId: this.data.selectType.id,
-        productId: this.data.productInfo.id
-      }],
-      orderType: 99
+      code: this.data.prodCode,
+      num: this.data.productBuyCount,
+      orderType: 1,
     }
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + '&type=' + this.data.door)
   },
@@ -196,7 +194,7 @@ Page({
         productInfo: datas.product,
         productInfoList: datas,
         priceList: datas.priceList, // 价格表
-        productSpec: datas.specMap, // 规格描述
+        // productSpec: datas.specMap, // 规格描述
       })
       // 渲染表格
       let tr = []
@@ -258,9 +256,6 @@ Page({
     this.setData({
       show: show
     })
-  },
-  cartClicked() {
-    Tool.switchTab('/pages/shopping-cart/shopping-cart')
   },
   btnClicked(e) {
     let n = parseInt(e.currentTarget.dataset.key)
