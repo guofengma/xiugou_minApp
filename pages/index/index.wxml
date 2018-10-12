@@ -140,15 +140,15 @@
 
   <view class='hot-sale-view whiteBg'>
     <view class='index-item-title flexR font-38'>超值热卖</view>
-    <view class='hot-sale-item' wx:for="{{hotSale}}" wx:key="{{index}}" >
+    <view class='hot-sale-item' wx:for="{{hotSale}}"  wx:for-index="key" wx:for-item='list' wx:key="{{key}}" >
       <view class='hot-sale-img'>
-        <image src='{{item.imgUrl}}' mode='widthFix'></image>
+        <image src='{{list.imgUrl}}' mode='widthFix' catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'></image>
       </view>
       <scroll-view scroll-x="true"   class='hot-sale-scroll'>
         <view class='hot-sale-content  boxSize'>
-          <view class='hot-sale-prd flexC' wx:for='{{6}}' wx:key='{{index}}'>
-            <image src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' mode='widthFix'></image>
-            <view class='ellipsis-2 font-24 gray prd-name'>哈哈啥快递哈会计师打卡时间达会计师大奖是的哈开始打哈肯定撒家伙是的卡号是单卡d</view>
+          <view class='hot-sale-prd flexC' wx:for='{{list.topicBannerProductDTOList}}' wx:key='{{index}}' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'>
+            <image src='{{item.specImg}}'></image>
+            <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName}}</view>
             <view class='red font-28'>¥87起</view>
           </view> 
            <!-- 查看更多  -->

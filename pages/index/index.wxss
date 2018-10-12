@@ -196,6 +196,7 @@
 }
 .hot-sale-prd image,.hot-sale-prd,.hot-sale-prd>view{
   width: 190rpx;
+  height: 190rpx;
 }
 .prd-name{
   margin: 10rpx 0;

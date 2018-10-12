@@ -75,11 +75,6 @@ Page({
           hotSale:datas
         })
       });
-      this.queryAdList(8, '为你推荐', (datas) => {
-        this.setData({
-          
-        })
-      });
       // this.querySpeList();
       this.queryFeaturedList()
       this.setData({
