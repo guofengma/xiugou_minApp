@@ -144,7 +144,7 @@ Component({
       }
       let serverTime = prop.date || +new Date();//万一取不到就用当前时间
       this.setData({
-        endTime: t - prop.date  //date为服务器时间 用new date()的话存在用户修改手机系统时间的情况
+        endTime: t - serverTime  //date为服务器时间 用new date()的话存在用户修改手机系统时间的情况
       });
       if ([1, 2, 3].includes(prop.status)) {
         this.data.interval = setInterval(() => {
