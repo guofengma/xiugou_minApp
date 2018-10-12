@@ -8,7 +8,7 @@ Page({
     data: {
       pageArr: [ // 1.链接产品2.链接专题3.降价拍4.秒杀5.礼包
         '其他',
-        '/pages/product-detail/product-detail?productId=',
+        '/pages/product-detail/product-detail?prodCode=',
         '/pages/topic/topic?code=',
         '/pages/product-detail/discount-detail/discount-detail?code=',
         '/pages/product-detail/seckill-detail/seckill-detail?code=',
@@ -75,7 +75,6 @@ Page({
           hotSale:datas
         })
       });
-      // this.querySpeList();
       this.queryFeaturedList()
       this.setData({
         noticeArr:Tool.sliceArray(this.data.noticeArr,2)

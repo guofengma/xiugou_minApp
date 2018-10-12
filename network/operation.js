@@ -71,6 +71,10 @@ export default class Operation {
 
         this.findProductByIdApp = '/product/getProductDetail'
 
+        // 根据code获取产品
+
+        this.getProductDetailByCode ='/product/getProductSpecByCode'
+
         // 搜索产品
 
         this.searchProduct ='/product/productList'
@@ -224,10 +228,6 @@ export default class Operation {
         // 秒杀下订单
 
         this.seckillSubmitOrder = '/operator/seckill/submitOrder'
-
-        // 订单修改地址 邮费计算
-
-        this.calcFreight  = '/order/order/calcFreight'
 
         // 预支付
 

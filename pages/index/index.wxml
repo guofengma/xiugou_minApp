@@ -149,7 +149,7 @@
           <view class='hot-sale-prd flexC' wx:for='{{list.topicBannerProductDTOList}}' wx:key='{{index}}' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'>
             <image src='{{item.specImg}}'></image>
             <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName}}</view>
-            <view class='red font-28'>¥87起</view>
+            <view class='red font-28'>¥{{item.productName}}起</view>
           </view> 
            <!-- 查看更多  -->
            <view class='hot-sale-more'>

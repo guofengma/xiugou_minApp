@@ -11,9 +11,9 @@
     <scroll-view scroll-y class='rightBar whiteBg boxSize'>
      <view class='rightBar-content'>
       <view class='banner'>
-        <image src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' mode='widthFix' ></image>
+        <image src='{{content.imgList}}' mode='widthFix' ></image>
       </view>
-      <view wx:for='{{content}}' wx:for-index="key" wx:for-item="list"  wx:key="{{key}}">
+      <view wx:for='{{content.productCategoryList}}' wx:for-index="key" wx:for-item="list"  wx:key="{{key}}">
         <view class='font-26 list-name'>{{list.name}}</view>
         <view class='classification-content'>
           <view class='classification-info flexC' wx:for='{{list.productCategoryList}}' wx:key='{{index}}' catchtap='itemClicked'  data-id="{{item.id}}" data-name='{{item.name}}'>

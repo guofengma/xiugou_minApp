@@ -71,7 +71,7 @@
         <view class='cell-content'>{{selectType.productType? selectType.productType:'选择产品规格'}}</view> -->
         </product-specification >
         <view bindtap='toggleShowRegular' style="padding: 0">
-          <template is="cell-line" data="{{name:'抢拍规则',placeholder:' '}}"  /> 
+          <template is="cell-line" data="{{name:'抢拍规则',placeholder:''}}"  /> 
         </view>
           
       <!-- </view> -->

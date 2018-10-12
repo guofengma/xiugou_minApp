@@ -22,6 +22,10 @@ Page({
         Tool.showAlert('昵称不能多于16个字')
         return
       }
+      if (this.data.nickname.length < 4) {
+        Tool.showAlert('昵称不能少4个字')
+        return
+      }
       let params = {
         nickname: this.data.nickname,
         reqName: '修改用户信息',

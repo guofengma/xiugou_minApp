@@ -77,10 +77,13 @@ Page({
       let content = []
       content = [{
         name:"为你推荐",
-        productCategoryList: datas
+        productCategoryList: datas.productCategoryList
       }]
       this.setData({
-        content: content
+        content: {
+          imgList: datas.imgList,
+          productCategoryList: content
+        }
       })
     };
     Tool.showErrMsg(r)

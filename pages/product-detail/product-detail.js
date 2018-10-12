@@ -133,11 +133,13 @@ Page({
     r.addToQueue();
   },
   requestFindProductByIdApp(){
+    let url = this.data.prodCode? Operation.getProductDetailByCode : Operation.findProductByIdApp
     let params = {
       id: this.data.productId,
+      code:this.data.prodCode,
       requestMethod: 'GET',
       reqName: '获取商品详情页',
-      url: Operation.findProductByIdApp
+      url: url
     }
     let r = RequestFactory.wxRequest(params);
     let productInfo = this.data.productInfo

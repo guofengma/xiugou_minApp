@@ -40,7 +40,7 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      productId: options.productId || 1,
+      // productId: options.productId || 1,
       prodCode: options.code
     })
     this.didLogin()
@@ -66,6 +66,7 @@ Page({
       if (data.status >= 4) {
         setTimeout(() => {
           //跳转到普通详情页
+          Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + this.data.prodCode)
         }, 5000)
       }
       let productSpec = this.refactorProductsData(data.productSpecValue);
@@ -75,7 +76,6 @@ Page({
       })
 
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
-      console.log(this.selectComponent('#promotion'));
       data.id && this.selectComponent('#promotion').init();
     };
     Tool.showErrMsg(r)
@@ -174,10 +174,10 @@ Page({
   },
   requestFindProductByIdApp() {
     let params = {
-      id: this.data.productId,
+      code: this.data.prodCode,
       requestMethod: 'GET',
       reqName: '获取商品详情页',
-      url: Operation.findProductByIdApp
+      url: Operation.getProductDetailByCode
     }
     let r = RequestFactory.wxRequest(params);
     let productInfo = this.data.productInfo
