@@ -65,6 +65,7 @@ Component({
       this.initTypeSelected()
     },
     initTypeSelected(){ // 默认第一个选中
+      console.log(this.data.productSpec)
       let productSpec = this.data.productSpec[0].list
       let specValue = productSpec[0].specValue
       let id = productSpec[0].id

@@ -86,7 +86,7 @@ export default class Operation {
 
         // 礼包详情
 
-      this.getGiftBagDetail = '/operator/activitypackage/findActivityPackageDetail'
+        this.getGiftBagDetail = '/operator/activitypackage/findActivityPackageDetail'
 
         // 是否能购买礼包
 
@@ -201,13 +201,21 @@ export default class Operation {
 
         /******************提交订单 订单结算*********************** */
 
-        // 购物车结算
+        // 普通商品结算
         
         this.makeSureOrder = '/order/makeSureOrder'
 
         // 提交订单
 
         this.submitOrder ='/order/submitOrder'
+
+        // 降价拍结算 
+
+        this.discountMakeSureOrder = '/operator/activityDepreciate/makeSureOrder' 
+
+        // 降价拍提交订单
+
+        this.discountSubmitOrder = '/operator/activityDepreciate/submitOrder' 
 
         // 订单修改地址 邮费计算
 

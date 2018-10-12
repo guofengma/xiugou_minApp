@@ -50,10 +50,19 @@ Page({
     this.requestOrderInfo(callBack)
   },
   requestOrderInfo(callBack = ()=>{}){ // 获取订单信息 优惠卷和省市区地址更改联动
+    let url = ''
+
+    if(this.data.door==1){
+
+    } else if (this.data.door == 2){
+      url = Operation.discountMakeSureOrder
+    } else {
+      url = Operation.makeSureOrder
+    }
     let params = {
       ...this.data.params,
       reqName: '提交订单',
-      url: Operation.makeSureOrder
+      url: url
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
@@ -70,7 +79,7 @@ Page({
      
       //渲染产品信息列表
       let showProduct =[]
-      if(this.data.door==99){
+      // if(this.data.door==99){
         item.orderProductList.forEach((item0,index)=>{
           showProduct.push({
             showImg: item0.specImg,
@@ -82,7 +91,7 @@ Page({
             stock: item0.stock,
           })
         })
-      }
+      // }
 
       item.showProduct = showProduct
       
@@ -215,15 +224,27 @@ Page({
       "buyerRemark": this.data.remark,
       "cityCode": orderAddress.cityCode || '',
       "couponId": this.data.coupon.id || '',
-      "orderProducts": this.data.params.orderProducts,
       "orderType": this.data.params.orderType,
       "provinceCode": orderAddress.provinceCode || '',
       "receiver": orderAddress.receiver || '',
       "recevicePhone": orderAddress.receiverPhone || '',
-      tokenCoin: this.data.useOneCoinNum, // 一元劵
-      reqName: '订单结算',
-      url: Operation.submitOrder
+      tokenCoin: this.data.useOneCoinNum, // 一元劵  
+      reqName: '订单结算', 
     }
+    let orderTypeParmas ={}
+    if(this.data.door==2){
+      orderTypeParmas = {
+        ...this.data.params,
+        "orderProducts": this.data.params.orderProducts,
+        url: Operation.discountSubmitOrder
+      }
+    } else {
+      orderTypeParmas = {
+        "orderProducts": this.data.params.orderProducts,
+        url: Operation.submitOrder
+      }
+    }
+    Object.assign(params, params, orderTypeParmas)
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {        
       Event.emit('updateShoppingCart')
@@ -238,7 +259,7 @@ Page({
     Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1")
   },
   couponClicked(){ // 点击使用优惠卷跳转
-    if(this.data.door==5) return
+    if(this.data.door!=99) return
     let productIds = this.getCouponProductPriceIds()
     Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&&productIds=" + JSON.stringify(productIds))
   },

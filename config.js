@@ -4,10 +4,10 @@ const config = {
   // baseUrl: 'http://172.16.10.42:8180/gateway',  // 蒋
   // baseUrl: 'http://172.16.10.29:8180/gateway',  // 周
   // baseUrl:'http://172.16.10.238:8180/gateway',  // 高
-  baseUrl:'http://172.16.10.56:8180/gateway',  // 沈
+  // baseUrl:'http://172.16.10.56:8180/gateway',  // 沈
   // baseUrl: 'http://172.16.10.41:8180/gateway',  // 张
   // baseUrl: 'http://172.16.10.12:8180/gateway',  // 杨
-  // baseUrl: 'http://172.16.10.19:8180/gateway',  // 吴
+  baseUrl: 'http://172.16.10.19:8180/gateway',  // 吴
   // baseUrl: 'http://172.16.10.88:8180/gateway',  // 陈
   // baseUrl: 'http://zhifu.dnvhot.tech', // 吴
   wxVersion: 'V2.2.5', // 微信小程序版本

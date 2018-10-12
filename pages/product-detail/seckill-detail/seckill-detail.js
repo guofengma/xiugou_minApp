@@ -23,7 +23,6 @@ Page({
       },
       children: [],
     }],
-    size: 0,
     proNavData: {},
     promotionDesc: {
       commingDesc: '',
@@ -48,7 +47,6 @@ Page({
     })
     this.didLogin()
     this.requestFindProductByIdApp()
-    this.getShoppingCartList()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -66,11 +64,11 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let data = req.responseObject.data || {};
-      // let productSpec = this.refactorProductsData(data.productSpecValue);
+      let productSpec = this.refactorProductsData(data.productSpecValue);
 
       this.setData({
         proNavData: data,
-        // productSpec: productSpec
+        productSpec: productSpec
       })
 
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
@@ -84,10 +82,16 @@ Page({
   refactorProductsData(originData = []) {
     let newData = {};
     originData.forEach(function (item) {
-      newData[item.specName] = {};
-      newData[item.specName].id = item.id;
-      newData[item.specName].specName = item.specName;
-      newData[item.specName].specValue = item.specValue;
+      // newData[item.specName] = {};
+      // newData[item.specName].id = item.id;
+      // newData[item.specName].specName = item.specName;
+      // newData[item.specName].specValue = item.specValue;
+      newData[item.specName] = [];
+      newData[item.specName].push({
+        id: item.id,
+        specName: item.specName,
+        specValue: item.specValue,
+      })
     })
     return newData;
   },
@@ -156,32 +160,6 @@ Page({
         break;
     }
   },
-  setStoragePrd(params, index) {
-    let list = Storage.getShoppingCart()
-    if (!list) {
-      list = []
-    } else {
-      for (let i = 0; i < list.length; i++) {
-        if (list[i].priceId === params.priceId) {
-          console.log(list[i].showCount, this.data.productBuyCount)
-          list[i].showCount += this.data.productBuyCount
-          this.updateStorageShoppingCart(list)
-          return
-        }
-      }
-    }
-    params.productId = this.data.selectType.productId
-    params.priceId = this.data.selectType.id
-    params.showCount = this.data.productBuyCount
-    list.push(params)
-    this.updateStorageShoppingCart(list)
-  },
-  updateStorageShoppingCart(list) {
-    Storage.setShoppingCart(list)
-    this.getShoppingCartList()
-    Tool.showSuccessToast('添加成功')
-    Event.emit('updateStorageShoppingCart')
-  },
   makeSureOrder() {
     // 立即购买
     if (!this.data.didLogin) {
@@ -197,29 +175,6 @@ Page({
       orderType: 99
     }
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + '&type=' + this.data.door)
-  },
-  addToShoppingCart() {
-    let params = {
-      productId: this.data.productInfo.id,
-      amount: this.data.productBuyCount,
-      priceId: this.data.selectType.id,
-      timestamp: +new Date(),
-      reqName: '加入购物车',
-      url: Operation.addToShoppingCart
-    }
-    // 加入购物车
-    if (!this.data.didLogin) {
-      this.setStoragePrd(params, this.data.selectType.index)
-      return
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      this.getShoppingCartList()
-      Event.emit('updateShoppingCart')
-      Tool.showSuccessToast('添加成功')
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
   },
   requestFindProductByIdApp() {
     let params = {
@@ -279,7 +234,6 @@ Page({
     r.addToQueue();
   },
   typeSubClicked(e) {
-    console.log(e)
     this.setData({
       selectType: e.detail
     })
@@ -355,32 +309,6 @@ Page({
   wxParseTagATap: function (e) {
     let link = e.currentTarget.dataset.src
     console.log(link)
-  },
-  getShoppingCartList() {
-    // 查询购物车
-    if (!this.data.didLogin) {
-      let data = Storage.getShoppingCart() || []
-      let size = data.length
-      this.setData({
-        size: size
-      })
-      return
-    }
-    let params = {
-      reqName: '获取购物车',
-      url: Operation.getShoppingCartList,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      data = data === null ? [] : data
-      let size = data.length > 99 ? 99 : data.length
-      this.setData({
-        size: size
-      })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
   },
   hiddenTips() {
     this.setData({
