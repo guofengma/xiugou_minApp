@@ -65,7 +65,11 @@ Page({
     r.successBlock = (req) => {
       let data = req.responseObject.data || {};
       let productSpec = this.refactorProductsData(data.productSpecValue);
-
+      if (data.status >= 4) {
+        setTimeout(() => {
+          //跳转到普通详情页
+        }, 5000)
+      }
       this.setData({
         proNavData: data,
         productSpec: productSpec
@@ -321,13 +325,6 @@ Page({
   //倒计时结束 执行下一步操作  刷新当前页面或跳转什么的
   timeout() {
     console.log('countdown complete');
-    let status = this.data.proNavData.status;
-    if (status === 4 || status === 5) {
-      //活动结束 5S后跳转到普通商品页
-
-    } else {
-      //重新获取最新数据
-      this.getTopicActivityData(this.data.prodCode);
-    }
+    this.getTopicActivityData(this.data.prodCode);
   },
 })

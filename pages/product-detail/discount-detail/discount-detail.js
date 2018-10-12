@@ -63,7 +63,11 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let data = req.responseObject.data || {};
-
+      if (data.status >= 4) {
+        setTimeout(() => {
+          //跳转到普通详情页
+        }, 5000)
+      }
       let productSpec = this.refactorProductsData(data.productSpecValue);
       this.setData({
         proNavData: data,
@@ -314,14 +318,7 @@ Page({
   //倒计时结束 执行下一步操作 
   timeout() {
     console.log('countdown complete');
-    let status = this.data.proNavData.status;
-    if(status === 4 || status === 5){
-      //活动结束 5S后跳转到普通商品页
-
-    } else {
-      //重新获取最新数据
-      this.getTopicActivityData(this.data.prodCode);
-    }
+    this.getTopicActivityData(this.data.prodCode);
   },
   toggleShowRegular() {
     this.setData({
