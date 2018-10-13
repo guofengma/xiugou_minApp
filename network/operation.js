@@ -83,6 +83,10 @@ export default class Operation {
 
         this.findProductStockBySpec = '/product/getProductSpec'
 
+        // 获取是否是活动产品
+
+        this.activityByProductId = '/operator/activity/queryByProductId'
+
         // 礼包详情
 
         this.getGiftBagDetail = '/operator/activitypackage/findActivityPackageDetail'

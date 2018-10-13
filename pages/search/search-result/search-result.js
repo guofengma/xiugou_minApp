@@ -32,14 +32,11 @@ Page({
       hotWordId: Number(options.hotWordId) || '',
       sortType: 1
     }
-    if (options.categoryId || options.hotWordId) {
-      
-      if (options.hotWordId){
-        delete params.categoryId
-      }else{
-        delete params.keyword
-        delete params.hotWordId
-      }
+    if (options.hotWordId) {
+      delete params.categoryId
+    } else {
+      delete params.keyword
+      delete params.hotWordId
     }
     this.setData({
       keyword: options.keyword || '',

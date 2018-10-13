@@ -83,7 +83,7 @@ Page({
       orderType: 5
     }
 
-    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&type=5")
+    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&door=5")
   },
   getGiftBagDetail() { //获取礼包详情
     let params = {
