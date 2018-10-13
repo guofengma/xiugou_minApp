@@ -8,6 +8,9 @@ Component({
         textSmall: '',
         disabled: false,
       }
+    },
+    isIphoneX: {
+      type: Boolean
     }
   },
   data: {

@@ -114,6 +114,7 @@
       promotionType="2"
       bindtap="footbarReady"
       data-key="2"
+      isIphoneX='{{isIPhoneX.isIPhoneX}}'
     ></product-promotion-footbar>
     <!--置顶的按钮-->
     <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
