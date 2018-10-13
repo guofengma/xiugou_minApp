@@ -9,6 +9,7 @@
         <!-- 降价拍开始前startPrice  开始后markdownPrice  秒杀都是一个字段 -->
         <text class='promotion-price-current' wx:if="{{promotionType == 2}}">{{prop.status === 1 ? prop.startPrice :prop.markdownPrice}}</text>
         <text class='promotion-price-current' wx:elif="{{promotionType == 1}}">{{prop.seckillPrice}}</text>
+        <text class='promotion-price-current' wx:else>Null</text>
       </view>
       <view class='promotion-detail inline'>
         <view class='promotion-price-origin {{prop.status == 1 || !promotionType ? "": "line-through"}}'>
