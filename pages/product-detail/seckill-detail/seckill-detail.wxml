@@ -39,7 +39,7 @@
      prop="{{proNavData}}" 
      promotionBg="{{proNavData.status == 1 ? 'comming' : 'ing'}}" 
      promotionDesc="{{promotionDesc}}"
-     promotionType="seckill"
+     promotionType="2"
      wx:if="{{proNavData.id}}"></product-promotion-info>
     <!-- 产品信息 -->
     <view class='prd-info boxSize'>
@@ -105,7 +105,7 @@
     <product-promotion-footbar 
       id="promotionFootbar"
       promotionFootbar="{{promotionFootbar}}"
-      promotionType="discount"
+      promotionType="2"
       bindtap="footbarReady"
       data-key="2"
     ></product-promotion-footbar>

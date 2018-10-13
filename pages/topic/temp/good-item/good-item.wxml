@@ -25,14 +25,20 @@
       
       <view class='good-foot'>
         <view class='good-price'>
+          <!-- productType 1:秒杀 2:降价拍 -->
           <view class='good-price-discount' 
+            wx:if="{{productType == 2}}"
             style="color:{{status === 2 ? '#D51243' : '#E60012'}}"
-          >¥52</view>
-          <view class='good-price-origin'>¥159.00</view>
+          >¥{{status === 1 ? startPrice : markdownPrice}}</view>
+          <view class='good-price-discount' 
+            wx:elif="{{productType === 1}}"
+            style="color:{{status === 2 ? '#D51243' : '#E60012'}}"
+          >¥{{seckillPrice}}</view>
+          <view class='good-price-origin'>¥{{originalPrice}}</view>
         </view>
         
         <view class='good-operate tip {{!notifyFlag ? "flexR" : ""}}' 
-          bindtap='toggleSubscribeItem' 
+          catchtap='toggleSubscribeItem' 
           data-type="{{notifyFLag ? 0 : 1}}"
           data-index="{{index}}"
           data-activity-id="{{id}}"
