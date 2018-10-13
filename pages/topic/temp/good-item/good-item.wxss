@@ -51,15 +51,23 @@
   background: #f2b7c6;
   border-radius: 20rpx;
   padding-right: 12rpx;
-  
+  position: relative;
 }
 .good-type-ing .good-loot-already{
-  min-width: 50%;
-  background: #D51243;
   border-radius: 20rpx;
   padding: 0 12rpx;
+  position:relative;
+  z-index:1;
 }
-
+.good-loot-progressbg {
+  height:29rpx;
+  max-width: 100%;
+  position:absolute;
+  left:0;
+  border-radius:20rpx;
+  background:#D51243;
+  z-index:0;
+}
 .good-foot{
   display:flex;
   flex-direction:row;

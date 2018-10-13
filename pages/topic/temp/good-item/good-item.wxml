@@ -18,6 +18,7 @@
       <view class='good-type good-type-ing' wx:elif="{{status === 2}}">
         <view class='flexR-sb'>
           <view class='good-loot-already'>已抢{{totalNumber - surplusNumber}}件</view>
+          <view class='good-loot-progressbg' style="width: {{~~(((totalNumber - surplusNumber)/totalNumber)*100)}}%"></view>
           <view class='good-loot-progress'>{{~~(((totalNumber - surplusNumber)/totalNumber)*100)}}%</view>
         </view>
       </view>
