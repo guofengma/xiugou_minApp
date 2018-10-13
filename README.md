@@ -69,7 +69,7 @@ iphoneX底部适配  iPhoneX-line
      prop="{{proNavData}}"
      promotionBg="{{proNavData.status == 1 ? 'comming' : 'ing'}}" 
      promotionDesc="{{promotionDesc}}"
-     promotionType="discount"
+     promotionType="2"
   ></product-promotion-info>
 ```
 其中
@@ -83,5 +83,5 @@ iphoneX底部适配  iPhoneX-line
     typeDesc: '起拍价'
   }
   
-  //promotionType  区分降价拍(discount)秒杀(seckill)  普通的为空
+  //promotionType  区分降价拍(2)秒杀(1)  普通的为空
 ```

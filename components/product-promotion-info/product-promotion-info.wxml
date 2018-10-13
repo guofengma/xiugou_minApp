@@ -1,12 +1,14 @@
 <!--components/product-promotion-info/product-promotion-info.wxml-->
 <!-- comming  => 未开始；  ing     => 进行中  以status区分对应不同背景色 -->
-<!-- discount => 降价；    seckill => 秒杀   promotionType对应不同活动 普通的为空 -->
+<!-- 2 => 降价；    1 => 秒杀   promotionType对应不同活动 普通的为空 -->
 <view class='promotion-info-container {{ promotionBg }}'>
   
   <view class='promotion-info-left'>
       <view class='promotion-price inline'>
         <text class="symbol">¥</text>
-        <text class='promotion-price-current'>{{prop.markdownPrice}}</text>
+        <!-- 降价拍开始前startPrice  开始后markdownPrice  秒杀都是一个字段 -->
+        <text class='promotion-price-current' wx:if="{{promotionType == 2}}">{{prop.status === 1 ? prop.startPrice :prop.markdownPrice}}</text>
+        <text class='promotion-price-current' wx:elif="{{promotionType == 1}}">{{prop.seckillPrice}}</text>
       </view>
       <view class='promotion-detail inline'>
         <view class='promotion-price-origin {{prop.status == 1 || !promotionType ? "": "line-through"}}'>

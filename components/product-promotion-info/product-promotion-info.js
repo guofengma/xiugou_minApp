@@ -51,11 +51,11 @@ Component({
     },
     formatTime(c) {
       let d = parseInt(c / 1000 / 60 / 60 / 24); 
-      let h = parseInt(c / 1000 / 60 / 60 - (24 * d)); 
+      let h = parseInt(c / 1000 / 60 / 60) - (24 * d);
       let m = parseInt(c / 1000 / 60 - (24 * 60 * d) - (60 * h));
       let s = parseInt(c / 1000 - (24 * 60 * 60 * d) - (60 * 60 * h) - (60 * m)); //
       let ms = Math.floor((c - (24 * 60 * 60 * 1000 * d) - (60 * 60 * 1000 * h) - (60 * 1000 * m) - (s * 1000)) / 10);
-      return ([h, m, s, ms]).map(Tool.formatNumber).join(':');
+      return ([h+d*24, m, s, ms]).map(Tool.formatNumber).join(':');
     },
     checkPromotionInfo() {
       // 获取完数据再展示
@@ -68,29 +68,31 @@ Component({
       )
       let countdownDesc = '距结束';
 
-      if (prop.status === 1)
+      if (prop.status === 1){
+        console.log(11);
         countdownDesc = '距开抢';
+      }
       //降价拍分多个阶段降价 展示文案不同
-      if(this.data.promotionType === 'discount'){
+      if(this.data.promotionType == 2){
 
         if (prop.status === 2) {
           countdownDesc = '距下次降价'; // 距下次降价
         }
         // 当降价至最低时或已售空则进入最后阶段
-        if (prop.markdownPrice == prop.floorPrice || prop.status === 3)
+        if ( (prop.status == 2 && prop.markdownPrice == prop.floorPrice) || prop.status === 3){
           countdownDesc = '距结束';
+        }
       }
 
       let typeDesc = this.data.promotionDesc.typeDesc;
 
-      if(this.data.promotionType == '') {
+      if(this.data.promotionType == 1) {
         typeDesc = '秒杀价';
       }
       // 秒杀活动结束或已抢完时，'秒杀价'文案要改成'已抢X件'
-      if ([3, 4, 5].includes(prop.status) && this.data.promotionType) {
+      if ([3, 4, 5].includes(prop.status) && this.data.promotionType == 1) {
         typeDesc = `已抢${prop.totalNumber - prop.surplusNumber}件`;
       }
-
       // ==========
       this.setData({
         "promotionDesc.commingDesc": commingDesc,
@@ -132,7 +134,7 @@ Component({
       let prop = this.data.prop;
       console.log(prop);
       let t = prop.endTime;
-      if (prop.status === 2 && this.data.promotionType === 'discount') {
+      if (prop.status === 2 && this.data.promotionType == 2) {
         t = prop.activityTime;
         //如果拍卖价等于底价
         if (prop.markdownPrice == prop.floorPrice) {

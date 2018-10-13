@@ -142,9 +142,9 @@ Page({
     //data.type  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
     if(data.status >= 3) return;
     if(data.type == 1){
-      Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code='+data.code)
+      Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code='+data.code + '&productType='+data.type)
     } else if(data.type == 2){
-      Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + data.code)
+      Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + data.code + '&productType=' + data.type)
     }
   }
 })
