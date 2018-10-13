@@ -12,7 +12,7 @@ Page({
     addressList:[],
     remark:'', // 买家留言
     door:'', // 1秒杀 2降价 3优惠套餐 4助力免费领 5礼包 99 普通
-    coupon: { id: "", nickname:'未使用优惠劵'}, //优惠券信息
+    coupon: { couponConfigId: "", nickname:'未使用优惠劵'}, //优惠券信息
     useOneCoinNum:0, // 1元劵张数
   },
   onLoad: function (options) {
@@ -37,7 +37,7 @@ Page({
   updateCoupon(){ // 点击优惠卷价格联动
     if (!this.data.couponClick) return
     let coupon = Storage.getCoupon()
-    this.data.params.couponId = coupon.id
+    this.data.params.couponId = coupon.couponConfigId
     this.setData({
       params: this.data.params
     })
@@ -151,7 +151,7 @@ Page({
     this.setData({
       addressType: e.currentTarget.dataset.index
     })
-    if (this.data.coupon.id){ // 使用了优惠券更新
+    if (this.data.coupon.couponConfigId){ // 使用了优惠券更新
       this.updateCoupon()
     } else {
       if(index==1){
@@ -225,7 +225,7 @@ Page({
       "areaCode": orderAddress.areaCode || '',
       "buyerRemark": this.data.remark,
       "cityCode": orderAddress.cityCode || '',
-      "couponId": this.data.coupon.id || '',
+      "couponId": this.data.coupon.couponConfigId || '',
       "orderType": this.data.params.orderType,
       "provinceCode": orderAddress.provinceCode || '',
       "receiver": orderAddress.receiver || '',

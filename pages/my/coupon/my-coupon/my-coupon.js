@@ -225,7 +225,7 @@ Page({
       this.setInputValue()
     },
     giveUpUse(){
-      Storage.setCoupon({ id: "", name: '未使用优惠劵' })
+      Storage.setCoupon({ couponConfigId: "", name: '未使用优惠劵' })
       Event.emit("updateCoupon")
       Tool.navigationPop()
     },
