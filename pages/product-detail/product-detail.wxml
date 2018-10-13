@@ -33,6 +33,15 @@
         {{activeIndex+"/"+ imgUrls.length}}
       </view>
     </view>
+    <view wx:if='{{proNavData}}' catchtap='goPage'>
+      <product-promotion-info 
+     id="promotion"
+     bind:countdown="timeout" 
+     prop="{{proNavData}}"
+     promotionBg="{{proNavData.status == 1 ? 'comming' : 'ing'}}" 
+     promotionDesc="{{promotionDesc}}"
+     promotionType="2" ></product-promotion-info>
+    </view>
     <!-- 产品信息 -->
     <view class='prd-info boxSize'>
       <view class='prd-name ellipsis-2'>{{productInfo.name}}</view>

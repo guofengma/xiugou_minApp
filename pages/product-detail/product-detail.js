@@ -40,7 +40,6 @@ Page({
       app.wxLogin(callBack)
     }
     this.requestFindProductByIdApp()
-    
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -92,6 +91,41 @@ Page({
     this.getShoppingCartList()
     Tool.showSuccessToast('添加成功')
     Event.emit('updateStorageShoppingCart')
+  },
+  activityByProductId(productId) {
+    let params = {
+      productId: productId,
+      reqName: '获取是否是活动产品',
+      url: Operation.activityByProductId,
+      requestMethod: 'GET',
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let datas = req.responseObject.data
+      if (datas.activityType == 1 || datas.activityType == 2 ){
+        let proNavData =datas.activityType == 1 ? datas.seckill : datas.depreciate
+        proNavData.originalPrice = this.data.productInfoList.originalPrice
+        this.setData({
+          proNavData: datas.activityType == 1 ? datas.seckill : datas.depreciate,
+          activityType: datas.activityType,
+          promotionDesc: {
+            commingDesc: '',
+            countdownDesc: '',
+            typeDesc: datas.activityType == 1 ? '秒杀价':"起拍价"
+          },
+        })
+       this.selectComponent('#promotion').init();
+      }
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  goPage(){
+    if(this.data.activityType==1){
+      Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code=' + this.data.proNavData.activityCode)
+    } else if (this.data.activityType == 2){
+      Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + this.data.proNavData.activityCode)
+    }
   },
   makeSureOrder(){
     // 立即购买
@@ -152,6 +186,7 @@ Page({
         priceList: datas.priceList, // 价格表
         productSpec: datas.specMap, // 规格描述
       })
+      this.activityByProductId(this.data.productId)
       // 渲染表格
       let tr = []
       let tbody = this.data.nodes
@@ -192,7 +227,6 @@ Page({
     r.addToQueue();
   },
   typeSubClicked(e){
-    console.log(e)
     this.setData({
       selectType: e.detail
     })
@@ -302,6 +336,9 @@ Page({
     this.setData({
       msgShow:false
     })
+  },
+  timeout(){
+    this.activityByProductId(this.data.productId)
   },
   onUnload: function () {
     Event.off('didLogin', this.didLogin);

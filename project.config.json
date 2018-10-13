@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 25,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
@@ -45,7 +45,7 @@
 					"id": 1,
 					"name": "产品详情页",
 					"pathName": "pages/product-detail/product-detail",
-					"query": "prodCode=P0001"
+					"query": "productId=1"
 				},
 				{
 					"id": 2,
@@ -57,7 +57,7 @@
 					"id": 3,
 					"name": "降价拍详情页",
 					"pathName": "pages/product-detail/discount-detail/discount-detail",
-					"query": "id=1&code=P0001"
+					"query": "code=JJP1810130020"
 				},
 				{
 					"id": -1,

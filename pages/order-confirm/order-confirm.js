@@ -56,8 +56,8 @@ Page({
       url = Operation.seckillMkeSureOrder
     } else if (this.data.door == 2){
       url = Operation.discountMakeSureOrder
-    } else if (this.data.door == 2) {
-      url = ''
+    } else if (this.data.door == 5) {
+      url = Operation.giftMkeSureOrder
     } else {
       url = Operation.makeSureOrder
     }
@@ -243,7 +243,13 @@ Page({
     } else if (this.data.door == 1){
       orderTypeParmas = {
         ...this.data.params,
-        url: Operation.seckillSubmitOrder
+        url: Operation.giftSubmitOrder
+      }
+    } else if (this.data.door == 5){
+      orderTypeParmas = {
+        ...this.data.params,
+        // "orderProducts": this.data.params.orderProducts,
+        url: Operation.discountSubmitOrder
       }
     }
     else {
