@@ -73,7 +73,7 @@ export default class Operation {
 
         // 根据code获取产品
 
-        this.getProductDetailByCode ='/product/getProductSpecByCode'
+        this.getProductDetailByCode ='/product/getProductDetailByCode'
 
         // 搜索产品
 
@@ -83,18 +83,9 @@ export default class Operation {
 
         this.findProductStockBySpec = '/product/getProductSpec'
 
-
-        // 礼包规格
-
-        this.getGiftBagSpec = '/order/giftBag/getGiftBagSpec'
-
         // 礼包详情
 
         this.getGiftBagDetail = '/operator/activitypackage/findActivityPackageDetail'
-
-        // 是否能购买礼包
-
-        this.checkGiftBagOrder = '/order/order/checkGiftBagOrder'
 
 
     /********************** 分类 *********************/
@@ -228,6 +219,14 @@ export default class Operation {
         // 秒杀下订单
 
         this.seckillSubmitOrder = '/operator/seckill/submitOrder'
+
+        // 礼包结算
+
+        this.giftMkeSureOrder = '/operator/activitypackage/makeSureOrder'
+
+        // 礼包下订单
+
+        this.giftSubmitOrder = '/operator/activitypackage/submitOrder'
 
         // 预支付
 

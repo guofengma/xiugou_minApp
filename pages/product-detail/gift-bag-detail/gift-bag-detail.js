@@ -87,7 +87,7 @@ Page({
   },
   getGiftBagDetail() { //获取礼包详情
     let params = {
-      id:Number(this.data.giftBagId),
+      code:this.data.giftBagId,
       isShowLoading:false,
       reqName: '礼包详情',
       requestMethod: 'GET',

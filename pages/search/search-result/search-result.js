@@ -33,10 +33,11 @@ Page({
       sortType: 1
     }
     if (options.categoryId || options.hotWordId) {
-      delete params.keyword
+      
       if (options.hotWordId){
         delete params.categoryId
       }else{
+        delete params.keyword
         delete params.hotWordId
       }
     }
