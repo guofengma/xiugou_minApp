@@ -27,7 +27,7 @@
 
     <template wx:elif="{{topicTemplateId==4}}" is="topic-temp4" data="{{topicDetailList}}"/> 
 
-    <template wx:elif="{{topicTemplateId==5}}" is="temp-reducePrice" data="{{topicList:topicList,currentTopicListIndex:currentTopicListIndex}}"/> 
+    <template wx:elif="{{topicTemplateId==5}}" is="temp-reducePrice" data="{{topicList:topicList,currentTopicListIndex:currentTopicListIndex,topicTabWidth:topicTabWidth}}"/> 
 
     <template wx:elif="{{topicTemplateId==6}}" is="temp-secKill" data="{{topicDetailList}}"/> 
     

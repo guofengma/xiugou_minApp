@@ -66,7 +66,7 @@ Page({
       if (data.status >= 4) {
         setTimeout(() => {
           //跳转到普通详情页
-          Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + this.data.prodCode)
+          Tool.navigateTo('/pages/product-detail/product-detail?productId=' + data.productId)
         }, 5000)
       }
       let productSpec = this.refactorProductsData(data.productSpecValue);

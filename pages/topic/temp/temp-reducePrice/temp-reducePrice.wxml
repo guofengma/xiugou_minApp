@@ -4,7 +4,7 @@
 <template name="temp-reducePrice">
   <!--导航  -->
   <template is='time-quantum' 
-    data="{{topicNavbarList:topicList.topicNavbarList,currentTopicListIndex:currentTopicListIndex}}"
+    data="{{topicNavbarList:topicList.topicNavbarList,currentTopicListIndex:currentTopicListIndex,width:topicTabWidth }}"
   ></template>
   <!--产品 -->
   
