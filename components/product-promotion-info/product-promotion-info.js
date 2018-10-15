@@ -60,7 +60,6 @@ Component({
     checkPromotionInfo() {
       // 获取完数据再展示
       let prop = this.data.prop;
-      console.log(11111)
       let commingDesc = this.decorateTime(
         prop.beginTime,
         prop.date || (+new Date()),
@@ -131,22 +130,28 @@ Component({
       return str;
     },
     init() {
-      console.log(22)
       this.checkPromotionInfo();
       let prop = this.data.prop;
       console.log(prop);
       let t = prop.endTime;
-      if (prop.status === 2 && this.data.promotionType == 1) {
+      if (prop.status === 2 && this.data.promotionType == 2) {
+        console.log(11);
         t = prop.activityTime;
         //如果拍卖价等于底价
         if (prop.markdownPrice == prop.floorPrice) {
+          console.log(22);
           t = prop.endTime;
         }
       }
       if (prop.status === 1) {
+        console.log(33);
         t = prop.beginTime;
       }
       let serverTime = prop.date || +new Date();//万一取不到就用当前时间
+      console.log(serverTime);
+      console.log(t);
+      console.log(t-serverTime);
+      console.log(44);
       this.setData({
         endTime: t - serverTime  //date为服务器时间 用new date()的话存在用户修改手机系统时间的情况
       });
