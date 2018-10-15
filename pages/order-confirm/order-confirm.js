@@ -240,16 +240,16 @@ Page({
         // "orderProducts": this.data.params.orderProducts,
         url: Operation.discountSubmitOrder
       }
-    } else if (this.data.door == 1){
+    } else if (this.data.door == 5){
       orderTypeParmas = {
         ...this.data.params,
         url: Operation.giftSubmitOrder
       }
-    } else if (this.data.door == 5){
+    } else if (this.data.door == 1){
       orderTypeParmas = {
         ...this.data.params,
         // "orderProducts": this.data.params.orderProducts,
-        url: Operation.discountSubmitOrder
+        url: Operation.seckillSubmitOrder
       }
     }
     else {

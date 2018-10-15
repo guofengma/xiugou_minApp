@@ -30,13 +30,13 @@ Component({
         productType.push(item.specValues)  
         // item.num=1
         priceList.push({
-          productId: this.data.productInfo.id,
+          productId: item.productId,
           priceId: item.productPriceId,
           num:1,
           sourceId: item.id,
           specImg: item.specImg,
           spec: item.specValues,
-          proudctName: item.proudctName,
+          productName: item.productName,
           originalPrice: this.data.productInfo.originalPrice
         })
       })

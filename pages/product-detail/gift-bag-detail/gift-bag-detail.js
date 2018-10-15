@@ -80,7 +80,8 @@ Page({
         productId: this.data.productInfo.id,
         priceList: this.data.selectType.priceList
       }],
-      orderType: 5
+      orderType: 5,
+      packageCode: this.data.productInfo.packageCode
     }
 
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&type=5")
