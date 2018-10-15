@@ -48,7 +48,7 @@
 
   <view class='index-ad-banner-view flexC whiteBg'>
     <block wx:for='{{adArr}}' wx:key='unique'>
-      <view class='overflow' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' >
+      <view class='overflow' wx:if='{{index<3}}' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' >
         <image src='{{item.imgUrl}}'></image>
       </view>
     </block>
