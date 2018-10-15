@@ -47,9 +47,10 @@ Page({
     // this.requestFindProductByIdApp()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
+    this.getTopicActivityData(this.data.prodCode);
   },
   onShow: function () {
-    this.getTopicActivityData(this.data.prodCode);
+    
   },
   //获取专题活动数据  JJP201810100001
   getTopicActivityData(code) {
