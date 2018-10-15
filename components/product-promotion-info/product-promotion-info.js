@@ -153,6 +153,9 @@ Component({
           this.countdown();
         }, this.data.delay)
       }
+    },
+    clearInterval() {
+      clearInterval(this.data.interval);
     }
   },
   ready() {

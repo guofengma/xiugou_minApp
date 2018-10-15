@@ -36,7 +36,8 @@ Page({
       textSmall: '',
       disabled: false,
     },
-    showRegular: false
+    showRegular: false,
+    jumpCommonProductTimer: null, // 定时跳转普通商品倒计时
   },
   onLoad: function (options) {
     this.setData({
@@ -61,9 +62,10 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      let data = req.responseObject.data || {};  
+      let data = req.responseObject.data || {}; 
+      let jumpTimer = null; 
       if (data.status >= 4) {
-        setTimeout(() => {
+        jumpTimer = setTimeout(() => {
           //跳转到普通详情页
           Tool.navigateTo('/pages/product-detail/product-detail?productId=' + data.productId)
         }, 5000)
@@ -72,6 +74,7 @@ Page({
       this.setData({
         proNavData: data,
         // productSpec: productSpec
+        jumpCommonProductTimer: jumpTimer
       })
       this.requestFindProductByIdApp(data.productId, productSpec)
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
@@ -309,11 +312,13 @@ Page({
   },
   onUnload: function () {
     Event.off('didLogin', this.didLogin);
+    this.selectComponent('#promotion').clearInterval();
   },
   //倒计时结束 执行下一步操作 
   timeout() {
     console.log('countdown complete');
     this.getTopicActivityData(this.data.prodCode);
+    clearTimeout(this.data.jumpCommonProductTimer);
   },
   toggleShowRegular() {
     this.setData({
