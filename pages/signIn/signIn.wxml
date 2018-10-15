@@ -14,14 +14,27 @@
   </view>
   <!-- 签到日历 -->
   <view class='sign-date-view'>
-  
+    <view class='line-view flexC'>
+      <view class='xdNum font-24 flexC whiteBg'>+1</view>
+      <view class='time font-22 white'>09.18</view>
+      <view class='line'></view>
+    </view>
   </view>
   <!-- 兑换1元劵 -->
-  <view class='coin-coupon-view whiteBg'>
-    <view class='leftBar'>
-      <view class='left red font-24 felxR'>
+  <view class='coin-coupon-view whiteBg flexR-sb'>
+    <view class='leftBar flexR'>
+      <view class='left red font-24'>
         <text class='coinNum'>1</text>元
       </view>
+      <view class='right'>
+        <view class='font-28'>现金抵扣卷</view>
+        <view class='gray font-24'>全场通用/无时间限制</view>
+      </view>
+    </view>
+    <view class='rightBar flexC'>
+      <view class='font-24'>消耗秀豆</view>
+      <view class='red font-24'>- 100 -</view>
+      <view class='redBg coinBtn flexC font-24'>立即兑换</view>
     </view>
   </view>
   <!-- 备注 -->

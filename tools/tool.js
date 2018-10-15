@@ -825,7 +825,7 @@ export default class Tool {
       r.failBlock = (req) => {
         console.log(req)
         // let page = this.getCurrentPageUrlWithArgs() //获取当前额页面
-        if (req.responseObject.code==1009){ // 超时登录
+        if (req.responseObject.code==10009){ // 超时登录
           callBack =()=>{
             let page = '/pages/login-wx/login-wx'
             this.navigateTo(page+'?isBack='+true)

@@ -105,6 +105,9 @@ button::after{
 .gray-9{
   color: #999;
 }
+.white{
+  color: #fff;
+}
 .redBg{
   background-color: #D51243;
   color: #fff;

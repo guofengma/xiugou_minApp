@@ -9,6 +9,7 @@ Component({
     isInit:Boolean,
     commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包 5 换货
     exchangeNum:Number, // 换货的数量
+    specIds: Array,
   },
   data: {
     visiable:false,
@@ -33,7 +34,6 @@ Component({
     },
     formatSpecList(){ // 格式化规格数组
       if (this.data.isInit) return
-
       let lists = []
       for (let key in this.data.productSpec) {
         lists.push({
@@ -46,10 +46,15 @@ Component({
       let priceList = []
       this.data.priceList.forEach((item)=>{
         totalStock += item.stock
-        if (this.data.ommodityType == 5 & item.price == this.data.price){
+        if (this.data.commodityType == 5 & item.price == this.data.price){
+          priceList.push(item)
+        }
+        console.log(this.data.commodityType, item.specIds,this.data.specIds)
+        if ((this.data.commodityType == 2 || this.data.commodityType == 3) && item.specIds == this.data.specIds.join(',')){
           priceList.push(item)
         }
       })
+      console.log(priceList)
       if (priceList.length==0){
         priceList = this.data.priceList
       }

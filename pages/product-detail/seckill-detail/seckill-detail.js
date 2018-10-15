@@ -74,10 +74,16 @@ Page({
           Tool.navigateTo('/pages/product-detail/product-detail?productId=' + data.productId)
         }, 5000)
       }
+      let specIds= []
+      data.productSpecValue.forEach((item)=>{
+        specIds.push(item.id)
+      })
+      specIds = Tool.bubbleSort(specIds)
       this.setData({
         proNavData: data,
         // productSpec: productSpec,
-        jumpCommonProductTimer: jumpTimer
+        specIds: specIds,
+        jumpCommonProductTimer: jumpTimer,
       })
       this.requestFindProductByIdApp(data.productId, productSpec)
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);

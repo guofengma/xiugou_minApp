@@ -51,7 +51,7 @@
 					"id": 2,
 					"name": "秒杀详情页",
 					"pathName": "pages/product-detail/seckill-detail/seckill-detail",
-					"query": "code=MS1810120001"
+					"query": "code=MS1810150002"
 				},
 				{
 					"id": 3,

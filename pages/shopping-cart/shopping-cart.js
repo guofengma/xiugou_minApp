@@ -202,6 +202,11 @@ Page({
     let index = e.currentTarget.dataset.index 
     let prdList = this.data.items
     prdList[index].isSelect = !prdList[index].isSelect
+    // console.log(prdList[index].activityType)
+    if (prdList[index].activityType){
+      Tool.showAlert('请至详情页购买')
+      return
+    }
     this.isSelectAllPrd(prdList)
     this.setData({
       items: prdList
@@ -363,7 +368,7 @@ Page({
       return
     }
     
-    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + params+'&type=2')
+    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + params+'&type=99')
   },
   cartProductClicked(e){
     let state = e.currentTarget.dataset.state

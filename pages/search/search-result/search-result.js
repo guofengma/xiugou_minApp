@@ -34,7 +34,7 @@ Page({
     }
     if (options.hotWordId) {
       delete params.categoryId
-    } else {
+    } else if (params.categoryId) {
       delete params.keyword
       delete params.hotWordId
     }

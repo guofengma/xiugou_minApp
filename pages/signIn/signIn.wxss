@@ -21,7 +21,7 @@
   height: 200rpx;
   border-radius: 14rpx;
   margin: 0 auto;
-  
+  padding:50rpx 30rpx 0 30rpx;
 }
 .sign-date-view{
   background:#DBC79D;
@@ -37,7 +37,49 @@
 /* 1元劵 */
 .coin-coupon-view .left{
   width: 154rpx;
-  
+  text-align: center;
+}
+/* .line-view{
+  width: 56rpx;
+  text-align: center;
+} */
+.coin-coupon-view .leftBar,.coin-coupon-view .leftBar>view{
+  /* height: 100%; */
+}
+/* 日历 */
+.xdNum{
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  margin-bottom: 20rpx;
+  margin: 0 auto;
+}
+.line-view{
+  display: inline-block;
+}
+.line-view{
+  position: relative;
+}
+.line{
+  position: absolute;
+  right: -50rpx;
+  top:24rpx;
+  height: 1rpx;
+  width: 60rpx;
+  background: #fff;
+}
+.rightBar{
+  width: 174rpx;
+  border-left: 1rpx dotted #ddd;
+  height: 100%;
+}
+.rightBar>view{
+  margin-bottom: 10rpx;
+}
+.coinBtn{
+  width: 132rpx;
+  height: 40rpx;
+  border-radius: 42rpx;
 }
 .coinNum{
   font-size: 72rpx;

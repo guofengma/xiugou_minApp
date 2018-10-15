@@ -72,9 +72,15 @@ Page({
           Tool.navigateTo('/pages/product-detail/product-detail?productId=' + data.productId)
         }, 5000)
       }
+      let specIds = []
+      data.productSpecValue.forEach((item) => {
+        specIds.push(item.id)
+      })
+      specIds = Tool.bubbleSort(specIds)
       let productSpec = this.refactorProductsData(data.productSpecValue);
       this.setData({
         proNavData: data,
+        specIds: specIds,
         // productSpec: productSpec
         jumpCommonProductTimer: jumpTimer
       })

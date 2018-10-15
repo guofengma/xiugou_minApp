@@ -55,13 +55,14 @@
         <product-specification id='prd-info-type' 
             bind:subClicked="typeSubClicked"  
             productSpec='{{productSpec}}' 
-            price = '{{productInfoList.price}}'
+            price = '{{proNavData.seckillPrice}}'
             priceList='{{priceList}}' 
             bind:counterInputOnChange='counterInputOnChange' 
             imgUrl="{{productInfo.imgUrl}}" 
             showImgs='{{true}}'
             isInit="{{false}}" 
             commodityType='2'
+            specIds='{{specIds}}'
             bind:hiddenTips='hiddenTips'
             isIphoneX='{{isIPhoneX.isIPhoneX}}'
         >

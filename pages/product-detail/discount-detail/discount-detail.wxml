@@ -65,6 +65,7 @@
             isInit="{{false}}" 
             commodityType='3'
             bind:hiddenTips='hiddenTips'
+            specIds='{{specIds}}'
             isIphoneX='{{isIPhoneX.isIPhoneX}}'
         >
         <!-- <view class='cell-name'>规格</view>
