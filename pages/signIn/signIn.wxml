@@ -19,8 +19,8 @@
   <!-- 兑换1元劵 -->
   <view class='coin-coupon-view whiteBg'>
     <view class='leftBar'>
-      <view class='left'>
-        
+      <view class='left red font-24'>
+        <text class='coinNum'>1</text>元
       </view>
     </view>
   </view>
