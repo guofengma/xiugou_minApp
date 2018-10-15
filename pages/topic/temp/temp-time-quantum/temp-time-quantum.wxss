@@ -39,7 +39,7 @@
   position: absolute;
   left:50%;
   transform: translateX(-50%);
-  top: 110rpx;
+  top: 105rpx;
 }
 .tab-timeq-ing .tab-timeq-item-time,.tab-timeq-ing .tab-timeq-item-desc{
   color: #fff;

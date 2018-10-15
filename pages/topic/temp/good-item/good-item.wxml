@@ -1,15 +1,15 @@
 <template name='good-item'>
-  <view class='good-item' 
-    bindtap="showGoodDetail" 
-    data-code="{{prodCode}}" 
-    data-status="{{status}}"
-    data-type="{{productType}}"
-  >
+  <view class='good-item' >
     <view class='good-item-thumb-container'>
       <image src="{{specImg}}"
         class='good-item-thumb'
+        bindtap="showGoodDetail" 
+        data-code="{{prodCode}}" 
+        data-status="{{status}}"
+        data-type="{{productType}}"
       ></image>
-      <image class='good-soldout' wx:if="{{status >= 3}}" src="/img/soldout.png"></image>
+      <image class='good-soldout' wx:if="{{status == 3}}" src="/img/soldout.png"></image>
+      <image class='good-soldout' wx:if="{{status >= 4}}" src="/img/closing@2x.png"></image>
     </view>
     
     <view class='good-detail'>
@@ -48,9 +48,14 @@
           <image src='/img/Clock.png' class="icon" wx:if="{{!notifyFlag}}"></image>
           <text>{{!notifyFlag ? '设置提醒' : '取消提醒'}}</text>
         </view>
-        <view class='good-operate loot' wx:elif="{{status === 2}}">马上抢</view>
-        <view class='good-operate out' wx:else>抢光了</view>
-      
+        <view class='good-operate loot'
+          catchtap="showGoodDetail" 
+          data-code="{{prodCode}}" 
+          data-status="{{status}}"
+          data-type="{{productType}}"
+          wx:elif="{{status === 2}}">马上抢</view>
+        <view class='good-operate out' wx:elif="{{status === 3}}">抢光了</view>
+        <view class='good-operate out' wx:elif="{{status >= 4}}">已结束</view>
       </view>
     </view>
   </view>
