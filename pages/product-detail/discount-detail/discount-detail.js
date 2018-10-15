@@ -44,7 +44,7 @@ Page({
       prodCode: options.code
     })
     this.didLogin()
-    this.requestFindProductByIdApp()
+    // this.requestFindProductByIdApp()
     this.getTopicActivityData(options.code);
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
@@ -62,7 +62,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      let data = req.responseObject.data || {};
+      let data = req.responseObject.data || {};  
       if (data.status >= 4) {
         setTimeout(() => {
           //跳转到普通详情页
@@ -72,9 +72,9 @@ Page({
       let productSpec = this.refactorProductsData(data.productSpecValue);
       this.setData({
         proNavData: data,
-        productSpec: productSpec
+        // productSpec: productSpec
       })
-
+      this.requestFindProductByIdApp(data.productId, productSpec)
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
       data.id && this.selectComponent('#promotion').init();
     };
@@ -172,12 +172,12 @@ Page({
     }
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + '&type=' + this.data.door)
   },
-  requestFindProductByIdApp() {
+  requestFindProductByIdApp(productId, productSpec) {
     let params = {
-      code: this.data.prodCode,
+      id: productId,
       requestMethod: 'GET',
       reqName: '获取商品详情页',
-      url: Operation.getProductDetailByCode
+      url: Operation.findProductByIdApp
     }
     let r = RequestFactory.wxRequest(params);
     let productInfo = this.data.productInfo
@@ -188,7 +188,7 @@ Page({
         productInfo: datas.product,
         productInfoList: datas,
         priceList: datas.priceList, // 价格表
-        // productSpec: datas.specMap, // 规格描述
+        productSpec: productSpec, // 规格描述
       })
       // 渲染表格
       let tr = []

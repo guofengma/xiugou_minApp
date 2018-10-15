@@ -47,7 +47,7 @@ Page({
       prodCode: options.code
     })
     this.didLogin()
-    this.requestFindProductByIdApp()
+    // this.requestFindProductByIdApp()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -74,9 +74,9 @@ Page({
       }
       this.setData({
         proNavData: data,
-        productSpec: productSpec
+        // productSpec: productSpec
       })
-
+      this.requestFindProductByIdApp(data.productId, productSpec)
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
 
       data.id && this.selectComponent('#promotion').init();
@@ -179,12 +179,12 @@ Page({
     }
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + '&type=' + this.data.door)
   },
-  requestFindProductByIdApp() {
+  requestFindProductByIdApp(productId, productSpec) {
     let params = {
-      code: this.data.prodCode,
+      id: this.data.prodCode,
       requestMethod: 'GET',
       reqName: '获取商品详情页',
-      url: Operation.getProductDetailByCode
+      url: Operation.findProductByIdApp
     }
     let r = RequestFactory.wxRequest(params);
     let productInfo = this.data.productInfo
@@ -195,7 +195,7 @@ Page({
         productInfo: datas.product,
         productInfoList: datas,
         priceList: datas.priceList, // 价格表
-        // productSpec: datas.specMap, // 规格描述
+        productSpec: datas.specMap, // 规格描述
       })
       // 渲染表格
       let tr = []

@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -51,7 +51,7 @@
 					"id": 2,
 					"name": "秒杀详情页",
 					"pathName": "pages/product-detail/seckill-detail/seckill-detail",
-					"query": "code=P0001"
+					"query": "code=MS1810120001"
 				},
 				{
 					"id": 3,

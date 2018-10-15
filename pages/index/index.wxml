@@ -147,7 +147,7 @@
       <scroll-view scroll-x="true"   class='hot-sale-scroll'>
         <view class='hot-sale-content  boxSize'>
           <block wx:for='{{list.topicBannerProductDTOList}}' wx:key='{{index}}'>
-            <view class='hot-sale-prd flexC'  catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.prodCode}}'>
+            <view class='hot-sale-prd flexC'  catchtap='adListClicked' data-prodtype='{{item.productType}}' data-val='{{item.prodCode}}'>
               <image src='{{item.specImg}}'></image>
               <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName}}</view>
             <view class='red font-28'>¥{{item.originalPrice}}起</view>

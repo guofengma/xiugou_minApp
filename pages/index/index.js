@@ -115,7 +115,18 @@ Page({
     adListClicked(e) {
       let adType = e.currentTarget.dataset.type;
       let val = e.currentTarget.dataset.val;
-      console.log(adType)
+      let prodtype = e.currentTarget.dataset.prodtype
+      if (prodtype == 1){
+        adType= 4
+      } else if (prodtype == 2){
+        adType = 3
+      } else if (prodtype == 3){
+        adType = 5
+      } else if (prodtype == 5){
+        adType = 2
+      } else if (prodtype == 99){
+        adType =1
+      }
       let page = this.data.pageArr[adType]+val;
       Tool.navigateTo(page)
     },

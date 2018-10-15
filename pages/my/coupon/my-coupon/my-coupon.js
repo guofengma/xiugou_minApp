@@ -76,14 +76,16 @@ Page({
         item.nickname = item.products.length == 1 ? "限" + item.products[0] + "可用" :"限指定商品可使用"
       } else if (length>1){
         // 多品类
-        item.nickname = "限指定分类商品使用" 
+        item.nickname = "限指定品类可用" 
       } else if (length==1){
         // 单品类
         if (item.products.length==0){
-          item.nickname = item[item.key].length > 0 ? "限指定分类可使用" : "限" + item[item.key][0] + "可用"
-        } else if (item.products.length==1) {
-          item.nickname = "限" + item.products[0] + "可用" 
-        } else {
+          item.nickname = item[item.key].length > 0 ? "限指定分类可使用" : "限" + item[item.key][0] + "类可用"
+        } 
+        // else if (item.products.length==1) {
+        //   item.nickname = "限" + item.products[0] + "可用" 
+        // } 
+        else {
           item.nickname = "限指定商品可使用" 
         }
       }
@@ -225,7 +227,7 @@ Page({
       this.setInputValue()
     },
     giveUpUse(){
-      Storage.setCoupon({ couponConfigId: "", name: '未使用优惠劵' })
+      Storage.setCoupon({ id: "", name: '未使用优惠劵' })
       Event.emit("updateCoupon")
       Tool.navigationPop()
     },
