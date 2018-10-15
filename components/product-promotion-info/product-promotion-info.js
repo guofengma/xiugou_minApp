@@ -68,7 +68,6 @@ Component({
       let countdownDesc = '距结束';
 
       if (prop.status === 1){
-        console.log(11);
         countdownDesc = '距开抢';
       }
       //降价拍分多个阶段降价 展示文案不同
