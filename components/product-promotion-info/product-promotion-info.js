@@ -60,7 +60,6 @@ Component({
     checkPromotionInfo() {
       // 获取完数据再展示
       let prop = this.data.prop;
-      console.log(11111)
       let commingDesc = this.decorateTime(
         prop.beginTime,
         prop.date || (+new Date()),
@@ -131,12 +130,11 @@ Component({
       return str;
     },
     init() {
-      console.log(22)
       this.checkPromotionInfo();
       let prop = this.data.prop;
       console.log(prop);
       let t = prop.endTime;
-      if (prop.status === 2 && this.data.promotionType == 1) {
+      if (prop.status === 2 && this.data.promotionType == 2) {
         t = prop.activityTime;
         //如果拍卖价等于底价
         if (prop.markdownPrice == prop.floorPrice) {
