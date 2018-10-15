@@ -321,12 +321,12 @@ Page({
   onUnload: function () {
     Event.off('didLogin', this.didLogin);
     this.selectComponent('#promotion').clearInterval();
+    clearTimeout(this.data.jumpCommonProductTimer);
   },
   //倒计时结束 执行下一步操作 
   timeout() {
     console.log('countdown complete');
     this.getTopicActivityData(this.data.prodCode);
-    clearTimeout(this.data.jumpCommonProductTimer);
   },
   toggleShowRegular() {
     this.setData({
