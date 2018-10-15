@@ -39,7 +39,7 @@
      prop="{{proNavData}}" 
      promotionBg="{{proNavData.status == 1 ? 'comming' : 'ing'}}" 
      promotionDesc="{{promotionDesc}}"
-     promotionType="2"
+     promotionType="1"
      wx:if="{{proNavData.id}}"></product-promotion-info>
     <!-- 产品信息 -->
     <view class='prd-info boxSize'>
