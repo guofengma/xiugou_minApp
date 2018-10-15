@@ -40,10 +40,10 @@
       <text>升级礼包优惠卷</text>
       <text>x1</text>
     </view>
-    <view class='getExp flexR-sb gray-9 gift-line'>
+    <!-- <view class='getExp flexR-sb gray-9 gift-line'>
       <text>500点经验值</text>
       <text>x1</text>
-    </view>
+    </view> -->
   </view>
   <!--购买支付信息  -->
   <view  class='order-info-other'>

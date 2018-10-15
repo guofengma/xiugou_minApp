@@ -12,8 +12,8 @@ const config = {
   // baseUrl: 'http://zhifu.dnvhot.tech', // 吴
   wxVersion: 'V2.2.5', // 微信小程序版本
   BaiduMapKey: 'BazNALkeiEEMMvZjWmPeXlRqOyd0BlnL',
-  AppId: 'wx228ac7ba52b9b1ed',//小程序AppID
-  Secret: 'ac645290e3299966fabe3cf0d0034f9b',//小程序Secret
+  AppId: 'wxa059b818226f8679',//小程序AppID
+  Secret: '12d86e1ba1937e896b482a170734a461',//小程序Secret
   imgSizeParams:{
     m_fixed:'?x-oss-process=image/resize,m_fixed,h_100,w_100', // 正方形
     m_fill:'?x-oss-process=image/resize,m_fill,h_100,w_100', // 固定宽度 自裁剪
