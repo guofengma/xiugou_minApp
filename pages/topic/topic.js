@@ -8,9 +8,9 @@ Page({
     topicDetailList:[], //专题产品信息
     topicList: [], // 专题列表信息
     currentTopicListIndex: 1, // 当前tab位置展示的产品列表信息
+    topicTabWidth: "", // 降价秒杀tab宽度
     currentTab: 0, //预设当前项的值
     scrollLeft: 0, //tab标题的滚动条位置
-    
   },
   onLoad: function (options) {
     // this.setData({
@@ -82,13 +82,30 @@ Page({
         let data = req.responseObject.data;
         if(!data) return
         console.log(data);
+        let width = '';
+        wx.getSystemInfo({
+          success: function (res) {
+            let topicNavbarListLength = data.topicNavbarList.length;
+            if( topicNavbarListLength < 0) {
+              width = '0';
+              return;
+            }
+            if (topicNavbarListLength <= 5) {
+              width = (100 / topicNavbarListLength) + '%';
+            } else {
+              width = (res.windowWidth / 5 ) + 'px';
+            }
+          }
+        })
+        
         // 设置专题标题
         wx.setNavigationBarTitle({
           title: data.name
         })
         this.setData({
           topicList: data,
-          currentTopicListIndex: data.topicNavbarList.length >> 1 // 这里取了个中位数，可能接口会提供
+          currentTopicListIndex: data.topicNavbarList.length >> 1, // 这里取了个中位数，可能接口会提供
+          topicTabWidth: width
         })
       };
       Tool.showErrMsg(r)
@@ -140,7 +157,7 @@ Page({
     const data = e.currentTarget.dataset;
     console.log(data);
     //data.type  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
-    if(data.status >= 3) return;
+    // if(data.status >= 3) return;
     if(data.type == 1){
       Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code='+data.code + '&productType='+data.type)
     } else if(data.type == 2){

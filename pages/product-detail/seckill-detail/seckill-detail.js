@@ -40,8 +40,6 @@ Page({
   },
   onLoad: function (options) {
     
-    this.getTopicActivityData(options.code);
-    
     this.setData({
       productId: options.productId ||1,
       prodCode: options.code
@@ -52,7 +50,7 @@ Page({
     Event.on('didLogin', this.didLogin, this);
   },
   onShow: function () {
-
+    this.getTopicActivityData(options.code);
   },
   //获取专题活动数据  JJP201810100001
   getTopicActivityData(code) {
@@ -69,7 +67,7 @@ Page({
       if (data.status >= 4) {
         setTimeout(() => {
           //跳转到普通详情页
-          Tool.navigateTo('/pages/product-detail/product-detail?prodCode='+this.data.prodCode)
+          Tool.navigateTo('/pages/product-detail/product-detail?productId=' + data.productId)
         }, 5000)
       }
       this.setData({
@@ -181,7 +179,7 @@ Page({
   },
   requestFindProductByIdApp(productId, productSpec) {
     let params = {
-      id: this.data.prodCode,
+      id: productId,
       requestMethod: 'GET',
       reqName: '获取商品详情页',
       url: Operation.findProductByIdApp

@@ -8,11 +8,12 @@
   background: #f7f7f7;
 }
 .tab-timeq-item {
-  width: 150rpx;
+  /* width: 150rpx; */
   display: inline-block;
   text-align: center;
-  padding: 20rpx 0 15rpx;
+  padding: 20rpx 10rpx 15rpx;
   background: #fff;
+  box-sizing: border-box;
 }
 .tab-timeq-item-time{
   color: #222;

@@ -1,12 +1,13 @@
 <template name='good-item'>
   <view class='good-item' >
-    <view class='good-item-thumb-container'>
+    <view class='good-item-thumb-container'
+      bindtap="showGoodDetail" 
+      data-code="{{prodCode}}" 
+      data-status="{{status}}"
+      data-type="{{productType}}"
+    >
       <image src="{{specImg}}"
         class='good-item-thumb'
-        bindtap="showGoodDetail" 
-        data-code="{{prodCode}}" 
-        data-status="{{status}}"
-        data-type="{{productType}}"
       ></image>
       <image class='good-soldout' wx:if="{{status == 3}}" src="/img/soldout.png"></image>
       <image class='good-soldout' wx:if="{{status >= 4}}" src="/img/closing@2x.png"></image>
@@ -22,7 +23,7 @@
           <view class='good-loot-progress'>{{~~(((totalNumber - surplusNumber)/totalNumber)*100)}}%</view>
         </view>
       </view>
-      <view class='good-type good-type-out' wx:else>抢光了{{totalNumber - surplusNumber}}件</view>
+      <view class='good-type good-type-out' wx:elif="{{status >= 4}}">抢光了{{totalNumber - surplusNumber}}件</view>
       
       <view class='good-foot'>
         <view class='good-price'>
