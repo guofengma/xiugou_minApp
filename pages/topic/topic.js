@@ -2,7 +2,7 @@ let { Tool, RequestFactory, Operation, Storage } = global;
 Page({
   data: {
     topicImgUrl:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-    topicTemplateId:5, // 模板id 
+    topicTemplateId: 0, // 模板id 
     isShowBar:false,//是否显示导航
     topicInfos:{}, //专题信息
     topicDetailList:[], //专题产品信息
@@ -105,7 +105,8 @@ Page({
         this.setData({
           topicList: data,
           currentTopicListIndex: data.topicNavbarList.length >> 1, // 这里取了个中位数，可能接口会提供
-          topicTabWidth: width
+          topicTabWidth: width,
+          topicTemplateId: data.templateId
         })
       };
       Tool.showErrMsg(r)

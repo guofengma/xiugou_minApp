@@ -44,13 +44,15 @@ Page({
       productId: options.productId ||1,
       prodCode: options.code
     })
+    
     this.didLogin()
     // this.requestFindProductByIdApp()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
   onShow: function () {
-    this.getTopicActivityData(options.code);
+    this.getTopicActivityData(this.data.prodCode);
+    
   },
   //获取专题活动数据  JJP201810100001
   getTopicActivityData(code) {
