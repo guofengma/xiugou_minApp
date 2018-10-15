@@ -48,7 +48,7 @@ Page({
     // this.requestFindProductByIdApp()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
-    this.getTopicActivityData(this.data.prodCode);
+    // this.getTopicActivityData(this.data.prodCode);
   },
   onShow: function () {
 
