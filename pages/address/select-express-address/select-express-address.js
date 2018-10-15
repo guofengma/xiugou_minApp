@@ -38,7 +38,7 @@ Page({
         item.addressInfo = item.province + item.city + item.area + item.address
         item.hasData = true
       })
-      if (req.responseObject.data.length>0){
+      if (data.length>0){
         this.setData({
           addressList: req.responseObject.data
         })
