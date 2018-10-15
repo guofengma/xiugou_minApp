@@ -82,12 +82,12 @@ Component({
       let old_shi_index = this.data.shi_index
       let old_qu_index = this.data.qu_index
       if(old_sheng_index != val[0]){
-        this.getCityList(this.data.sheng[val[0]].zipcode) 
+        this.getCityList(this.data.sheng[val[0]].code) 
         this.setIndex(val[0],0,0)
         return
       }
       if (old_shi_index != val[1]){
-        this.getAreaList(this.data.shi[val[1]].zipcode)
+        this.getAreaList(this.data.shi[val[1]].code)
         this.setIndex(val[0], val[1], 0)
         return
       }
@@ -128,6 +128,7 @@ Component({
     },
     // 获取市
     getCityList(id) {
+      console.log(id)
       let params = {
         fatherCode: id,
         isShowLoading: false,
