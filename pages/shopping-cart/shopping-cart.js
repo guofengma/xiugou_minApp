@@ -9,6 +9,7 @@ Page({
     totalPrice:0, // 总价
     selectList:[], //选中的产品
     tipVal:'',
+    activeType: ["", "秒", "降", "优惠套餐", "助力免费领", "支付有礼", "满减送", "刮刮乐"],
     ysf: { title: '购物车' }
   },
   onLoad: function (options) {
@@ -158,6 +159,8 @@ Page({
         item.showType = item.specValues? item.specValues.join('—'):''
         item.showCount = item.amount || 1  // 商品数量
         item.isSelect = false  //是否选择 
+        item.activityType = item.activityType === null ? 0:item.activityType
+        item.labelName = this.data.activeType[item.activityType]
         if (this.data.items.length > 0) {
           let arr = this.data.items
           for (let i = 0; i < arr.length; i++) {
@@ -364,8 +367,8 @@ Page({
   },
   cartProductClicked(e){
     let state = e.currentTarget.dataset.state
-    if(state == 4) {
-      Tool.navigateTo('/pages/product-detail/product-detail?productId=' + e.currentTarget.dataset.id)
+    if(state == 1) {
+      Tool.navigateTo('/pages/product-detail/product-detail?door=100&productId=' + e.currentTarget.dataset.id)
     }
   },
   onUnload: function () {

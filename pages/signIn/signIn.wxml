@@ -18,7 +18,11 @@
   </view>
   <!-- 兑换1元劵 -->
   <view class='coin-coupon-view whiteBg'>
-  
+    <view class='leftBar'>
+      <view class='left'>
+        
+      </view>
+    </view>
   </view>
   <!-- 备注 -->
   <view class='font-24 gray-9 tips'>

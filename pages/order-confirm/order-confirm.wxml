@@ -36,8 +36,8 @@
   </view>
   <!-- 礼包优惠卷和经验值 -->
   <view class='gift-items font-24 whiteBg' wx:if='{{door==5}}'>
-    <view class='flexR-sb gray-9 gift-line' wx:for='{{3}}' wx:key='unique'>
-      <text>升级礼包优惠卷</text>
+    <view class='flexR-sb gray-9 gift-line' wx:for='{{orderInfos.couponList}}' wx:key='unique'>
+      <text>{{item.couponName}}</text>
       <text>x1</text>
     </view>
     <!-- <view class='getExp flexR-sb gray-9 gift-line'>

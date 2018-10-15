@@ -38,7 +38,7 @@
       <view class='font-28'>尊敬的V2会员您好</view>
       <view>
         <view class='level-line-view'>
-          
+          这块没有提测
         </view>
       </view>
     </view>
@@ -46,7 +46,7 @@
 
   <!-- 广告位 -->
 
-  <view class='index-ad-banner-view flexC whiteBg'>
+  <view class='index-ad-banner-view flexC whiteBg' wx:if='{{adArr.length>0}}'>
     <block wx:for='{{adArr}}' wx:key='unique'>
       <view class='overflow' wx:if='{{index<3}}' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' >
         <image src='{{item.imgUrl}}'></image>
@@ -81,7 +81,7 @@
   </view>
 
   <!-- 明星店铺 -->
-  <view class='star-shop-view'>
+  <view class='star-shop-view' wx:if='{{starShop.length>0}}'>
     <view class='index-item-title flexR font-38'>明星店铺</view>
     <view class='star-shop-item whiteBg' wx:for='{{starShop}}' wx:key='{{index}}'>
      <image src='{{item.imgUrl}}' mode='widthFix'></image>
@@ -112,7 +112,7 @@
   </view>
 
   <!-- 今日榜单 -->
-  <view class='today-list-view whiteBg'>
+  <view class='today-list-view whiteBg' wx:if='{{todayList.length>0}}'>
     <view class='index-item-title flexR font-38'>今日榜单</view>
     <swiper class="today-list-imageContainer" bindchange="handleChange" previous-margin="62rpx" next-margin="62rpx" circular autoplay>
       <block wx:for="{{todayList}}" wx:key="{{index}}">
@@ -124,7 +124,7 @@
   </view>
 
   <!-- 精品推荐 -->
-  <view class='today-list-view fine-quality-view whiteBg'>
+  <view class='today-list-view fine-quality-view whiteBg' wx:if='{{fineQuality.length>0}}'>
     <view class='index-item-title flexR font-38'>精品推荐</view>
     <swiper class="today-list-imageContainer" bindchange="handleChange"  next-margin="150rpx" circular>
       <block wx:for="{{fineQuality}}" wx:key="{{index}}">
@@ -138,7 +138,7 @@
 
   <!-- 超值热卖 -->
 
-  <view class='hot-sale-view whiteBg'>
+  <view class='hot-sale-view whiteBg' wx:if='{{hotSale.length>0}}'>
     <view class='index-item-title flexR font-38'>超值热卖</view>
     <view class='hot-sale-item' wx:for="{{hotSale}}"  wx:for-index="key" wx:for-item='list' wx:key="{{key}}" >
       <view class='hot-sale-img'>
@@ -166,7 +166,7 @@
   </view>
 
   <!-- 为你推荐 -->
-  <view class='recommend-view whiteBg'>
+  <view class='recommend-view whiteBg' wx:if='{{recommendArr.length>0}}' >
     <view class='index-item-title flexR font-38'>为你推荐</view>
     <view class='recommend-prd-content flexR'>
       <view class='recommend-prd-item boxSize' wx:for='{{recommendArr}}' wx:key='{{index}}' style='margin-right:{{index%2==1? "0":"10"}}rpx' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'>

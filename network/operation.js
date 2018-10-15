@@ -461,11 +461,11 @@ export default class Operation {
 
         // 消息
 
-        this.queryMessage = '/user/message/queryMessage';
+        this.queryMessage = '/message/queryMessagePage';
 
         // 通知详情
 
-        this.queryNoticeMessage = '/user/notice/queryNoticeMessage';
+        this.queryNoticeMessage = '/notice/queryNoticePage';
 
         // 拼店消息
 
@@ -473,7 +473,7 @@ export default class Operation {
 
         // 查看消息详情
 
-        this.findMessageDetail = '/user/message/findMessageDetail';
+        this.findMessageDetail = '/message/queryById';
 
       /************************** 降价秒杀 *******************************/
       

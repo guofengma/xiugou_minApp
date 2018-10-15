@@ -29,6 +29,7 @@ Page({
     this.setData({
       productId: options.productId || '',
       prodCode: options.prodCode || '',
+      door: options.door || '',
     })
    
     this.didLogin()
@@ -83,6 +84,7 @@ Page({
     params.productId = this.data.selectType.productId
     params.priceId = this.data.selectType.id
     params.showCount = this.data.productBuyCount
+    
     list.push(params)
     this.updateStorageShoppingCart(list)
   },
@@ -102,6 +104,7 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let datas = req.responseObject.data
+      if(!datas) return
       if (datas.activityType == 1 || datas.activityType == 2 ){
         let proNavData =datas.activityType == 1 ? datas.seckill : datas.depreciate
         proNavData.originalPrice = this.data.productInfoList.originalPrice
@@ -114,6 +117,9 @@ Page({
             typeDesc: datas.activityType == 1 ? '秒杀价':"起拍价"
           },
         })
+        if (this.data.door == 100) {
+          this.goPage()
+        }
        this.selectComponent('#promotion').init();
       }
     };
@@ -122,9 +128,9 @@ Page({
   },
   goPage(){
     if(this.data.activityType==1){
-      Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code=' + this.data.proNavData.activityCode)
+      Tool.redirectTo('/pages/product-detail/seckill-detail/seckill-detail?code=' + this.data.proNavData.activityCode)
     } else if (this.data.activityType == 2){
-      Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + this.data.proNavData.activityCode)
+      Tool.redirectTo('/pages/product-detail/discount-detail/discount-detail?code=' + this.data.proNavData.activityCode)
     }
   },
   makeSureOrder(){

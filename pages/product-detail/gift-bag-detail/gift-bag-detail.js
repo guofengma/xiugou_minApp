@@ -24,10 +24,7 @@ Page({
             },
             children: [],
     }],
-    isShowGiftTips:{
-      show:false,
-      nextLevel:''
-    }, //是否显示礼包升级提示
+    isShowGiftTips:false, //是否显示礼包升级提示
     size: 0,
     dismiss:false, // 能否可以购买礼包 
   },
@@ -37,6 +34,7 @@ Page({
     })
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
+    this.closeMask()
   },
   onShow: function () {
     this.getGiftBagDetail()
@@ -250,10 +248,10 @@ Page({
     })
   },
   closeMask(){
-    let { isShowGiftTips} = this.data
-    isShowGiftTips.show = !isShowGiftTips.show
+    // let { isShowGiftTips} = this.data
+    // isShowGiftTips.show = !isShowGiftTips.show
     this.setData({
-      isShowGiftTips: isShowGiftTips
+      isShowGiftTips: !this.data.isShowGiftTips
     })
   },
   hiddenTips() {

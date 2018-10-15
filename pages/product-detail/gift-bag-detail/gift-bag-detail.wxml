@@ -42,7 +42,7 @@
         <text class='price1 red'>¥ {{productInfo.levelPrice}}</text>
         <text class='gray-9 price2'>原价¥ {{productInfo.originalPrice}}</text>
         <!-- <text class='label-pd'>{{productInfo.level}}</text> -->
-        <text>升级大礼包</text>
+        <text>{{productInfo.type==1?  "普通礼包":"升级礼包"}}</text>
       </view>
       <view class='shippingInfo gray'>
         <text style='margin-right:158rpx'>快递：'问产品怎么算'</text> 
@@ -113,12 +113,12 @@
 
 </scroll-view>
 
-<tips-info isShoW='{{isShowGiftTips.show}}' header='温馨提示' bind:closeMask='closeMask'>
+<tips-info isShoW='{{isShowGiftTips}}' header='温馨提示' bind:closeMask='closeMask'>
   <view class='tips-title ellipsis'>{{productInfo.name}}</view>
   <view class='tips-line font-30'>升级礼包为定制产品</view>
   <view class='font-28 tips-content'>
     <view class='first-tips'>
-      购买后即可升级成为V{{isShowGiftTips.nextLevel}}级用户，可享受V{{isShowGiftTips.nextLevel}}用户
+      购买后即可升级成为XX{{isShowGiftTips.nextLevel}}级用户，可享受XX{{isShowGiftTips.nextLevel}}用户
     </view>
     <view>
       消费权限，该礼包产品不可退换货，如有产品质量问题，可联系客服进行申诉
