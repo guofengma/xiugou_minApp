@@ -1,5 +1,5 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
-
+import WxParse from '../../../libs/wxParse/wxParse.js';
 Page({
   data: {
     userLevelInfo:{}
@@ -7,6 +7,7 @@ Page({
   onLoad: function (options) {
     Tool.isIPhoneX(this)
     this.getUserLevelInfo()
+    this.getNextLevelInfo()
   },
   getUserLevelInfo() {
     let params = {
@@ -23,6 +24,22 @@ Page({
       this.setData({
         userLevelInfo:datas
       })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  getNextLevelInfo(){
+    let params = {
+      isShowLoading: false,
+      reqName: '获取我的晋升',
+      requestMethod: 'GET',
+      url: Operation.getNextLevelInfo
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let datas = req.responseObject.data
+      let html = datas.content || ''
+      WxParse.wxParse('article', 'html', html, this, 5);
     };
     Tool.showErrMsg(r)
     r.addToQueue();

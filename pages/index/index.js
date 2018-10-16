@@ -97,6 +97,22 @@ Page({
     },
     didLogin() {
       Tool.didLogin(this)
+      if (this.data.didLogin){
+        this.getLevelInfos()
+      }
+    },
+    getLevelInfos(){
+      let params = {
+        requestMethod: 'GET',
+        url: Operation.getLevelInfos,
+        hasCookie: false
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
     },
     queryAdList(types = 1, reqName='',callBack=()=>{}) {
       let params = {

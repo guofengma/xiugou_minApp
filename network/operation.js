@@ -326,7 +326,21 @@ export default class Operation {
 
         this.orderOneMore  ='/order/order/orderOneMore'
 
+        /****************** 一元劵*********************** */
         
+        // 兑换一元券
+
+        this.exchangeTokenCoin = '/user/exchangeTokenCoin'
+  
+        // 签到
+
+        this.querySignList = '/user/userSign/querySignList'
+
+        // 签到获取秀豆
+
+        this.tokenCoinSign='/user/userSign/sign'
+
+
         /******************我的---设置*********************** */
 
         //退出登录
@@ -336,6 +350,14 @@ export default class Operation {
         // 获取用户信息
 
         this.getLevel = '/user/getUser'
+
+        // 获取用户下一等级层级信息
+
+        this.getNextLevelInfo ='/user/level/getNextLevelInfo'
+
+        // 查询等级信息
+
+        this.getLevelInfos = '/user/level/get'
 
         /******************我的---通讯录*********************** */
 

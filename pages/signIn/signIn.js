@@ -1,4 +1,4 @@
-// pages/signIn/signIn.js
+let { Tool, RequestFactory, Operation, Event, Storage} = global;
 Page({
 
   /**
@@ -6,53 +6,99 @@ Page({
    */
   data: {
     animate0:false,
-    animate2:false,
+    animate1:false,
+    canClick:true,
+    todaySgin:false,
+    needXD:100,
   },
   onLoad: function (options) {
-
+    this.querySignList()
+   
+   
   },
-  onReady: function () {
-
+  getLevel() {
+    let params = {
+      isShowLoading: false,
+      reqName: '获取用户等级',
+      requestMethod: 'GET',
+      url: Operation.getLevel
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      Storage.setUserAccountInfo(req.responseObject.data)
+      this.setData({
+        userInfos: req.responseObject.data
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  querySignList(){
+    let params = {
+      url: Operation.querySignList,
+      requestMethod: 'GET',
+      isShowLoading: false,
+    };
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      this.getLevel()
+      let datas = req.responseObject.data || [];
+      let totalDay = datas[3].continuous ? datas[3].continuous : (datas[2].continuous || 0)
+      this.setData({
+        lists:datas,
+        totalDay: totalDay,
+        todaySgin: datas[3].reward? true:false
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  exchangeTokenCoin(){
+    if (this.data.needXD > this.data.userInfos.userScore){
+      Tool.showAlert("秀豆不足")
+      return
+    }
+    let params = {
+      url: Operation.exchangeTokenCoin,
+    };
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      Tool.showSuccessToast("兑换成功")
+      this.getLevel()
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  tokenCoinSign() {
+    if(!this.data.canClick) return
+    let params = {
+      url: Operation.tokenCoinSign,
+    };
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      this.querySignList()
+      Event.emit('getLevel')
+      this.setData({
+        animate0: true,
+        canClick:false
+      })
+      let that = this
+      setTimeout(function () {
+        Tool.showSuccessToast("获得秀豆+" + (that.data.lists[3].canReward || that.data.lists[3].reward))
+      }, 1200)
+      setTimeout(function () {
+        that.setData({
+          animate1: true
+        })
+      }, 600)
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function () {
 
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
 
   }

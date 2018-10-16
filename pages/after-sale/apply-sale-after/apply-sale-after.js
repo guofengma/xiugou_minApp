@@ -61,7 +61,7 @@ Page({
     activeIndex:'',
     refundType: 0, // 0为仅退款 1为退货退款  2为换货
     queryReasonParams:[
-      'TKLY', 'HHLY ','THYK'
+      'TKLY', 'HHLY ','THTK'
     ], // 2 退款理由 3 换货理由 4 退货退款
     originalImg:[],
     smallImg:[],
@@ -91,13 +91,16 @@ Page({
   initData(){
     let list = this.data.list
     if (this.data.returnProductId) {
-      list.imgList.forEach((item) => {
+      let imgList = list.imgList || []
+      imgList.forEach((item) => {
         this.data.originalImg.push(item.originalImg)
         this.data.smallImg.push(item.smallImg)
       })
       this.setData({
         originalImg: this.data.originalImg,
-        smallImg: this.data.smallImg
+        smallImg: this.data.smallImg,
+        remark: list.remark,
+        returnReason:list.returnReason
       })
       this.selectComponent("#update-img").initData()
     }
@@ -116,6 +119,18 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock= (req) => {
+      let datas = req.responseObject.data || []
+     
+      if (this.data.returnReason){
+        datas.forEach((item,index)=>{
+          if(item.value==this.data.returnReason){
+            this.setData({
+              activeIndex:index
+            })
+            this.selectComponent('#chooseReason').setIndex(index);
+          }
+        })
+      }
       this.data.reason[refundType].list = req.responseObject.data
       this.setData({
         reason: this.data.reason
