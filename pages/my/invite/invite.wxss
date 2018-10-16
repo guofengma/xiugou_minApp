@@ -1,5 +1,5 @@
 .bg{
-    background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/invite-bg.png") no-repeat top center;
+    background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/invite_bg.png") no-repeat top center;
     background-size: cover;
     width: 100%;
     height:100%;
@@ -7,97 +7,51 @@
     overflow: hidden;
     position: fixed;
 }
-.area{
-    text-align: center;
-    width: 80%;
-    margin-left: 10%;
-    height: 600rpx;
-    background-color: #ffffff;
-    border-radius: 10rpx;
-    position: absolute;
-    top:200rpx;
-    z-index: 3;
+.avatar {
+  position: relative;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: 2rpx solid #F6672A;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  top: 52rpx;
+  margin: 0 auto;
 }
-.detail{
-    position: absolute;
-    top:-55rpx;
-    left: 50%;
-    transform: translateX(-50%);
+.title1,.title2 {
+  color: #F7682A;
+  font-size: 36rpx;
+  font-weight:600;
+  font-family:PingFangSC-Semibold;
+  text-align: center
 }
-.avature-img{
-    width: 110rpx;
-    height: 110rpx;
-    border-radius: 50%;
-    border:4rpx solid;
+.title3,.title4 {
+  color: #000;
+  font-size: 30rpx;
+  font-weight:400;
+  font-family:PingFangSC-Regular;
+  text-align: center
 }
-.code{
-    width: 180rpx;
-    height: 180rpx;
-    border: solid 4rpx #55348f;
-    margin-top: 60rpx;
+.title1 {
+  margin-top: 100rpx;
 }
-.info{
-    font-weight: 600;
-    margin-top: 30rpx;
+.title2 {
+  margin-top: 40rpx;
 }
-.title1{
-    font-size: 24rpx;
-    line-height: 40rpx;
+.title3 {
+  margin-top: 160rpx;
 }
-.title2{
-    font-size: 34rpx;
-    color: #53328a;
-    margin: 50rpx 0;
+.title4 {
+  margin-top: 35rpx;
 }
-.title3{
-    font-size: 30rpx;
-}
-.footer-area{
-    position: absolute;
-    width: 100%;
-    top:22rpx;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.tip{
-    font-size: 26rpx;
-    color: #ffffff;
-    line-height: 40rpx;
-}
-.opr{
-    width: 600rpx;
-    margin: 0 auto;
-    margin-top: 80rpx;
-}
-.opr view,.share{
-    text-align: center;
-    width: 37%;
-    height: 96rpx;
-    line-height: 96rpx;
-    border-radius: 10rpx;
-    border: 1rpx  solid #513187;
-    font-size: 30rpx;
-    color: #ffffff;
-    font-weight: 600;
-}
-.share{
-    background-color: transparent;
-    border:0;
-    width: 100%;
-}
-
-.footer{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height:364rpx;
-}
-.footer image{
-    /*position: ;*/
-    width: 90%;
-    height:364rpx;
-    position: absolute;
-    bottom: 0;
-    left: 5%;
+.share-button {
+  color: #fff;
+  font-size: 30rpx;
+  width:460rpx;
+  height:88rpx;
+  line-height: 88rpx;
+  background:rgba(247,104,42,1);
+  border-radius:44px;
+  margin-top: 66rpx;
 }
