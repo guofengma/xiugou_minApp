@@ -11,40 +11,30 @@ Page({
         page: 1,
         pageSize: 10,
         reqName: '拼店消息',
-        url: Operation.queryStoreMessageList
+        'type':200,
+        url: Operation.queryMessage
       }
       let r = RequestFactory.wxRequest(params);
-        // let r = global.RequestFactory.queryStoreMessageList(params);
       r.successBlock = (req) => {
-          if (req.responseObject.data.resultCount > 0) {
-              let datas = [];
-              datas = req.responseObject.data.data;
-              this.setData({
-                  hasInf: true,
-                  time: Tool.formatTime(datas[0].pushTime)
-              })
-          }
+        if (req.responseObject.data.totalNum > 0) {
+          let datas = [];
+          datas = req.responseObject.data.data;
+          this.setData({
+            hasInf: true,
+            time: Tool.formatTime(datas[0].createdTime)
+          })
+        }
           Event.emit('queryPushNum')
         };
         Tool.showErrMsg(r)
         r.addToQueue();
     },
-
     onLoad: function (options) {
       this.getData()
     },
     onShow: function () {
 
     },
-
-    didLogin() {
-        if (!Tool.didLogin(this)) {
-            Tool.navigateTo('/pages/login/login-wx/login-wx');
-            return false
-        }
-        return true
-    },
-
     onUnload: function () {
 
     },

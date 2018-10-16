@@ -6,8 +6,14 @@
   <!-- 签到按钮 -->
   <view class='sign-btn-view'>
     <view class='sign-btn flexR'>
-      <text class='font-38'>签</text>
+      <text class='font-38 ' wx:if='{{!animated}}'>签</text>
+      <text class='font-38 animated {{animate0? "zoomIn":""}}' wx:else>哈</text>
+      <view class='animated'>
+        <image-sub imgStyle='{{"width:38rpx"}}' imgSrc="{{'icon.png'}}"/>
+        <view class='font-22 white'></view>
+      </view>
     </view>
+   
     <view class='font-24 gray-9 flexR'>
       <text>累计签到1天</text>
     </view>

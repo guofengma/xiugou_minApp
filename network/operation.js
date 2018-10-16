@@ -457,7 +457,7 @@ export default class Operation {
 
         // 消息未读详情
 
-        this.queryPushNum = '/user/push/queryPushNum';
+        this.queryPushNum = '/notice/newNoticeMessageCount';
 
         // 消息
 

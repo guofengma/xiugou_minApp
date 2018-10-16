@@ -17,6 +17,7 @@ Page({
           let params = {
             pageSize: this.data.pageSize,
             page: this.data.currentPage,
+            'type':100,
             reqName: '消息',
             url: Operation.queryMessage
           }
@@ -24,32 +25,31 @@ Page({
             params: params
           });
           let r = RequestFactory.wxRequest(params);
-            // let r = global.RequestFactory.queryMessage(params);
-            let list = this.data.list;
+          let list = this.data.list;
           r.successBlock = (req) => {
-                let datas = [];
-                for (let i in req.responseObject.data.data) {
-                    let item = req.responseObject.data.data[i];
-                    item.creatTime = Tool.formatTime(item.creatTime);
-                    item.pushTime = Tool.formatTime(item.pushTime);
-                    item.title=this.data.title[item.type-1];
-                    item.payStyle=this.payStyle(item.payType);
-                    datas.push(item)
-                }
+            let datas = [];
+            for (let i in req.responseObject.data.data) {
+                let item = req.responseObject.data.data[i];
+                item.createTime = Tool.formatTime(item.createdTime);
+                item.pushTime = Tool.formatTime(item.pushTime);
+                // item.title=this.data.title[item.type-1];
+                item.payStyle=this.payStyle(item.payType);
+                datas.push(item)
+            }
+            this.setData({
+                list: list.concat(datas),
+                totalPage: req.responseObject.data.total,
+            });
+            if (this.data.totalPage > this.data.currentPage) {
                 this.setData({
-                    list: list.concat(datas),
-                    totalPage: req.responseObject.data.total,
-                });
-                if (this.data.totalPage > this.data.currentPage) {
-                    this.setData({
-                        currentPage: ++this.data.currentPage
-                    })
-                } else {
-                    this.data.hasNext = false
-                }
-                Event.emit('queryPushNum')
-            };
-            r.addToQueue();
+                    currentPage: ++this.data.currentPage
+                })
+            } else {
+                this.data.hasNext = false
+            }
+            Event.emit('queryPushNum')
+        };
+        r.addToQueue();
         }
 
     },

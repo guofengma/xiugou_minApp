@@ -85,8 +85,12 @@
 }
 .coinBtn{
   width: 132rpx;
-  height: 40rpx;
+  height:40rpx;
   border-radius: 42rpx;
+}
+.blodBg{
+  background:  #CEB575;
+  color: #fff;
 }
 .coinNum{
   font-size: 72rpx;
