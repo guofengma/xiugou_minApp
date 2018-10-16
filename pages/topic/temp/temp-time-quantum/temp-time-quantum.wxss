@@ -18,6 +18,7 @@
 .tab-timeq-item-time{
   color: #222;
   font-size: 36rpx;  
+  line-height: 36rpx;
   font-weight: 400;
   font-family: 'Helvetica';
 }
@@ -40,7 +41,7 @@
   position: absolute;
   left:50%;
   transform: translateX(-50%);
-  top: 105rpx;
+  top: 100rpx;
 }
 .tab-timeq-ing .tab-timeq-item-time,.tab-timeq-ing .tab-timeq-item-desc{
   color: #fff;

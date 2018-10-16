@@ -52,7 +52,7 @@ Component({
       if ( //什么情况下不允许点击按钮
         (props.status === 1 && props.notifyFlag) ||  //未开始已设置提醒
         [3, 4, 5].includes(props.status) || // 已售完、已结束、手动结束下
-        (props.beginTime - props.date) <= 3 * 60 * 1000 || //开始前3分钟
+        (props.status === 1 &&(props.beginTime - props.date) <= 3 * 60 * 1000) || //开始前3分钟
         props.limitFlag  // 购买数量已到限购数
       ) {
         p.disabled = true;

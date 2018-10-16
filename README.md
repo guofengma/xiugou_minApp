@@ -85,3 +85,9 @@ iphoneX底部适配  iPhoneX-line
   
   //promotionType  区分降价拍(2)秒杀(1)  普通的为空
 ```
+
+## 注意
+1. background url 不支持带空格的链接  like:
+``` 
+background:url(https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/timg (1).jpg)
+```

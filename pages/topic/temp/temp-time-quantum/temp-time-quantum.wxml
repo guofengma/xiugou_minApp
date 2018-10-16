@@ -8,7 +8,7 @@
         style="width:{{width}}"
       >
         <view class='tab-timeq-item-time'>{{item.navName}}</view>
-        <view class='tab-timeq-item-desc'>已开拍</view>
+        <view class='tab-timeq-item-desc'>{{item.desc}}</view>
       </view>
     </scroll-view>
   </view>    
