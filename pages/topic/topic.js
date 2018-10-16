@@ -104,7 +104,7 @@ Page({
         })
         this.setData({
           topicList: data,
-          currentTopicListIndex: data.topicNavbarList.length >> 1, // 这里取了个中位数，可能接口会提供
+          currentTopicListIndex: data.checkIndex,//data.topicNavbarList.length >> 1, // 这里取了个中位数，可能接口会提供
           topicTabWidth: width,
           topicTemplateId: data.templateId
         })

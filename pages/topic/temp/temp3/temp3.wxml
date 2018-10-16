@@ -4,9 +4,9 @@
 
 <template name="topic-temp3">
   <!--导航  -->
-  <template is="topic-bar" data="{{topicDetailList,scrollLeft,currentTab}}"/>
+  <template is="topic-bar" data="{{topicList,scrollLeft,currentTab}}"/>
   
-  <block wx:for='{{topicDetailList[currentTab].banner}}'  wx:key='unique'>
+  <block wx:for='{{topicList[currentTab].banner}}'  wx:key='unique'>
     <view class='topic-banner topic-temp3' >
       <image src='{{item.img}}' mode='widthFix'></image>
     </view>
