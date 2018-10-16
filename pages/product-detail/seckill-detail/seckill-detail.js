@@ -68,7 +68,7 @@ Page({
       let data = req.responseObject.data || {};
       let productSpec = this.refactorProductsData(data.productSpecValue);
       let jumpTimer = null; 
-      if (data.status >= 4) {
+      if (data.status >= 4 && data.type == 1) {//type是否为隐藏类目，非隐藏要跳转  1：显示 2：隐藏
         jumpTimer = setTimeout(() => {
           //跳转到普通详情页
           Tool.navigateTo('/pages/product-detail/product-detail?productId=' + data.productId)
