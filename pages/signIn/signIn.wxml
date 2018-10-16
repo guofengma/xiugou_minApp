@@ -13,15 +13,15 @@
     </view>
   </view>
   <!-- 签到日历 -->
-  <view class='sign-date-view'>
-    <view class='line-view flexC'>
-      <view class='xdNum font-24 flexC whiteBg'>+1</view>
+  <view class='sign-date-view boxSize'>
+    <view class='line-view flexC' wx:for='{{7}}' wx:key='{{index}}'>
+      <view class='xdNum font-24 flexC whiteBg'>+{{index}}</view>
       <view class='time font-22 white'>09.18</view>
       <view class='line'></view>
     </view>
   </view>
   <!-- 兑换1元劵 -->
-  <view class='coin-coupon-view whiteBg flexR-sb'>
+  <view class='coin-coupon-view whiteBg flexR-sb boxSize'>
     <view class='leftBar flexR'>
       <view class='left red font-24'>
         <text class='coinNum'>1</text>元

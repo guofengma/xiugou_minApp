@@ -21,7 +21,10 @@
   height: 200rpx;
   border-radius: 14rpx;
   margin: 0 auto;
-  padding:50rpx 30rpx 0 30rpx;
+  padding:50rpx 0rpx 0 30rpx;
+}
+.coin-coupon-view{
+  padding: 30rpx 0;
 }
 .sign-date-view{
   background:#DBC79D;
@@ -51,11 +54,15 @@
   width: 48rpx;
   height: 48rpx;
   border-radius: 50%;
-  margin-bottom: 20rpx;
   margin: 0 auto;
+  margin-bottom: 20rpx;
+}
+.sign-date-view .line-view:last-child .line{
+  width: 0
 }
 .line-view{
   display: inline-block;
+  margin-right: 40rpx;
 }
 .line-view{
   position: relative;
