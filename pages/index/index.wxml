@@ -33,23 +33,29 @@
   
   <!-- 我的等级 -->
   
-  <view class='index-level-view whiteBg'>
+  <view class='index-level-view whiteBg' wx:if='{{didLogin}}'>
     <view class='boxSize flexR-sb'>
       <view class='font-28'>
-        <text class='font-28 levalName'>尊敬的V2会员，您好</text>
+        <text class='font-28 levalName'>尊敬的{{userInfos.levelName}}会员您好</text>
         <!-- 等级线 -->
         <view class='levelLineContent boxSize'>
           <view class='levelLine'>
-            <view class='myLevelLine'></view>
+            <view class='myLevelLine' >
+            <!-- style='width:{{(userInfos.experience || 0)/(levelList[levelList.length-1].upgradeExp)}}%' -->
+              <view class='my-level-val font-22 whiteBg'>
+                <text class='triangle_border_up'></text>
+                11111
+              </view>
+            </view>
             <view class='levelVal font-22 flexC' wx:for='{{levelList}}' wx:key='{{index}}' style='left:{{(442/(levelList.length-1))*index-16}}rpx'>
               <view>{{item.name}}</view>
-              <view>o</view>
+              <view class='circle'></view>
             </view>
           </view>
         </view>
       </view>
       <view class='font-22 flexR level-btn whiteBg'>
-        <view class=' flexC  whiteBg'>
+        <view class=' flexC  whiteBg levelBtnName'>
          <text>特权</text>
          <text>查看</text>
         </view>
