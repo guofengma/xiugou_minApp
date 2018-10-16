@@ -261,3 +261,43 @@
   bottom: 40rpx;
   right: 0;
 }
+/* 会员等级 */
+.level-content{
+  padding: 10rpx 30rpx 0 50rpx;
+}
+.level-btn{
+  color: #9B6D26;
+  width: 90rpx;
+  height: 90rpx;
+  border:8rpx solid #C18E3B;
+  border-radius: 50%;
+}
+.levelLine{
+  width: 442rpx;
+  height: 7rpx;
+  background: #9B6D26;
+  border-radius: 10rpx;
+  position: relative;
+}
+.myLevelLine{
+  position: absolute;
+  background: #E7AE39;
+  width: 50%;
+  height: 100%;
+  z-index: 99;
+}
+.levelLineContent{
+  height: 100rpx;
+  padding-top:46rpx; 
+  padding-left: 40rpx;
+}
+.levelVal{
+  position: absolute;
+  bottom: -12rpx;
+  left:0;
+  z-index: 200;
+  color: #9B6D26;
+}
+.levalName{
+  padding-top:5rpx;
+}

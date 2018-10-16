@@ -61,7 +61,7 @@ Page({
     activeIndex:'',
     refundType: 0, // 0为仅退款 1为退货退款  2为换货
     queryReasonParams:[
-      'TKLY', 'HHLY ','THTK'
+      'TKLY', 'THTK','HHLY'
     ], // 2 退款理由 3 换货理由 4 退货退款
     originalImg:[],
     smallImg:[],

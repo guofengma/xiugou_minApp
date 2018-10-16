@@ -99,7 +99,24 @@ Page({
       Tool.didLogin(this)
       if (this.data.didLogin){
         this.getLevelInfos()
+        this.getLevel()
       }
+    },
+    getLevel() {
+      let params = {
+        isShowLoading: false,
+        reqName: '获取用户等级',
+        requestMethod: 'GET',
+        url: Operation.getLevel
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        this.setData({
+          userInfos: req.responseObject.data
+        })
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
     },
     getLevelInfos(){
       let params = {
@@ -109,7 +126,10 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
-        
+        let datas = req.responseObject.data || []
+        this.setData({
+          levelList:datas
+        })
       };
       Tool.showErrMsg(r)
       r.addToQueue();

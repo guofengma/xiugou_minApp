@@ -34,13 +34,27 @@
   <!-- 我的等级 -->
   
   <view class='index-level-view whiteBg'>
-    <view class='boxSize'>
-      <view class='font-28'>尊敬的V2会员您好</view>
-      <view>
-        <view class='level-line-view'>
-          这块没有提测
+    <view class='boxSize flexR-sb'>
+      <view class='font-28'>
+        <text class='font-28 levalName'>尊敬的V2会员，您好</text>
+        <!-- 等级线 -->
+        <view class='levelLineContent boxSize'>
+          <view class='levelLine'>
+            <view class='myLevelLine'></view>
+            <view class='levelVal font-22 flexC' wx:for='{{levelList}}' wx:key='{{index}}' style='left:{{(442/(levelList.length-1))*index-16}}rpx'>
+              <view>{{item.name}}</view>
+              <view>o</view>
+            </view>
+          </view>
         </view>
       </view>
+      <view class='font-22 flexR level-btn whiteBg'>
+        <view class=' flexC  whiteBg'>
+         <text>特权</text>
+         <text>查看</text>
+        </view>
+        <view>></view>
+      </view>  
     </view>
   </view>
 
