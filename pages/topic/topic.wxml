@@ -19,17 +19,17 @@
   <!-- 产品模块 -->
   <!-- <block wx:for="{{topicDetailList}}"  wx:key='unique' > -->
 
-    <template wx:if="{{topicTemplateId==1}}" is="topic-temp1" data="{{topicDetailList,scrollLeft,currentTab}}"/>
+    <template wx:if="{{topicTemplateId==1}}" is="topic-temp1" data="{{scrollLeft,topicList,currentTopicListIndex,topicTabWidth}}"/>
 
-    <template wx:elif="{{topicTemplateId==2}}" is="topic-temp2" data="{{topicDetailList}}"/>
+    <template wx:elif="{{topicTemplateId==2}}" is="topic-temp2" data="{{scrollLeft,topicList,currentTopicListIndex,topicTabWidth}}"/>
 
-    <template wx:elif="{{topicTemplateId==3}}" is="topic-temp3" data="{{topicDetailList,scrollLeft,currentTab}}"/>
+    <template wx:elif="{{topicTemplateId==3}}" is="topic-temp3" data="{{scrollLeft,topicList,currentTopicListIndex,topicTabWidth}}"/>
 
-    <template wx:elif="{{topicTemplateId==4}}" is="topic-temp4" data="{{topicDetailList}}"/> 
+    <template wx:elif="{{topicTemplateId==4}}" is="topic-temp4" data="{{scrollLeft,topicList,currentTopicListIndex,topicTabWidth}}"/> 
 
-    <template wx:elif="{{topicTemplateId==5}}" is="temp-reducePrice" data="{{topicList:topicList,currentTopicListIndex:currentTopicListIndex,topicTabWidth:topicTabWidth}}"/> 
+    <template wx:elif="{{topicTemplateId==5}}" is="temp-reducePrice" data="{{topicList,currentTopicListIndex,topicTabWidth}}"/> 
 
-    <template wx:elif="{{topicTemplateId==6}}" is="temp-secKill" data="{{topicList:topicList,currentTopicListIndex:currentTopicListIndex,topicTabWidth:topicTabWidth}}"/> 
+    <template wx:elif="{{topicTemplateId==6}}" is="temp-secKill" data="{{topicList,currentTopicListIndex,topicTabWidth}}"/> 
     
   <!-- </block> -->
 
