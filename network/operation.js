@@ -324,7 +324,7 @@ export default class Operation {
 
         // 再次购买
 
-        this.orderOneMore  ='/order/order/orderOneMore'
+        this.orderOneMore ='/order/againOrder'
 
         /****************** 一元劵*********************** */
         

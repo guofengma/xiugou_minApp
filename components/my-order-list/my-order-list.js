@@ -211,22 +211,29 @@ Component({
     //再次购买
     continueBuy(e) {
       let params = {
-        orderId: e.currentTarget.dataset.id,
+        id: e.currentTarget.dataset.id,
         reqName: '再次购买获取规格',
         url: Operation.orderOneMore,
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.orderOneMore(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data;
-        datas.forEach((item) => {
-          item.sareSpecId = item.id;
-          item.productNumber = item.num;
-          item.isSelect = true
+        let orderProducts = datas.orderProducts || []
+        let list =[]
+        orderProducts.forEach((item) => {
+          list.push({
+            productId:item.productId,
+            priceId:item.priceId,
+            amount:item.num,
+            showCount:item.num,
+            isSelect:true
+          })
         });
-        Storage.setShoppingCart(datas);
-        Event.emit('continueBuy');
-        Tool.switchTab('/pages/shopping-cart/shopping-cart')
+        if(list.length>0){
+          Storage.setShoppingCart(list);
+          Event.emit('continueBuy');
+          Tool.switchTab('/pages/shopping-cart/shopping-cart')
+        }
       };
       Tool.showErrMsg(r);
       r.addToQueue();
