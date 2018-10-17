@@ -11,7 +11,9 @@
   height:68rpx;
 }
 .topic-prd-info{
-  margin-bottom:20rpx; 
+  margin-bottom:20rpx;
+  display: inline-block;
+  margin-right: 26rpx; 
 }
 .prd-info-model{
   position: absolute;
