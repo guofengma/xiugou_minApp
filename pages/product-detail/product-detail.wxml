@@ -15,7 +15,7 @@
       <view class='msg-view fr' bindtap='msgClicked'></view>
       <template is="msg-tips" data="{{msgShow}}" /> 
     </view>
-    <view class='slider' style='height:{{imgheights[0]}}rpx'>
+    <view class='slider' style='height:{{imgheights[0]}}rpx;min-height:400rpx;'>
       <!--广告轮播  -->
       <view class='slider-nav boxSize'>
         <!-- <image src='/img/back-icon.png' mode='widthFix' class='fl'></image> -->
