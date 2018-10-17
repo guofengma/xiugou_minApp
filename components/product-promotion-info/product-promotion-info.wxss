@@ -45,6 +45,7 @@
 }
 .promotion-price-origin, .promotion-info-right {
   font-size: 22rpx;
+  position: relative;
 }
 .promotion-desc {
   font-size: 22rpx;
@@ -96,4 +97,11 @@
   color: #FFFC00;
   font-size: 26rpx;
   padding-right: 10rpx;
+}
+.regular-jump-icon {
+  width:16rpx;
+  height:26rpx;
+  position:absolute;
+  right:4rpx;
+  bottom:4rpx;
 }
