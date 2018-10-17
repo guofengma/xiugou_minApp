@@ -21,7 +21,7 @@ Page({
         name:'可叠加使用',
         isCoinCoupon:true,
         value:1,
-        num:100,
+        num:0,
         active:true,
       },
       show:false,
@@ -244,9 +244,16 @@ Page({
         }
     },
     onLoad: function (options) {
+      let userInfo = Storage.getUserAccountInfo() || {}
+      this.data.coinData.num = userInfo.tokenCoin || 0
+      if (this.data.coinData.num){
+        this.data.lists[0].unshift(this.data.coinData)
+      }
       this.setData({
         door: options.door || '',
+        lists: this.data.lists,
         productIds: options.productIds || '',
+        coinData: this.data.coinData
       })
       if(this.data.door==1){
         this.availableDiscountCouponForProduct()

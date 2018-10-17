@@ -16,7 +16,7 @@
           <view class='gray time' wx:else>有效期：{{item.start_time}}-{{item.outTime}}</view>
         </view>
         <view class='coupon-right flexC font-28 {{item.couponClassName}}' >
-          <text wx:if='{{item.isCoinCoupon}}'>x{{num}}</text>
+          <text wx:if='{{item.isCoinCoupon}}'>x{{item.num}}</text>
         </view>
       </view>
       <view class='gray bottomBar-item flexR-sb ellipsis'>限品类：{{item.nickname}}</view>

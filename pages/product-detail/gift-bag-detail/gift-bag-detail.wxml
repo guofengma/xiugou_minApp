@@ -45,7 +45,7 @@
         <text>{{productInfo.type==1?  "普通礼包":"升级礼包"}}</text>
       </view>
       <view class='shippingInfo gray'>
-        <text style='margin-right:158rpx'>快递：'问产品怎么算'</text> 
+        <text style='margin-right:158rpx'>快递：{{productInfo.freightTemplatePrice || 0}}</text> 
         <text>月销售{{productInfo.saleNum || 0}}笔</text>
       </view>
     </view>

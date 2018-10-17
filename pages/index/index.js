@@ -97,6 +97,42 @@ Page({
     },
     didLogin() {
       Tool.didLogin(this)
+      if (this.data.didLogin){
+        this.getLevelInfos()
+        this.getLevel()
+      }
+    },
+    getLevel() {
+      let params = {
+        isShowLoading: false,
+        reqName: '获取用户等级',
+        requestMethod: 'GET',
+        url: Operation.getLevel
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        this.setData({
+          userInfos: req.responseObject.data
+        })
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    },
+    getLevelInfos(){
+      let params = {
+        requestMethod: 'GET',
+        url: Operation.getLevelInfos,
+        hasCookie: false
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let datas = req.responseObject.data || []
+        this.setData({
+          levelList:datas
+        })
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
     },
     queryAdList(types = 1, reqName='',callBack=()=>{}) {
       let params = {

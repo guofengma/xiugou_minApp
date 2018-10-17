@@ -21,7 +21,8 @@
   height: 200rpx;
   border-radius: 14rpx;
   margin: 0 auto;
-  padding:50rpx 0rpx 0 30rpx;
+  padding:50rpx 0rpx 0 34rpx;
+  position: relative;
 }
 .coin-coupon-view{
   padding: 30rpx 0;
@@ -56,13 +57,18 @@
   border-radius: 50%;
   margin: 0 auto;
   margin-bottom: 20rpx;
+  border:1rpx solid transparent;
 }
-.sign-date-view .line-view:last-child .line{
+/* .sign-date-view .line-view:last-child .line{
   width: 0
-}
+} */
 .line-view{
   display: inline-block;
-  margin-right: 40rpx;
+  margin-right: 45rpx;
+  position: relative;
+}
+.totalDay{
+  margin-bottom: 20rpx;
 }
 .line-view{
   position: relative;
@@ -72,7 +78,15 @@
   right: -50rpx;
   top:24rpx;
   height: 1rpx;
-  width: 60rpx;
+  width: 55rpx;
+  background: #CEB575;
+}
+.lineBegin{
+  position: absolute;
+  left: -34rpx;
+  width: 34rpx;
+}
+.line.active{
   background: #fff;
 }
 .rightBar{
@@ -85,8 +99,21 @@
 }
 .coinBtn{
   width: 132rpx;
-  height: 40rpx;
+  height:40rpx;
+  padding: 20rpx 0;
   border-radius: 42rpx;
+}
+.whiteBg{
+  color:#666;
+}
+.noSgin{
+  background:  #CEB575;
+  border-color: #fff;
+  color: #666;
+}
+.boldBg{
+  background:  #CEB575;
+  color: #fff;
 }
 .coinNum{
   font-size: 72rpx;
@@ -119,9 +146,15 @@
 	-webkit-animation-name: zoomIn;
 	animation-name: zoomIn
 }
+.zoomIn2 {
+	-webkit-animation-name: zoomIn;
+	animation-name: zoomIn;
+  animation-delay:.6s;
+  -webkit-animation-delay:.6s;
+}
 .animated {
-	-webkit-animation-duration: 1s;
-	animation-duration: 1s;
+	-webkit-animation-duration: .6s;
+	animation-duration: .6s;
 	-webkit-animation-fill-mode: both;
 	animation-fill-mode: both
 }

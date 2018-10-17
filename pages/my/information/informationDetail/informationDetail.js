@@ -21,27 +21,27 @@ Page({
         id: id,
         'type': types,
         reqName: '消息详情',
-        url: Operation.findMessageDetail
+        url: Operation.findMessageDetail,
+        requestMethod: 'GET'
       }
       let r = RequestFactory.wxRequest(params); 
-        // let r = RequestFactory.findMessageDetail(params);
       r.successBlock = (req) => {
-            if(types==8){
-                let refuseDetail=req.responseObject.data;
-                this.setData({
-                    refuseDetail: refuseDetail
-                })
-            } else{
-                let detail=req.responseObject.data;
-                if(types==7){
-                  detail.total = detail.actual_amounts + detail.actual_balance + detail.actual_token_coin
-                }
-                detail.pay_time = detail.pay_time ? Tool.formatTime(detail.pay_time ):'';
-                detail.create_time = detail.create_time ? Tool.formatTime(detail.create_time) : '';
-                this.setData({
-                    detail: detail
-                })
+        if(types==8){
+            let refuseDetail=req.responseObject.data;
+            this.setData({
+                refuseDetail: refuseDetail
+            })
+        } else{
+            let detail=req.responseObject.data;
+            if(types==7){
+              detail.total = detail.actual_amounts + detail.actual_balance + detail.actual_token_coin
             }
+            detail.pay_time = detail.pay_time ? Tool.formatTime(detail.pay_time ):'';
+            detail.create_time = detail.create_time ? Tool.formatTime(detail.create_time) : '';
+            this.setData({
+                detail: detail
+            })
+        }
         };
         Tool.showErrMsg(r);
         r.addToQueue();

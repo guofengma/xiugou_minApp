@@ -2,7 +2,8 @@
 Component({
   properties: {
     hidden:Boolean,
-    reason:Object
+    reason:Object,
+    dIndex:Number
   },
 
   /**
@@ -22,6 +23,9 @@ Component({
     },
     reasonClicked(e) {
       let index = e.currentTarget.dataset.index
+      this.setIndex(index)
+    },
+    setIndex(index){
       this.setData({
         activeIndex: index
       })
