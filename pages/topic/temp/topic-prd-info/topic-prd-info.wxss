@@ -8,6 +8,7 @@
 }
 .prd-name{
   margin-bottom: 15rpx;
+  height:68rpx;
 }
 .topic-prd-info{
   margin-bottom:20rpx; 

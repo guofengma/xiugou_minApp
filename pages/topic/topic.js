@@ -13,11 +13,6 @@ Page({
     scrollLeft: 0, //tab标题的滚动条位置
   },
   onLoad: function (options) {
-    // this.setData({
-    //   id: options.id
-    // })
-    
-    // this.getTopicDetail(options.id)
 
     this.getTopicByCode(options.code || 'ZT20180002');
   },
@@ -33,37 +28,13 @@ Page({
       })
     }
   },
-  getTopicDetail(id){
-    let params = {
-      id: id,
-      reqName: '获取专题详情页',
-      url: Operation.getTopicDetail
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      if (data){
-        this.setData({
-          topicTemplateId: data.templateId,
-          topicDetailList: data.content,
-          topicInfos: data
-        })
-      }
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
   productClicked(e){
     let id = e.currentTarget.dataset.id
-    let prdType = e.currentTarget.dataset.type
-    if (prdType ==1 ){
+    let prdType = e.currentTarget.dataset.type  //1秒杀 2降价拍 3礼包 4助力免费领 5专题 99普通商品
+    if (prdType == 99 ){
       Tool.navigateTo('/pages/product-detail/product-detail?productId=' + id + '&door=1')
-    } else if (prdType==2){
+    } else if (prdType==3){
       Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + id + '&door=1')
-    } else if (prdType == 3) {
-      Tool.navigateTo('/pages/download-app/download-app?title='+'不能购买此产品')
-    } else if (prdType == 5){
-      this.getTopicDetail(id)
     }
   },
   // 获取专题信息列表

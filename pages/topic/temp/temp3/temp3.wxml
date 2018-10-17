@@ -4,15 +4,20 @@
 
 <template name="topic-temp3">
   <!--导航  -->
-  <template is="topic-bar" data="{{topicList,scrollLeft,currentTab}}"/>
-  
-  <block wx:for='{{topicList[currentTab].banner}}'  wx:key='unique'>
-    <view class='topic-banner topic-temp3' >
-      <image src='{{item.img}}' mode='widthFix'></image>
+  <template is="topic-bar" data="{{topicList,scrollLeft,currentTopicListIndex,topicTabWidth}}"/>
+  <!--产品 -->
+  <view class='topic-prd-content topic-temp1'>
+      <block wx:for='{{topicList.topicNavbarList[currentTopicListIndex].topicBannerProducts}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
+        <template is="topic-prd-info" data="{{width:'220',bg:'#fff',ellipsis:'ellipsis',...list,key}}"/>
+      </block>
+  </view>
+  <block wx:for='{{topicList.topicNavbarList[currentTopicListIndex].topicNavbarBannerList}}'  wx:key='unique'>
+    <view class='topic-banner topic-temp'>
+      <image src='{{item.bannerImg}}' mode='widthFix'></image>
     </view>
-    <view class='topic-prd-content' style='justify-content:flex-start'>
-      <block wx:for='{{item.product}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
-        <template is="topic-prd-info" data="{{width:'220',...list,key}}"/>
+    <view class='topic-prd-content topic-temp1'>
+      <block wx:for='{{item.topicBannerProductList}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
+        <template is="topic-prd-info" data="{{width:'220',bg:'#fff',ellipsis:'ellipsis',...list,key}}"/>
       </block>
     </view>
   </block>

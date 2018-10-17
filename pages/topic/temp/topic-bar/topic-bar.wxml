@@ -1,9 +1,9 @@
 <template name="topic-bar">
-  <view class='tab-h-view'>
+  <view class='tab-h-view' wx:if="topicList.topicNavbarList.length">
     <scroll-view scroll-x="true" class="tab-h font-26 boxSize whiteBg" scroll-left="{{scrollLeft}}">
-      <block wx:for='{{topicDetailList}}' wx:key='unique'>
-        <view class="tab-item {{currentTab==index?'red':'gray'}}"  data-current="{{index}}" catchtap="swichNav">
-          <text data-current="{{index}}" catchtap="swichNav">{{item.name}}</text>
+      <block wx:for='{{topicList.topicNavbarList}}' wx:key='unique'>
+        <view class="tab-item"  data-current="{{index}}" catchtap="changeTopicTabIndex" style="width: {{topicTabWidth}}">
+          <text class="{{currentTopicListIndex==index?'current':''}}">{{item.navName}}</text>
         </view>
       </block>
     </scroll-view>
