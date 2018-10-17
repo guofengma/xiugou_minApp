@@ -48,13 +48,13 @@
   <!--购买支付信息  -->
   <view  class='order-info-other'>
     <!-- 1元劵 -->
-    <view class='flexR-sb' catchtap='iconClicked' >
+    <view class='flexR-sb' catchtap='iconClicked' wx:if='{{userInfos.tokenCoin}}' >
       <view class='reducePrice' >
         1元现金卷 
       </view>
-      <view class='gray'>
-        <text wx:if='{{userInfos.tokenCoin}}'> {{useOneCoinNum? "- ¥"+useOneCoinNum:""}}</text>
-        <text wx:else>暂无可以一元劵</text>
+      <view class='gray' >
+        <text > {{useOneCoinNum? "- ¥"+useOneCoinNum:""}}</text>
+        <!-- <text wx:else>暂无可以一元劵</text> -->
         <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
       </view>
     </view>
