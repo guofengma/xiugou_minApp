@@ -20,7 +20,7 @@
           </delete-bar>
         </view>
       </view>
-      <view class='flexR redBg font-22' wx:if='{{activityType==1 || activityType==2}}'>{{activityType==1? "秒杀":"降价拍"}}已开始，请进入商品页购买</view>
+      <view class='flexR redBg font-22' wx:if='{{item.activityType==1 || item.activityType==2}}'>{{item.activityType==1? "秒杀":"降价拍"}}已开始，请进入商品页购买</view>
     </view>
   </view>
   <!--搜索结果异常显示 tipVal  -->

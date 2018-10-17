@@ -21,7 +21,7 @@
   height: 200rpx;
   border-radius: 14rpx;
   margin: 0 auto;
-  padding:50rpx 0rpx 0 34rpx;
+  padding:50rpx 0rpx 0 0rpx;
   position: relative;
 }
 .coin-coupon-view{
@@ -29,6 +29,7 @@
 }
 .sign-date-view{
   background:#DBC79D;
+  text-align: center;
 }
 .coin-coupon-view{
   height: 188rpx;
@@ -60,11 +61,14 @@
   border:1rpx solid transparent;
 }
 /* .sign-date-view .line-view:last-child .line{
-  width: 0
+  width: 0;
 } */
+.sign-date-view .line-view:last-child{
+  margin-right: 0rpx;
+}
 .line-view{
   display: inline-block;
-  margin-right: 45rpx;
+  margin-right: 42rpx;
   position: relative;
 }
 .totalDay{
@@ -83,8 +87,8 @@
 }
 .lineBegin{
   position: absolute;
-  left: -34rpx;
-  width: 34rpx;
+  left: -54rpx;
+  width: 54rpx;
 }
 .line.active{
   background: #fff;
@@ -99,7 +103,7 @@
 }
 .coinBtn{
   width: 132rpx;
-  height:40rpx;
+  height:42rpx;
   padding: 20rpx 0;
   border-radius: 42rpx;
 }

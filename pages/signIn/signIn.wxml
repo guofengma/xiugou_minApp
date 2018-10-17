@@ -6,9 +6,11 @@
   <!-- 签到按钮 -->
   <view class='sign-btn-view '>
     <view class='sign-btn flexR' catchtap='tokenCoinSign'>
-      <text class='font-38 ' wx:if='{{!animate0&!animate1&!todaySgin}}'>签</text>
-      <view class='font-38 animated  {{animate0? "zoomIn":""}}' wx:if='{{!animate1&&animate0&!todaySgin}}'>
-        <image-sub imgStyle='{{"width:100rpx"}}' imgSrc="{{'home_icon1.png'}}"/>
+      <view wx:if='{{!todaySgin}}'>
+       <text class='font-38 ' wx:if='{{!animate0&!animate1}}'>签</text>
+        <view class='font-38 animated  {{animate0? "zoomIn":""}}' wx:if='{{!animate1&&animate0}}'>
+          <image-sub imgStyle='{{"width:100rpx"}}' imgSrc="{{'home_icon1.png'}}"/>
+        </view>
       </view>
       <view class='animated flexC {{animate1? "zoomIn2":""}}' wx:if='{{animate1&&animate0 || todaySgin}}'>
         <image-sub imgStyle='{{"width:66rpx"}}' imgSrc="{{'icon.png'}}"/>
@@ -22,7 +24,8 @@
   </view>
   <!-- 签到日历 -->
   <view class='sign-date-view boxSize overflow'>
-    <view class='line-view flexC' wx:for='{{lists}}' wx:key='{{index}}'>
+    <view style='display:inline-block'>
+     <view class='line-view flexC' wx:for='{{lists}}' wx:key='{{index}}'>
       <view class='line lineBegin {{index<3? "active":""}}' wx:if='{{index==0}}'></view>
       <view class='xdNum font-24 flexC  boxSize {{item.continuous&&item.reward? "whiteBg":""}} {{item.reward===0&&index!=3? "noSgin":""}} {{item.canReward? " boldBg":""}}'>
         <text wx:if='{{index!=3}}'>+{{item.canReward? item.canReward:item.reward}}</text>
@@ -35,6 +38,7 @@
       </view>
       <view class='time font-22 white'>{{item.signDate}}</view>
       <view class='line {{index<3? "active":""}}'></view>
+    </view>
     </view>
   </view>
   <!-- 兑换1元劵 -->

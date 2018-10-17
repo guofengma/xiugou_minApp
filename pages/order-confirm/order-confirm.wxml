@@ -53,7 +53,8 @@
         1元现金卷 
       </view>
       <view class='gray'>
-        -¥ 20
+        <text wx:if='{{userInfos.tokenCoin}}'> {{useOneCoinNum? "- ¥"+useOneCoinNum:""}}</text>
+        <text wx:else>暂无可以一元劵</text>
         <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
       </view>
     </view>
@@ -78,7 +79,7 @@
   </view>
   <!--支付bar  -->
   <view class='flexR payBar {{isIPhoneX.className}}'>
-    <view>应付款 <text class='red'>：¥{{orderInfos.totalAmounts}}</text></view>
+    <view>应付款 <text class='red'>：¥{{orderInfos.showTotalAmounts}}</text></view>
     <view class='btn redBg flexR' bindtap='payBtnClicked'>提交订单</view>
   </view>
 </view>

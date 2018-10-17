@@ -53,7 +53,7 @@
           </view>
         </view>
       </view>
-      <view class='font-22 flexR level-btn whiteBg'>
+      <view class='font-22 flexR level-btn whiteBg' catchtap='levelBtnClicked'>
         <view class=' flexC  whiteBg levelBtnName'>
          <text>特权</text>
          <text>查看</text>

@@ -12,22 +12,32 @@ Page({
     addressList:[],
     remark:'', // 买家留言
     door:'', // 1秒杀 2降价 3优惠套餐 4助力免费领 5礼包 99 普通
-    coupon: { id: "", nickname:'未使用优惠劵'}, //优惠券信息
+    coupon: { id: "", nickname: '未使用优惠劵', canClick:true}, //优惠券信息
     useOneCoinNum:0, // 1元劵张数
   },
   onLoad: function (options) {
+    Tool.getUserInfos(this)
     this.setData({
       params: JSON.parse(options.params),
-      door: options.type
+      door: options.type,
     })
     this.requestOrderInfo()
     Tool.isIPhoneX(this)
     this.availableDiscountCouponForProduct()
     Event.on('updateOrderAddress', this.updateOrderAddress,this)
     Event.on('updateCoupon', this.couponClick,this)
+    Event.on('getTokenCoin', this.getTokenCoin,this)
   },
   onShow: function () {
     this.updateCoupon()
+  },
+  getTokenCoin(){
+    let useOneCoinNum = Storage.getTokenCoin() || 0
+    this.data.orderInfos.showTotalAmounts = Tool.sub(this.data.orderInfos.totalAmounts, useOneCoinNum)
+    this.setData({
+      useOneCoinNum: Number(useOneCoinNum),
+      orderInfos: this.data.orderInfos
+    })
   },
   couponClick() { // 是否点击了优惠卷
     this.setData({
@@ -108,7 +118,7 @@ Page({
         addressList[1] = item.address
       }
       // item.totalAmounts = Tool.add(item.totalAmounts, item.totalFreightFee)
-
+      item.showTotalAmounts = Tool.sub(item.totalAmounts, this.data.useOneCoinNum)
       callBack(item)
 
       this.setData({
@@ -270,12 +280,12 @@ Page({
     r.addToQueue();
   },
   iconClicked(){ // 点击使用1元劵跳转
-    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1")
+    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + this.data.useOneCoinNum)
   },
   couponClicked(){ // 点击使用优惠卷跳转
-    if(this.data.door!=99) return
+    if (this.data.door != 99 || this.data.coupon.canClick===false) return
     let productIds = this.getCouponProductPriceIds()
-    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&&productIds=" + JSON.stringify(productIds))
+    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=2&productIds=" + JSON.stringify(productIds))
   },
   getCouponProductPriceIds(){ // 获取请求优惠卷的参数
     let productIds = []
@@ -302,7 +312,8 @@ Page({
         this.setData({
           coupon:{
             id:'',
-            nickname:"暂无可用优惠劵"
+            nickname:"暂无可用优惠劵",
+            canClick:false,
           }
         })
       }      

@@ -19,7 +19,7 @@ Page({
         "",// 活动日历
         '/pages/my/coupon/my-coupon/my-coupon',//优惠卷
         '/pages/my/my-promotion/my-promotion', //我的数据
-        "",//收藏店铺
+        "/pages/download-app/download-app",//收藏店铺
         '/pages/my/help-customer/help-customer',//帮助
         '/pages/address/select-express-address/select-express-address',//地址
         '',//足迹
@@ -94,6 +94,9 @@ Page({
       }
       if (query){
         page = page + "?query=" + query
+      }
+      if (pageIndex==12){
+        Tool.switchTab(page)
       }
       Tool.navigateTo(page)
     },

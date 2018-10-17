@@ -201,12 +201,13 @@ Page({
     // 点击选择
     let index = e.currentTarget.dataset.index 
     let prdList = this.data.items
-    prdList[index].isSelect = !prdList[index].isSelect
-    // console.log(prdList[index].activityType)
-    if (prdList[index].activityType){
+    if (prdList[index].activityType) {
       Tool.showAlert('请至详情页购买')
       return
     }
+    
+    prdList[index].isSelect = !prdList[index].isSelect
+    
     this.isSelectAllPrd(prdList)
     this.setData({
       items: prdList

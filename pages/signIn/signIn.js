@@ -13,8 +13,6 @@ Page({
   },
   onLoad: function (options) {
     this.querySignList()
-   
-   
   },
   getLevel() {
     let params = {
