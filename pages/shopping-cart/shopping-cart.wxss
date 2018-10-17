@@ -63,3 +63,7 @@
   font-size: 24rpx;
   margin-left:30rpx; 
 }
+.redBg-2{
+  background:rgba(213,18,67,0.5);
+  color:#fff;
+}

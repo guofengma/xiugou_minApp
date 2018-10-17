@@ -169,6 +169,11 @@ Page({
             }
           }
         }
+        if (item.activityType){
+          let currentTime = new Date().getTime();
+          item.isBegin = item.activityBeginTime>currentTime? false:true
+          item.isEnd = item.activityEndTime > currentTime? false:true
+        }
       })
       this.setData({
         items: data,
@@ -201,10 +206,10 @@ Page({
     // 点击选择
     let index = e.currentTarget.dataset.index 
     let prdList = this.data.items
-    if (prdList[index].activityType) {
-      Tool.showAlert('请至详情页购买')
-      return
-    }
+    // if (prdList[index].activityType) {
+    //   Tool.showAlert('请至详情页购买')
+    //   return
+    // }
     
     prdList[index].isSelect = !prdList[index].isSelect
     
@@ -344,6 +349,9 @@ Page({
     let items = this.data.items
     let selectAll = this.data.selectAll
     for (let i = 0; i < items.length; i++) {
+      // if (!items[i].activityType){
+      //   items[i].isSelect = !selectAll
+      // } 
       items[i].isSelect = !selectAll
     }
     this.setData({

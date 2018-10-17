@@ -99,9 +99,9 @@ Page({
       }]
       this.setData({
         content: {
-          img: datas.imgList,
-          linkType:data.linkType,
-          linkTypeCode: datas.linkTypeCode,
+          img: datas.imgList || '',
+          linkType:datas.linkType || 0,
+          linkTypeCode: datas.linkTypeCode || 0,
           productCategoryList: content
         }
       })

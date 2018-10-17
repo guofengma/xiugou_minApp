@@ -20,7 +20,10 @@
           </delete-bar>
         </view>
       </view>
-      <view class='flexR redBg font-22' wx:if='{{item.activityType==1 || item.activityType==2}}'>{{item.activityType==1? "秒杀":"降价拍"}}已开始，请进入商品页购买</view>
+      <view class='flexR font-22 {{item.isBegin? "redBg":"redBg-2"}}' wx:if='{{!item.isEnd && item.activityType}}'>
+        <text wx:if='{{item.isBegin}}'>该商品正在进行{{item.activityType==1? "秒杀":"降价拍"}}活动，快去看看~</text>
+        <text wx:else>{{item.activityType==1? "秒杀":"降价拍"}}活动未开始,暂不可购买</text>
+      </view>
     </view>
   </view>
   <!--搜索结果异常显示 tipVal  -->

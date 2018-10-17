@@ -117,9 +117,9 @@ Page({
             typeDesc: datas.activityType == 1 ? '秒杀价':"起拍价"
           },
         })
-        if (this.data.door == 100) {
-          this.goPage()
-        }
+        // if (this.data.door == 100) {
+        //   this.goPage()
+        // }
        this.selectComponent('#promotion').init();
       }
     };
