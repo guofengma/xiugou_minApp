@@ -85,6 +85,13 @@ iphoneX底部适配  iPhoneX-line
   
   //promotionType  区分降价拍(2)秒杀(1)  普通的为空
 ```
+倒计时时间计算相关
+当前时间取的是接口返回的服务器时间date
+活动开始前结束时间取的是beginTime
+活动开始后默认是取的endTime
+但是降价拍的话是分阶段的
+所以开始取的是activityTime
+如果拍卖价markdownPrice等于底价floorPrice的话才取的endTime
 
 ## 注意
 1. background url 不支持带空格的链接  like:

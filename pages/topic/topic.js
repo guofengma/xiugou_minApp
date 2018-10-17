@@ -29,12 +29,18 @@ Page({
     }
   },
   productClicked(e){
-    let id = e.currentTarget.dataset.id
-    let prdType = e.currentTarget.dataset.type  //1秒杀 2降价拍 3礼包 4助力免费领 5专题 99普通商品
+    let dataset = e.currentTarget.dataset;
+    let id = dataset.id;
+    let prdType = dataset.type;  //1秒杀 2降价拍 3礼包 4助力免费领 5专题 99普通商品
+    let code = dataset.code;
     if (prdType == 99 ){
       Tool.navigateTo('/pages/product-detail/product-detail?productId=' + id + '&door=1')
     } else if (prdType==3){
       Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + id + '&door=1')
+    } else if(prdType == 2){
+      Tool.navigateTo('/pages/discount-detail/discount-detail?code=' + code)
+    } else if(prdType == 3) {
+      Tool.navigateTo('/pages/seckill-detail/seckill-detail?code=' + code)
     }
   },
   // 获取专题信息列表
@@ -131,9 +137,9 @@ Page({
     //data.type  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
     // if(data.status >= 3) return;
     if(data.type == 1){
-      Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code='+data.code + '&productType='+data.type)
+      Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code='+data.code)
     } else if(data.type == 2){
-      Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + data.code + '&productType=' + data.type)
+      Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + data.code)
     }
   }
 })
