@@ -105,7 +105,7 @@ Page({
       let specPriceList = []
       for (let key in datas.specPriceList) {
         specPriceList.push({
-          name: key,
+          name: datas.specPriceList[key][0].productName,
           value: datas.specPriceList[key]
         })
         let total = 0

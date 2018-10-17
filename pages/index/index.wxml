@@ -11,7 +11,7 @@
        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'home_icon_xiaoxi@2x.png'}}"/>
       </view>
     </view>
-    <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:{{imgheights[0]}}rpx;' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff'>
+    <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:{{imgheights[0]}}rpx;min-height:400rpx' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff'>
     <block wx:for="{{imgUrls}}" wx:key='unique'>
       <swiper-item>
         <image src="{{item.imgUrl}}" class="slide-image" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' bindload="imageLoad" />
