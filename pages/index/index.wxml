@@ -100,12 +100,11 @@
   </view>
 
   <!-- 明星店铺 -->
-  <view class='star-shop-view' wx:if='{{starShop.length>0}}'>
+  <!-- <view class='star-shop-view' wx:if='{{starShop.length>0}}'>
     <view class='index-item-title flexR font-38'>明星店铺</view>
     <view class='star-shop-item whiteBg' wx:for='{{starShop}}' wx:key='{{index}}'>
      <image src='{{item.imgUrl}}' mode='widthFix'></image>
      <view class='flexR'>
-       <!-- logo -->
        <view class='star-shop-logo flexR-sb'>
          <image src='{{item.storeDTO.headUrl || "/img/default-userImg.png"}}' mode='widthFix'></image>
          <view>
@@ -116,19 +115,17 @@
           <view class='font-20 gray'>成员：{{item.storeDTO.storeUserNum}}</view>
          </view>
        </view>
-       <!-- 店铺收入 -->
        <view class='flexC monthIncome'>
          <text class='font-20 gray'>店铺本月收入</text>
          <view class='font-22'>{{item.storeDTO.tradeBalance}}</view>
        </view>
-       <!-- 累计收入 -->
        <view class='flexC totalIncome'>
         <text class='font-20 gray'>店铺累计收入</text>
         <view class='font-22'>{{item.storeDTO.totalTradeBalance}}</view>
        </view>
      </view>
     </view>    
-  </view>
+  </view> -->
 
   <!-- 今日榜单 -->
   <view class='today-list-view whiteBg' wx:if='{{todayList.length>0}}'>

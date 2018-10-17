@@ -55,11 +55,11 @@ Page({
           adArr: datas
         })
       });
-      this.queryAdList(3, '明星店铺推荐位', (datas) => {
-        this.setData({
-          starShop:datas
-        })
-      });
+      // this.queryAdList(3, '明星店铺推荐位', (datas) => {
+      //   this.setData({
+      //     starShop:datas
+      //   })
+      // });
       this.queryAdList(4, '今日榜单', (datas) => {
         this.setData({
           todayList:datas
