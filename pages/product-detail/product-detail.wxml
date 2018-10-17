@@ -40,6 +40,7 @@
      prop="{{proNavData}}"
      promotionBg="{{proNavData.status == 1 ? 'comming' : 'ing'}}" 
      promotionDesc="{{promotionDesc}}"
+     from="normal"
      promotionType="{{activityType}}" ></product-promotion-info>
     </view>
     <!-- 产品信息 -->

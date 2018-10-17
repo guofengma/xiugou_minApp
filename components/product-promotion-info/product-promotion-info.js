@@ -17,6 +17,10 @@ Component({
     promotionBg: {
       type: String,
       value: 'comming'
+    },
+    from: {
+      type: String,
+      value: ''
     }
   },
   data: {

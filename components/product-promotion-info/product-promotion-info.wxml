@@ -55,6 +55,6 @@
           </view>
         </view>
     </view>
-    
+    <image src='/img/right-arrow.png' wx:if="{{from}}" class='regular-jump-icon'></image>
   </view>
 </view>
