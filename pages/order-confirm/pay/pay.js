@@ -125,7 +125,7 @@ Page({
       if(index == 1){
         Tool.switchTab('/pages/index/index')
       } else {
-        Tool.redirectTo('/pages/my/my-order/my-order?query=1')
+        Tool.redirectTo('/pages/my/my-order/my-order?query='+(index-2))
       }
       
     },

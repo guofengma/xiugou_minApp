@@ -40,11 +40,10 @@
         <!-- 等级线 -->
         <view class='levelLineContent boxSize'>
           <view class='levelLine'>
-            <view class='myLevelLine' >
-            <!-- style='width:{{(userInfos.experience || 0)/(levelList[levelList.length-1].upgradeExp)}}%' -->
-              <view class='my-level-val font-22 whiteBg'>
+            <view class='myLevelLine' style='width:{{(userInfos.experience)/(levelList[levelList.length-1].upgradeExp)*100}}%' >
+              <view class='my-level-val font-22 whiteBg' >
                 <text class='triangle_border_up'></text>
-                11111
+                {{userInfos.experience}}
               </view>
             </view>
             <view class='levelVal font-22 flexC' wx:for='{{levelList}}' wx:key='{{index}}' style='left:{{(442/(levelList.length-1))*index-16}}rpx'>

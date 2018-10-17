@@ -317,13 +317,14 @@
   position: absolute;
   top:18rpx;
   border-radius: 20rpx;
-  right:-14rpx;
+  right:-20rpx;
   background: #fff;
   padding: 0rpx 8rpx;
   line-height:28rpx;
   display: inline-block;
   min-width: 20rpx;
   text-align: center;
+  color: #9B6D26;
 }
 .triangle_border_up{
   border-style: solid;
@@ -331,6 +332,6 @@
   border-color: transparent transparent #fff transparent;
   position: absolute;
   top:-14rpx;
-  left: 10rpx;
+  right: 11rpx;
   z-index: 999;
 }

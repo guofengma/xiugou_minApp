@@ -111,6 +111,8 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
+        let userInfos = req.responseObject.data 
+        userInfos.experience = userInfos.experience ? userInfos.experience:0
         this.setData({
           userInfos: req.responseObject.data
         })
