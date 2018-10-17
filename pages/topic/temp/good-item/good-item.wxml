@@ -9,8 +9,8 @@
       <image src="{{specImg}}"
         class='good-item-thumb'
       ></image>
-      <image class='good-soldout' wx:if="{{status == 3}}" src="/img/soldout.png"></image>
-      <image class='good-soldout' wx:if="{{status >= 4}}" src="/img/closing@2x.png"></image>
+      <image class='good-soldout' wx:if="{{status == 3}}" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/soldout.png/soldout.png"></image>
+      <image class='good-soldout' wx:if="{{status >= 4}}" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/soldout.png/closing@2x.png"></image>
     </view>
     
     <view class='good-detail'>
