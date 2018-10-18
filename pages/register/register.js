@@ -153,7 +153,6 @@ Page({
     });
     this.countdown(this);
     let params = {
-      templateCode: 'MOBILE_REGISTRATION_CODE',
       phone: this.data.phone,
       reqName: '发送短信',
       url: Operation.sendMessage,

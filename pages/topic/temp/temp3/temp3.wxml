@@ -6,7 +6,7 @@
   <!--导航  -->
   <template is="topic-bar" data="{{topicList,scrollLeft,currentTopicListIndex,topicTabWidth}}"/>
   <!--产品 -->
-  <view class='topic-prd-content topic-temp1'>
+  <view class='topic-prd-content topic-temp1' style="display:block;">
       <block wx:for='{{topicList.topicNavbarList[currentTopicListIndex].topicBannerProducts}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
         <template is="topic-prd-info" data="{{width:'216',bg:'#fff',ellipsis:'ellipsis',itemCount:3,...list,key}}"/>
       </block>
@@ -15,7 +15,7 @@
     <view class='topic-banner topic-temp'>
       <image src='{{item.bannerImg}}' mode='widthFix'></image>
     </view>
-    <view class='topic-prd-content topic-temp1'>
+    <view class='topic-prd-content topic-temp1' style="display:block;">
       <block wx:for='{{item.topicBannerProductList}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
         <template is="topic-prd-info" data="{{width:'216',bg:'#fff',ellipsis:'ellipsis',itemCount:3,...list,key,itemCount:3}}"/>
       </block>

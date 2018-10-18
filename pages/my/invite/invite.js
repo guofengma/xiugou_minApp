@@ -6,6 +6,7 @@ Page({
       token:'',
     },
     onLoad: function (options) {
+      Tool.isIPhoneX(this)
       this.refreshMemberInfoNotice()
       Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
     },

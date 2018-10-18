@@ -11,7 +11,7 @@
   height:68rpx;
 }
 .topic-prd-info{
-  margin-bottom:20rpx;
+  margin-bottom:26rpx;
   display: inline-block;
   margin-right: 26rpx; 
 }
