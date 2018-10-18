@@ -51,7 +51,6 @@ Component({
         let datas = [];
         let secondMap = new Map();
         let key = this.data.key;
-        
         for (let i in req.responseObject.data.data) {
           let item = req.responseObject.data.data[i];
           item.createTime = Tool.formatTime(item.createTime);
@@ -75,7 +74,7 @@ Component({
           secondArry: secondMap,
           key: key
         });
-        
+        console.log(this.data.list)
         if (!req.responseObject.data.totalPage) {
           this.setData({
             tipVal: 2
@@ -163,9 +162,11 @@ Component({
       r.addToQueue();
     },
     cancelOrder() {
+      console.log(1111)
       this.setData({
         isCancel: false,
-        list: []
+        list: [],
+        key:0
       });
       this.getData(this.data.num);
     },

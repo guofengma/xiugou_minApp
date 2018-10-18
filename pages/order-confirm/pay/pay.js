@@ -61,7 +61,7 @@ Page({
       
     },
     payOrder(payType){
-      if (this.data.payList.showTotalAmounts==0){
+      if (this.data.payList.totalAmounts==0){
         payType=1
       }
       let params ={
@@ -125,12 +125,16 @@ Page({
       if(index == 1){
         Tool.switchTab('/pages/index/index')
       } else {
-        Tool.redirectTo('/pages/my/my-order/my-order?query='+(index-2))
+        let query = ''
+        if(index==3){
+          query =1
+        }
+        Tool.redirectTo('/pages/my/my-order/my-order?query=' + query)
       }
       
     },
     continuePay(payType) {
-      if (this.data.payList.showTotalAmounts == 0) {
+      if (this.data.payList.totalAmounts == 0) {
         payType = 1
       }
       let params = {

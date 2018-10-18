@@ -160,9 +160,9 @@
       <view class='hot-sale-img'>
         <image src='{{list.imgUrl}}' mode='widthFix' catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'></image>
       </view>
-      <scroll-view scroll-x="true"   class='hot-sale-scroll'>
+      <scroll-view scroll-x="true"   class='hot-sale-scroll' wx:if='{{list.topicBannerProductDTOList.length>0}}'>
         <view class='hot-sale-content  boxSize'>
-          <block wx:for='{{list.topicBannerProductDTOList}}' wx:key='{{index}}'>
+          <block wx:for='{{list.topicBannerProductDTOList}}' wx:key='{{index}}' wx:if='{{index<8}}'>
             <view class='hot-sale-prd flexC'  catchtap='adListClicked' data-prodtype='{{item.productType}}' data-val='{{item.prodCode}}'>
               <image src='{{item.specImg}}'></image>
               <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName}}</view>
@@ -170,7 +170,7 @@
           </view>     
           </block>
            <!-- 查看更多  -->
-           <view class='hot-sale-more'>
+           <view class='hot-sale-more' wx:if='{{list.topicBannerProductDTOList.length>8}}'>
              <view class='font-22 flexC gray'>
               <view >查看更多</view>
               <view class='font-20'>View more</view>

@@ -41,7 +41,7 @@ Page({
         params: params
       })
       if (currentTab==0){
-        if(this.data.door==1){
+        if(this.data.door==1&&this.data.useType==2){
           this.availableDiscountCouponForProduct()
         } else {
           this.getDiscountCouponNoUse();
@@ -191,12 +191,12 @@ Page({
     toDetail(e){
       let index = e.currentTarget.dataset.index
       let key = e.currentTarget.dataset.key
+      Storage.setCoupon(this.data.lists[key][index])
       if(this.data.door==1&&key==0){
-        if (this) {
+        if (this.data.useType==1) {
           this.btnClicked()
         } else {
           this.data.lists[key][index].canClick= true
-          Storage.setCoupon(this.data.lists[key][index])
           Event.emit("updateCoupon")
           Tool.navigationPop()
         }
@@ -257,21 +257,28 @@ Page({
     onLoad: function (options) {
       let userInfo = Storage.getUserAccountInfo() || {}
       this.data.coinData.num = userInfo.tokenCoin || 0
-      if (this.data.coinData.num){
+      if (this.data.coinData.num && options.useType!=2){
         this.data.lists[0].unshift(this.data.coinData)
       }
-      let coinData = options.coin == 0 ? 1 : options.coin
       this.setData({
         door: options.door || '',
         useType: options.useType || '',
         lists: this.data.lists,
         productIds: options.productIds || '',
         coinData: this.data.coinData,
-        coinNum: coinData || ''
       })
-      if (this.data.door == 1 && this.data.useType==2){
-        this.availableDiscountCouponForProduct()
+      if (this.data.door == 1){
+        if (this.data.useType == 1){
+          this.setData({
+            coinNum: options.coin == 0 ? this.data.coinData.num : options.coin
+          })
+        } else {
+          this.availableDiscountCouponForProduct()
+        }
       } else {
+        this.setData({
+
+        })
         this.getDiscountCouponNoActive()
         this.getDiscountCouponNoUse();
       }
