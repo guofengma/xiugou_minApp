@@ -313,7 +313,6 @@ Page({
         }
       })
       arr2.push(num)
-      console.log(afrerSaleType)
       return arr2
     },
     middleBtn(){
@@ -332,7 +331,6 @@ Page({
           return item0 & item.restrictions == item0
         })
         let btnArr = this.test(arr)
-        console.log(btnArr)
         if (outOrderState == 2){
           if (btnArr[0]) middle = {  id: 1, content: '退款' }
         }

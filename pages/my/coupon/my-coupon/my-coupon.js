@@ -41,7 +41,7 @@ Page({
         params: params
       })
       if (currentTab==0){
-        if(this.data.door==1){
+        if(this.data.door==1&&this.data.useType==2){
           this.availableDiscountCouponForProduct()
         } else {
           this.getDiscountCouponNoUse();
@@ -68,7 +68,7 @@ Page({
       item.value = item.type == 3?  Tool.mul(item.value,0.1):item.value
 
       //优惠卷的使用范围
-      
+      item.products =item.products? item.products:[]
       let length = item.length
     
       if (length==0){
@@ -95,7 +95,7 @@ Page({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data
-        if (req.responseObject.data.totalPage == 0) return
+        if (req.responseObject.data.totalPage == 0 || datas.data==null) return
         datas.data.forEach((item,index)=>{
           item.outTime = Tool.timeStringForDateString(Tool.formatTime(item.expireTime),"YYYY.MM.DD");
           item.start_time = Tool.timeStringForDateString(Tool.formatTime(item.startTime), "YYYY.MM.DD");
@@ -191,12 +191,12 @@ Page({
     toDetail(e){
       let index = e.currentTarget.dataset.index
       let key = e.currentTarget.dataset.key
+      Storage.setCoupon(this.data.lists[key][index])
       if(this.data.door==1&&key==0){
-        if (this) {
+        if (this.data.useType==1) {
           this.btnClicked()
         } else {
           this.data.lists[key][index].canClick= true
-          Storage.setCoupon(this.data.lists[key][index])
           Event.emit("updateCoupon")
           Tool.navigationPop()
         }
@@ -257,21 +257,28 @@ Page({
     onLoad: function (options) {
       let userInfo = Storage.getUserAccountInfo() || {}
       this.data.coinData.num = userInfo.tokenCoin || 0
-      if (this.data.coinData.num){
+      if (this.data.coinData.num && options.useType!=2){
         this.data.lists[0].unshift(this.data.coinData)
       }
-      console.log()
       this.setData({
         door: options.door || '',
         useType: options.useType || '',
         lists: this.data.lists,
         productIds: options.productIds || '',
         coinData: this.data.coinData,
-        coinNum: options.coin == 0 ? 1 : options.coin
       })
-      if (this.data.door == 1 && this.data.useType==2){
-        this.availableDiscountCouponForProduct()
+      if (this.data.door == 1){
+        if (this.data.useType == 1){
+          this.setData({
+            coinNum: options.coin == 0 ? this.data.coinData.num : options.coin
+          })
+        } else {
+          this.availableDiscountCouponForProduct()
+        }
       } else {
+        this.setData({
+
+        })
         this.getDiscountCouponNoActive()
         this.getDiscountCouponNoUse();
       }

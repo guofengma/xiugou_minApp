@@ -29,8 +29,10 @@ Page({
         datas.showRefundTime = Tool.formatTime(datas.orderReturnAmounts.refundTime)
       } else if (datas.status == 3){
         datas.statusName = '商家拒绝你的请求' 
-        datas.showRefundTime = Tool.formatTime(datas.refusalTime)
-      } else{
+        datas.showRefundTime = Tool.formatTime(datas.refuseTime)
+      } else if (datas.status == 1){
+        datas.statusName = '申请中'
+      } else {
         datas.statusName = '退款中'
       }
       this.setData({

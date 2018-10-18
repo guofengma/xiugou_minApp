@@ -21,7 +21,8 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      list: Storage.getInnerOrderList() || ''
+      list: Storage.getInnerOrderList() || '',
+      returnProductId: options.returnProductId
     })
     this.findReturnProductById(options.returnProductId)
     Event.on('updataExpressNo', this.updataExpressNo, this)
@@ -30,6 +31,7 @@ Page({
     this.setData({
       expressNo: { id: 2, content: Storage.getExpressNo() }
     })
+    this.findReturnProductById(this.data.returnProductId)
   },
   findReturnProductById(returnProductId) {
     let list = this.data.list

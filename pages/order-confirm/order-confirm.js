@@ -31,13 +31,20 @@ Page({
   onShow: function () {
     this.updateCoupon()
   },
-  getTokenCoin(){
+  getTokenCoin(){ // 1元劵计算
     let useOneCoinNum = Storage.getTokenCoin() || 0
-    this.data.orderInfos.showTotalAmounts = Tool.sub(this.data.orderInfos.totalAmounts, useOneCoinNum)
-    this.setData({
-      useOneCoinNum: Number(useOneCoinNum),
-      orderInfos: this.data.orderInfos
-    })
+    if (this.data.orderInfos.totalAmounts>=1){
+      this.data.orderInfos.showTotalAmounts = Tool.sub(Math.floor(this.data.orderInfos.totalAmounts), useOneCoinNum)
+      if (this.data.orderInfos.showTotalAmounts<0){
+        this.data.orderInfos.showTotalAmounts = 0
+        useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
+      }
+      this.data.orderInfos.showTotalAmounts = Tool.sub(this.data.orderInfos.totalAmounts, useOneCoinNum)
+      this.setData({
+        useOneCoinNum: Number(useOneCoinNum),
+        orderInfos: this.data.orderInfos
+      })
+    }
   },
   couponClick() { // 是否点击了优惠卷
     this.setData({
@@ -117,35 +124,20 @@ Page({
       if (!this.data.isChangeAddress){
         addressList[1] = item.address
       }
+      item.showTotalAmounts = item.totalAmounts
       // item.totalAmounts = Tool.add(item.totalAmounts, item.totalFreightFee)
-      item.showTotalAmounts = Tool.sub(item.totalAmounts, this.data.useOneCoinNum)
       callBack(item)
 
       this.setData({
         orderInfos: item,
         addressList: addressList
       })
-      
+      if (this.data.useOneCoinNum>0){
+        this.getTokenCoin()
+      }
     };
     Tool.showErrMsg(r)
     r.addToQueue();
-  },
-  userScore(item){ // 计算积分
-    // 积分抵扣计算
-    let score = item.dealer.userScore > item.showTotalScore ? item.showTotalScore : item.dealer.userScore
-    item.showScore = score
-    // item.reducePrice = item.userScoreToBalance*score
-    item.reducePrice = Tool.mul(item.userScoreToBalance,score)
-    // 当商品可以使用积分 用户积分大于0的时候 显示可以使用积分
-    if (this.data.door != 0){
-      item.canUseScore = (item.showTotalScore > 0 && item.dealer.userScore) ? true : false
-      item.showTipsName = item.dealer.userScore <= 0? '暂无积分可用' : '不支持积分消费'
-    } else{
-      item.canUseScore =  false
-      item.showTipsName = '不支持积分消费'
-    }
-   
-    return item
   },
   addressClicked(){
     if (this.data.addressType!=1){
@@ -172,24 +164,6 @@ Page({
       if (isUseIntegral) {
         orderInfos.totalAmounts = Tool.sub(orderInfos.totalAmounts,orderInfos.reducePrice)
       }
-    }
-    this.setData({
-      orderInfos: orderInfos
-    })
-  },
-  switchChange(){
-    if (!this.data.orderInfos.canUseScore) return
-    this.setData({
-      isUseIntegral: !this.data.isUseIntegral,
-    })
-    this.getReducePrice()
-  },
-  getReducePrice(){
-    let { orderInfos, isUseIntegral} = this.data
-    if (isUseIntegral) {
-      orderInfos.totalAmounts = Tool.sub(orderInfos.totalAmounts, orderInfos.reducePrice) 
-    } else {
-      orderInfos.totalAmounts = Tool.add(orderInfos.totalAmounts, orderInfos.reducePrice) 
     }
     this.setData({
       orderInfos: orderInfos
@@ -283,7 +257,7 @@ Page({
     Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + this.data.useOneCoinNum)
   },
   couponClicked(){ // 点击使用优惠卷跳转
-    if (this.data.door != 99 || this.data.coupon.canClick===false) return
+    if ((this.data.door != 99 && this.data.door ==5)|| this.data.coupon.canClick===false) return
     let productIds = this.getCouponProductPriceIds()
     Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=2&productIds=" + JSON.stringify(productIds))
   },
@@ -298,7 +272,7 @@ Page({
     return productIds
   },
   availableDiscountCouponForProduct() { // 产品可用优惠劵列表
-    if(this.data.door!=99) return
+    if (this.data.door != 99&&this.data.door != 5) return
     let productIds = this.getCouponProductPriceIds()
     let params = {
       productPriceIds: productIds,
@@ -327,6 +301,41 @@ Page({
   onUnload: function () {
     Event.off('updateOrderAddress', this.updateOrderAddress)
     Event.off('updateCoupon', this.couponClick)
-  }
+  },
+    // switchChange(){
+  //   if (!this.data.orderInfos.canUseScore) return
+  //   this.setData({
+  //     isUseIntegral: !this.data.isUseIntegral,
+  //   })
+  //   this.getReducePrice()
+  // },
+  // getReducePrice(){
+  //   let { orderInfos, isUseIntegral} = this.data
+  //   if (isUseIntegral) {
+  //     orderInfos.totalAmounts = Tool.sub(orderInfos.totalAmounts, orderInfos.reducePrice) 
+  //   } else {
+  //     orderInfos.totalAmounts = Tool.add(orderInfos.totalAmounts, orderInfos.reducePrice) 
+  //   }
+  //   this.setData({
+  //     orderInfos: orderInfos
+  //   })
+  // },
+  // userScore(item){ // 计算积分
+  //   // 积分抵扣计算
+  //   let score = item.dealer.userScore > item.showTotalScore ? item.showTotalScore : item.dealer.userScore
+  //   item.showScore = score
+  //   // item.reducePrice = item.userScoreToBalance*score
+  //   item.reducePrice = Tool.mul(item.userScoreToBalance,score)
+  //   // 当商品可以使用积分 用户积分大于0的时候 显示可以使用积分
+  //   if (this.data.door != 0){
+  //     item.canUseScore = (item.showTotalScore > 0 && item.dealer.userScore) ? true : false
+  //     item.showTipsName = item.dealer.userScore <= 0? '暂无积分可用' : '不支持积分消费'
+  //   } else{
+  //     item.canUseScore =  false
+  //     item.showTipsName = '不支持积分消费'
+  //   }
+
+  //   return item
+  // },
 })
 
