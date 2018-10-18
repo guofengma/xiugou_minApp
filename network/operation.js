@@ -414,7 +414,7 @@ export default class Operation {
           2. phone:string
         */
 
-        this.sendMessage = '/user/phoneCode/sendMessage'
+        this.sendMessage = '/sms/sendMessage'
 
         /************************** 首页 *******************************/ 
 

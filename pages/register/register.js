@@ -153,10 +153,11 @@ Page({
     });
     this.countdown(this);
     let params = {
-      code: 'MOBILE_REGISTRATION_CODE',
+      templateCode: 'MOBILE_REGISTRATION_CODE',
       phone: this.data.phone,
       reqName: '发送短信',
       url: Operation.sendMessage,
+      requestMethod: 'GET',
       hasCookie: false
     }
     let r = RequestFactory.wxRequest(params);

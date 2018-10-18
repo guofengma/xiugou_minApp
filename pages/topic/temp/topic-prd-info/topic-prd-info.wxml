@@ -11,9 +11,9 @@
 </template> -->
 
 <template name="topic-prd-info">
-  <view class='topic-prd-info whiteBg' style='width:{{width}}rpx;margin-right:{{key%3==0? "0":"15"}}rpx' bindtap='productClicked' data-id='{{productId}}' data-type="{{productType}}" data-code="{{prodCode}}">
+  <view class='topic-prd-info whiteBg' style='width:{{width}}rpx;margin-right:{{(key+1)%itemCount==0? "0":"24"}}rpx' bindtap='productClicked' data-id='{{productId}}' data-type="{{productType}}" data-code="{{prodCode}}">
     <view class='prd-img-view flexR'>
-      <image src="{{specImg || 'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg'}}" style="height:{{width}}rpx;"></image>  
+      <image src="{{specImg}}" style="height:{{width}}rpx;"></image>  
       <!-- <view class='prd-info-model boxSize ellipsis'>哈吉斯带回家啊开始打瞌睡的哈萨克大赛科技大厦抠脚大汉看见爱上的啊啊上登记卡华师大看见爱上的</view> -->
     </view>
     <view class='prd-info whiteBg'>

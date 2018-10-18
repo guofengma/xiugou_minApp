@@ -36,10 +36,10 @@ Page({
     if (prdType == 99 ){
       Tool.navigateTo('/pages/product-detail/product-detail?productId=' + id + '&door=1')
     } else if (prdType==3){
-      Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + id + '&door=1')
+      Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + code + '&door=1')
     } else if(prdType == 2){
       Tool.navigateTo('/pages/discount-detail/discount-detail?code=' + code)
-    } else if(prdType == 3) {
+    } else if(prdType == 1) {
       Tool.navigateTo('/pages/seckill-detail/seckill-detail?code=' + code)
     }
   },
