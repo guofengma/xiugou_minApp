@@ -7,8 +7,10 @@
         bindtap="changeTopicTabIndex"
         style="width:{{width}}"
       >
-        <view class='tab-timeq-item-time'>{{item.navName}}</view>
-        <view class='tab-timeq-item-desc'>{{item.desc}}</view>
+        <view class='tab-item-wrap'>
+          <view class='tab-timeq-item-time'>{{item.navName}}</view>
+          <view class='tab-timeq-item-desc' wx:if="{{item.desc}}">{{item.desc}}</view>
+        </view>
       </view>
     </scroll-view>
   </view>    

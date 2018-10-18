@@ -6,14 +6,20 @@
   white-space: nowrap;
   position: relative;
   background: #f7f7f7;
+  margin-top: -20rpx;  
 }
 .tab-timeq-item {
-  /* width: 150rpx; */
   display: inline-block;
+}
+.tab-item-wrap {
+  /* width: 150rpx; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 20rpx 10rpx 15rpx;
-  background: #fff;
   box-sizing: border-box;
+  height: 110rpx;
 }
 .tab-timeq-item-time{
   color: #222;
@@ -30,7 +36,8 @@
   background: #D51243;
   position:relative;
 }
-.tab-timeq-ing::after{
+/* 导航箭头 */
+/* .tab-timeq-ing::after{
   display: block;
   content: '';
   width: 0;
@@ -42,7 +49,7 @@
   left:50%;
   transform: translateX(-50%);
   top: 100rpx;
-}
+} */
 .tab-timeq-ing .tab-timeq-item-time,.tab-timeq-ing .tab-timeq-item-desc{
   color: #fff;
 }
