@@ -170,7 +170,7 @@
           </view>     
           </block>
            <!-- 查看更多  -->
-           <view class='hot-sale-more' wx:if='{{list.topicBannerProductDTOList.length>8}}'>
+           <view class='hot-sale-more' wx:if='{{list.topicBannerProductDTOList.length>8}}' catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'>
              <view class='font-22 flexC gray'>
               <view >查看更多</view>
               <view class='font-20'>View more</view>
