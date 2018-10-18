@@ -33,18 +33,28 @@ Page({
   },
   getTokenCoin(){ // 1元劵计算
     let useOneCoinNum = Storage.getTokenCoin() || 0
-    if (this.data.orderInfos.totalAmounts>=1){
-      this.data.orderInfos.showTotalAmounts = Tool.sub(Math.floor(this.data.orderInfos.totalAmounts), useOneCoinNum)
-      if (this.data.orderInfos.showTotalAmounts<0){
-        this.data.orderInfos.showTotalAmounts = 0
-        useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
-      }
-      this.data.orderInfos.showTotalAmounts = Tool.sub(this.data.orderInfos.totalAmounts, useOneCoinNum)
-      this.setData({
-        useOneCoinNum: Number(useOneCoinNum),
-        orderInfos: this.data.orderInfos
-      })
+    if (useOneCoinNum > this.data.orderInfos.totalAmounts){
+      useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
     }
+    this.data.params.tokenCoin = useOneCoinNum 
+    this.setData({
+      useOneCoinNum: Number(useOneCoinNum),
+      params: this.data.params
+    })
+    if (useOneCoinNum>0)
+    this.requestOrderInfo()
+    // if (this.data.orderInfos.totalAmounts>=1){
+    //   this.data.orderInfos.showTotalAmounts = Tool.sub(Math.floor(this.data.orderInfos.totalAmounts), useOneCoinNum)
+    //   if (this.data.orderInfos.showTotalAmounts<0){
+    //     this.data.orderInfos.showTotalAmounts = 0
+    //     useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
+    //   }
+    //   this.data.orderInfos.showTotalAmounts = Tool.sub(this.data.orderInfos.totalAmounts, useOneCoinNum)
+    //   this.setData({
+    //     useOneCoinNum: Number(useOneCoinNum),
+    //     orderInfos: this.data.orderInfos
+    //   })
+    // }
   },
   couponClick() { // 是否点击了优惠卷
     this.setData({
@@ -124,7 +134,7 @@ Page({
       if (!this.data.isChangeAddress){
         addressList[1] = item.address
       }
-      item.showTotalAmounts = item.totalAmounts
+      // item.showTotalAmounts = item.totalAmounts
       // item.totalAmounts = Tool.add(item.totalAmounts, item.totalFreightFee)
       callBack(item)
 
@@ -132,9 +142,9 @@ Page({
         orderInfos: item,
         addressList: addressList
       })
-      if (this.data.useOneCoinNum>0){
-        this.getTokenCoin()
-      }
+      // if (this.data.useOneCoinNum>0){
+      //   this.getTokenCoin()
+      // }
     };
     Tool.showErrMsg(r)
     r.addToQueue();
@@ -302,7 +312,7 @@ Page({
     Event.off('updateOrderAddress', this.updateOrderAddress)
     Event.off('updateCoupon', this.couponClick)
   },
-    // switchChange(){
+  // switchChange(){
   //   if (!this.data.orderInfos.canUseScore) return
   //   this.setData({
   //     isUseIntegral: !this.data.isUseIntegral,

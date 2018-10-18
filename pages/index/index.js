@@ -45,6 +45,7 @@ Page({
       }
     },
     onLoad: function () {
+      Event.on('getLevel', this.getLevel,this)
       this.queryAdList(1,'轮播图片',(datas)=>{
         this.setData({
           imgUrls:datas
