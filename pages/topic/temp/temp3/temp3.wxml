@@ -6,19 +6,26 @@
   <!--导航  -->
   <template is="topic-bar" data="{{topicList,scrollLeft,currentTopicListIndex,topicTabWidth}}"/>
   <!--产品 -->
-  <view class='topic-prd-content topic-temp1' style="display:block;">
+  <view class='topic-prd-content topic-temp1'>
       <block wx:for='{{topicList.topicNavbarList[currentTopicListIndex].topicBannerProducts}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
-        <template is="topic-prd-info" data="{{width:'216',bg:'#fff',ellipsis:'ellipsis',itemCount:3,...list,key}}"/>
+        <template is="topic-prd-info" data="{{width:'216',bg:'#fff',ellipsis:'ellipsis',...list,key}}"/>
       </block>
+      <!-- 防止数量为5的时候第二行出现两边对齐的情况 -->
+      <view style='width:216rpx;height:0;border:0'></view>
+      <view style='width:216rpx;height:0;border:0'></view>
+      <view style='width:216rpx;height:0;border:0'></view>
   </view>
   <block wx:for='{{topicList.topicNavbarList[currentTopicListIndex].topicNavbarBannerList}}'  wx:key='unique'>
     <view class='topic-banner topic-temp'>
       <image src='{{item.bannerImg}}' mode='widthFix'></image>
     </view>
-    <view class='topic-prd-content topic-temp1' style="display:block;">
+    <view class='topic-prd-content topic-temp1' >
       <block wx:for='{{item.topicBannerProductList}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
-        <template is="topic-prd-info" data="{{width:'216',bg:'#fff',ellipsis:'ellipsis',itemCount:3,...list,key,itemCount:3}}"/>
+        <template is="topic-prd-info" data="{{width:'216',bg:'#fff',ellipsis:'ellipsis',...list,key,itemCount:3}}"/>
       </block>
+      <view style='width:216rpx;height:0;border:0'></view>
+      <view style='width:216rpx;height:0;border:0'></view>
+      <view style='width:216rpx;height:0;border:0'></view>
     </view>
   </block>
 </template>
