@@ -36,9 +36,9 @@
 .topic-prd-content{
   padding: 0 30rpx;
   margin-top:20rpx;
-  /* display: flex;
+  display: flex;
   justify-content:space-between;
-  flex-wrap:wrap; */
+  flex-wrap:wrap; 
 }
 .topic-banner{
   width: 100%;
