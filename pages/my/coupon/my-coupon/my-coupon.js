@@ -68,7 +68,7 @@ Page({
       item.value = item.type == 3?  Tool.mul(item.value,0.1):item.value
 
       //优惠卷的使用范围
-      
+      item.products =item.products? item.products:[]
       let length = item.length
     
       if (length==0){
@@ -95,7 +95,7 @@ Page({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data
-        if (req.responseObject.data.totalPage == 0) return
+        if (req.responseObject.data.totalPage == 0 || datas.data==null) return
         datas.data.forEach((item,index)=>{
           item.outTime = Tool.timeStringForDateString(Tool.formatTime(item.expireTime),"YYYY.MM.DD");
           item.start_time = Tool.timeStringForDateString(Tool.formatTime(item.startTime), "YYYY.MM.DD");
@@ -260,14 +260,14 @@ Page({
       if (this.data.coinData.num){
         this.data.lists[0].unshift(this.data.coinData)
       }
-      console.log()
+      let coinData = options.coin == 0 ? 1 : options.coin
       this.setData({
         door: options.door || '',
         useType: options.useType || '',
         lists: this.data.lists,
         productIds: options.productIds || '',
         coinData: this.data.coinData,
-        coinNum: options.coin == 0 ? 1 : options.coin
+        coinNum: coinData || ''
       })
       if (this.data.door == 1 && this.data.useType==2){
         this.availableDiscountCouponForProduct()

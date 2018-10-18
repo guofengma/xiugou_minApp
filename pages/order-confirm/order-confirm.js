@@ -33,11 +33,13 @@ Page({
   },
   getTokenCoin(){
     let useOneCoinNum = Storage.getTokenCoin() || 0
-    this.data.orderInfos.showTotalAmounts = Tool.sub(this.data.orderInfos.totalAmounts, useOneCoinNum)
-    this.setData({
-      useOneCoinNum: Number(useOneCoinNum),
-      orderInfos: this.data.orderInfos
-    })
+    if (this.data.orderInfos.totalAmounts>=1){
+      this.data.orderInfos.showTotalAmounts = Tool.sub(this.data.orderInfos.totalAmounts, useOneCoinNum)
+      this.setData({
+        useOneCoinNum: Number(useOneCoinNum),
+        orderInfos: this.data.orderInfos
+      })
+    }
   },
   couponClick() { // 是否点击了优惠卷
     this.setData({
@@ -117,8 +119,12 @@ Page({
       if (!this.data.isChangeAddress){
         addressList[1] = item.address
       }
+      item.showTotalAmounts = item.totalAmounts
       // item.totalAmounts = Tool.add(item.totalAmounts, item.totalFreightFee)
-      item.showTotalAmounts = Tool.sub(item.totalAmounts, this.data.useOneCoinNum)
+      if (this.data.orderInfos.totalAmounts >= 1){
+        item.showTotalAmounts = Tool.sub(item.totalAmounts, this.data.useOneCoinNum)
+      }
+      
       callBack(item)
 
       this.setData({
@@ -283,7 +289,7 @@ Page({
     Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + this.data.useOneCoinNum)
   },
   couponClicked(){ // 点击使用优惠卷跳转
-    if (this.data.door != 99 || this.data.coupon.canClick===false) return
+    if ((this.data.door != 99 && this.data.door ==5)|| this.data.coupon.canClick===false) return
     let productIds = this.getCouponProductPriceIds()
     Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=2&productIds=" + JSON.stringify(productIds))
   },
@@ -298,7 +304,7 @@ Page({
     return productIds
   },
   availableDiscountCouponForProduct() { // 产品可用优惠劵列表
-    if(this.data.door!=99) return
+    if (this.data.door != 99&&this.data.door != 5) return
     let productIds = this.getCouponProductPriceIds()
     let params = {
       productPriceIds: productIds,
