@@ -412,9 +412,10 @@ export default class Operation {
           手机号修改绑定新手机：MOBILE_VERIFYNEWPHONE_CODE
           登录时忘记密码：MOBILE_FORGETPASSWORD_CODE
           2. phone:string
+          2018年10月18日接口修改 短信接口只需传phone即可  @ydg
         */
 
-        this.sendMessage = '/sms/sendMessage'
+        this.sendMessage = '/sms/sendRegMessage'
 
         /************************** 首页 *******************************/ 
 
