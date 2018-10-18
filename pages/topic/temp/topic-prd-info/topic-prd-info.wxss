@@ -13,7 +13,7 @@
 .topic-prd-info{
   margin-bottom:26rpx;
   display: inline-block;
-  margin-right: 26rpx; 
+  /* margin-right: 26rpx;  */
 }
 .prd-info-model{
   position: absolute;
