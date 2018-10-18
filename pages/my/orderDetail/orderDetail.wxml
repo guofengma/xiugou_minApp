@@ -89,7 +89,7 @@
                 <view></view>
             </view>
             <text>{{detail.orderPayRecord? "实付款":"需付款"}}</text>
-            <text class='red'>¥{{detail.orderPayRecord.amounts || detail.needPrice}}</text>
+            <text class='red'>¥{{detail.needPrice}}</text>
         </view>
     </view>
 

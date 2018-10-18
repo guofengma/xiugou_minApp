@@ -33,7 +33,7 @@
   <template is="address-saler" data="{{addressType,src,datas,hasData:true}}"/>
 
   <!--物流  -->
-  <view catchtap='logClicked' data-express='{{expressNo}}' wx:if='{{datas.status!=3&&!expressNo.id}}'>
+  <view catchtap='logClicked' data-express='{{expressNo}}' wx:if='{{datas.status!=3&&!expressNo.id || expressNo.id}}'>
     <template is="cell-line" data="{{name:'退货物流',placeholder:expressNo.content}}"/>
   </view>
 </view>
