@@ -17,7 +17,7 @@
     </view>
     <view class='topic-prd-content topic-temp1'>
       <block wx:for='{{item.topicBannerProductList}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
-        <template is="topic-prd-info" data="{{width:'335',bg:'#fff',ellipsis:'ellipsis',...list,key}}"/>
+        <template is="topic-prd-info" data="{{width:'335',bg:'#fff',ellipsis:'ellipsis',itemCount:2,...list,key}}"/>
       </block>
     </view>
   </block>
