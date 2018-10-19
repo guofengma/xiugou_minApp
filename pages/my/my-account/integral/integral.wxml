@@ -9,7 +9,7 @@
               {{account}}
             </view>
           </view>
-          <view class='coinBtn font-28 flexR'>
+          <view class='coinBtn font-28 flexR' catchtap='goPage'>
             <view>兑换1元现金劵</view>
           </view>
         </view>
@@ -24,7 +24,7 @@
             </view>
           </view>
           <view class="money {{item.add?'red':''}}">
-              <text>{{item.add?'+':'-'}}</text>{{item.userScore}}
+              <text>{{item.add?'+':'-'}}</text>{{item.userScore || 0}}
           </view>
         </view>
     </view>

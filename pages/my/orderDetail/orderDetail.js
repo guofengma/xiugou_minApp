@@ -12,6 +12,7 @@ Page({
       },
       afterSaleTypeArr:[1,2,4,8,16],// 不支持优惠卷  不支持1元劵  不支持退款 不支持换货 不支持退货 
       types:['退款','换货','退货','退换'],
+      returnTypeArr: ['', '退款', '退货', '换货'],
       hasData:true,
       imgSrcUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/',
       logIcon: 'order-state-3-dark.png',
@@ -147,9 +148,17 @@ Page({
     },
     //确认收货
     confirmReceipt() {
+      let content = '确认收货吗?'
+        let list = this.data.detail.orderProductList
+        list.forEach((item,index)=>{
+          let returnProductStatus = item.returnProductStatus || 99999
+          if (returnProductStatus < 6 && returnProductStatus != 3) {
+            content = '确认收货将关闭' + this.data.returnTypeArr[item.returnType] + "申请，确认收货吗？"
+          }
+        })
         let id = this.data.orderId;
         let that=this;
-        Tool.showComfirm('确认收货？', function () {
+      Tool.showComfirm(content, function () {
           let params = {
             orderNum: that.data.detail.orderNum,
             reqName: '确认收货',

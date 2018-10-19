@@ -179,18 +179,18 @@ Component({
     },
     //确认收货
     confirmReceipt(e) {
-      let content = '确认收货吗'
+      let content = '确认收货吗?'
       let index = e.currentTarget.dataset.index;
       let id = e.currentTarget.dataset.id;
       let list = this.data.list[index]
       list.orderProductList.forEach((item,index)=>{
-        console.log(item.returnProductStatus)
-        if (item.returnProductStatus < 6 && item.returnProductStatus!=3){
-          content = '确认收货讲关闭' + this.data.returnTypeArr[item.returnType]+"申请确认收货吗？"
+        let returnProductStatus = item.returnProductStatus || 99999
+        if (returnProductStatus < 6 && returnProductStatus!=3){
+          content = '确认收货将关闭' + this.data.returnTypeArr[item.returnType]+"申请，确认收货吗？"
         }
       })
       let that = this;
-      Tool.showComfirm('确认收货？', function () {
+      Tool.showComfirm(content, function () {
         let params = {
           orderNum: id,
           reqName: '确认收货',
