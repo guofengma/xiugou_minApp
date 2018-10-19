@@ -38,11 +38,15 @@ Page({
     }
     this.data.params.tokenCoin = useOneCoinNum 
     this.setData({
-      useOneCoinNum: Number(useOneCoinNum),
       params: this.data.params
     })
+    let callBack = ()=>{
+      this.setData({
+        useOneCoinNum: Number(useOneCoinNum)
+      })
+    }
     if (useOneCoinNum>0)
-    this.requestOrderInfo()
+    this.requestOrderInfo(callBack)
     // if (this.data.orderInfos.totalAmounts>=1){
     //   this.data.orderInfos.showTotalAmounts = Tool.sub(Math.floor(this.data.orderInfos.totalAmounts), useOneCoinNum)
     //   if (this.data.orderInfos.showTotalAmounts<0){
@@ -108,19 +112,17 @@ Page({
      
       //渲染产品信息列表
       let showProduct =[]
-      // if(this.data.door==99){
-        item.orderProductList.forEach((item0,index)=>{
-          showProduct.push({
-            showImg: item0.specImg,
-            showName: item0.productName,
-            showType: item0.spec,
-            showPrice: item0.price,
-            showQnt: item0.num,
-            status: 1,
-            stock: item0.stock,
-          })
+      item.orderProductList.forEach((item0,index)=>{
+        showProduct.push({
+          showImg: item0.specImg,
+          showName: item0.productName,
+          showType: item0.spec,
+          showPrice: item0.price,
+          showQnt: item0.num,
+          status: 1,
+          stock: item0.stock,
         })
-      // }
+      })
 
       item.showProduct = showProduct
       
@@ -200,10 +202,6 @@ Page({
     })
   },
   payBtnClicked(){ // 提交订单
-    let score = this.data.orderInfos.showScore
-    if (!this.data.isUseIntegral){
-        score=0
-    }
     let orderAddress = this.data.addressList[this.data.addressType]
     if (!orderAddress){
       Tool.showAlert('请选择订单地址')
@@ -254,7 +252,8 @@ Page({
     }
     Object.assign(params, params, orderTypeParmas)
     let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {        
+    r.successBlock = (req) => {
+      Event.emit('getLevel')  
       Event.emit('updateShoppingCart')
       let data = req.responseObject.data
       Storage.setPayOrderList(data)

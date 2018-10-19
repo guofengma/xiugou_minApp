@@ -81,7 +81,6 @@ Page({
         time: time,
         result: this.data.result
       })
-      Event.emit('getDetail')
     };
     Tool.showErrMsg(r)
     r.addToQueue();
@@ -101,6 +100,7 @@ Page({
     Tool.navigateTo(page)
   },
   onUnload: function () {
+    Event.emit('getDetail')
     clearInterval(this.data.time)
     Event.off('updataExpressNo', this.updataExpressNo)
   },
