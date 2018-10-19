@@ -833,7 +833,7 @@ export default class Tool {
 
     static didLogin(that) {
       let userInfo = global.Storage.getUserAccountInfo() ? global.Storage.getUserAccountInfo():{}
-      let didLogin = userInfo.id && global.Storage.getUserCookie()? true : false
+      let didLogin = userInfo.id && global.Storage.getToken()? true : false
       that.setData({
         didLogin: didLogin
       })
@@ -843,8 +843,12 @@ export default class Tool {
     // 登录以后的操作
 
     static loginOpt(req){
-      let cookies = req.header['Set-Cookie'] || req.header['set-cookie'] 
-      if (cookies) this.formatCookie(cookies)
+      // let cookies = req.header['Set-Cookie'] || req.header['set-cookie'] 
+      // if (cookies) this.formatCookie(cookies)
+      if (req.responseObject.data.token){
+        global.Storage.setToken(req.responseObject.data.token)
+      }
+      
       global.Storage.setUserAccountInfo(req.responseObject.data)
       global.Event.emit('didLogin');
       global.Storage.setWxOpenid(req.responseObject.data.openid)
@@ -1044,6 +1048,13 @@ export default class Tool {
       result.push(array.slice(i, i + num));
     }
     return result
+  }
+
+  static getUUID() {
+    return 'xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/[xy]/g, function (c) {
+      let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
   }
 }
 

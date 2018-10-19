@@ -248,4 +248,21 @@ export default class Storage {
       return this.getterFor('payOrderList');
     } 
     
+    // getToken()
+
+    static setToken(info) {
+      this.setterFor('userToken', info)
+    }
+
+    static getToken() {
+      return this.getterFor('userToken');
+    } 
+
+    static setPlatform(info) {
+      this.setterFor('platform', info)
+    }
+
+    static getPlatform() {
+      return this.getterFor('platform');
+    } 
 }
