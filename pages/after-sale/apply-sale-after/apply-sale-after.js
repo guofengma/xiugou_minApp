@@ -63,6 +63,7 @@ Page({
     queryReasonParams:[
       'TKLY', 'THTK','HHLY'
     ], // 2 退款理由 3 换货理由 4 退货退款
+    stateArr:['',"申请中","已同意","已拒绝",'中',"中","完成","超时","超时"],
     originalImg:[],
     smallImg:[],
     remark:'',
@@ -149,11 +150,20 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let data = req.responseObject.data
-      data.imgUrl = data.specImg ? data.specImg : this.data.list.imgUrl
-      data.createTime = Tool.formatTime(data.orderCreateTime)
-      this.setData({
-        orderInfos: data
-      })
+      if (data.status==1){
+        data.imgUrl = data.specImg ? data.specImg : this.data.list.imgUrl
+        data.createTime = Tool.formatTime(data.orderCreateTime)
+        this.setData({
+          orderInfos: data
+        })
+      } else if (data.status != 1 && data.returnProductId) {
+        let callBack = ()=>{
+          Tool.redirectTo('/pages/my/my-order/my-order')
+        }
+        let content = "售后"+this.data.stateArr[data.status]+",不能修改申请"
+        Tool.showAlert(content,callBack)
+      }
+      
     }
     Tool.showErrMsg(r)
     r.addToQueue();
