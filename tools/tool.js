@@ -472,8 +472,6 @@ export default class Tool {
     }
 
     static redirectTo(url, success, fail, complete) {
-        // console.log('\n\n******************************************************************************************');
-        // console.log('redirectTo:' + url);
         wx.redirectTo({
             url: url,
             success: success,
@@ -484,8 +482,6 @@ export default class Tool {
     }
 
     static switchTab(url, success, fail, complete) {
-        // console.log('\n\n******************************************************************************************');
-        // console.log('switchTab:' + url);
         wx.switchTab({
             url: url,
             success: success,
@@ -495,8 +491,6 @@ export default class Tool {
     }
    
     static navigateTo(url, success, fail, complete) {
-        // console.log('\n\n******************************************************************************************');
-        // console.log('navigateTo:' + url);
         wx.navigateTo({
             url: url,
             success: success,
@@ -741,23 +735,6 @@ export default class Tool {
       }
       return false
     }
-    // 格式化服务器端返回的cookie
-
-    static formatCookie(cookies) {
-      let __cookies = [];
-      (cookies.match(/([\w\-.]*)=([^\s]+);/g) ||[]).forEach((str) => {
-        if (str.indexOf('Path=/') !== 0) {
-          __cookies.push(str);
-        } else if (str.indexOf('token2') != -1){
-          let token2 = str.slice(7)
-          __cookies.push(token2);
-        }
-      });
-      //  最后发送的
-      let myCookie = __cookies.join('')
-      global.Storage.setUserCookie(myCookie)
-      return myCookie
-    }
 
     // 获取用户账号信息 
 
@@ -824,7 +801,6 @@ export default class Tool {
     static showErrMsg(r,callBack=()=>{}) {
       r.failBlock = (req) => {
         console.log(req)
-        // let page = this.getCurrentPageUrlWithArgs() //获取当前额页面
         if (req.responseObject.code==10009){ // 超时登录
           callBack =()=>{
             let page = '/pages/login-wx/login-wx'
@@ -835,32 +811,38 @@ export default class Tool {
       }
     }
 
+    // 格式化服务器端返回的cookie
+
+    static formatCookie(cookies) {
+      let __cookies = [];
+      (cookies.match(/([\w\-.]*)=([^\s]+);/g) || []).forEach((str) => {
+        if (str.indexOf('Path=/') !== 0) {
+          __cookies.push(str);
+        } else if (str.indexOf('token2') != -1) {
+          let token2 = str.slice(7)
+          __cookies.push(token2);
+        }
+      });
+      //  最后发送的
+      let myCookie = __cookies.join('')
+      global.Storage.setUserCookie(myCookie)
+      return myCookie
+    }
+
     // 是否登录
 
     static didLogin(that) {
-      // let didLogin = global.Storage.getUserCookie() !='out' ? true : false
       let userInfo = global.Storage.getUserAccountInfo() ? global.Storage.getUserAccountInfo():{}
-    
       let didLogin = userInfo.id && global.Storage.getUserCookie()? true : false
-
-      console.log(userInfo.id)
       that.setData({
         didLogin: didLogin
       })
       return didLogin
     }
 
-    static loginLimit(that,item) {
-      let didLogin = this.didLogin(that)
-      if (!didLogin && item.index==4){
-        this.navigateTo('/pages/login/login-wx/login-wx')
-      }
-    }
-
     // 登录以后的操作
 
     static loginOpt(req){
-      // 获取 cookies
       let cookies = req.header['Set-Cookie'] || req.header['set-cookie'] 
       if (cookies) this.formatCookie(cookies)
       global.Storage.setUserAccountInfo(req.responseObject.data)
@@ -1007,16 +989,9 @@ export default class Tool {
       returnProduct.applyTime = global.Tool.formatTime(returnProduct.applyTime)
       returnProduct.imgUrl = returnProduct.specImg
       returnProduct.productName = returnProduct.productName
-      // if (data.returnAmountsRecord) {
-      //   returnProduct.showAmount = data.returnAmountsRecord.showAmount = returnProduct.price * returnProduct.num
-      //   if (data.returnAmountsRecord.refundTime)
-      //     data.returnAmountsRecord.showRefundTime = global.Tool.formatTime(data.returnAmountsRecord.refundTime)
-      // }
       if (returnProduct.returnAddress) {
         returnProduct.returnAddress.addressInfo = returnProduct.returnAddress.provinceName + returnProduct.returnAddress.cityName + returnProduct.returnAddress.areaName
       }
-      // data.receive.addressInfo = data.receive.address
-      // return req
     }
 
     // 根据屏幕大小 高度自适应

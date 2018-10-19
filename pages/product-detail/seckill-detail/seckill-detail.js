@@ -311,7 +311,7 @@ Page({
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/product-detail?productId=' + this.data.productId,
+      path: '/pages/order-confirm/order-confirm?productId=' + this.data.productId,
       imageUrl: imgUrl
     }
   },

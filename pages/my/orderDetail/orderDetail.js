@@ -346,12 +346,6 @@ Page({
           }
           
         }
-        // if (outOrderState == 4 ) {
-        //   // 确认收货的状态的订单售后截止时间和当前时间比
-        //   if (finishTime - now>0){
-        //     middle = { id: 2, content: '退换' }
-        //   }      
-        // }
         if (innerState == 4) {
           let arr = ["退款中",'退货中','换货中']
           middle = { id: 3, inner: innerState, content: arr[returnType-1],returnType: returnType } 
