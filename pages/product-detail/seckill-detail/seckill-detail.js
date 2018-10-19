@@ -302,7 +302,10 @@ Page({
     })
   },
   onShareAppMessage: function (res) {
-
+    // 这里要把下拉列表给隐藏掉  不然分享出去的图片里会显示列表下拉的状态
+    this.setData({
+      msgShow: !this.data.msgShow
+    })
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)
@@ -311,7 +314,7 @@ Page({
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/order-confirm/order-confirm?productId=' + this.data.productId,
+      path: '/pages/product-detail/seckill-detail/seckill-detail?code=' + this.data.prodCode,
       imageUrl: imgUrl
     }
   },
