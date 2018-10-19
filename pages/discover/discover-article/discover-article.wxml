@@ -1,0 +1,20 @@
+<template name="discover-article">
+  <view class="discover-article-container">
+    <view class='discover-article_thumb'>
+      <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
+      <view class='discover-article_desc'>氨基酸洗面奶，30秒自动起泡清洁力强不伤脸，不含角质合痘痘肌和敏感肌，涂抹在手上等...</view>
+    </view>
+    <view class="discover-article_body">
+      <view class='discover-article_info'>
+        <view class='discover_author'>
+          <image class='discover_avatar' src='https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/TB2EtekiP3z9KJjy0FmXXXiwXXa_!!2867551008.jpg'></image>
+          <view class='discover_author_name'>、霓娜</view>
+          <view class='discover_view'>
+            <image src='/img/icon_view@3x.png'></image>
+            <text>1235</text>
+          </view>  
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
