@@ -87,7 +87,10 @@ export default class Request {
       method: this.requestMethod,
       header: {
         'content-type': 'application/json',
-        'Cookie': this.hasCookie()
+        // 'Cookie': this.hasCookie(),
+        'device': global.Storage.getPlatform() || '',
+        'platform': this.bodyParam.systemVersion,
+        'sg-token': global.Storage.getToken() || ''
       },
       success: function (res) {
         if (that.managerLoadingPrompt) {

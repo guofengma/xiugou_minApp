@@ -126,7 +126,7 @@ Page({
       let params = {
         requestMethod: 'GET',
         url: Operation.getLevelInfos,
-        hasCookie: false
+        // hasCookie: false
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
@@ -143,7 +143,7 @@ Page({
         'type': types,
         reqName: reqName,
         url: Operation.queryAdList,
-        hasCookie: false
+        // hasCookie: false
       }
       let r = RequestFactory.wxRequest(params);
         r.successBlock = (req) => {
@@ -201,7 +201,7 @@ Page({
       this.getIsLogin(callBack)
     },
     getIsLogin(callBack=()=>{}){
-      let cookie = Storage.getUserCookie() || ''
+      let cookie = Storage.getToken() || ''
       if (!this.data.didLogin && !cookie) {
         Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
         return
