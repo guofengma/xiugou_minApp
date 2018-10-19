@@ -18,7 +18,8 @@ Component({
     status: '',
     orderNum: '',
     key: 0,
-    time:""
+    time:"",
+    returnTypeArr:['','退款','退货','换货']
   },
   methods: {
     //获取列表数据
@@ -115,7 +116,6 @@ Component({
     //删除订单
     deleteItem(e) {
       let id = e.currentTarget.dataset.id;
-      console.log(id)
       let status = e.currentTarget.dataset.status;
       this.setData({
         isDelete: true,
@@ -179,7 +179,16 @@ Component({
     },
     //确认收货
     confirmReceipt(e) {
+      let content = '确认收货吗'
+      let index = e.currentTarget.dataset.index;
       let id = e.currentTarget.dataset.id;
+      let list = this.data.list[index]
+      list.orderProductList.forEach((item,index)=>{
+        console.log(item.returnProductStatus)
+        if (item.returnProductStatus < 6 && item.returnProductStatus!=3){
+          content = '确认收货讲关闭' + this.data.returnTypeArr[item.returnType]+"申请确认收货吗？"
+        }
+      })
       let that = this;
       Tool.showComfirm('确认收货？', function () {
         let params = {

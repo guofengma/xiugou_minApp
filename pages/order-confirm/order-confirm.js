@@ -36,7 +36,7 @@ Page({
     if (useOneCoinNum > this.data.orderInfos.totalAmounts){
       useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
     }
-    this.data.params.tokenCoin = useOneCoinNum 
+    this.data.params.tokenCoin = Number(useOneCoinNum)
     this.setData({
       params: this.data.params
     })
@@ -222,7 +222,7 @@ Page({
       "provinceCode": orderAddress.provinceCode || '',
       "receiver": orderAddress.receiver || '',
       "recevicePhone": orderAddress.receiverPhone || '',
-      tokenCoin: this.data.useOneCoinNum, // 一元劵  
+      tokenCoin: Number(this.data.useOneCoinNum), // 一元劵  
       reqName: '订单结算', 
     }
     let orderTypeParmas ={}
@@ -263,7 +263,8 @@ Page({
     r.addToQueue();
   },
   iconClicked(){ // 点击使用1元劵跳转
-    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + this.data.useOneCoinNum)
+    let useOneCoinNum = this.data.useOneCoinNum ? this.data.useOneCoinNum : Math.floor(this.data.orderInfos.totalAmounts)
+    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + useOneCoinNum)
   },
   couponClicked(){ // 点击使用优惠卷跳转
     if ((this.data.door != 99 && this.data.door ==5)|| this.data.coupon.canClick===false) return
