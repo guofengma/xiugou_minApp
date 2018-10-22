@@ -5,6 +5,6 @@
     <view class='title2'>专属你的惊喜福利活动</view>
     <view class='title3' style="margin-top: {{isIPhoneX.isIPhoneX ? '260':'160'}}rpx">免费领取福利</view>
     <view class='title4'>数量有限赶快参与吧~</view>
-    <button open-type='share' class='share-button'>分享至...{{isIPhoneX.isIPhoneX}}</button>
+    <button open-type='share' class='share-button'>分享至...</button>
   </view>
 </view>
