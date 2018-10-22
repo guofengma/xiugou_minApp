@@ -31,10 +31,15 @@ Page({
   onLoad: function (options) {
     this.setData({
       giftBagId: options.giftBagId || '',
+      inviteCode: options.inviteCode || ''
     })
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
     this.closeMask()
+    this.refreshMemberInfoNotice()
+  },
+  refreshMemberInfoNotice() {
+    Tool.getUserInfos(this)
   },
   onShow: function () {
     this.getGiftBagDetail()
@@ -63,7 +68,7 @@ Page({
   giftBagClicked() {
     // 立即购买
     if (!this.data.didLogin) { // 未登录
-      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true + '&inviteCode=' + this.data.inviteCode)
       return
     }
     
@@ -234,11 +239,12 @@ Page({
     })
   },
   onShareAppMessage: function (res) {
+    let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
     let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img : ''
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.giftBagId,
+      path: '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.giftBagId + '&inviteCode=' + inviteCode,
       imageUrl: imgUrl
     }
   },
