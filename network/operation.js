@@ -438,6 +438,10 @@ export default class Operation {
 
         this.queryFeaturedList = '/config/advertisement/queryRecommendedPageList'
 
+        // 秀场头条
+
+        this.discoverNotice = '/discover/query'
+
 
         /************************** 帮助中心 *******************************/
 

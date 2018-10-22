@@ -31,13 +31,7 @@ Page({
       starShop:[], // 明星店铺
       todayList:[], // 今日榜单
       fineQuality:[],//精品推荐
-      noticeArr:[ // 头条
-        { content:'1手机号大手大脚熬枯受淡卡萨丁阖家安康三打哈科技收到货阿克苏较好的卡仕达'},
-        { content: '2手机号大手大脚熬枯受淡卡萨丁阖家安康三打哈科技收到货阿克苏较好的卡仕达' },
-        { content: '3手机号大手大脚熬枯受淡卡萨丁阖家安康三打哈科技收到货阿克苏较好的卡仕达' },
-        { content: '4手机号大手大脚熬枯受淡卡萨丁阖家安康三打哈科技收到货阿克苏较好的卡仕达' },
-        { content: '5手机号大手大脚熬枯受淡卡萨丁阖家安康三打哈科技收到货阿克苏较好的卡仕达' },
-      ],
+      noticeArr:[  ],// 头条
       recommendArr:[],
       params:{
         page:1,
@@ -46,6 +40,7 @@ Page({
     },
     onLoad: function () {
       Event.on('getLevel', this.getLevel,this)
+      this.discoverNotice()
       this.queryAdList(1,'轮播图片',(datas)=>{
         this.setData({
           imgUrls:datas
@@ -72,9 +67,6 @@ Page({
         })
       });
       this.queryFeaturedList()
-      this.setData({
-        noticeArr:Tool.sliceArray(this.data.noticeArr,2)
-      })
       if (!app.globalData.systemInfo){
         app.getSystemInfo()
       }
@@ -102,6 +94,32 @@ Page({
         this.getLevelInfos()
         this.getLevel()
       }
+    },
+    discoverNotice() {
+      let params = {
+        isShowLoading: false,
+        reqName: '获取秀场头条',
+        requestMethod: 'GET',
+        url: Operation.discoverNotice
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let datas = req.responseObject.data.data || []
+        this.setData({
+          noticeArr: Tool.sliceArray(datas, 2)
+        })
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    },
+    noticeChange(e){ // 轮播结束以后继续请求
+      if (e.detail.current==this.data.noticeArr.length-1){
+        this.discoverNotice()
+      }
+    },
+    noticeClicked(e){
+      let id = e.currentTarget.dataset.id
+      Tool.navigateTo('/pages/discover/discover-detail/discover-detail?articleId='+id)
     },
     getLevel() {
       let params = {

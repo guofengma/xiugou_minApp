@@ -34,9 +34,12 @@ Page({
     }
     if (options.hotWordId) {
       delete params.categoryId
-    } else if (params.categoryId) {
+    } else if (options.categoryId) {
       delete params.keyword
       delete params.hotWordId
+    } else if (!options.hotWordId && !options.categoryId){
+      delete params.hotWordId
+      delete params.categoryId
     }
     this.setData({
       keyword: options.keyword || '',

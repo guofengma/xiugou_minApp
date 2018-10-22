@@ -11,7 +11,7 @@
        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'home_icon_xiaoxi@2x.png'}}"/>
       </view>
     </view>
-    <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:{{imgheights[0]}}rpx;min-height:400rpx' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff'>
+    <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:{{imgheights[0]}}rpx;min-height:400rpx' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff' circular="true">
     <block wx:for="{{imgUrls}}" wx:key='unique'>
       <swiper-item>
         <image src="{{item.imgUrl}}" class="slide-image" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' bindload="imageLoad" />
@@ -81,18 +81,18 @@
       <view>头条</view>
     </view>
     <view class='notice-rightBar boxSize'>
-      <swiper autoplay="true" interval='3000' vertical='true'  style='height:80rpx;' >
+      <swiper autoplay="true" interval='3000' vertical='true'  style='height:80rpx;'  bindchange='noticeChange' circular="true">
         <block wx:for="{{noticeArr}}" wx:for-item="list" wx:for-index='key' wx:key='{{key}}' >
-          <swiper-item class='swiper-item-notice'>
+          <swiper-item class='swiper-item-notice' >
             <block wx:for="{{list}}" wx:key='{{index}}'>
-              <view class='ellipsis font-22 gray notice-line'>
-                <text class='notice-label red font-22'>最热</text>
-                {{item.content}}
+              <view class='ellipsis font-22 gray notice-line' catchtap='noticeClicked' data-id='{{item.id}}'>
+                <text class='notice-label red font-22' wx:if='{{item.generalize==2}}'>最热</text>
+                {{item.title}}
               </view>
-            </block>
-            <view class='notice-img'>
-              <image src='http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg' mode='widthFix'></image>
-            </view>
+              <view class='notice-img' wx:if="{{index%2==0}}" >
+                <image src='{{item.coverImg}}' mode='widthFix' catchtap='noticeClicked' data-id='{{item.id}}'></image>
+              </view>
+            </block> 
           </swiper-item>
         </block>
       </swiper>
