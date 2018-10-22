@@ -269,8 +269,9 @@ Page({
       })
       if (this.data.door == 1){
         if (this.data.useType == 1){
+          let coinNum = options.coin > this.data.coinData.num ? this.data.coinData.num : options.coin
           this.setData({
-            coinNum: options.coin
+            coinNum: coinNum
           })
         } else {
           this.availableDiscountCouponForProduct()

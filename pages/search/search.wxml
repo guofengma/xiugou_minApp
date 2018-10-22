@@ -8,7 +8,7 @@
   </view>
   <view class='search-words-view' wx:if='{{door==0&&keyWord.length>0}}'>
     <block wx:for='{{activeSearchLists}}' wx:key="unique">
-       <view class='search-words-line font-26' bindtap='getHotkeyword' data-keyword='{{item}}'>{{item}}</view>
+       <view class='search-words-line font-26 ellipsis' bindtap='getHotkeyword' data-keyword='{{item}}'>{{item}}</view>
     </block>
   </view>
   <view wx:else>

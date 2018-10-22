@@ -3,10 +3,10 @@
 </view>
 
 <view class='content'>
-  <view class='whiteBg font-26 flexR'>50元推广试用套餐/推广周期7天</view>
-  <view class='whiteBg font-26 flexR'>100元推广试用套餐/推广周期14天</view>
-  <view class='whiteBg font-26 flexR'>500元推广试用套餐/推广周期30天</view>
-  <view class='whiteBg font-26 flexR'>1000元推广试用套餐/推广周期30天</view>
+  <view class='whiteBg font-26 flexR' catchtap='itemClicked' data-num='50'>50元推广试用套餐/推广周期7天</view>
+  <view class='whiteBg font-26 flexR' catchtap='itemClicked' data-num='100'>100元推广试用套餐/推广周期14天</view>
+  <view class='whiteBg font-26 flexR' catchtap='itemClicked' data-num='500'>500元推广试用套餐/推广周期30天</view>
+  <view class='whiteBg font-26 flexR'  catchtap='itemClicked' data-num='1000'>1000元推广试用套餐/推广周期30天</view>
 </view>
 
 <view class='font-26 gray flexR'>

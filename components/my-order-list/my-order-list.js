@@ -58,6 +58,7 @@ Component({
           item.finishTime = Tool.formatTime(item.finishTime);
           item.sendTime = Tool.formatTime(item.sendTime);
           item.payTime = Tool.formatTime(item.payTime);
+          item.cancelTime = Tool.formatTime(item.cancelTime);
           // item.createTime = Tool.formatTime(item.orderCreateTime);
           // 礼包不显示产品描述
           // if (item.orderProductList[0].orderType == 98) item.orderProduct[0].spec=''

@@ -4,17 +4,9 @@ Page({
 
   },
   onLoad: function (options) {
-
-  },
-  onReady: function () {
-
-  },
-  onShow: function () {
-
-  },
-  itemClicked(e){
-    let num = e.currentTarget.dataset.num
-    Tool.navigateTo('/pages/my/extension/pay/pay?num='+num)
+    this.setData({
+      num: options.num
+    })
   },
   onHide: function () {
 

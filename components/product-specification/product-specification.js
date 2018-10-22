@@ -44,7 +44,13 @@ Component({
       // 渲染总库存
       let totalStock = 0
       let priceList = []
-      this.data.priceList.forEach((item)=>{
+      let stockList = []
+      this.data.priceList.forEach((item) => {
+        if(item.stock!=0){
+          stockList.push(item)
+        }
+      })
+      stockList.forEach((item)=>{
         totalStock += item.stock
         if (this.data.commodityType == 5 & item.price == this.data.price){
           priceList.push(item)
@@ -56,7 +62,7 @@ Component({
       })
       console.log(priceList)
       if (priceList.length==0){
-        priceList = this.data.priceList
+        priceList = stockList
       }
       console.log("初始化中的价格" + priceList)
       this.setData({
