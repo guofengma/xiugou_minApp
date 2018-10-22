@@ -1056,5 +1056,9 @@ export default class Tool {
       return v.toString(16);
     });
   }
+
+  static formatString(str){
+    return str.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "")
+  }
 }
 

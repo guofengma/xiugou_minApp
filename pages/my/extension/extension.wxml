@@ -1,0 +1,25 @@
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<view class='extension-page'>
+  <view class='extension-view whiteBg' wx:for='{{6}}' wx:key='{{index}}'>
+    <view class='flexR-sb topBar'>
+      <view>
+        <view class='ellipsis font-32 extension-name'>50元推广试用套餐</view>
+        <view class='gray font-26'>剩余推广金额¥20.03</view>
+      </view>
+      <!-- 根据时间情况判断按钮显示状态 -->
+      <view class='extension-btn font-26 flexC {{index==1? "red":"gray"}}'>
+        {{index==1? "继续支付":"推广详情"}}
+      </view>
+    </view>
+    <view class='gray extension-time font-26 flexR-sb'>购买时间：2018-09-18 10：38：56</view> 
+  </view>
+</view>
+
+<!-- 底部退款按钮 -->
+
+<view class='{{isIPhoneX.className}} bottom-bar flexR redBg font-26' catchtap='bottomBtnClicked'>发起邀请推广</view>
+
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

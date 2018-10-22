@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 30,
+			"current": 31,
 			"list": [
 				{
 					"id": 0,
@@ -219,6 +219,18 @@
 					"id": -1,
 					"name": "换货",
 					"pathName": "pages/after-sale/exchange-goods/exchange-goods",
+					"query": ""
+				},
+				{
+					"id": 31,
+					"name": "我的推广订单",
+					"pathName": "pages/my/extension/extension",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的推广列表",
+					"pathName": "pages/my/extension/extension-type/extension-type",
 					"query": ""
 				}
 			]
