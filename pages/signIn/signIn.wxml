@@ -64,7 +64,7 @@
   </view>
 
   <!-- 优惠卷张数 -->
-  <view class='font-24 gray-9 flexC'>
+  <view class='font-24 gray-9 flexC' catchtap='goPage'>
      已有{{userInfos.tokenCoin || 0}}张现金劵>
   </view>
 </view>

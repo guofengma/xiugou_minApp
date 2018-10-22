@@ -63,7 +63,7 @@ Page({
       headImg: this.data.userInfo.avatarUrl,
       reqName: '用户微信登陆',
       url: Operation.wechatLogin,
-      hasCookie: false
+      // hasCookie: false
     };
     let r = RequestFactory.wxRequest(params);
     r.successBlock= (req) => {

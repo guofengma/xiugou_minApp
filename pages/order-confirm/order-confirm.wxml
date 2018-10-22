@@ -79,7 +79,7 @@
   </view>
   <!--支付bar  -->
   <view class='flexR payBar {{isIPhoneX.className}}'>
-    <view>应付款 <text class='red'>：¥{{orderInfos.showTotalAmounts}}</text></view>
+    <view>应付款 <text class='red'>：¥{{orderInfos.totalAmounts}}</text></view>
     <view class='btn redBg flexR' bindtap='payBtnClicked'>提交订单</view>
   </view>
 </view>

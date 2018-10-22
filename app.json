@@ -59,9 +59,15 @@
     "pages/signIn/signIn",
     "pages/product-detail/discount-detail/discount-detail",
     "pages/product-detail/seckill-detail/seckill-detail",
+<<<<<<< HEAD
     "pages/discover/discover",
     "pages/discover/discover-detail/discover-detail",
     "pages/discover/discover-fav/discover-fav"
+=======
+    "pages/my/extension/extension",
+    "pages/my/extension/extension-type/extension-type",
+    "pages/my/extension/extension-detail/extension-detail"
+>>>>>>> develop-cww
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

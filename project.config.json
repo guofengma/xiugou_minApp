@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 31,
 			"list": [
 				{
 					"id": 0,
@@ -213,6 +213,24 @@
 					"id": -1,
 					"name": "问题反馈",
 					"pathName": "pages/my/help-customer/help-customer",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "换货",
+					"pathName": "pages/after-sale/exchange-goods/exchange-goods",
+					"query": ""
+				},
+				{
+					"id": 31,
+					"name": "我的推广订单",
+					"pathName": "pages/my/extension/extension",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的推广列表",
+					"pathName": "pages/my/extension/extension-type/extension-type",
 					"query": ""
 				}
 			]

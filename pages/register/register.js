@@ -26,12 +26,12 @@ Page({
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
     })
-    // if (options.inviteCode){
-    //   let callBack = () => {
-    //     this.sweepCode(options.inviteCode)
-    //   }
-    //   app.wxLogin(callBack)
-    // }
+    if (options.inviteCode){
+      let callBack = () => {
+        this.sweepCode(options.inviteCode)
+      }
+      app.wxLogin(callBack)
+    }
   },
   onShow: function () {
     
@@ -92,7 +92,7 @@ Page({
       ...params,
       reqName: '判断手机号是否已经注册',
       url: Operation.findMemberByPhone,
-      hasCookie: false
+      // hasCookie: false
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
@@ -157,7 +157,7 @@ Page({
       reqName: '发送短信',
       url: Operation.sendMessage,
       requestMethod: 'GET',
-      hasCookie: false
+      // hasCookie: false
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.sendMessage(params);

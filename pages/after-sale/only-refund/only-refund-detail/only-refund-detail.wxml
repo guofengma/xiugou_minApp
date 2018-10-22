@@ -10,7 +10,9 @@
   <view wx:if='{{datas.status==6 || datas.status==3}}'>{{datas.showRefundTime}}</view>
   <view wx:if='{{datas.status==3}}'>{{datas.refusalReason}}</view>
 </view>
-
+<view wx:if='{{datas.status==1}}'>
+   <amend-application applyType='{{"退款"}}' list='{{datas}}'/>
+</view>
 <!--退款成功以后才显示以下内容  -->
 
 <template is="temp-refund-info" data="{{...datas}}"/>

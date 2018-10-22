@@ -270,7 +270,7 @@ Page({
       if (this.data.door == 1){
         if (this.data.useType == 1){
           this.setData({
-            coinNum: options.coin == 0 ? this.data.coinData.num : options.coin
+            coinNum: options.coin
           })
         } else {
           this.availableDiscountCouponForProduct()

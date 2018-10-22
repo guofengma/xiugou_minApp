@@ -97,4 +97,15 @@ iphoneX底部适配  iPhoneX-line
 1. background url 不支持带空格的链接  like:
 ``` 
 background:url(https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/timg (1).jpg)
+
 ```
+
+/**************登录*****************/
+
+设置设备唯一识别标志 Tool.getUUID()
+每次登录的时候 判断本地是否保存了uuid 若无保存 则在app.js里面调用方法生成一个
+在注册完成以后 或者 登录以后 获取返回信息的内的 token 字段 用 Storage.setPlatform('取到的Token字符串')保存在本地
+每次请求的时候 在请求头中写入 
+device：Tool.getUUID()获取的唯一识别号
+platform：系统版本号
+sg-token:获取的token

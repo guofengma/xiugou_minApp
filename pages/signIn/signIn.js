@@ -74,14 +74,14 @@ Page({
     };
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      this.querySignList()
-      Event.emit('getLevel')
+      // Event.emit('getLevel')
       this.setData({
         animate0: true,
         canClick:false
       })
       let that = this
       setTimeout(function () {
+        that.querySignList()
         Tool.showSuccessToast("获得秀豆+" + (that.data.lists[3].canReward || that.data.lists[3].reward))
       }, 1200)
       setTimeout(function () {
@@ -93,7 +93,9 @@ Page({
     Tool.showErrMsg(r)
     r.addToQueue();
   },
-
+  goPage(){
+    Tool.navigateTo('/pages/my/coupon/my-coupon/my-coupon')
+  },
   onUnload: function () {
 
   },

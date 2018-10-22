@@ -165,8 +165,8 @@
           <block wx:for='{{list.topicBannerProductDTOList}}' wx:key='{{index}}' wx:if='{{index<8}}'>
             <view class='hot-sale-prd flexC'  catchtap='adListClicked' data-prodtype='{{item.productType}}' data-val='{{item.prodCode}}'>
               <image src='{{item.specImg}}'></image>
-              <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName}}</view>
-            <view class='red font-28'>¥{{item.originalPrice}}起</view>
+              <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName || ''}}</view>
+            <view class='red font-28'>¥{{item.originalPrice || 0}}起</view>
           </view>     
           </block>
            <!-- 查看更多  -->
