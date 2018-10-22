@@ -73,6 +73,11 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let datas = req.responseObject.data || []
+      datas.forEach((item,indx)=>{
+        if(item.name.length>4){
+          item.name = item.name.slice(0,4)+'...'
+        }
+      })
       datas.unshift({
         id: 'hot', name: "为你推荐"
       })

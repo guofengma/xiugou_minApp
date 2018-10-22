@@ -20,11 +20,11 @@
 <view wx:if='{{datas.status>1}}'>
   <!--地址信息  -->
   <view class='address active whiteBg' >
-    <template is="address-info" data="{{addressType,...datas,hasData:true}}"/>
+    <template is="address-info" data="{{addressType,...datas,hasData:true,door:1}}"/>
   </view>
 
   <!--商家地址  -->
-  <template is="address-saler" data="{{addressType,src,datas,hasData:true}}"/>
+  <template is="address-saler" data="{{addressType,src,datas,hasData:true,door:1}}"/>
 
   <!--物流  -->
   <view>

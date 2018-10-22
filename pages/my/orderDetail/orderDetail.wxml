@@ -26,7 +26,7 @@
 <view class='order-state-info' >
     <view class='boxSize'>
         <!--等待付款的时候显示和待发货  -->
-        <template is="address-info" wx:if='{{status==1||status==7 ||status==8 }}' data="{{addressType,src,...address,hasData}}"/>
+        <template is="address-info" wx:if='{{status==1||status==7 ||status==8 }}' data="{{addressType,src,...address,hasData,door:1}}"/>
 
         <!-- 待发货/已发货/已完成的时候显示 -->
         <view class='logistics flexR-sb' wx:if="{{status==2||status==3||status==4||status==6 ||status==5 }}" bindtap='logisticsClicked'>
@@ -44,7 +44,7 @@
 <view class='container'>
     <!--地址信息 如果发货了 显示地址 -->
     <view class='my-order-address' wx:if='{{status==2||status==3||status==4 ||status==5 ||status== 6 }}'>
-        <template is="address-info" data="{{addressType,src,...address,hasData}}"/>
+        <template is="address-info" data="{{addressType,src,...address,hasData,door:1}}"/>
     </view>
 
     <!--订单信息  -->
