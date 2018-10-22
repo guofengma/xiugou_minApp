@@ -18,12 +18,13 @@ Page({
         // 来自页面内转发按钮
         console.log(res.target)
       }
+      let userinfo = this.data.userInfos;
       let title = '参加活动，免费领取福利';
-      let desc = "您的好友" + this.data.userInfos.nickname+"邀请您加入";
+      let desc = "您的好友" + userinfo.nickname+"邀请您加入";
       return {
         title: title,
         desc: desc,
-        path: '/pages/register/register'
+        path: '/pages/register/register?inviteCode=' + userinfo.inviteId 
       }
     },
     onUnload: function () {
