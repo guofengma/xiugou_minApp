@@ -1,0 +1,14 @@
+<import src='/pages/discover/discover-item/discover-item.wxml'/>
+<view class="discover-fav-container">
+  <view class='discover-fav-top flexR-sb'>
+    <view class='discover-fav-info'>您收藏了<text>22</text>个店铺</view>
+    <view class='discover-fav-manage' bindtap='toggleShowEdit'>{{showEdit ? '完成' : '管理'}}</view>
+  </view>
+
+  <view class='discover-list'>
+    <view class='discover-item-container'>
+      <template is="discover-item" data="{{showEdit}}" />
+    </view>
+  </view>
+
+</view>

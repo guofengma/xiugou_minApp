@@ -1,0 +1,13 @@
+@import "/pages/discover/discover-item/discover-item.wxss";
+.discover-fav-container {
+  padding: 0 30rpx;
+}
+.discover-fav-top {
+  font-size: 26rpx;
+}
+.discover-fav-manage {
+  padding: 30rpx 0 30rpx 30rpx;
+}
+.discover-fav-top text,.discover-fav-manage{
+  color: #FF1A54;
+}
