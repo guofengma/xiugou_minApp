@@ -58,7 +58,10 @@
     "pages/topic/topic",
     "pages/signIn/signIn",
     "pages/product-detail/discount-detail/discount-detail",
-    "pages/product-detail/seckill-detail/seckill-detail"
+    "pages/product-detail/seckill-detail/seckill-detail",
+    "pages/discover/discover",
+    "pages/discover/discover-detail/discover-detail",
+    "pages/discover/discover-fav/discover-fav"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
