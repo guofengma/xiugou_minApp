@@ -20,6 +20,7 @@
   padding: 20rpx 10rpx 15rpx;
   box-sizing: border-box;
   height: 110rpx;
+  flex-direction:column;
 }
 .tab-timeq-item-time{
   color: #222;
