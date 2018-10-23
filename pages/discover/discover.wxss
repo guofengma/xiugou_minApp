@@ -56,38 +56,11 @@
   padding:20rpx;
   margin-bottom:20rpx;
 }
-.discover_author {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 22rpx;
+.discover-tab-new {
+  margin-top: 20rpx;
 }
-.discover_avatar{
-  width: 60rpx;
-  height: 60rpx;
-  border-radius: 50%;
-}
-.discover_view {
-  color: #808080;
-  font-size: 20rpx;
-  display: flex;
-  align-items: center;
-}
-.discover_view image {
-  width: 34rpx;
-  height: 22rpx;
-  margin-right: 10rpx;
-}
-.discover_author_name {
-  display: inline-block;
-  /* max-width: 126rpx; */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 32rpx;
-  white-space: nowrap;
-  flex: 1;
-  padding: 0 10rpx;
-}
-.discover_time {
-  color: #939393;
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }

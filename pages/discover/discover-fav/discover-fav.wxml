@@ -1,14 +1,31 @@
 <import src='/pages/discover/discover-item/discover-item.wxml'/>
-<view class="discover-fav-container">
+
+<view class="discover-fav-container" style="margin-bottom: {{showEdit ? '100' : '0'}}rpx">
   <view class='discover-fav-top flexR-sb'>
-    <view class='discover-fav-info'>您收藏了<text>22</text>个店铺</view>
+    <view class='discover-fav-info'>您收藏了<text>{{items.length}}</text>篇文章</view>
     <view class='discover-fav-manage' bindtap='toggleShowEdit'>{{showEdit ? '完成' : '管理'}}</view>
   </view>
-
-  <view class='discover-list'>
+  <!-- fav list S -->
+  <view class='discover-list' wx:if="items.length">
     <view class='discover-item-container'>
-      <template is="discover-item" data="{{showEdit}}" />
+      <template is="discover-item" data="{{showEdit,items}}" />
     </view>
   </view>
-
+  <view class='no-more' wx:if="{{currentPage == totalPage}}">已经到底啦~</view>
+  <view class='no-more' wx:if="{{!items.length}}">您暂未收藏文章~</view>
+  <!-- fav list E -->
+  <!-- operate S -->
+  <view class='discover-fav-edit' wx:if="{{showEdit}}">
+    <view class='checkAll' bindtap='checkAll'>
+      <image class='checkAll-icon' 
+        src="{{isCheckAll?'/img/list_btn_gouxuan_sel@3x.png':'/img/choose-icon.png'}}"
+      ></image>
+      <text>全选</text>
+    </view>
+    <view class='delete' bindtap='deleteSelectItems'>删除</view>
+  </view>
+  <!-- operate E -->
+  <view class='goTop' bindtap='goTop' wx:if='{{showBackTop}}'>
+      <image src='/img/top-icon.png' mode='widthFix'></image>
+    </view>
 </view>

@@ -232,7 +232,25 @@
 					"name": "我的推广列表",
 					"pathName": "pages/my/extension/extension-type/extension-type",
 					"query": ""
-				}
+				},
+        {
+          "id": -1,
+          "name": "秀购发现",
+          "pathName": "pages/discover/discover",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "秀购发现详情",
+          "pathName": "pages/discover/discover-detail/discover-detail",
+          "query": ""
+        },
+        {
+          "id": -1,
+          "name": "发现收藏",
+          "pathName": "pages/discover/discover-fav/discover-fav",
+          "query": ""
+        }
 			]
 		}
 	}

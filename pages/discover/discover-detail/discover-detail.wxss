@@ -1,4 +1,5 @@
 @import "/pages/discover/discover.wxss";
+@import "/libs/wxParse/wxParse.wxss";
 page{
   background: #fff;
 }
