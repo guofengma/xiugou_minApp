@@ -1,8 +1,8 @@
 <template name="discover-article">
   <view class="discover-article-container">
-    <view class='discover-article_thumb'>
-      <image src="http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg"></image>
-      <view class='discover-article_desc'>氨基酸洗面奶，30秒自动起泡清洁力强不伤脸，不含角质合痘痘肌和敏感肌，涂抹在手上等...</view>
+    <view class='discover-article_thumb' bindtap='handleItemClicked' data-id="{{id}}">
+      <image src="{{coverImg}}"></image>
+      <view class='discover-article_desc'>{{content}}</view>
     </view>
     <view class="discover-article_body">
       <view class='discover-article_info'>
@@ -11,7 +11,7 @@
           <view class='discover_author_name'>、霓娜</view>
           <view class='discover_view'>
             <image src='/img/icon_view@3x.png'></image>
-            <text>1235</text>
+            <text>{{click}}</text>
           </view>  
         </view>
       </view>

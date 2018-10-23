@@ -56,6 +56,9 @@
   padding:20rpx;
   margin-bottom:20rpx;
 }
+.discover-tab-new {
+  margin-top: 20rpx;
+}
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
