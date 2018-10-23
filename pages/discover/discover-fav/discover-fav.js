@@ -146,7 +146,7 @@ Page({
       success(res) {
         if(res.cancel) return;
         let params = {
-          type: 2,
+          type: 1,
           articleIds: checkedList,
           reqName: '取消收藏操作',
           url: Operation.discoverCountCancel

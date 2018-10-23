@@ -104,19 +104,26 @@ Page({
       reqName: '订阅提醒',
       url: Operation.addActivitySubscribe,
       activityId: data.activityId,
-      activityType: 1, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
+      activityType: data.activityType, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
       type: type, // 1订阅 0 取消订阅
       userId: userInfo.id
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      let data = req.responseObject || {};
-      let items = this.data.topicDetailList[this.data.currentTopicListIndex];
+      // banner标识了是来自最上层商品还是banner下面的商品
+      let items = this.data.topicList
+      let targetItem = null;
+      if(data.banner == 1){
+        targetItem = items.topicNavbarList[this.data.currentTopicListIndex].topicNavbarBannerList.topicBannerProductList;
+      } else {
+        targetItem = items.topicNavbarList[this.data.currentTopicListIndex].topicBannerProducts;
+      }
+      console.log(targetItem);
       //是否通知值为0or1
-      items[itemIndex].notifyFlag = +!items[itemIndex].notifyFlag;
+      targetItem[itemIndex].notifyFlag = +!targetItem[itemIndex].notifyFlag;
       
       this.setData({
-        topicDetailList: items
+        topicList: items
       })
     };
     Tool.showErrMsg(r)

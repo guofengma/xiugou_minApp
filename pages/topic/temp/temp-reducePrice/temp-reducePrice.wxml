@@ -12,7 +12,7 @@
       <block 
         wx:for="{{topicList.topicNavbarList[currentTopicListIndex].topicBannerProducts}}" 
         wx:key="{{item.id}}">
-         <template is='good-item' data="{{...item,index:index}}"></template>
+         <template is='good-item' data="{{...item,index:index,fromBanner:0}}"></template>
       </block>
     </view>
     <!-- 带banner的产品列表 S -->
@@ -27,7 +27,7 @@
         <block 
           wx:for="{{item.topicBannerProductList}}" 
           wx:key="{{item.id}}">
-          <template is='good-item' data="{{...item,index:index}}"></template>
+          <template is='good-item' data="{{...item,index:index,fromBanner:1}}"></template>
         </block>
       </view>
     </block>

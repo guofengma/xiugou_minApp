@@ -3,37 +3,35 @@
   <!-- swiper S -->
   <view class='discover-detail-swiper'>
     <swiper circular autoplay  bindchange='sliderChange'>
-      <block wx:for="{{imgUrls}}" wx:key="unique">
+      <block wx:for="{{details.imgs}}" wx:key="unique">
         <swiper-item>
           <image src="{{item}}" class="slide-image"/>
         </swiper-item>
       </block>
     </swiper>
-    <view wx:if='{{imgUrls.length>0}}' class="activeIndex">
-        {{activeIndex+"/"+ imgUrls.length}}
+    <view wx:if='{{details.imgs.length>0}}' class="activeIndex">
+        {{activeIndex+"/"+ details.imgs.length}}
       </view>
   </view>
   <!-- swiper E -->
   <!-- content S -->
   <view class='discover-detail-content'>
     <view class='discover_author'>
-      <image class='discover_avatar' src='https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/TB2EtekiP3z9KJjy0FmXXXiwXXa_!!2867551008.jpg'></image>
-      <view class='discover_author_name'>、霓娜</view>
+      <image class='discover_avatar' src='{{details.userHeadImg}}'></image>
+      <view class='discover_author_name'>{{details.userName}}</view>
       <view class='discover_view'>
         <image src='/img/icon_view@3x.png'></image>
-        <text>1235</text>
+        <text>{{details.click}}</text>
       </view>  
     </view>
     <view class="content">
-      <!-- 现在对于人工智能的态度，了解计算机的和不了解计算机的基本上没有什说什数的意见就是，人工智能很厉害，可能解 么分歧，大多数的意见就是，人工智能很厉害，可能或可以取代很多人类工公数的意见就是，人工智能很厉害。 
-      不懂计算机的多数是非专业人士，看到人工智能诸如阿尔法狗可以击败共数的意见就是，人工智能很厉害，可能解 人类顶级棋手，自然会这样么想。而懂计算机的多数是专业 数的意见就是，人工智能很厉害！ -->
       <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
     </view>
   </view>
   <!-- content E -->
   <!-- recommend list S -->
   <view class='discover-detail-recommend'>
-    <view class='item' wx:for="{{details.products}}" wx:key="unique">
+    <view class='item' wx:for="{{details.products}}" wx:key="unique" bindtap='showItemDetail' data-id="{{}}">
       <view class='item-thumb'>
         <image src='{{item.headImg}}'></image>
       </view>
