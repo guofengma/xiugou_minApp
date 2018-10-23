@@ -47,7 +47,6 @@
 .prd-info{
   color: #bbb;
   font-size: 22rpx;
-  height: 255rpx;
   padding: 30rpx;
 }
 .prd-name{
@@ -94,9 +93,9 @@
   box-sizing: border-box;
   padding: 0 30rpx;
 }
-.chooseBox view.gray{
+/* .chooseBox view.gray{
   border-top: 1rpx solid #eee
-}
+} */
 .prd-info-line{
   font-size: 30rpx;
   border-top: 1rpx solid #eee;
@@ -162,10 +161,13 @@
   width: 44rpx;
 }
 .bottom-bar>view{
-  width: 33.33%;
+  width: 20%;
   border-right: 1rpx solid #ddd;
   text-align: center;
   height: 100%;
+}
+.bottom-bar .add-cart, .bottom-bar .buy-btn{
+  flex: 2;
 }
 .buy-btn{
   border-right: 0;

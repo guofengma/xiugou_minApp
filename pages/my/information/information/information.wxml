@@ -4,17 +4,16 @@
 
 <block wx:if="{{list.length>0}}">
     <view class="notice-item" wx:for="{{list}}" wx:key="unique">
-        <view class="time">{{item.pushTime}}</view>
-        <view class="title {{item.type==10||item.type==13||item.type==14?'red':''}}">{{item.title}}</view>
-        <view class="content" wx:if="{{item.type==1||item.type==7}}">
-            <view class="item">{{item.creatTime}}</view>
+        <view class="time">{{item.createTime}}</view>
+        <!-- <view class="title {{item.type==10||item.type==13||item.type==14?'red':''}}">{{item.title}}</view> -->
+        <!-- <view class="content" wx:if="{{item.type==1||item.type==7}}">
+            <view class="item">{{item.createTime}}</view>
             <view class="money-area" wx:if="{{item.type==1}}">支付金额：
                 <text class="money red">¥{{item.amounts}}</text>
             </view>
             <view class="money-area" wx:else>退款金额：
                 <text class="money red">¥{{item.amounts}}</text>
             </view>
-            <!--<view class="item">付款方式：代币支付 ¥ 20.00 余额支付 ¥ 30.50</view>-->
             <view class="item" wx:if="{{item.type==1}}">付款方式：{{item.payStyle}}</view>
             <view class="item" wx:else>退款去向：{{item.payStyle}}</view>
             <view class="item">交易订单：{{item.orderNum}}</view>
@@ -32,13 +31,12 @@
                 <text class="money red">{{item.tokenCoin}}枚</text>
             </view>
            <view class="info">{{item.content}}</view>
+        </view> -->
+        <view class="content">
+            <view class="item">{{item.title}}</view>
+            <view class="info gray-9">{{item.content}}</view>
         </view>
-        <view class="content" wx:else>
-            <view class="item">{{item.creatTime}}</view>
-            <view class="info">{{item.content}}</view>
-            <!--<view class="item">通知时间：2018-05-05 12:45:34</view>-->
-        </view>
-        <view class="watch-detail" bindtap="informationDetail" data-type="{{item.type}}" data-id="{{item.id}}" data-tdid="{{item.tdId}}" wx:if='{{item.type<=8||item.type==15}}'>查看详情
+        <view class="watch-detail" bindtap="informationDetail" data-type="{{item.type}}" data-id="{{item.id}}" data-tdid="{{item.tdId}}" >查看详情
             <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/detail-btn.png"></image>
         </view>
     </view>

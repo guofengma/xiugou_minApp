@@ -2,7 +2,8 @@ let { Tool, RequestFactory } = global;
 import config from '../../config.js'
 Component({
   properties: {
-    
+    propsOriginalImg:Array,
+    propssmallImg: Array,
   },
   data: {
     originalImg:[],
@@ -54,6 +55,14 @@ Component({
       })
       this.triggerEvent('uploadImage', {...this.data})
     },
+    initData(){
+      if (this.data.propsOriginalImg.length > 0 && this.data.propssmallImg.length>0){
+        this.setData({
+          originalImg: this.data.propsOriginalImg,
+          smallImg: this.data.propssmallImg,
+        })
+      }
+    }
   },
   ready: function () {
     

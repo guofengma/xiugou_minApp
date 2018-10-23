@@ -1,7 +1,7 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
-
+const app = getApp()
 Page({
   data: {
     didLogin:false,
@@ -23,21 +23,35 @@ Page({
       },
       children: [],
     }],
-    size:0
+    size:0,
+    userInfos:{}
   },
   onLoad: function (options) {
     this.setData({
       productId: options.productId || '',
       prodCode: options.prodCode || '',
+      door: options.door || '',
+      inviteCode: options.inviteCode || ''
     })
+   
     this.didLogin()
+    let callBack = ()=>{
+      this.getShoppingCartList()
+    }
+    if (!this.data.didLogin){
+      app.getSystemInfo()
+      app.wxLogin(callBack)
+    }
     this.requestFindProductByIdApp()
-    this.getShoppingCartList()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
+    this.refreshMemberInfoNotice()
   },
   onShow: function () {
   
+  },
+  refreshMemberInfoNotice() {
+    Tool.getUserInfos(this)
   },
   imageLoad(e) {
     Tool.getAdaptHeight(e, this)
@@ -76,6 +90,7 @@ Page({
     params.productId = this.data.selectType.productId
     params.priceId = this.data.selectType.id
     params.showCount = this.data.productBuyCount
+    
     list.push(params)
     this.updateStorageShoppingCart(list)
   },
@@ -85,10 +100,49 @@ Page({
     Tool.showSuccessToast('添加成功')
     Event.emit('updateStorageShoppingCart')
   },
+  activityByProductId(productId) {
+    let params = {
+      productId: productId,
+      reqName: '获取是否是活动产品',
+      url: Operation.activityByProductId,
+      requestMethod: 'GET',
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let datas = req.responseObject.data
+      if(!datas) return
+      if (datas.activityType == 1 || datas.activityType == 2 ){
+        let proNavData =datas.activityType == 1 ? datas.seckill : datas.depreciate
+        proNavData.originalPrice = this.data.productInfoList.originalPrice
+        this.setData({
+          proNavData: datas.activityType == 1 ? datas.seckill : datas.depreciate,
+          activityType: datas.activityType,
+          promotionDesc: {
+            commingDesc: '',
+            countdownDesc: '',
+            typeDesc: datas.activityType == 1 ? '秒杀价':"起拍价"
+          },
+        })
+        // if (this.data.door == 100) {
+        //   this.goPage()
+        // }
+       this.selectComponent('#promotion').init();
+      }
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  goPage(){
+    if(this.data.activityType==1){
+      Tool.redirectTo('/pages/product-detail/seckill-detail/seckill-detail?code=' + this.data.proNavData.activityCode)
+    } else if (this.data.activityType == 2){
+      Tool.redirectTo('/pages/product-detail/discount-detail/discount-detail?code=' + this.data.proNavData.activityCode)
+    }
+  },
   makeSureOrder(){
     // 立即购买
     if (!this.data.didLogin) {
-      Tool.navigateTo('/pages/login-wx/login-wx?isBack='+true)
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true+'&inviteCode=' + this.data.inviteCode)
       return
     }
     let params = {
@@ -99,7 +153,7 @@ Page({
       }],
       orderType:99
     }
-    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params)+'&type='+this.data.door )
+    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params)+'&type=99' )
   },
   addToShoppingCart(){
     let params = {
@@ -125,11 +179,13 @@ Page({
     r.addToQueue();
   },
   requestFindProductByIdApp(){
+    let url = this.data.prodCode? Operation.getProductDetailByCode : Operation.findProductByIdApp
     let params = {
       id: this.data.productId,
+      code:this.data.prodCode,
       requestMethod: 'GET',
       reqName: '获取商品详情页',
-      url: Operation.findProductByIdApp
+      url: url
     }
     let r = RequestFactory.wxRequest(params);
     let productInfo = this.data.productInfo
@@ -142,6 +198,7 @@ Page({
         priceList: datas.priceList, // 价格表
         productSpec: datas.specMap, // 规格描述
       })
+      this.activityByProductId(this.data.productId)
       // 渲染表格
       let tr = []
       let tbody = this.data.nodes
@@ -182,7 +239,6 @@ Page({
     r.addToQueue();
   },
   typeSubClicked(e){
-    console.log(e)
     this.setData({
       selectType: e.detail
     })
@@ -247,11 +303,12 @@ Page({
       // 来自页面内转发按钮
       console.log(res.target)
     }
+    let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
     let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img:''
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/product-detail?productId=' + this.data.productId,
+      path: '/pages/product-detail/product-detail?productId=' + this.data.productId + '&inviteCode=' + inviteCode,
       imageUrl: imgUrl
     }
   },
@@ -259,14 +316,17 @@ Page({
     let link = e.currentTarget.dataset.src
     console.log(link)
   },
+  getStorageCartList() {
+    let data = Storage.getShoppingCart() || []
+    let size = data.length
+    this.setData({
+      size: size
+    })
+    return
+  },
   getShoppingCartList() {
-    // 查询购物车
     if (!this.data.didLogin){
-      let data = Storage.getShoppingCart() || []
-      let size = data.length
-      this.setData({
-        size: size
-      })
+      this.getStorageCartList()
       return
     }
     let params = {
@@ -289,6 +349,9 @@ Page({
     this.setData({
       msgShow:false
     })
+  },
+  timeout(){
+    this.activityByProductId(this.data.productId)
   },
   onUnload: function () {
     Event.off('didLogin', this.didLogin);

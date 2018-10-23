@@ -16,7 +16,6 @@ Page({
         url: Operation.queryHelpQuestionList
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.queryHelpQuestionList();
       r.successBlock = (req) => {
         let data = req.responseObject.data? req.responseObject.data : {}
         let listArr = []

@@ -1,0 +1,24 @@
+<template name="coupon-temp">
+    <view class="item-ans {{item.active? 'active':''}}"  bindtap="toDetail" data-id="{{item.id}}" data-index='{{index}}' data-key="{{key}}">
+      <view class='flexR-sb topBar-item'>
+        <view class='coupon-left flexC'>
+          <view class='{{item.active? "red":"gray"}} font-30'>
+            {{item.type !=3? "¥":''}}
+            <text >{{item.value}}</text>
+            {{item.type ==3? "折":''}}
+          </view>
+          <!-- <view class='gray' >{{item.typeName}}</view> -->
+        </view>
+        <view class='coupon-center'>
+          <view class='font-26'>{{item.name}}</view>
+          <view class='gray' wx:if='{{!item.isCoinCoupon}}'>满{{item.useConditions || 0}}可用</view>
+          <view class='gray time' wx:if='{{item.isCoinCoupon}}' >有效期：无时间限制</view>
+          <view class='gray time' wx:else>有效期：{{item.start_time}}-{{item.outTime}}</view>
+        </view>
+        <view class='coupon-right flexC font-28 {{item.couponClassName}}' >
+          <text wx:if='{{item.isCoinCoupon}}'>x{{item.num}}</text>
+        </view>
+      </view>
+      <view class='gray bottomBar-item flexR-sb ellipsis'>限品类：{{item.nickname}}</view>
+    </view>
+</template>

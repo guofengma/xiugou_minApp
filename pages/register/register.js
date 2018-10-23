@@ -30,7 +30,7 @@ Page({
       let callBack = () => {
         this.sweepCode(options.inviteCode)
       }
-      app.wxLogin(false, callBack)
+      app.wxLogin(callBack)
     }
   },
   onShow: function () {
@@ -39,7 +39,7 @@ Page({
   sweepCode(id){ // 判断邀请码是否过期等
     let params = {
       code: id,
-      identity: Storage.getWxOpenid(),
+      identity: Storage.getd(),
       reqName: '邀请码是否过期',
       url: Operation.sweepCode
     }
@@ -92,11 +92,13 @@ Page({
       ...params,
       reqName: '判断手机号是否已经注册',
       url: Operation.findMemberByPhone,
-      hasCookie: false
+      // hasCookie: false
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let callBack = () => {
+        Storage.setMemberId(req.responseObject.data.id)
+        Tool.loginOpt(req)
         Tool.switchTab('/pages/index/index')
       }
       Tool.showSuccessToast('注册成功', callBack)
@@ -151,11 +153,11 @@ Page({
     });
     this.countdown(this);
     let params = {
-      code: 'MOBILE_REGISTRATION_CODE',
       phone: this.data.phone,
       reqName: '发送短信',
       url: Operation.sendMessage,
-      hasCookie: false
+      requestMethod: 'GET',
+      // hasCookie: false
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.sendMessage(params);

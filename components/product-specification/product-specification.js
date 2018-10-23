@@ -7,6 +7,9 @@ Component({
     imgUrl:String,
     price:Number,
     isInit:Boolean,
+    commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包 5 换货
+    exchangeNum:Number, // 换货的数量
+    specIds: Array,
   },
   data: {
     visiable:false,
@@ -40,17 +43,44 @@ Component({
       }
       // 渲染总库存
       let totalStock = 0
-      this.data.priceList.forEach((item)=>{
-        totalStock += item.stock
+      let priceList = []
+      let stockList = []
+      this.data.priceList.forEach((item) => {
+        if(item.stock!=0){
+          stockList.push(item)
+        }
       })
+      stockList.forEach((item)=>{
+        totalStock += item.stock
+        if (this.data.commodityType == 5 & item.price == this.data.price){
+          priceList.push(item)
+        }
+        console.log(this.data.commodityType, item.specIds,this.data.specIds)
+        if ((this.data.commodityType == 2 || this.data.commodityType == 3) && item.specIds == this.data.specIds.join(',')){
+          priceList.push(item)
+        }
+      })
+      console.log(priceList)
+      if (priceList.length==0){
+        priceList = stockList
+      }
+      console.log("初始化中的价格" + priceList)
       this.setData({
+        priceList: priceList,
         productSpec: lists,
         totalStock: totalStock,
         isInit:true
       }) 
       // 渲染提示语
       this.getTipsSpec()
-      // console.log(this.data.productSpec)     
+      this.initTypeSelected()
+    },
+    initTypeSelected(){ // 默认第一个选中
+      console.log(this.data.productSpec)
+      let productSpec = this.data.productSpec[0].list
+      let specValue = productSpec[0].specValue
+      let id = productSpec[0].id
+      this.renderSpecVeiw(0, 0, specValue, id)
     },
     typeListClicked(e) { // 规格点击事件
 
@@ -63,9 +93,13 @@ Component({
       let specValue = e.currentTarget.dataset.specvalue // 中文描述
       let id = e.currentTarget.dataset.id
 
+      this.renderSpecVeiw(key, index, specValue, id)
+      
+    },
+    renderSpecVeiw(key, index, specValue, id){ // 开始渲染
       // 深复制数组
       let obj = [...this.data.isActive]
-      obj[key] = { specValue, id, key, index,name:this.data.productSpec[key].name }
+      obj[key] = { specValue, id, key, index, name: this.data.productSpec[key].name }
       let spec_id = []
       for (let i = 0; i < obj.length; i++) {
         if (obj[i] !== undefined) {
@@ -81,9 +115,8 @@ Component({
           }
         }
       })
-      // console.log(obj)
       this.setData({
-        isActive:obj,
+        isActive: obj,
       })
       // 获取已选规格
       let selectIds = this.getSelectIds(obj)
@@ -92,7 +125,7 @@ Component({
       let selectGroup = this.getSelectGroup(obj)
       let unselectGroup = this.getUnSelectGroup(selectGroup)
 
-      unselectGroup.forEach((item,index)=>{
+      unselectGroup.forEach((item, index) => {
         console.log('*************************************************来自未选择规格组****************')
         this.set_block(item.list, all_ids)
         console.log(all_ids)
@@ -101,14 +134,14 @@ Component({
       selectGroup.forEach((item0, index0) => {
         console.log('*************************************************来自已选择规格组***************')
         console.log("来自已选的", item0)
-        this.update_2(item0.list, index,obj,key)
+        this.update_2(item0.list, index, obj, key)
         console.log('*************来自已选择规格组****************')
       })
       // 渲染提示语
       this.getTipsSpec(this.data.isActive)
       // 如果全部选择好了 渲染对应的价格和库存
       this.isSelectAllTypes()
-      
+
     },
     isSelectAllTypes(){ // 全部选择规格以后渲染页面
       if (this.isSelectAll()) {

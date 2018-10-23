@@ -5,7 +5,9 @@ Page({
       ysf: { title: '支付方式' },
       payList:'',
       isShow:false, // 显示支付结果
-      result:1, //支付结果
+      tipsContent: ['已通知商家，会给你尽快发货', '请耐心等待'],
+      tipsBtn: ['返回首页', '查看订单'],
+      result: false,
       payWayActive:[false,true,false],
       useAmount:[false,false],
       useBalance:0,
@@ -25,7 +27,7 @@ Page({
       if (this.data.payList.outTradeNo){
         this.continueToPay()
       } else if (!this.data.payList.outTradeNo && options.isContinuePay ){
-        this.againToPrePay()
+        // this.againToPrePay()
       }
     },
     formatNum(num){ // 保留两位小数不四舍五入
@@ -61,37 +63,36 @@ Page({
       
     },
     payOrder(payType){
-      if (this.data.payList.showTotalAmounts==0){
+      if (this.data.payList.totalAmounts==0){
         payType=1
       }
       let params ={
-        amounts: this.data.payList.showTotalAmounts,
+        amounts: this.data.payList.totalAmounts,
         balance: 0, // 先按照0 写死
         orderNum: this.data.payList.orderNum,
         openid: Storage.getWxOpenid(),
         tokenCoin: 0, // 先按照0 写死
         "type": payType,
-        url: Operation.repay,
+        url: Operation.prePay,
         reqName: '预支付',
       }
-      // let r = RequestFactory.repay(params);
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
-        this.test(payType, req)
+        // this.test(payType, req)
         // this.wxPay(payType, req.responseObject.data.outTradeNo)
-        // if (payType==1){
-        //   this.showResult(true)
-        // } else {
-        //   let datas = req.responseObject.data
-        //   this.wxPay(payType, datas.outTradeNo, datas.prePayStr)
-        // }
+        if (payType==1){
+          this.showResult(true)
+        } else {
+          let datas = req.responseObject.data
+          this.wxPay(payType, datas.outTradeNo, datas.prePayStr)
+        }
       };
       Tool.showErrMsg(r)
       r.addToQueue();
     },
     paySuccess(payway,outTradeNo){
       let params ={
-        amounts: this.data.payList.showTotalAmounts,
+        amounts: this.data.payList.totalAmounts,
         outTradeNo:outTradeNo,
         payTime: Tool.timeStringForDate(new Date(), "YYYY-MM-DD HH:mm:ss"),
         tradeNo:'',
@@ -100,7 +101,6 @@ Page({
         reqName: '第三方支付回调接口',
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.paySuccess(params);
       r.successBlock = (req) => {
         this.showResult(true)
       };
@@ -122,17 +122,21 @@ Page({
         result:bool,
       })
     },
-    goPage(e){
+    payResultClicked(e){
       let index = e.currentTarget.dataset.index
       if(index == 1){
         Tool.switchTab('/pages/index/index')
       } else {
-        Tool.redirectTo('/pages/my/my-order/my-order')
+        let query = ''
+        if(index==3){
+          query =1
+        }
+        Tool.redirectTo('/pages/my/my-order/my-order?query=' + query)
       }
       
     },
     continuePay(payType) {
-      if (this.data.payList.showTotalAmounts == 0) {
+      if (this.data.payList.totalAmounts == 0) {
         payType = 1
       }
       let params = {
@@ -143,8 +147,6 @@ Page({
         reqName: '继续支付',
       }
       let r = RequestFactory.wxRequest(params);
-
-      // let r = RequestFactory.continuePay(params);
       r.successBlock = (req) => {
         // this.test(payType, req)
         // this.wxPay(payType, req.responseObject.data.outTradeNo)
@@ -164,13 +166,13 @@ Page({
         outTradeNo: this.data.payList.outTradeNo,
         url: Operation.continueToPay,
         reqName: '继续去支付',
+        requestMethod: 'GET',
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.continueToPay(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data
         let payList = this.data.payList
-        payList.showTotalAmounts = datas.amounts
+        payList.totalAmounts = datas.amounts
         this.setData({
           payType: datas.type,
           payList:payList
@@ -186,11 +188,10 @@ Page({
         reqName: '继续去预支付',
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.againToPrePay(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data
         let payList = this.data.payList
-        payList.showTotalAmounts = datas.needPay
+        payList.totalAmounts= datas.needPay
         payList.scorePrice = datas.scorePrice
         this.setData( {
           payList: payList
@@ -200,6 +201,7 @@ Page({
       r.addToQueue();
     },
     wxPay(payType, outTradeNo, payList){ //微信支付
+      payList = JSON.parse(payList)
       let that = this
       wx.requestPayment({
         'timeStamp': payList.timeStamp,
@@ -208,8 +210,8 @@ Page({
         'signType': 'MD5',
         'paySign': payList.paySign,
         'success': function (res) {
-          that.orderQuery(outTradeNo)
-          // that.showResult(true)
+          // that.orderQuery(outTradeNo)
+          that.showResult(true)
         },
         'fail': function (res) {
           that.showResult(false)
@@ -237,7 +239,6 @@ Page({
         reqName: '主动查询订单状态',
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.orderQuery(params);
       r.successBlock = (req) => {
         this.showResult(true)
       };

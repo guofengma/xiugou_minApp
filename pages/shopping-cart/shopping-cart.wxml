@@ -5,18 +5,24 @@
 
 <scroll-view class="search-result" scroll-y >
   <view class='shopping-cart'>
-    <view class='shopping-cart-line flexR-sb'  data-index='{{index}}' wx:for='{{items}}' wx:key='unique' >
-      <view class='chooseImg' wx:if="{{item.status==1&&item.stock>0}}" bindtap='chooseClicked' data-index='{{index}}' >
-       <image src='{{ item.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
+    <view wx:for='{{items}}'  data-index='{{index}}'  wx:key='unique' class='shopping-cart-line '>
+      <view class='flexR-sb whiteBg' >
+        <view class='chooseImg' wx:if="{{item.status==1&&item.stock>0}}" bindtap='chooseClicked' data-index='{{index}}' >
+        <image src='{{ item.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
+        </view>
+        <view wx:else class='statusLabel flexR'>
+        失效
+        </view>
+        <!--侧滑删除代码  -->
+        <view class='move-box'>
+          <delete-bar  bind:deleteClicked="deleteClicked" item='{{items}}' index="{{index}}">
+            <template is="cart-product-info" data='{{innerCount:item.showCount,imgSize:160,countSize:50,index,...item}}'/>
+          </delete-bar>
+        </view>
       </view>
-      <view wx:else class='statusLabel flexR'>
-       失效
-      </view>
-      <!--侧滑删除代码  -->
-      <view class='move-box'>
-        <delete-bar  bind:deleteClicked="deleteClicked" item='{{items}}' index="{{index}}">
-          <template is="cart-product-info" data='{{innerCount:item.showCount,imgSize:160,countSize:50,index,...item}}'/>
-        </delete-bar>
+      <view class='flexR font-22 {{item.isBegin? "redBg":"redBg-2"}}' wx:if='{{!item.isEnd && item.activityType}}'>
+        <text wx:if='{{item.isBegin}}'>该商品正在进行{{item.activityType==1? "秒杀":"降价拍"}}活动，快去看看~</text>
+        <text wx:else>{{item.activityType==1? "秒杀":"降价拍"}}活动未开始,暂不可购买</text>
       </view>
     </view>
   </view>

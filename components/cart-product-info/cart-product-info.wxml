@@ -4,7 +4,10 @@
       <image src='{{showImg}}' class='search-img' style='width:{{imgSize}}rpx;height:{{imgSize}}rpx'></image>
     </view>
     <view class='right-bar' style='width:{{480}}rpx'>
-      <view class='ellipsis-2'>{{showName}}</view>
+      <view class='ellipsis-2 prdName'>
+        <text class='red font-22 labelName' wx:if='{{labelName}}'>{{labelName}}</text>
+        {{showName}}
+      </view>
       <view class='gray ellipsis'>{{showType}} </view>
       <view class='prd-count-box flexR' wx:if='{{status==1}}' >
         <view class='red'>¥ {{showPrice}}</view>
@@ -15,4 +18,5 @@
       </view>
     </view>
   </view>
+  
 </template>

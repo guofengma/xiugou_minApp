@@ -6,8 +6,8 @@
     </view>
     <scroll-view scroll-y style='height:380rpx;'>
       <block wx:for='{{reason.list}}' wx:key='unique' >
-        <view class='reason-cell' bindtap='reasonClicked' data-content='{{item}}' data-index='{{index}}' data-id='{{item.dKey}}'>
-          <view class='{{activeIndex===index? "active":""}}'>{{item.dValue}}</view>
+        <view class='reason-cell' bindtap='reasonClicked' data-content='{{item}}' data-index='{{index}}' data-id='{{item.id}}'>
+          <view class='{{activeIndex===index? "active":""}}'>{{item.value}}</view>
         </view>
       </block>
     </scroll-view>

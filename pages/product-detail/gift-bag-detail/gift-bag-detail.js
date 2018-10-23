@@ -24,19 +24,22 @@ Page({
             },
             children: [],
     }],
-    isShowGiftTips:{
-      show:false,
-      nextLevel:''
-    }, //是否显示礼包升级提示
+    isShowGiftTips:false, //是否显示礼包升级提示
     size: 0,
-    dismiss:true, // 能否可以购买礼包 
+    dismiss:false, // 能否可以购买礼包 
   },
   onLoad: function (options) {
     this.setData({
       giftBagId: options.giftBagId || '',
+      inviteCode: options.inviteCode || ''
     })
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
+    this.closeMask()
+    this.refreshMemberInfoNotice()
+  },
+  refreshMemberInfoNotice() {
+    Tool.getUserInfos(this)
   },
   onShow: function () {
     this.getGiftBagDetail()
@@ -65,7 +68,7 @@ Page({
   giftBagClicked() {
     // 立即购买
     if (!this.data.didLogin) { // 未登录
-      Tool.navigateTo('/pages/login/login-wx/login-wx?isBack=' + true)
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true + '&inviteCode=' + this.data.inviteCode)
       return
     }
     
@@ -80,74 +83,66 @@ Page({
         productId: this.data.productInfo.id,
         priceList: this.data.selectType.priceList
       }],
-      orderType: 98
+      orderType: 5,
+      packageCode: this.data.productInfo.packageCode
     }
 
-    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&type=0")
-  },
-  checkGiftBagOrder(){
-    let params = {
-      giftBagId: this.data.giftBagId,
-      isShowLoading:false,
-      reqName: '是否能购买礼包',
-      url: Operation.checkGiftBagOrder
-    }
-    let r = RequestFactory.wxRequest(params);
-
-    // let r = RequestFactory.checkGiftBagOrder(params)
-
-    r.successBlock = (req) => { //能否可以购买礼包
-      this.setData({
-        dismiss:false,
-        isShowGiftTips: {
-          show: true,
-          nextLevel: req.responseObject.data.nextLevel
-        }, //是否显示礼包升级提示
-      })
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&type=5")
   },
   getGiftBagDetail() { //获取礼包详情
     let params = {
-      giftBagId: this.data.giftBagId,
+      code:this.data.giftBagId,
       isShowLoading:false,
       reqName: '礼包详情',
+      requestMethod: 'GET',
       url: Operation.getGiftBagDetail
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.getGiftBagDetail(params)
-
     r.successBlock = (req) => {
-
-      this.checkGiftBagOrder()
-
       let datas = req.responseObject.data
+      if (this.data.didLogin){
+        this.setData({
+          dismiss: !datas.userBuy
+        })
+      }
       // 渲染库存
       let giftStock = []
-      datas.specList.forEach((items) => {
-        let total = 0
-        items.value.forEach((item) => {
-          total += item.stock
+      let specPriceList = []
+      for (let key in datas.specPriceList) {
+        specPriceList.push({
+          name: datas.specPriceList[key][0].productName,
+          value: datas.specPriceList[key]
         })
-        giftStock.push(total)
-      })
+        let total = 0
+        datas.specPriceList[key].forEach((items, index) => {
+          total += items.surplusNumber
+          giftStock.push(total)
+        })
+      }
+      // datas.specPriceList.forEach((items,index) => {
+      //   console.log(index)
+      //   let total = 0
+      //   items.value.forEach((item) => {
+      //     total += item.stock
+      //   })
+      //   giftStock.push(total)
+      // })
 
       // 显示各礼包总库存里面的最小库存
 
-      datas.product.showStock = Math.min(...giftStock)
+      datas.showStock = Math.min(...giftStock)
 
       this.setData({
-        imgUrls: datas.ImgUrl,
-        productInfo: datas.product,
+        imgUrls: datas.imgFileList,
+        productInfo: datas,
         // priceList: datas.priceList,
-        productId: datas.product.id,
-        productTypeList: datas.specList
+        productId: datas.id,
+        productTypeList: specPriceList
       })
       // 渲染表格
       let tr = []
       let tbody = this.data.nodes
-      for (let i = 0; i < datas.infoValue.length; i++) {
+      for (let i = 0; i < datas.paramValueList.length; i++) {
         tr.push(
           {
             name: "tr",
@@ -157,7 +152,7 @@ Page({
               attrs: { class: 'td frist-td' },
               children: [{
                 type: "text",
-                text: datas.infoValue[i].param
+                text: datas.paramValueList[i].param
               }]
             },
             {
@@ -165,7 +160,7 @@ Page({
               attrs: { class: 'td td2' },
               children: [{
                 type: "text",
-                text: datas.infoValue[i].paramValue
+                text: datas.paramValueList[i].paramValue
               }]
             }
             ]
@@ -177,7 +172,7 @@ Page({
       this.setData({
         nodes: tbody
       })
-      let html = datas.product.content
+      let html = datas.content
       WxParse.wxParse('article', 'html', html, this, 5);
     }
     r.failBlock = (req) => {
@@ -244,11 +239,12 @@ Page({
     })
   },
   onShareAppMessage: function (res) {
+    let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
     let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img : ''
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.giftBagId,
+      path: '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.giftBagId + '&inviteCode=' + inviteCode,
       imageUrl: imgUrl
     }
   },
@@ -258,10 +254,10 @@ Page({
     })
   },
   closeMask(){
-    let { isShowGiftTips} = this.data
-    isShowGiftTips.show = !isShowGiftTips.show
+    // let { isShowGiftTips} = this.data
+    // isShowGiftTips.show = !isShowGiftTips.show
     this.setData({
-      isShowGiftTips: isShowGiftTips
+      isShowGiftTips: !this.data.isShowGiftTips
     })
   },
   hiddenTips() {

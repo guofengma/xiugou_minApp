@@ -11,29 +11,61 @@ Page({
     orderInfos:"",
     addressList:[],
     remark:'', // 买家留言
-    door:'', //0 是礼包 1是产品详情页进入 2是购物车进入 3是从我的订单进来的 
-    coupon: { id: "", nickname:'未使用优惠劵'}, //优惠券信息
+    door:'', // 1秒杀 2降价 3优惠套餐 4助力免费领 5礼包 99 普通
+    coupon: { id: "", nickname: '未使用优惠劵', canClick:true}, //优惠券信息
+    useOneCoinNum:0, // 1元劵张数
   },
   onLoad: function (options) {
+    Tool.getUserInfos(this)
     this.setData({
       params: JSON.parse(options.params),
-      door: options.type
+      door: options.type,
     })
     this.requestOrderInfo()
     Tool.isIPhoneX(this)
     this.availableDiscountCouponForProduct()
     Event.on('updateOrderAddress', this.updateOrderAddress,this)
     Event.on('updateCoupon', this.couponClick,this)
+    Event.on('getTokenCoin', this.getTokenCoin,this)
   },
   onShow: function () {
     this.updateCoupon()
   },
-  couponClick() {
+  getTokenCoin(){ // 1元劵计算
+    let useOneCoinNum = Storage.getTokenCoin() || 0
+    if (useOneCoinNum > this.data.orderInfos.totalAmounts){
+      useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
+    }
+    this.data.params.tokenCoin = Number(useOneCoinNum)
+    this.setData({
+      params: this.data.params
+    })
+    let callBack = ()=>{
+      this.setData({
+        useOneCoinNum: Number(useOneCoinNum)
+      })
+    }
+    if (useOneCoinNum>0)
+    this.requestOrderInfo(callBack)
+    // if (this.data.orderInfos.totalAmounts>=1){
+    //   this.data.orderInfos.showTotalAmounts = Tool.sub(Math.floor(this.data.orderInfos.totalAmounts), useOneCoinNum)
+    //   if (this.data.orderInfos.showTotalAmounts<0){
+    //     this.data.orderInfos.showTotalAmounts = 0
+    //     useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
+    //   }
+    //   this.data.orderInfos.showTotalAmounts = Tool.sub(this.data.orderInfos.totalAmounts, useOneCoinNum)
+    //   this.setData({
+    //     useOneCoinNum: Number(useOneCoinNum),
+    //     orderInfos: this.data.orderInfos
+    //   })
+    // }
+  },
+  couponClick() { // 是否点击了优惠卷
     this.setData({
       couponClick:true
     })
   },
-  updateCoupon(){
+  updateCoupon(){ // 点击优惠卷价格联动
     if (!this.data.couponClick) return
     let coupon = Storage.getCoupon()
     this.data.params.couponId = coupon.id
@@ -47,85 +79,23 @@ Page({
       })
     }
     this.requestOrderInfo(callBack)
-    // if (coupon.id){ // 选择了优惠券的时候请求数据
-    //   this.orderCalcDiscountCouponAndUseScore(coupon)
-    // } else {
-    //   let orderList = this.data.orderInfos
-    //   if (this.data.addressType == 1) { // 快递
-    //     orderList.totalAmounts = Tool.add(orderList.orginTotalAmounts, orderList.totalFreightFee)
-    //   } else {
-    //     orderList.totalAmounts = orderList.totalPrice
-    //   }
-    //   orderList.showTotalScore = orderList.totalScore
-    //   this.userScore(orderList)
-    //   if (this.data.isUseIntegral) {
-    //     orderList.totalAmounts = Tool.sub(orderList.totalAmounts,orderList.reducePrice)
-    //     orderList.totalAmounts = orderList.totalAmounts > 0 ? orderList.totalAmounts:0
-    //   }
-    //   this.setData({
-    //     orderInfos: orderList,
-    //     couponClick:false,
-    //     coupon: coupon
-    //   })
-    // }
   },
-  orderCalcDiscountCouponAndUseScore(coupon) { 
-    // let params = {
-    //   couponId: coupon.id,
-    //   orderProductList: this.data.params
-    // }
-    let param = JSON.parse(this.data.params)
-    param.couponId = coupon.id
-    // let params = {
-    //   orderParam: JSON.stringify(param)
-    // }
-    // let r = RequestFactory.orderCalcDiscountCouponAndUseScore(params);
-    let params = {
-      orderParam: JSON.stringify(param),
-      reqName: '使用优惠券查询',
-      url: Operation.orderCalcDiscountCouponAndUseScore
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      this.setData({
-        coupon: coupon
-      })
-      let datas = req.responseObject.data
-      let orderList = this.data.orderInfos
-      orderList.totalAmounts = datas.totalAmounts
-      orderList.showTotalScore = datas.totalScore
+  requestOrderInfo(callBack = ()=>{}){ // 获取订单信息 优惠卷和省市区地址更改联动
+    let url = ''
 
-      if (this.data.addressType == 1) { // 快递
-        orderList.totalAmounts = Tool.add(datas.totalAmounts,orderList.totalFreightFee)
-      } else {
-        orderList.totalAmounts = datas.totalAmounts
-      }
-      this.userScore(orderList)
-      if (this.data.isUseIntegral && orderList.canUseScore) {
-        orderList.totalAmounts = Tool.sub(orderList.totalAmounts, orderList.reducePrice)
-        orderList.totalAmounts = orderList.totalAmounts > 0 ? orderList.totalAmounts : 0
-      }
-      if (!orderList.canUseScore){
-        this.setData({
-          isUseIntegral:false
-        })
-      }
-      this.setData({
-        orderInfos: orderList
-      })
-      //this.getReducePrice()
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
-  onPullDownRefresh: function () {
-    this.requestOrderInfo()
-  },
-  requestOrderInfo(callBack = ()=>{}){
+    if(this.data.door==1){
+      url = Operation.seckillMkeSureOrder
+    } else if (this.data.door == 2){
+      url = Operation.discountMakeSureOrder
+    } else if (this.data.door == 5) {
+      url = Operation.giftMkeSureOrder
+    } else {
+      url = Operation.makeSureOrder
+    }
     let params = {
       ...this.data.params,
       reqName: '提交订单',
-      url: Operation.makeSureOrder
+      url: url
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
@@ -142,39 +112,17 @@ Page({
      
       //渲染产品信息列表
       let showProduct =[]
-      if(this.data.door!=0){
-        item.orderProductList.forEach((item0) => {
-          showProduct.push({
-            showImg: item0.specImg,
-            showName: item0.productName,
-            showType: item0.spec,
-            showPrice: item0.price,
-            showQnt: item0.num,
-            status: 1,
-            stock: item0.stock,
-          })
+      item.orderProductList.forEach((item0,index)=>{
+        showProduct.push({
+          showImg: item0.specImg,
+          showName: item0.productName,
+          showType: item0.spec,
+          showPrice: item0.price,
+          showQnt: item0.num,
+          status: 1,
+          stock: item0.stock,
         })
-      }
-      if(this.data.door==0){
-        item.orderProductList.forEach((item0,index)=>{
-          showProduct.push({
-            showImg: item0.specImg,
-            showName: item0.productName,
-            showType: item0.spec,
-            showPrice: item0.price,
-            showQnt: item0.num,
-            status: 1,
-            stock: item0.stock,
-          })
-        })
-      }
-
-      // 是否有自提的权限 礼包没有自提权限
-      // item.hasSelfLifting = (item.user.pickedUp==1&&this.data.door!=0? true:false)
-
-      // if (item.hasSelfLifting){
-      //   this.queryStoreHouseList()
-      // }
+      })
 
       item.showProduct = showProduct
       
@@ -188,35 +136,20 @@ Page({
       if (!this.data.isChangeAddress){
         addressList[1] = item.address
       }
+      // item.showTotalAmounts = item.totalAmounts
       // item.totalAmounts = Tool.add(item.totalAmounts, item.totalFreightFee)
-
       callBack(item)
 
       this.setData({
         orderInfos: item,
         addressList: addressList
       })
-      
+      // if (this.data.useOneCoinNum>0){
+      //   this.getTokenCoin()
+      // }
     };
     Tool.showErrMsg(r)
     r.addToQueue();
-  },
-  userScore(item){ // 计算积分
-    // 积分抵扣计算
-    let score = item.dealer.userScore > item.showTotalScore ? item.showTotalScore : item.dealer.userScore
-    item.showScore = score
-    // item.reducePrice = item.userScoreToBalance*score
-    item.reducePrice = Tool.mul(item.userScoreToBalance,score)
-    // 当商品可以使用积分 用户积分大于0的时候 显示可以使用积分
-    if (this.data.door != 0){
-      item.canUseScore = (item.showTotalScore > 0 && item.dealer.userScore) ? true : false
-      item.showTipsName = item.dealer.userScore <= 0? '暂无积分可用' : '不支持积分消费'
-    } else{
-      item.canUseScore =  false
-      item.showTipsName = '不支持积分消费'
-    }
-   
-    return item
   },
   addressClicked(){
     if (this.data.addressType!=1){
@@ -227,7 +160,7 @@ Page({
   },
   changeAddressType(e){
     let index = e.currentTarget.dataset.index
-    console.log(index)
+
     let { orderInfos, isUseIntegral } = this.data
     this.setData({
       addressType: e.currentTarget.dataset.index
@@ -247,52 +180,6 @@ Page({
     this.setData({
       orderInfos: orderInfos
     })
-  },
-  switchChange(){
-    if (!this.data.orderInfos.canUseScore) return
-    this.setData({
-      isUseIntegral: !this.data.isUseIntegral,
-    })
-    this.getReducePrice()
-  },
-  getReducePrice(){
-    let { orderInfos, isUseIntegral} = this.data
-    if (isUseIntegral) {
-      orderInfos.totalAmounts = Tool.sub(orderInfos.totalAmounts, orderInfos.reducePrice) 
-    } else {
-      orderInfos.totalAmounts = Tool.add(orderInfos.totalAmounts, orderInfos.reducePrice) 
-    }
-    this.setData({
-      orderInfos: orderInfos
-    })
-  },
-  queryStoreHouseList() {
-    // let r = RequestFactory.queryStoreHouseList();
-    let params = {
-      reqName: '获取自提地址列表',
-      url: Operation.queryStoreHouseList,
-      preprocessCallback:true,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      data.forEach((item, index) => {
-        item.addressInfo = item.province + item.city + item.area + item.address
-        item.hasData = true
-        if (index == 0) {
-          item.defaultStatus = 1
-        }
-      })
-      if (req.responseObject.data.length > 0) {
-        let addressList = this.data.addressList
-        addressList[2] = req.responseObject.data[0]
-        this.setData({
-          addressList: addressList
-        })
-      }
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
   },
   updateOrderAddress(){ // 重新计算邮费 
     let address = Storage.getOrderAddress()
@@ -315,10 +202,6 @@ Page({
     })
   },
   payBtnClicked(){ // 提交订单
-    let score = this.data.orderInfos.showScore
-    if (!this.data.isUseIntegral){
-        score=0
-    }
     let orderAddress = this.data.addressList[this.data.addressType]
     if (!orderAddress){
       Tool.showAlert('请选择订单地址')
@@ -330,26 +213,47 @@ Page({
     }
     let storehouseId = this.data.addressType == 2? orderAddress.id : ''
     let params = {
-      // orderParam: JSON.stringify({
-        "address": orderAddress.address,
-        "areaCode": orderAddress.areaCode || '',
-        "buyerRemark": this.data.remark,
-        "cityCode": orderAddress.cityCode || '',
-        "couponId": this.data.coupon.id || '',
-        "orderProducts": this.data.params.orderProducts,
-        "orderType": this.data.params.orderType,
-        // "pickedUp": this.data.addressType,
-        "provinceCode": orderAddress.provinceCode || '',
-        "receiver": orderAddress.receiver || '',
-        "recevicePhone": orderAddress.recevicePhone || '',
-        // "storehouseId": storehouseId,
-        "useScore": score,
-      // }),
-      reqName: '订单结算',
-      url: Operation.submitOrder
+      "address": orderAddress.address,
+      "areaCode": orderAddress.areaCode || '',
+      "buyerRemark": this.data.remark,
+      "cityCode": orderAddress.cityCode || '',
+      "couponId": this.data.coupon.id || '',
+      "orderType": this.data.params.orderType,
+      "provinceCode": orderAddress.provinceCode || '',
+      "receiver": orderAddress.receiver || '',
+      "recevicePhone": orderAddress.receiverPhone || '',
+      tokenCoin: Number(this.data.useOneCoinNum), // 一元劵  
+      reqName: '订单结算', 
     }
+    let orderTypeParmas ={}
+    if (this.data.door == 2){
+      orderTypeParmas = {
+        ...this.data.params,
+        // "orderProducts": this.data.params.orderProducts,
+        url: Operation.discountSubmitOrder
+      }
+    } else if (this.data.door == 5){
+      orderTypeParmas = {
+        ...this.data.params,
+        url: Operation.giftSubmitOrder
+      }
+    } else if (this.data.door == 1){
+      orderTypeParmas = {
+        ...this.data.params,
+        // "orderProducts": this.data.params.orderProducts,
+        url: Operation.seckillSubmitOrder
+      }
+    }
+    else {
+      orderTypeParmas = {
+        "orderProducts": this.data.params.orderProducts,
+        url: Operation.submitOrder
+      }
+    }
+    Object.assign(params, params, orderTypeParmas)
     let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {        
+    r.successBlock = (req) => {
+      Event.emit('getLevel')  
       Event.emit('updateShoppingCart')
       let data = req.responseObject.data
       Storage.setPayOrderList(data)
@@ -358,23 +262,30 @@ Page({
     Tool.showErrMsg(r)
     r.addToQueue();
   },
-  couponClicked(){
-    if(this.data.door==0) return
+  iconClicked(){ // 点击使用1元劵跳转
+    let useOneCoinNum = this.data.useOneCoinNum ? this.data.useOneCoinNum : Math.floor(this.data.orderInfos.totalAmounts)
+    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + useOneCoinNum)
+  },
+  couponClicked(){ // 点击使用优惠卷跳转
+    if ((this.data.door != 99 && this.data.door ==5)|| this.data.coupon.canClick===false) return
+    let productIds = this.getCouponProductPriceIds()
+    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=2&productIds=" + JSON.stringify(productIds))
+  },
+  getCouponProductPriceIds(){ // 获取请求优惠卷的参数
     let productIds = []
-    let orderList = this.data.orderInfos.orderProductList
-    orderList.forEach((item)=>{
-      productIds.push(item.productId)
+    this.data.params.orderProducts.forEach((item) => {
+      productIds.push({
+        priceId: item.priceId,
+        productId: item.productId,
+      })
     })
-    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&&productIds=" + this.data.params)
+    return productIds
   },
   availableDiscountCouponForProduct() { // 产品可用优惠劵列表
-    let productIds = []
-    this.data.params.orderProducts.forEach((item)=>{
-      productIds.push(item.productId)
-    })
-    console.log(productIds)
+    if (this.data.door != 99&&this.data.door != 5) return
+    let productIds = this.getCouponProductPriceIds()
     let params = {
-      productIds: productIds,
+      productPriceIds: productIds,
       reqName: '产品可用优惠劵列表',
       url: Operation.availableDiscountCouponForProduct
     }
@@ -385,7 +296,8 @@ Page({
         this.setData({
           coupon:{
             id:'',
-            nickname:"暂无可用优惠劵"
+            nickname:"暂无可用优惠劵",
+            canClick:false,
           }
         })
       }      
@@ -393,9 +305,47 @@ Page({
     Tool.showErrMsg(r);
     r.addToQueue();
   },
+  onPullDownRefresh: function () {
+    this.requestOrderInfo()
+  },
   onUnload: function () {
     Event.off('updateOrderAddress', this.updateOrderAddress)
     Event.off('updateCoupon', this.couponClick)
-  }
+  },
+  // switchChange(){
+  //   if (!this.data.orderInfos.canUseScore) return
+  //   this.setData({
+  //     isUseIntegral: !this.data.isUseIntegral,
+  //   })
+  //   this.getReducePrice()
+  // },
+  // getReducePrice(){
+  //   let { orderInfos, isUseIntegral} = this.data
+  //   if (isUseIntegral) {
+  //     orderInfos.totalAmounts = Tool.sub(orderInfos.totalAmounts, orderInfos.reducePrice) 
+  //   } else {
+  //     orderInfos.totalAmounts = Tool.add(orderInfos.totalAmounts, orderInfos.reducePrice) 
+  //   }
+  //   this.setData({
+  //     orderInfos: orderInfos
+  //   })
+  // },
+  // userScore(item){ // 计算积分
+  //   // 积分抵扣计算
+  //   let score = item.dealer.userScore > item.showTotalScore ? item.showTotalScore : item.dealer.userScore
+  //   item.showScore = score
+  //   // item.reducePrice = item.userScoreToBalance*score
+  //   item.reducePrice = Tool.mul(item.userScoreToBalance,score)
+  //   // 当商品可以使用积分 用户积分大于0的时候 显示可以使用积分
+  //   if (this.data.door != 0){
+  //     item.canUseScore = (item.showTotalScore > 0 && item.dealer.userScore) ? true : false
+  //     item.showTipsName = item.dealer.userScore <= 0? '暂无积分可用' : '不支持积分消费'
+  //   } else{
+  //     item.canUseScore =  false
+  //     item.showTipsName = '不支持积分消费'
+  //   }
+
+  //   return item
+  // },
 })
 

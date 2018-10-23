@@ -1,5 +1,5 @@
 // pages/my/account.js
-let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
+let { Tool, RequestFactory, Storage, Event, Operation} = global
 Page({
     data: {
       userInfos:'',
@@ -19,17 +19,16 @@ Page({
         "",// 活动日历
         '/pages/my/coupon/my-coupon/my-coupon',//优惠卷
         '/pages/my/my-promotion/my-promotion', //我的数据
-        "",//收藏店铺
+        "/pages/download-app/download-app",//收藏店铺
         '/pages/my/help-customer/help-customer',//帮助
         '/pages/address/select-express-address/select-express-address',//地址
         '',//足迹
       ]
     },
     onLoad: function (options) {
-      this.setData({
-        imgUrl: Config.imgBaseUrl
-      })
       this.didLogin()
+      this.refreshMemberInfoNotice()
+      Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
       Event.on('didLogin', this.didLogin, this);
     },
     onShow: function () {
@@ -50,6 +49,9 @@ Page({
     },
     onHide: function() {
 
+    },
+    refreshMemberInfoNotice() {
+      Tool.getUserInfos(this)
     },
     getLevel(){
       if (!this.data.didLogin) return
@@ -92,6 +94,9 @@ Page({
       }
       if (query){
         page = page + "?query=" + query
+      }
+      if (pageIndex==12){
+        Tool.switchTab(page)
       }
       Tool.navigateTo(page)
     },

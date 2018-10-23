@@ -4,9 +4,9 @@
 
 <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 
-<template is="my-order-product-info" data="{{...list.returnProduct}}"/>
+<template is="my-order-product-info" data="{{...list}}"/>
 
-<view catchtap='logLineClicked'>
+<view bindtap='logLineClicked'>
   <template is="cell-line" data="{{name:'物流公司',placeholder:'请选择物流公司',content:company.name}}"/>
 </view>
 

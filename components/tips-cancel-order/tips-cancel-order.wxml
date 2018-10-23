@@ -7,8 +7,8 @@
         </view>
         <view class='tips-content'>
           <block wx:for='{{reasonArr}}' wx:key='{{index}}'>
-            <view data-content='{{item.dValue}}'  class="{{reason===index?'active':''}}" bindtap='reasonClicked' data-index="{{index}}">
-              {{item.dValue}}
+            <view data-content='{{item.value}}'  class="{{reason===index?'active':''}}" bindtap='reasonClicked' data-index="{{index}}">
+              {{item.value}}
             </view>
           </block>
           <!-- <view data-content='信息填写错误，请重新拍' class="{{reason==2?'active':''}}" bindtap='reasonClicked'

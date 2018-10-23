@@ -12,12 +12,12 @@ Component({
   methods: {
     queryDictionaryDetailsType() { //获取取消订单的理由
       let params = {
-        dType: 1,
+        code: 'QXDD',
         reqName: '获取数字字典',
+        requestMethod: 'GET',
         url: Operation.queryDictionaryDetailsType,
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.queryDictionaryDetailsType(params)
       r.successBlock = (req) => {
         this.setData({
           reasonArr: req.responseObject.data
@@ -44,24 +44,18 @@ Component({
         return
       }
       let params = {
-        buyerRemark: this.data.content,
+        buyerRemark: this.data.content || '无',
         orderNum: this.data.orderNum,
         reqName: '取消订单',
         url: Operation.cancelOrder,
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.cancelOrder(params);
       r.successBlock = (req) => {
-        if (req.responseObject.code == 200) {
-          if(this.data.door==1){
-            this.triggerEvent('cancelOrder', { ...this.data });
-          } else {
-            Tool.navigateTo('/pages/my/my-order/my-order')
-          }
+        if (this.data.door == 1) {
+          this.triggerEvent('cancelOrder', { ...this.data });
         } else {
-          Tool.showSuccessToast(req.responseObject.msg)
+          Tool.navigateTo('/pages/my/my-order/my-order')
         }
-
       };
       Tool.showErrMsg(r)
       r.addToQueue();

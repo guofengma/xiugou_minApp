@@ -24,3 +24,11 @@
 .leftbar{
   margin-right: 30rpx;
 }
+.labelName{
+  padding: 0rpx 6rpx;
+  border: 1rpx solid;
+  border-radius: 5rpx;
+}
+.prdName{
+  line-height: 36rpx;
+}

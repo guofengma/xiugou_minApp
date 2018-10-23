@@ -6,87 +6,205 @@ let { Tool, RequestFactory, Event, Storage, Operation} = global;
 
 Page({
     data: {
-        imgUrls: [
-          'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-          'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-          'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-        ],
-        url: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/',
+      pageArr: [ // 1.链接产品2.链接专题3.降价拍4.秒杀5.礼包 6.外链
+        '其他',
+        '/pages/product-detail/product-detail?prodCode=',
+        '/pages/topic/topic?code=',
+        '/pages/product-detail/discount-detail/discount-detail?code=',
+        '/pages/product-detail/seckill-detail/seckill-detail?code=',
+        '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
+      ],
+      iconArr:[ // icon 图标
+        { name: '赚钱', icon:'home-icon-xueyuan.png',page:''},
+        { name: '分享', icon: 'home_icon_share.png', page: '' },
+        { name: '签到', icon: 'home_icon_shengqian.png', page: '/pages/signIn/signIn',login:true },
+        { name: '学院', icon: 'home-icon-xueyuan.png', page: ''},
+        { name: '秒杀', icon: 'home_icon_chuxiao.png', page: ''},
+        { name: '手机相机', icon: 'iconForobtain.png', page: '' },
+        { name: '电脑家电', icon: 'iconForobtain.png', page: '' },
+        { name: '品质男装', icon: 'iconForobtain.png', page: ''},
+        { name: '美妆个护', icon: 'iconForobtain.png', page: '' },
+        { name: '全部分类', icon: 'iconForobtain.png', page: '/pages/product-classification/product-classification' }
+      ],
+      imgUrls: [],// 轮播
+      adArr:[],// 广告位
+      starShop:[], // 明星店铺
+      todayList:[], // 今日榜单
+      fineQuality:[],//精品推荐
+      noticeArr:[  ],// 头条
+      recommendArr:[],
+      params:{
+        page:1,
+        pageSize:10
+      }
     },
     onLoad: function () {
-      // this.queryAdList();
-      // this.querySpeList();
-      // this.queryFeaturedList()
+      Event.on('getLevel', this.getLevel,this)
+      this.discoverNotice()
+      this.queryAdList(1,'轮播图片',(datas)=>{
+        this.setData({
+          imgUrls:datas
+        })
+      });
+      this.queryAdList(2, '推荐位', (datas) => {
+        this.setData({
+          adArr: datas
+        })
+      });
+      this.queryAdList(4, '今日榜单', (datas) => {
+        this.setData({
+          todayList:datas
+        })
+      });
+      this.queryAdList(5, '精品推荐', (datas) => {
+        this.setData({
+          fineQuality: datas
+        })
+      });
+      this.queryAdList(6, '超值热卖', (datas) => {
+        this.setData({
+          hotSale:datas
+        })
+      });
+      this.queryFeaturedList()
+      if (!app.globalData.systemInfo){
+        app.getSystemInfo()
+      }
       app.wxLogin()
       Event.on('didLogin', this.didLogin, this);
     },
-    goPages(){
-      Tool.navigateTo("/pages/product-classification/product-classification")
+    goPages(e){
+      let index = e.currentTarget.dataset.index
+      let page = this.data.iconArr[index].page
+      if (this.data.iconArr[index].login){
+        let callBack =''
+        this.getIsLogin(callBack = () => { Tool.navigateTo(page)})
+        return
+      }
+      if(page){
+        Tool.navigateTo(page)
+      }
     },
     imageLoad(e){
       Tool.getAdaptHeight(e, this)
     },
     didLogin() {
       Tool.didLogin(this)
+      if (this.data.didLogin){
+        this.getLevelInfos()
+        this.getLevel()
+      }
     },
-    queryAdList() {
+    discoverNotice() {
       let params = {
-        pageType: 1,
-        type: 1,
-        reqName: '轮播图查询',
+        isShowLoading: false,
+        reqName: '获取秀场头条',
+        requestMethod: 'GET',
+        url: Operation.discoverNotice
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let datas = req.responseObject.data.data || []
+        this.setData({
+          noticeArr: Tool.sliceArray(datas, 2)
+        })
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    },
+    noticeChange(e){ // 轮播结束以后继续请求
+      if (e.detail.current==this.data.noticeArr.length-1){
+        this.discoverNotice()
+      }
+    },
+    noticeClicked(e){
+      let id = e.currentTarget.dataset.id
+      Tool.navigateTo('/pages/discover/discover-detail/discover-detail?articleId='+id)
+    },
+    getLevel() {
+      let params = {
+        isShowLoading: false,
+        reqName: '获取用户等级',
+        requestMethod: 'GET',
+        url: Operation.getLevel
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        Storage.setUserAccountInfo(req.responseObject.data)
+        let userInfos = req.responseObject.data 
+        userInfos.experience = userInfos.experience ? userInfos.experience:0
+        this.setData({
+          userInfos: req.responseObject.data
+        })
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    },
+    getLevelInfos(){
+      let params = {
+        requestMethod: 'GET',
+        url: Operation.getLevelInfos,
+        // hasCookie: false
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let datas = req.responseObject.data || []
+        this.setData({
+          levelList:datas
+        })
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    },
+    queryAdList(types = 1, reqName='',callBack=()=>{}) {
+      let params = {
+        'type': types,
+        reqName: reqName,
         url: Operation.queryAdList,
-        hasCookie: false
+        // hasCookie: false
       }
       let r = RequestFactory.wxRequest(params);
         r.successBlock = (req) => {
-            this.setData({
-                imgUrls: req.responseObject.data
-            })
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
-    },
-    querySpeList() {
-      let params = {
-        pageType: 1,
-        type: 1,
-        reqName: '专题查询',
-        url: Operation.queryAdList
-      }
-      let r = RequestFactory.wxRequest(params);
-        r.successBlock = (req) => {
-            this.setData({
-                topicImgUrl: req.responseObject.data
-            })
+          callBack(req.responseObject.data)
         };
         Tool.showErrMsg(r)
         r.addToQueue();
     },
     adListClicked(e) {
-        let adType = e.currentTarget.dataset.type;
-        let val = e.currentTarget.dataset.val;
-        let page = '';
-        if (adType == 1) {
-          page = '/pages/product-detail/product-detail?prodCode=' + val
-        } else if (adType == 2) {
-          page = '/pages/topic/topic?id=' + val
-        }
-        Tool.navigateTo(page)
-        
+      let adType = e.currentTarget.dataset.type;
+      let val = e.currentTarget.dataset.val;
+      let prodtype = e.currentTarget.dataset.prodtype
+      if (adType==6){
+        Tool.showAlert("跳转链接等待H5页面域名确认")
+        return
+      }
+      if (prodtype == 1){
+        adType= 4
+      } else if (prodtype == 2){
+        adType = 3
+      } else if (prodtype == 3){
+        adType = 5
+      } else if (prodtype == 5){
+        adType = 2
+      } else if (prodtype == 99){
+        adType =1
+      }
+      let page = this.data.pageArr[adType]+val;
+      Tool.navigateTo(page)
     },
     queryFeaturedList() {
       let params = {
-        linkType: 1,
-        pageType: 1,
+        ...this.data.params,
         reqName: '获取推荐产品',
         url: Operation.queryFeaturedList
       }
       let r = RequestFactory.wxRequest(params);
         r.successBlock = (req) => {
-            let data = req.responseObject.data ? req.responseObject.data : []
-            this.setData({
-                recommendImgUrl: req.responseObject.data
-            })
+          let datas = req.responseObject.data
+          this.setData({
+            recommendArr: this.data.recommendArr.concat(datas.data),
+            recommendTotalPage: datas.totalPage,
+          })
         };
         Tool.showErrMsg(r)
         r.addToQueue();
@@ -95,16 +213,35 @@ Page({
       Tool.navigateTo('/pages/search/search?door=0')
     },
     msgClicked() {
-      let cookie = Storage.getUserCookie() || ''
-      if (!this.data.didLogin && !cookie ) {
-        Tool.navigateTo('/pages/login/login-wx/login-wx?isBack=' + true)
+      let callBack =()=>{
+        Tool.navigateTo('/pages/my/information/information')
+      }
+      this.getIsLogin(callBack)
+    },
+    getIsLogin(callBack=()=>{}){
+      let cookie = Storage.getToken() || ''
+      if (!this.data.didLogin && !cookie) {
+        Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
         return
       }
-      Tool.navigateTo('/pages/my/information/information')
+      callBack()
+    },
+    levelBtnClicked(){
+      Tool.navigateTo('/pages/my/my-promotion/my-promotion')
     },
     topicClicked(e){
       let id = e.currentTarget.dataset.id
       Tool.navigateTo('/pages/topic/topic?id='+id)
+    },
+    onReachBottom() {
+      this.data.params.page++;
+      if (this.data.params.page>this.data.recommendTotalPage){
+        return
+      }
+      this.setData({
+        params: this.data.params,
+      })
+      this.queryFeaturedList()
     },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);

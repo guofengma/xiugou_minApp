@@ -15,6 +15,7 @@
         <view class='order-status'>
             {{state.status}}
         </view>
+        <view wx:if='{{detail.buyerRemark}}' class='font-26'>{{detail.buyerRemark}}</view>
         <view class='timeDown' wx:if="{{detail.status==1 || detail.status==3}}">
           {{distanceTime}} {{detail.status==1? "自动取消订单":"自动收货"}}
         </view>
@@ -25,12 +26,12 @@
 <view class='order-state-info' >
     <view class='boxSize'>
         <!--等待付款的时候显示和待发货  -->
-        <template is="address-info" wx:if='{{status==1||status==4||status==10 ||status==8 }}' data="{{addressType,src,...address,hasData}}"/>
+        <template is="address-info" wx:if='{{status==1||status==7 ||status==8 }}' data="{{addressType,src,...address,hasData,door:1}}"/>
 
         <!-- 待发货/已发货/已完成的时候显示 -->
-        <view class='logistics flexR-sb' wx:if="{{status==2||status==3||status==6 || status==7 ||status==5 }}" bindtap='logisticsClicked'>
+        <view class='logistics flexR-sb' wx:if="{{status==2||status==3||status==4||status==6 ||status==5 }}" bindtap='logisticsClicked'>
             <view>
-                <view class='info'>{{state.info}}</view>
+                <view class='info ellipsis'>{{state.info}}</view>
                 <view class='gray'>{{state.time}}</view>
             </view>
             <view class='right-icon'>
@@ -42,8 +43,8 @@
 
 <view class='container'>
     <!--地址信息 如果发货了 显示地址 -->
-    <view class='my-order-address' wx:if='{{status!=1&&status!=4&&status!=10&&status!=8 }}'>
-        <template is="address-info" data="{{addressType,src,...address,hasData}}"/>
+    <view class='my-order-address' wx:if='{{status==2||status==3||status==4 ||status==5 ||status== 6 }}'>
+        <template is="address-info" data="{{addressType,src,...address,hasData,door:1}}"/>
     </view>
 
     <!--订单信息  -->
@@ -52,7 +53,7 @@
         <text class='label-red-border'>套餐</text>
         <text class='gray font-24'>双十一套餐</text>
       </view> -->
-      <block wx:for="{{detail.list}}" wx:key="unique">
+      <block wx:for="{{detail.orderProductList}}" wx:key="unique">
           <view catchtap='productClicked' data-productid='{{item.productId}}'>
             <template is="my-order-product-info" data="{{...item}}"/>
           </view>
@@ -66,15 +67,15 @@
     <view class='order-pay-info gray boxSize'>
         <view class='flexR-sb'>
             <text>商品价格</text>
-            <text>¥{{detail.totalPrice}}</text>
-        </view>
-        <view class='flexR-sb' wx:if='{{detail.couponPrice}}'>
-            <text>优惠券优惠</text>
-            <text>-¥{{detail.couponPrice}}</text>
+            <text>¥{{detail.totalProductPrice}}</text>
         </view>
         <view class='flexR-sb'>
-            <text>积分抵扣</text>
-            <text>-¥{{detail.scorePrice? detail.scorePrice:'0'}}</text>
+            <text>优惠券优惠</text>
+            <text>-¥{{detail.couponPrice || 0}}</text>
+        </view>
+        <view class='flexR-sb'>
+            <text>1元劵现金劵</text>
+            <text>-¥{{detail.tokenCoin || 0}}</text>
         </view>
         <view class='flexR-sb'>
             <text>运费（快递）</text>
@@ -82,14 +83,14 @@
         </view>
         <view class='flexR-sb total'>
             <text>订单总价</text>
-            <text>¥{{detail.showOrderTotalPrice}}</text>
+            <text>¥{{detail.totalOrderPrice}}</text>
         </view>
         <view class='flexR-sb total totalPay'>
             <view class='popup'>
                 <view></view>
             </view>
-            <text>需付款</text>
-            <text class='red'>¥{{detail.orderTotalPrice}}</text>
+            <text>{{detail.orderPayRecord? "实付款":"需付款"}}</text>
+            <text class='red'>¥{{detail.needPrice}}</text>
         </view>
     </view>
 
@@ -102,11 +103,12 @@
             <text selectable="true">{{detail.orderNum}}</text>
           </view>
           <view>创建时间：{{detail.createTime}}</view>
-          <view wx:if='{{detail.sysPayTime}}'>平台付款时间：{{detail.sysPayTime}}</view>
+          <!-- <view wx:if='{{detail.sysPayTime}}'>平台付款时间：{{detail.sysPayTime}}</view> -->
           <view wx:if='{{detail.payTime}}'>三方付款时间：{{detail.payTime}}</view>
           <view wx:if='{{detail.outTradeNo}}'>三方交易号：{{detail.outTradeNo}}</view>
           <view wx:if='{{detail.sendTime}}'>发货时间：{{detail.sendTime}}</view>
-          <view wx:if='{{detail.payTime}}'>成交时间：{{detail.payTime}}</view>
+          <!-- <view wx:if='{{detail.payTime}}'>成交时间：{{detail.payTime}}</view> -->
+          <view wx:if='{{detail.cancelTime}}'>取消时间：{{detail.cancelTime}}</view>
         </view>
     </view>
 
@@ -119,7 +121,7 @@
         <view class='order-btn btn-left flexR' wx:if="{{state.bottomBtn[0]=='删除订单'}}" bindtap="deleteItem">
           {{state.bottomBtn[0]}}
         </view>
-        <view class='order-btn btn-left flexR' wx:if="{{state.bottomBtn[0]=='取消订单'}}" bindtap="cancelItem">
+        <view class='order-btn btn-left flexR' wx:if="{{state.bottomBtn[0]=='取消订单'}}"  bindtap="cancelItem" > 
           {{state.bottomBtn[0]}}
         </view> 
         <view class='order-btn btn-left flexR' wx:if="{{state.bottomBtn[0]=='查看物流'}}" bindtap="seeLogistics">
@@ -127,7 +129,7 @@
         </view>        
     </block>
     <block>
-        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='确认收货' && !state.isHiddenComfirmBtn}}" bindtap="confirmReceipt">
+        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='确认收货'}}" bindtap="confirmReceipt">
           {{state.bottomBtn[1]}}
         </view>
         <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='删除订单'}}" bindtap="deleteItem">
@@ -136,12 +138,9 @@
         <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='继续支付'}}" bindtap="continuePay">
           {{detail.outTradeNo? "继续支付":"去支付"}}
         </view>
-        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='再次购买' && detail.orderType!=98}}" bindtap="continueBuy">
+        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='再次购买' && detail.orderType!=5}}" bindtap="continueBuy">
           {{state.bottomBtn[1]}}
         </view>
-        <!-- <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='订单退款'}}" bindtap="orderRefund">
-          {{state.bottomBtn[1]}}
-        </view>   -->
     </block>
 
 </view>

@@ -7,41 +7,49 @@
 <import src='/components/address-saler/address-saler.wxml'/>
 
 <!--提示语  -->
-<view class='redBg font-26 flexR tips' wx:if='{{expressNo.id==0}}'>
+<view class='redBg font-26 flexR tips'  wx:if='{{datas.status>1}}'>
   商家已同意换货申请，请尽快发货
 </view>
 <view class='flexC tips-exchange font-26'>
   <view class='tips-title'>{{result[resultIndex].state}}</view>
   <view>{{result[resultIndex].info}}</view>
   <view>{{distanceTime}}</view>
-</view>
-<!--地址信息  -->
-<view class='address active whiteBg'>
-  <template is="address-info" data="{{addressType,...datas.receive,hasData:true}}"/>
+  <view wx:if='{{datas.status==6}}'>{{result[resultIndex].time}}</view>
 </view>
 
-<!--商家地址  -->
-<template is="address-saler" data="{{addressType,src,datas,hasData:true}}"/>
-
-<!--物流  -->
-<view>
-  <view bindtap='logClicked' data-express='{{expressNo}}' data-type='1'>
-    <template is="cell-line" data="{{name:'退货物流',placeholder:expressNo.content}}"/>
+<view wx:if='{{datas.status>1}}'>
+  <!--地址信息  -->
+  <view class='address active whiteBg' >
+    <template is="address-info" data="{{addressType,...datas,hasData:true,door:1}}"/>
   </view>
-  <view wx:if='{{expressNo.id!=0}}' bindtap='logClicked' data-express='{{SaleExpressNo}}' data-type='2'>
-    <template is="cell-line" data="{{name:'商家物流',placeholder:SaleExpressNo.content}}"/>
+
+  <!--商家地址  -->
+  <template is="address-saler" data="{{addressType,src,datas,hasData:true,door:1}}"/>
+
+  <!--物流  -->
+  <view>
+    <view bindtap='logClicked' data-express='{{expressNo}}' data-type='1' wx:if='{{datas.status!=3&&!expressNo.id  || expressNo.id}}'>
+      <template is="cell-line" data="{{name:'退货物流',placeholder:expressNo.content}}"/>
+    </view>
+    <view wx:if='{{expressNo.id!=0&&SaleExpressNo.id!=1}}' bindtap='logClicked' data-express='{{SaleExpressNo}}' data-type='2'>
+      <template is="cell-line" data="{{name:'商家物流',placeholder:SaleExpressNo.content}}"/>
+    </view>
   </view>
 </view>
 
+<view wx:else>
+   <amend-application applyType='{{"换货"}}' list='{{datas}}'/>
+</view>
 <!--换货信息  -->
 
 <view class='exchange-info font-26 '>
   <view class='flexR-sb after-sale-line gray'>换货订单</view>
-  <template is="after-sale-prd-info" data="{{...datas.returnProduct}}"/>
+  <template is="after-sale-prd-info" data="{{...datas}}"/>
   <view class='exchange-content whiteBg gray'>
-    <view>换货原因：{{datas.returnProduct.return_reason}}</view>
+    <view>订单编号：{{datas.orderNum}}</view>
+    <view>换货原因：{{datas.returnReason}}</view>
     <!-- <view>换货金额：¥{{list.showRefund}}</view> -->
-    <view>换货说明：{{datas.returnProduct.remark}}</view>
+    <view>换货说明：{{datas.remark}}</view>
     <view>
       <view>凭证图片</view>
       <view class='userImg'>
@@ -50,9 +58,9 @@
         </block>
       </view>
     </view>
-    <view>申请时间：{{datas.returnProduct.applyTime}}</view>
-    <!-- <view>更换型号： 32G 黑色</view> -->
-    <view>数量：X{{datas.returnProduct.num}}</view>
+    <view>申请时间：{{datas.applyTime}}</view>
+    <view>更换型号： {{datas.exchangeSpec}}</view>
+    <view>数量：x {{datas.num}}</view>
   </view>
 </view>
 

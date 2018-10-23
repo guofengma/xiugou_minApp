@@ -220,6 +220,15 @@ export default class Storage {
     static getCoupon() {
       return this.getterFor('coupon');
     } 
+    
+    // 保存优惠券
+    static setTokenCoin(info) {
+      this.setterFor('tokenCoin', info)
+    }
+
+    static getTokenCoin() {
+      return this.getterFor('tokenCoin');
+    } 
 
     // 订单搜索历史
     static setSearchOrderHistory(info) {
@@ -239,4 +248,21 @@ export default class Storage {
       return this.getterFor('payOrderList');
     } 
     
+    // getToken()
+
+    static setToken(info) {
+      this.setterFor('userToken', info)
+    }
+
+    static getToken() {
+      return this.getterFor('userToken');
+    } 
+
+    static setPlatform(info) {
+      this.setterFor('platform', info)
+    }
+
+    static getPlatform() {
+      return this.getterFor('platform');
+    } 
 }

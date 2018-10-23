@@ -17,7 +17,8 @@ Page({
     this.setData({
       openid: Storage.getWxOpenid() || '',
       userInfo: Storage.wxUserInfo() || '',
-      isBack: options.isBack || false
+      isBack: options.isBack || false,
+      inviteCode: options.inviteCode || '',
     })
     if (!this.data.openid){
       app.wxLogin()
@@ -63,7 +64,7 @@ Page({
       headImg: this.data.userInfo.avatarUrl,
       reqName: '用户微信登陆',
       url: Operation.wechatLogin,
-      hasCookie: false
+      // hasCookie: false
     };
     let r = RequestFactory.wxRequest(params);
     r.successBlock= (req) => {
@@ -77,7 +78,7 @@ Page({
     }
     r.failBlock = (req) => {
       if (req.responseObject.code == 34005){
-        Tool.navigateTo('/pages/register/register')
+        Tool.navigateTo('/pages/register/register?inviteCode=' + this.data.inviteCode)
       } else if (req.responseObject.code == 40000){
         Tool.navigateTo('/pages/download-app/download-app?door=1')
       } else {

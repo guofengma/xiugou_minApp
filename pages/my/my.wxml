@@ -7,7 +7,7 @@
         <image src='{{imgUrl+"iconService.png"}}' mode='widthFix' catchtap='itemClicked' data-page='1'></image>
       </view>
     </view>
-    <view class='my-avatar'>
+    <view class='my-avatar' catchtap='itemClicked' data-page='2'>
       <image src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></image>
       <view>
         <view class='my-info-item' catchtap='itemClicked' data-page='2' >
@@ -52,30 +52,30 @@
       <view>
         <text>查看全部</text>
         <!-- 右边的见头 -->
-        <image src='{{imgUrl+"xjt_10@2x.png"}}' mode='widthFix' class='my-info-arrow'></image>
+        <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'xjt_10@2x.png'}}" class='my-info-arrow'/>
       </view>
     </view>
     <!-- 订单列表 -->
     <view class='my-order-list'>
       <view class='list-cont my-wait-pay' catchtap='itemClicked' data-page='6' data-query='1'>
-        <image src='{{imgUrl+"iconForsale.png"}}'  mode='widthFix' class='forsale'></image>
+        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsale.png'}}"/>
         <view>待付款</view>
-        <view class='reddot'>1</view>
+        <!-- <view class='reddot'>1</view> -->
       </view>
       <!-- 代发货 -->
       <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='2'>
-        <image src='{{imgUrl+"iconForsend.png"}}'  mode='widthFix' class='forsale'></image>
+        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsend.png'}}"/>
         <view>待发货</view>
       </view>
       <!-- 待收货 -->
       <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='3'>
-        <image src='{{imgUrl+"iconForobtain.png"}}'mode='widthFix' class='forsale'></image>
-        <view>待收获</view>
+        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForobtain.png'}}"/>
+        <view>待收货</view>
       </view>
       <!-- 售后 -->
       <view class='list-cont' catchtap='itemClicked' data-page='7'>
-        <image src='{{imgUrl+"iconAftersale.png"}}' mode='widthFix' class='forsale'></image>
-        <view>售后/付款</view>
+        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconAftersale.png'}}"/>
+        <view>售后/退款</view>
       </view>
     </view>
   </view>
@@ -88,35 +88,35 @@
     <!-- 工具列表 -->
     <view class='my-tools-list'>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='8'>
-        <image src='{{imgUrl+"iconInvite.png"}}' mode='widthFix' class='my-invite'></image>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconInvite.png'}}"/>
         <view>邀请好友</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='9'>
-        <image src='{{imgUrl+"iconCalendar.png"}}' mode='widthFix' class='my-calendar'></image>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconCalendar.png'}}"/>
         <view>活动日历</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='10'>
-        <image src='{{imgUrl+"iconVoucher.png"}}'  mode='widthFix' class='my-voucher'></image>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconVoucher.png'}}"/>
         <view>优惠券</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='11'>
-        <image src='{{imgUrl+"iconData.png"}}' mode='widthFix' class='my-data'></image>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconData.png'}}"/>
         <view>我的数据</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='12'>
-        <image src='{{imgUrl+"iconCollect.png"}}' mode='widthFix' class='my-collect'></image>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconCollect.png'}}"/>
         <view>收藏店铺</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='13'>
-        <image src='{{imgUrl+"iconHelp.png"}}'  mode='widthFix' class='my-help'></image>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconHelp.png'}}"/>
         <view>帮助</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='14'>
-        <image src='{{imgUrl+"iconAddress.png"}}' mode='widthFix' class='my-address'></image>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconAddress.png'}}"/>
         <view>地址</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='15'>
-        <image src='{{imgUrl+"iconTrack.png"}}' mode='widthFix' class='my-track'></image>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconTrack.png'}}"/>
         <view>足迹</view>
       </view>
     </view>

@@ -1,21 +1,24 @@
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+/* 顶部搜索 */
 .search-bar{
-  position: absolute;
-  top: 18rpx;
-  left: 0;
-  width: 100%;
-  padding:0 42rpx;
+  padding:30rpx 30rpx 10rpx 30rpx;
   z-index: 999;
+  background:linear-gradient(rgba(0,0,0,0.4),transparent);
+  justify-content: space-around
 }
 .bar{
-  width: 597rpx;
-	height: 64rpx;
-	background-color: rgba(255, 255, 255, 0.9);
+  width: 533rpx;
+	height: 60rpx;
+	background-color: rgba(255, 255, 255, 0.8);
 	border-radius: 28rpx;
+  justify-content: flex-start;
 }
-.bar image{
-  width:40rpx; 
-  margin-left: 20rpx;
-  margin-top: 5rpx;
+.bar image{ 
+ margin: -8rpx 14rpx 0 20rpx;
 }
 .search-bar image{
   width: 42rpx;
@@ -23,4 +26,317 @@
 .slide-image{
   width: 100%;
   height:100%;
+}
+.index-items-view{
+  padding:30rpx 2rpx 0 2rpx;
+  align-content:flex-start;
+  flex-wrap:wrap;
+  margin-bottom: 20rpx;
+}
+.item-name{
+  margin-bottom: 10rpx;
+}
+.items-sub{
+  margin:0rpx 26rpx 30rpx 26rpx;
+}
+/* 会员等级 */
+.index-level-view{
+  padding:20rpx 30rpx; 
+}
+.index-level-view>view{
+  width:690rpx;
+  height:154rpx;
+  background:linear-gradient(90deg,rgba(247,215,149,1),rgba(247,215,148,1));
+  border-radius:10px;
+  margin: 0 auto;
+  padding:20rpx;
+}
+/* 推荐位 */
+.index-ad-banner-view{
+  height: 400rpx;
+  align-items:flex-start;
+  padding: 0 30rpx;
+  justify-content: space-between;
+  flex-wrap:wrap;
+  padding-top: 20rpx;
+}
+.index-ad-banner-view image{
+  width: 100%;
+  height: 100%;
+  vertical-align: middle；
+}
+.index-ad-banner-view>view{
+  width: 306rpx;
+  height: 192rpx;
+  border-radius: 10rpx;
+}
+.index-ad-banner-view>view:first-child{
+  height: 400rpx;
+  width: 370rpx;
+  margin-right: 15rpx;
+}
+.index-notice-view{
+  padding: 40rpx 30rpx;
+  margin-bottom: 20rpx;
+}
+/* 头条轮播 */
+.notice-label{
+  border:1rpx solid;
+  border-radius: 10rpx;
+  padding: 0 5rpx;
+  margin-right: 5rpx;
+}
+.notice-img{
+  width:93rpx;
+  position:absolute;
+  right:0;
+  top:0;
+  height:80rpx;
+}
+.notice-img image{
+  width: 100%;
+}
+.notice-line{
+  height: 40rpx;
+  line-height: 40rpx;
+  width: calc(100% - 124rpx);
+}
+.notice-leftBar{
+  width: 70rpx;
+  border-right: 1rpx solid #EAEAEA;
+}
+.notice-rightBar{
+  width: calc(100% - 70rpx);
+  padding-left:16rpx; 
+}
+.index-item-title{
+  padding: 30rpx 0;
+}
+/* 明星店铺 */
+.star-shop-item{
+  width: 690rpx;
+  margin: 0 auto 20rpx auto;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.star-shop-item>view{
+  justify-content: flex-start;
+  padding: 20rpx 30rpx;
+}
+.star-shop-item>image{
+  width: 100%;
+}
+.star-shop-logo image{
+  width: 90rpx;
+  border-radius: 50%;
+  margin-right: 17rpx;
+}
+.star-shop-logo{
+  width: 280rpx;
+  justify-content: flex-start;
+}
+.start-shop-label{
+  display: inline-block;
+  background: #F2D3A2;
+  color: #AB8433;
+  width: 27rpx;
+  height: 27rpx;
+  font-size: 16rpx;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 27rpx;
+  vertical-align: middle;
+}
+.monthIncome{
+  width: 190rpx;
+  border-left:1rpx solid #eee;
+  border-right:1rpx solid #eee;
+}
+.totalIncome{
+  padding-left: 28rpx;
+}
+/* 今日榜单 */
+.today-list-view{
+  margin-bottom:20rpx; 
+  padding-bottom: 30rpx;
+}
+.today-list-imageContainer{
+ width: 100%;
+ height: 280rpx;
+}
+.today-list-item{
+ height: 500rpx;
+ padding: 0 10rpx;
+}
+.today-list-itemImg{
+ /* position: absolute; */
+ width:100%;
+ height: 100%;
+ border-radius: 15rpx;
+}
+/* 精品推荐 */
+.fine-quality-view .today-list-itemImg{
+  height: 280rpx;
+}
+/* .fine-quality-tips{
+  margin-top: 20rpx;
+} */
+.fine-quality-view{
+  padding-bottom:50rpx;
+}
+/* 超值热卖 */
+.hot-sale-view{
+  margin-bottom: 20rpx;
+}
+.hot-sale-img{
+  width: 690rpx;
+  margin: 0 auto;
+}
+.hot-sale-img image{
+  width: 100%;
+  border-radius: 10rpx;
+}
+.hot-sale-prd image,.hot-sale-prd,.hot-sale-prd>view{
+  width: 190rpx;
+  /* height: 190rpx; */
+}
+.hot-sale-content image{
+  height: 190rpx !important;
+  width: 100%;
+}
+.prd-name{
+  margin: 10rpx 0;
+}
+.hot-sale-prd{
+  margin-right: 30rpx;
+}
+.hot-sale-content{
+  display:flex;
+  flex-direction:row;
+  width:100%;
+  padding:20rpx 30rpx 40rpx 30rpx
+}
+.hot-sale-more{
+  padding-right:30rpx;
+}
+.hot-sale-more>view{
+  width: 149rpx;
+  height: 149rpx;
+  background: #F7F7F7;
+  border-radius: 50%;
+  margin-top: 50rpx;
+}
+/* 为你推荐 */
+.recommend-prd-img{
+  position: relative;
+}
+.recommend-prd-img>image{
+  width: 100%;
+  height: 340rpx;
+}
+.recommend-prd-img>view{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background:rgba(240,240,240,0.75);
+}
+.recommend-prd-item{
+  width: 340rpx;
+  border: 1rpx solid #EDEDED;
+  margin-bottom:10rpx; 
+}
+.recommend-prd-content{
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding:0 30rpx 20rpx 30rpx;
+}
+.recommend-prd-info{
+  padding: 20rpx 12rpx;
+}
+.prd-name{
+  height: 72rpx;
+}
+/* 任务 */
+.duty{
+  position: fixed;
+  bottom: 40rpx;
+  right: 0;
+}
+/* 会员等级 */
+.level-content{
+  padding: 10rpx 30rpx 0 50rpx;
+}
+.level-btn{
+  color: #9B6D26;
+  width: 90rpx;
+  height: 90rpx;
+  border:8rpx solid #E7AE39;
+  border-radius: 50%;
+}
+.levelLine{
+  width: 442rpx;
+  height: 7rpx;
+  background: #9B6D26;
+  border-radius: 10rpx;
+  position: relative;
+}
+.myLevelLine{
+  position: absolute;
+  background: #E7AE39;
+  width: 50%;
+  height: 100%;
+  z-index: 99;
+}
+.levelLineContent{
+  height: 80rpx;
+  padding-top:42rpx; 
+  padding-left: 40rpx;
+}
+.levelVal{
+  position: absolute;
+  bottom: -6rpx;
+  left:0;
+  z-index: 200;
+  color: #9B6D26;
+  line-height: 32rpx;
+}
+.levalName{
+  padding-top:5rpx;
+}
+.circle{
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: #fff;
+  border:4rpx solid  #E7AE39;
+}
+.levelBtnName{
+  line-height: 28rpx;
+  margin-right: 6rpx;
+}
+.my-level-val{
+  position: absolute;
+  top:18rpx;
+  border-radius: 20rpx;
+  right:-20rpx;
+  background: #fff;
+  padding: 0rpx 8rpx;
+  line-height:28rpx;
+  display: inline-block;
+  min-width: 20rpx;
+  text-align: center;
+  color: #9B6D26;
+}
+.triangle_border_up{
+  border-style: solid;
+  border-width: 4px;
+  border-color: transparent transparent #fff transparent;
+  position: absolute;
+  top:-14rpx;
+  right: 12rpx;
+  z-index: 999;
+}
+.hot-sale-img{
+  margin-bottom: 20rpx;
 }

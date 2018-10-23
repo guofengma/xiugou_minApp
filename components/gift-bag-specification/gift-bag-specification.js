@@ -23,22 +23,30 @@ Component({
       // 点击确定 
       if (!this.isSelectAll()) return
       let isActive = this.data.isActive
+      console.log(isActive)
       let productType = []
       let priceList = []
       isActive.forEach((item, index) => {
-        productType.push(item.spec)
-        item.num=1
+        productType.push(item.specValues)  
+        // item.num=1
         priceList.push({
-          ...item
+          productId: item.productId,
+          priceId: item.productPriceId,
+          num:1,
+          sourceId: item.id,
+          specImg: item.specImg,
+          spec: item.specValues,
+          productName: item.productName,
+          originalPrice: this.data.productInfo.originalPrice
         })
       })
 
       // 如果被选择的库存小于用户输入的库存 发生在先选择数量再选择规格的情况下
-      if (this.data.selectPrdList.stock < this.data.innerCount) {
-        this.setData({
-          innerCount: this.data.selectPrdList.stock,
-        })
-      }
+      // if (this.data.selectPrdList.stock < this.data.innerCount) {
+      //   this.setData({
+      //     innerCount: this.data.selectPrdList.stock,
+      //   })
+      // }
       // 已选择的类型
       productType = '已选："' + productType.join('""') + '"'
       this.setData({
@@ -67,6 +75,7 @@ Component({
       })
       this.getTipsSpec(obj)
       if (this.isSelectAll()){
+        console.log(111111)
         this.makeSureType(true)
       }
     },
@@ -79,12 +88,12 @@ Component({
         tips.push(this.data.productTypeList[i].name)
       }
       chooseTypes.forEach((item, index) => {
-        if (item.priceId) {
-          let index = tips.indexOf(item.specName)
+        if (item.productPriceId) {
+          let index = tips.indexOf(item.name)
           if (index != 1) {
             tips.splice(index, 1)
           }
-          chooseArr.push(item.spec)
+          chooseArr.push(item.specValues)
         }
       })
       // tips = "请选择"+tips.join(',')
@@ -111,7 +120,7 @@ Component({
     isSelectAll() { // 是否选择了所有的规格选项
       let isActive = this.data.isActive
       let arr = isActive.filter((item) => {
-        if (item !== undefined && item.priceId) {
+        if (item !== undefined && item.productPriceId) {
           return item
         }
       })

@@ -39,6 +39,7 @@ Page({
           Storage.setUserCookie(null)
           Storage.setUserAccountInfo(null)
           Event.emit('didLogin');
+          Event.emit('refreshMemberInfoNotice');
           this.cancel()
           Tool.switchTab("/pages/index/index")
       };

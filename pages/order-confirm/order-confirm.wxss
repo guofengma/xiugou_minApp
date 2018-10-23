@@ -34,7 +34,8 @@
   padding: 0 30rpx;
 }
 .order-info-other .gray image{
-  width: 20rpx;
+  width: 15rpx;
+  margin-left: 5rpx;
   position: relative;
   top: -2.5rpx;
 }
@@ -86,11 +87,34 @@
 }
 .reducePrice{
   /* min-height:88rpx; */
-  width:66%;
+  width:30%;
   /* text-align:justify;
   line-height:38rpx;
   padding-top:15rpx; */
 }
 .gift-view{
   padding:15rpx 30rpx 0 30rpx;
+}
+/* 礼包优惠卷 */
+.gift-items{
+  border-top: 1rpx solid #ddd;
+  border-bottom: 1rpx solid #ddd;
+  margin-bottom: 30rpx;
+  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForobtain.png) no-repeat 30rpx 25rpx; 
+  background-size:32rpx 25rpx;
+}
+.gift-items>.gift-line:last-child{
+  border-bottom: 0;  
+}
+.gift-line{
+  margin-left: 72rpx;
+  border-bottom: 1rpx solid #ddd;
+  height: 68rpx;
+  padding-right: 30rpx;
+}
+.getExp{
+  margin-left: 0;
+  padding-left: 70rpx;
+  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForobtain.png) no-repeat 30rpx center; 
+  background-size:32rpx 25rpx;
 }

@@ -26,7 +26,7 @@
   </view>
   <!--商品信息  -->
   <view class='order-prd-info'>
-    <view  wx:if='{{door==0}}' class='gift-view whiteBg'>
+    <view  wx:if='{{door==5}}' class='gift-view whiteBg'>
       <text class='label-red-border'>礼包</text>
       <text class='gray font-24'>{{orderInfos.orderProductList[0].name}}</text>
     </view> 
@@ -34,42 +34,43 @@
        <template is="cart-product-info" data='{{innerCount,imgSize:180,...item}}'/>
     </block>
   </view>
+  <!-- 礼包优惠卷和经验值 -->
+  <view class='gift-items font-24 whiteBg' wx:if='{{door==5}}'>
+    <view class='flexR-sb gray-9 gift-line' wx:for='{{orderInfos.couponList}}' wx:key='unique'>
+      <text>{{item.couponName}}</text>
+      <text>x1</text>
+    </view>
+    <!-- <view class='getExp flexR-sb gray-9 gift-line'>
+      <text>500点经验值</text>
+      <text>x1</text>
+    </view> -->
+  </view>
   <!--购买支付信息  -->
   <view  class='order-info-other'>
+    <!-- 1元劵 -->
+    <view class='flexR-sb' catchtap='iconClicked' wx:if='{{userInfos.tokenCoin}}' >
+      <view class='reducePrice' >
+        1元现金卷 
+      </view>
+      <view class='gray' >
+        <text > {{useOneCoinNum? "- ¥"+useOneCoinNum:""}}</text>
+        <!-- <text wx:else>暂无可以一元劵</text> -->
+        <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
+      </view>
+    </view>
+    <!-- 优惠卷 -->
     <view class='flexR-sb' bindtap='couponClicked'>
       <view>优惠券</view>
       <view class='gray'>
         <!-- 不支持使用优惠券 -->
-        <text wx:if='{{door!=0}}'>{{coupon.nickname}}</text>
+        <text wx:if='{{door==99 || door==5}}'>{{coupon.nickname}}</text>
         <text wx:else>不支持使用优惠劵</text>
         <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
       </view>
     </view>
-    <view class='flexR-sb user_score' >
-      <!-- <view>
-        商品积分：{{orderInfos.totalScore}},用户可用积分：{{orderInfos.dealer.user_score}}
-        <text class='red'>抵 ¥ {{orderInfos.reducePrice}}</text>
-      </view> -->
-      <view class='reducePrice' >
-        <view wx:if='{{orderInfos.canUseScore}}'>
-          共{{orderInfos.dealer.userScore}}积分,可用积分: {{orderInfos.showTotalScore}}
-          <text class='red'>抵 ¥ {{orderInfos.reducePrice}}</text>
-        </view>
-        <view wx:else>{{orderInfos.showTipsName}}</view>
-      </view>
-      <image class='switch' 
-          src='{{ isUseIntegral? "/img/switch-2.png":"/img/switch-1.png"}}'  
-          mode='widthFix' bindtap='switchChange'  >
-      </image>
-      <!-- <view class='gray' wx:if='{{!orderInfos.canUseScore}}'>{{orderInfos.showTipsName}} </view> 
-      <image class='switch' wx:else 
-        src='{{ isUseIntegral? "/img/switch-2.png":"/img/switch-1.png"}}'  
-        mode='widthFix' bindtap='switchChange'  >
-      </image> -->
-    </view>
     <view class='flexR-sb'>
       <view>运费</view>
-      <view class='gray'>¥ {{addressType==1? orderInfos.totalFreightFee:0}}</view>
+      <view class='gray'>¥ {{orderInfos.totalFreightFee||0}}</view>
     </view>
     <view class='flexR-sb leaving-msg'>
       <view>买家留言：</view>

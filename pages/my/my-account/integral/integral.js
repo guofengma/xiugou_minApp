@@ -64,6 +64,9 @@ Page({
     onReachBottom() {
       this.getData();
     },
+    goPage(){
+      Tool.navigateTo('/pages/signIn/signIn')
+    },
     onLoad: function (options) {
       this.getData();
       this.setData({

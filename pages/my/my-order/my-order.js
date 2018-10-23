@@ -17,11 +17,9 @@ Page({
     this.selectComponent("#orderList").onReachBottom()
   },
   onLoad: function (options) {
-    if (options.index) {
-      this.setData({
-        num: options.query
-      });
-    }
+    this.setData({
+      num: options.query
+    });
     this.selectComponent("#orderList").getData(this.data.num);
   },
   searchOrder(){

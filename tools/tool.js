@@ -472,8 +472,6 @@ export default class Tool {
     }
 
     static redirectTo(url, success, fail, complete) {
-        // console.log('\n\n******************************************************************************************');
-        // console.log('redirectTo:' + url);
         wx.redirectTo({
             url: url,
             success: success,
@@ -484,8 +482,6 @@ export default class Tool {
     }
 
     static switchTab(url, success, fail, complete) {
-        // console.log('\n\n******************************************************************************************');
-        // console.log('switchTab:' + url);
         wx.switchTab({
             url: url,
             success: success,
@@ -495,8 +491,6 @@ export default class Tool {
     }
    
     static navigateTo(url, success, fail, complete) {
-        // console.log('\n\n******************************************************************************************');
-        // console.log('navigateTo:' + url);
         wx.navigateTo({
             url: url,
             success: success,
@@ -741,23 +735,6 @@ export default class Tool {
       }
       return false
     }
-    // 格式化服务器端返回的cookie
-
-    static formatCookie(cookies) {
-      let __cookies = [];
-      (cookies.match(/([\w\-.]*)=([^\s]+);/g) ||[]).forEach((str) => {
-        if (str.indexOf('Path=/') !== 0) {
-          __cookies.push(str);
-        } else if (str.indexOf('token2') != -1){
-          let token2 = str.slice(7)
-          __cookies.push(token2);
-        }
-      });
-      //  最后发送的
-      let myCookie = __cookies.join('')
-      global.Storage.setUserCookie(myCookie)
-      return myCookie
-    }
 
     // 获取用户账号信息 
 
@@ -767,7 +744,8 @@ export default class Tool {
         let idcard = userInfo.idcard
         userInfo.showName = idcard ? userInfo.realname : userInfo.nickname
         userInfo.isRealname = idcard ? true : false
-        userInfo.showPhone = userInfo.phone.slice(0, 3) + "*****" + userInfo.phone.slice(7)
+        // userInfo.showPhone = userInfo.phone.slice(0, 3) + "*****" + userInfo.phone.slice(7)
+        userInfo.showPhone = userInfo.phone
         if (userInfo.province) userInfo.showRegion = userInfo.province + userInfo.city + userInfo.area
         if (!userInfo.area) userInfo.showRegion = userInfo.province + userInfo.city
       }
@@ -823,8 +801,7 @@ export default class Tool {
     static showErrMsg(r,callBack=()=>{}) {
       r.failBlock = (req) => {
         console.log(req)
-        // let page = this.getCurrentPageUrlWithArgs() //获取当前额页面
-        if (req.responseObject.code==1009){ // 超时登录
+        if (req.responseObject.code==10009){ // 超时登录
           callBack =()=>{
             let page = '/pages/login-wx/login-wx'
             this.navigateTo(page+'?isBack='+true)
@@ -834,34 +811,44 @@ export default class Tool {
       }
     }
 
+    // 格式化服务器端返回的cookie
+
+    static formatCookie(cookies) {
+      let __cookies = [];
+      (cookies.match(/([\w\-.]*)=([^\s]+);/g) || []).forEach((str) => {
+        if (str.indexOf('Path=/') !== 0) {
+          __cookies.push(str);
+        } else if (str.indexOf('token2') != -1) {
+          let token2 = str.slice(7)
+          __cookies.push(token2);
+        }
+      });
+      //  最后发送的
+      let myCookie = __cookies.join('')
+      global.Storage.setUserCookie(myCookie)
+      return myCookie
+    }
+
     // 是否登录
 
     static didLogin(that) {
-      // let didLogin = global.Storage.getUserCookie() !='out' ? true : false
       let userInfo = global.Storage.getUserAccountInfo() ? global.Storage.getUserAccountInfo():{}
-    
-      let didLogin = userInfo.id && global.Storage.getUserCookie()? true : false
-
-      console.log(userInfo.id)
+      let didLogin = userInfo.id && global.Storage.getToken()? true : false
       that.setData({
         didLogin: didLogin
       })
       return didLogin
     }
 
-    static loginLimit(that,item) {
-      let didLogin = this.didLogin(that)
-      if (!didLogin && item.index==4){
-        this.navigateTo('/pages/login/login-wx/login-wx')
-      }
-    }
-
     // 登录以后的操作
 
     static loginOpt(req){
-      // 获取 cookies
-      let cookies = req.header['Set-Cookie']
-      this.formatCookie(cookies)
+      // let cookies = req.header['Set-Cookie'] || req.header['set-cookie'] 
+      // if (cookies) this.formatCookie(cookies)
+      if (req.responseObject.data.token){
+        global.Storage.setToken(req.responseObject.data.token)
+      }
+      
       global.Storage.setUserAccountInfo(req.responseObject.data)
       global.Event.emit('didLogin');
       global.Storage.setWxOpenid(req.responseObject.data.openid)
@@ -1001,21 +988,14 @@ export default class Tool {
     // 退换货数据变换
 
     static findReturnProductById(req){
-      let data = req.responseObject.data
-      let returnProduct = data.returnProduct
-      returnProduct.applyTime = global.Tool.formatTime(returnProduct.apply_time)
-      returnProduct.imgUrl = returnProduct.spec_img
-      returnProduct.productName = returnProduct.product_name
-      if (data.returnAmountsRecord) {
-        returnProduct.showAmount = data.returnAmountsRecord.showAmount = returnProduct.price * returnProduct.num
-        if (data.returnAmountsRecord.refundTime)
-          data.returnAmountsRecord.showRefundTime = global.Tool.formatTime(data.returnAmountsRecord.refundTime)
+      // let data = req.responseObject.data
+      let returnProduct = req.responseObject.data
+      returnProduct.applyTime = global.Tool.formatTime(returnProduct.applyTime)
+      returnProduct.imgUrl = returnProduct.specImg
+      returnProduct.productName = returnProduct.productName
+      if (returnProduct.returnAddress) {
+        returnProduct.returnAddress.addressInfo = returnProduct.returnAddress.provinceName + returnProduct.returnAddress.cityName + returnProduct.returnAddress.areaName
       }
-      if (data.returnAddress) {
-        data.returnAddress.addressInfo = data.returnAddress.address
-      }
-      data.receive.addressInfo = data.receive.address
-      // return req
     }
 
     // 根据屏幕大小 高度自适应
@@ -1047,7 +1027,8 @@ export default class Tool {
     }
     return num
   }
-
+  
+  // 冒泡排序
   static bubbleSort(array){
     let i = 0, len = array.length, j, d; 
     for (; i < len; i++) {
@@ -1058,6 +1039,26 @@ export default class Tool {
       }
     }
     return array;
+  }
+
+  // 平均分割数字
+  static sliceArray(array,num) {
+    let result = [];
+    for (let i = 0, len = array.length; i < len; i += num) {
+      result.push(array.slice(i, i + num));
+    }
+    return result
+  }
+
+  static getUUID() {
+    return 'xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/[xy]/g, function (c) {
+      let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+  static formatString(str){
+    return str.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "")
   }
 }
 

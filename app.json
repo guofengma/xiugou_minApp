@@ -34,7 +34,6 @@
     "pages/logistics/write-logistics/write-logistics",
     "pages/after-sale/my-after-sale/my-after-sale",
     "pages/after-sale/choose-after-sale/choose-after-sale",
-    "pages/after-sale/only-refund/apply-result/apply-result",
     "pages/after-sale/only-refund/only-refund-detail/only-refund-detail",
     "pages/after-sale/apply-sale-after/apply-sale-after",
     "pages/after-sale/return-goods/return-goods",
@@ -56,7 +55,17 @@
     "pages/download-app/oldUser-downLoad/oldUser-downLoad",
     "pages/product-classification/product-classification",
     "pages/register/agreement/agreement",
-    "pages/topic/topic"
+    "pages/topic/topic",
+    "pages/signIn/signIn",
+    "pages/product-detail/discount-detail/discount-detail",
+    "pages/product-detail/seckill-detail/seckill-detail",
+    "pages/discover/discover",
+    "pages/discover/discover-detail/discover-detail",
+    "pages/discover/discover-fav/discover-fav",
+    "pages/my/extension/extension",
+    "pages/my/extension/extension-type/extension-type",
+    "pages/my/extension/extension-detail/extension-detail",
+    "pages/my/extension/pay/pay"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

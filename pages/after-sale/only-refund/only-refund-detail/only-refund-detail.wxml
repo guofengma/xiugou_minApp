@@ -7,10 +7,12 @@
 <view class='flexC tips-exchange font-26'>
   <view class='tips-title'>{{datas.statusName}}</view>
   <!--退款中不需要要显示时间  -->
-  <view wx:if='{{datas.returnProduct.status==4}}'>{{datas.returnAmountsRecord.showRefundTime}}</view>
-  <view wx:if='{{datas.returnProduct.status==3}}'>{{datas.returnProduct.refusal_reason}}</view>
+  <view wx:if='{{datas.status==6 || datas.status==3}}'>{{datas.showRefundTime}}</view>
+  <view wx:if='{{datas.status==3}}'>{{datas.refusalReason}}</view>
 </view>
-
+<view wx:if='{{datas.status==1}}'>
+   <amend-application applyType='{{"退款"}}' list='{{datas}}'/>
+</view>
 <!--退款成功以后才显示以下内容  -->
 
 <template is="temp-refund-info" data="{{...datas}}"/>
@@ -19,8 +21,8 @@
 
 <view class='exchange-info font-26 '>
   <view class='flexR-sb after-sale-line gray'>退款订单</view>
-  <template is="after-sale-prd-info" data="{{...datas.returnProduct}}"/>
-  <template is="refund-explain" data="{{datas}}"/>
+  <template is="after-sale-prd-info" data="{{...datas}}"/>
+  <template is="refund-explain" data="{{...datas}}"/>
 </view>
 
 <!--联系卖家  -->

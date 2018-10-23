@@ -1,3 +1,5 @@
+@import "/pages/my/coupon/temp/coupon-temp";
+
 .tab-h{
   height: 80rpx;
   width: 100%; 
@@ -43,44 +45,7 @@
 .pagesize{
   height: 100%;
 }
-.item-ans{
-  width: 690rpx;
-  margin:20rpx auto;
-  display: flex; 
-  flex-grow: row no-wrap;
-  justify-content: space-between; 
-  box-sizing: border-box; 
-  height: 220rpx;
-  align-items: center;
-  border-radius: 20rpx;
-  font-size: 22rpx;
-  box-shadow: 0 0 20rpx 0 rgba(102, 102, 102, 0.1);
-  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/coupon-gray-2.png) no-repeat left top;
-  background-size: 100%;
-}
-.item-ans.active{
-  background-image: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/coupon-canuse.png)
-}
-.coupon-right{
-  width: 100rpx;
-  color: #fff; 
-}
-.coupon-left{
-  width: 210rpx;
-  box-sizing: border-box;
-  padding-left: 58rpx;
-}
-.coupon-center{
-  width: 380rpx;
-  box-sizing: border-box;
-  padding-left: 20rpx;
-}
-.coupon-left .red text,.coupon-left .gray text {
-  font-size: 40rpx;
-}
-.coupon-center>view{
-  margin-top: 14rpx;
-}
+
 .btn-view{
   height: 100rpx;
   width: 100%;
@@ -90,4 +55,44 @@
   width: 230rpx;
   margin-top: 200rpx;
   margin-bottom: 20rpx;
+}
+/* <!-- 选择现金优惠卷弹框 --> */
+
+.use-container{
+  width: 540rpx;
+  height: 330rpx;
+  border-radius: 24rpx;
+  background: #FCFCFC;
+  font-size: 34rpx;
+  position: relative;
+  padding: 0 72rpx;
+}
+
+.use-input{
+  width: 270rpx;
+  border:1rpx solid #ddd;
+  margin: 0 10rpx;
+  min-height: 52rpx;
+  height: 52rpx;
+  font-size: 26rpx;
+  text-align: center;
+}
+.use-footer{
+  color: #0076FF;
+  border-top: 1rpx solid #ddd;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.use-header{
+  margin-top: 40rpx;
+  margin-bottom: 46rpx;
+}
+.use-footer>view{
+  height: 84rpx;
+  width: 50%;
+}
+.use-footer>view:first-child{
+  border-right: 1rpx solid #ddd;
 }

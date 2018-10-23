@@ -9,6 +9,7 @@ Page({
     totalPrice:0, // 总价
     selectList:[], //选中的产品
     tipVal:'',
+    activeType: ["", "秒", "降", "优惠套餐", "助力免费领", "支付有礼", "满减送", "刮刮乐"],
     ysf: { title: '购物车' }
   },
   onLoad: function (options) {
@@ -158,6 +159,8 @@ Page({
         item.showType = item.specValues? item.specValues.join('—'):''
         item.showCount = item.amount || 1  // 商品数量
         item.isSelect = false  //是否选择 
+        item.activityType = item.activityType === null ? 0:item.activityType
+        item.labelName = this.data.activeType[item.activityType]
         if (this.data.items.length > 0) {
           let arr = this.data.items
           for (let i = 0; i < arr.length; i++) {
@@ -165,6 +168,11 @@ Page({
               item.isSelect = arr[i].isSelect
             }
           }
+        }
+        if (item.activityType){
+          let currentTime = new Date().getTime();
+          item.isBegin = item.activityBeginTime>currentTime? false:true
+          item.isEnd = item.activityEndTime > currentTime? false:true
         }
       })
       this.setData({
@@ -198,7 +206,13 @@ Page({
     // 点击选择
     let index = e.currentTarget.dataset.index 
     let prdList = this.data.items
+    // if (prdList[index].activityType) {
+    //   Tool.showAlert('请至详情页购买')
+    //   return
+    // }
+    
     prdList[index].isSelect = !prdList[index].isSelect
+    
     this.isSelectAllPrd(prdList)
     this.setData({
       items: prdList
@@ -335,6 +349,9 @@ Page({
     let items = this.data.items
     let selectAll = this.data.selectAll
     for (let i = 0; i < items.length; i++) {
+      // if (!items[i].activityType){
+      //   items[i].isSelect = !selectAll
+      // } 
       items[i].isSelect = !selectAll
     }
     this.setData({
@@ -360,12 +377,12 @@ Page({
       return
     }
     
-    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + params+'&type=2')
+    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + params+'&type=99')
   },
   cartProductClicked(e){
     let state = e.currentTarget.dataset.state
-    if(state == 4) {
-      Tool.navigateTo('/pages/product-detail/product-detail?productId=' + e.currentTarget.dataset.id)
+    if(state == 1) {
+      Tool.navigateTo('/pages/product-detail/product-detail?door=100&productId=' + e.currentTarget.dataset.id)
     }
   },
   onUnload: function () {

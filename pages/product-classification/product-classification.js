@@ -3,7 +3,15 @@ Page({
   data: {
     leftBarLists:[
     ],
-    activeIndex:0
+    activeIndex:0,
+    pageArr: [ // 1.链接产品2.链接专题3.降价拍4.秒杀5.礼包 6.外链
+      '其他',
+      '/pages/product-detail/product-detail?prodCode=',
+      '/pages/topic/topic?code=',
+      '/pages/product-detail/discount-detail/discount-detail?code=',
+      '/pages/product-detail/seckill-detail/seckill-detail?code=',
+      '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
+    ],
   },
   onLoad: function (options) {
     this.findNameList()
@@ -47,6 +55,16 @@ Page({
     Tool.showErrMsg(r)
     r.addToQueue();
   },
+  adClicked(e){
+    let linkType = e.currentTarget.dataset.linktype
+    let code = e.currentTarget.dataset.code
+    if (linkType == 6) {
+      Tool.showAlert("跳转链接等待H5页面域名确认")
+      return
+    }
+    let page = this.data.pageArr[linkType] + code;
+    Tool.navigateTo(page)
+  },
   findNameList() {
     let params = {
       reqName: '一级分类列表',
@@ -55,6 +73,11 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let datas = req.responseObject.data || []
+      datas.forEach((item,indx)=>{
+        if(item.name.length>4){
+          item.name = item.name.slice(0,4)+'...'
+        }
+      })
       datas.unshift({
         id: 'hot', name: "为你推荐"
       })
@@ -77,10 +100,15 @@ Page({
       let content = []
       content = [{
         name:"为你推荐",
-        productCategoryList: datas
+        productCategoryList: datas.productCategoryList
       }]
       this.setData({
-        content: content
+        content: {
+          img: datas.imgList || '',
+          linkType:datas.linkType || 0,
+          linkTypeCode: datas.linkTypeCode || 0,
+          productCategoryList: content
+        }
       })
     };
     Tool.showErrMsg(r)

@@ -1,0 +1,66 @@
+@import "/pages/discover/discover-item/discover-item.wxss";
+@import "/pages/discover/discover-article/discover-article.wxss";
+.discover-tab {
+  display: flex;
+  background: #fff;
+  border-top:1rpx solid #ddd;
+}
+.discover-tab_item {
+  flex:1;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  font-family:PingFangSC-Medium;
+  font-weight:500;
+  color: #666;
+  padding: 36rpx 0;
+  text-align: center;
+}
+.discover-tab_item.active {
+  color: #D51234;
+  border-bottom: 2rpx solid #D51234;
+}
+
+.discover-top-swiper {
+  margin-top: 20rpx;
+}
+.discover-top-swiper image {
+  width: 600rpx;
+  height: 350rpx;
+  border-radius: 15rpx;
+}
+
+.discover-hot-swiper image {
+  width: 560rpx;
+  height: 280rpx;
+  border-radius: 15rpx;
+}
+
+.discover-topic-title {
+  font-size:38rpx;
+  font-family:PingFangSC-Medium;
+  font-weight:500;
+  color: #333;
+  margin: 30rpx 0;
+  text-align: center;
+}
+.discover-list {
+  padding: 0 30rpx;
+}
+
+.discover-handpick {
+  padding: 0 30rpx;
+}
+.discover-article-container {
+  background:#fff;
+  padding:20rpx;
+  margin-bottom:20rpx;
+}
+.discover-tab-new {
+  margin-top: 20rpx;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

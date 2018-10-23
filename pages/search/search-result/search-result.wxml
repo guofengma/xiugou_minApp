@@ -34,6 +34,7 @@
     imgUrl="{{imgUrl}}" 
     showImgs='{{true}}' 
     isIphoneX='{{isIPhoneX.isIPhoneX}}'
+    commodityType = '1'
   />
   <view class='go-cart flexR' catchtap='goPage'>
     <image src='/img/cart-big.png' mode='widthFix'></image>

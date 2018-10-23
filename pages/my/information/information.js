@@ -16,16 +16,16 @@ Page({
     queryPushNum(){
       let params = {
         reqName: '消息未读详情',
-        url: Operation.queryPushNum
+        url: Operation.queryPushNum,
+        requestMethod: 'GET'
       }
       let r = RequestFactory.wxRequest(params);
-        // let r = RequestFactory.queryPushNum(params);
       r.successBlock = (req) => {
         let detail=req.responseObject.data;
         this.setData({
-        noticeNum:detail.noticeNum,
-        messageNum:detail.messageNum,
-        storeMessageNum:detail.storeMessageNum,
+          noticeNum: detail.noticeCount,
+          messageNum: detail.messageCount,
+          storeMessageNum: detail.shopMessageCount,
         })
       };
       Tool.showErrMsg(r)
@@ -55,9 +55,9 @@ Page({
     },
     //关闭弹出框
     dismissCancel(){
-        this.setData({
-            isNew:false
-        })
+      this.setData({
+          isNew:false
+      })
     },
     onUnload: function () {
       Event.off('queryPushNum', this.queryPushNum)

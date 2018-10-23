@@ -1,0 +1,21 @@
+.discover-article_thumb {
+  position: relative;
+}
+.discover-article_thumb image{
+  width: 100%;
+  height: 325rpx;
+}
+.discover-article_thumb .discover-article_desc {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  font-size: 22rpx;
+  color: #fff;
+  padding: 10rpx 20rpx;
+  background: linear-gradient( rgba(255,255,255,0),rgba(0,0,0,0.3));
+  box-sizing: border-box;
+}
+.discover-article_body {
+  padding: 20rpx 0 10rpx;
+}

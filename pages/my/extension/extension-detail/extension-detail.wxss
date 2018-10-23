@@ -1,0 +1,10 @@
+.extension-page-detail{
+  min-height: 100%;
+  padding-bottom: 120rpx;
+}
+.extension-content{
+  margin-top: 20rpx;
+}
+.bottomBar{
+  
+}

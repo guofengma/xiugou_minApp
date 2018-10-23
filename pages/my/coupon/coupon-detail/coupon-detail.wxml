@@ -1,22 +1,14 @@
-<view class='coupon-detail flexR-sb {{detail.active? "active":""}}'>
-  <view class='left'>
-    <view class='{{detail.active? "red":"gray"}} font-30'>
-      {{detail.type !=3? "¥":''}}
-      <text >{{detail.value}}</text>
-      {{detail.type ==3? "折":''}}
-    </view>
-    <view class='gray' >{{detail.typeName}}</view>
-    <view>满{{detail.useConditions}}可用</view>
-  </view>
-  <view class='center boxSize'>
-    <view class='font-30 '>{{detail.name}}</view>
-    <view class='gray'>限品类：{{detail.nickname}}</view>
-    <view class='gray'>有效期：{{detail.start_time}} - {{detail.outTime}}</view>
-  </view>
-</view>
+<import src='/pages/my/coupon/temp/coupon-temp.wxml'/>
+
+<template is="coupon-temp" data="{{item:detail}}"/>
 
 <view class='tips'>
   <view>使用说明：</view>
-  <view>{{detail.remarks}}</view>
+  <view class='gray'>
+    <view wx:if='{{!detail.isCoinCoupon}}'>{{detail.remarks}}</view>
+    <view wx:else>
+      <view>1.全场均可使用此优惠券</view>
+      <view>2.礼包优惠卷在激活有效期内可以购买指导商品</view>
+    </view>
+  </view>
 </view>
-<button class='loginBtn'  disabled='{{detail.left}}' bindtap='btnClicked'>{{detail.left|| "立即使用"}}</button>

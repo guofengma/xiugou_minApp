@@ -21,15 +21,18 @@ Page({
       url: Operation.findReturnProductById
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.findReturnProductById(params)
     r.successBlock = (req) => {
       Tool.findReturnProductById(req)
       let datas = req.responseObject.data
-      if (datas.returnProduct.status ==4){
+      if (datas.status ==6){
         datas.statusName = '退款成功'
-      } else if (datas.returnProduct.status == 3){
-        datas.statusName = '商家拒绝你的请求'
-      } else{
+        datas.showRefundTime = Tool.formatTime(datas.orderReturnAmounts.refundTime)
+      } else if (datas.status == 3){
+        datas.statusName = '商家拒绝你的请求' 
+        datas.showRefundTime = Tool.formatTime(datas.refuseTime)
+      } else if (datas.status == 1){
+        datas.statusName = '申请中'
+      } else {
         datas.statusName = '退款中'
       }
       this.setData({

@@ -6,6 +6,9 @@ Page({
         userInfos:''
     },
     onLoad: function (options) {
+      this.setData({
+        wxUserInfo:Storage.wxUserInfo() || '',
+      })
       this.refreshMemberInfoNotice()
       Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
     },

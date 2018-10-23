@@ -71,6 +71,10 @@ export default class Operation {
 
         this.findProductByIdApp = '/product/getProductDetail'
 
+        // 根据code获取产品
+
+        this.getProductDetailByCode ='/product/getProductDetailByCode'
+
         // 搜索产品
 
         this.searchProduct ='/product/productList'
@@ -79,18 +83,13 @@ export default class Operation {
 
         this.findProductStockBySpec = '/product/getProductSpec'
 
+        // 获取是否是活动产品
 
-        // 礼包规格
-
-        this.getGiftBagSpec = '/order/giftBag/getGiftBagSpec'
+        this.activityByProductId = '/operator/activity/queryByProductId'
 
         // 礼包详情
 
-        this.getGiftBagDetail = '/order/giftBag/getGiftBagDetail'
-
-        // 是否能购买礼包
-
-        this.checkGiftBagOrder = '/order/order/checkGiftBagOrder'
+        this.getGiftBagDetail = '/operator/activitypackage/findActivityPackageDetail'
 
 
     /********************** 分类 *********************/
@@ -201,7 +200,7 @@ export default class Operation {
 
         /******************提交订单 订单结算*********************** */
 
-        // 购物车结算
+        // 普通商品结算
         
         this.makeSureOrder = '/order/makeSureOrder'
 
@@ -209,25 +208,45 @@ export default class Operation {
 
         this.submitOrder ='/order/submitOrder'
 
-        // 订单修改地址 邮费计算
+        // 降价拍结算 
 
-        this.calcFreight  = '/order/order/calcFreight'
+        this.discountMakeSureOrder = '/operator/activityDepreciate/makeSureOrder' 
+
+        // 降价拍提交订单
+
+        this.discountSubmitOrder = '/operator/activityDepreciate/submitOrder' 
+
+        // 秒杀结算
+
+        this.seckillMkeSureOrder = '/operator/seckill/makeSureOrder'
+
+        // 秒杀下订单
+
+        this.seckillSubmitOrder = '/operator/seckill/submitOrder'
+
+        // 礼包结算
+
+        this.giftMkeSureOrder = '/operator/activitypackage/makeSureOrder'
+
+        // 礼包下订单
+
+        this.giftSubmitOrder = '/operator/activitypackage/submitOrder'
 
         // 预支付
 
-        this.repay = '/order/prePay'
+        this.prePay = '/order/prePay'
 
         // 第三方支付回调接口
 
-        this.paySuccess = '/order/order/paySuccess'
+        this.paySuccess = '/order/paySuccess'
 
         // 继续去支付
 
-        this.continueToPay  = '/order/order/continueToPay'
+        this.continueToPay = '/order/payRecord/continueToPay'
 
         // 继续支付
 
-        this.continuePay = '/order/order/continuePay'
+        this.continuePay = '/order/payRecord/continuePay'
         
         // 继续去预支付
 
@@ -253,49 +272,75 @@ export default class Operation {
 
         // 我的售后
 
-        this.queryAftermarketOrderPageList  ='/order/order/queryAftermarketOrderPageList'
+        this.queryAftermarketOrderPageList ='/order/queryAftermarketOrderList'
 
         // 申请退款
         
-        this.orderRefund = '/order/order/orderRefund'
+        this.orderRefund = '/order/returnProduct/applyRefund'
 
         // 申请换货
 
-        this.applyExchangeProduct = '/order/order/applyExchangeProduct'
+        this.applyExchangeProduct = '/order/returnProduct/applyExchangeGoods'
 
         // 申请退货
 
-        this.applyReturnGoods  = '/order/order/applyReturnGoods'
+        this.applyReturnGoods = '/order/returnProduct/applyReturnGoods'
+
+        // 撤销申请
+
+        this.revokeApply = '/order/returnProduct/revokeApply'
+
+        // 修改申请
+
+        this.updateApply = '/order/returnProduct/updateApply'
 
         // 查看申请退款子订单详情
 
-        this.findOrderProductInfo = '/order/orderProduct/findOrderProductInfo'
+        this.findOrderProductInfo = '/order/orderProduct/lookDetial'
 
         // 查看退款退货换货情况
 
-        this.findReturnProductById = '/order/order/findReturnProductById'
+        this.findReturnProductById = '/order/returnProduct/lookDetail'
 
         // 退货换货填写物流信息
 
-        this.fillInExpressInfoById ='/order/order/fillInExpressInfoById'
+        this.fillInExpressInfoById ='/order/returnProduct/fillSendInfo'
+
+        // 物流查看
+
+        this.findLogisticsDetail = '/order/logistics/findLogisticsDetail'
 
         // 退换货物流查看
 
         this.findReturnProduct = '/user/delivery/findReturnProduct'
 
-        // 物流公司选择
-
-        this.findAllExpress = '/user/express/findAllExpress'
-
         // 根据订单id查询快递信息
 
-        this.findDelivery ='/user/delivery/find'
+        this.findDelivery = '/user/delivery/find'
+
+        // 物流公司选择
+
+        this.findAllExpress = '/sysExpress/findAllExpress'
 
         // 再次购买
 
-        this.orderOneMore  ='/order/order/orderOneMore'
+        this.orderOneMore ='/order/againOrder'
 
+        /****************** 一元劵*********************** */
         
+        // 兑换一元券
+
+        this.exchangeTokenCoin = '/user/exchangeTokenCoin'
+  
+        // 签到
+
+        this.querySignList = '/user/userSign/querySignList'
+
+        // 签到获取秀豆
+
+        this.tokenCoinSign='/user/userSign/sign'
+
+
         /******************我的---设置*********************** */
 
         //退出登录
@@ -305,6 +350,14 @@ export default class Operation {
         // 获取用户信息
 
         this.getLevel = '/user/getUser'
+
+        // 获取用户下一等级层级信息
+
+        this.getNextLevelInfo ='/user/level/getNextLevelInfo'
+
+        // 查询等级信息
+
+        this.getLevelInfos = '/user/level/get'
 
         /******************我的---通讯录*********************** */
 
@@ -359,15 +412,23 @@ export default class Operation {
           手机号修改绑定新手机：MOBILE_VERIFYNEWPHONE_CODE
           登录时忘记密码：MOBILE_FORGETPASSWORD_CODE
           2. phone:string
+          2018年10月18日接口修改 短信接口只需传phone即可  @ydg
         */
 
-        this.sendMessage = '/user/phoneCode/sendMessage'
+        this.sendMessage = '/sms/sendRegMessage'
 
         /************************** 首页 *******************************/ 
 
-        //轮播图
+      /* 
+        查询广告位列表 
+        type：1.APP首页banner广告位   2.APP首页推荐位   3.APP首页明星店铺推荐位    4.APP首页今日榜单广告位
+        5.APP首页精品推荐广告位  6.APP首页超值热卖广告位  7.APP首页专题广告位  8.APP首页为你推荐广告位
+        9.拼店首页banner推荐位  10.类目搜索banner广告位
+        status： 1.有效 2.无效
+        linkType：1.链接产品2.链接专题3.降价拍4.秒杀5.礼包
+      */
 
-        this.queryAdList = '/user/ad/queryAdList'
+        this.queryAdList = '/config/advertisement/queryAdvertisementList'
 
         // 获取专题详情页
 
@@ -375,7 +436,11 @@ export default class Operation {
 
         // 获取推荐产品
 
-        this.queryFeaturedList = '/user/featured/queryFeaturedList'
+        this.queryFeaturedList = '/config/advertisement/queryRecommendedPageList'
+
+        // 秀场头条
+
+        this.discoverNotice = '/discover/query'
 
 
         /************************** 帮助中心 *******************************/
@@ -419,15 +484,15 @@ export default class Operation {
 
         // 消息未读详情
 
-        this.queryPushNum = '/user/push/queryPushNum';
+        this.queryPushNum = '/notice/newNoticeMessageCount';
 
         // 消息
 
-        this.queryMessage = '/user/message/queryMessage';
+        this.queryMessage = '/message/queryMessagePage';
 
         // 通知详情
 
-        this.queryNoticeMessage = '/user/notice/queryNoticeMessage';
+        this.queryNoticeMessage = '/notice/queryNoticePage';
 
         // 拼店消息
 
@@ -435,8 +500,45 @@ export default class Operation {
 
         // 查看消息详情
 
-        this.findMessageDetail = '/user/message/findMessageDetail';
+        this.findMessageDetail = '/message/queryById';
 
+      /************************** 降价秒杀 *******************************/
+      
+        // 订阅提醒
+        
+        this.addActivitySubscribe = '/activity/activitySubscribe/addActivitySubscribe';
+
+        // 获取专题信息
+
+        this.getTopicById = '/topic/findByCode';
+
+        // 获取降价拍详情
+
+        this.getActivityDepreciateById = '/operator/activityDepreciate/findById';
+
+        // 获取秒杀详情
+
+        this.getActivitySeckillById = '/operator/seckill/findByCode';
+
+        // 获取收藏列表
+
+        this.queryCollect = '/discover/queryCollect';
+
+        // 获取发现列表 type { 1：精选 2：热门 3：推荐 4：最新 全部则不传}, page, size
+
+        this.queryDiscoverListByType = '/discover/query';
+
+        // 获取发现详情
+
+        this.getDiscoverById = '/discover/getById';
+
+        // 取消 点赞/收藏
+
+        this.discoverCountCancel = '/discover/count/cancel';
+
+        // 点赞/收藏
+
+        this.discoveerCountSave = '/discover/count/save';
 
         __instance(this);
 

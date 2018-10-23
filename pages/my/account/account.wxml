@@ -18,13 +18,13 @@
                 <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
             </view>
         </view>
-        <view class="item" bindtap="account">
+        <view class="item">
             <view>
                 <text>微信账号</text>
             </view>
             <view>
-                <!--<text>1111</text>-->
-                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+                <open-data type="userNickName"></open-data>
+                <!-- <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image> -->
             </view>
         </view>
     </view>

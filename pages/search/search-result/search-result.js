@@ -32,13 +32,14 @@ Page({
       hotWordId: Number(options.hotWordId) || '',
       sortType: 1
     }
-    if (options.categoryId || options.hotWordId) {
+    if (options.hotWordId) {
+      delete params.categoryId
+    } else if (options.categoryId) {
       delete params.keyword
-      if (options.hotWordId){
-        delete params.categoryId
-      }else{
-        delete params.hotWordId
-      }
+      delete params.hotWordId
+    } else if (!options.hotWordId && !options.categoryId){
+      delete params.hotWordId
+      delete params.categoryId
     }
     this.setData({
       keyword: options.keyword || '',
@@ -75,17 +76,10 @@ Page({
   searchKeyword(){
     if (!Tool.isEmpty(this.data.keyword)){
       let history = Storage.getHistorySearch()
-      let str = this.data.keyword.length > 10 ? this.data.keyword.slice(0, 10) + "..." : this.data.keyword
-      let hasSame = false
-      history.forEach((item) => {
-        if (item == str) {
-          hasSame = true
-        }
-      })
-      if (!hasSame) {
-        history.unshift(this.data.keyword)
-        Storage.setHistorySearch(history)
-      }
+      history.unshift(this.data.keyword)
+      let setArr = new Set(history)
+      history = [...setArr]
+      Storage.setHistorySearch(history)
     } else {
       Tool.showAlert('请输入搜索内容')
       return

@@ -6,6 +6,7 @@
 import RequestQueue from './request-queue';
 import RequestStatus from './request-status';
 import config from '../../config.js'
+import RSA from '../../tools/rsa.js'
 //请求基类
 export default class Request {
   constructor(bParam) {
@@ -73,6 +74,30 @@ export default class Request {
     RequestQueue.addRequest(this);
   }
 
+  /**
+   * @param {string} query字符串 选填 http://www.mr.com/?a=1&b=2#login
+   * @returns {object} {a:1,b:2}
+   */
+  query2Object(str) {
+    let url = str || document.URL;
+    // removeURLAnchor
+    url.indexOf('#') > 0 && (url = url.substring(0, url.indexOf('#')))
+    let e = {},
+      t = url,
+      o = t.split('?').slice(1).join('');
+    if (o.length < 3) {
+      return e;
+    }
+    for (let n = o.split('&'), i = 0; i < n.length; i++) {
+      let r = n[i], d = r.indexOf('=');
+      if (!(0 > d || d === r.length - 1)) {
+        let p = r.substring(0, d), s = r.substring(d + 1);
+        0 !== p.length && 0 !== s.length && (e[p] = decodeURIComponent(s));
+      }
+    }
+    return e;
+  }
+
   //发起请求
   start() {
     let that = this;
@@ -80,14 +105,31 @@ export default class Request {
     if (this.manageLoadingPrompt) {
       global.Tool.showLoading();
     }
+    let url = this.url();
+
+    let body = this.body();
+
+    let rsa_headers = '';
+    console.log(url);
+    // 只需对白名单内的url做加签处理
+    if (RSA.checkInWhiteList(url)) {
+      console.log(`对${url}进行加签处理`);
+      rsa_headers = RSA.sign(body);
+      if (this.requestMethod.toUpperCase() == 'POST') {
+        rsa_headers = RSA.sign(this.query2Object(url));
+      }
+    }
     wx.request({
-      url: this.url(),
-      data: this.body(),
+      url: url,
+      data: body,
       dataType: 'json',
       method: this.requestMethod,
       header: {
         'content-type': 'application/json',
-        'Cookie': this.hasCookie()
+        // 'Cookie': this.hasCookie(),
+        'device': global.Storage.getPlatform() || '',
+        'platform': this.bodyParam.systemVersion,
+        'sg-token': global.Storage.getToken() || ''
       },
       success: function (res) {
         if (that.managerLoadingPrompt) {
@@ -101,7 +143,7 @@ export default class Request {
         //成功
         that.responseObject = res.data;
         //成功
-        if (res.data.code == '10000') {
+        if (res.data.code == '10000' || res.data.code === 0) {
           let Datas = that.responseObject.data;
           let firstData = {};
           firstData = Datas
@@ -179,6 +221,7 @@ export default class Request {
       this.cookie = global.Storage.getUserCookie() || ' '
       return this.cookie
     }
+    delete this.bodyParam.hasCookie
   }
 }
 

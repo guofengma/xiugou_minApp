@@ -85,7 +85,9 @@ Page({
     this.setData({
       keyWord: e.detail.keyWord
     })
-    this.requestKeywords()
+    if(this.data.door!=1){
+      this.requestKeywords()
+    }
   },
   requestKeywords(){
     let params = {
@@ -123,6 +125,7 @@ Page({
         keywords.unshift(this.data.keyWord)
         let setArr = new Set(keywords)
         keywords=[...setArr]
+        keywords.splice(9)
         if (this.data.door == 1) {
           Storage.setSearchOrderHistory(keywords)
         } else {
@@ -159,7 +162,6 @@ Page({
       url: Operation.getProvinceList,
     }
     let r = RequestFactory.wxRequest(params)
-    // let r = RequestFactory.getProvinceList();
     r.successBlock = (req) => {
       let data = req.responseObject.data
       let showProvince = ''

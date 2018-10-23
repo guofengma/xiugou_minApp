@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "仅退款详情",
   "usingComponents": {
+    "amend-application": "/pages/after-sale/temp/amend-application/amend-application",
     "contact-seller": "/components/contact-seller/contact-seller"
   }
 }

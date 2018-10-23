@@ -13,8 +13,19 @@ Page({
       totalPageArr:[], //保存页数 
       params:{
         page:1,
-        pageSize:5
+        pageSize:10
       },
+      coinData:{
+        nickname:'全场通用',
+        'type':0,
+        name:'可叠加使用',
+        isCoinCoupon:true,
+        value:1,
+        num:0,
+        active:true,
+      },
+      show:false,
+      coinNum:1
     },
     // 上拉加载更多
     onScroll(e) {
@@ -30,7 +41,7 @@ Page({
         params: params
       })
       if (currentTab==0){
-        if(this.data.door==1){
+        if(this.data.door==1&&this.data.useType==2){
           this.availableDiscountCouponForProduct()
         } else {
           this.getDiscountCouponNoUse();
@@ -57,7 +68,7 @@ Page({
       item.value = item.type == 3?  Tool.mul(item.value,0.1):item.value
 
       //优惠卷的使用范围
-      
+      item.products =item.products? item.products:[]
       let length = item.length
     
       if (length==0){
@@ -65,24 +76,26 @@ Page({
         item.nickname = item.products.length == 1 ? "限" + item.products[0] + "可用" :"限指定商品可使用"
       } else if (length>1){
         // 多品类
-        item.nickname = "限指定分类商品使用" 
+        item.nickname = "限指定品类可用" 
       } else if (length==1){
         // 单品类
         if (item.products.length==0){
-          item.nickname = item[item.key].length > 0 ? "限指定商品可使用" : "限" + item[item.key][0] + "可用"
-        } else if (item.products.length==1) {
-          item.nickname = "限" + item.products[0] + "可用" 
-        } else {
+          item.nickname = item[item.key].length > 0 ? "限指定分类可使用" : "限" + item[item.key][0] + "类可用"
+        } 
+        // else if (item.products.length==1) {
+        //   item.nickname = "限" + item.products[0] + "可用" 
+        // } 
+        else {
           item.nickname = "限指定商品可使用" 
         }
       }
       
     },
-    formatCouponInfos(params,index,isActive=false,leftName,){
+    formatCouponInfos(params, index, isActive = false, couponClassName){
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data
-        if (req.responseObject.data.totalPage == 0) return
+        if (req.responseObject.data.totalPage == 0 || datas.data==null) return
         datas.data.forEach((item,index)=>{
           item.outTime = Tool.timeStringForDateString(Tool.formatTime(item.expireTime),"YYYY.MM.DD");
           item.start_time = Tool.timeStringForDateString(Tool.formatTime(item.startTime), "YYYY.MM.DD");
@@ -95,7 +108,7 @@ Page({
           key = (item.cat3? 'cat3' : key)
           item.length =length
           item.key = key
-          item.left = leftName;
+          item.couponClassName = couponClassName;
           item.active = isActive;
           this.getCouponType(item)
         })
@@ -112,7 +125,7 @@ Page({
     availableDiscountCouponForProduct(){
       let params = {
         ...this.data.params,
-        productIds: this.data.productIds,
+        productPriceIds: JSON.parse(this.data.productIds),
         reqName: '产品可用优惠劵列表',
         url: Operation.availableDiscountCouponForProduct
       }
@@ -128,7 +141,7 @@ Page({
         status:0
       }
       params.pageSize = 5
-      this.formatCouponInfos(params, 0,true,'')
+      this.formatCouponInfos(params, 0, true,'')
     },
     // 待激活
     getDiscountCouponNoActive() {
@@ -139,7 +152,7 @@ Page({
         status: 3
       }
       params.pageSize = 5
-      this.formatCouponInfos(params, 0, false, '待激活')
+      this.formatCouponInfos(params, 0, false, 'coupon-right-unUsed')
     },
     //已经优惠劵列表
     getDiscountCouponUserd() {
@@ -149,7 +162,7 @@ Page({
         reqName: '已使用优惠劵列表',
         url: Operation.couponList
       }
-      this.formatCouponInfos(params, 2, false, '已使用')
+      this.formatCouponInfos(params, 2, false, 'coupon-right-used')
     },
     //失效优惠劵列表
     getDiscountCouponLosed() {
@@ -159,7 +172,7 @@ Page({
         status:2,
         url: Operation.couponList
       }
-      this.formatCouponInfos(params, 1, false, '已失效')
+      this.formatCouponInfos(params, 1, false, 'coupon-right-lose')
     },
 
     // 点击标题切换当前页时改变样式
@@ -179,16 +192,53 @@ Page({
       let index = e.currentTarget.dataset.index
       let key = e.currentTarget.dataset.key
       Storage.setCoupon(this.data.lists[key][index])
-      Tool.navigateTo('../coupon-detail/coupon-detail')
       if(this.data.door==1&&key==0){
-        Event.emit("updateCoupon")
-        Tool.navigationPop()
+        if (this.data.useType==1) {
+          this.btnClicked()
+        } else {
+          this.data.lists[key][index].canClick= true
+          Event.emit("updateCoupon")
+          Tool.navigationPop()
+        }
       } else{
         Tool.navigateTo('../coupon-detail/coupon-detail')
       }
     },
+    btnClicked(e){
+      this.setData({
+        show:!this.data.show
+      })
+      if (e){
+        let index = e.currentTarget.dataset.index
+        Storage.setTokenCoin(this.data.coinNum)
+        Event.emit('getTokenCoin')
+        Tool.navigationPop()
+      }
+    },
+    bindKeyInput(e){
+      this.setData({
+        coinNum: Number(e.detail.value)
+      })
+      this.setInputValue()
+    },
+    setInputValue(){
+      this.data.coinNum = this.data.coinNum < 0 ? 0 : this.data.coinNum
+      this.data.coinNum = this.data.coinNum > this.data.coinData.num ? this.data.coinData.num : this.data.coinNum
+      this.setData({
+        coinNum: this.data.coinNum
+      })
+    },
+    addClicked(e){
+      let index = e.currentTarget.dataset.index
+      if(index==1){
+        this.data.coinNum--
+      }else{
+        this.data.coinNum++
+      }
+      this.setInputValue()
+    },
     giveUpUse(){
-      Storage.setCoupon({ id: "", name: '未使用优惠劵' })
+      Storage.setCoupon({ id: "", name: '未使用优惠劵', canClick:true })
       Event.emit("updateCoupon")
       Tool.navigationPop()
     },
@@ -204,18 +254,36 @@ Page({
             })
         }
     },
-      onLoad: function (options) {
-        this.setData({
-          door: options.door || '',
-          productIds: options.productIds || '',
-        })
-        if(this.data.door==1){
-          this.availableDiscountCouponForProduct()
+    onLoad: function (options) {
+      let userInfo = Storage.getUserAccountInfo() || {}
+      this.data.coinData.num = userInfo.tokenCoin || 0
+      if (this.data.coinData.num && options.useType!=2){
+        this.data.lists[0].unshift(this.data.coinData)
+      }
+      this.setData({
+        door: options.door || '',
+        useType: options.useType || '',
+        lists: this.data.lists,
+        productIds: options.productIds || '',
+        coinData: this.data.coinData,
+      })
+      if (this.data.door == 1){
+        if (this.data.useType == 1){
+          let coinNum = options.coin > this.data.coinData.num? this.data.coinData.num : options.coin
+          this.setData({
+            coinNum: coinNum
+          })
         } else {
-          this.getDiscountCouponNoActive()
-          this.getDiscountCouponNoUse();
+          this.availableDiscountCouponForProduct()
         }
-        this.getDiscountCouponUserd();
-        this.getDiscountCouponLosed();
-    },
+      } else {
+        this.setData({
+
+        })
+        this.getDiscountCouponNoActive()
+        this.getDiscountCouponNoUse();
+      }
+      this.getDiscountCouponUserd();
+      this.getDiscountCouponLosed();
+  },
 })

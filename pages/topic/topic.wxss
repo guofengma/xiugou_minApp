@@ -1,13 +1,17 @@
 @import "/pages/topic/temp/topic-prd-info/topic-prd-info.wxss";
 
 @import "/pages/topic/temp/topic-bar/topic-bar.wxss";
+
+/* 秒杀、降价时间tab */
+@import "/pages/topic/temp/good-item/good-item.wxss";
+
+@import "/pages/topic/temp/temp-time-quantum/temp-time-quantum.wxss";
+
+
 .prd-img-view image,.topic-banner image,.ad-img{
   width: 100%;
 }
-/* .ad-img{
-  height: 100%;
-  width: 100%;
-} */
+
 .ad-view{
   /* min-height: 350rpx; */
   position: relative;
@@ -31,9 +35,10 @@
 }
 .topic-prd-content{
   padding: 0 30rpx;
+  margin-top:20rpx;
   display: flex;
   justify-content:space-between;
-  flex-wrap:wrap;
+  flex-wrap:wrap; 
 }
 .topic-banner{
   width: 100%;
@@ -49,9 +54,25 @@
 .topic-type{
   height: 99rpx;
 }
-.topic-prd-content>view{
+/* .topic-prd-content>view{
   margin-right: 15rpx;
-}
-/* .topic-prd-content>view:first-child{
-  margin-left: 0
 } */
+
+/* 秒杀降价商品item  */
+.goods-container{
+  padding: 20rpx 30rpx;
+  background: #f7f7f7;
+}
+
+.no-more {
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+  margin: 30rpx 0;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

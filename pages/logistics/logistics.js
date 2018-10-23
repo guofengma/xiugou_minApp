@@ -57,29 +57,18 @@ Page({
     },
     onLoad: function (options) {
         this.setData({
-            id: options.orderId || '',
+            id: options.id || '',
             door: options.door || '',
             type: options.type || ''
         });
         this.getDelivery()
     },
     getDelivery() {
-        let params ='' 
-        if(this.data.door==1){
-          params = {
-            id: this.data.id,
-            "type": this.data.type,
-            reqName: '退换货物流查看',
-            url: Operation.findReturnProduct
-          };
-          // r = RequestFactory.findReturnProduct(params);
-        } else {
-          params = {
-            orderId: this.data.id,
-            reqName: '查看物流',
-            url: Operation.findDelivery
-          };
-          // r = RequestFactory.findDelivery(params);
+        let params = {
+          expNum: this.data.id,
+          requestMethod: 'GET',
+          reqName: '物流查看',
+          url: Operation.findLogisticsDetail
         }
         let r = RequestFactory.wxRequest(params);
         r.successBlock= (req) => {
@@ -97,7 +86,7 @@ Page({
               let tempList = [];
               if (list.length) {
                 list.forEach((item) => {
-                  item.showDate = item.time.slice(6, 10)  
+                  item.showDate = item.time.slice(5, 10)  
                   item.showTime = item.time.slice(11, 16)
                   tempList.push(item)
                 });

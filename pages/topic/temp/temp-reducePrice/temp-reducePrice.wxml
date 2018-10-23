@@ -1,0 +1,36 @@
+<import src='/pages/topic/temp/temp-time-quantum/temp-time-quantum.wxml' />
+<import src='/pages/topic/temp/good-item/good-item.wxml' />
+
+<template name="temp-reducePrice">
+  <!--导航  -->
+  <template is='time-quantum' 
+    data="{{topicNavbarList:topicList.topicNavbarList,currentTopicListIndex:currentTopicListIndex,width:topicTabWidth }}"
+  ></template>
+  <!--产品 -->
+  
+    <view class='topic-prd-content topic-temp1'>
+      <block 
+        wx:for="{{topicList.topicNavbarList[currentTopicListIndex].topicBannerProducts}}" 
+        wx:key="{{item.id}}">
+         <template is='good-item' data="{{...item,index:index}}"></template>
+      </block>
+    </view>
+    <!-- 带banner的产品列表 S -->
+    <block 
+      wx:for="{{topicList.topicNavbarList[currentTopicListIndex].topicNavbarBannerList}}"
+      wx:key="index"
+    >
+      <view class='topic-banner topic-temp'>
+        <image src='{{item.bannerImg}}' mode='widthFix'></image>
+      </view>
+      <view class='topic-prd-content topic-temp1'>
+        <block 
+          wx:for="{{item.topicBannerProductList}}" 
+          wx:key="{{item.id}}">
+          <template is='good-item' data="{{...item,index:index}}"></template>
+        </block>
+      </view>
+    </block>
+    <!-- 带banner的产品列表 E -->
+    <!-- <view class='no-more' wx:if="{{topicList.id}}">已经到底啦~</view> -->
+</template>

@@ -2,7 +2,7 @@ let { Tool, RequestFactory, Storage, Event, Operation } = global;
 Component({
   properties: {
     num:Number,
-    condition:String
+    condition:String,
   },
   data: {
     num: 0,
@@ -18,7 +18,8 @@ Component({
     status: '',
     orderNum: '',
     key: 0,
-    time:""
+    time:"",
+    returnTypeArr:['','退款','退货','换货']
   },
   methods: {
     //获取列表数据
@@ -35,10 +36,10 @@ Component({
     //获取数据
     getData(index) {
       let params = {
-        pageSize: this.data.pageSize,
+        size: this.data.pageSize,
         page: this.data.currentPage,
-        status:index,
-        condition:this.properties.condition || '',
+        status:index || '',
+        orderNum:this.properties.condition || '',
         reqName: "获取我的订单列表"+index,
         url: Operation.queryOrderPageList
       }
@@ -47,20 +48,22 @@ Component({
         params: params
       });
       let r = RequestFactory.wxRequest(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let datas = [];
         let secondMap = new Map();
         let key = this.data.key;
         for (let i in req.responseObject.data.data) {
           let item = req.responseObject.data.data[i];
-          item.createTime = Tool.formatTime(item.orderCreateTime);
+          item.createTime = Tool.formatTime(item.createTime);
           item.finishTime = Tool.formatTime(item.finishTime);
           item.sendTime = Tool.formatTime(item.sendTime);
+          item.payTime = Tool.formatTime(item.payTime);
+          item.cancelTime = Tool.formatTime(item.cancelTime);
           // item.createTime = Tool.formatTime(item.orderCreateTime);
           // 礼包不显示产品描述
-          if (item.orderProduct[0].orderType == 98) item.orderProduct[0].spec=''
+          // if (item.orderProductList[0].orderType == 98) item.orderProduct[0].spec=''
           // 这块是倒计时 
-          if (item.orderStatus == 1) {
+          if (item.status == 1) {
             let now = Tool.timeStringForDate(new Date(), "YYYY-MM-DD HH:mm:ss");
             secondMap.set(key, 1);
           }
@@ -69,12 +72,12 @@ Component({
         }
         this.setData({
           list: list.concat(datas),
-          totalPage: req.responseObject.data.total,
+          totalPage: req.responseObject.data.totalPage,
           secondArry: secondMap,
           key: key
         });
-
-        if (!req.responseObject.data.total) {
+        console.log(this.data.list)
+        if (!req.responseObject.data.totalPage) {
           this.setData({
             tipVal: 2
           });
@@ -109,18 +112,18 @@ Component({
     },
     //跳到物流页面
     logistics(e) {
-      Tool.navigateTo('/pages/logistics/logistics?orderId=' + e.currentTarget.dataset.id)
+      Tool.navigateTo('/pages/logistics/logistics?id=' + e.currentTarget.dataset.id)
     },
     //删除订单
     deleteItem(e) {
       let id = e.currentTarget.dataset.id;
-      let status = e.currentTarget.dataset.orderstatus;
+      let status = e.currentTarget.dataset.status;
       this.setData({
         isDelete: true,
         orderId: id,
         status: status,
       });
-      this.deleteOrder()
+      // this.deleteOrder()
     },
     dismissCancel() {
       //取消取消订单
@@ -132,32 +135,24 @@ Component({
     deleteOrder() {
       let url = ''
       let reqName = ''
-      if (this.data.status == 7 || this.data.status == 5 || this.data.status == 6) {//已完成订单/待确认
-        // r = RequestFactory.deleteOrder(params)
+      if (this.data.status == 4 || this.data.status == 5 ) {//已完成订单/待确认
         url = Operation.deleteOrder
         reqName = '删除订单'
       } else {
-        // r = RequestFactory.deleteClosedOrder(params)
         url = Operation.deleteClosedOrder
         reqName = '删除订单'
       }
       let params = {
-        id: this.data.orderId,
-        // orderNum:
+        orderNum: this.data.orderId,
         url: url,
         reqName: reqName
       };
       let r = RequestFactory.wxRequest(params);
-      r.finishBlock = (req) => {
-        if (req.responseObject.code == 200) {
-          this.setData({
-            list: []
-          });
-          this.getData(this.data.num);
-        } else {
-          Tool.showSuccessToast(req.responseObject.msg)
-        }
-
+      r.successBlock = (req) => {
+        this.setData({
+          list: []
+        });
+        this.getData(this.data.num);
       };
       r.completeBlock = (req) => {
         this.setData({
@@ -168,9 +163,11 @@ Component({
       r.addToQueue();
     },
     cancelOrder() {
+      console.log(1111)
       this.setData({
         isCancel: false,
-        list: []
+        list: [],
+        key:0
       });
       this.getData(this.data.num);
     },
@@ -183,25 +180,29 @@ Component({
     },
     //确认收货
     confirmReceipt(e) {
+      let content = '确认收货吗?'
+      let index = e.currentTarget.dataset.index;
       let id = e.currentTarget.dataset.id;
+      let list = this.data.list[index]
+      list.orderProductList.forEach((item,index)=>{
+        let returnProductStatus = item.returnProductStatus || 99999
+        if (returnProductStatus < 6 && returnProductStatus!=3){
+          content = '确认收货将关闭' + this.data.returnTypeArr[item.returnType]+"申请，确认收货吗？"
+        }
+      })
       let that = this;
-      Tool.showComfirm('确认收货？', function () {
+      Tool.showComfirm(content, function () {
         let params = {
-          orderId: id,
+          orderNum: id,
           reqName: '确认收货',
           url: Operation.confirmReceipt,
         }
         let r = RequestFactory.wxRequest(params);
-        // let r = RequestFactory.confirmReceipt(params);
-        r.finishBlock = (req) => {
-          if (req.responseObject.code == 200) {
-            that.setData({
-              list: []
-            });
-            that.getData(that.data.num);
-          } else {
-            Tool.showSuccessToast(req.responseObject.msg)
-          }
+        r.successBlock = (req) => {
+          that.setData({
+            list: []
+          });
+          that.getData(that.data.num);
         };
         Tool.showErrMsg(r);
         r.addToQueue();
@@ -211,31 +212,39 @@ Component({
     continuePay(e) {
       let item = e.currentTarget.dataset.item;
       let params = {
-        totalAmounts: item.totalPrice + item.freightPrice, //总价
+        totalAmounts: item.needPrice, //总价
         orderNum: item.orderNum, // 订单号
-        outTradeNo: item.outTrandNo  // 流水号
+        outTradeNo: item.outTradeNo  // 流水号
       };
+      Storage.setPayOrderList(params)
       Tool.navigateTo('/pages/order-confirm/pay/pay?isContinuePay=' + true + '&data=' + JSON.stringify(params))
     },
     //再次购买
     continueBuy(e) {
       let params = {
-        orderId: e.currentTarget.dataset.id,
+        id: e.currentTarget.dataset.id,
         reqName: '再次购买获取规格',
         url: Operation.orderOneMore,
       }
       let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.orderOneMore(params);
-      r.finishBlock = (req) => {
+      r.successBlock = (req) => {
         let datas = req.responseObject.data;
-        datas.forEach((item) => {
-          item.sareSpecId = item.id;
-          item.productNumber = item.num;
-          item.isSelect = true
+        let orderProducts = datas.orderProducts || []
+        let list =[]
+        orderProducts.forEach((item) => {
+          list.push({
+            productId:item.productId,
+            priceId:item.priceId,
+            amount:item.num,
+            showCount:item.num,
+            isSelect:true
+          })
         });
-        Storage.setShoppingCart(datas);
-        Event.emit('continueBuy');
-        Tool.switchTab('/pages/shopping-cart/shopping-cart')
+        if(list.length>0){
+          Storage.setShoppingCart(list);
+          Event.emit('continueBuy');
+          Tool.switchTab('/pages/shopping-cart/shopping-cart')
+        }
       };
       Tool.showErrMsg(r);
       r.addToQueue();
@@ -249,18 +258,18 @@ Component({
       let orderArry = that.data.list;
       for (let i = 0; i < orderArry.length; i++) {
         let order = orderArry[i];
-        if (order.orderStatus == 1) {
+        if (order.status == 1) {
           let second = mapArry.get(i);
           if (second) {//秒数>0
             // let countDownTime = Tool.timeStringForTimeCount(second);
-            let endTime = Tool.formatTime(order.overtimeClosedTime)
+            let endTime = Tool.formatTime(order.shutOffTime)
             let countdown = Tool.getDistanceTime(endTime, this,1)
             order.countDownTime = countdown + '后自动取消订单';
             mapArry.set(i, countdown);
           } else {
             //order.countDownTime = '交易关闭';
             clearTimeout(this.data.time);
-            order.orderStatus = 10
+            order.status = 8
             if(this.data.num==1){
               orderArry.splice(i,1)
             }
@@ -284,20 +293,6 @@ Component({
         list: orderArry,
         time: time
       });
-    },
-    time() {
-      //待付款订单 倒计时处理
-      let detail = this.data.detail
-      let endTime = Tool.formatTime(detail.overtimeClosedTime)
-      let countdown = Tool.getDistanceTime(endTime, this)
-      if (countdown == null) {
-        detail.status = 10
-        clearTimeout(this.data.time);
-        this.setData({
-          detail: detail,
-          state: this.orderState(10)//订单状态相关信息
-        })
-      }
     },
     onUnload(){
       clearTimeout(this.data.time);

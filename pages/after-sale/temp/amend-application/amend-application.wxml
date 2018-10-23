@@ -1,10 +1,10 @@
 <view class='whiteBg'>
   <view class='font-30 amend-tips-view flexR-sb'>
-    您已成功发起退款申请，请耐心等待商家处理。
+    您已成功发起{{applyType}}申请，请耐心等待商家处理。
   </view>
   <view class='overflow btn-veiw font-30'>
-    <view class='fr red flexR right' catchtap=''>修改申请</view>
-    <view class='fr gray flexR' catchtap='cancelApply'>撤销申请</view>
+    <view class='fr red flexR right' catchtap='updateApply'>修改申请</view>
+    <view class='fr gray flexR' catchtap='revokeApply'>撤销申请</view>
   </view>
 </view>
 
