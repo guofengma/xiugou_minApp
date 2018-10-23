@@ -241,7 +241,7 @@ Page({
             info: '仓库正在扫描出仓...',
             time: ''
           },
-          { status: '退换货完成',
+          { status: '订单已完成',
             bottomBtn: ['删除订单', '再次购买'],
             bottomId: ['', 5], 
             orderIcon: "order-state-5.png", 

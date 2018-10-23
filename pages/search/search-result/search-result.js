@@ -76,17 +76,10 @@ Page({
   searchKeyword(){
     if (!Tool.isEmpty(this.data.keyword)){
       let history = Storage.getHistorySearch()
-      let str = this.data.keyword.length > 10 ? this.data.keyword.slice(0, 10) + "..." : this.data.keyword
-      let hasSame = false
-      history.forEach((item) => {
-        if (item == str) {
-          hasSame = true
-        }
-      })
-      if (!hasSame) {
-        history.unshift(this.data.keyword)
-        Storage.setHistorySearch(history)
-      }
+      history.unshift(this.data.keyword)
+      let setArr = new Set(history)
+      history = [...setArr]
+      Storage.setHistorySearch(history)
     } else {
       Tool.showAlert('请输入搜索内容')
       return
