@@ -66,30 +66,31 @@ Page({
       item.typeName = typeObj[item.type]
       item.showTypeName = item.type == 4 || item.type == 2? true:false
       item.value = item.type == 3?  Tool.mul(item.value,0.1):item.value
-
-      //优惠卷的使用范围
-      item.products =item.products? item.products:[]
-      let length = item.length
-    
-      if (length==0){
-        // 单产品和多产品的判断
-        item.nickname = item.products.length == 1 ? "限" + item.products[0] + "可用" :"限指定商品可使用"
-      } else if (length>1){
-        // 多品类
-        item.nickname = "限指定品类可用" 
-      } else if (length==1){
-        // 单品类
-        if (item.products.length==0){
-          item.nickname = item[item.key].length > 0 ? "限指定分类可使用" : "限" + item[item.key][0] + "类可用"
-        } 
-        // else if (item.products.length==1) {
-        //   item.nickname = "限" + item.products[0] + "可用" 
-        // } 
-        else {
-          item.nickname = "限指定商品可使用" 
+      item.nickname = this.getCouponTypename(item)
+    },
+    getCouponTypename(item) { //优惠卷的使用范围
+      let products = item.products || [], cat1 = item.cat1 || [], cat2 = item.cat2 || [], cat3 = item.cat3 || [];
+      let result = null;
+      if (products.length) {
+        if ((cat1.length || cat2.length || cat3.length)) {
+          return '限商品：限指定商品可使用';
+        }
+        if (products.length > 1) {
+          return '限商品：限指定商品可使用';
+        }
+        if (products.length === 1) {
+          return `限商品：限${products[0]}可用`;
         }
       }
-      
+      else if ((cat1.length + cat2.length + cat3.length) === 1) {
+        result = [...cat1, ...cat2, ...cat3];
+        return `限品类：限${result[0]}品类可用`;
+      }
+      else if ((cat1.length + cat2.length + cat3.length) > 1) {
+        return `限品类：限指定品类商品可用`;
+      } else {
+        return '全品类：全场通用券';
+      }
     },
     formatCouponInfos(params, index, isActive = false, couponClassName){
       let r = RequestFactory.wxRequest(params);
@@ -99,15 +100,6 @@ Page({
         datas.data.forEach((item,index)=>{
           item.outTime = Tool.timeStringForDateString(Tool.formatTime(item.expireTime),"YYYY.MM.DD");
           item.start_time = Tool.timeStringForDateString(Tool.formatTime(item.startTime), "YYYY.MM.DD");
-          let length = 0,key=""
-          length += (item.cat1? 1:0)
-          length += (item.cat2? 1 : 0)
-          length += (item.cat3? 1 : 0)
-          key = (item.cat1? 'cat1' : key)
-          key = (item.cat2? 'cat2' : key)
-          key = (item.cat3? 'cat3' : key)
-          item.length =length
-          item.key = key
           item.couponClassName = couponClassName;
           item.active = isActive;
           this.getCouponType(item)
@@ -269,8 +261,9 @@ Page({
       })
       if (this.data.door == 1){
         if (this.data.useType == 1){
+          let coinNum = options.coin > this.data.coinData.num? this.data.coinData.num : options.coin
           this.setData({
-            coinNum: options.coin
+            coinNum: coinNum
           })
         } else {
           this.availableDiscountCouponForProduct()

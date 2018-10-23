@@ -36,8 +36,9 @@ Page({
     },
     onLoad: function (options) {
         this.setData({
-            orderId: options.orderId,
-            status: options.status,
+          orderId: options.orderId,
+          status: options.status,
+          num: options.num || ''
         });
         Tool.isIPhoneX(this)
         if(options.status==4){
@@ -241,7 +242,7 @@ Page({
             info: '仓库正在扫描出仓...',
             time: ''
           },
-          { status: '退换货完成',
+          { status: '订单已完成',
             bottomBtn: ['删除订单', '再次购买'],
             bottomId: ['', 5], 
             orderIcon: "order-state-5.png", 
@@ -362,7 +363,8 @@ Page({
         }
 
         if (innerState==6 && returnType) {
-          middle = { id: 0, inner: innerState, content: '售后完成', returnType: returnType}
+          let content = outOrderState == 2? "退款成功" :"售后完成"
+          middle = { id: 0, inner: innerState, content: content, returnType: returnType}
         }
         item.middleBtn = middle
       })

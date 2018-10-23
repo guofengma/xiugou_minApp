@@ -7,12 +7,12 @@
   <view class='shopping-cart'>
     <view wx:for='{{items}}'  data-index='{{index}}'  wx:key='unique' class='shopping-cart-line '>
       <view class='flexR-sb whiteBg' >
-        <view class='chooseImg' wx:if="{{item.status==1&&item.stock>0}}" bindtap='chooseClicked' data-index='{{index}}' >
+        <view class='chooseImg'  bindtap='chooseClicked' data-index='{{index}}' >
         <image src='{{ item.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
         </view>
-        <view wx:else class='statusLabel flexR'>
+        <!-- <view wx:else class='statusLabel flexR'>
         失效
-        </view>
+        </view> -->
         <!--侧滑删除代码  -->
         <view class='move-box'>
           <delete-bar  bind:deleteClicked="deleteClicked" item='{{items}}' index="{{index}}">

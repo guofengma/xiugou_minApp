@@ -23,13 +23,15 @@ Page({
       },
       children: [],
     }],
-    size:0
+    size:0,
+    userInfos:{}
   },
   onLoad: function (options) {
     this.setData({
       productId: options.productId || '',
       prodCode: options.prodCode || '',
       door: options.door || '',
+      inviteCode: options.inviteCode || ''
     })
    
     this.didLogin()
@@ -43,9 +45,13 @@ Page({
     this.requestFindProductByIdApp()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
+    this.refreshMemberInfoNotice()
   },
   onShow: function () {
   
+  },
+  refreshMemberInfoNotice() {
+    Tool.getUserInfos(this)
   },
   imageLoad(e) {
     Tool.getAdaptHeight(e, this)
@@ -136,7 +142,7 @@ Page({
   makeSureOrder(){
     // 立即购买
     if (!this.data.didLogin) {
-      Tool.navigateTo('/pages/login-wx/login-wx?isBack='+true)
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true+'&inviteCode=' + this.data.inviteCode)
       return
     }
     let params = {
@@ -297,11 +303,12 @@ Page({
       // 来自页面内转发按钮
       console.log(res.target)
     }
+    let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
     let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img:''
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/product-detail?productId=' + this.data.productId,
+      path: '/pages/product-detail/product-detail?productId=' + this.data.productId + '&inviteCode=' + inviteCode,
       imageUrl: imgUrl
     }
   },

@@ -5,7 +5,9 @@
   <view class='flexR-sb bottomBar' style=''>
     <scroll-view scroll-y  class='leftBar'>
       <block wx:for='{{leftBarLists}}' wx:key='unique'>
-        <view data-id='{{item.id}}' class='flexR ellipsis leftItem font-26 boxSize {{activeIndex==index? "active":""}}' catchtap='leftBarClicked' data-index='{{index}}'>{{item.name}}</view>
+        <view data-id='{{item.id}}' class='flexR ellipsis leftItem font-26 boxSize {{activeIndex==index? "active":""}}' catchtap='leftBarClicked' data-index='{{index}}'>
+          {{item.name}}
+        </view>
       </block>
     </scroll-view>
     <scroll-view scroll-y class='rightBar whiteBg boxSize'>

@@ -64,7 +64,9 @@
     "pages/discover/discover-fav/discover-fav",
     "pages/my/extension/extension",
     "pages/my/extension/extension-type/extension-type",
-    "pages/my/extension/extension-detail/extension-detail"
+    "pages/my/extension/extension-detail/extension-detail",
+    "pages/my/extension/pay/pay",
+    "pages/my/extension/extension-explain/extension-explain"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

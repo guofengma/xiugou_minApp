@@ -15,6 +15,7 @@
         <view class='order-status'>
             {{state.status}}
         </view>
+        <view wx:if='{{detail.buyerRemark}}' class='font-26'>{{detail.buyerRemark}}</view>
         <view class='timeDown' wx:if="{{detail.status==1 || detail.status==3}}">
           {{distanceTime}} {{detail.status==1? "自动取消订单":"自动收货"}}
         </view>
@@ -25,7 +26,7 @@
 <view class='order-state-info' >
     <view class='boxSize'>
         <!--等待付款的时候显示和待发货  -->
-        <template is="address-info" wx:if='{{status==1||status==7 ||status==8 }}' data="{{addressType,src,...address,hasData}}"/>
+        <template is="address-info" wx:if='{{status==1||status==7 ||status==8 }}' data="{{addressType,src,...address,hasData,door:1}}"/>
 
         <!-- 待发货/已发货/已完成的时候显示 -->
         <view class='logistics flexR-sb' wx:if="{{status==2||status==3||status==4||status==6 ||status==5 }}" bindtap='logisticsClicked'>
@@ -43,7 +44,7 @@
 <view class='container'>
     <!--地址信息 如果发货了 显示地址 -->
     <view class='my-order-address' wx:if='{{status==2||status==3||status==4 ||status==5 ||status== 6 }}'>
-        <template is="address-info" data="{{addressType,src,...address,hasData}}"/>
+        <template is="address-info" data="{{addressType,src,...address,hasData,door:1}}"/>
     </view>
 
     <!--订单信息  -->
@@ -106,7 +107,7 @@
           <view wx:if='{{detail.payTime}}'>三方付款时间：{{detail.payTime}}</view>
           <view wx:if='{{detail.outTradeNo}}'>三方交易号：{{detail.outTradeNo}}</view>
           <view wx:if='{{detail.sendTime}}'>发货时间：{{detail.sendTime}}</view>
-          <view wx:if='{{detail.payTime}}'>成交时间：{{detail.payTime}}</view>
+          <!-- <view wx:if='{{detail.payTime}}'>成交时间：{{detail.payTime}}</view> -->
           <view wx:if='{{detail.cancelTime}}'>取消时间：{{detail.cancelTime}}</view>
         </view>
     </view>
@@ -149,7 +150,7 @@
         <!--提示框  -->
 <!-- <template is="tips-cancel-order" data='{{isCancel,content,reason}}'/> -->
 
-<tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{detail.orderNum}}'/>
+<tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{detail.orderNum}}' num='{{num}}'/>
 
 <template is="tips-delete-order" data='{{isDelete}}' />
 

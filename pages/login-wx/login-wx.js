@@ -17,7 +17,8 @@ Page({
     this.setData({
       openid: Storage.getWxOpenid() || '',
       userInfo: Storage.wxUserInfo() || '',
-      isBack: options.isBack || false
+      isBack: options.isBack || false,
+      inviteCode: options.inviteCode || '',
     })
     if (!this.data.openid){
       app.wxLogin()
@@ -77,7 +78,7 @@ Page({
     }
     r.failBlock = (req) => {
       if (req.responseObject.code == 34005){
-        Tool.navigateTo('/pages/register/register')
+        Tool.navigateTo('/pages/register/register?inviteCode=' + this.data.inviteCode)
       } else if (req.responseObject.code == 40000){
         Tool.navigateTo('/pages/download-app/download-app?door=1')
       } else {

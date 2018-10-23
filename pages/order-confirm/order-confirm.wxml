@@ -70,7 +70,7 @@
     </view>
     <view class='flexR-sb'>
       <view>运费</view>
-      <view class='gray'>¥ {{addressType==1? orderInfos.totalFreightFee:0}}</view>
+      <view class='gray'>¥ {{orderInfos.totalFreightFee||0}}</view>
     </view>
     <view class='flexR-sb leaving-msg'>
       <view>买家留言：</view>

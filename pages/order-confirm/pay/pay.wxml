@@ -1,4 +1,5 @@
 <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+<import src='/components/pay-result-tips/pay-result-tips.wxml'/>
 
 <view class="pay">
     <!-- <view class="wrap gray" wx:if='{{!isContinuePay}}'>
@@ -64,25 +65,5 @@
     <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
 </view>
 
-<view class="pay-tips boxSize model-view-bg " wx:if='{{isShow}}'>
-  <view class='tips-box overflow flexC'>
-    <block wx:if='{{result}}'>
-      <image src='/img/pay-right.png' mode='widthFix'></image>
-      <view class='tips-title'>支付成功！</view>
-      <view class='gray'>已通知商家，会给你尽快发货</view>
-      <view class='gray'>请耐心等待</view>
-      <!-- <view class='btn flexR' bindtap='goPage'>确认</view> -->
-      <view class='font-30 red flexR-sb btn-sm-veiw'>
-        <view class='btn-sm flexR' bindtap='goPage' data-index='1'>返回首页</view>
-        <view class='btn-sm flexR' bindtap='goPage' data-index='2'>查看订单</view>
-      </view>
-    </block>
-    <block wx:else>
-      <image src='/img/pay-err.png' mode='widthFix'></image>
-        <view class='tips-title'>支付失败！</view>
-        <view class='gray'>请重新支付，以免订单超时</view>
-        <view class='gray'>交易失败</view>
-        <view class='btn flexR' bindtap='goPage' data-index='3'>去支付</view>
-    </block>
-  </view>
-</view>
+
+<template  is="pay-result-tips" data='{{isShow,tipsBtn,result,tipsContent}}'/>

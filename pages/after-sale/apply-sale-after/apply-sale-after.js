@@ -150,18 +150,18 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let data = req.responseObject.data
-      if (data.status==1){
-        data.imgUrl = data.specImg ? data.specImg : this.data.list.imgUrl
-        data.createTime = Tool.formatTime(data.orderCreateTime)
-        this.setData({
-          orderInfos: data
-        })
-      } else if (data.status != 1 && data.returnProductId) {
+      if (data.status != 1 && data.returnProductId) {
         let callBack = ()=>{
           Tool.redirectTo('/pages/my/my-order/my-order')
         }
         let content = "售后"+this.data.stateArr[data.status]+",不能修改申请"
         Tool.showAlert(content,callBack)
+      } else {
+        data.imgUrl = data.specImg ? data.specImg : this.data.list.imgUrl
+        data.createTime = Tool.formatTime(data.orderCreateTime)
+        this.setData({
+          orderInfos: data
+        })
       }
       
     }

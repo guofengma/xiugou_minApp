@@ -18,12 +18,12 @@ Page({
         Tool.showAlert('请输入昵称')
         return
       }
-      if (this.data.nickname.length>16){
-        Tool.showAlert('昵称不能多于16个字')
+      if (this.data.nickname.length>8){
+        Tool.showAlert('昵称不能多于8个字')
         return
       }
-      if (this.data.nickname.length < 4) {
-        Tool.showAlert('昵称不能少4个字')
+      if (this.data.nickname.length < 2) {
+        Tool.showAlert('昵称不能少2个字')
         return
       }
       let params = {

@@ -125,6 +125,7 @@ Page({
         keywords.unshift(this.data.keyWord)
         let setArr = new Set(keywords)
         keywords=[...setArr]
+        keywords.splice(9)
         if (this.data.door == 1) {
           Storage.setSearchOrderHistory(keywords)
         } else {

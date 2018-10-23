@@ -16,8 +16,8 @@
       <text wx:if="{{item.status==1}}">待支付</text>
       <text wx:elif="{{item.status==2}}">待发货</text>
       <text wx:elif="{{item.status==3}}">待收货</text>
-      <text wx:elif="{{item.status==4 || tem.status==5 }}">已完成</text>
-      <text wx:elif="{{item.status==6 || item.status== 8}}">已关闭</text>
+      <text wx:elif="{{item.status==4 || tem.status==5 || item.status==6 }}">已完成</text>
+      <text wx:elif="{{item.status== 8}}">已关闭</text>
       <text wx:elif="{{item.status== 7}}">已取消</text>
     </view>
   </view>
@@ -48,7 +48,8 @@
     <view class="time">
       <text wx:if="{{ item.status==4 || item.status==5}}">完成时间：{{item.finishTime}}</text>
       <text wx:elif="{{ item.status==3 }}">发货时间：{{item.sendTime}}</text>
-       <text wx:elif="{{ item.status==2 }}">付款时间：{{item.payTime}}</text>
+      <text wx:elif="{{ item.status==2 }}">付款时间：{{item.payTime}}</text>
+      <text wx:elif="{{ item.status==7 }}">取消时间：{{item.cancelTime}}</text>
       <text wx:else>创建时间：{{item.createTime}}</text>
     </view>
     <view>

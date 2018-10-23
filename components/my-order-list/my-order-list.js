@@ -58,6 +58,7 @@ Component({
           item.finishTime = Tool.formatTime(item.finishTime);
           item.sendTime = Tool.formatTime(item.sendTime);
           item.payTime = Tool.formatTime(item.payTime);
+          item.cancelTime = Tool.formatTime(item.cancelTime);
           // item.createTime = Tool.formatTime(item.orderCreateTime);
           // 礼包不显示产品描述
           // if (item.orderProductList[0].orderType == 98) item.orderProduct[0].spec=''
@@ -107,7 +108,7 @@ Component({
     },
     //跳到订单详情
     toOrderDetail(e) {
-      Tool.navigateTo('/pages/my/orderDetail/orderDetail?orderId=' + e.currentTarget.dataset.id + '&status=' + e.currentTarget.dataset.status)
+      Tool.navigateTo('/pages/my/orderDetail/orderDetail?orderId=' + e.currentTarget.dataset.id + '&status=' + e.currentTarget.dataset.status+'&num='+this.data.num)
     },
     //跳到物流页面
     logistics(e) {
@@ -162,7 +163,6 @@ Component({
       r.addToQueue();
     },
     cancelOrder() {
-      console.log(1111)
       this.setData({
         isCancel: false,
         list: [],

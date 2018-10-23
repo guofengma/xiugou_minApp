@@ -23,7 +23,7 @@
 .order-status{
   font-size: 36rpx;
 }
-.order-state-icon{
+.order-state-icon,.detail-tips{
   padding-left: 70rpx;
   /*background: transparent url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/order-state-1.png) no-repeat 10rpx center;*/
   /*background-size: 42rpx 42rpx;*/
