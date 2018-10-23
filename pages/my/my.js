@@ -23,6 +23,9 @@ Page({
         '/pages/my/help-customer/help-customer',//帮助
         '/pages/address/select-express-address/select-express-address',//地址
         '',//足迹
+        '',//我的任务
+        '',//我的推广
+        '/pages/discover/discover-fav/discover-fav',//发现收藏
       ]
     },
     onLoad: function (options) {

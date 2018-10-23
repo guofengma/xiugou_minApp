@@ -176,7 +176,7 @@ box-shadow:5rpx 0px 10rpx rgba(142,199,255,0.54);
 .my-tools-list{
   padding: 30rpx;
   display: flex;
-  justify-content:space-between;
+  /* justify-content:space-between; */
   flex-wrap: wrap;
   height: 366rpx;
   align-items: center;
