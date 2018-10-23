@@ -12,8 +12,9 @@
   width: 44rpx;
   height: 44rpx;
   position: absolute;
-  top: 20rpx;
-  right: 20rpx;
+  top: 0;
+  right: 0;
+  padding: 20rpx;
 }
 .discover-list-item_thumb {
   position: relative;
@@ -44,3 +45,38 @@
   margin-bottom: 24rpx;
 }
 
+.discover_author {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22rpx;
+}
+.discover_avatar{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+.discover_view {
+  color: #808080;
+  font-size: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.discover_view image {
+  width: 34rpx;
+  height: 22rpx;
+  margin-right: 10rpx;
+}
+.discover_author_name {
+  display: inline-block;
+  /* max-width: 126rpx; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 32rpx;
+  white-space: nowrap;
+  flex: 1;
+  padding: 0 10rpx;
+}
+.discover_time {
+  color: #939393;
+}

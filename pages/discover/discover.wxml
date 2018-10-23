@@ -46,7 +46,7 @@
   <view class='discover-list'>
     <view class='discover-topic-title'>推荐</view>
     <view class='discover-item-container'>
-      <template is="discover-item" data="{{showEdit}}" />
+      <template is="discover-item" data="{{showEdit,items}}" />
     </view>
   </view>
   <!-- 推荐列表 E -->

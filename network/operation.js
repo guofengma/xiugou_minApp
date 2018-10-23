@@ -516,6 +516,26 @@ export default class Operation {
 
         this.getActivitySeckillById = '/operator/seckill/findByCode';
 
+        // 获取收藏列表
+
+        this.queryCollect = '/discover/queryCollect';
+
+        // 获取发现列表 type { 1：精选 2：热门 3：推荐 4：最新 全部则不传}, page, size
+
+        this.queryDiscoverListByType = '/discover/query';
+
+        // 获取发现详情
+
+        this.getDiscoverById = '/discover/getById';
+
+        // 取消 点赞/收藏
+
+        this.discoverCountCancel = '/discover/count/cancel';
+
+        // 点赞/收藏
+
+        this.discoveerCountSave = '/discover/count/save';
+
         __instance(this);
 
     }
