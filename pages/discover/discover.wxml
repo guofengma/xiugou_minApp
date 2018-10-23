@@ -47,6 +47,7 @@
         <template is="discover-item" data="{{showEdit,items:topic}}" />
       </view>
     </view>
+    <view class='no-more' wx:if="{{currentTopicPage == totalTopicPage}}">已经到底啦~</view>
     <!-- 推荐列表 E -->
   </view>
   <view class='discover-tab-new' wx:else>
@@ -55,5 +56,9 @@
         <template is="discover-item" data="{{showEdit,items:discover}}" />
       </view>
     </view>
+    <view class='no-more' wx:if="{{currentDiscoverPage == totalDiscoverPage}}">已经到底啦~</view>
+  </view>
+  <view class='goTop' bindtap='goTop' wx:if='{{showBackTop}}'>
+    <image src='/img/top-icon.png' mode='widthFix'></image>
   </view>
 </view>

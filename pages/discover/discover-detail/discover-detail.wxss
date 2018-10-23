@@ -63,6 +63,7 @@ page{
 }
 .item .item-title {
   color: #333;
+  height:76rpx;
 }
 .item .item-info {
   margin-top: 6rpx;
