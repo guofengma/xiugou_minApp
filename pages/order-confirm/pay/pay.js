@@ -5,7 +5,9 @@ Page({
       ysf: { title: '支付方式' },
       payList:'',
       isShow:false, // 显示支付结果
-      result:1, //支付结果
+      tipsContent: ['已通知商家，会给你尽快发货', '请耐心等待'],
+      tipsBtn: ['返回首页', '查看订单'],
+      result: false,
       payWayActive:[false,true,false],
       useAmount:[false,false],
       useBalance:0,
@@ -120,7 +122,7 @@ Page({
         result:bool,
       })
     },
-    goPage(e){
+    payResultClicked(e){
       let index = e.currentTarget.dataset.index
       if(index == 1){
         Tool.switchTab('/pages/index/index')

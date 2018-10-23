@@ -13,7 +13,7 @@ Page({
       let index = e.currentTarget.dataset.index
       let params = {
         id: this.data.list.id,
-        hadHelp: index == 1 ? 2 : 1,
+        hadHelp: index == 1 ? 0: 1,
         reqName: '解决问题是否有用',
         url: Operation.updateHelpQuestion
       }

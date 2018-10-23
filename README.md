@@ -109,3 +109,13 @@ background:url(https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/timg (
 device：Tool.getUUID()获取的唯一识别号
 platform：系统版本号
 sg-token:获取的token
+
+
+/**************新增支付结果模板*****************/
+
+pay-result-tips 传入
+isShow: boolean 是否显示弹框
+result:boolean  是否支付成功
+tipsContent:Array 成功支付的文案 ['已通知商家，会给你尽快发货', '请耐心等待'],
+tipsBtn:Array 按钮文案 ['返回首页', '查看订单'],
+payResultClicked: 按钮点击事件
