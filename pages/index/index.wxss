@@ -42,6 +42,7 @@
 /* 会员等级 */
 .index-level-view{
   padding:20rpx 30rpx; 
+  padding-bottom: 0;
 }
 .index-level-view>view{
   width:690rpx;

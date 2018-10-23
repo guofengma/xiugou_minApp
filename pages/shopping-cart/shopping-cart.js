@@ -206,11 +206,9 @@ Page({
     // 点击选择
     let index = e.currentTarget.dataset.index 
     let prdList = this.data.items
-    // if (prdList[index].activityType) {
-    //   Tool.showAlert('请至详情页购买')
-    //   return
-    // }
-    
+    if (!prdList[index].stock || prdList[index].status!=1) {
+      return
+    }
     prdList[index].isSelect = !prdList[index].isSelect
     
     this.isSelectAllPrd(prdList)
@@ -348,17 +346,21 @@ Page({
     //点击全选 
     let items = this.data.items
     let selectAll = this.data.selectAll
+    let num =0
     for (let i = 0; i < items.length; i++) {
-      // if (!items[i].activityType){
-      //   items[i].isSelect = !selectAll
-      // } 
-      items[i].isSelect = !selectAll
+      if (items[i].stock && items[i].status==1){
+        num++;
+        items[i].isSelect = !selectAll
+      } 
     }
-    this.setData({
-      selectAll: !selectAll,
-      items: items
-    })
-    this.getTotalPrice()
+    if(num){
+      this.setData({
+        selectAll: !selectAll,
+        items: items
+      })
+      this.getTotalPrice()
+    }
+    
   },
   makeOrder(){
     let params = JSON.stringify({

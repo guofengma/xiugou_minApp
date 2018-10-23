@@ -144,7 +144,6 @@ Page({
       let params = {
         requestMethod: 'GET',
         url: Operation.getLevelInfos,
-        // hasCookie: false
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
@@ -161,7 +160,6 @@ Page({
         'type': types,
         reqName: reqName,
         url: Operation.queryAdList,
-        // hasCookie: false
       }
       let r = RequestFactory.wxRequest(params);
         r.successBlock = (req) => {

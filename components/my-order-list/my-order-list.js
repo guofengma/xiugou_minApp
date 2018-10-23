@@ -108,7 +108,7 @@ Component({
     },
     //跳到订单详情
     toOrderDetail(e) {
-      Tool.navigateTo('/pages/my/orderDetail/orderDetail?orderId=' + e.currentTarget.dataset.id + '&status=' + e.currentTarget.dataset.status)
+      Tool.navigateTo('/pages/my/orderDetail/orderDetail?orderId=' + e.currentTarget.dataset.id + '&status=' + e.currentTarget.dataset.status+'&num='+this.data.num)
     },
     //跳到物流页面
     logistics(e) {
@@ -163,7 +163,6 @@ Component({
       r.addToQueue();
     },
     cancelOrder() {
-      console.log(1111)
       this.setData({
         isCancel: false,
         list: [],

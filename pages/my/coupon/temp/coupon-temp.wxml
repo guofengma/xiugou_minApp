@@ -19,6 +19,6 @@
           <text wx:if='{{item.isCoinCoupon}}'>x{{item.num}}</text>
         </view>
       </view>
-      <view class='gray bottomBar-item flexR-sb ellipsis'>限品类：{{item.nickname}}</view>
+      <view class='gray bottomBar-item flexR-sb ellipsis'>{{item.nickname}}</view>
     </view>
 </template>

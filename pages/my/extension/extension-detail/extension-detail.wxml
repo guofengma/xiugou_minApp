@@ -1,13 +1,20 @@
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
 <view class='extension-page-detail'>
   <view class='redBg font-26 flexR'>剩余推广时间：</view>
   <!-- 明细 -->
   <view wx:for='{{10}}' wx:key='{{index}}' class='whiteBg extension-content'>
-    <view class='flexR-sb topBar'>
+    <view class='flexR-sb topBar padding'>
       <view class='font-32'>哈哈哈哈哈</view>
       <view class='gray font-26'>
         领取红包 <text class='red'>2.5元</text>
       </view>
     </view>
-    <view class='font-26 bottomBar'>领取时间：2018-09-18 10:38:56</view>
+    <view class='font-26 bottomBar flexR-sb padding'>领取时间：2018-09-18 10:38:56</view>
   </view>
 </view>
+
+<button open-type='share' class='redBg share-btn font-26 flexR {{isIPhoneX.className}}'>分享我的推广</button>
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

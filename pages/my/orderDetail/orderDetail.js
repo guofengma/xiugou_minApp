@@ -36,8 +36,9 @@ Page({
     },
     onLoad: function (options) {
         this.setData({
-            orderId: options.orderId,
-            status: options.status,
+          orderId: options.orderId,
+          status: options.status,
+          num: options.num || ''
         });
         Tool.isIPhoneX(this)
         if(options.status==4){
@@ -362,7 +363,8 @@ Page({
         }
 
         if (innerState==6 && returnType) {
-          middle = { id: 0, inner: innerState, content: '售后完成', returnType: returnType}
+          let content = outOrderState == 2? "退款成功" :"售后完成"
+          middle = { id: 0, inner: innerState, content: content, returnType: returnType}
         }
         item.middleBtn = middle
       })
