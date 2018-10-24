@@ -66,7 +66,7 @@ Page({
         return;
     }
     type == 3 &&
-    this.getDiscoveryByType(3, 1, (data) => {
+      this.getDiscoveryByType(3, localData.currentTopicPage + 1, (data) => {
       let topic = this.data.topic;
       this.setData({
         topic: topic.concat(data.data),
@@ -75,7 +75,7 @@ Page({
       })
     });
     type == 4 && 
-    this.getDiscoveryByType(4, 1, (data) => {
+      this.getDiscoveryByType(4, localData.currentDiscoverPage + 1 , (data) => {
       let discover = this.data.discover;
       this.setData({
         discover: discover.concat(data.data),
@@ -146,6 +146,7 @@ Page({
     r.successBlock = (req) => {
       let data = req.responseObject.data || {};
       if (typeof callback == 'function'){
+        if (data.data == null) data.data = [];
         callback(data);
         return;
       }
@@ -160,5 +161,9 @@ Page({
     this.setData({
       tabIndex: index
     })
+  },
+  handleSwiperClick(e) {
+    let code = e.currentTarget.dataset.code;
+    Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + code);
   }
 })

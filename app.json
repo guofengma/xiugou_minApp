@@ -94,7 +94,7 @@
         "selectedIconPath": "/img/tabbar/group_tab_selected.png"
       },
       {
-        "pagePath": "pages/download-app/download-app",
+        "pagePath": "pages/discover/discover",
         "text": "发现",
         "iconPath": "/img/tabbar/discover_unselected.png",
         "selectedIconPath": "/img/tabbar/discover_selected.png"
