@@ -268,6 +268,7 @@ Page({
     params.page =1
     switch (n) {
       case 1:
+        params.sortModel = 2
         break;
       case 2:
         params.sortModel = 2

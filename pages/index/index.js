@@ -36,7 +36,7 @@ Page({
       params:{
         page:1,
         pageSize:10
-      }
+      },
     },
     onLoad: function () {
       Event.on('getLevel', this.getLevel,this)

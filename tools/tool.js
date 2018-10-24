@@ -1060,5 +1060,28 @@ export default class Tool {
   static formatString(str){
     return str.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "")
   }
+
+  // 位运算
+  
+  static bitOperation(arr,num) {
+    let result = arr.filter((item0) => {
+      let bit = item0&num
+      return bit == item0
+    })
+    return result
+  }
+  
+  static isJson(text) {
+    if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
+      replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+      replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+        return true
+
+    } else {
+
+        return false
+
+    }
+  }
 }
 

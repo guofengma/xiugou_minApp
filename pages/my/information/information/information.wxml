@@ -35,8 +35,12 @@
         <view class="content">
             <view class="item">{{item.title}}</view>
             <view class="info gray-9">{{item.content}}</view>
+            <view wx:if='{{item.paramType==100 || item.paramType==101}}'>
+              <view>付款方式：{{item.payName}}</view>
+              <view>交易订单：{{item.orderNum}}</view>
+            </view>
         </view>
-        <view class="watch-detail" bindtap="informationDetail" data-type="{{item.type}}" data-id="{{item.id}}" data-tdid="{{item.tdId}}" >查看详情
+        <view class="watch-detail" bindtap="informationDetail" wx:if='{{title[item.paramType][1]}}' data-type="{{item.paramType}}" data-param="{{item.param}}" >查看详情
             <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/detail-btn.png"></image>
         </view>
     </view>
