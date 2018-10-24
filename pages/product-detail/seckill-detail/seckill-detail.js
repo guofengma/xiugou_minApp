@@ -204,7 +204,7 @@ Page({
         productInfo: datas.product,
         productInfoList: datas,
         priceList: datas.priceList, // 价格表
-        productSpec: datas.specMap, // 规格描述
+        productSpec: productSpec, // 规格描述
       })
       // 渲染表格
       let tr = []
