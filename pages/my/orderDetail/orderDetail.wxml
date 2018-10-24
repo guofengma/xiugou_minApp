@@ -147,7 +147,7 @@
 </view>
 
 
-        <!--提示框  -->
+<!--提示框  -->
 <!-- <template is="tips-cancel-order" data='{{isCancel,content,reason}}'/> -->
 
 <tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{detail.orderNum}}' num='{{num}}'/>

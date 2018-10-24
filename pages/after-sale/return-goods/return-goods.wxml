@@ -30,7 +30,9 @@
   </view> -->
 
   <!--商家地址  -->
-  <template is="address-saler" data="{{addressType,src,datas,hasData:true,door:1}}"/>
+  <view wx:if='{{datas.status!=3}}'>
+    <template is="address-saler" data="{{addressType,src,datas,hasData:true,door:1}}"/>
+  </view>
 
   <!--物流  -->
   <view catchtap='logClicked' data-express='{{expressNo}}' wx:if='{{datas.status!=3&&!expressNo.id || expressNo.id}}'>

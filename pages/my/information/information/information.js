@@ -9,20 +9,20 @@ Page({
         list: [],
         hasNext: true,//是否有下一页
         title:{
-          100: ['支付成功', '/pages/my/information/information/information','orderNum'],
-          101: ['退款成功', '/pages/my/information/information/information', 'orderNum'],
+          100: ['支付成功', '/pages/my/information/informationDetail/informationDetail','allItem'],
+          101: ['退款成功', '/pages/my/information/informationDetail/informationDetail','allItem'],
           102: ['获得秀豆'],
           103: ['身份认证驳回'],
-          104: ['订单超时', '/pages/my/orderDetail/orderDetail?orderId=','orderNum'],
+          104: ['订单超时', '/pages/my/orderDetail/orderDetail?orderId=','orderId'],
           105: ['优惠券提醒','/pages/my/coupon/my-coupon/my-coupon'],
           106: ['反馈问题回复'],
           107: ['秒杀活动', '/pages/product-detail/seckill-detail/seckill-detail?code=','param'],
           108: ['降价拍活动', '/pages/product-detail/discount-detail/discount-detail?code=','param'],
           109: ['待提现账户入账提醒'],
-          110: ['订单发货', '/pages/my/orderDetail/orderDetail?orderId='],
-          120: ['售后服务(退款申请)', '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail?returnProductId=',''],
-          121: ['售后服务(退货申请)', '/pages/after-sale/return-goods/return-goods?returnProductId='],
-          122: ['售后服务(换货申请)', '/pages/after-sale/exchange-goods/exchange-goods?returnProductId=']
+          110: ['订单发货', '/pages/my/orderDetail/orderDetail?orderId=','orderId'],
+          120: ['售后服务(退款申请)', '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail?returnProductId=','returnProductId'],
+          121: ['售后服务(退货申请)', '/pages/after-sale/return-goods/return-goods?returnProductId=','returnProductId'],
+          122: ['售后服务(换货申请)', '/pages/after-sale/exchange-goods/exchange-goods?returnProductId=', 'returnProductId']
         },
         // payType:['平台支付','微信支付','支付宝支付','银联支付'],
         payTypeArr:[1,2,4,8,16],
@@ -62,22 +62,23 @@ Page({
               }
               if (item.paramType == 101 || item.paramType==100){
                 let arr = Tool.bitOperation(this.data.payTypeArr,item.param.payType)
-                item.payName =''
+                item.payName = []
                 arr.forEach((item0,index)=>{
-                  item.payName+=this.data.payType[item0]
+                  item.payName.push(this.data.payType[item0])
                 })
+                item.payName = item.payName.join('/')
                 item.orderNum = item.param.orderNum
               }
               item.payStyle=this.payStyle(item.payType);
                 datas.push(item)
             }
             this.setData({
-                list: list.concat(datas),
-                totalPage: req.responseObject.data.total,
+              list: list.concat(datas),
+              totalPage: req.responseObject.data.totalPage,
             });
             if (this.data.totalPage > this.data.currentPage) {
                 this.setData({
-                    currentPage: ++this.data.currentPage
+                  currentPage: ++this.data.currentPage
                 })
             } else {
                 this.data.hasNext = false
@@ -121,7 +122,14 @@ Page({
       let paramType=e.currentTarget.dataset.type;
       let param = e.currentTarget.dataset.param;
       let page = this.data.title[paramType][1];
-      let query = param[this.data.title[paramType][2]]
+      let index = e.currentTarget.dataset.index
+      Storage.setPayInfoList(this.data.list[index])
+      let query = ''
+      if (this.data.title[paramType][2]!='allItem'){
+       query = param[this.data.title[paramType][2]]
+      } else {
+        
+      }
       Tool.navigateTo(page+query)
     },
     onLoad: function (options) {

@@ -30,6 +30,7 @@ Page({
       keyword: options.keyword || '',
       categoryId: Number(options.categoryId) || '',
       hotWordId: Number(options.hotWordId) || '',
+      sortModel:2,
       sortType: 1
     }
     if (options.hotWordId) {

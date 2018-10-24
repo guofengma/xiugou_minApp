@@ -40,7 +40,7 @@
               <view>交易订单：{{item.orderNum}}</view>
             </view>
         </view>
-        <view class="watch-detail" bindtap="informationDetail" wx:if='{{title[item.paramType][1]}}' data-type="{{item.paramType}}" data-param="{{item.param}}" >查看详情
+        <view class="watch-detail" bindtap="informationDetail" wx:if='{{title[item.paramType][1]}}' data-type="{{item.paramType}}" data-param="{{item.param}}" data-index='{{index}}'>查看详情
             <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/detail-btn.png"></image>
         </view>
     </view>

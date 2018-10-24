@@ -17,7 +17,7 @@
   <view wx:if='{{datas.status==6}}'>{{result[resultIndex].time}}</view>
 </view>
 
-<view wx:if='{{datas.status>1}}'>
+<view wx:if='{{datas.status>1&&datas.status!=3}}'>
   <!--地址信息  -->
   <view class='address active whiteBg' >
     <template is="address-info" data="{{addressType,...datas,hasData:true,door:1}}"/>

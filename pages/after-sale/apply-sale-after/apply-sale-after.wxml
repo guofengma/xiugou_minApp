@@ -47,7 +47,7 @@
 
 <!--确认按钮  -->
 
-<view class='{{isIPhoneX.className}} redBg font-32 flexR btn-view' catchtap='orderRefund'>确认</view>
+<view class='{{isIPhoneX.className}} redBg font-32 flexR btn-view' catchtap='orderRefund'>提交</view>
 
 <!--适配iPhone X  -->
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

@@ -13,7 +13,7 @@
 <view class='cell-line font-26 flexR-sb'>
   物流单号
   <view class='flexR-sb '>
-    <input type='text' value='{{code}}' placeholder='请填写单号' class='input' style=' text-align: right' placeholder-class='gary' bindinput='inputOnchange'></input>
+    <input type='text' placeholder='请填写单号' class='input' style=' text-align: right' placeholder-class='gary' bindinput='inputOnchange'></input>
     <image src='/img/saomiao.png' mode='widthFix' class='log-img' bindtap='onCodeClickListener'></image>
   </view>
 </view>
