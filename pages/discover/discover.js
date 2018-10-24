@@ -146,6 +146,7 @@ Page({
     r.successBlock = (req) => {
       let data = req.responseObject.data || {};
       if (typeof callback == 'function'){
+        if (data.data == null) data.data = [];
         callback(data);
         return;
       }
