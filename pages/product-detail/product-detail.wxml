@@ -25,7 +25,7 @@
       <swiper autoplay="true" interval='3000' bindchange='sliderChange'>
         <block wx:for="{{imgUrls}}" wx:key="unique">
           <swiper-item>
-            <image src="{{item.smallImg}}" class="slide-image" bindload="imageLoad"/>
+            <image src="{{item.smallImg}}" class="slide-image" bindload="imageLoad" bindtap='swiperImgCliked' data-index='{{index}}'/>
           </swiper-item>
         </block>
       </swiper>
@@ -116,11 +116,11 @@
         <view class='gray'>购物车</view>
         <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
       </view>
-      <view class='add-cart font-28 flexR' bindtap='btnClicked' data-key='1'>
-        加入购物车
-      </view>
-      <view class='buy-btn font-28 flexR redBg' bindtap='btnClicked'data-key='2'>
+      <view class='buy-btn font-28 flexR' bindtap='btnClicked'data-key='2'>
         立即购买
+      </view>
+      <view class='add-cart font-28 flexR redBg' bindtap='btnClicked' data-key='1'>
+        加入购物车
       </view>
     </view>
     <!--置顶的按钮-->

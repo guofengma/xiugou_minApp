@@ -164,6 +164,7 @@
 }
 .logistics .info{
   font-size: 30rpx;
+  width: 500rpx;
 }
 .right-icon{
   width: 22rpx;

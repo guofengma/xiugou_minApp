@@ -84,6 +84,7 @@ Page({
             this.setData({
                 detail: detail,
                 address: address,
+              status:detail.status,
                 state: this.orderState(detail.status)//订单状态相关信息this.data.state
             })
             if (detail.expressNo) {

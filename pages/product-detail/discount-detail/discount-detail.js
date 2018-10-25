@@ -54,6 +54,18 @@ Page({
   onShow: function () {
 
   },
+  swiperImgCliked(e) {
+    let index = e.currentTarget.dataset.index
+    let src = this.data.imgUrls[index].smallImg
+    let urls = []
+    this.data.imgUrls.forEach((item) => {
+      urls.push(item.smallImg)
+    })
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: urls// 需要预览的图片http链接列表
+    })
+  },
   //获取专题活动数据  JJP201810100001
   getTopicActivityData(code) {
     let params = {

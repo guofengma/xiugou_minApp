@@ -24,9 +24,9 @@
  
   <view  class='index-items-view boxSize whiteBg flexR'>
     <block wx:for='{{iconArr}}' wx:key='unique'>
-      <view class='flexC items-sub' catchtap='goPages' data-index='{{index}}'>
-        <image-sub imgStyle='{{"width:96rpx"}}' imgSrc="{{item.icon}}"/>
-        <text class='font-24 gray item-name'>{{item.name}}</text>
+      <view class='flexC items-sub boxSize' catchtap='goPages' data-index='{{index}}'>
+        <image-sub imgStyle='{{"width:96rpx"}}' imgSrc="{{item.img}}"/>
+        <view class='font-24 gray item-name ellipsis'>{{item.name}}</view>
       </view>
     </block>
   </view>

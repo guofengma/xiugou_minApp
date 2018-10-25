@@ -19,7 +19,7 @@
             </scroll-view>
         </swiper-item>
     </swiper>
-    <view class='btn-view flexR fixed-bottom font-30 whiteBg' wx:if="{{currentTab==0&door==1&&lists[0].length>1}}" catchtap='giveUpUse'>放弃使用优惠券</view> 
+    <view class='btn-view flexR fixed-bottom font-30 whiteBg' wx:if="{{currentTab==0&door==1&&lists[0].length>0&&useType==2}}" catchtap='giveUpUse'>放弃使用优惠券</view> 
 </view>
 
 

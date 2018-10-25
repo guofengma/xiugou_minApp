@@ -38,6 +38,11 @@
 }
 .items-sub{
   margin:0rpx 26rpx 30rpx 26rpx;
+  width: 96rpx;
+}
+.items-sub>view{
+  width: 100%;
+  text-align: center;
 }
 /* 会员等级 */
 .index-level-view{

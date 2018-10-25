@@ -442,6 +442,10 @@ export default class Operation {
 
         this.discoverNotice = '/discover/query'
 
+        // 四个分类
+
+        this.indexQueryCategoryList ='/config/advertisement/queryCategoryList'
+
 
         /************************** 帮助中心 *******************************/
 

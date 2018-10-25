@@ -1,0 +1,15 @@
+<view class='red-envelopes'>
+  <view class='flexR-sb font-26 topBar gray'>
+    <text class=''>请选择一个红包</text>
+    <view class='flexR'>
+      <image-sub imgStyle='{{"width:32rpx"}}' imgSrc="{{'home_icon_search_nor@2x.png'}}"/>
+      换一换
+    </view>
+  </view>
+  <view class='content'>
+    <view wx:for='{{4}}' wx:key='{{index}}'>
+      <view>赠送红包</view>
+      
+    </view>
+  </view>
+</view>

@@ -15,16 +15,16 @@ Page({
         '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
       ],
       iconArr:[ // icon 图标
-        { name: '赚钱', icon:'home-icon-xueyuan.png',page:''},
-        { name: '分享', icon: 'home_icon_share.png', page: '' },
-        { name: '签到', icon: 'home_icon_shengqian.png', page: '/pages/signIn/signIn',login:true },
-        { name: '学院', icon: 'home-icon-xueyuan.png', page: ''},
-        { name: '秒杀', icon: 'home_icon_chuxiao.png', page: ''},
-        { name: '手机相机', icon: 'iconForobtain.png', page: '' },
-        { name: '电脑家电', icon: 'iconForobtain.png', page: '' },
-        { name: '品质男装', icon: 'iconForobtain.png', page: ''},
-        { name: '美妆个护', icon: 'iconForobtain.png', page: '' },
-        { name: '全部分类', icon: 'iconForobtain.png', page: '/pages/product-classification/product-classification' }
+        { name: '赚钱', img:'home-icon-xueyuan.png',page:''},
+        { name: '分享', img: 'home_icon_share.png', page: '' },
+        { name: '签到', img: 'home_icon_shengqian.png', page: '/pages/signIn/signIn',login:true },
+        { name: '学院', img: 'home-icon-xueyuan.png', page: ''},
+        { name: '秒杀', img: 'home_icon_chuxiao.png', page: ''},
+        // { name: '手机相机', icon: 'iconForobtain.png', page: '' },
+        // { name: '电脑家电', icon: 'iconForobtain.png', page: '' },
+        // { name: '品质男装', icon: 'iconForobtain.png', page: ''},
+        // { name: '美妆个护', icon: 'iconForobtain.png', page: '' },
+        { name: '全部分类', img: 'iconForobtain.png', page: '/pages/product-classification/product-classification' }
       ],
       imgUrls: [],// 轮播
       adArr:[],// 广告位
@@ -67,6 +67,7 @@ Page({
         })
       });
       this.queryFeaturedList()
+      this.indexQueryCategoryList()
       if (!app.globalData.systemInfo){
         app.getSystemInfo()
       }
@@ -94,6 +95,24 @@ Page({
         this.getLevelInfos()
         this.getLevel()
       }
+    },
+    indexQueryCategoryList(){
+      let params = {
+        isShowLoading: false,
+        reqName: '获取首页4个分类',
+        requestMethod: 'GET',
+        url: Operation.indexQueryCategoryList
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let datas = req.responseObject.data || []
+        this.data.iconArr.splice(5, 0, ...datas)
+        this.setData({
+          iconArr: this.data.iconArr
+        })
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
     },
     discoverNotice() {
       let params = {

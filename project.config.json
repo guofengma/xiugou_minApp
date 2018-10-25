@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 31,
+			"current": 36,
 			"list": [
 				{
 					"id": 0,
@@ -233,24 +233,29 @@
 					"pathName": "pages/my/extension/extension-type/extension-type",
 					"query": ""
 				},
-        {
-          "id": -1,
-          "name": "秀购发现",
-          "pathName": "pages/discover/discover",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "秀购发现详情",
-          "pathName": "pages/discover/discover-detail/discover-detail",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "发现收藏",
-          "pathName": "pages/discover/discover-fav/discover-fav",
-          "query": ""
-        }
+				{
+					"id": -1,
+					"name": "秀购发现",
+					"pathName": "pages/discover/discover",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "秀购发现详情",
+					"pathName": "pages/discover/discover-detail/discover-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "发现收藏",
+					"pathName": "pages/discover/discover-fav/discover-fav",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "红包",
+					"pathName": "pages/register/red-envelopes/red-envelopes"
+				}
 			]
 		}
 	}
