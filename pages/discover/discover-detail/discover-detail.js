@@ -77,5 +77,9 @@ Page({
     Tool.showErrMsg(r)
     r.addToQueue();
     
+  },
+  showItemDetail(e) {
+    let productId = e.currentTarget.dataset.id;
+    Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + productId);
   }
 })
