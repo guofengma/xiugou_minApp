@@ -60,8 +60,8 @@ Page({
     let type = this.data.tabIndex == 0 ? 3 : 4;
     let localData = this.data;
     if(
-      (type == 3 && localData.currentTopicPage == localData.totalTopicPage) || 
-      (type == 4 && localData.currentDiscoverPage == localData.totalDiscoverPage)
+      (type == 3 && localData.currentTopicPage == localData.totalTopicPage || localData.topic.length == 0) || 
+      (type == 4 && localData.currentDiscoverPage == localData.totalDiscoverPage || localData.discover.length == 0)
     ){
         return;
     }
