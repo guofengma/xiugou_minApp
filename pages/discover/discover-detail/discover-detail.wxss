@@ -9,6 +9,9 @@ page{
 .discover-detail-swiper {
   position: relative;
 }
+.discover-detail-swiper swiper {
+  height: 750rpx;
+}
 .discover-detail-swiper image {
   width: 100%;
   height: 750rpx;

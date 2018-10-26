@@ -60,8 +60,8 @@ Page({
     let type = this.data.tabIndex == 0 ? 3 : 4;
     let localData = this.data;
     if(
-      (type == 3 && localData.currentTopicPage == localData.totalTopicPage) || 
-      (type == 4 && localData.currentDiscoverPage == localData.totalDiscoverPage)
+      (type == 3 && localData.currentTopicPage == localData.totalTopicPage || localData.topic.length == 0) || 
+      (type == 4 && localData.currentDiscoverPage == localData.totalDiscoverPage || localData.discover.length == 0)
     ){
         return;
     }
@@ -162,8 +162,24 @@ Page({
       tabIndex: index
     })
   },
+  // 轮播跳转 1.链接产品2.链接专题3.降价拍4.秒杀5.礼包 6.外链
   handleSwiperClick(e) {
-    let code = e.currentTarget.dataset.code;
-    Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + code);
+    let data = e.currentTarget.dataset;
+    let code = data.code;
+    let linkType = data.link
+    let url = '';
+    if(linkType == 1) {
+      url = '/pages/product-detail/product-detail?prodCode=' + code;
+    } else if (linkType == 2) {
+      url = '/pages/topic/topic?code=' + code;
+    } else if (linkType == 3) {
+      url = '/pages/product-detail/discount-detail/discount-detail?code=' + code;
+    } else if (linkType == 4) {
+      url = '/pages/product-detail/seckill-detail/seckill-detail?code=' + code;
+    } else if (linkType == 5) {
+      url = '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + code;
+    } 
+
+    Tool.navigateTo(url);
   }
 })

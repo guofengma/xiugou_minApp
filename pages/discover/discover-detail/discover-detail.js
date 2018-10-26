@@ -68,14 +68,18 @@ Page({
     r.successBlock = (req) => {
       let data = req.responseObject.data || {};
       let _details = this.data.details;
-      this.setData({
-        "details.hadLike": type == 2 ? !_details.hadLike : _details.hadLike,
-        "details.hadCollect": type == 1 ? !_details.hadCollect : _details.hadCollect,
-      })
-      // this.getArticleDetail()
+      // this.setData({
+      //   "details.hadLike": type == 2 ? !_details.hadLike : _details.hadLike,
+      //   "details.hadCollect": type == 1 ? !_details.hadCollect : _details.hadCollect,
+      // })
+      this.getArticleDetail()
     };
     Tool.showErrMsg(r)
     r.addToQueue();
     
+  },
+  showItemDetail(e) {
+    let productId = e.currentTarget.dataset.id;
+    Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + productId);
   }
 })

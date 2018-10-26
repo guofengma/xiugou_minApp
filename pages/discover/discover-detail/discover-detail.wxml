@@ -31,7 +31,7 @@
   <!-- content E -->
   <!-- recommend list S -->
   <view class='discover-detail-recommend'>
-    <view class='item' wx:for="{{details.products}}" wx:key="unique" bindtap='showItemDetail' data-id="{{}}">
+    <view class='item' wx:for="{{details.products}}" wx:key="unique" bindtap='showItemDetail' data-id="{{item.productId}}">
       <view class='item-thumb'>
         <image src='{{item.headImg}}'></image>
       </view>
@@ -39,7 +39,7 @@
         <view class='item-title ellipsis-2'>{{item.name}}</view>
         <view class='item-info flexR-sb'>
           <view class='item-price'>￥{{item.price}}</view>
-          <image class='addCart-icon' src='/img/icon_gouwuche@3x.png'></image>
+          <!-- <image class='addCart-icon' src='/img/icon_gouwuche@3x.png'></image> -->
         </view>
       </view>
     </view>
