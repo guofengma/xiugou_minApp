@@ -47,7 +47,6 @@ Page({
     ],
     placeholder: { placeholder: '请填写说明', disabled:false}
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -146,7 +145,11 @@ Page({
       hidden: !this.data.hidden,
       placeholder: { placeholder: ' ', disabled: true}
     })
-
+  },
+  hiddenTips() { 
+    this.setData({
+      hidden: !this.data.hidden,
+    })
   },
   makeSureReason(e){
     let placeholder= this.data.reason[this.data.refundType].placeholder

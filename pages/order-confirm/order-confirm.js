@@ -12,7 +12,7 @@ Page({
     addressList:[],
     remark:'', // 买家留言
     door:'', // 1秒杀 2降价 3优惠套餐 4助力免费领 5礼包 99 普通
-    coupon: { id: "", nickname: '未使用优惠劵', canClick:true}, //优惠券信息
+    coupon: { id: "", name: '未使用优惠劵', canClick:true}, //优惠券信息
     useOneCoinNum:0, // 1元劵张数
   },
   onLoad: function (options) {
@@ -296,7 +296,7 @@ Page({
         this.setData({
           coupon:{
             id:'',
-            nickname:"暂无可用优惠劵",
+            name:"暂无可用优惠劵",
             canClick:false,
           }
         })

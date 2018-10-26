@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 36,
+			"current": 10,
 			"list": [
 				{
 					"id": 0,
@@ -96,7 +96,7 @@
 					"query": ""
 				},
 				{
-					"id": 8,
+					"id": 10,
 					"name": "申请售后",
 					"pathName": "pages/after-sale/apply-sale-after/apply-sale-after",
 					"query": "refundType=2&returnProductId=1"
@@ -254,7 +254,8 @@
 				{
 					"id": -1,
 					"name": "红包",
-					"pathName": "pages/register/red-envelopes/red-envelopes"
+					"pathName": "pages/register/red-envelopes/red-envelopes",
+					"query": ""
 				}
 			]
 		}

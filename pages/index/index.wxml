@@ -86,7 +86,7 @@
           <swiper-item class='swiper-item-notice' >
             <block wx:for="{{list}}" wx:key='{{index}}'>
               <view class='ellipsis font-22 gray notice-line' catchtap='noticeClicked' data-id='{{item.id}}'>
-                <text class='notice-label red font-22' wx:if='{{item.generalize==2}}'>最热</text>
+                <text class='notice-label red font-22'>{{noticeLabel[item.generalize]}}</text>
                 {{item.title}}
               </view>
             </block> 

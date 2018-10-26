@@ -37,7 +37,8 @@ Page({
         page:1,
         pageSize:10
       },
-      notice: ['', '精选', '热门','推荐','']
+      isChange:true,
+      noticeLabel: ['', '精选', '热门','推荐','最新']
     },
     onLoad: function () {
       Event.on('getLevel', this.getLevel,this)
@@ -116,6 +117,7 @@ Page({
       r.addToQueue();
     },
     discoverNotice() {
+      if (!this.data.isChange) return
       let params = {
         isShowLoading: false,
         reqName: '获取秀场头条',
@@ -265,6 +267,13 @@ Page({
       Event.off('didLogin', this.didLogin);
     },
     onShow:function (){
-
+      this.setData({
+        isChange:true
+      })
+    },
+    onHide: function () {
+      this.setData({
+        isChange:false
+      })
     }
 })

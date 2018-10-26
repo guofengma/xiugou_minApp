@@ -35,7 +35,6 @@ Page({
     })
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
-    this.closeMask()
     this.refreshMemberInfoNotice()
   },
   refreshMemberInfoNotice() {
@@ -113,8 +112,12 @@ Page({
     r.successBlock = (req) => {
       let datas = req.responseObject.data
       if (this.data.didLogin){
+        if (datas.userBuy && datas.type==2){
+          this.data.isShowGiftTips =true
+        }
         this.setData({
-          dismiss: !datas.userBuy
+          dismiss: !datas.userBuy,
+          isShowGiftTips: this.data.isShowGiftTips
         })
       }
       // 渲染库存

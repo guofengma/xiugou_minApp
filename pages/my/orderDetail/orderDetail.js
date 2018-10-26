@@ -63,6 +63,8 @@ Page({
             detail.payTime=detail.payTime?Tool.formatTime(detail.payTime):'';
             detail.cancelTime = detail.cancelTime ? Tool.formatTime(detail.cancelTime) : '';
             detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
+            detail.showFinishTime = detail.deliverTime? Tool.formatTime(detail.deliverTime) : Tool.formatTime(detail.finishTime)
+            detail.deliverTime = Tool.formatTime(detail.deliverTime)
             let address = {}
             address.receiver = detail.receiver;
             address.recevicePhone = detail.recevicePhone;
