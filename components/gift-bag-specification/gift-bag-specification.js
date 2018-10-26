@@ -132,6 +132,6 @@ Component({
   },
   
   ready: function () {
-    
+    Tool.isIPhoneX(this)
   }
 })

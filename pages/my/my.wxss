@@ -8,6 +8,9 @@
 .top-view {
   padding:  20rpx 30rpx 0 30rpx;
 }
+.list-cont{
+  position: relative
+}
 .my-info{
   display: flex;
   align-content: center;

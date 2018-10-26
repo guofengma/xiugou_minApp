@@ -7,7 +7,10 @@
     </view>
     <view class="opr">
         <view class="no-help btn red" catchtap='isUseClicked' data-index='1'>没啥帮助？</view>
-        <view class="has-help btn redBg" catchtap='isUseClicked' data-index='2'>有用<image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/helped.png"></image><text>+1</text></view>
+        <view class="has-help btn redBg" catchtap='isUseClicked' data-index='2'>
+        有用
+        <!-- <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/helped.png"></image><text>+1</text> -->
+        </view>
     </view>
 </view>
 

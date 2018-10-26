@@ -49,8 +49,7 @@
       <view class='price'>
         <text class='price1 red'>¥ {{productInfoList.price}}<text class='font-24'>起</text></text>
         <text class='price2 gray'>¥ {{productInfoList.originalPrice}}</text>
-        <!-- <text class='label-pd redBg'>拼店价：¥{{productInfo.group_price}}</text> -->
-        <!-- <text class='price3 red'>积分价：¥ {{productInfo.min_payment}}</text> -->
+        <text class='label-pd redBg'>{{productInfoList.priceLable}}</text>
       </view>
       <view class='shippingInfo gray'>
         <text style='margin-right:158rpx'>快递：{{productInfoList.freight}}</text> 

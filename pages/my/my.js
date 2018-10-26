@@ -40,6 +40,7 @@ Page({
       })
       if (this.data.didLogin){
         this.getLevel()
+        this.countUserOrderNum()
       }
       if (this.data.tabClicked!=1) return
       if (!this.data.didLogin) {
@@ -55,6 +56,23 @@ Page({
     },
     refreshMemberInfoNotice() {
       Tool.getUserInfos(this)
+    },
+    countUserOrderNum(){ // 获取订单数量
+      let params = {
+        isShowLoading: false,
+        reqName: '获取用户等级',
+        url: Operation.countUserOrderNum
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let datas = req.responseObject.data
+        this.setData({
+          countUserOrderNum: datas
+        })
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+
     },
     getLevel(){
       if (!this.data.didLogin) return

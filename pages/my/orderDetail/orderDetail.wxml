@@ -104,8 +104,8 @@
           </view>
           <view>创建时间：{{detail.createTime}}</view>
           <!-- <view wx:if='{{detail.sysPayTime}}'>平台付款时间：{{detail.sysPayTime}}</view> -->
-          <view wx:if='{{detail.payTime}}'>三方付款时间：{{detail.payTime}}</view>
-          <view wx:if='{{detail.outTradeNo}}'>三方交易号：{{detail.outTradeNo}}</view>
+          <view wx:if='{{detail.payTime&&status!=1}}'>三方付款时间：{{detail.payTime}}</view>
+          <view wx:if='{{detail.outTradeNo&&status!=1}}'>三方交易号：{{detail.outTradeNo}}</view>
           <view wx:if='{{detail.sendTime}}'>发货时间：{{detail.sendTime}}</view>
           <!-- <view wx:if='{{detail.payTime}}'>成交时间：{{detail.payTime}}</view> -->
           <view wx:if='{{detail.cancelTime}}'>取消时间：{{detail.cancelTime}}</view>

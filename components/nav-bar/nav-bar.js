@@ -7,7 +7,7 @@ Component({
   data: {
     show:false,
     activeIndex:1,
-    priceShow:{clicked:false,up:false}  // 是否被点击  是否从高到底
+    priceShow:{clicked:false,up:true}  // 是否被点击  是否从高到底
   },
   methods: {
     navbarClicked(e){

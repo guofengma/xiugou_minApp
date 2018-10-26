@@ -2,14 +2,17 @@
   <view class='flexR-sb font-26 topBar gray'>
     <text class=''>请选择一个红包</text>
     <view class='flexR'>
-      <image-sub imgStyle='{{"width:32rpx"}}' imgSrc="{{'home_icon_search_nor@2x.png'}}"/>
+      <image-sub imgStyle='{{"width:32rpx"}}' imgSrc="{{'shuaxin-icon.png'}}"/>
       换一换
     </view>
   </view>
-  <view class='content'>
+  <view class='content flexR-sb' catchtap='btnClicked'>
     <view wx:for='{{4}}' wx:key='{{index}}'>
-      <view>赠送红包</view>
-      
+      <view class='font-26 title flexR'>赠送红包</view>
     </view>
   </view>
+  <view class='dismiss font-26 flexR'>
+    <view>跳过</view>
+  </view>
+  <view class='code-btn gray flexR font-26'>填写授权码</view>
 </view>

@@ -80,8 +80,8 @@
       <view>秀场</view>
       <view>头条</view>
     </view>
-    <view class='notice-rightBar boxSize'>
-      <swiper autoplay="true" interval='3000' vertical='true'  style='height:80rpx;'  bindchange='noticeChange' circular="true">
+    <view class='notice-rightBar boxSize flexR-sb'>
+      <swiper autoplay="true" interval='3000' vertical='true'  style='height:80rpx;'  bindchange='noticeChange' circular="true" class='swiper'>
         <block wx:for="{{noticeArr}}" wx:for-item="list" wx:for-index='key' wx:key='{{key}}' >
           <swiper-item class='swiper-item-notice' >
             <block wx:for="{{list}}" wx:key='{{index}}'>
@@ -89,13 +89,13 @@
                 <text class='notice-label red font-22' wx:if='{{item.generalize==2}}'>最热</text>
                 {{item.title}}
               </view>
-              <view class='notice-img' wx:if="{{index%2==0}}" >
-                <image src='{{item.coverImg}}' mode='widthFix' catchtap='noticeClicked' data-id='{{item.id}}'></image>
-              </view>
             </block> 
           </swiper-item>
         </block>
       </swiper>
+      <view class='notice-img'>
+                <image src='{{noticeArr[0][0].coverImg}}' mode='widthFix' catchtap='noticeClicked' data-id='{{noticeArr[0][0].id}}'></image>
+              </view>
     </view>
   </view>
 
@@ -191,7 +191,7 @@
          <view class='ellipsis font-24 gray'>{{item.title}}</view>
         </view>
         <view class='recommend-prd-info'>
-          <view class='font-20 gold'>自营 | 满减</view>
+          <!-- <view class='font-20 gold'>自营 | 满减</view> -->
           <view class='ellipsis-2 font-24 prd-name'>{{item.name}}</view>
           <view class='red font-28'>¥{{item.price || 0}}起</view>
         </view>

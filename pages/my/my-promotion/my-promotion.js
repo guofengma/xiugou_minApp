@@ -20,6 +20,7 @@ Page({
     r.successBlock = (req) => {
       let datas = req.responseObject.data
       datas.surpluslExperience = Tool.sub(datas.levelExperience, datas.experience)
+      datas.surpluslExperience = datas.surpluslExperience>0 ? datas.surpluslExperience:0
       datas.width = datas.experience / datas.levelExperience *100+"%"
       this.setData({
         userLevelInfo:datas

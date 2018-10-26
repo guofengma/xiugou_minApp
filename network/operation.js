@@ -185,6 +185,10 @@ export default class Operation {
 
         this.confirmReceipt ='/order/confirmReceipt';
 
+        // 获取订单数量
+
+        this.countUserOrderNum = '/order/countUserOrderNum'
+
         // 删除已完成订单
 
         this.deleteOrder ='/order/deleteCompletedOrder';

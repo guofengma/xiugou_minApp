@@ -24,7 +24,7 @@ Page({
       children: [],
     }],
     size:0,
-    userInfos:{}
+    userInfos:{},
   },
   onLoad: function (options) {
     this.setData({
@@ -41,6 +41,8 @@ Page({
     if (!this.data.didLogin){
       app.getSystemInfo()
       app.wxLogin(callBack)
+    } else {
+      this.getShoppingCartList()
     }
     this.requestFindProductByIdApp()
     Tool.isIPhoneX(this)
@@ -202,7 +204,8 @@ Page({
     let r = RequestFactory.wxRequest(params);
     let productInfo = this.data.productInfo
     r.successBlock = (req) => {
-      let datas = req.responseObject.data
+      let datas = req.responseObject.data || {}
+      datas.priceLable = datas.priceType == 1 ? '原价' : datas.priceType == 2 ? "拼店价" : this.data.userInfos.levelName+"价"
       this.setData({
         imgUrls: datas.productImgList,
         productInfo: datas.product,
@@ -320,7 +323,7 @@ Page({
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/product-detail?productId=' + this.data.productId + '&inviteCode=' + inviteCode,
+      path: '/pages/product-detail/product-detail?productId=' + this.data.productInfo.id + '&inviteCode=' + inviteCode,
       imageUrl: imgUrl
     }
   },

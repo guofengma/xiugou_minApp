@@ -52,7 +52,7 @@
   padding: 0 30rpx;
 }
 .growing-question{
-  margin-bottom: 115rpx;
+  margin-bottom: 150rpx;
 }
 .icon-growing{
   height: 88rpx;
@@ -86,7 +86,7 @@
   margin-top: 186rpx;
 }
 .growing-question>view{
-  height: 88rpx;
+  min-height: 88rpx;
   line-height: 88rpx;
   padding: 0 50rpx;
   border-top: 1rpx solid #eee;

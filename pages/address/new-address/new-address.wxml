@@ -39,7 +39,7 @@
                 <view wx:else class='textarea'></view>
             </view>
         </view>
-       <view class="wrap">
+       <view class="wrap" wx:if='{{!id}}'>
             <view class="default mar-top2">
                 <view>
                     <text>是否设为默认地址</text>

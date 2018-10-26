@@ -37,6 +37,7 @@ Page({
         page:1,
         pageSize:10
       },
+      notice: ['', '精选', '热门','推荐','']
     },
     onLoad: function () {
       Event.on('getLevel', this.getLevel,this)

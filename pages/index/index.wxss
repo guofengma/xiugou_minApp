@@ -94,9 +94,9 @@
 }
 .notice-img{
   width:93rpx;
-  position:absolute;
+  /* position:absolute;
   right:0;
-  top:0;
+  top:0; */
   height:80rpx;
 }
 .notice-img image{
@@ -105,11 +105,14 @@
 .notice-line{
   height: 40rpx;
   line-height: 40rpx;
-  width: calc(100% - 124rpx);
+  width: calc(100% - 24rpx);
 }
 .notice-leftBar{
   width: 70rpx;
   border-right: 1rpx solid #EAEAEA;
+}
+.swiper{
+  width: calc(100% - 93rpx);
 }
 .notice-rightBar{
   width: calc(100% - 70rpx);
