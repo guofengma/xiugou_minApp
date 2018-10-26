@@ -2,7 +2,7 @@
   <view class="discover-article-container">
     <view class='discover-article_thumb' bindtap='handleItemClicked' data-id="{{id}}">
       <image src="{{coverImg}}"></image>
-      <view class='discover-article_desc'>{{content}}</view>
+      <!-- <view class='discover-article_desc'>{{content}}</view> -->
     </view>
     <view class="discover-article_body">
       <view class='discover-article_info'>
