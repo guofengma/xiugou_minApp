@@ -409,16 +409,22 @@ export default class Tool {
      * @param imgCount
      * @param successCallback
      */
-    static uploadImage(imgCount, successCallback, failCallback) {
+    static uploadImage(imgCount, successCallback=()=>{}, failCallback=()=>{}) {
       wx.chooseImage({
         count: imgCount, // 默认9
         sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
         success: function (res) {
           // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          console.log(res)
           let tempFilePaths = res.tempFilePaths;
+          if (tempFilePaths[0].lastIndexOf('.gif')!=-1){
+            global.Tool.showAlert('不支持gif格式图片')
+            return
+          }
           let tempFilesSize = res.tempFiles[0].size
-          if (tempFilesSize <= 3000000){
+
+          if (tempFilesSize <= 3145728){
             // console.log(tempFilePaths[0])
             wx.uploadFile({
               url: global.RequestFactory.aliyunOSSUploadImage(),
@@ -1059,6 +1065,29 @@ export default class Tool {
 
   static formatString(str){
     return str.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "")
+  }
+
+  // 位运算
+  
+  static bitOperation(arr,num) {
+    let result = arr.filter((item0) => {
+      let bit = item0&num
+      return bit == item0
+    })
+    return result
+  }
+  
+  static isJson(text) {
+    if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
+      replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+      replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+        return true
+
+    } else {
+
+        return false
+
+    }
   }
 }
 
