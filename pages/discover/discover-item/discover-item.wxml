@@ -6,7 +6,7 @@
         <image src='{{item.img}}' mode="widthFix"></image>
         <view class='discover_view'>
             <image src='/img/icon_view_white@3x.png'></image>
-            <text>{{item.click}}</text>
+            <text>{{item.click || 0}}</text>
           </view>
       </view>
       <view class='discover-list-item-body'>
@@ -21,16 +21,17 @@
       </view>
       <image class='discover-list-item-edit' wx:if="{{showEdit}}" src="{{item.checked?'/img/list_btn_gouxuan_sel@3x.png':'/img/choose-icon.png'}}" catchtap='manageItem' data-index="{{index}}"></image>
     </view>
-    <!-- discover item E -->
   </view>
+    <!-- discover item E -->
+  
   
   <view class='discover-list-item-aside'>
-    <view class='discover-list-item' wx:for="{{items}}" wx:key="unique" wx:if="{{(index+1)%2 == 0}}" bindtap='handleItemClicked' data-id="{{item.id}}">
+    <view class='discover-list-item' wx:for="{{items}}" wx:key="unique" wx:if="{{(index+1)%2 == 0}}"  bindtap='handleItemClicked' data-id="{{item.id}}">
       <view class='discover-list-item_thumb' >
         <image src='{{item.img}}' mode="widthFix"></image>
         <view class='discover_view'>
             <image src='/img/icon_view_white@3x.png'></image>
-            <text>{{item.click}}</text>
+            <text>{{item.click || 0}}</text>
           </view>
       </view>
       <view class='discover-list-item-body'>

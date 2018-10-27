@@ -21,7 +21,7 @@
       <view class='discover_author_name'>{{details.userName}}</view>
       <view class='discover_view'>
         <image src='/img/icon_view@3x.png'></image>
-        <text>{{details.click}}</text>
+        <text>{{details.click || 0}}</text>
       </view>  
     </view>
     <view class="content">
@@ -31,7 +31,7 @@
   <!-- content E -->
   <!-- recommend list S -->
   <view class='discover-detail-recommend'>
-    <view class='item' wx:for="{{details.products}}" wx:key="unique" bindtap='showItemDetail' data-id="{{item.productId}}">
+    <view class='item' wx:for="{{details.products}}" wx:key="unique" bindtap='showItemDetail' data-id="{{item.code}}">
       <view class='item-thumb'>
         <image src='{{item.headImg}}'></image>
       </view>
