@@ -174,3 +174,19 @@
 .gift-view{
   padding:15rpx 30rpx 0 30rpx;
 }
+.coupon-line>view{
+  border-bottom: 1rpx solid #eee;
+  padding: 0 76rpx;
+  height: 88rpx;
+}
+.product-ifo-list>view{
+  border-bottom: 1rpx solid #eee;
+}
+.product-ifo-list>view:last-child{
+  border-bottom: 0
+}
+.coupon-line>view:first-child{
+  border-top: 1rpx solid #eee;
+  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForobtain.png) no-repeat 30rpx 25rpx; 
+  background-size:32rpx 32rpx;
+}

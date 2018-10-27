@@ -101,7 +101,7 @@
   border-bottom: 1rpx solid #ddd;
   margin-bottom: 30rpx;
   background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForobtain.png) no-repeat 30rpx 25rpx; 
-  background-size:32rpx 25rpx;
+  background-size:32rpx 32rpx;
 }
 .gift-items>.gift-line:last-child{
   border-bottom: 0;  

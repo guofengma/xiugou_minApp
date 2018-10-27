@@ -49,18 +49,26 @@
 
     <!--订单信息  -->
     <view class='order-prd-info'>
-      <!-- <view class='gift-view whiteBg'>
-        <text class='label-red-border'>套餐</text>
-        <text class='gray font-24'>双十一套餐</text>
-      </view> -->
-      <block wx:for="{{detail.orderProductList}}" wx:key="unique">
+      <view class='gift-view whiteBg' wx:if='{{detail.orderType==5 || detail.orderType==98}}'>
+        <text class='label-red-border'>礼包</text>
+        <text class='gray font-24'>{{detail.orderProductList[0].productName}}</text>
+      </view>
+      <view class='product-ifo-list'>
+        <block wx:for="{{detail.showProductList}}" wx:key="unique">
           <view catchtap='productClicked' data-productid='{{item.productId}}'>
             <template is="my-order-product-info" data="{{...item}}"/>
           </view>
           <view class='sale-after flexR' wx:if="{{item.middleBtn}}">
             <view class='order-btn btn-left flexR' catchtap='subBtnClicked' data-id='{{item.middleBtn.id}}' data-returntype='{{item.middleBtn.returnType}}' data-index='{{index}}'>{{item.middleBtn.content}}</view>
           </view>
-      </block>
+        </block>
+      </view>
+      <view wx:if='{{detail.orderType==5 || detail.orderType==98}}' class='gray font-24 whiteBg coupon-line'>
+        <view class='flexR-sb' wx:for='{{detail.orderProductList[0].giftBagCoupons}}'>
+          <view>{{item.couponName}}</view>
+          <view>x1</view>
+        </view> 
+      </view>
     </view>
 
     <!-- 商品价格等信息 -->
@@ -138,7 +146,7 @@
         <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='继续支付'}}" bindtap="continuePay">
           {{detail.outTradeNo? "继续支付":"去支付"}}
         </view>
-        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='再次购买' && detail.orderType!=5}}" bindtap="continueBuy">
+        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='再次购买' && detail.orderType!=5&& detail.orderType!=98}}" bindtap="continueBuy">
           {{state.bottomBtn[1]}}
         </view>
     </block>

@@ -57,7 +57,7 @@ Page({
   },
   videoClicked() {
     this.setData({
-      autoplay: !this.data.autoplay
+      autoplay: false
     })
     // Tool.navigateTo('/pages/my/information/information')
   },

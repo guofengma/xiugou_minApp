@@ -13,7 +13,7 @@
         </view>
         <view class="clearfix"></view>
     </view> -->
-    <view class="wrap gray " wx:if='{{!isContinuePay}}'>
+    <view class="wrap gray " >
         <view class="left">
             <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon_03-03@2x.png"></image>
             <view>余额支付</view>

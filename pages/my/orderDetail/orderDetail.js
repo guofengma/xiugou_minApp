@@ -83,6 +83,13 @@ Page({
                 time: time
               })
             } 
+        detail.showProductList = (detail.orderType == 5 || detail.orderType == 98) ? detail.orderProductList[0].orderProductPriceList : detail.orderProductList
+            if (detail.orderType == 5 || detail.orderType == 98){
+              detail.orderProductList[0].orderProductPriceList.forEach((item)=>{
+                item.num = item.productNum
+                item.price = item.originalPrice
+              })
+            }
             this.setData({
                 detail: detail,
                 address: address,

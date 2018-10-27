@@ -215,7 +215,7 @@ Page({
     },
     setInputValue(){
       this.data.coinNum = this.data.coinNum < 0 ? 0 : this.data.coinNum
-      this.data.coinNum = this.data.coinNum > this.data.coinData.num ? this.data.coinData.num : this.data.coinNum
+      this.data.coinNum = this.data.coinNum > this.data.maxNum ? this.data.maxNum : this.data.coinNum
       this.setData({
         coinNum: this.data.coinNum
       })
@@ -263,7 +263,8 @@ Page({
         if (this.data.useType == 1){
           let coinNum = options.coin > this.data.coinData.num? this.data.coinData.num : options.coin
           this.setData({
-            coinNum: coinNum
+            coinNum: coinNum,
+            maxNum: this.data.coinData.num > coinNum ? coinNum : this.data.coinData.num,
           })
         } else {
           this.availableDiscountCouponForProduct()

@@ -26,40 +26,31 @@ Page({
     this.availableDiscountCouponForProduct()
     Event.on('updateOrderAddress', this.updateOrderAddress,this)
     Event.on('updateCoupon', this.couponClick,this)
-    Event.on('getTokenCoin', this.getTokenCoin,this)
+    Event.on('getTokenCoin', this.tokenCoinClick,this)
   },
   onShow: function () {
     this.updateCoupon()
+    this.getTokenCoin()
   },
   getTokenCoin(){ // 1元劵计算
+    if (!this.data.tokenCoinClick) return
     let useOneCoinNum = Storage.getTokenCoin() || 0
-    if (useOneCoinNum > this.data.orderInfos.totalAmounts){
-      useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
-    } else if (useOneCoinNum==0){
-
-    }
     this.data.params.tokenCoin = Number(useOneCoinNum)
     this.setData({
       params: this.data.params
     })
     let callBack = ()=>{
       this.setData({
-        useOneCoinNum: Number(useOneCoinNum)
+        useOneCoinNum: this.data.params.tokenCoin,
+        tokenCoinClick:false
       })
     }
     this.requestOrderInfo(callBack)
-    // if (this.data.orderInfos.totalAmounts>=1){
-    //   this.data.orderInfos.showTotalAmounts = Tool.sub(Math.floor(this.data.orderInfos.totalAmounts), useOneCoinNum)
-    //   if (this.data.orderInfos.showTotalAmounts<0){
-    //     this.data.orderInfos.showTotalAmounts = 0
-    //     useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
-    //   }
-    //   this.data.orderInfos.showTotalAmounts = Tool.sub(this.data.orderInfos.totalAmounts, useOneCoinNum)
-    //   this.setData({
-    //     useOneCoinNum: Number(useOneCoinNum),
-    //     orderInfos: this.data.orderInfos
-    //   })
-    // }
+  },
+  tokenCoinClick(){
+    this.setData({
+      tokenCoinClick: true
+    })
   },
   couponClick() { // 是否点击了优惠卷
     this.setData({
@@ -319,7 +310,7 @@ Page({
   onUnload: function () {
     Event.off('updateOrderAddress', this.updateOrderAddress)
     Event.off('updateCoupon', this.couponClick)
-    Event.off('getTokenCoin', this.getTokenCoin)
+    Event.off('getTokenCoin', this.tokenCoinClick)
   },
   // switchChange(){
   //   if (!this.data.orderInfos.canUseScore) return
