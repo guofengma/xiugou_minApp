@@ -46,6 +46,7 @@
     
   </view>
   <!-- recommend list E -->
+  <view class='fixed-height'></view>
   <!-- footer operate S -->
   <view class='discover-detail-operate flexR'>
     <!-- 1.收藏 2.点赞 -->
