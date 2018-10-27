@@ -9,7 +9,7 @@ Page({
     animate1:false,
     canClick:true,
     todaySgin:false,
-    needXD:100,
+    needXD:1,
   },
   onLoad: function (options) {
     this.querySignList()
@@ -25,7 +25,7 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       this.setData({
-        // userInfos: req.responseObject.data
+        needXD: req.responseObject.data
       })
     };
     Tool.showErrMsg(r)

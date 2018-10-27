@@ -35,6 +35,8 @@ Page({
     let useOneCoinNum = Storage.getTokenCoin() || 0
     if (useOneCoinNum > this.data.orderInfos.totalAmounts){
       useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
+    } else if (useOneCoinNum==0){
+
     }
     this.data.params.tokenCoin = Number(useOneCoinNum)
     this.setData({
@@ -45,7 +47,6 @@ Page({
         useOneCoinNum: Number(useOneCoinNum)
       })
     }
-    if (useOneCoinNum>0)
     this.requestOrderInfo(callBack)
     // if (this.data.orderInfos.totalAmounts>=1){
     //   this.data.orderInfos.showTotalAmounts = Tool.sub(Math.floor(this.data.orderInfos.totalAmounts), useOneCoinNum)
@@ -69,14 +70,21 @@ Page({
     if (!this.data.couponClick) return
     let coupon = Storage.getCoupon()
     this.data.params.couponId = coupon.id
+    this.data.params.tokenCoin = 0
     this.setData({
-      params: this.data.params
+      params: this.data.params,
     })
-    let callBack = ()=>{
+    let callBack = (item)=>{
       this.setData({
         coupon: coupon,
         couponClick: false
       })
+      if (this.data.useOneCoinNum>item.totalAmounts){
+        Tool.showAlert("一元劵最多只能使用" + Math.floor(item.totalAmounts)+'张')
+        this.setData({
+          useOneCoinNum:0
+        })
+      }
     }
     this.requestOrderInfo(callBack)
   },
@@ -99,7 +107,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      wx.stopPullDownRefresh() //停止下拉刷新
+      wx.stopPullDownRefresh() //停止下拉刷新du
       let item = req.responseObject.data || {}
       // 渲染地址列表
       let userAdress = item.userAddress
@@ -222,7 +230,7 @@ Page({
       "provinceCode": orderAddress.provinceCode || '',
       "receiver": orderAddress.receiver || '',
       "recevicePhone": orderAddress.receiverPhone || '',
-      tokenCoin: Number(this.data.useOneCoinNum), // 一元劵  
+      tokenCoin: this.data.params.tokenCoin, // 一元劵  
       reqName: '订单结算', 
     }
     let orderTypeParmas ={}
@@ -311,6 +319,7 @@ Page({
   onUnload: function () {
     Event.off('updateOrderAddress', this.updateOrderAddress)
     Event.off('updateCoupon', this.couponClick)
+    Event.off('getTokenCoin', this.getTokenCoin)
   },
   // switchChange(){
   //   if (!this.data.orderInfos.canUseScore) return
