@@ -60,6 +60,7 @@
     </view>
     <view>申请时间：{{datas.applyTime}}</view>
     <view>更换型号： {{datas.exchangeSpec}}</view>
+    <view>换货编号：{{datas.refundNo}}</view>
     <view>数量：x {{datas.num}}</view>
   </view>
 </view>

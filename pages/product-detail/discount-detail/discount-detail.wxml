@@ -27,7 +27,7 @@
       <swiper autoplay="{{autoplay}}" interval='3000' bindchange='sliderChange'>
         <block wx:for="{{imgUrls}}" wx:key="unique">
           <swiper-item>
-            <video src="{{productInfoList.product.videoUrl}}"   controls wx:if='{{item.videoUrl}}' class='video' bindplay='videoClicked'></video>
+            <video src="{{productInfoList.product.videoUrl}}"   controls wx:if='{{item.videoUrl}}' class='video' bindplay='videoClicked' show-fullscreen-btn='{{false}}'></video>
             <image src="{{item.smallImg}}" class="slide-image" wx:else bindload="imageLoad" bindtap='swiperImgCliked' data-index='{{index}}'/>
           </swiper-item>
         </block>

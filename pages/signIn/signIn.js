@@ -13,6 +13,23 @@ Page({
   },
   onLoad: function (options) {
     this.querySignList()
+    this.getTokenCionExchange()
+  },
+  getTokenCionExchange(){
+    let params = {
+      isShowLoading: false,
+      reqName: '获取用户等级',
+      requestMethod: 'GET',
+      url: Operation.getTokenCionExchange
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      this.setData({
+        // userInfos: req.responseObject.data
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
   getLevel() {
     let params = {

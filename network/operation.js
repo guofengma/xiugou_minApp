@@ -344,6 +344,10 @@ export default class Operation {
 
         this.tokenCoinSign='/user/userSign/sign'
 
+        // 获取秀豆兑换1元卷的比例
+
+        this.getTokenCionExchange ='/common/config/getExchange'
+
 
         /******************我的---设置*********************** */
 
