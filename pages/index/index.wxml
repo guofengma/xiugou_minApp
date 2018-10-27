@@ -2,7 +2,7 @@
   <!--轮播  -->
   <view class='ad'>
     <view class='search-bar boxSize flexR-sb fixed-top'>
-      <image src='/img/logo-img.png' mode='widthFix'></image>
+      <image src='/img/logo-img.jpg' mode='widthFix'></image>
       <view class='bar flexR-sb gray font-28' catchtap='searchClicked'>
         <image-sub imgStyle='{{"width:32rpx"}}' imgSrc="{{'home_icon_search_nor@2x.png'}}"/>
         <text>请输入关键字搜索</text>
@@ -25,7 +25,8 @@
   <view  class='index-items-view boxSize whiteBg flexR'>
     <block wx:for='{{iconArr}}' wx:key='unique'>
       <view class='flexC items-sub boxSize' catchtap='goPages' data-index='{{index}}'>
-        <image-sub imgStyle='{{"width:96rpx"}}' imgSrc="{{item.img}}"/>
+        <image-sub imgStyle='{{"width:96rpx"}}' imgSrc="{{item.img}}" wx:if='{{index<5}}'/>
+        <image wx:else src='{{item.img}}' mode='widthFix' style='width:96rpx'></image>
         <view class='font-24 gray item-name ellipsis'>{{item.name}}</view>
       </view>
     </block>

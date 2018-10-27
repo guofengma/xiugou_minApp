@@ -89,16 +89,16 @@
         "selectedIconPath": "/img/tabbar/index_selected.png"
       },
       {
-        "pagePath": "pages/download-app/download-app",
-        "text": "拼店",
-        "iconPath": "/img/tabbar/group_tab_unselected.png",
-        "selectedIconPath": "/img/tabbar/group_tab_selected.png"
-      },
-      {
         "pagePath": "pages/discover/discover",
         "text": "发现",
         "iconPath": "/img/tabbar/discover_unselected.png",
         "selectedIconPath": "/img/tabbar/discover_selected.png"
+      },
+      {
+        "pagePath": "pages/download-app/download-app",
+        "text": "拼店",
+        "iconPath": "/img/tabbar/group_tab_unselected.png",
+        "selectedIconPath": "/img/tabbar/group_tab_selected.png"
       },
       {
         "pagePath": "pages/shopping-cart/shopping-cart",

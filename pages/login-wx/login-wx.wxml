@@ -2,7 +2,7 @@
   <view class='loginBg'>
     <!-- <image class='loginImg-wx' src='/img/login-bg2.png' mode="widthFix"></image> -->
     <view class='logoView flexR'>
-      <image class='logo' src='/img/logo-img.png'></image>
+      <image class='logo' src='/img/logo-img.jpg'></image>
     </view>
   </view>
   <view>

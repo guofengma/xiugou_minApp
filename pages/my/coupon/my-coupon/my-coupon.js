@@ -154,7 +154,7 @@ Page({
         reqName: '已使用优惠劵列表',
         url: Operation.couponList
       }
-      this.formatCouponInfos(params, 2, false, 'coupon-right-used')
+      this.formatCouponInfos(params, 1, false, 'coupon-right-used')
     },
     //失效优惠劵列表
     getDiscountCouponLosed() {
@@ -164,7 +164,7 @@ Page({
         status:2,
         url: Operation.couponList
       }
-      this.formatCouponInfos(params, 1, false, 'coupon-right-lose')
+      this.formatCouponInfos(params, 2, false, 'coupon-right-lose')
     },
 
     // 点击标题切换当前页时改变样式

@@ -24,10 +24,11 @@
         <image src='/img/msg-icon.png' mode='widthFix' class='fr' bindtap='msgClicked'></image>
         <template is="msg-tips" data="{{msgShow}}" /> 
       </view>
-      <swiper autoplay="true" interval='3000' bindchange='sliderChange'>
+      <swiper autoplay="{{autoplay}}" interval='3000' bindchange='sliderChange'>
         <block wx:for="{{imgUrls}}" wx:key="unique">
           <swiper-item>
-            <image src="{{item.smallImg}}" class="slide-image" bindload="imageLoad" bindtap='swiperImgCliked' data-index='{{index}}'/>
+            <video src="{{item.videoUrl}}"   controls wx:if='{{item.videoUrl}}' class='video' bindplay='videoClicked'></video>
+            <image src="{{item.smallImg}}" wx:else class="slide-image" bindload="imageLoad" bindtap='swiperImgCliked' data-index='{{index}}'/>
           </swiper-item>
         </block>
       </swiper>
@@ -45,7 +46,7 @@
         <text>{{productInfo.type==1?  "普通礼包":"升级礼包"}}</text>
       </view>
       <view class='shippingInfo gray'>
-        <text style='margin-right:158rpx'>快递：{{productInfo.freightTemplatePrice || 0}}</text> 
+        <text style='margin-right:158rpx'>快递：{{productInfo.freightTemplatePrice || '包邮'}}</text> 
         <text>月销售{{productInfo.saleNum || 0}}笔</text>
       </view>
     </view>

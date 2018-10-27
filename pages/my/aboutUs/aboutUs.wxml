@@ -1,7 +1,7 @@
 <!--pages/my/account.wxml-->
 <view class="aboutUs">
    <view class="logo-area">
-       <image class="logo-img" src="/img/logo-img.png"></image>
+       <image class="logo-img" src="/img/logo-img.jpg"></image>
        <view>当前版本：1.0</view>
    </view>
     <view class="content-area">

@@ -37,6 +37,7 @@ Page({
       disabled: false,
     },
     showRegular: false,
+    autoplay: true,
     jumpCommonProductTimer: null, // 定时跳转普通商品倒计时
   },
   onLoad: function (options) {
@@ -55,12 +56,20 @@ Page({
   onShow: function () {
     
   },
+  videoClicked() {
+    this.setData({
+      autoplay: !this.data.autoplay
+    })
+    // Tool.navigateTo('/pages/my/information/information')
+  },
   swiperImgCliked(e) {
     let index = e.currentTarget.dataset.index
     let src = this.data.imgUrls[index].smallImg
     let urls = []
     this.data.imgUrls.forEach((item) => {
-      urls.push(item.smallImg)
+      if (item.smallImg) {
+        urls.push(item.smallImg)
+      }
     })
     wx.previewImage({
       current: src, // 当前显示图片的http链接
@@ -211,6 +220,9 @@ Page({
     let productInfo = this.data.productInfo
     r.successBlock = (req) => {
       let datas = req.responseObject.data
+      datas.product.videoUrl && datas.productImgList.unshift({
+        videoUrl: datas.product.videoUrl
+      })
       this.setData({
         imgUrls: datas.productImgList,
         productInfo: datas.product,
@@ -269,7 +281,8 @@ Page({
   },
   sliderChange(e) {
     this.setData({
-      activeIndex: e.detail.current + 1
+      activeIndex: e.detail.current + 1,
+      autoplay: true
     })
   },
   // 切换 tabar
