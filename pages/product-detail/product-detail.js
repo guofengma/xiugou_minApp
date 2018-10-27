@@ -33,6 +33,11 @@ Page({
     })
     // Tool.navigateTo('/pages/my/information/information')
   },
+  videoPause() {
+    this.setData({
+      autoplay: true
+    })
+  },
   onLoad: function (options) {
     console.log(options);
     this.setData({

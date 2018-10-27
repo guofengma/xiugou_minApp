@@ -62,6 +62,11 @@ Page({
     })
     // Tool.navigateTo('/pages/my/information/information')
   },
+  videoPause() {
+    this.setData({
+      autoplay: true
+    })
+  },
   swiperImgCliked(e) {
     let index = e.currentTarget.dataset.index
     let src = this.data.imgUrls[index].smallImg

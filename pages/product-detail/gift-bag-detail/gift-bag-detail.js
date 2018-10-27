@@ -49,6 +49,11 @@ Page({
       autoplay: false
     })
   },
+  videoPause(){
+    this.setData({
+      autoplay: true
+    })
+  },
   imageLoad(e) {
     Tool.getAdaptHeight(e, this)
   },
@@ -220,6 +225,7 @@ Page({
   },
   sliderChange(e) {
     this.setData({
+      // activeIndex: e.detail.current + 1,
       activeIndex: e.detail.current + 1,
       autoplay:true,
     })
