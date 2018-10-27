@@ -34,6 +34,7 @@ Page({
     // Tool.navigateTo('/pages/my/information/information')
   },
   onLoad: function (options) {
+    console.log(options);
     this.setData({
       productId: options.productId || '',
       prodCode: options.prodCode || '',
@@ -224,6 +225,7 @@ Page({
         productInfoList: datas,
         priceList: datas.priceList, // 价格表
         productSpec: datas.specMap, // 规格描述
+        productId: datas.product.id ? datas.product.id : this.data.productId
       })
       this.activityByProductId(this.data.productId)
       // 渲染表格

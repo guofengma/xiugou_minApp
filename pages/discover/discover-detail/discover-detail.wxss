@@ -3,9 +3,6 @@
 page{
   background: #fff;
 }
-.discover-detail-container {
-  margin-bottom: 80rpx;
-}
 .discover-detail-swiper {
   position: relative;
 }
@@ -32,6 +29,9 @@ page{
 }
 .discover-detail-content,.discover-detail-recommend {
   padding: 32rpx;
+}
+.fixed-height{
+  height: 80rpx;
 }
 .discover-detail-content .content {
   font-size: 26rpx;
