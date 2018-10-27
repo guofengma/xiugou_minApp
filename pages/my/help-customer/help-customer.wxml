@@ -45,7 +45,7 @@
       <view bindtap='makePhoneCall'>
           <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/help_phone.png" class=""></image>
           <view>咨询电话</view>
-          <view>09:00-18:00</view>
+          <view>8:30-24:00</view>
       </view>
       <view>
             <!-- <button class="go-cart-view contact" open-type="contact" >
@@ -59,7 +59,7 @@
             >
             <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/help_customer.png" class=""></image>
             <view>在线客服</view>
-            <view>09:00-18:00</view>  
+            <view>8:30-24:00</view>  
           </button>
           <!-- <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/help_customer.png" class=""></image>
           <view>在线客服</view>

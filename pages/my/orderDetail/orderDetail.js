@@ -63,6 +63,8 @@ Page({
             detail.payTime=detail.payTime?Tool.formatTime(detail.payTime):'';
             detail.cancelTime = detail.cancelTime ? Tool.formatTime(detail.cancelTime) : '';
             detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
+            detail.showFinishTime = detail.deliverTime? Tool.formatTime(detail.deliverTime) : Tool.formatTime(detail.finishTime)
+            detail.deliverTime = Tool.formatTime(detail.deliverTime)
             let address = {}
             address.receiver = detail.receiver;
             address.recevicePhone = detail.recevicePhone;
@@ -84,6 +86,7 @@ Page({
             this.setData({
                 detail: detail,
                 address: address,
+              status:detail.status,
                 state: this.orderState(detail.status)//订单状态相关信息this.data.state
             })
             if (detail.expressNo) {

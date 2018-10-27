@@ -35,7 +35,6 @@ Page({
     })
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
-    this.closeMask()
     this.refreshMemberInfoNotice()
   },
   refreshMemberInfoNotice() {
@@ -46,6 +45,18 @@ Page({
   },
   imageLoad(e) {
     Tool.getAdaptHeight(e, this)
+  },
+  swiperImgCliked(e) {
+    let index = e.currentTarget.dataset.index
+    let src = this.data.imgUrls[index].smallImg
+    let urls = []
+    this.data.imgUrls.forEach((item) => {
+      urls.push(item.smallImg)
+    })
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: urls// 需要预览的图片http链接列表
+    })
   },
   didLogin() {
     Tool.didLogin(this)
@@ -101,8 +112,12 @@ Page({
     r.successBlock = (req) => {
       let datas = req.responseObject.data
       if (this.data.didLogin){
+        if (datas.userBuy && datas.type==2){
+          this.data.isShowGiftTips =true
+        }
         this.setData({
-          dismiss: !datas.userBuy
+          dismiss: !datas.userBuy,
+          isShowGiftTips: this.data.isShowGiftTips
         })
       }
       // 渲染库存

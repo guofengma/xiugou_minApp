@@ -47,24 +47,24 @@
   </view>
   <!--购买支付信息  -->
   <view  class='order-info-other'>
-    <!-- 1元劵 -->
-    <view class='flexR-sb' catchtap='iconClicked' wx:if='{{userInfos.tokenCoin}}' >
-      <view class='reducePrice' >
-        1元现金卷 
-      </view>
-      <view class='gray' >
-        <text > {{useOneCoinNum? "- ¥"+useOneCoinNum:""}}</text>
-        <!-- <text wx:else>暂无可以一元劵</text> -->
-        <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
-      </view>
-    </view>
     <!-- 优惠卷 -->
     <view class='flexR-sb' bindtap='couponClicked'>
       <view>优惠券</view>
       <view class='gray'>
         <!-- 不支持使用优惠券 -->
-        <text wx:if='{{door==99 || door==5}}'>{{coupon.nickname}}</text>
+        <text wx:if='{{door==99 || door==5}}'>{{coupon.name}}</text>
         <text wx:else>不支持使用优惠劵</text>
+        <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
+      </view>
+    </view>
+    <!-- 1元劵 -->
+    <view class='flexR-sb' catchtap='iconClicked' wx:if='{{userInfos.tokenCoin}}' >
+      <view class='reducePrice' >
+        1元现金劵
+      </view>
+      <view class='gray' >
+        <text > {{useOneCoinNum? "- ¥"+useOneCoinNum:""}}</text>
+        <!-- <text wx:else>暂无可以一元劵</text> -->
         <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
       </view>
     </view>
