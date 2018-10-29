@@ -139,7 +139,7 @@ Page({
       reqName: '获取发现'
     };
     // 起初4是获取最新的  后来一波撕逼发现获取最新不需要传generalize参数了
-    if (type !== 4) params.type = type; 
+    if (type !== 4) params.generalize = type; 
     
     const typeList = this.data.typeList;
     let obj = {};
