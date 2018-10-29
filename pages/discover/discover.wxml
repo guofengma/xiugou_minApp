@@ -35,6 +35,13 @@
         <block wx:for="{{hot}}" wx:key="unique">
           <swiper-item>
             <image src="{{item.img}}" bindtap='handleItemClicked' data-id="{{item.id}}" class="slide-image" width="355" height="150"/>
+            <view class='discover-hot-desc'>
+              <text class='ellipsis'>{{item.pureContent}}</text>
+              <view class='discover_view'>
+                <image src='/img/icon_view_white@3x.png'></image>
+                <text>{{item.click || 0}}</text>
+              </view>
+            </view>
           </swiper-item>
         </block>
       </swiper>

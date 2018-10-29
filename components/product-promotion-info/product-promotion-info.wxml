@@ -20,7 +20,7 @@
           <view class='font-20 inline' wx:if="{{promotionType}}">
             <text class='line-through pr10'>原价¥ {{prop.originalPrice}} </text> |
           </view>
-          {{prop.reseCount}}人关注             
+          {{prop.reseCount || 0}}人关注             
         </view>
         <view class='promotion-desc' wx:else>{{promotionDesc.typeDesc}}</view>
       </view>
