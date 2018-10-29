@@ -11,7 +11,7 @@
       </view>
       <view class='discover-list-item-body'>
         <view class='discover-list-item_title ellipsis-2'>
-          {{item.title}}
+          {{item.pureContent}}
         </view>
         <view class='discover_author'>
           <image class='discover_avatar' src='{{item.userHeadImg}}'></image>
@@ -36,7 +36,7 @@
       </view>
       <view class='discover-list-item-body'>
         <view class='discover-list-item_title ellipsis-2'>
-          {{item.title}}
+          {{item.pureContent}}
         </view>
         <view class='discover_author'>
           <image class='discover_avatar' src='{{item.userHeadImg}}'></image>
