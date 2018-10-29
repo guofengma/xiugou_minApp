@@ -148,6 +148,7 @@ Page({
           giftStock.push(total)
         })
       }
+      
       // datas.specPriceList.forEach((items,index) => {
       //   console.log(index)
       //   let total = 0

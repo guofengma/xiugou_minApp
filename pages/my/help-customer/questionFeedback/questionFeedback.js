@@ -74,6 +74,10 @@ Page({
     //提交成功
     addFeedback() {
       if (this.data.active) {
+        if (this.data.content.length < 10) {
+          Tool.showAlert('问题反馈详情说明字数不能少于10个字')
+          return
+        }
         let originalImg = ''
         let smallImg = ''
         if (this.data.originalImg) {

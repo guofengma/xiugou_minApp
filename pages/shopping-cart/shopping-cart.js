@@ -32,6 +32,9 @@ Page({
         this.getShoppingCartList()
       }
     } else {
+      this.setData({
+        items: [], 
+      })
       this.getStorageShoppingCart()
     }
   },

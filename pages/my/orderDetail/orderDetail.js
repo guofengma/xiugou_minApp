@@ -332,7 +332,9 @@ Page({
         // 不支持的售后种类
         let arr = Tool.bitOperation(this.data.afterSaleTypeArr, item.restrictions)
         // 支持的售后种类
-        let afterSaleType = [...new Set(this.data.afterSaleTypeArr.concat(arr))]
+        let afterSaleType = this.data.afterSaleTypeArr.filter(function (n) {
+          return arr.indexOf(n) == -1
+        });
         item.afterSaleType = afterSaleType
         if (outOrderState == 2){
           if (afterSaleType.includes(4)) middle = {  id: 1, content: '退款' }
