@@ -1,3 +1,21 @@
 .title{
   padding-top: 80rpx;
 }
+.label{
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  position: absolute;
+  left: -18rpx;
+  top:-1rpx;
+}
+.rule-line{
+  border-left: 1rpx solid #D51243;
+  height: 98rpx;
+  position: relative;
+  padding-left:20rpx;
+}
+.content{
+  width: 650rpx;
+  margin: 0 auto;
+}

@@ -1,8 +1,9 @@
 <view class='sub-page'>
   <view class='title flexR'>签到规则说明</view>
-  <view>
-   <view>
-   
+  <view class='content'>
+   <view class='rule-line'>
+     <view class='label redBg flexR font-24'>1</view>
+     <view class='font-26'>每天可签到一次</view>
    </view>
   </view>
 </view>
