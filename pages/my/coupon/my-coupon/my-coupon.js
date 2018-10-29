@@ -16,7 +16,7 @@ Page({
         pageSize:10
       },
       coinData:{
-        nickname:'全场通用',
+        nickname:'全品类：无金额门槛',
         'type':0,
         name:'可叠加使用',
         isCoinCoupon:true,
@@ -230,7 +230,7 @@ Page({
       this.setInputValue()
     },
     giveUpUse(){
-      Storage.setCoupon({ id: "", name: '未使用优惠劵', canClick:true })
+      Storage.setCoupon({ id: "", name: '选择优惠劵', canClick:true })
       Event.emit("updateCoupon")
       Tool.navigationPop()
     },
@@ -260,11 +260,12 @@ Page({
         coinData: this.data.coinData,
       })
       if (this.data.door == 1){
+        let maxUseCoin = options.maxUseCoin || 0
         if (this.data.useType == 1){
           let coinNum = options.coin > this.data.coinData.num? this.data.coinData.num : options.coin
           this.setData({
             coinNum: coinNum,
-            maxNum: this.data.coinData.num > coinNum ? coinNum : this.data.coinData.num,
+            maxNum: this.data.coinData.num > maxUseCoin ? maxUseCoin : this.data.coinData.num,
           })
         } else {
           this.availableDiscountCouponForProduct()

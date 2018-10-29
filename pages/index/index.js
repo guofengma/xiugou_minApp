@@ -33,7 +33,8 @@ Page({
         pageSize:10
       },
       isChange:true,
-      noticeLabel: ['', '精选', '热门','推荐','最新']
+      noticeLabel: ['', '精选', '热门','推荐','最新'],
+      isShowNotice:false, // 是否展示公告
     },
     onLoad: function () {
       Event.on('getLevel', this.getLevel,this)
@@ -264,6 +265,11 @@ Page({
         params: this.data.params,
       })
       this.queryFeaturedList()
+    },
+    isShowNotice(){
+      this.setData({
+        isShowNotice: !this.data.isShowNotice
+      })
     },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);

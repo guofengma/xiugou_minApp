@@ -83,7 +83,7 @@ Page({
         let params = {
           originalImg: originalImg,
           smallImg: smallImg,
-          typeKey: this.data.typeArr[this.data.activeIndex].id,
+          typeKey: this.data.typeArr[this.data.activeIndex].detailId,
           content: this.data.content,
           reqName: '添加反馈',
           url: Operation.addFeedback

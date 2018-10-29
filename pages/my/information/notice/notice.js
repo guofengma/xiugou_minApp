@@ -34,6 +34,7 @@ Page({
         let r = RequestFactory.wxRequest(params);
         r.successBlock = (req) => {
           let list = [];
+          if (!req.responseObject.data.totalPage) return
           for (let i in req.responseObject.data.data) {
             let item = req.responseObject.data.data[i];
             list.push(item)

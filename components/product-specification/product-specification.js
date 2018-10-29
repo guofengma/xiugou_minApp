@@ -73,7 +73,7 @@ Component({
       }) 
       // 渲染提示语
       this.getTipsSpec()
-      this.initTypeSelected()
+      //this.initTypeSelected()
     },
     initTypeSelected(){ // 默认第一个选中
       console.log(this.data.productSpec)

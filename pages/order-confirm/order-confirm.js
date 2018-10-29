@@ -12,7 +12,7 @@ Page({
     addressList:[],
     remark:'', // 买家留言
     door:'', // 1秒杀 2降价 3优惠套餐 4助力免费领 5礼包 99 普通
-    coupon: { id: "", name: '未使用优惠劵', canClick:true}, //优惠券信息
+    coupon: { id: "", name: '选择优惠卷', canClick:true}, //优惠券信息
     useOneCoinNum:0, // 1元劵张数
     couponArr:[1,2], // 不支持优惠卷 不支持1元劵
   },
@@ -264,7 +264,11 @@ Page({
   },
   iconClicked(){ // 点击使用1元劵跳转
     let useOneCoinNum = this.data.useOneCoinNum ? this.data.useOneCoinNum : Math.floor(this.data.orderInfos.totalAmounts)
-    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + useOneCoinNum)
+    let maxUseCoin= this.data.orderInfos.totalAmounts
+    if (this.data.useOneCoinNum){
+      maxUseCoin = Tool.add(this.data.orderInfos.totalAmounts, useOneCoinNum)
+    }
+    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + useOneCoinNum + '&maxUseCoin=' + maxUseCoin)
   },
   couponClicked(){ // 点击使用优惠卷跳转
     if ((this.data.door != 99 && this.data.door ==5)|| this.data.coupon.canClick===false) return

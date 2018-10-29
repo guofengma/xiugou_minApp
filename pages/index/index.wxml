@@ -159,7 +159,7 @@
     <view class='index-item-title flexR font-38'>超值热卖</view>
     <view class='hot-sale-item' wx:for="{{hotSale}}"  wx:for-index="key" wx:for-item='list' wx:key="{{key}}" >
       <view class='hot-sale-img'>
-        <image src='{{list.imgUrl}}' mode='widthFix' catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'></image>
+        <image src='{{list.imgUrl}}'catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'></image>
       </view>
       <scroll-view scroll-x="true"   class='hot-sale-scroll' wx:if='{{list.topicBannerProductDTOList.length>0}}'>
         <view class='hot-sale-content  boxSize'>
@@ -205,3 +205,9 @@
    <image-sub imgStyle='{{"width:165rpx"}}' imgSrc="{{'home_icon_activity.png'}}"/>
   </view>
 </view>
+
+<!-- 公告 -->
+
+<notice visiable="{{isShowNotice}}"
+  bind:isShowNotice='isShowNotice'
+/>
