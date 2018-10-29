@@ -160,9 +160,9 @@ Page({
       // 显示各礼包总库存里面的最小库存
 
       datas.showStock = Math.min(...giftStock)
-      datas.videoUrl && datas.imgFileList.unshift({
-        videoUrl: datas.videoUrl
-      })
+      // datas.videoUrl && datas.imgFileList.unshift({
+      //   videoUrl: datas.videoUrl
+      // })
       this.setData({
         imgUrls: datas.imgFileList,
         productInfo: datas,

@@ -22,9 +22,9 @@
         <image src='/img/msg-icon.png' mode='widthFix' class='fr' bindtap='msgClicked'></image>
         <template is="msg-tips" data="{{msgShow}}" /> 
       </view>
-       <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
+       <!-- <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
         <video  src="{{productInfo.videoUrl}}"   bindplay='videoClicked' bindpause='videoPause' bindended='videoPause' show-fullscreen-btn='{{false}}' custom-cache="{{false}}" enable-progress-gesture='{{false}}'></video> 
-      </view>
+      </view> -->
       <swiper autoplay="{{autoplay}}" interval='3000' bindchange='sliderChange'>
         <block wx:for="{{imgUrls}}" wx:key="unique">
           <swiper-item> 

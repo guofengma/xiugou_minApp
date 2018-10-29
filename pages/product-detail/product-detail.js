@@ -221,9 +221,9 @@ Page({
     r.successBlock = (req) => {
       let datas = req.responseObject.data || {}
       datas.priceLable = datas.priceType == 1 ? '原价' : datas.priceType == 2 ? "拼店价" : this.data.userInfos.levelName+"价"
-      datas.product.videoUrl && datas.productImgList.unshift({
-        videoUrl: datas.product.videoUrl
-      })
+      // datas.product.videoUrl && datas.productImgList.unshift({
+      //   videoUrl: datas.product.videoUrl
+      // })
       this.setData({
         imgUrls: datas.productImgList,
         productInfo: datas.product,

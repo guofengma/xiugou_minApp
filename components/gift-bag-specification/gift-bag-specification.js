@@ -75,7 +75,6 @@ Component({
       })
       this.getTipsSpec(obj)
       if (this.isSelectAll()){
-        console.log(111111)
         this.makeSureType(true)
       }
     },

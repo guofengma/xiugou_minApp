@@ -22,9 +22,9 @@
         <image src='/img/msg-icon.png' mode='widthFix' class='fr' bindtap='msgClicked'></image>
         <template is="msg-tips" data="{{msgShow}}" /> 
       </view>
-      <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
+      <!-- <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
         <video  src="{{productInfo.videoUrl}}"   bindplay='videoClicked' bindpause='videoPause' bindended='videoPause' show-fullscreen-btn='{{false}}' custom-cache="{{false}}" enable-progress-gesture='{{false}}'></video> 
-      </view>
+      </view> -->
       <swiper autoplay="{{autoplay}}" interval='3000' bindchange='sliderChange'>
         <block wx:for="{{imgUrls}}" wx:key="unique">
           <swiper-item> 
@@ -112,7 +112,7 @@
   </view>
     </view>
     <!-- 详情页 tabar  -->
-    <view class="bottom-bar flexR boxSize {{isIPhoneX.className}}">
+    <view class="bottom-bar flexR boxSize {{isIPhoneX.className}}" wx:if='{{productInfoList.onSale}}'>
       <view class='cart font-22 flexC' bindtap='cartClicked'>
         <image src='/img/shoppingcart.png' mode='widthFix'></image>
         <view class='gray'>购物车</view>
@@ -125,12 +125,14 @@
         加入购物车
       </view>
     </view>
+    <view wx:else class="bottom-bar flexR boxSize {{isIPhoneX.className}} no-sale">此商品已下架</view>
     <!--置顶的按钮-->
     <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
       <image src='/img/top-icon.png' mode='widthFix'></image>
       <!-- <view>顶部</view> -->
     </view>
   </view>
+  
 
 </scroll-view>
 

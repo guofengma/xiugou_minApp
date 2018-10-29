@@ -95,7 +95,7 @@
         </block>
       </swiper>
       <view class='notice-img'>
-                <image src='{{noticeArr[0][0].userHeadImg}}' mode='widthFix' catchtap='noticeClicked' data-id='{{noticeArr[0][0].id}}'></image>
+                <image src='{{noticeArr[0][0].img}}' mode='widthFix' catchtap='noticeClicked' data-id='{{noticeArr[0][0].id}}'></image>
               </view>
     </view>
   </view>

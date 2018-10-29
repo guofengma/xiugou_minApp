@@ -2,17 +2,17 @@
 
 <view class='after-sale-type flexR-sb font-32'>服务联系</view>
 
-<view class='group group1 ' catchtap='goPage' data-index='0'>
+<view class='group group1 ' catchtap='goPage' data-index='0' wx:if='list.afterSaleType[0]==afterSaleTypeArr[0]'>
    <view class='font-32'>退款</view>
    <view class='font-30'>未收到货（包含未签收）</view>
 </view>
 
-<view class='group group2' catchtap='goPage' data-index='1'>
+<view class='group group2' catchtap='goPage' data-index='1' wx:if='list.afterSaleType[1]==afterSaleTypeArr[1]'>
    <view class='font-32'>退货退款</view>
    <view class='font-30'>已收到货，需要退换已收到的货物</view>
 </view >
 
-<view class='group group3' catchtap='goPage' data-index='2'>
+<view class='group group3' catchtap='goPage' data-index='2' wx:if='list.afterSaleType[2]==afterSaleTypeArr[2]'>
    <view class='font-32'>换货</view>
    <view class='font-30'>未收到货（包含未签收）</view>
 </view>

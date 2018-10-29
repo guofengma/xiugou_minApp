@@ -185,7 +185,8 @@ Component({
       let list = this.data.list[index]
       list.orderProductList.forEach((item,index)=>{
         let returnProductStatus = item.returnProductStatus || 99999
-        if (returnProductStatus < 6 && returnProductStatus!=3){
+        // returnProductStatus < 6 && returnProductStatus!=3
+        if (returnProductStatus ==1){
           content = '确认收货将关闭' + this.data.returnTypeArr[item.returnType]+"申请，确认收货吗？"
         }
       })

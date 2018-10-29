@@ -14,6 +14,7 @@ Page({
     door:'', // 1秒杀 2降价 3优惠套餐 4助力免费领 5礼包 99 普通
     coupon: { id: "", name: '未使用优惠劵', canClick:true}, //优惠券信息
     useOneCoinNum:0, // 1元劵张数
+    couponArr:[1,2], // 不支持优惠卷 不支持1元劵
   },
   onLoad: function (options) {
     Tool.getUserInfos(this)

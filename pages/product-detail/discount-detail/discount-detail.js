@@ -219,9 +219,9 @@ Page({
     let productInfo = this.data.productInfo
     r.successBlock = (req) => {
       let datas = req.responseObject.data
-      datas.product.videoUrl && datas.productImgList.unshift({
-        videoUrl: datas.product.videoUrl
-      })
+      // datas.product.videoUrl && datas.productImgList.unshift({
+      //   videoUrl: datas.product.videoUrl
+      // })
       this.setData({
         imgUrls: datas.productImgList,
         productInfo: datas.product,

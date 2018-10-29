@@ -17,7 +17,7 @@
         </view>
         <view wx:if='{{detail.buyerRemark}}' class='font-26'>{{detail.buyerRemark}}</view>
         <view class='timeDown' wx:if="{{detail.status==1 || detail.status==3}}">
-          {{distanceTime}} {{detail.status==1? "自动取消订单":"自动收货"}}
+          {{distanceTime}} {{detail.status==1? "后自动取消订单":"后自动确认收货"}}
         </view>
     </view>
 </view>

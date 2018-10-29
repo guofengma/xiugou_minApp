@@ -24,9 +24,9 @@
         <image src='/img/msg-icon.png' mode='widthFix' class='fr' bindtap='msgClicked'></image>
         <template is="msg-tips" data="{{msgShow}}" /> 
       </view>
-      <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
+      <!-- <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
         <video  src="{{productInfo.videoUrl}}"   bindplay='videoClicked' bindpause='videoPause' bindended='videoPause' show-fullscreen-btn='{{false}}' custom-cache="{{false}}" enable-progress-gesture='{{false}}'></video> 
-      </view>
+      </view> -->
       <swiper autoplay="{{autoplay}}" interval='3000' bindchange='sliderChange'>
         <block wx:for="{{imgUrls}}" wx:key="unique">
           <swiper-item> 
@@ -44,7 +44,7 @@
       <view class='price'>
         <text class='price1 red'>¥ {{productInfo.levelPrice}}</text>
         <text class='gray-9 price2'>原价¥ {{productInfo.originalPrice}}</text>
-        <!-- <text class='label-pd'>{{productInfo.level}}</text> -->
+        <text class='label-pd redBg'>{{productInfo.userLevelTypeName}}</text>
         <text>{{productInfo.type==1?  "普通礼包":"升级礼包"}}</text>
       </view>
       <view class='shippingInfo gray'>

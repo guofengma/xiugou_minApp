@@ -55,6 +55,8 @@ Page({
                 item.createTime = Tool.formatTime(item.createdTime);
                 // item.pushTime = Tool.formatTime(item.pushTime);
                 // item.title=this.data.title[item.type-1];
+              item.param = item.param || '{}'
+              item.paramType = item.paramType || 0
               if(Tool.isJson(item.param)){
                 item.param = JSON.parse(item.param)
               } else {
