@@ -132,13 +132,15 @@ Page({
   // 获取发现相关数据
   getDiscoveryByType(type, page = 1, callback) {
     let params = {
-      generalize: type,
       page: page,
       size: 20, //默认20
       url: Operation.queryDiscoverListByType,
       requestMethod: 'GET',
       reqName: '获取发现'
     };
+    // 起初4是获取最新的  后来一波撕逼发现获取最新不需要传generalize参数了
+    if (type !== 4) params.type = type; 
+    
     const typeList = this.data.typeList;
     let obj = {};
     
