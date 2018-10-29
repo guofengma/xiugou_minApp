@@ -5,5 +5,17 @@
      <view class='label redBg flexR font-24'>1</view>
      <view class='font-26'>每天可签到一次</view>
    </view>
+   <view class='rule-line'>
+     <view class='label redBg flexR font-24'>2</view>
+     <view class='font-26'>连续签到秀豆会叠加一个数量</view>
+   </view>
+   <view class='rule-line'>
+     <view class='label redBg flexR font-24'>3</view>
+     <view class='font-26'>如果签到中途断了，只能重新开始签到累计</view>
+   </view>
+   <view class='rule-line'>
+     <view class='label redBg flexR font-24'>4</view>
+     <view class='font-26'>签到的秀豆没有时效性</view>
+   </view>
   </view>
 </view>

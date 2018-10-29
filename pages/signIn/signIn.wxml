@@ -1,5 +1,5 @@
 <view class='sign-page sub-page'>
-  <view class='gray-9 font-24 rule'>
+  <view class='gray-9 font-24 rule' catchtap='ruleClicked'>
     <image-sub imgStyle='{{"width:30rpx"}}' imgSrc="{{'home_icon.png'}}"/>
     <text> 签到规则</text>
   </view>

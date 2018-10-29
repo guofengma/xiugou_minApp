@@ -110,6 +110,9 @@ Page({
     Tool.showErrMsg(r)
     r.addToQueue();
   },
+  ruleClicked(){
+    Tool.navigateTo('/pages/signIn/rule/rule')
+  },
   goPage(){
     Tool.navigateTo('/pages/my/coupon/my-coupon/my-coupon')
   },

@@ -1,5 +1,6 @@
 .title{
   padding-top: 80rpx;
+  padding-bottom: 60rpx;
 }
 .label{
   width: 36rpx;
@@ -13,9 +14,12 @@
   border-left: 1rpx solid #D51243;
   height: 98rpx;
   position: relative;
-  padding-left:20rpx;
+  padding-left:30rpx;
 }
 .content{
-  width: 650rpx;
+  width: 630rpx;
   margin: 0 auto;
+}
+.content>.rule-line:last-child{
+  border-left: 1rpx solid transparent
 }
