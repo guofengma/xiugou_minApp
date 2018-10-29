@@ -2,7 +2,7 @@
   <!--轮播  -->
   <view class='ad'>
     <view class='search-bar boxSize flexR-sb fixed-top'>
-      <image src='/img/logo-img.jpg' mode='widthFix'></image>
+      <image src='/img/logo-index@2x.png' mode='widthFix'></image>
       <view class='bar flexR-sb gray font-28' catchtap='searchClicked'>
         <image-sub imgStyle='{{"width:32rpx"}}' imgSrc="{{'home_icon_search_nor@2x.png'}}"/>
         <text>请输入关键字搜索</text>

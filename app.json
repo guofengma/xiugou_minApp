@@ -67,7 +67,8 @@
     "pages/my/extension/extension-detail/extension-detail",
     "pages/my/extension/pay/pay",
     "pages/my/extension/extension-explain/extension-explain",
-    "pages/register/red-envelopes/red-envelopes"
+    "pages/register/red-envelopes/red-envelopes",
+    "pages/signIn/rule/rule"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

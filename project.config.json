@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 25,
+			"current": 37,
 			"list": [
 				{
 					"id": 0,
@@ -255,6 +255,12 @@
 					"id": -1,
 					"name": "红包",
 					"pathName": "pages/register/red-envelopes/red-envelopes",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "签到规则",
+					"pathName": "pages/signIn/rule/rule",
 					"query": ""
 				}
 			]

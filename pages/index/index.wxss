@@ -21,7 +21,7 @@
  margin: -8rpx 14rpx 0 20rpx;
 }
 .search-bar image{
-  width: 42rpx;
+  width: 46rpx;
 }
 .slide-image{
   width: 100%;
