@@ -201,7 +201,7 @@
   </view>
 
   <!-- 任务 -->
-  <view class='duty'>
+  <view class='duty' style="right: {{isScroll?-80:0}}rpx">
    <image-sub imgStyle='{{"width:165rpx"}}' imgSrc="{{'home_icon_activity.png'}}"/>
   </view>
 </view>

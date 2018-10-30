@@ -3,7 +3,7 @@
     <view class='task-share-card'>
       <!-- 未刮奖 -->
       <view class='task-card ready'>刮刮卡</view>
-      <view class='lottery_btn active'>立即领取</view>
+      <view class='lottery_btn inactive'>立即领取</view>
     </view>
     <view class='task-share-card'>
       <!-- 抽中优惠券 -->
@@ -15,13 +15,13 @@
           <view class='coupon-time'>使用期限：2018.10.14-2018.10.16</view>
         </view>
       </view>
-      <view class='lottery_btn active'>立即领取</view>
+      <view class='lottery_btn active' catchtap='toggleModalShow'>立即领取</view>
     </view>
     <view class='task-share-card'>
       <!-- 秀豆 -->
       <view class='task-card bean'>
         <view class='bean-wrap flexR'>
-          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xiu_bean.png' class='bean-icon'></image>
+          <image src='{{imgUrl}}xiu_bean.png' class='bean-icon'></image>
           <view class='bean-count'>88<text>秀豆</text></view>
         </view>
         <view class='bean-desc'>满100秀豆可兑换1元现金券</view>
@@ -29,8 +29,15 @@
       <view class='lottery_btn active'>立即领取</view>
     </view>
     <view class='task-detail-desc'>
-      <image mode='widthFix' src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png' class='task-thumb'></image>
+      <image mode='widthFix' src='{{imgUrl}}task_detail_bg.png' class='task-thumb'></image>
     </view>
   </view>
-  <view class='fixed-height'></view>
+  <!-- 填写领取手机 -->
+  <view class='modal' wx:if="{{showPhoneModal}}">
+    <view class='modal-body'>
+      <view class='modal-title'>领取手机号</view>
+      <input class='modal-input' bindinput='phoneInput' placeholder='输入手机号' focus='{{inputFocus}}'></input>
+      <button class='modal-btn' catchtap='toggleModalShow'>确定</button>
+    </view>
+  </view>
 </view>

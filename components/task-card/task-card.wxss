@@ -104,10 +104,10 @@
   height: 100%;
 }
 .card-task-award {
-  font-size: 40rpx;
+  font-size: 28rpx;
   color: #F00006;
   position:absolute;
-  left:115rpx;
+  left:140rpx;
   top:90rpx;
 }
 .card-task-award text {
