@@ -301,7 +301,7 @@ Page({
           coupon:{
             id:'',
             name:"暂无可用优惠劵",
-            canClick:false,
+            canClick:true,
           }
         })
       }      
