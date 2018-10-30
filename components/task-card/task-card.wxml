@@ -3,7 +3,7 @@
     <image class='card-close' src='/img/close-3.png' catchtap='close'></image>
     <!-- 成功领奖 -->
     <view wx:if="{{type == 'success'}}">
-      <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_success.png' class='card-thumb'></image>
+      <image src='{{imgUrl}}task_success.png' class='card-thumb'></image>
       <view class='card-content'>
         <view class='card-success-item font-28'>获得现金奖励！</view>
         <view class='card-detail'>
@@ -18,7 +18,7 @@
     </view>
     <!-- 啥都没有 -->
     <view wx:elif="{{type == 'fail'}}">
-      <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_fail.png' class='card-thumb'></image>
+      <image src='{{imgUrl}}task_fail.png' class='card-thumb'></image>
       <view class='card-content fail'>
         <view class='text'>没有任何秀友帮你激活~ </view>
         <view class='text'>下次再接再励~</view>
@@ -28,7 +28,7 @@
     <view wx:else>
       <view class='card-title'>品牌奖励任务</view>
       <view class='card-task-wrap'>
-        <image class='card-task-thumb' src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_brand.png'></image>
+        <image class='card-task-thumb' src='{{imgUrl}}task_brand.png'></image>
         <view class='card-task-award'><text>¥</text>2-10</view>
       </view>
       <view class='card-task-desc'>

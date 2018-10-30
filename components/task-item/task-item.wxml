@@ -2,7 +2,7 @@
   <view class="task-header">
     <view class='task-title flexR-sb' bindtap='toggleShowDetail'>
       <view class='task-name'>任务说明：邀请好友可获得品牌推广的现金奖励，邀请好友可获得品牌推广的现金奖励</view>
-      <image class='task-icon-arrow {{showDetail?"active":""}}' src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/arrow_{{showDetail ?"top": "bottom"}}.png'></image>
+      <image class='task-icon-arrow {{showDetail?"active":""}}' src='{{imgUrl}}arrow_{{showDetail ?"top": "bottom"}}.png'></image>
     </view>
     <view class='task-detail' wx:if="{{showDetail}}">
       <view class='task-desc'>任务说明：邀请好友可获得品牌推广的现金奖励，邀请好友可获得品牌推广的现金奖励</view>

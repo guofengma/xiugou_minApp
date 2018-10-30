@@ -1,3 +1,4 @@
+let {Config } = global;
 Component({
   properties: {
     type: {
@@ -6,7 +7,7 @@ Component({
     }
   },
   data: {
-
+    imgUrl: Config.imgBaseUrl
   },
   methods: {
     close() {

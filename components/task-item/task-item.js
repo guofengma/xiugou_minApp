@@ -1,4 +1,4 @@
-let { Tool } = global;
+let { Tool, Config } = global;
 Component({
   properties: {
     date: {
@@ -8,6 +8,7 @@ Component({
   },
 
   data: {
+    imgUrl: Config.imgBaseUrl,
     showCard: false,    
     countdownTime: '00:00:00:00',
     showDetail: false,
