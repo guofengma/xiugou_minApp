@@ -1,6 +1,6 @@
 @import "/libs/wxParse/wxParse.wxss";
 .bg-area{
-  background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/dbj_02@2x.png") no-repeat top center;
+  background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/dbj_02@2x.png") no-repeat top center;
   background-size: cover;
   color: #fff;
   height: 364rpx;
@@ -8,7 +8,7 @@
   display: flex;
 }
 .img-area{
-  background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/tx_03@2x.png") no-repeat top center;
+  background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/tx_03@2x.png") no-repeat top center;
   background-size: cover;
   width: 210rpx;
   height: 210rpx;
@@ -45,7 +45,7 @@
   width:690rpx;
   height:259rpx;
   margin: 0 auto;
-  background: transparent url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/promotion-bg.png") no-repeat;
+  background: transparent url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/promotion-bg.png") no-repeat;
   background-size: 100%;
   border-radius:20px;
   box-shadow:0px 0px 20px 0px rgba(0,0,0,0.1);
@@ -57,7 +57,7 @@
 .icon-growing{
   height: 88rpx;
   padding-left: 40rpx;
-  background: transparent url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/my-promotion-icon.png") no-repeat left 28rpx;
+  background: transparent url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-promotion-icon.png") no-repeat left 28rpx;
   background-size: 30rpx;
 }
 .growing-value{

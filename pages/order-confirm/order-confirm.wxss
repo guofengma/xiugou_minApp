@@ -8,7 +8,7 @@
   padding: 30rpx 100rpx 33rpx 30rpx;
   position: relative;
   border-top: 1rpx solid #eee;
-  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/line-bg.png) no-repeat left bottom;
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/line-bg.png) no-repeat left bottom;
   background-size: 100%;
   margin-bottom: 20rpx;
 }
@@ -100,7 +100,7 @@
   border-top: 1rpx solid #ddd;
   border-bottom: 1rpx solid #ddd;
   margin-bottom: 30rpx;
-  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForobtain.png) no-repeat 30rpx 25rpx; 
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/iconForobtain.png) no-repeat 30rpx 25rpx;
   background-size:32rpx 32rpx;
 }
 .gift-items>.gift-line:last-child{
@@ -115,6 +115,6 @@
 .getExp{
   margin-left: 0;
   padding-left: 70rpx;
-  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/iconForobtain.png) no-repeat 30rpx center; 
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/iconForobtain.png) no-repeat 30rpx center;
   background-size:32rpx 25rpx;
 }

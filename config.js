@@ -19,6 +19,6 @@ const config = {
     m_fixed:'?x-oss-process=im age/resize,m_fixed,h_100,w_100', // 正方形
     m_fill:'?x-oss-process=image/resize,m_fill,h_100,w_100', // 固定宽度 自裁剪
   },
-  imgBaseUrl:"https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/",// 图片的地址
+  imgBaseUrl:"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/",// 图片的地址
 }
 export default config

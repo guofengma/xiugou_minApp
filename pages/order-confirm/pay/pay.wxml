@@ -15,7 +15,7 @@
     </view> -->
     <view class="wrap gray " >
         <view class="left">
-            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon_03-03@2x.png"></image>
+            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon_03-03@2x.png"></image>
             <view>余额支付</view>
         </view>
         <view class="right useBalance">
@@ -28,7 +28,7 @@
     <view class="inf">平台支付仅限APP使用</view>
     <!-- <view class="wrap" bindtap="payWay" data-index='0' data-val='16'>
         <view class="left">
-            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon_03-05@2x.png"></image>
+            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon_03-05@2x.png"></image>
             <view>银行卡支付</view>
         </view>
         <view class="right">
@@ -38,7 +38,7 @@
     </view> -->
     <view class="wrap" bindtap="payWay"  data-index='1' data-val='16'>
         <view class="left">
-            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon_03-08@2x.png"></image>
+            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon_03-08@2x.png"></image>
             <view>微信支付</view>
         </view>
         <view class="right">
@@ -48,7 +48,7 @@
     </view>
     <!-- <view class="wrap">
         <view class="left">
-            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon_03-09@2x.png"></image>
+            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon_03-09@2x.png"></image>
             <view>支付宝支付</view>
         </view>
         <view class="right">

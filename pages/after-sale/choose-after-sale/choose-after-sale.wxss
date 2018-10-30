@@ -23,16 +23,16 @@
   flex-direction: column;
   justify-content: center;
   margin-bottom: 20rpx;
-  background: #fff url('https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/shouhou_icon_tuikuan_nor@2x.png') no-repeat 40rpx center;
+  background: #fff url('https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/shouhou_icon_tuikuan_nor@2x.png') no-repeat 40rpx center;
   background-size: 90rpx 90rpx;
 }
 .group .font-30{
   color: #666;
 }
 .group2{
-  background-image: url('https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/shouhou_icon_tuihuo_nor@2x.png')
+  background-image: url('https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/shouhou_icon_tuihuo_nor@2x.png')
 }
 
 .group3{
-  background-image: url('https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/shouhou_icon_huanhuo_nor@2x.png')
+  background-image: url('https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/shouhou_icon_huanhuo_nor@2x.png')
 }

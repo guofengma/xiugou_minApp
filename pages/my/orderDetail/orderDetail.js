@@ -15,7 +15,7 @@ Page({
       types:['退款','换货','退货','退换'],
       returnTypeArr: ['', '退款', '退货', '换货'],
       hasData:true,
-      imgSrcUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/',
+      imgSrcUrl: 'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/',
       logIcon: 'order-state-3-dark.png',
       isCancel: false,//是否取消订单
       isDelete: false, //是否删除订单

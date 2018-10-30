@@ -6,7 +6,7 @@
                 <text>{{typeArr[activeIndex].value}}</text>
             </view>
             <view>
-                <image class="jt-img" src="{{mask?'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/expand-btn.png':'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/packup-btn.png'}}" mode='widthFix'></image>
+                <image class="jt-img" src="{{mask?'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/expand-btn.png':'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/packup-btn.png'}}" mode='widthFix'></image>
             </view>
         </view>
     </view>
@@ -47,7 +47,7 @@
     <view wx:if="{{success}}" class="success-mask">
         <view class="success-area">
             <view class="success-content">
-                <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/success.png"></image>
+                <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/success.png"></image>
                 <view class="success">提交成功!</view>
                 <view class="tip">已提交给相关客服人员 并催促尽快处理！</view>
             </view>

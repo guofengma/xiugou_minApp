@@ -10,7 +10,7 @@
   height: 810rpx;
   background: #fff;
   border-radius: 14rpx;
-  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/index-notice-bg.png) no-repeat left top; 
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/index-notice-bg.png) no-repeat left top;
   background-size: 100%;
 }
 .scroll-view{

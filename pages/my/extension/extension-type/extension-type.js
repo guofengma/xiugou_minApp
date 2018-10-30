@@ -16,9 +16,7 @@ Page({
     let num = e.currentTarget.dataset.num
     Tool.navigateTo('/pages/my/extension/pay/pay?num='+num)
   },
-  goPage(){
-    Tool.navigateTo('/pages/my/extension/extension-explain/extension-explain')
-  },
+
   onHide: function () {
 
   },

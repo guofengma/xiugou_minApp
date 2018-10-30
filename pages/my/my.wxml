@@ -3,8 +3,8 @@
   <view class='content-top'>
     <view class='top-view'>
       <view class='fr'>
-        <image src='{{imgUrl+"iconSetup.png"}}' mode='widthFix' catchtap='itemClicked' data-page='0'></image>
-        <image src='{{imgUrl+"iconService.png"}}' mode='widthFix' catchtap='itemClicked' data-page='1'></image>
+        <image src='{{imgUrl+"iconSetup.png"}}' mode='widthFix' catchtap='itemClicked' data-page='0' imgStyle='{{"width:42px"}}' ></image>
+        <image src='{{imgUrl+"iconService.png"}}' mode='widthFix' catchtap='itemClicked' data-page='1' imgStyle='{{"width:42rpx"}}' ></image>
       </view>
     </view>
     <view class='my-avatar' catchtap='itemClicked' data-page='2'>
@@ -111,8 +111,8 @@
         <view>收藏店铺</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='13'>
-        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconHelp.png'}}"/>
-        <view>帮助</view>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconService.png'}}"/>
+        <view>帮助与客服</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='14'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconAddress.png'}}"/>

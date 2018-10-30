@@ -5,7 +5,7 @@ Page({
       userInfos:'',
       tabClicked:1,
       num:0,
-      imgUrl:'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/',
+      imgUrl:'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/',
       pageArr:[
         "/pages/my/setting/setting", // 设置
         "/pages/my/information/information",//我的消息
@@ -24,7 +24,7 @@ Page({
         '/pages/address/select-express-address/select-express-address',//地址
         '',//足迹
         '',//我的任务
-        '',//我的推广
+        '/pages/my/extension/extension',//我的推广
         '/pages/discover/discover-fav/discover-fav',//发现收藏
       ]
     },

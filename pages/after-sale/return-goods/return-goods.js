@@ -64,6 +64,7 @@ Page({
       }
       if (status == 3) {
         this.data.result[status].info = datas.refusalReason
+        this.data.result[status].time = Tool.formatTime(datas.refuseTime)
       }
       this.setData({
         expressNo: expressNo,

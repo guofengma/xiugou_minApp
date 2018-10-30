@@ -41,7 +41,7 @@
             </view>
         </view>
         <view class="watch-detail" bindtap="informationDetail" wx:if='{{title[item.paramType][1]}}' data-type="{{item.paramType}}" data-param="{{item.param}}" data-index='{{index}}'>查看详情
-            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/detail-btn.png"></image>
+            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/detail-btn.png"></image>
         </view>
     </view>
     <!--<view class="notice-item">-->
@@ -54,7 +54,7 @@
     <!--<view class="item">交易订单：9985465156091</view>-->
     <!--<view class="item">退款说明：退款一件短袖</view>-->
     <!--</view>-->
-    <!--<view class="watch-detail">查看详情 <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/detail-btn.png"></image></view>-->
+    <!--<view class="watch-detail">查看详情 <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/detail-btn.png"></image></view>-->
     <!--</view>-->
     <!--<view class="notice-item">-->
     <!--<view class="time">05/06 15:45</view>-->
@@ -65,7 +65,7 @@
     <!--<view class="item">店铺名称：包子小铺</view>-->
     <!--<view class="item">操作时间：2018-05-05 12:45:34</view>-->
     <!--</view>-->
-    <!--<view class="watch-detail">查看详情 <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/detail-btn.png"></image></view>-->
+    <!--<view class="watch-detail">查看详情 <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/detail-btn.png"></image></view>-->
     <!--</view>-->
     <!--<view class="notice-item">-->
     <!--<view class="time">05/06 15:45</view>-->
@@ -74,7 +74,7 @@
     <!--<view class="info">您所提交的订单尚未支付，请尽快支付，谢谢！</view>-->
     <!--<view class="item">通知时间：2018-05-05 12:45:34</view>-->
     <!--</view>-->
-    <!--<view class="watch-detail">查看详情 <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/detail-btn.png"></image></view>-->
+    <!--<view class="watch-detail">查看详情 <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/detail-btn.png"></image></view>-->
     <!--</view>-->
     <!--<view class="notice-item">-->
     <!--<view class="time">05/06 15:45</view>-->
@@ -83,7 +83,7 @@
     <!--<view class="info">您所提交的订单已发货，请耐心等待收货！</view>-->
     <!--<view class="item">通知时间：2018-05-05 12:45:34</view>-->
     <!--</view>-->
-    <!--<view class="watch-detail">查看详情 <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/detail-btn.png"></image></view>-->
+    <!--<view class="watch-detail">查看详情 <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/detail-btn.png"></image></view>-->
     <!--</view>-->
     <!--<view class="notice-item">-->
     <!--<view class="time">05/06 15:45</view>-->
@@ -92,7 +92,7 @@
     <!--<view class="info">您所提交的订单已超时，已取消订单，如需购买，请重新下单。</view>-->
     <!--<view class="item">通知时间：2018-05-05 12:45:34</view>-->
     <!--</view>-->
-    <!--<view class="watch-detail">查看详情 <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/detail-btn.png"></image></view>-->
+    <!--<view class="watch-detail">查看详情 <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/detail-btn.png"></image></view>-->
     <!--</view>-->
     <!--<view class="notice-item">-->
     <!--<view class="time">05/06 15:45</view>-->
@@ -101,7 +101,7 @@
     <!--<view class="info">您的提现申请被驳回，请确认。</view>-->
     <!--<view class="item">通知时间：2018-05-05 12:45:34</view>-->
     <!--</view>-->
-    <!--<view class="watch-detail">查看详情 <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/detail-btn.png"></image></view>-->
+    <!--<view class="watch-detail">查看详情 <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/detail-btn.png"></image></view>-->
     <!--</view>-->
     <!--<view class="notice-item">-->
     <!--<view class="time">05/06 15:45</view>-->
