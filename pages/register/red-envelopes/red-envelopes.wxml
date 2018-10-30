@@ -14,5 +14,9 @@
   <view class='dismiss font-26 flexR'>
     <view>跳过</view>
   </view>
-  <view class='code-btn gray flexR font-26'>填写授权码</view>
+  <view class='code-btn gray flexR font-26' catchtap='goPage'>填写授权码</view>
 </view>
+
+<red-envelopes visiable="{{isShow}}"
+  bind:isShow='isShow'
+/>

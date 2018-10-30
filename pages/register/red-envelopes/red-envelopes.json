@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "领取红包",
   "usingComponents": {
-    "image-sub": "/components/image-sub/image-sub"
+    "image-sub": "/components/image-sub/image-sub",
+    "red-envelopes": "/components/red-envelopes/red-envelopes"
   }
 }

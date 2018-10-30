@@ -20,10 +20,8 @@ App({
       global.Operation = Operation
       global.Config = config
       this.getSystemInfo();
-      console.log(Storage.getPlatform())
       // this.wxLogin()
       if (!Storage.getPlatform()){
-        console.log(11111)
         let uuid = Tool.getUUID()
         Storage.setPlatform(uuid)
       }

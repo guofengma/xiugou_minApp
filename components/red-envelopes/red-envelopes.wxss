@@ -1,0 +1,43 @@
+@import "/css/app";
+.container{
+  width: 514rpx;
+  padding-top:80rpx;
+  position: relative;
+}
+.red-envelopes-view{
+  height: 724rpx;
+  background: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/tanguang_bg_hongbao_nor@2x.png) no-repeat left top; 
+  background-size: 100%;
+}
+.close{
+  position: absolute;
+  top:0;
+  right: -47rpx;
+  z-index: 100004
+}
+.red-envelopes-view{
+  color: #fff;
+  text-align: center
+}
+.red-info{
+  font-size: 28rpx;
+  padding-top: 52rpx;
+}
+.amout{
+  font-size: 100rpx;
+  display: inline-block
+}
+.red-succ{
+  font-size: 46rpx;
+  position: absolute;
+  bottom: 36rpx;
+  width: 100%;
+}
+.btn-name{
+  position: absolute;
+  width: 100%;
+  bottom: 170rpx;
+  height: 160rpx;
+  font-size: 28rpx;
+  color: #80522A
+}
