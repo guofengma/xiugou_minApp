@@ -34,6 +34,14 @@ Page({
       detail: {},//详情信息
       orderId: '',//订单ID
       status: '',//订单状态
+      payTypeArr: [1, 2, 4, 8, 16], // 平台支付 微信支付 微信支付 支付宝支付 银联支付
+      payType: {
+        1: '平台支付',
+        2: '微信支付',
+        4: '微信支付',
+        8: '支付宝支付',
+        16: '银联支付'
+      },
     },
     onLoad: function (options) {
         this.setData({
@@ -100,9 +108,7 @@ Page({
             if (detail.expressNo) {
               this.getDelivery(detail)
             }
-            if (detail.orderType != 5){
-              this.middleBtn()
-            }
+            this.middleBtn()
         };
         Tool.showErrMsg(r)
         r.addToQueue();
@@ -320,7 +326,7 @@ Page({
     middleBtn(){
       let detail = this.data.detail
       let outOrderState = detail.status // 外订单状态
-      let childrenList = detail.orderProductList 
+      let childrenList = detail.orderProductList
       let state = this.data.state
       let btnArr = []
       childrenList.forEach((item,index)=>{

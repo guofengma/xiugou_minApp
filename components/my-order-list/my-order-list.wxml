@@ -27,7 +27,7 @@
       <view class="item" wx:for="{{item.orderProductList}}" wx:key="item" wx:for-item="oItem">
         <image src="{{oItem.specImg}}" alt=""></image>
         <view class="goods-inf">
-          <view class="ellipsis-2">
+          <view class="ellipsis-2 label-line">
             <text class='label-red-border' wx:if='{{item.orderType==98 || item.orderType==5}}'>礼包</text> {{oItem.productName}}
           </view>
           <view class="color-classify">{{oItem.spec}} </view>

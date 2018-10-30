@@ -51,7 +51,7 @@ Page({
     let callBack = ()=>{
       this.getShoppingCartList()
     }
-    if (!this.data.didLogin){
+    if (!this.data.didLogin && this.data.inviteCode){
       app.getSystemInfo()
       app.wxLogin(callBack)
     } else {

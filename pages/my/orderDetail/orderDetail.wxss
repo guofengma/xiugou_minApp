@@ -190,3 +190,7 @@
   background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/iconForobtain.png) no-repeat 30rpx 25rpx;
   background-size:32rpx 32rpx;
 }
+.gift-sale-after{
+  border-bottom:0;
+
+}

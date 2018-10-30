@@ -7,7 +7,10 @@
 @import  "/components/result-tips/result-tips";
 
 @import "/components/search-bar/search-bar.wxss";
-
+.label-line{
+  height: 38rpx;
+  line-break: 38rpx;
+}
 .order-list{
     margin-top: 20rpx;
 }

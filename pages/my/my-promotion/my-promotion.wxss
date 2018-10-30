@@ -15,7 +15,8 @@
 }
 .img-area image{
   width: 140rpx;
-  border-radius: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
 }
 .levelName{
   font-size: 26rpx;
@@ -85,13 +86,16 @@
 .growing-question{
   margin-top: 186rpx;
 }
-.growing-question>view{
+.title{
   min-height: 88rpx;
   line-height: 88rpx;
   padding: 0 50rpx;
-  border-top: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
   box-sizing: border-box;
 }
-.growing-question>view:first-child{
-  border-top:0;
+.growing-question>view:last-child{
+  padding: 30rpx;
+}
+.growing-question>view{
+  background: #fff;
 }

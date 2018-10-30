@@ -5,7 +5,6 @@ Page({
       userInfos:'',
       tabClicked:1,
       num:0,
-      imgUrl:'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/',
       pageArr:[
         "/pages/my/setting/setting", // 设置
         "/pages/my/information/information",//我的消息

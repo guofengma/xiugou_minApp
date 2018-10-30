@@ -61,7 +61,7 @@ Component({
       stockList.forEach((item)=>{
         totalStock += item.stock
         // 换货的时候 去掉价格不等的清单
-        if (this.data.commodityType == 5 & item.price == this.data.price){
+        if (this.data.commodityType == 5 & item.price <= this.data.price){
           priceList.push(item)
         }
         console.log(this.data.commodityType, item.specIds,this.data.specIds)

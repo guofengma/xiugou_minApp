@@ -3,8 +3,8 @@
   <view class='content-top'>
     <view class='top-view'>
       <view class='fr'>
-        <image src='{{imgUrl+"iconSetup.png"}}' mode='widthFix' catchtap='itemClicked' data-page='0' imgStyle='{{"width:42px"}}' ></image>
-        <image src='{{imgUrl+"iconService.png"}}' mode='widthFix' catchtap='itemClicked' data-page='1' imgStyle='{{"width:42rpx"}}' ></image>
+        <image-sub imgStyle='{{"width:42rpx"}}' imgSrc="{{'tongyong_icon_shezhi_nor@2x.png'}}" catchtap='itemClicked' data-page='0'/>
+        <image-sub imgStyle='{{"width:42rpx"}}' imgSrc="{{'tongyong_icon_xiaoxi_nor@2x.png'}}" catchtap='itemClicked' data-page='1'/>
       </view>
     </view>
     <view class='my-avatar' catchtap='itemClicked' data-page='2'>
@@ -12,11 +12,11 @@
       <view>
         <view class='my-info-item' catchtap='itemClicked' data-page='2' >
           <text class='my-name'> {{userInfos.nickname}}</text>
-          <image src='{{imgUrl+"xjt_10@2x.png"}}' mode='widthFix' class='my-info-arrow'></image>
+          <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
         </view>
 
         <view class='my-rank'>
-          <image src='{{imgUrl+"iconRank.png"}}'  mode='widthFix'></image>
+          <image-sub imgStyle='{{"width:88rpx"}}' imgSrc="{{'iconRank.png'}}"/>
           <text class='my-rank-no'>{{userInfos.levelName || ''}}</text>
         </view>
       </view>

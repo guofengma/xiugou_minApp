@@ -6,7 +6,7 @@
 
 <view class='orderComfirm sub-page'>
   <!--订单地址类型  -->
-  <view class='choose-addressType flexR'>
+  <!-- <view class='choose-addressType flexR'>
     <view data-index='1' 
           class='flexR {{addressType==1? "active":""}}' 
           style='width:{{!orderInfos.hasSelfLifting? "100%":"50%"}}'
@@ -16,7 +16,7 @@
           class='flexR addressType2 {{addressType==2? "active":""}}' 
           bindtap='changeAddressType'
           >自提</view>
-  </view>
+  </view> -->
   <!--订单地址信息  -->
   <view class='address-view' bindtap='addressClicked'>
     <template is="address-info" data='{{addressType,...addressList[addressType]}}'/>
