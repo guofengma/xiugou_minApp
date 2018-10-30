@@ -1,5 +1,6 @@
 import jsrsasign from './jsrassign';
 import rsa_config from './ras_config';
+import config from '../config.js'
 
 let key = '-----BEGIN PRIVATE KEY-----' + rsa_config.rsa_key + '-----END PRIVATE KEY-----';
 
@@ -51,7 +52,7 @@ const RSA = {
     }
   },
   checkInWhiteList(url) {
-    return rsa_config.whiteList.includes(url);
+    return rsa_config.whiteList.includes(url.replace(config.baseUrl,''));
   }
 }
 export default RSA;

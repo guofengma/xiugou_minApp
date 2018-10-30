@@ -1,0 +1,42 @@
+<view class="card-container">
+  <view class='card-body' >
+    <image class='card-close' src='/img/close-3.png' catchtap='close'></image>
+    <!-- 成功领奖 -->
+    <view wx:if="{{type == 'success'}}">
+      <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_success.png' class='card-thumb'></image>
+      <view class='card-content'>
+        <view class='card-success-item font-28'>获得现金奖励！</view>
+        <view class='card-detail'>
+          <view class='card-success-count'>
+            <text class='font-28'>¥</text>24
+            <text class='card-success-sup font-24'>+18秀豆</text>
+          </view>
+        </view>
+        <view class='btn-see'>查看账户</view>
+        <view class='card-tip'>现金奖励已存入“现金账户”</view>
+      </view>
+    </view>
+    <!-- 啥都没有 -->
+    <view wx:elif="{{type == 'fail'}}">
+      <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_fail.png' class='card-thumb'></image>
+      <view class='card-content fail'>
+        <view class='text'>没有任何秀友帮你激活~ </view>
+        <view class='text'>下次再接再励~</view>
+      </view>
+    </view>
+    <!-- 任务待领取 -->
+    <view wx:else>
+      <view class='card-title'>品牌奖励任务</view>
+      <view class='card-task-wrap'>
+        <image class='card-task-thumb' src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_brand.png'></image>
+        <view class='card-task-award'><text>¥</text>2-10</view>
+      </view>
+      <view class='card-task-desc'>
+        <view>完成推广任务</view>
+        <view>可获得2-10元现金奖励</view>
+      </view>
+      <view class='btn-get'>马上领取</view>
+    </view>
+  </view>
+  
+</view>

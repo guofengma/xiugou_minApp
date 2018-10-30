@@ -1,0 +1,4 @@
+<view class="task-container">
+  <task-item date="{{10000}}"></task-item>
+  <task-item date="{{20000}}"></task-item>
+</view>

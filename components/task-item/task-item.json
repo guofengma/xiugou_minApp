@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "task-card": "/components/task-card/task-card"
+  }
+}

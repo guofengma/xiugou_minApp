@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 31,
+			"current": 34,
 			"list": [
 				{
 					"id": 0,
@@ -45,7 +45,7 @@
 					"id": 1,
 					"name": "产品详情页",
 					"pathName": "pages/product-detail/product-detail",
-					"query": "productId=1"
+					"query": "productId=71"
 				},
 				{
 					"id": 2,
@@ -233,22 +233,40 @@
 					"pathName": "pages/my/extension/extension-type/extension-type",
 					"query": ""
 				},
+				{
+					"id": -1,
+					"name": "秀购发现",
+					"pathName": "pages/discover/discover",
+					"query": ""
+				},
+				{
+					"id": 34,
+					"name": "秀购发现详情",
+					"pathName": "pages/discover/discover-detail/discover-detail",
+					"query": "articleId=4"
+				},
+				{
+					"id": -1,
+					"name": "发现收藏",
+					"pathName": "pages/discover/discover-fav/discover-fav",
+					"query": ""
+				},
         {
           "id": -1,
-          "name": "秀购发现",
-          "pathName": "pages/discover/discover",
+          "name": "我的任务",
+          "pathName": "pages/my/task/task",
           "query": ""
         },
         {
           "id": -1,
-          "name": "秀购发现详情",
-          "pathName": "pages/discover/discover-detail/discover-detail",
+          "name": "任务详情",
+          "pathName": "pages/my/task/task-detail/task-detail",
           "query": ""
         },
         {
           "id": -1,
-          "name": "发现收藏",
-          "pathName": "pages/discover/discover-fav/discover-fav",
+          "name": "任务分享",
+          "pathName": "pages/my/task/task-share/task-share",
           "query": ""
         }
 			]

@@ -1,0 +1,60 @@
+@import '/css/app.wxss';
+.task-item {
+  background: #fff;
+  margin-bottom: 20rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+.task-icon-arrow {
+  width:42rpx;
+  height:21rpx;
+}
+.task-name {
+  width: 90%;
+}
+.task-detail,.task-footer {
+  border-top: 1rpx solid #ddd;
+}
+.task-title,.task-detail,.task-footer {
+  padding: 20rpx 30rpx;  
+}
+.task-start {
+  margin-top: 20rpx;
+}
+.task-info-wrap {
+  width: 690rpx;
+  height: 344rpx;
+  margin-top: 40rpx;
+  background: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png) no-repeat center;
+  background-size: 100%;
+}
+.task-info-detail {
+  margin-left: 342rpx;
+  padding-top: 90rpx;
+  text-align: center;
+  color: #fff;
+}
+.task-info-detail button {
+  margin: 20rpx auto 10rpx;
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  border-radius: 10rpx;
+  background: #D51243;
+  color: #fff;
+}
+.task-status text {
+  width:16rpx;
+  display:inline-block;
+  text-align: center;
+}
+.task-delay {
+  color: #D51243;
+  font-size: 22rpx;
+}
+.task-delay .redpackage {
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 10rpx;
+}

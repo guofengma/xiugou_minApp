@@ -1,0 +1,36 @@
+<view class='container'>
+  <view class='task-share-info'>
+    <view class='task-share-card'>
+      <!-- 未刮奖 -->
+      <view class='task-card ready'>刮刮卡</view>
+      <view class='lottery_btn active'>立即领取</view>
+    </view>
+    <view class='task-share-card'>
+      <!-- 抽中优惠券 -->
+      <view class='task-card coupon flexR'>
+        <view class='coupon-money'>888<text class='symbol'>元</text></view>
+        <view class='coupon-info'>
+          <view class='coupon-title'>菲诗小铺店铺优惠券</view>
+          <view class='coupon-detail'>满199减20元</view>
+          <view class='coupon-time'>使用期限：2018.10.14-2018.10.16</view>
+        </view>
+      </view>
+      <view class='lottery_btn active'>立即领取</view>
+    </view>
+    <view class='task-share-card'>
+      <!-- 秀豆 -->
+      <view class='task-card bean'>
+        <view class='bean-wrap flexR'>
+          <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xiu_bean.png' class='bean-icon'></image>
+          <view class='bean-count'>88<text>秀豆</text></view>
+        </view>
+        <view class='bean-desc'>满100秀豆可兑换1元现金券</view>
+      </view>
+      <view class='lottery_btn active'>立即领取</view>
+    </view>
+    <view class='task-detail-desc'>
+      <image mode='widthFix' src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png' class='task-thumb'></image>
+    </view>
+  </view>
+  <view class='fixed-height'></view>
+</view>
