@@ -35,6 +35,24 @@ Page({
       isChange:true,
       noticeLabel: ['', '精选', '热门','推荐','最新'],
       isShowNotice:false, // 是否展示公告
+      isScroll: false,
+      scrollTimer: null,
+    },
+    // 滚动的时候任务要缩进去
+    onPageScroll(e){
+      // 这里加个判断 如果没任务的话也return
+      clearTimeout(this.data.scrollTimer);
+      if (this.data.isScroll) return;
+      this.setData({
+        isScroll: true,
+      })
+      let timer = setTimeout(()=>{
+        console.log(11);
+        this.setData({
+          isScroll: false,
+          scrollTimer: timer
+        });
+      },1000);
     },
     onLoad: function () {
       Event.on('getLevel', this.getLevel,this)

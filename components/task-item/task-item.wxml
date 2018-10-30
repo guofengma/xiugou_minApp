@@ -7,12 +7,13 @@
     <view class='task-detail' wx:if="{{showDetail}}">
       <view class='task-desc'>任务说明：邀请好友可获得品牌推广的现金奖励，邀请好友可获得品牌推广的现金奖励</view>
       <view class='task-start'>任务开始时间： 2018-10-29</view>
-      <view class='task-info-wrap' bindtap='toggleCardShow'>
+      <view class='task-info-wrap'>
         <view class='task-info-detail'>
           <view class='task-status'>
             任务倒计时：<text wx:for="{{countdownTime}}" wx:key="{{index}}">{{item}}</text>
           </view>
           <button open-type='share'>继续分享</button>
+          <button bindtap='toggleCardShow'>开启奖励</button>
           <view class='task-info-tip'>暂无好友激活 </view>
         </view>
       </view>

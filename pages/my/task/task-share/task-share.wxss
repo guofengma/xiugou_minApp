@@ -82,3 +82,61 @@
 .lottery_btn.active {
   background: #D51243;
 }
+.lottery_btn.inactive {
+  background: #ccc;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .5);
+  text-align: center;
+  white-space: nowrap;
+  z-index: 99;
+}
+.modal::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.modal-body {
+  width: 540rpx;
+  height: 386rpx;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 5rpx;
+  background-color: #fff;
+  white-space: normal;
+  position: relative;
+}
+.modal-title {
+  font-size: 30rpx;
+  color: #333;
+  margin: 30rpx 0 70rpx;
+  font-weight: bold;
+}
+.modal-input,.modal-btn {
+  width:480rpx;
+  height:80rpx;
+  line-height:80rpx;
+  border-radius:5rpx;
+  font-size:28rpx;
+  box-sizing:border-box;  
+}
+.modal-input {
+  margin:0 auto;  
+  text-align:left;
+  border:1rpx solid #ddd;
+  padding:0 20rpx;
+}
+.modal-btn {
+  box-sizing:border-box;
+  text-align: center;
+  margin: 30rpx auto 0;
+  background: #F00006;
+  color: #fff;
+}

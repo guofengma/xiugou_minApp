@@ -29,7 +29,7 @@
       <view class='card-title'>品牌奖励任务</view>
       <view class='card-task-wrap'>
         <image class='card-task-thumb' src='{{imgUrl}}task_brand.png'></image>
-        <view class='card-task-award'><text>¥</text>2-10</view>
+        <view class='card-task-award'>现 金</view>
       </view>
       <view class='card-task-desc'>
         <view>完成推广任务</view>
