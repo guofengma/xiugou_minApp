@@ -30,6 +30,7 @@ Page({
       keyword: options.keyword || '',
       categoryId: Number(options.categoryId) || '',
       hotWordId: Number(options.hotWordId) || '',
+      sortModel:2,
       sortType: 1
     }
     if (options.hotWordId) {
@@ -268,6 +269,7 @@ Page({
     params.page =1
     switch (n) {
       case 1:
+        params.sortModel = 2
         break;
       case 2:
         params.sortModel = 2

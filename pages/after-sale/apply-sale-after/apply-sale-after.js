@@ -70,6 +70,11 @@ Page({
         this.data.smallImg.push(item.smallImg)
       })
       this.setData({
+        selectType:{
+          id: list.exchangePriceId || '',
+          spec: list.exchangeSpec || '',
+          specImg: list.exchangeSpecImg || '',
+        },
         originalImg: this.data.originalImg,
         smallImg: this.data.smallImg,
         remark: list.remark,

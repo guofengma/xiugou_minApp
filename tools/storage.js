@@ -265,4 +265,13 @@ export default class Storage {
     static getPlatform() {
       return this.getterFor('platform');
     } 
+
+  static setPayInfoList(info) {
+    console.log(info)
+    this.setterFor('payInfoList', info)
+  }
+
+  static getPayInfoList(info) {
+      return this.getterFor('payInfoList');
+  }
 }

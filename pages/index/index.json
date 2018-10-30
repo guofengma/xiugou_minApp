@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "秀购",
   "usingComponents": {
-    "image-sub": "/components/image-sub/image-sub"
+    "image-sub": "/components/image-sub/image-sub",
+    "notice": "/components/notice/notice"
   }
 }

@@ -17,10 +17,12 @@ Component({
       let clickedNum = this.data.clickedNum
       clickedNum++
       if (clickedNum > 3) return
+      console.log(22222)
       this.setData({
         clickedNum: clickedNum
       })
       let callBack = (fileInfo) => {
+        console.log(fileInfo.data)
         let tempUrl = fileInfo.data;
         this.data.originalImg.push(tempUrl);
         this.data.smallImg.push(tempUrl + config.imgSizeParams.m_fill);
@@ -28,6 +30,7 @@ Component({
           originalImg: this.data.originalImg,
           smallImg: this.data.smallImg
         })
+        console.log(this.data.originalImg, this.data.smallImg)
         this.triggerEvent('uploadImage', { ...this.data})
       };
       let failCallback = () =>{
@@ -65,6 +68,11 @@ Component({
     }
   },
   ready: function () {
-    
+    if (this.data.propssmallImg.length>0){
+      this.setData({
+        smallImg: this.data.propssmallImg,
+        originalImg: this.data.propsOriginalImg
+      })
+    }
   }
 })

@@ -15,16 +15,11 @@ Page({
         '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
       ],
       iconArr:[ // icon 图标
-        { name: '赚钱', icon:'home-icon-xueyuan.png',page:''},
-        { name: '分享', icon: 'home_icon_share.png', page: '' },
-        { name: '签到', icon: 'home_icon_shengqian.png', page: '/pages/signIn/signIn',login:true },
-        { name: '学院', icon: 'home-icon-xueyuan.png', page: ''},
-        { name: '秒杀', icon: 'home_icon_chuxiao.png', page: ''},
-        { name: '手机相机', icon: 'iconForobtain.png', page: '' },
-        { name: '电脑家电', icon: 'iconForobtain.png', page: '' },
-        { name: '品质男装', icon: 'iconForobtain.png', page: ''},
-        { name: '美妆个护', icon: 'iconForobtain.png', page: '' },
-        { name: '全部分类', icon: 'iconForobtain.png', page: '/pages/product-classification/product-classification' }
+        { name: '赚钱', img:'home-icon-xueyuan.png',page:''},
+        { name: '分享', img: 'home_icon_share.png', page: '' },
+        { name: '签到', img: 'home_icon_shengqian.png', page: '/pages/signIn/signIn',login:true },
+        { name: '学院', img: 'home-icon-xueyuan.png', page: ''},
+        { name: '秒杀', img: 'home_icon_chuxiao.png', page: ''},
       ],
       imgUrls: [],// 轮播
       adArr:[],// 广告位
@@ -36,7 +31,10 @@ Page({
       params:{
         page:1,
         pageSize:10
-      }
+      },
+      isChange:true,
+      noticeLabel: ['', '精选', '热门','推荐','最新'],
+      isShowNotice:false, // 是否展示公告
     },
     onLoad: function () {
       Event.on('getLevel', this.getLevel,this)
@@ -67,6 +65,7 @@ Page({
         })
       });
       this.queryFeaturedList()
+      this.indexQueryCategoryList()
       if (!app.globalData.systemInfo){
         app.getSystemInfo()
       }
@@ -76,14 +75,21 @@ Page({
     goPages(e){
       let index = e.currentTarget.dataset.index
       let page = this.data.iconArr[index].page
-      if (this.data.iconArr[index].login){
-        let callBack =''
-        this.getIsLogin(callBack = () => { Tool.navigateTo(page)})
-        return
+      if(index<5){
+        if (this.data.iconArr[index].login) {
+          let callBack = ''
+          this.getIsLogin(callBack = () => { Tool.navigateTo(page) })
+          return
+        }
+      } else if(index<9){
+        page ='/pages/search/search-result/search-result?keyword='+this.data.iconArr[index].name
+      } else if(index==9){
+        page ='/pages/product-classification/product-classification'
       }
-      if(page){
+      if (page) {
         Tool.navigateTo(page)
       }
+      
     },
     imageLoad(e){
       Tool.getAdaptHeight(e, this)
@@ -95,7 +101,26 @@ Page({
         this.getLevel()
       }
     },
+    indexQueryCategoryList(){
+      let params = {
+        isShowLoading: false,
+        reqName: '获取首页4个分类',
+        requestMethod: 'GET',
+        url: Operation.indexQueryCategoryList
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let datas = req.responseObject.data || []
+        this.data.iconArr.splice(5, 0, ...datas)
+        this.setData({
+          iconArr: this.data.iconArr
+        })
+      };
+      //Tool.showErrMsg(r)
+      r.addToQueue();
+    },
     discoverNotice() {
+      if (!this.data.isChange) return
       let params = {
         isShowLoading: false,
         reqName: '获取秀场头条',
@@ -241,10 +266,22 @@ Page({
       })
       this.queryFeaturedList()
     },
+    isShowNotice(){
+      this.setData({
+        isShowNotice: !this.data.isShowNotice
+      })
+    },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);
     },
     onShow:function (){
-
+      this.setData({
+        isChange:true
+      })
+    },
+    onHide: function () {
+      this.setData({
+        isChange:false
+      })
     }
 })

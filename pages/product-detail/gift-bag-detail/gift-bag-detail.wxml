@@ -24,9 +24,12 @@
         <image src='/img/msg-icon.png' mode='widthFix' class='fr' bindtap='msgClicked'></image>
         <template is="msg-tips" data="{{msgShow}}" /> 
       </view>
-      <swiper autoplay="true" interval='3000' bindchange='sliderChange'>
+      <!-- <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
+        <video  src="{{productInfo.videoUrl}}"   bindplay='videoClicked' bindpause='videoPause' bindended='videoPause' show-fullscreen-btn='{{false}}' custom-cache="{{false}}" enable-progress-gesture='{{false}}'></video> 
+      </view> -->
+      <swiper autoplay="{{autoplay}}" interval='3000' bindchange='sliderChange'>
         <block wx:for="{{imgUrls}}" wx:key="unique">
-          <swiper-item>
+          <swiper-item> 
             <image src="{{item.smallImg}}" class="slide-image" bindload="imageLoad" bindtap='swiperImgCliked' data-index='{{index}}'/>
           </swiper-item>
         </block>
@@ -41,11 +44,11 @@
       <view class='price'>
         <text class='price1 red'>¥ {{productInfo.levelPrice}}</text>
         <text class='gray-9 price2'>原价¥ {{productInfo.originalPrice}}</text>
-        <!-- <text class='label-pd'>{{productInfo.level}}</text> -->
+        <text class='label-pd redBg'>{{productInfo.userLevelTypeName}}</text>
         <text>{{productInfo.type==1?  "普通礼包":"升级礼包"}}</text>
       </view>
       <view class='shippingInfo gray'>
-        <text style='margin-right:158rpx'>快递：{{productInfo.freightTemplatePrice || 0}}</text> 
+        <text style='margin-right:158rpx'>快递：{{productInfo.freightTemplatePrice || '包邮'}}</text> 
         <text>月销售{{productInfo.saleNum || 0}}笔</text>
       </view>
     </view>

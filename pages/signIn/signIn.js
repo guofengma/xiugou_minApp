@@ -9,10 +9,27 @@ Page({
     animate1:false,
     canClick:true,
     todaySgin:false,
-    needXD:100,
+    needXD:1,
   },
   onLoad: function (options) {
     this.querySignList()
+    this.getTokenCionExchange()
+  },
+  getTokenCionExchange(){
+    let params = {
+      isShowLoading: false,
+      reqName: '获取用户等级',
+      requestMethod: 'GET',
+      url: Operation.getTokenCionExchange
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      this.setData({
+        needXD: req.responseObject.data
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
   getLevel() {
     let params = {
@@ -92,6 +109,9 @@ Page({
     };
     Tool.showErrMsg(r)
     r.addToQueue();
+  },
+  ruleClicked(){
+    Tool.navigateTo('/pages/signIn/rule/rule')
   },
   goPage(){
     Tool.navigateTo('/pages/my/coupon/my-coupon/my-coupon')

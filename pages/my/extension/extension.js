@@ -15,6 +15,9 @@ Page({
     // Tool.navigateTo('/pages/my/extension/pay/pay?num=')
     Tool.navigateTo('/pages/my/extension/extension-detail/extension-detail')
   },
+  goPage() {
+    Tool.navigateTo('/pages/my/extension/extension-explain/extension-explain')
+  },
   onShow: function () {
 
   },

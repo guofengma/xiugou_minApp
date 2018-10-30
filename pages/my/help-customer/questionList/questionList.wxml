@@ -6,7 +6,7 @@
                     <text>{{item.title}}</text>
                 </view>
                 <view>
-                    <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+                    <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/xjt_10@2x.png' mode='widthFix'></image>
                 </view>
             </view>
         </block>

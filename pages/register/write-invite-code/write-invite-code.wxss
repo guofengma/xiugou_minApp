@@ -1,12 +1,29 @@
 .input-view{
-  border-bottom: 1rpx solid #ddd;
-  margin-bottom: 80rpx;
+  margin-bottom: 140rpx;
+  height: 88rpx;
+  border-radius: 10rpx;
+  padding:0  20rpx;
+}
+.input-view input{
+  width:75%;
+}
+.input-view view{
+  width: 25%;
 }
 .sub-page{
-  width: 580rpx;
-  margin: 0 auto;
+  padding: 30rpx;
 }
-.tips-code{
-  margin-top: 170rpx;
-  margin-bottom: 100rpx;
+.dismiss{
+  position: fixed;
+  width: 100%;
+  bottom: 150rpx;
+}
+.dismiss text{
+  border-bottom:1rpx solid #666;
+}
+button[disabled]:not([type]){
+  background-color: #ddd;
+}
+.loginBtn{
+  border-radius: 60rpx;
 }

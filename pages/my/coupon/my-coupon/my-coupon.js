@@ -16,7 +16,7 @@ Page({
         pageSize:10
       },
       coinData:{
-        nickname:'全场通用',
+        nickname:'全品类：无金额门槛',
         'type':0,
         name:'可叠加使用',
         isCoinCoupon:true,
@@ -154,7 +154,7 @@ Page({
         reqName: '已使用优惠劵列表',
         url: Operation.couponList
       }
-      this.formatCouponInfos(params, 2, false, 'coupon-right-used')
+      this.formatCouponInfos(params, 1, false, 'coupon-right-used')
     },
     //失效优惠劵列表
     getDiscountCouponLosed() {
@@ -164,7 +164,7 @@ Page({
         status:2,
         url: Operation.couponList
       }
-      this.formatCouponInfos(params, 1, false, 'coupon-right-lose')
+      this.formatCouponInfos(params, 2, false, 'coupon-right-lose')
     },
 
     // 点击标题切换当前页时改变样式
@@ -215,7 +215,7 @@ Page({
     },
     setInputValue(){
       this.data.coinNum = this.data.coinNum < 0 ? 0 : this.data.coinNum
-      this.data.coinNum = this.data.coinNum > this.data.coinData.num ? this.data.coinData.num : this.data.coinNum
+      this.data.coinNum = this.data.coinNum > this.data.maxNum ? this.data.maxNum : this.data.coinNum
       this.setData({
         coinNum: this.data.coinNum
       })
@@ -230,7 +230,7 @@ Page({
       this.setInputValue()
     },
     giveUpUse(){
-      Storage.setCoupon({ id: "", name: '未使用优惠劵', canClick:true })
+      Storage.setCoupon({ id: "", name: '选择优惠劵', canClick:true })
       Event.emit("updateCoupon")
       Tool.navigationPop()
     },
@@ -260,10 +260,12 @@ Page({
         coinData: this.data.coinData,
       })
       if (this.data.door == 1){
+        let maxUseCoin = options.maxUseCoin || 0
         if (this.data.useType == 1){
           let coinNum = options.coin > this.data.coinData.num? this.data.coinData.num : options.coin
           this.setData({
-            coinNum: coinNum
+            coinNum: coinNum,
+            maxNum: this.data.coinData.num > maxUseCoin ? maxUseCoin : this.data.coinData.num,
           })
         } else {
           this.availableDiscountCouponForProduct()

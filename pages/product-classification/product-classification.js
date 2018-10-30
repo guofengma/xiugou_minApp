@@ -104,7 +104,7 @@ Page({
       }]
       this.setData({
         content: {
-          img: datas.imgList || '',
+          img: datas.img || '',
           linkType:datas.linkType || 0,
           linkTypeCode: datas.linkTypeCode || 0,
           productCategoryList: content

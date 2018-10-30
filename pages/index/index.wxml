@@ -2,7 +2,7 @@
   <!--轮播  -->
   <view class='ad'>
     <view class='search-bar boxSize flexR-sb fixed-top'>
-      <image src='/img/logo-img.png' mode='widthFix'></image>
+      <image src='/img/logo-index@2x.png' mode='widthFix'></image>
       <view class='bar flexR-sb gray font-28' catchtap='searchClicked'>
         <image-sub imgStyle='{{"width:32rpx"}}' imgSrc="{{'home_icon_search_nor@2x.png'}}"/>
         <text>请输入关键字搜索</text>
@@ -25,7 +25,8 @@
   <view  class='index-items-view boxSize whiteBg flexR'>
     <block wx:for='{{iconArr}}' wx:key='unique'>
       <view class='flexC items-sub boxSize' catchtap='goPages' data-index='{{index}}'>
-        <image-sub imgStyle='{{"width:96rpx"}}' imgSrc="{{item.img}}"/>
+        <image-sub imgStyle='{{"width:96rpx"}}' imgSrc="{{item.img}}" wx:if='{{index<5}}'/>
+        <image wx:else src='{{item.img}}' mode='widthFix' style='width:96rpx'></image>
         <view class='font-24 gray item-name ellipsis'>{{item.name}}</view>
       </view>
     </block>
@@ -94,7 +95,7 @@
         </block>
       </swiper>
       <view class='notice-img'>
-                <image src='{{noticeArr[0][0].coverImg}}' mode='widthFix' catchtap='noticeClicked' data-id='{{noticeArr[0][0].id}}'></image>
+                <image src='{{noticeArr[0][0].img}}' mode='widthFix' catchtap='noticeClicked' data-id='{{noticeArr[0][0].id}}'></image>
               </view>
     </view>
   </view>
@@ -158,7 +159,7 @@
     <view class='index-item-title flexR font-38'>超值热卖</view>
     <view class='hot-sale-item' wx:for="{{hotSale}}"  wx:for-index="key" wx:for-item='list' wx:key="{{key}}" >
       <view class='hot-sale-img'>
-        <image src='{{list.imgUrl}}' mode='widthFix' catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'></image>
+        <image src='{{list.imgUrl}}'catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'></image>
       </view>
       <scroll-view scroll-x="true"   class='hot-sale-scroll' wx:if='{{list.topicBannerProductDTOList.length>0}}'>
         <view class='hot-sale-content  boxSize'>
@@ -204,3 +205,9 @@
    <image-sub imgStyle='{{"width:165rpx"}}' imgSrc="{{'home_icon_activity.png'}}"/>
   </view>
 </view>
+
+<!-- 公告 -->
+
+<notice visiable="{{isShowNotice}}"
+  bind:isShowNotice='isShowNotice'
+/>

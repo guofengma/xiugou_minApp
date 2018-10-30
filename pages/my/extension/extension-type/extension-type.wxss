@@ -12,10 +12,7 @@
   /* min-height: 300rpx; */
   margin-bottom: 40rpx;
 }
-.label{
-  width: 26rpx;
-  height: 26rpx;
-  border-radius: 50%;
-  border:1rpx solid;
-  margin-right: 6rpx;
+.disabledBg{
+  background: #ccc;
+  color: #fff;
 }

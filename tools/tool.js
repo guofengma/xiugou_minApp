@@ -806,7 +806,6 @@ export default class Tool {
 
     static showErrMsg(r,callBack=()=>{}) {
       r.failBlock = (req) => {
-        console.log(req)
         if (req.responseObject.code==10009){ // 超时登录
           callBack =()=>{
             let page = '/pages/login-wx/login-wx'

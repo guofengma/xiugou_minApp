@@ -5,7 +5,7 @@
     <view class='flexR-sb topBar'>
       <view>
         <view class='ellipsis font-32 extension-name'>50元推广试用套餐</view>
-        <view class='gray font-26'>剩余推广金额¥20.03</view>
+        <view class='gray font-26'>剩余推广金额¥20.03 || 已结束</view>
       </view>
       <!-- 根据实际情况判断按钮显示状态 -->
       <view class='extension-btn font-26 flexC {{index==1? "red":"gray"}}'>
@@ -13,6 +13,9 @@
       </view>
     </view>
     <view class='gray extension-time font-26 flexR-sb'>购买时间：2018-09-18 10：38：56</view> 
+  </view>
+  <view class='font-26 gray flexR explain' catchtap='goPage'>
+    <view class='label flexR font-24'>i</view>推广说明
   </view>
 </view>
 

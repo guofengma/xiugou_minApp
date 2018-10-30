@@ -10,11 +10,12 @@ Page({
           recevicePhone:'',
           addressInfo:''
       },
-      afterSaleTypeArr:[1,2,4,8,16],// 不支持优惠卷  不支持1元劵  不支持退款 不支持换货 不支持退货 
+      afterSaleTypeArr:[4,8,16],// 不支持退款 不支持换货 不支持退货 
+      afterSaleType:[], //支持售后的数组 
       types:['退款','换货','退货','退换'],
       returnTypeArr: ['', '退款', '退货', '换货'],
       hasData:true,
-      imgSrcUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/',
+      imgSrcUrl: 'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/',
       logIcon: 'order-state-3-dark.png',
       isCancel: false,//是否取消订单
       isDelete: false, //是否删除订单
@@ -83,6 +84,13 @@ Page({
                 time: time
               })
             } 
+        detail.showProductList = (detail.orderType == 5 || detail.orderType == 98) ? detail.orderProductList[0].orderProductPriceList : detail.orderProductList
+            if (detail.orderType == 5 || detail.orderType == 98){
+              detail.orderProductList[0].orderProductPriceList.forEach((item)=>{
+                item.num = item.productNum
+                item.price = item.originalPrice
+              })
+            }
             this.setData({
                 detail: detail,
                 address: address,
@@ -156,7 +164,7 @@ Page({
         let list = this.data.detail.orderProductList
         list.forEach((item,index)=>{
           let returnProductStatus = item.returnProductStatus || 99999
-          if (returnProductStatus < 6 && returnProductStatus != 3) {
+          if (returnProductStatus == 1) {
             content = '确认收货将关闭' + this.data.returnTypeArr[item.returnType] + "申请，确认收货吗？"
           }
         })
@@ -309,25 +317,6 @@ Page({
       Tool.showErrMsg(r)
       r.addToQueue();
     },
-    test(arr){
-      let afrerSaleType = []
-      this.data.afterSaleTypeArr.forEach((item)=>{
-        if (arr.includes(item)){
-          afrerSaleType.push(false)
-        } else{
-          afrerSaleType.push(true)
-        }
-      })
-      let arr2 = afrerSaleType.slice(2)
-      let num = 0;
-      arr2.forEach((item)=>{
-        if(item){
-          num++
-        }
-      })
-      arr2.push(num)
-      return arr2
-    },
     middleBtn(){
       let detail = this.data.detail
       let outOrderState = detail.status // 外订单状态
@@ -340,19 +329,22 @@ Page({
         let returnType = item.returnType
         let finishTime = item.finishTime
         let now = new Date().getTime()
-        let arr = this.data.afterSaleTypeArr.filter((item0)=>{
-          return item0 & item.restrictions == item0
-        })
-        let btnArr = this.test(arr)
+        // 不支持的售后种类
+        let arr = Tool.bitOperation(this.data.afterSaleTypeArr, item.restrictions)
+        // 支持的售后种类
+        let afterSaleType = this.data.afterSaleTypeArr.filter(function (n) {
+          return arr.indexOf(n) == -1
+        });
+        item.afterSaleType = afterSaleType
         if (outOrderState == 2){
-          if (btnArr[0]) middle = {  id: 1, content: '退款' }
+          if (afterSaleType.includes(4)) middle = {  id: 1, content: '退款' }
         }
         // 确认收货的状态的订单售后截止时间和当前时间比
         if (outOrderState == 3 || (outOrderState == 4 && finishTime - now > 0) ){
-          if (btnArr[btnArr.length-1]>1){
+          if (afterSaleType.length>1){
             middle = { id: 4, content: '退换' }
           } else{
-            let index = btnArr.indexOf(true)
+            let index = this.data.afterSaleTypeArr.indexOf(afterSaleType[0])
             if(index!=-1){
               middle = { id: index+1, content: this.data.types[index] }
             }
@@ -407,7 +399,6 @@ Page({
       let returnType = list.returnType
       let returnProductStatus = list.returnProductStatus
       let params = "?id=" + list.returnProductId
-      console.log(list)
       if (returnType == 1) {
 
         page = '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail'
@@ -425,13 +416,17 @@ Page({
         page = '/pages/after-sale/apply-sale-after/apply-sale-after?refundType=0'
 
       } else if (btnTypeId == 4) {   
-        page = '/pages/after-sale/choose-after-sale/choose-after-sale'
+        page = '/pages/after-sale/choose-after-sale/choose-after-sale' 
       }
       Tool.navigateTo(page + params)
     },
     productClicked(e){
       let id = e.currentTarget.dataset.productid
-      Tool.navigateTo('/pages/product-detail/product-detail?productId=' + id)
+      if (this.data.detail.orderType == 5 || this.data.detail.orderType==98 ){
+        Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.detail.orderProductList[0].activityCode)
+      } else {
+        Tool.navigateTo('/pages/product-detail/product-detail?productId=' + id)
+      }
     },
     orderRefund(){
       Tool.showAlert('目前只支持单件商品退款，请进行单件退款操作~')

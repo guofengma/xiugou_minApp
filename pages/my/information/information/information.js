@@ -8,8 +8,30 @@ Page({
         pageSize: 10, // 每次加载请求的条数 默认10
         list: [],
         hasNext: true,//是否有下一页
-        title:['支付成功','订单发货','订单超时','退款申请','退货申请','换货申请','退款成功','提现申请驳回','提现申请成功','提交提现申请','余额提现到账','代币提现到账','身份认证成功','身份认证失败','优惠券'],
-        payType:['平台支付','微信支付','支付宝支付','银联支付']
+        title:{
+          100: ['支付成功', '/pages/my/information/informationDetail/informationDetail','allItem'],
+          101: ['退款成功', '/pages/my/information/informationDetail/informationDetail','allItem'],
+          102: ['获得秀豆'],
+          103: ['身份认证驳回'],
+          104: ['订单超时', '/pages/my/orderDetail/orderDetail?orderId=','orderId'],
+          105: ['优惠券提醒','/pages/my/coupon/my-coupon/my-coupon'],
+          106: ['反馈问题回复'],
+          107: ['秒杀活动', '/pages/product-detail/seckill-detail/seckill-detail?code=','param'],
+          108: ['降价拍活动', '/pages/product-detail/discount-detail/discount-detail?code=','param'],
+          109: ['待提现账户入账提醒'],
+          110: ['订单发货', '/pages/my/orderDetail/orderDetail?orderId=','orderId'],
+          120: ['售后服务(退款申请)', '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail?returnProductId=','returnProductId'],
+          121: ['售后服务(退货申请)', '/pages/after-sale/return-goods/return-goods?returnProductId=','returnProductId'],
+          122: ['售后服务(换货申请)', '/pages/after-sale/exchange-goods/exchange-goods?returnProductId=', 'returnProductId']
+        },
+        // payType:['平台支付','微信支付','支付宝支付','银联支付'],
+        payTypeArr:[1,2,4,8,16],
+        payType: {
+        1: '平台支付',
+        2: '微信支付',
+        4: '微信支付',
+        8: '支付宝支付',
+        16: '银联支付'},
     },
     //获取数据
     getData() {
@@ -31,18 +53,34 @@ Page({
             for (let i in req.responseObject.data.data) {
                 let item = req.responseObject.data.data[i];
                 item.createTime = Tool.formatTime(item.createdTime);
-                item.pushTime = Tool.formatTime(item.pushTime);
+                // item.pushTime = Tool.formatTime(item.pushTime);
                 // item.title=this.data.title[item.type-1];
-                item.payStyle=this.payStyle(item.payType);
+              item.param = item.param || '{}'
+              item.paramType = item.paramType || 0
+              if(Tool.isJson(item.param)){
+                item.param = JSON.parse(item.param)
+              } else {
+                item.param = { param: item.param}
+              }
+              if (item.paramType == 101 || item.paramType==100){
+                let arr = Tool.bitOperation(this.data.payTypeArr,item.param.payType)
+                item.payName = []
+                arr.forEach((item0,index)=>{
+                  item.payName.push(this.data.payType[item0])
+                })
+                item.payName = item.payName.join('/')
+                item.orderNum = item.param.orderNum
+              }
+              item.payStyle=this.payStyle(item.payType);
                 datas.push(item)
             }
             this.setData({
-                list: list.concat(datas),
-                totalPage: req.responseObject.data.total,
+              list: list.concat(datas),
+              totalPage: req.responseObject.data.totalPage,
             });
             if (this.data.totalPage > this.data.currentPage) {
                 this.setData({
-                    currentPage: ++this.data.currentPage
+                  currentPage: ++this.data.currentPage
                 })
             } else {
                 this.data.hasNext = false
@@ -83,41 +121,18 @@ Page({
     },
     //跳到详情页
     informationDetail(e){
-        let type=e.currentTarget.dataset.type;
-        let id=e.currentTarget.dataset.id;
-        let tdId=e.currentTarget.dataset.tdid;
-        let page='';
-        if (!this.didLogin()) return;
-        switch (type){
-            case 1:
-                page='../informationDetail/informationDetail?id='+id+'&type='+type;//支付成功
-                break;
-            case 2:
-                page='../../orderDetail/orderDetail?orderId='+tdId+'&status=3';//订单发货
-                break;
-            case 3:
-                page='../../orderDetail/orderDetail?orderId='+tdId+'&status=10';//订单超时
-                break;
-            case 4:
-                page = '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail?returnProductId=' + tdId;//退款申请
-                break;
-            case 5:
-                page = '/pages/after-sale/return-goods/return-goods?returnProductId=' + tdId;//退货申请
-                break;
-            case 6:
-                page = '/pages/after-sale/exchange-goods/exchange-goods?returnProductId=' + tdId;//换货申请
-                break;
-            case 7:
-                page='../informationDetail/informationDetail?id='+id+'&type='+type;//退款成功
-                break;
-            case 8:
-                page='../informationDetail/informationDetail?id='+id+'&type='+type;//提现申请驳回
-                break;
-            case 15:
-                page='/pages/my/coupon/my-coupon/my-coupon';//优惠券
-                break;
-        }
-        Tool.navigateTo(page)
+      let paramType=e.currentTarget.dataset.type;
+      let param = e.currentTarget.dataset.param;
+      let page = this.data.title[paramType][1];
+      let index = e.currentTarget.dataset.index
+      Storage.setPayInfoList(this.data.list[index])
+      let query = ''
+      if (this.data.title[paramType][2]!='allItem'){
+       query = param[this.data.title[paramType][2]]
+      } else {
+        
+      }
+      Tool.navigateTo(page+query)
     },
     onLoad: function (options) {
         this.getData()

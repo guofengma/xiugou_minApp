@@ -33,7 +33,14 @@ Component({
       this.isVisiableClicked()
     },
     formatSpecList(){ // 格式化规格数组
-      if (this.data.isInit) return
+      if (!this.data.isInit){
+        this.setData({
+          selectPrdList: {},
+          isActive: [{ index: '', val: '' }],
+        })
+      }else{
+        return
+      }
       let lists = []
       for (let key in this.data.productSpec) {
         lists.push({
@@ -45,6 +52,7 @@ Component({
       let totalStock = 0
       let priceList = []
       let stockList = []
+      // 去掉库存0的清单 
       this.data.priceList.forEach((item) => {
         if(item.stock!=0){
           stockList.push(item)
@@ -52,6 +60,7 @@ Component({
       })
       stockList.forEach((item)=>{
         totalStock += item.stock
+        // 换货的时候 去掉价格不等的清单
         if (this.data.commodityType == 5 & item.price == this.data.price){
           priceList.push(item)
         }
@@ -60,7 +69,6 @@ Component({
           priceList.push(item)
         }
       })
-      console.log(priceList)
       if (priceList.length==0){
         priceList = stockList
       }
@@ -73,14 +81,17 @@ Component({
       }) 
       // 渲染提示语
       this.getTipsSpec()
-      this.initTypeSelected()
+      //this.initTypeSelected()
     },
     initTypeSelected(){ // 默认第一个选中
-      console.log(this.data.productSpec)
-      let productSpec = this.data.productSpec[0].list
-      let specValue = productSpec[0].specValue
-      let id = productSpec[0].id
-      this.renderSpecVeiw(0, 0, specValue, id)
+      let productSpecArr = [...this.data.productSpec]
+      productSpecArr.forEach((item,index)=>{
+        let productSpec= item.list
+        console.log("***********" ,productSpec)
+        let specValue = productSpec[0].specValue
+        let id = productSpec[0].id
+        this.renderSpecVeiw(0, 0, specValue, id)
+      })
     },
     typeListClicked(e) { // 规格点击事件
 

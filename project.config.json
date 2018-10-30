@@ -96,7 +96,7 @@
 					"query": ""
 				},
 				{
-					"id": 8,
+					"id": 10,
 					"name": "申请售后",
 					"pathName": "pages/after-sale/apply-sale-after/apply-sale-after",
 					"query": "refundType=2&returnProductId=1"
@@ -268,7 +268,25 @@
           "name": "任务分享",
           "pathName": "pages/my/task/task-share/task-share",
           "query": ""
-        }
+        },
+				{
+					"id": -1,
+					"name": "红包",
+					"pathName": "pages/register/red-envelopes/red-envelopes",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "签到规则",
+					"pathName": "pages/signIn/rule/rule",
+					"query": ""
+				},
+				{
+					"id": 38,
+					"name": "填写邀请码",
+					"pathName": "pages/register/write-invite-code/write-invite-code",
+					"query": ""
+				}
 			]
 		}
 	}

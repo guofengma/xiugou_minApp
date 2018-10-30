@@ -10,7 +10,7 @@
             </view>
           </view>
           <view>
-            <view class="btn flexR" bindtap="change">兑换代币</view>
+            <!-- <view class="btn flexR" bindtap="change">兑换秀豆</view> -->
             <view class="explain" bindtap="explain">
                 <image src="{{imgBaseUrl+'icon01_07@2x.png'}}"></image>
                 <text class='font-22'>提现说明</text>
@@ -101,7 +101,7 @@
         <view class="content">
             
         </view>
-        <image class="close" bindtap="closeMask" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/sc_03@2x.png"></image>
+        <image class="close" bindtap="closeMask" src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/sc_03@2x.png"></image>
     </view> -->
     
     <!-- <view class="mask" wx-if="{{isLevel}}">
@@ -111,7 +111,7 @@
             </view>
             
         </view>
-        <image class="close" bindtap="closeMask" src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/sc_03@2x.png"></image>
+        <image class="close" bindtap="closeMask" src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/sc_03@2x.png"></image>
     </view> -->
 </view>
 

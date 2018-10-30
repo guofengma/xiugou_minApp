@@ -18,21 +18,21 @@
   height: 158rpx;
   border-top: 1rpx solid #eee;
   border-bottom: 1rpx solid #eee;
-  padding-left: 170rpx;
+  padding-left: 160rpx;
   display:flex;
   flex-direction: column;
   justify-content: center;
   margin-bottom: 20rpx;
-  background: #fff url('https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/after-sale-2.png') no-repeat 40rpx center;
-  background-size: 100rpx 100rpx;
+  background: #fff url('https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/shouhou_icon_tuikuan_nor@2x.png') no-repeat 40rpx center;
+  background-size: 90rpx 90rpx;
 }
 .group .font-30{
   color: #666;
 }
 .group2{
-  background-image: url('https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/after-sale-1.png')
+  background-image: url('https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/shouhou_icon_tuihuo_nor@2x.png')
 }
 
 .group3{
-  background-image: url('https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/after-sale-3.png')
+  background-image: url('https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/shouhou_icon_huanhuo_nor@2x.png')
 }

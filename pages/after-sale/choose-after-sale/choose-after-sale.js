@@ -3,11 +3,27 @@ let { Tool, RequestFactory, Storage} = global
 Page({
   data: {
     ysf: { title: '售后服务' },
-    list:{}
+    list:{},
+    afterSaleTypeArr: [4, 16, 8],// 不支持退款 不支持退货 不支持换货
+    afterSaleType: [true, true, true], // 支持退款 支持换货 支持退货
   },
   onLoad: function (options) {
     this.setData({
       list: Storage.getInnerOrderList() || ''
+    })
+    this.initData()
+  },
+  initData(){
+    let afterSaleType = []
+    this.data.afterSaleTypeArr.forEach((item,index)=>{
+      if(this.data.list.afterSaleType.includes(item)){
+        afterSaleType.push(true)
+      }else{
+        afterSaleType.push(false)
+      }
+    })
+    this.setData({
+      afterSaleType: afterSaleType
     })
   },
   goPage(e){

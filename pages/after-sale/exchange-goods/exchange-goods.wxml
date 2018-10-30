@@ -7,17 +7,17 @@
 <import src='/components/address-saler/address-saler.wxml'/>
 
 <!--提示语  -->
-<view class='redBg font-26 flexR tips'  wx:if='{{datas.status>1}}'>
+<view class='redBg font-26 flexR tips'  wx:if='{{datas.status==2}}'>
   商家已同意换货申请，请尽快发货
 </view>
 <view class='flexC tips-exchange font-26'>
   <view class='tips-title'>{{result[resultIndex].state}}</view>
-  <view>{{result[resultIndex].info}}</view>
+  <view wx:if='{{datas.status!=3}}'>{{result[resultIndex].info}}</view>
   <view>{{distanceTime}}</view>
-  <view wx:if='{{datas.status==6}}'>{{result[resultIndex].time}}</view>
+  <view wx:if='{{datas.status==6 || datas.status==3}}'>{{result[resultIndex].time}}</view>
 </view>
-
-<view wx:if='{{datas.status>1}}'>
+<view wx:if='{{datas.status==3}}' class='refusalReason whiteBg font-26 flexR-sb'>拒绝原因：{{result[resultIndex].info}}</view>
+<view wx:if='{{datas.status>1&&datas.status!=3}}'>
   <!--地址信息  -->
   <view class='address active whiteBg' >
     <template is="address-info" data="{{addressType,...datas,hasData:true,door:1}}"/>
@@ -37,7 +37,7 @@
   </view>
 </view>
 
-<view wx:else>
+<view wx:if='{{datas.status==1}}'>
    <amend-application applyType='{{"换货"}}' list='{{datas}}'/>
 </view>
 <!--换货信息  -->
@@ -60,6 +60,7 @@
     </view>
     <view>申请时间：{{datas.applyTime}}</view>
     <view>更换型号： {{datas.exchangeSpec}}</view>
+    <view>换货编号：{{datas.refundNo}}</view>
     <view>数量：x {{datas.num}}</view>
   </view>
 </view>

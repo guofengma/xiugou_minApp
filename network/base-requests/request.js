@@ -110,7 +110,6 @@ export default class Request {
     let body = this.body();
 
     let rsa_headers = '';
-    console.log(url);
     // 只需对白名单内的url做加签处理
     if (RSA.checkInWhiteList(url)) {
       console.log(`对${url}进行加签处理`);
@@ -193,6 +192,7 @@ export default class Request {
         }
       },
       complete: function (res) {
+        console.log(res.data)
         that.requestStatus = RequestStatus.finish;
         that.completeBlock(that);
         if(res.statusCode != 200) {
@@ -216,7 +216,6 @@ export default class Request {
 
   //拼接url
   url() {
-    console.log(this.baseUrl,this.bodyParam.url)
     this._url = this.baseUrl + this.bodyParam.url
     return this._url;
   }

@@ -3,8 +3,8 @@
   <view class='content-top'>
     <view class='top-view'>
       <view class='fr'>
-        <image src='{{imgUrl+"iconSetup.png"}}' mode='widthFix' catchtap='itemClicked' data-page='0'></image>
-        <image src='{{imgUrl+"iconService.png"}}' mode='widthFix' catchtap='itemClicked' data-page='1'></image>
+        <image src='{{imgUrl+"iconSetup.png"}}' mode='widthFix' catchtap='itemClicked' data-page='0' imgStyle='{{"width:42px"}}' ></image>
+        <image src='{{imgUrl+"iconService.png"}}' mode='widthFix' catchtap='itemClicked' data-page='1' imgStyle='{{"width:42rpx"}}' ></image>
       </view>
     </view>
     <view class='my-avatar' catchtap='itemClicked' data-page='2'>
@@ -32,15 +32,15 @@
     <view class='my-account-item'>我的资产</view>
     <view class='my-account-list'>
       <view class='my-account-coin' catchtap='itemClicked' data-page='3' data-query='{{userInfos.availableBalance}}'>
-        <view class='account-num' >{{userInfos.availableBalance || 0}}</view>
+        <view class='account-num' >{{userInfos.availableBalance || 0.00}}</view>
         <view>现金账户</view>
       </view>
       <view class='my-account-xiudou' catchtap='itemClicked' data-page='4' data-query='{{userInfos.userScore}}'>
-        <view class='account-num'>{{userInfos.userScore || 0}}</view>
+        <view class='account-num'>{{userInfos.userScore || 0.00}}</view>
         <view>秀豆账户</view>
       </view>
       <view class='my-account-leave' catchtap='itemClicked' data-page='5' data-query='{{userInfos.blockedBalance}}'>
-        <view class='account-num'>{{userInfos.blockedBalance || 0}}</view>
+        <view class='account-num'>{{userInfos.blockedBalance || 0.00}}</view>
         <view>待提取账户</view>
       </view>
     </view>
@@ -60,22 +60,25 @@
       <view class='list-cont my-wait-pay' catchtap='itemClicked' data-page='6' data-query='1'>
         <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsale.png'}}"/>
         <view>待付款</view>
-        <!-- <view class='reddot'>1</view> -->
+        <view class='reddot'  wx:if='{{countUserOrderNum.waitPayNum}}'>{{countUserOrderNum.waitPayNum}}</view>
       </view>
       <!-- 代发货 -->
       <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='2'>
         <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsend.png'}}"/>
         <view>待发货</view>
+        <view class='reddot' wx:if='{{countUserOrderNum.waitSendNum}}'>{{countUserOrderNum.waitSendNum}}</view>
       </view>
       <!-- 待收货 -->
       <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='3'>
         <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForobtain.png'}}"/>
         <view>待收货</view>
+        <view class='reddot' wx:if='{{countUserOrderNum.waitReceiveNum}}'>{{countUserOrderNum.waitReceiveNum}}</view>
       </view>
       <!-- 售后 -->
       <view class='list-cont' catchtap='itemClicked' data-page='7'>
         <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconAftersale.png'}}"/>
         <view>售后/退款</view>
+        <view class='reddot' wx:if='{{countUserOrderNum.afterSaleServiceNum}}'>{{countUserOrderNum.afterSaleServiceNum}}</view>
       </view>
     </view>
   </view>
@@ -108,8 +111,8 @@
         <view>收藏店铺</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='13'>
-        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconHelp.png'}}"/>
-        <view>帮助</view>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconService.png'}}"/>
+        <view>帮助与客服</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='14'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconAddress.png'}}"/>

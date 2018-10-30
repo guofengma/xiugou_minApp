@@ -16,7 +16,7 @@ Page({
         originalImg: [],
         smallImg: [],
         content:'',
-        bgImgUrl:"https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/checked.png",
+        bgImgUrl:"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/checked.png",
         typeArr:[
           // "请选择问题类型","账户问题", "营销问题", "购买流程","推广机制"
         ]
@@ -74,6 +74,10 @@ Page({
     //提交成功
     addFeedback() {
       if (this.data.active) {
+        if (this.data.content.length < 10) {
+          Tool.showAlert('问题反馈详情说明字数不能少于10个字')
+          return
+        }
         let originalImg = ''
         let smallImg = ''
         if (this.data.originalImg) {
@@ -83,7 +87,7 @@ Page({
         let params = {
           originalImg: originalImg,
           smallImg: smallImg,
-          typeKey: this.data.typeArr[this.data.activeIndex].id,
+          typeKey: this.data.typeArr[this.data.activeIndex].detailId,
           content: this.data.content,
           reqName: '添加反馈',
           url: Operation.addFeedback

@@ -63,8 +63,7 @@
         1元现金劵
       </view>
       <view class='gray' >
-        <text > {{useOneCoinNum? "- ¥"+useOneCoinNum:""}}</text>
-        <!-- <text wx:else>暂无可以一元劵</text> -->
+        <text > {{useOneCoinNum? "- ¥"+useOneCoinNum:"选择1元现金劵"}}</text>
         <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
       </view>
     </view>

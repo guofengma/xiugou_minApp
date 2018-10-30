@@ -185,6 +185,10 @@ export default class Operation {
 
         this.confirmReceipt ='/order/confirmReceipt';
 
+        // 获取订单数量
+
+        this.countUserOrderNum = '/order/countUserOrderNum'
+
         // 删除已完成订单
 
         this.deleteOrder ='/order/deleteCompletedOrder';
@@ -340,6 +344,10 @@ export default class Operation {
 
         this.tokenCoinSign='/user/userSign/sign'
 
+        // 获取秀豆兑换1元卷的比例
+
+        this.getTokenCionExchange ='/common/config/getExchange'
+
 
         /******************我的---设置*********************** */
 
@@ -441,6 +449,10 @@ export default class Operation {
         // 秀场头条
 
         this.discoverNotice = '/discover/query'
+
+        // 四个分类
+
+        this.indexQueryCategoryList ='/config/advertisement/queryCategoryList'
 
 
         /************************** 帮助中心 *******************************/
