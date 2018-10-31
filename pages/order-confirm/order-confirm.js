@@ -15,6 +15,8 @@ Page({
     coupon: { id: "", name: '选择优惠劵', canClick:true}, //优惠券信息
     useOneCoinNum:0, // 1元劵张数
     couponArr:[1,2], // 不支持优惠卷 不支持1元劵
+    canUseTokenCoin: true,//支持使用支持1元劵
+    canUseCoupon: true//支持使用优惠卷
   },
   onLoad: function (options) {
     Tool.getUserInfos(this)
@@ -112,6 +114,7 @@ Page({
      
       //渲染产品信息列表
       let showProduct =[]
+      let canUseTokenCoin = false, canUseCoupon = false
       item.orderProductList.forEach((item0,index)=>{
         showProduct.push({
           showImg: item0.specImg,
@@ -121,6 +124,19 @@ Page({
           showQnt: item0.num,
           status: 1,
           stock: item0.stock,
+        })
+        let arr = Tool.bitOperation(this.data.couponArr, item0.restrictions)
+        console.log(item0.restrictions)
+        let couponType = this.data.couponArr.filter(function (n) {
+          return arr.indexOf(n) == -1
+        });
+        couponType.forEach((item,index)=>{
+          if(item==this.data.couponArr[0]){
+            canUseCoupon = true
+          }
+          if (item == this.data.couponArr[1]) {
+            canUseTokenCoin = true
+          }
         })
       })
 
@@ -142,7 +158,9 @@ Page({
 
       this.setData({
         orderInfos: item,
-        addressList: addressList
+        addressList: addressList,
+        canUseCoupon: canUseCoupon,
+        canUseTokenCoin: canUseTokenCoin
       })
       // if (this.data.useOneCoinNum>0){
       //   this.getTokenCoin()
@@ -271,7 +289,7 @@ Page({
     Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + useOneCoinNum + '&maxUseCoin=' + maxUseCoin)
   },
   couponClicked(){ // 点击使用优惠卷跳转
-    if ((this.data.door != 99 && this.data.door ==5)|| this.data.coupon.canClick===false) return
+    if ((this.data.door != 99 && this.data.door == 5) || this.data.coupon.canClick === false || !this.data.canUseCoupon) return
     let productIds = this.getCouponProductPriceIds()
     Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=2&productIds=" + JSON.stringify(productIds))
   },

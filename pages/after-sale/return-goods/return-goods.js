@@ -5,14 +5,14 @@ Page({
     addressType:1,
     result: [ // 退货
       { state: "其他" },
-      { state: "申请中", info: "等待商家通过", time: '' },
-      { state: "商家已通过", info: "请在规定时间内退货给卖家", tips: "退款中", time: '倒计时' },
-      { state: "商家拒绝您的请求", info: "请联系客服" },
-      { state: "退货中", info: "等待商家确认" },
-      { state: "等待买家确认收货", info: "", time: '' },
-      { state: "退货完成", info: "", time: '完成的时间' },
-      { state: "退货申请已撤销", info: "请联系客服" },
-      { state: "退货时间超时", info: "请联系客服" },
+      { state: "等待商家处理", info: "等待商家通过", time: '' },
+      { state: "商家已通过", info: "请在规定时间内退货给卖家", tips: "退款中", time: '' },
+      { state: "商家拒绝退货申请", info: "" },
+      { state: "请退货请商家", info: "等待商家确认" },
+      { state: "等待商家确认", info: "", time: '' },
+      { state: "退货完成", info: "", time: '' },
+      { state: "退货申请已撤销", info: "" },
+      { state: "退货时间超时", info: "请" },
     ],
     time:'',
     datas:'',
@@ -55,7 +55,9 @@ Page({
           time = setInterval(function () { Tool.getDistanceTime(datas.endTime, self); }, 1000);
         }
       }
-      
+      if (status == 1) {
+        this.data.result[status].time = Tool.formatTime(datas.applyTime)
+      }
       if (datas.expressNo) {
         expressNo = { id: 2, content: datas.expressNo }
       }

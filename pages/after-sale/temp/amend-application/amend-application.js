@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation, Storage } = global
+let { Tool, RequestFactory, Operation, Storage, Event } = global
 
 Component({
   properties: {
@@ -18,7 +18,8 @@ Component({
         }
         let r = RequestFactory.wxRequest(params);
         r.successBlock = (req) => {
-          Tool.redirectTo('/pages/my/my-order/my-order')
+          Event.emit('getDetail')
+          Tool.navigationPop()
         };
         Tool.showErrMsg(r)
         r.addToQueue();

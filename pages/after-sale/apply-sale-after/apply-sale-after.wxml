@@ -66,4 +66,5 @@
   isIphoneX='{{isIPhoneX.isIPhoneX}}'
   commodityType = '5'
   bind:hiddenTips='hiddenTips'
+  productPriceId = '{{productPriceId.productPriceId}}'
 />

@@ -37,6 +37,13 @@ Page({
       isShowNotice:false, // 是否展示公告
       isScroll: false,
       scrollTimer: null,
+      downPriceParam:{
+        1: 'startPrice',
+        2: 'markdownPrice',
+        3: 'markdownPrice',
+        4: 'markdownPrice',
+        5: 'markdownPrice'
+      }
     },
     // 滚动的时候任务要缩进去
     onPageScroll(e){
@@ -78,6 +85,20 @@ Page({
         })
       });
       this.queryAdList(6, '超值热卖', (datas) => {
+        datas.forEach((item,index)=>{
+          let  topicBannerProductDTOList = item.topicBannerProductDTOList || []
+          topicBannerProductDTOList.forEach((item0,index0)=>{
+            if (item0.productType === 2){
+              item0.showPrice = item0[this.data.downPriceParam[item0.status]]
+            }
+            else if (item0.productType === 1) {
+              item0.showPrice = item0.seckillPrice
+            }
+            else {
+              item0.showPrice = item0.originalPrice
+            }
+          })
+        })
         this.setData({
           hotSale:datas
         })
@@ -242,6 +263,10 @@ Page({
       let r = RequestFactory.wxRequest(params);
         r.successBlock = (req) => {
           let datas = req.responseObject.data
+          let list = datas.data || []
+          list.forEach((item,index)=>{
+
+          })
           this.setData({
             recommendArr: this.data.recommendArr.concat(datas.data),
             recommendTotalPage: datas.totalPage,

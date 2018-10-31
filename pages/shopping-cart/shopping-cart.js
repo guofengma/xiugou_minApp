@@ -17,9 +17,14 @@ Page({
     Event.on('updateShoppingCart', this.getShoppingCartList, this)
     Event.on('updateStorageShoppingCart', this.getRichItemList, this)
     Event.on('didLogin', this.getLoginCart, this);
-    Event.on('continueBuy', this.shoppingCartLimit, this);
+    Event.on('continueBuy', this.shoppingcart0neMoreOrder, this);
   },
   onShow: function () {
+
+  },
+  onPullDownRefresh: function () {
+    this.myRecordingA(1, answerUrl);
+    wx.stopPullDownRefresh();
 
   },
   getLoginCart(){
@@ -75,6 +80,21 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
+      this.formatShoppingListData(req)
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  shoppingcart0neMoreOrder(){
+    let isArrParams = this.getFormCookieToSessionParams()
+    let params = {
+      cacheList: isArrParams,
+      reqName: '再来一单的时候批量加入购物车',
+      url: Operation.shoppingcart0neMoreOrder,
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      Storage.clearShoppingCart()
       this.formatShoppingListData(req)
     };
     Tool.showErrMsg(r)
@@ -394,6 +414,7 @@ Page({
     Event.off('updateStorageShoppingCart', this.getStorageShoppingCart);
     Event.off('updateShoppingCart', this.getShoppingCartList);
     Event.off('didLogin', this.didLogin);
+    Event.on('continueBuy', this.shoppingcart0neMoreOrder);
   },
   test(){
     // 阻止冒泡 

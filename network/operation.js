@@ -133,7 +133,10 @@ export default class Operation {
 
       this.getRichItemList  ='/user/shoppingcart/getRichItemList'
 
+       // 再来一单的时候批量加入购物车
 
+      this.shoppingcart0neMoreOrder = '/user/shoppingcart/oneMoreOrder'
+      
     /********************** 地址管理 *********************/
         // 新增地址 或 修改地址(传id)
 

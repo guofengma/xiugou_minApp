@@ -22,3 +22,11 @@ image{
 .consignee{
   margin-bottom: 10rpx;
 }
+.text-name{
+  display:inline-block;
+  width:224rpx;
+  
+}
+/* .text-left{
+  align-items: flex-start
+} */

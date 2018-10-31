@@ -74,6 +74,7 @@ Page({
             detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
             detail.showFinishTime = detail.deliverTime? Tool.formatTime(detail.deliverTime) : Tool.formatTime(detail.finishTime)
             detail.deliverTime = Tool.formatTime(detail.deliverTime)
+            detail.shutOffTime = Tool.formatTime(detail.shutOffTime)
             let address = {}
             address.receiver = detail.receiver;
             address.recevicePhone = detail.recevicePhone;
@@ -84,7 +85,13 @@ Page({
             }else{
                 detail.sendTime=''
             }
-            
+        detail.payWay = Tool.bitOperation(this.data.payTypeArr,detail.orderPayRecord.type)
+        if (detail.payWay.includes(this.data.payTypeArr[0])){
+          detail.showPlatformTime = Tool.formatTime(detail.platformPayTime)
+        }
+        if (detail.payWay.length > 1 || (detail.payWay.length == 1 && !detail.payWay.includes(this.data.payTypeArr[0]))){
+          detail.isUsedThirdPay = true
+        }
             if (detail.status == 1 || detail.status == 3) { // 开始倒计时
               let that = this
               let time = setInterval(function () { that.time() }, 1000)

@@ -11,7 +11,8 @@
        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'home_icon_xiaoxi@2x.png'}}"/>
       </view>
     </view>
-    <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:{{imgheights[0]}}rpx;min-height:400rpx' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff' circular="true">
+    <!-- height:{{imgheights[0]}}rpx;min-height:400rpx -->
+    <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:460rpx' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff' circular="true">
     <block wx:for="{{imgUrls}}" wx:key='unique'>
       <swiper-item>
         <image src="{{item.imgUrl}}" class="slide-image" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' bindload="imageLoad" />
@@ -167,7 +168,7 @@
             <view class='hot-sale-prd flexC'  catchtap='adListClicked' data-prodtype='{{item.productType}}' data-val='{{item.prodCode}}'>
               <image src='{{item.specImg}}'></image>
               <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName || ''}}</view>
-            <view class='red font-28'>¥{{item.originalPrice || 0}}起</view>
+            <view class='red font-28'>¥{{item.showPrice || 0}}起</view>
           </view>     
           </block>
            <!-- 查看更多  -->

@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -251,24 +251,24 @@
 					"pathName": "pages/discover/discover-fav/discover-fav",
 					"query": ""
 				},
-        {
-          "id": -1,
-          "name": "我的任务",
-          "pathName": "pages/my/task/task",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "任务详情",
-          "pathName": "pages/my/task/task-detail/task-detail",
-          "query": ""
-        },
-        {
-          "id": -1,
-          "name": "任务分享",
-          "pathName": "pages/my/task/task-share/task-share",
-          "query": ""
-        },
+				{
+					"id": -1,
+					"name": "我的任务",
+					"pathName": "pages/my/task/task",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "任务详情",
+					"pathName": "pages/my/task/task-detail/task-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "任务分享",
+					"pathName": "pages/my/task/task-share/task-share",
+					"query": ""
+				},
 				{
 					"id": -1,
 					"name": "红包",

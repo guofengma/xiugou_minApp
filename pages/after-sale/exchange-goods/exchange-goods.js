@@ -6,7 +6,7 @@ Page({
     src:'/img/address-icon-gray.png',
     result:[ // 换货
       { state:"其他"},
-      { state: "申请中", info: "等待商家通过", time: '' },
+      { state: "等待商家处理", info: "", time: '' },
       { state: "商家已通过", info: "请在规定时间内退货给卖家", time: ''},
       { state: "商家拒绝您的请求", info: "请联系客服" },
       { state: "换货中", info: "等待商家确认" },

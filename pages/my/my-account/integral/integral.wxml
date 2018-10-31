@@ -17,9 +17,9 @@
     <view class="list-area">
         <view class="list-item flexR-sb" wx:for="{{list}}" wx:key="unique">
           <view class='flexR-sb detail-content'>
-            <image src="{{imgBaseUrl+useTypeArr[item.usType].icon}}"></image>
+            <image src="{{imgBaseUrl+useTypeArr[item.useType].icon}}"></image>
             <view class="detail">
-              <view class="style">{{useTypeArr[item.usType].name}}</view>
+              <view class="style">{{useTypeArr[item.useType].name}}</view>
               <view class="time">{{item.createTime}}</view>
             </view>
           </view>

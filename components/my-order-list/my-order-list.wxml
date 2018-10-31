@@ -50,6 +50,7 @@
       <text wx:elif="{{ item.status==3 }}">发货时间：{{item.sendTime}}</text>
       <text wx:elif="{{ item.status==2 }}">付款时间：{{item.payTime}}</text>
       <text wx:elif="{{ item.status==7 }}">取消时间：{{item.cancelTime}}</text>
+      <text wx:elif="{{ item.status==8 }}">关闭时间：{{item.payEndTime}}</text>
       <text wx:else>创建时间：{{item.createTime}}</text>
     </view>
     <view>

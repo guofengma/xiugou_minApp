@@ -17,9 +17,9 @@
 </view>
 <view class='flexC tips-exchange font-26'>
   <view class='tips-title'>{{result[resultIndex].state}}</view>
-  <view wx:if='{{datas.status!=3}}'>{{result[resultIndex].info}}</view>
+  <!-- <view wx:if='{{datas.status!=3}}'>{{result[resultIndex].info}}</view> -->
   <view>{{distanceTime}}</view>
-  <view wx:if='{{datas.status==6 || datas.status==3}}'>{{result[resultIndex].time}}</view>
+  <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view>
 </view>
 <view wx:if='{{datas.status==3}}' class='refusalReason whiteBg font-26 flexR-sb'>拒绝原因：{{result[resultIndex].info}}</view>
 <!--退款成功以后才显示以下内容  -->

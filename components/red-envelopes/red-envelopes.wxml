@@ -15,7 +15,7 @@
       </view>
       <view class='red-succ' catchtap='goPage'>
         <view>领取成功</view>
-        <view class='font-22'>可前往我的-优惠卷查看</view>
+        <view class='font-22'>可前往我的-优惠券查看</view>
       </view>
     </view> 
     <view class='close' catchtap='close'>

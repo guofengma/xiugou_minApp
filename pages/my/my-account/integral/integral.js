@@ -13,6 +13,8 @@ Page({
         { name: '注册赠送', icon:'zczs-icon.png'},
         { name: '活动赠送', icon: 'hdzs-icon.png' },
         { name: '商品购买抵扣', icon: 'xdxf-icon.png' },
+        { name: '兑换一元券', icon: 'xdxf-icon.png' },
+        { name: '签到', icon: 'zczs-icon.png' },
       ]
     },
     //获取数据
