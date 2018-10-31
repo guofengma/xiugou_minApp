@@ -27,7 +27,8 @@ Component({
     countdownTime: '00:00:00:00',
     interval: null,
     endTime: 0,
-    delay: 90 //倒计时间隔
+    delay: 90, //倒计时间隔
+    tryCount: 5,
   },
   methods: {
     // 倒计时 到毫秒
@@ -36,6 +37,14 @@ Component({
       let delay = this.data.delay;
       if (typeof time !== 'number' || time <= 0 || !time) {
         clearInterval(this.data.interval);
+        if(this.data.tryCount <= 0 ) return;
+        setTimeout(()=>{
+          console.log('try again');
+          this.triggerEvent('countdown', true);
+          this.setData({
+            tryCount: this.data.tryCount-1
+          })
+        },500)
         return time;
       }
       time -= delay;

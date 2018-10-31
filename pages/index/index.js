@@ -35,6 +35,8 @@ Page({
       isChange:true,
       noticeLabel: ['', '精选', '热门','推荐','最新'],
       isShowNotice:false, // 是否展示公告
+      hasTask: false,
+      showCard: false, // 任务领取窗口展示
       isScroll: false,
       scrollTimer: null,
       downPriceParam:{
@@ -43,7 +45,46 @@ Page({
         3: 'markdownPrice',
         4: 'markdownPrice',
         5: 'markdownPrice'
+      },
+      taskDetail:{}
+    },
+    close() {
+      this.toggleCardShow();
+    },
+    toggleCardShow() {
+      this.setData({
+        showCard: !this.data.showCard
+      })
+    },
+    findUserJobsByUserId() {
+      let params = {
+        url: Operation.findUserJobsByUserId,
+        requestMethod: 'GET'
       }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let data = req.responseObject.data || {};
+        
+        data.receiveFlag &&
+        this.setData({
+          taskDetail: data,
+          hasTask: !!data.receiveFlag
+        })
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    },
+    getJob() {
+      let params = {
+        url: Operation.addJobs
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let data = req.responseObject.data || {};
+        Tool.navigateTo('/pages/my/task/task-detail/task-detail?jobId=' + this.data.taskDetail.id)
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
     },
     // 滚动的时候任务要缩进去
     onPageScroll(e){
@@ -64,6 +105,7 @@ Page({
     onLoad: function () {
       Event.on('getLevel', this.getLevel,this)
       this.discoverNotice()
+      this.findUserJobsByUserId();
       this.queryAdList(1,'轮播图片',(datas)=>{
         this.setData({
           imgUrls:datas

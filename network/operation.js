@@ -555,6 +555,30 @@ export default class Operation {
 
         this.discoveerCountSave = '/discover/count/save';
 
+        // 根据openid判断用户是否存在
+
+        this.userExistByOpenid = '/user/userLogin/existedUserByOpenId'
+
+        // 获取刮刮卡
+
+        this.getScratchCard = '/scratch/scratchCard/updateScratchCard'
+
+        // 获取我的任务列表
+
+        this.queryJobsByUserId = '/user/userJobs/queryJobsByUserId'
+
+        // 查询是否有任务
+
+        this.findUserJobsByUserId = '/user/userJobs/findUserJobsByUserId'
+
+        // 领取任务
+
+        this.addJobs = '/user/userJobs/add'
+
+        // 获取任务详情
+
+        this.findByJobId = '/user/userJobs/findByJobId'
+
         __instance(this);
 
     }

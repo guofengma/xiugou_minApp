@@ -32,10 +32,10 @@
         <view class='card-task-award'>现 金</view>
       </view>
       <view class='card-task-desc'>
-        <view>完成推广任务</view>
-        <view>可获得2-10元现金奖励</view>
+        <view>{{name}}</view>
+        <view>{{desc}}</view>
       </view>
-      <view class='btn-get'>马上领取</view>
+      <view class='btn-get' bindtap='getJob'>马上领取</view>
     </view>
   </view>
   

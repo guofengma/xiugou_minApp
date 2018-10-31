@@ -32,6 +32,12 @@
   font-size: 72rpx;
   text-align: center;  
 }
+.noting-msg {
+  line-height:182rpx;
+  color: #666;
+  font-size: 32rpx;
+  text-align: center;
+}
 .coupon-info {
   color: #999;
 }
