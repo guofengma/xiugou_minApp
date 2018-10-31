@@ -24,9 +24,8 @@ image{
 }
 .text-name{
   display:inline-block;
-  width:224rpx;
-  
+  width:60%;
 }
-/* .text-left{
-  align-items: flex-start
-} */
+.text-left{
+   width:60%;
+}

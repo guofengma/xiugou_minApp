@@ -38,7 +38,7 @@
 </view>
 
 <view wx:if='{{datas.status==1}}'>
-   <amend-application applyType='{{"换货"}}' list='{{datas}}'/>
+   <amend-application applyType='{{"换货"}}' list='{{datas}}' returnProductId='{{returnProductId}}' bind:reloadPage='findReturnProductById'/>
 </view>
 <!--换货信息  -->
 

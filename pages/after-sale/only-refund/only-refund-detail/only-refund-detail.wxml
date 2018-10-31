@@ -11,7 +11,7 @@
 </view>
 <view wx:if='{{datas.status==3}}' class='refusalReason whiteBg font-26 flexR-sb'>拒绝原因：{{datas.refusalReason}}</view>
 <view wx:if='{{datas.status==1}}'>
-   <amend-application applyType='{{"退款"}}' list='{{datas}}'/>
+   <amend-application applyType='{{"退款"}}' list='{{datas}}' returnProductId='{{returnProductId}}' bind:reloadPage='findReturnProductById'/>
 </view>
 <!--退款成功以后才显示以下内容  -->
 

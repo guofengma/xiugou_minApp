@@ -12,7 +12,7 @@
 
 
 <!--提示语  -->
-<view class='redBg font-26 flexR tips' wx:if='{{datas.status==2}}'>
+<view class='redBg font-26 flexR tips' wx:if='{{datas.status==2 || datas.status==7}}'>
   商家已同意退货退款申请，请尽快发货
 </view>
 <view class='flexC tips-exchange font-26'>
@@ -41,9 +41,9 @@
   </view>
 </view>
 <view  wx:if='{{datas.status==1}}'>
-   <amend-application applyType='{{"退货"}}' list='{{datas}}'/>
+   <amend-application applyType='{{"退货"}}' list='{{datas}}' returnProductId='{{returnProductId}}' bind:reloadPage='findReturnProductById'/>
 </view>
-<!--换货信息  -->
+<!--换货信息  --> 
 
 <view class='exchange-info font-26 '>
   <view class='flexR-sb after-sale-line gray'>退款订单</view>

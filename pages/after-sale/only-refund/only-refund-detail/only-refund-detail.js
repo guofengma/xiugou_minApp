@@ -12,14 +12,15 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      list: Storage.getInnerOrderList() || ''
+      list: Storage.getInnerOrderList() || '',
+      returnProductId: options.returnProductId
     })
-    this.findReturnProductById(options.returnProductId)
+    this.findReturnProductById()
   },
   findReturnProductById(returnProductId) {
     let list = this.data.list
     let params = {
-      returnProductId: returnProductId || this.data.list.returnProductId,
+      returnProductId: this.data.returnProductId || this.data.list.returnProductId,
       reqName: '查看退款退货换货情况',
       url: Operation.findReturnProductById
     }

@@ -34,10 +34,9 @@ Page({
     this.findReturnProductById(this.data.returnProductId)
   },
   findReturnProductById(returnProductId) {
-    console.log(returnProductId)
     let list = this.data.list
     let params = {
-      returnProductId: Number(returnProductId) || this.data.list.returnProductId,
+      returnProductId: Number(this.data.returnProductId) || this.data.list.returnProductId,
       reqName: '查看退款退货换货情况',
       url: Operation.findReturnProductById
     }

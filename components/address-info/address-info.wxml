@@ -12,7 +12,7 @@
       <view wx:else>
         <view wx:if='{{addressType==1}}' class='flexR-sb consignee'>
            <view class='flexR-sb text-left'>
-              <text>{{door==1? "收货人：":""}}</text>
+              <text wx:if='{{door==1}}'>{{door==1? "收货人：":""}}</text>
               <text class='text-name'>{{receiver}}</text>
            </view>
            <text>{{receiverPhone || receivePhone || recevicePhone}}</text>

@@ -76,7 +76,7 @@
       <view class='gray'>
        <text class='label red' >服务</text>
         正品保障·急速发货 <text wx:if='{{productInfo.afterSaleServiceDays>0}}'>{{productInfo.afterSaleServiceDays>30? 30:productInfo.afterSaleServiceDays}}天无理由退换货</text>
-        <text wx:else>不支持退换货</text>
+        <text wx:else>无售后服务</text>
       </view>
     </view>
     <!--产品图文详情切换  -->
