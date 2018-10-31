@@ -2,7 +2,7 @@
   <view class='task-detail-info'>
     <text class='task-detail-title'>任务说明：</text>
     <view class='task-detail-desc'>
-      邀请好友可获得品牌推广的现金奖励
+      {{detail.remarks || ''}}
       <image mode='widthFix' src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png' class='task-thumb'></image>
     </view>
   </view>

@@ -201,9 +201,17 @@
   </view>
 
   <!-- 任务 -->
-  <view class='duty' style="right: {{isScroll?-80:0}}rpx">
+  <view class='duty' wx:if="{{hasTask}}" style="right: {{isScroll?-80:0}}rpx" catchtap='toggleCardShow'>
    <image-sub imgStyle='{{"width:165rpx"}}' imgSrc="{{'home_icon_activity.png'}}"/>
   </view>
+  <task-card 
+    bind:close="close" 
+    bind:get="getJob" 
+    type="loading"
+    desc="{{taskDetail.desc}}"
+    name="{{taskDetail.name || ''}}"
+    wx:if="{{showCard}}"  
+  ></task-card> 
 </view>
 
 <!-- 公告 -->

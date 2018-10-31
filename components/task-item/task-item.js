@@ -1,9 +1,9 @@
 let { Tool, Config } = global;
 Component({
   properties: {
-    date: {
-      type: Number,
-      default: 0
+    item: {
+      type: Object,
+      value: {}
     }
   },
 
@@ -22,7 +22,7 @@ Component({
       })
     },
     countdown() {
-      let time = this.data.date;
+      let time = this.data.item.countDown;
       let delay = this.data.delay;
       if (typeof time !== 'number' || time <= 0 || !time) {
         return time;
@@ -32,12 +32,12 @@ Component({
         this.setData({
           countdownTime: '00:00:00:00'
         });
-        // this.triggerEvent('countdown', true);
+        this.triggerEvent('countdown', true);
         return;
       } else {
         this.setData({
           countdownTime: this.formatTime(time),
-          date: time
+          "item.countDown": time
         })
       }
       setTimeout(()=> {
@@ -59,6 +59,10 @@ Component({
       this.setData({
         showCard: !this.data.showCard
       })
+    },
+    // 开启奖励
+    openAward() {
+
     }
   },
   ready() {

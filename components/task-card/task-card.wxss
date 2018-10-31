@@ -86,9 +86,10 @@
   line-height: 80rpx;
   border-radius: 10rpx;
   background: #f00006;
+  font-size: 28rpx;
   color: #fff;
   text-align: center;
-  margin: 50rpx auto 0;
+  margin: 40rpx auto 0;
 }
 .card-title {
   margin: 20rpx 0 40rpx;
@@ -117,4 +118,5 @@
   margin-top: 38rpx;
   font-size: 24rpx;
   line-height: 34rpx;
+  padding: 0 20rpx;
 }

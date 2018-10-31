@@ -1,26 +1,28 @@
+let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
 Page({
   data: {
-
+    detail: {}
   },
   onLoad (options) {
-
+    console.log(options)
+    this.getTaskDetail(options.jobId)
   },
-  onReady () {
-
+  getTaskDetail(jobId) {
+    let params = {
+      url: Operation.findByJobId,
+      jobId: jobId,
+      requestMethod: 'GET'
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let data = req.responseObject.data || {};
+      this.setData({
+        detail: data
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
-
-  onShow () {
-
-  },
-
-  onHide () {
-
-  },
-
-  onUnload () {
-
-  },
-
   onShareAppMessage () {
     return ({
       title: '',
