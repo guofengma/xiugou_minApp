@@ -87,7 +87,7 @@ Page({
     },
     onLoad: function (options) {
       this.setData({
-        account: options.query || 0,
+        account: options.query || '0.00',
         imgBaseUrl: Config.imgBaseUrl
       })
       this.getData()

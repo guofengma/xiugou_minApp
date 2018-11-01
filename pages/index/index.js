@@ -46,7 +46,8 @@ Page({
         4: 'markdownPrice',
         5: 'markdownPrice'
       },
-      taskDetail:{}
+      taskDetail:{},
+      width:0
     },
     close() {
       this.toggleCardShow();
@@ -177,7 +178,7 @@ Page({
     didLogin() {
       Tool.didLogin(this)
       if (this.data.didLogin){
-        this.getLevelInfos()
+        // this.getLevelInfos()
         this.getLevel()
       }
     },
@@ -241,6 +242,7 @@ Page({
         this.setData({
           userInfos: req.responseObject.data
         })
+        this.getLevelInfos()
       };
       Tool.showErrMsg(r)
       r.addToQueue();
@@ -253,8 +255,35 @@ Page({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data || []
+        let userInfos = this.data.userInfos
+        let levelId = userInfos.levelId
+        // let levelId = 1
+        let userExp = userInfos.experience
+        // let userExp = 1300
+        let levelObj = datas.filter((item) =>{
+          return item.id == levelId
+        }) 
+        let index = datas.indexOf(levelObj[0])
+        // 下一等级
+        let nextLevel = datas[index+1]
+        // 当前等级
+        let preLevel = datas[index]
+        let width = 0
+        // 是否升级
+        let isUpdateLevel = !(userExp > nextLevel.upgradeExp)
+        userExp = userExp > nextLevel.upgradeExp? nextLevel.upgradeExp : userExp
+        if(index==0){
+          let Denominator = isUpdateLevel ? userExp / nextLevel.upgradeExp : userExp / nextLevel.upgradeExp - 0.01
+          width = Denominator  * (1 / (datas.length - 2))
+        } else if (index==datas.length-1){
+          width =1 
+        } else {
+          let Denominator = isUpdateLevel ? (userExp - preLevel.upgradeExp) / (nextLevel.upgradeExp - preLevel.upgradeExp) : (userExp - preLevel.upgradeExp) / (nextLevel.upgradeExp - preLevel.upgradeExp) - 0.01
+          width = index / (datas.length - 2) + Denominator * (1 / (datas.length - 2))
+        }
         this.setData({
-          levelList:datas
+          levelList:datas,
+          width: width*100
         })
       };
       Tool.showErrMsg(r)

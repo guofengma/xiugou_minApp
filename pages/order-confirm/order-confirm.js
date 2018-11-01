@@ -297,8 +297,9 @@ Page({
     let productIds = []
     this.data.params.orderProducts.forEach((item) => {
       productIds.push({
-        priceId: item.priceId,
-        productId: item.productId,
+        priceId:item.priceId,
+        productId:item.productId,
+        amount:item.num
       })
     })
     return productIds

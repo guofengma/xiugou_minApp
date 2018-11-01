@@ -53,7 +53,7 @@ Page({
       let SaleExpressNo = this.data.SaleExpressNo
       let time =''
       if (status == 1) {
-        this.data.result[status].time = Tool.formatTime(datas.applyTime)
+        this.data.result[status].time = datas.applyTime
       }
       if (status == 2) {
         let self = this

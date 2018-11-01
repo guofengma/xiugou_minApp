@@ -42,7 +42,7 @@
         <!-- 等级线 -->
         <view class='levelLineContent boxSize'>
           <view class='levelLine'>
-            <view class='myLevelLine' style='width:{{(userInfos.experience)/(levelList[levelList.length-1].upgradeExp)*100}}%' >
+            <view class='myLevelLine' style='width:{{width}}%' >
               <view class='my-level-val font-22 whiteBg' >
                 <text class='triangle_border_up'></text>
                 {{userInfos.experience}}
