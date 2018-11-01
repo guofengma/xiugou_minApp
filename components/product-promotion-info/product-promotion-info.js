@@ -190,6 +190,9 @@ Component({
     },
     clearInterval() {
       clearInterval(this.data.interval);
+      this.setData({
+        tryCount: 0
+      })
     }
   },
   ready() {

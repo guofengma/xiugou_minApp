@@ -39,6 +39,7 @@ Page({
     showRegular: false,
     jumpCommonProductTimer: null, // 定时跳转普通商品倒计时
     autoplay: true,
+    screenShow: false, // 用于判断是否锁屏
   },
   onLoad: function (options) {
     this.setData({
@@ -46,15 +47,26 @@ Page({
       prodCode: options.code
     })
     this.didLogin()
-    // this.getTopicActivityData(this.data.prodCode);    
+    this.getTopicActivityData(this.data.prodCode);    
     // this.requestFindProductByIdApp()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
   onShow: function () {
-    this.selectComponent('#promotion') && this.selectComponent('#promotion').clearInterval();
-    clearTimeout(this.data.jumpCommonProductTimer);
-    this.getTopicActivityData(this.data.prodCode); 
+    if (!this.data.screenShow) return;
+    this.onLoad({code:this.data.prodCode})
+    // this.selectComponent('#promotion') && this.selectComponent('#promotion').clearInterval();
+    // clearTimeout(this.data.jumpCommonProductTimer);
+    // this.toggleScreenShowStatus();
+    // this.getTopicActivityData(this.data.prodCode); 
+  },
+  onHide() {
+    this.toggleScreenShowStatus();
+  },
+  toggleScreenShowStatus(){
+    this.setData({
+      screenShow: !this.data.screenShow
+    })
   },
   videoClicked() {
     this.setData({
