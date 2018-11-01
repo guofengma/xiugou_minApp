@@ -1,6 +1,6 @@
 <view class='container'>
   <view class='task-share-info'>
-    <view class='task-share-card' wx:if="{{scratchCard.status == 2}}">
+    <view class='task-share-card' wx:if="{{!scratchCard.id}}">
       <!-- 未刮奖 -->
       <view class='task-card ready' bindtap='getScratchCard'>刮刮卡</view>
       <view class='lottery_btn inactive'>立即领取</view>
@@ -8,11 +8,13 @@
     <view class='task-share-card' wx:else>
       <!-- 抽中优惠券 -->
       <view class='task-card coupon flexR' wx:if="{{scratchCard.typeStatus == 1}}">
-        <view class='coupon-money'>888<text class='symbol'>元</text></view>
+        <view class='coupon-money'>{{scratchCard.value}}<text class='symbol'>元</text></view>
         <view class='coupon-info'>
-          <view class='coupon-title'>菲诗小铺店铺优惠券</view>
-          <view class='coupon-detail'>满199减20元</view>
-          <view class='coupon-time'>使用期限：2018.10.14-2018.10.16</view>
+          <view class='coupon-title'>{{scratchCard.name}}</view>
+          <view class='coupon-detail'>满{{useConditions||'0'}}减{{scratchCard.value}}{{scratchCard.type == 3? '折': '元'}}
+          <!-- 优惠劵类型 1: 满减 2:抵价 3:折扣 4:抵扣 -->
+          </view>
+          <view class='coupon-time' wx:if="{{scratchCard.status == 1}}">使用期限：</view>
         </view>
       </view>
       <!-- 秀豆 -->
@@ -21,14 +23,14 @@
           <image src='{{imgUrl}}xiu_bean.png' class='bean-icon'></image>
           <view class='bean-count'>{{scratchCard.giftValue}}<text>秀豆</text></view>
         </view>
-        <view class='bean-desc'>满100秀豆可兑换1元现金券</view>
+        <view class='bean-desc'>{{scratchCard.sysConfig}}</view>
       </view>
       <!-- 啥都没有 -->
       <view class='task-card noting' wx:else>
         <view class='noting-msg'>{{scratchCard.priceInfo}}</view>
       </view>
       <view 
-        class='lottery_btn {{scratchCard.status == 1 ? "active":"inactive"}}' 
+        class='lottery_btn {{scratchCard.status == 2 ? "active":"inactive"}}' 
         catchtap='toggleModalShow'
       >立即领取</view>
     </view>
