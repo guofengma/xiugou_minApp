@@ -565,7 +565,7 @@ export default class Operation {
 
         // 获取刮刮卡
 
-        this.getScratchCard = '/scratch/scratchCard/updateScratchCard'
+        this.getScratchCard = '/scratch/scratchCard/findByCode'
 
         // 获取我的任务列表
 
@@ -608,7 +608,7 @@ export default class Operation {
 
         // 验证刮刮卡使用状态
 
-        this.checkScratchCodeStatus = ''
+        this.checkScratchCodeStatus = '/scratch/scratchCardInformation/findByCode'
 
         __instance(this);
 

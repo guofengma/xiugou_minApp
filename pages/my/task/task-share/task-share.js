@@ -39,7 +39,10 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let data = req.responseObject.data || {};
-      
+      this.setData({
+        scratchCode: data.scratchCode
+      });
+      this.checkScratchCodeStatus();
     };
     Tool.showErrMsg(r)
     r.addToQueue();
@@ -47,27 +50,29 @@ Page({
   checkScratchCodeStatus() {
     let params = {
       url: Operation.checkScratchCodeStatus,
-      
-    }
+      openid: this.data.userInfos.openid,
+      code: this.data.scratchCode,
+      requestMethod: 'GET'
+    };
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let data = req.responseObject.data || {};
+      this.setData({
+        scratchCard: data
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
   onReady () {
 
   },
-
-  onShow () {
-
-  },
-
-  onHide () {
-
-  },
-
   onUnload () {
     Event.off('didLogin', this.didLogin);
   },
   toRegister() {
-    let from = encodeURIComponent('/pages/my/task/task-share/task-share');
-    Tool.navigateTo(`/pages/register/register?from=${from}&inviteId=${this.data.inviteId}`)
+    let from = encodeURIComponent(`/pages/my/task/task-share/task-share?inviteId=${this.data.inviteId}`);
+    Tool.navigateTo(`/pages/register/register?from=${from}&inviteCode=${this.data.inviteId}`)
   },
   didLogin() {
     Tool.didLogin(this)
@@ -108,12 +113,13 @@ Page({
     // 如果开始获取到手机了就不需要填了
     if(phone) {
       this.getAward();
-      return;
+    } else {
+      this.toRegister();
+      this.setData({
+        showPhoneModal: !this.data.showPhoneModal,
+        inputFocus: !this.data.inputFocus
+      })
     }
-    this.setData({
-      showPhoneModal: !this.data.showPhoneModal,
-      inputFocus: !this.data.inputFocus
-    })
   },
   // 验证手机并领取奖励
   checkAwardPhone() {
@@ -139,7 +145,7 @@ Page({
   // 刮刮卡
   getScratchCard() {
     let params = {
-      code: 'GGK1810270002',
+      code: this.data.scratchCode,
       openid: Storage.getterFor('openid'),
       url: Operation.getScratchCard,
       reqName: '获取刮刮卡',
@@ -157,6 +163,8 @@ Page({
   },
   // 获取奖励
   getAward() {
-
+    let params = {
+      url: Operation
+    }
   }
 })
