@@ -55,7 +55,7 @@
         <text class='label-pd redBg'>{{productInfoList.priceLable}}</text>
       </view>
       <view class='shippingInfo gray'>
-        <text style='margin-right:158rpx'>快递：{{productInfoList.freight}}</text> 
+        <text style='margin-right:158rpx'>快递：{{productInfoList.freight || '包邮'}}</text> 
         <text>月销售{{productInfoList.monthSaleTotal}}笔</text>
       </view>
     </view>
