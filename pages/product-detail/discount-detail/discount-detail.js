@@ -53,7 +53,9 @@ Page({
     // this.getTopicActivityData(this.data.prodCode);
   },
   onShow: function () {
-
+    this.selectComponent('#promotion').clearInterval();
+    clearTimeout(this.data.jumpCommonProductTimer);
+    this.getTopicActivityData(this.data.prodCode); 
   },
   videoClicked() {
     this.setData({
