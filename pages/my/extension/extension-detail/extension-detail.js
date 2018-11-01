@@ -4,11 +4,19 @@ Page({
   data: {
     page: 1,
     pagesize: 10,
-    list:[]
+    list:[],
+    stautsArr: {
+      0: '未推广',
+      1: '已推广',
+      2: '已结束',
+      3: '已取消',
+    },
   },
   onLoad: function (options) {
     this.setData({
-      packageId: options.packageId
+      packageId: options.packageId,
+      endTime: options.endTime,
+      status: options.status,
     })
     this.queryPromotionReceiveRecordPageList()
     Tool.isIPhoneX(this)
@@ -29,6 +37,13 @@ Page({
         if (item.phone)
         item.showPhone = item.phone.slice(0, 3) + "*****" + item.phone.slice(7)
       })
+      if (this.data.status == 1) { // 开始倒计时
+        let that = this
+        let time = setInterval(function () { that.time() }, 1000)
+        this.setData({
+          time: time
+        })
+      } 
       this.setData({
         list: this.data.list.concat(datas.data),
         totalPage: datas.totalPage
@@ -36,6 +51,16 @@ Page({
     }
     Tool.showErrMsg(r)
     r.addToQueue();
+  }, 
+  time() {
+    let endTime = Tool.formatTime(Number(this.data.endTime))
+    let countdown = Tool.getDistanceTime(endTime, this)
+    if (countdown == 0) {
+      clearTimeout(this.data.time);
+      this.setData({
+        detail: 3,
+      })
+    }
   },
   onReachBottom() {
     this.data.page++;
@@ -53,5 +78,8 @@ Page({
       path: '/pages/my/extension/extension-detail/extension-detail',
       imageUrl: imgUrl
     }
+  },
+  onUnload: function () {
+    clearTimeout(this.data.time)
   },
 })

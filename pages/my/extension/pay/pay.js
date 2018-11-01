@@ -9,7 +9,9 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      num: options.num/2 || ''
+      num: options.num,
+      price: options.price,
+      total: options.total,
     })
   },
   selectIcon(){

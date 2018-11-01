@@ -13,6 +13,17 @@ Component({
     },
     goPage(){
       Tool.navigateTo('/pages/my/coupon/my-coupon/my-coupon')
+    },
+    btnClick(){
+      let params = {
+        url: Operation.userReceivePackage,
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
     }
   }
 })

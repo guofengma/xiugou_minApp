@@ -476,6 +476,10 @@ export default class Operation {
 
         this.addFeedback = '/user/feedback/addFeedback'
 
+        // 获取帮助次数
+
+        this.findQuestionEffectById = '/help/helpQuestion/findQuestionEffectById'
+
         /************************** 优惠券 *******************************/
 
         // 未使用优惠劵列表 status 优惠券状态 0-未使用 1-已使用 2-已失效 3-未激活
