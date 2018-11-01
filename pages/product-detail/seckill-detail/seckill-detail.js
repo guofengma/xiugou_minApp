@@ -54,7 +54,7 @@ Page({
     Event.on('didLogin', this.didLogin, this);
   },
   onShow: function () {
-    
+    this.getTopicActivityData(this.data.prodCode);
   },
   videoClicked() {
     this.setData({

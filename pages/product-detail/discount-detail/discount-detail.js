@@ -53,7 +53,7 @@ Page({
     // this.getTopicActivityData(this.data.prodCode);
   },
   onShow: function () {
-
+    this.getTopicActivityData(this.data.prodCode); 
   },
   videoClicked() {
     this.setData({
