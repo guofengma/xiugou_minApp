@@ -10,6 +10,7 @@ Component({
     commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包 5 换货
     exchangeNum:Number, // 换货的数量
     specIds: Array,
+    productPriceId:Number, // 换货的价格id
   },
   data: {
     visiable:false,
@@ -33,7 +34,14 @@ Component({
       this.isVisiableClicked()
     },
     formatSpecList(){ // 格式化规格数组
-      if (this.data.isInit) return
+      if (!this.data.isInit){
+        this.setData({
+          selectPrdList: {},
+          isActive: [{ index: '', val: '' }],
+        })
+      }else{
+        return
+      }
       let lists = []
       for (let key in this.data.productSpec) {
         lists.push({
@@ -45,6 +53,7 @@ Component({
       let totalStock = 0
       let priceList = []
       let stockList = []
+      // 去掉库存0的清单 
       this.data.priceList.forEach((item) => {
         if(item.stock!=0){
           stockList.push(item)
@@ -52,15 +61,15 @@ Component({
       })
       stockList.forEach((item)=>{
         totalStock += item.stock
-        if (this.data.commodityType == 5 & item.price == this.data.price){
+        // 换货的时候 去掉价格不等的清单
+        // 可以更换同价格的其他型号 或者 同型号的比购买时候低的同一种型号（同型号的价格低于或者等于购买时的价格）
+        if (this.data.commodityType == 5 && (item.id == this.data.productPriceId || item.price == this.data.price) ){
           priceList.push(item)
         }
-        console.log(this.data.commodityType, item.specIds,this.data.specIds)
         if ((this.data.commodityType == 2 || this.data.commodityType == 3) && item.specIds == this.data.specIds.join(',')){
           priceList.push(item)
         }
       })
-      console.log(priceList)
       if (priceList.length==0){
         priceList = stockList
       }
@@ -73,14 +82,17 @@ Component({
       }) 
       // 渲染提示语
       this.getTipsSpec()
-      this.initTypeSelected()
+      //this.initTypeSelected()
     },
     initTypeSelected(){ // 默认第一个选中
-      console.log(this.data.productSpec)
-      let productSpec = this.data.productSpec[0].list
-      let specValue = productSpec[0].specValue
-      let id = productSpec[0].id
-      this.renderSpecVeiw(0, 0, specValue, id)
+      let productSpecArr = [...this.data.productSpec]
+      productSpecArr.forEach((item,index)=>{
+        let productSpec= item.list
+        console.log("***********" ,productSpec)
+        let specValue = productSpec[0].specValue
+        let id = productSpec[0].id
+        this.renderSpecVeiw(0, 0, specValue, id)
+      })
     },
     typeListClicked(e) { // 规格点击事件
 
@@ -332,7 +344,7 @@ Component({
         visiable: !this.data.visiable,
         typeClicked: types
       })
-      if (this.data.visiable){
+      if (this.data.visiable || this.data.commodityType==5){
         this.triggerEvent('hiddenTips');
       }
     },
@@ -370,6 +382,6 @@ Component({
   },
   
   ready: function () {
-   
+    Tool.isIPhoneX(this)
   }
 })

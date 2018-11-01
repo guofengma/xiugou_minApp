@@ -3,8 +3,8 @@
 <view class='pagesize'>
     <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
         <view class="tab-item {{currentTab==0?'red':'gray'}}"  data-current="0" bindtap="swichNav">未使用</view>
-        <view class="tab-item {{currentTab==1?'red':'gray'}}" data-current="1" bindtap="swichNav">已失效</view>
-        <view class="tab-item {{currentTab==2?'red':'gray'}}" data-current="2" bindtap="swichNav">已使用</view>
+        <view class="tab-item {{currentTab==1?'red':'gray'}}" data-current="1" bindtap="swichNav">已使用</view>
+        <view class="tab-item {{currentTab==2?'red':'gray'}}" data-current="2" bindtap="swichNav">已失效</view>
     </scroll-view>
     <swiper class="tab-content {{currentTab==0&&door==1? 'tab-active':''}}" current="{{currentTab}}" duration="300" bindchange="switchTab">
         <swiper-item wx:for="{{lists}}" wx:for-index="key" wx:for-item="list"  wx:key="{{key}}">
@@ -19,7 +19,7 @@
             </scroll-view>
         </swiper-item>
     </swiper>
-    <view class='btn-view flexR fixed-bottom font-30 whiteBg' wx:if="{{currentTab==0&door==1&&lists[0].length>1}}" catchtap='giveUpUse'>放弃使用优惠券</view> 
+    <view class='btn-view flexR fixed-bottom font-30 whiteBg' wx:if="{{currentTab==0&door==1&&lists[0].length>0&&useType==2}}" catchtap='giveUpUse'>放弃使用优惠券</view> 
 </view>
 
 

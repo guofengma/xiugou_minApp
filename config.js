@@ -1,4 +1,5 @@
 const config = {
+  // baseUrl: 'https://uatapi.sharegoodsmall.com/gateway',// 市场部内测环境
   baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
   // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
   // baseUrl: 'http://172.16.10.42:8180/gateway',  // 蒋
@@ -19,6 +20,6 @@ const config = {
     m_fixed:'?x-oss-process=im age/resize,m_fixed,h_100,w_100', // 正方形
     m_fill:'?x-oss-process=image/resize,m_fill,h_100,w_100', // 固定宽度 自裁剪
   },
-  imgBaseUrl:"https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/",// 图片的地址
+  imgBaseUrl:"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/",// 图片的地址
 }
 export default config

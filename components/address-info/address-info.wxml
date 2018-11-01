@@ -11,8 +11,11 @@
       <!--姓名 电话  -->
       <view wx:else>
         <view wx:if='{{addressType==1}}' class='flexR-sb consignee'>
-           <text>{{door==1? "收货人：":""}}{{receiver}}</text>
-           <text>{{receiverPhone || receivePhone}}</text>
+           <view class='flexR-sb text-left'>
+              <text wx:if='{{door==1}}'>{{door==1? "收货人：":""}}</text>
+              <text class='text-name'>{{receiver}}</text>
+           </view>
+           <text>{{receiverPhone || receivePhone || recevicePhone}}</text>
         </view>
       </view>
       <view class='address-content gray'>

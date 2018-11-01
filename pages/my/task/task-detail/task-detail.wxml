@@ -1,0 +1,11 @@
+<view class='container'>
+  <view class='task-detail-info'>
+    <text class='task-detail-title'>任务说明：</text>
+    <view class='task-detail-desc'>
+      {{detail.remarks || ''}}
+      <image mode='widthFix' src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png' class='task-thumb'></image>
+    </view>
+  </view>
+  <view class='fixed-height'></view>
+  <button class='share' open-type='share'>分享好友帮您点击</button>
+</view>

@@ -14,7 +14,7 @@
       <swiper indicator-dots="true" previous-margin="62rpx" next-margin="62rpx" circular autoplay>
         <block wx:for="{{swipers}}" wx:key="unique">
           <swiper-item>
-            <image src="{{item.imgUrl}}" class="slide-image" width="355" height="150"/>
+            <image src="{{item.imgUrl}}" class="slide-image" width="355" height="150" bindtap='handleSwiperClick' data-code='{{item.linkTypeCode}}' data-link="{{item.linkType}}" />
           </swiper-item>
         </block>
       </swiper>
@@ -34,7 +34,16 @@
       <swiper previous-margin="30rpx" next-margin="130rpx" circular>    
         <block wx:for="{{hot}}" wx:key="unique">
           <swiper-item>
+            <view style="position:relative;">
             <image src="{{item.img}}" bindtap='handleItemClicked' data-id="{{item.id}}" class="slide-image" width="355" height="150"/>
+            <view class='discover-hot-desc'>
+              <text class='ellipsis'>{{item.pureContent}}</text>
+              <view class='discover_view'>
+                <image src='/img/icon_view_white@3x.png'></image>
+                <text>{{item.click || 0}}</text>
+              </view>
+            </view>
+            </view>
           </swiper-item>
         </block>
       </swiper>
@@ -47,6 +56,7 @@
         <template is="discover-item" data="{{showEdit,items:topic}}" />
       </view>
     </view>
+    <view class='no-more' wx:if="{{currentTopicPage == totalTopicPage}}">已经到底啦~</view>
     <!-- 推荐列表 E -->
   </view>
   <view class='discover-tab-new' wx:else>
@@ -55,5 +65,9 @@
         <template is="discover-item" data="{{showEdit,items:discover}}" />
       </view>
     </view>
+    <view class='no-more' wx:if="{{currentDiscoverPage == totalDiscoverPage}}">已经到底啦~</view>
+  </view>
+  <view class='goTop' bindtap='goTop' wx:if='{{showBackTop}}'>
+    <image src='/img/top-icon.png' mode='widthFix'></image>
   </view>
 </view>

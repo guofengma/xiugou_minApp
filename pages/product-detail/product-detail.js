@@ -24,9 +24,22 @@ Page({
       children: [],
     }],
     size:0,
-    userInfos:{}
+    userInfos:{},
+    autoplay:true,
+  },
+  videoClicked(){
+    this.setData({
+      autoplay: false
+    })
+    // Tool.navigateTo('/pages/my/information/information')
+  },
+  videoPause() {
+    this.setData({
+      autoplay: true
+    })
   },
   onLoad: function (options) {
+    console.log(options);
     this.setData({
       productId: options.productId || '',
       prodCode: options.prodCode || '',
@@ -38,9 +51,11 @@ Page({
     let callBack = ()=>{
       this.getShoppingCartList()
     }
-    if (!this.data.didLogin){
+    if (!this.data.didLogin && this.data.inviteCode){
       app.getSystemInfo()
       app.wxLogin(callBack)
+    } else {
+      this.getShoppingCartList()
     }
     this.requestFindProductByIdApp()
     Tool.isIPhoneX(this)
@@ -58,6 +73,20 @@ Page({
   },
   didLogin() {
     Tool.didLogin(this)
+  },
+  swiperImgCliked(e){
+    let index = e.currentTarget.dataset.index
+    let src = this.data.imgUrls[index].smallImg
+    let urls = []
+    this.data.imgUrls.forEach((item)=>{
+      if (item.smallImg) {
+        urls.push(item.smallImg)
+      }
+    })
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: urls// 需要预览的图片http链接列表
+    })
   },
   msgTipsClicked(e){
     let n = parseInt(e.currentTarget.dataset.index) 
@@ -190,13 +219,18 @@ Page({
     let r = RequestFactory.wxRequest(params);
     let productInfo = this.data.productInfo
     r.successBlock = (req) => {
-      let datas = req.responseObject.data
+      let datas = req.responseObject.data || {}
+      datas.priceLable = datas.priceType == 1 ? '原价' : datas.priceType == 2 ? "拼店价" : this.data.userInfos.levelName+"价"
+      // datas.product.videoUrl && datas.productImgList.unshift({
+      //   videoUrl: datas.product.videoUrl
+      // })
       this.setData({
         imgUrls: datas.productImgList,
         productInfo: datas.product,
         productInfoList: datas,
         priceList: datas.priceList, // 价格表
         productSpec: datas.specMap, // 规格描述
+        productId: datas.product.id ? datas.product.id : this.data.productId
       })
       this.activityByProductId(this.data.productId)
       // 渲染表格
@@ -250,7 +284,8 @@ Page({
   },
   sliderChange(e){
     this.setData({
-      activeIndex: e.detail.current+1
+      activeIndex: e.detail.current+1,
+      autoplay:true
     })
   },
   // 切换 tabar
@@ -308,7 +343,7 @@ Page({
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/product-detail?productId=' + this.data.productId + '&inviteCode=' + inviteCode,
+      path: '/pages/product-detail/product-detail?productId=' + this.data.productInfo.id + '&inviteCode=' + inviteCode,
       imageUrl: imgUrl
     }
   },

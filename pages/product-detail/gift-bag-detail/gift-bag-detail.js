@@ -26,7 +26,8 @@ Page({
     }],
     isShowGiftTips:false, //是否显示礼包升级提示
     size: 0,
-    dismiss:false, // 能否可以购买礼包 
+    dismiss:false, // 能否可以购买礼包
+    autoplay:true, 
   },
   onLoad: function (options) {
     this.setData({
@@ -35,7 +36,6 @@ Page({
     })
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
-    this.closeMask()
     this.refreshMemberInfoNotice()
   },
   refreshMemberInfoNotice() {
@@ -44,8 +44,33 @@ Page({
   onShow: function () {
     this.getGiftBagDetail()
   },
+  videoClicked() {
+    this.setData({
+      autoplay: false
+    })
+  },
+  videoPause(){
+    this.setData({
+      autoplay: true
+    })
+  },
   imageLoad(e) {
     Tool.getAdaptHeight(e, this)
+  },
+  swiperImgCliked(e) {
+    let index = e.currentTarget.dataset.index
+    let src = this.data.imgUrls[index].smallImg
+    let urls = []
+
+    this.data.imgUrls.forEach((item) => {
+      if (item.smallImg){
+        urls.push(item.smallImg)
+      }
+    })
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: urls// 需要预览的图片http链接列表
+    })
   },
   didLogin() {
     Tool.didLogin(this)
@@ -101,8 +126,12 @@ Page({
     r.successBlock = (req) => {
       let datas = req.responseObject.data
       if (this.data.didLogin){
+        if (datas.userBuy && datas.type==2){
+          this.data.isShowGiftTips =true
+        }
         this.setData({
-          dismiss: !datas.userBuy
+          dismiss: !datas.userBuy,
+          isShowGiftTips: this.data.isShowGiftTips
         })
       }
       // 渲染库存
@@ -119,6 +148,7 @@ Page({
           giftStock.push(total)
         })
       }
+      
       // datas.specPriceList.forEach((items,index) => {
       //   console.log(index)
       //   let total = 0
@@ -131,7 +161,9 @@ Page({
       // 显示各礼包总库存里面的最小库存
 
       datas.showStock = Math.min(...giftStock)
-
+      // datas.videoUrl && datas.imgFileList.unshift({
+      //   videoUrl: datas.videoUrl
+      // })
       this.setData({
         imgUrls: datas.imgFileList,
         productInfo: datas,
@@ -194,7 +226,9 @@ Page({
   },
   sliderChange(e) {
     this.setData({
-      activeIndex: e.detail.current + 1
+      // activeIndex: e.detail.current + 1,
+      activeIndex: e.detail.current + 1,
+      autoplay:true,
     })
   },
   // 切换 tabar

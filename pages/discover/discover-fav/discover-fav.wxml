@@ -12,7 +12,7 @@
     </view>
   </view>
   <view class='no-more' wx:if="{{currentPage == totalPage}}">已经到底啦~</view>
-  <view class='no-more' wx:if="{{!items.length}}">您暂未收藏文章~</view>
+  <view class='no-more' wx:if="{{!items || items.length == 0}}">您暂未收藏文章~</view>
   <!-- fav list E -->
   <!-- operate S -->
   <view class='discover-fav-edit' wx:if="{{showEdit}}">
@@ -26,6 +26,6 @@
   </view>
   <!-- operate E -->
   <view class='goTop' bindtap='goTop' wx:if='{{showBackTop}}'>
-      <image src='/img/top-icon.png' mode='widthFix'></image>
-    </view>
+    <image src='/img/top-icon.png' mode='widthFix'></image>
+  </view>
 </view>

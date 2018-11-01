@@ -2,7 +2,7 @@
   <view class='regular-body'>
     <image bindtap='close' src='/img/close-3.png' class='regular-close-icon'></image>
     <view class='regular-header'>
-    <image src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/dhk_07@2x.png' class="regular-header-bg"></image>
+    <image src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/dhk_07@2x.png' class="regular-header-bg"></image>
     {{title}}
     </view>
     <scroll-view scroll-y class='regular-content'>{{content}}</scroll-view>

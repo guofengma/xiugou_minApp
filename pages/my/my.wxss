@@ -8,6 +8,9 @@
 .top-view {
   padding:  20rpx 30rpx 0 30rpx;
 }
+.list-cont{
+  position: relative
+}
 .my-info{
   display: flex;
   align-content: center;
@@ -15,7 +18,7 @@
 }
 .content-top{
   position: relative;
-  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/bg_img_user@2x.png) no-repeat left bottom; 
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/bg_img_user@2x.png) no-repeat left bottom;
   background-size: 100% 100%;
   border-top: 1prx solid #eee;
   
@@ -176,7 +179,7 @@ box-shadow:5rpx 0px 10rpx rgba(142,199,255,0.54);
 .my-tools-list{
   padding: 30rpx;
   display: flex;
-  justify-content:space-between;
+  /* justify-content:space-between; */
   flex-wrap: wrap;
   height: 366rpx;
   align-items: center;

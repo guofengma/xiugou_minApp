@@ -133,7 +133,10 @@ export default class Operation {
 
       this.getRichItemList  ='/user/shoppingcart/getRichItemList'
 
+       // 再来一单的时候批量加入购物车
 
+      this.shoppingcart0neMoreOrder = '/user/shoppingcart/oneMoreOrder'
+      
     /********************** 地址管理 *********************/
         // 新增地址 或 修改地址(传id)
 
@@ -184,6 +187,10 @@ export default class Operation {
         // 确认收货
 
         this.confirmReceipt ='/order/confirmReceipt';
+
+        // 获取订单数量
+
+        this.countUserOrderNum = '/order/countUserOrderNum'
 
         // 删除已完成订单
 
@@ -340,6 +347,10 @@ export default class Operation {
 
         this.tokenCoinSign='/user/userSign/sign'
 
+        // 获取秀豆兑换1元卷的比例
+
+        this.getTokenCionExchange ='/common/config/getExchange'
+
 
         /******************我的---设置*********************** */
 
@@ -442,6 +453,10 @@ export default class Operation {
 
         this.discoverNotice = '/discover/query'
 
+        // 四个分类
+
+        this.indexQueryCategoryList ='/config/advertisement/queryCategoryList'
+
 
         /************************** 帮助中心 *******************************/
 
@@ -539,6 +554,49 @@ export default class Operation {
         // 点赞/收藏
 
         this.discoveerCountSave = '/discover/count/save';
+
+        // 根据openid判断用户是否存在
+
+        this.userExistByOpenid = '/user/userLogin/existedUserByOpenId'
+
+        // 获取刮刮卡
+
+        this.getScratchCard = '/scratch/scratchCard/updateScratchCard'
+
+        // 获取我的任务列表
+
+        this.queryJobsByUserId = '/user/userJobs/queryJobsByUserId'
+
+        // 查询是否有任务
+
+        this.findUserJobsByUserId = '/user/userJobs/findUserJobsByUserId'
+
+        // 领取任务
+
+        this.addJobs = '/user/userJobs/add'
+
+        // 获取任务详情
+
+        this.findByJobId = '/user/userJobs/findByJobId'
+
+
+      /************************** 优惠券 *******************************/
+
+        // 推广红包列表
+
+        this.queryPromotionPackagePageList = '/user/promotionPackage/queryPromotionPackagePageList';
+
+        // 分页查询用户购买信息列表
+
+        this.queryUserBuyPromotionPromoter = '/promotion/promotionPromoter/queryUserBuyPromotionPromoter';
+
+        // 用户领取红包
+
+        this.userReceivePackage = '/promotion/promotionPromoter/userReceivePackage';
+
+        // 分页查询用户领取红包记录列表
+
+        this.queryPromotionReceiveRecordPageList = '/promotion/promotionReceiveRecord/queryPromotionReceiveRecordPageList'
 
         __instance(this);
 

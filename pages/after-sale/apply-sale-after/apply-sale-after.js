@@ -12,18 +12,8 @@ Page({
         choose:'退款原因',
         info: "退款说明",
         placeholder:"请填写退款说明",
-        list: [
-          // '多拍/错拍/不想要', 
-          // '快递/物流一直未收到', 
-          // '未按约定时间发货',
-          // '商品/破损/少件/污渍等', 
-          // '货物破损已拒签',
-          // '假冒品牌/产品',
-          // '未按约定时间发货',
-          // '退运费',
-          // '发票问题',
-          // '其他'
-        ]
+        list: [],
+        tips:''
       },
       {
         navbar: '申请退货',
@@ -31,16 +21,8 @@ Page({
         choose: '退货原因',
         info:"退货说明",
         placeholder: "请填写退货说明",
-        list: [
-          // '7天无理由退换货',
-          // '商品描述的尺寸与实物不符',
-          // '商品/破损/少件/污渍等',
-          // '假冒品牌/产品',
-          // '包装破损/商品破损',
-          // '退运费',
-          // '发票问题',
-          // '其他'
-        ]
+        list: [],
+        tips: '退回商品需由买家承担运费，请确保商品不影响二次销售'
       },
       {
         navbar: '申请换货',
@@ -48,14 +30,8 @@ Page({
         choose: '换货原因',
         info: "换货说明",
         placeholder: "请填写退货说明",
-        list: [
-          // '7天无理由退换货',
-          // '商品描述的尺寸与实物不符',
-          // '商品/破损/少件/污渍等',
-          // '质量存在问题',
-          // '假冒品牌/产品',
-          // '其他'
-        ]
+        list: [],
+        tips: '仅可更换同规格或者同价格的商品'
       }
     ],
     activeIndex:'',
@@ -74,7 +50,6 @@ Page({
     ],
     placeholder: { placeholder: '请填写说明', disabled:false}
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -98,6 +73,11 @@ Page({
         this.data.smallImg.push(item.smallImg)
       })
       this.setData({
+        selectType:{
+          id: list.exchangePriceId || '',
+          spec: list.exchangeSpec || '',
+          specImg: list.exchangeSpecImg || '',
+        },
         originalImg: this.data.originalImg,
         smallImg: this.data.smallImg,
         remark: list.remark,
@@ -173,7 +153,11 @@ Page({
       hidden: !this.data.hidden,
       placeholder: { placeholder: ' ', disabled: true}
     })
-
+  },
+  hiddenTips() { 
+    this.setData({
+      hidden: !this.data.hidden,
+    })
   },
   makeSureReason(e){
     let placeholder= this.data.reason[this.data.refundType].placeholder

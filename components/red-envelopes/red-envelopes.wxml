@@ -1,0 +1,25 @@
+<view class='model-view-bg ' wx:if="{{visiable}}">
+  <view class='container'>
+    <view class='red-envelopes-view'>
+      <view class='red-info'>
+        <view>187****9934</view>
+        <view>赠送了你一个红包</view>
+        <view>
+          <view class='amout'>2</view>元
+        </view>
+        <view>红包抵扣金</view>
+      </view>
+      <view class='flexC btn-name' wx:if='{{door!=1}}' catchtap='btnClick'>
+        <view>立即</view>
+        <view>领取</view>
+      </view>
+      <view class='red-succ' catchtap='goPage'>
+        <view>领取成功</view>
+        <view class='font-22'>可前往我的-优惠券查看</view>
+      </view>
+    </view> 
+    <view class='close' catchtap='close'>
+        <image-sub imgStyle='{{"width:47rpx"}}' imgSrc="{{'red-envelopes.png'}}" />
+      </view> 
+  </view>
+</view>

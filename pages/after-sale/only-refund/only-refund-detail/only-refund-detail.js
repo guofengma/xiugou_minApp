@@ -5,18 +5,22 @@ Page({
     ysf: { title: '仅退款详情' },
     list:{},
     state:'',
-    datas:[]
+    datas:[],
+    stateInfo:[
+      "", "商家退款审核中", "商家已同意您的退款请求", "商家拒绝退款", '商家退款中', '商家退款中','退款成功','已关闭','超时处理'
+    ]
   },
   onLoad: function (options) {
     this.setData({
-      list: Storage.getInnerOrderList() || ''
+      list: Storage.getInnerOrderList() || '',
+      returnProductId: options.returnProductId
     })
-    this.findReturnProductById(options.returnProductId)
+    this.findReturnProductById()
   },
   findReturnProductById(returnProductId) {
     let list = this.data.list
     let params = {
-      returnProductId: returnProductId || this.data.list.returnProductId,
+      returnProductId: this.data.returnProductId || this.data.list.returnProductId,
       reqName: '查看退款退货换货情况',
       url: Operation.findReturnProductById
     }
@@ -24,16 +28,12 @@ Page({
     r.successBlock = (req) => {
       Tool.findReturnProductById(req)
       let datas = req.responseObject.data
+      datas.statusName = this.data.stateInfo[datas.status]
       if (datas.status ==6){
-        datas.statusName = '退款成功'
         datas.showRefundTime = Tool.formatTime(datas.orderReturnAmounts.refundTime)
       } else if (datas.status == 3){
         datas.statusName = '商家拒绝你的请求' 
         datas.showRefundTime = Tool.formatTime(datas.refuseTime)
-      } else if (datas.status == 1){
-        datas.statusName = '申请中'
-      } else {
-        datas.statusName = '退款中'
       }
       this.setData({
         datas: datas

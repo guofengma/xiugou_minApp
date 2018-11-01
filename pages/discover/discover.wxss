@@ -4,6 +4,11 @@
   display: flex;
   background: #fff;
   border-top:1rpx solid #ddd;
+  position:fixed;
+  width:100%;
+  top:0;
+  left:0;
+  z-index: 1;
 }
 .discover-tab_item {
   flex:1;
@@ -30,12 +35,25 @@
   border-radius: 15rpx;
 }
 
-.discover-hot-swiper image {
+.discover-hot-swiper .slide-image {
   width: 560rpx;
   height: 280rpx;
   border-radius: 15rpx;
 }
-
+.discover-hot-desc {
+  position:absolute;
+  bottom:0;
+  width:calc(100% - 30rpx);
+  display:flex;
+  justify-content:space-between;
+  box-sizing:border-box;
+  padding:10rpx 20rpx;
+  color: #fff;
+  font-size: 22rpx;
+}
+.discover-hot-desc .discover_view {
+  color: #fff;
+}
 .discover-topic-title {
   font-size:38rpx;
   font-family:PingFangSC-Medium;
@@ -56,8 +74,8 @@
   padding:20rpx;
   margin-bottom:20rpx;
 }
-.discover-tab-new {
-  margin-top: 20rpx;
+.discover-tab-new,.discover-tab-hot-assist {
+  margin-top: 136rpx;
 }
 ::-webkit-scrollbar {
   width: 0;

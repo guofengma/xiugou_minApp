@@ -276,3 +276,27 @@
   margin-right: 10rpx;
 }
 
+.video{
+  position: absolute;
+  top:0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  /* opacity: 0; */
+}
+.video video{
+  width: 100%;
+  height: 100%;
+}
+.swiper{
+  position: absolute;
+  top:0;
+  width: 100%;
+  height: 100%;
+  z-index: 20
+}
+.no-sale{
+  justify-content: center;
+  background: #ddd !important;
+  color: #fff;
+}

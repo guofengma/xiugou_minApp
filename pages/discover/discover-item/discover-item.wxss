@@ -38,7 +38,7 @@
 }
 .discover-list-item_title {
   color: #666;
-  height: 66rpx;
+  /* height: 66rpx; */
   font-size:24rpx;
   font-family:PingFangSC-Regular;
   font-weight:400;
@@ -79,4 +79,22 @@
 }
 .discover_time {
   color: #939393;
+}
+
+.goTop{
+  position: fixed;
+  right: 30rpx;
+  bottom: 120rpx;
+  background-color:transparent !important;
+  
+}
+.goTop image{
+  width: 90rpx;
+}
+
+.no-more {
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+  margin: 30rpx 0;
 }

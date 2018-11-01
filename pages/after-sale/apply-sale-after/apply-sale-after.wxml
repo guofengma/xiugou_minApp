@@ -10,8 +10,7 @@
 
 
 <view class='apply-sale-after-page'>
-  <view class='redBg flexR tips font-26'>退回商品需由买家承担运费，请确保不影响商品完好</view>
-
+  <view class='redBg flexR tips font-26' wx:if='{{reason[refundType].tips}}'>{{reason[refundType].tips}}</view>
   <view class='order-info'>
     <view class='cell-line whiteBg'>订单编号：{{orderInfos.orderNum}}</view>
     <template is="my-order-product-info" data="{{...orderInfos}}"/>
@@ -47,7 +46,7 @@
 
 <!--确认按钮  -->
 
-<view class='{{isIPhoneX.className}} redBg font-32 flexR btn-view' catchtap='orderRefund'>确认</view>
+<view class='{{isIPhoneX.className}} redBg font-32 flexR btn-view' catchtap='orderRefund'>提交</view>
 
 <!--适配iPhone X  -->
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
@@ -65,4 +64,5 @@
   showImgs='{{true}}' 
   isIphoneX='{{isIPhoneX.isIPhoneX}}'
   commodityType = '5'
+  productPriceId = '{{productPriceId.productPriceId}}'
 />

@@ -38,6 +38,7 @@ Page({
     },
     showRegular: false,
     jumpCommonProductTimer: null, // 定时跳转普通商品倒计时
+    autoplay: true,
   },
   onLoad: function (options) {
     this.setData({
@@ -52,7 +53,34 @@ Page({
     // this.getTopicActivityData(this.data.prodCode);
   },
   onShow: function () {
-
+    this.selectComponent('#promotion').clearInterval();
+    clearTimeout(this.data.jumpCommonProductTimer);
+    this.getTopicActivityData(this.data.prodCode); 
+  },
+  videoClicked() {
+    this.setData({
+      autoplay: false
+    })
+    // Tool.navigateTo('/pages/my/information/information')
+  },
+  videoPause() {
+    this.setData({
+      autoplay: true
+    })
+  },
+  swiperImgCliked(e) {
+    let index = e.currentTarget.dataset.index
+    let src = this.data.imgUrls[index].smallImg
+    let urls = []
+    this.data.imgUrls.forEach((item) => {
+      if (item.smallImg) {
+        urls.push(item.smallImg)
+      }
+    })
+    wx.previewImage({
+      current: src, // 当前显示图片的http链接
+      urls: urls// 需要预览的图片http链接列表
+    })
   },
   //获取专题活动数据  JJP201810100001
   getTopicActivityData(code) {
@@ -193,6 +221,9 @@ Page({
     let productInfo = this.data.productInfo
     r.successBlock = (req) => {
       let datas = req.responseObject.data
+      // datas.product.videoUrl && datas.productImgList.unshift({
+      //   videoUrl: datas.product.videoUrl
+      // })
       this.setData({
         imgUrls: datas.productImgList,
         productInfo: datas.product,
@@ -251,7 +282,8 @@ Page({
   },
   sliderChange(e) {
     this.setData({
-      activeIndex: e.detail.current + 1
+      activeIndex: e.detail.current + 1,
+      autoplay: true
     })
   },
   // 切换 tabar

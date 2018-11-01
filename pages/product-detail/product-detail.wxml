@@ -22,10 +22,13 @@
         <image src='/img/msg-icon.png' mode='widthFix' class='fr' bindtap='msgClicked'></image>
         <template is="msg-tips" data="{{msgShow}}" /> 
       </view>
-      <swiper autoplay="true" interval='3000' bindchange='sliderChange'>
+      <!-- <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
+        <video  src="{{productInfo.videoUrl}}"   bindplay='videoClicked' bindpause='videoPause' bindended='videoPause' show-fullscreen-btn='{{false}}' custom-cache="{{false}}" enable-progress-gesture='{{false}}'></video> 
+      </view> -->
+      <swiper autoplay="{{autoplay}}" interval='3000' bindchange='sliderChange'>
         <block wx:for="{{imgUrls}}" wx:key="unique">
-          <swiper-item>
-            <image src="{{item.smallImg}}" class="slide-image" bindload="imageLoad"/>
+          <swiper-item> 
+            <image src="{{item.smallImg}}" class="slide-image" bindload="imageLoad" bindtap='swiperImgCliked' data-index='{{index}}'/>
           </swiper-item>
         </block>
       </swiper>
@@ -38,7 +41,7 @@
      id="promotion"
      bind:countdown="timeout" 
      prop="{{proNavData}}"
-     promotionBg="{{proNavData.status == 1 ? 'comming' : 'ing'}}" 
+     promotionBg="{{'comming'}}" 
      promotionDesc="{{promotionDesc}}"
      from="normal"
      promotionType="{{activityType}}" ></product-promotion-info>
@@ -49,8 +52,7 @@
       <view class='price'>
         <text class='price1 red'>¥ {{productInfoList.price}}<text class='font-24'>起</text></text>
         <text class='price2 gray'>¥ {{productInfoList.originalPrice}}</text>
-        <!-- <text class='label-pd redBg'>拼店价：¥{{productInfo.group_price}}</text> -->
-        <!-- <text class='price3 red'>积分价：¥ {{productInfo.min_payment}}</text> -->
+        <text class='label-pd redBg'>{{productInfoList.priceLable}}</text>
       </view>
       <view class='shippingInfo gray'>
         <text style='margin-right:158rpx'>快递：{{productInfoList.freight}}</text> 
@@ -80,6 +82,7 @@
       <view class='gray'>
         <text class='label red' >服务</text>
         正品保障·急速发货 <text wx:if='{{productInfo.afterSaleServiceDays>0}}'>{{productInfo.afterSaleServiceDays>30? 30:productInfo.afterSaleServiceDays}}天无理由退换货</text>
+        <text wx:else>无售后服务</text>
       </view>
     </view>
     <!--产品图文详情切换  -->
@@ -110,25 +113,27 @@
   </view>
     </view>
     <!-- 详情页 tabar  -->
-    <view class="bottom-bar flexR boxSize {{isIPhoneX.className}}">
+    <view class="bottom-bar flexR boxSize {{isIPhoneX.className}}" wx:if='{{productInfoList.onSale}}'>
       <view class='cart font-22 flexC' bindtap='cartClicked'>
         <image src='/img/shoppingcart.png' mode='widthFix'></image>
         <view class='gray'>购物车</view>
         <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
       </view>
-      <view class='add-cart font-28 flexR' bindtap='btnClicked' data-key='1'>
-        加入购物车
-      </view>
-      <view class='buy-btn font-28 flexR redBg' bindtap='btnClicked'data-key='2'>
+      <view class='buy-btn font-28 flexR' bindtap='btnClicked'data-key='2'>
         立即购买
       </view>
+      <view class='add-cart font-28 flexR redBg' bindtap='btnClicked' data-key='1'>
+        加入购物车
+      </view>
     </view>
+    <view wx:else class="bottom-bar flexR boxSize {{isIPhoneX.className}} no-sale">此商品已下架</view>
     <!--置顶的按钮-->
     <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
       <image src='/img/top-icon.png' mode='widthFix'></image>
       <!-- <view>顶部</view> -->
     </view>
   </view>
+  
 
 </scroll-view>
 

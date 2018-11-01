@@ -1,0 +1,5 @@
+@import '../task.wxss';
+
+.task-detail-title {
+  font-size: 26rpx;
+}

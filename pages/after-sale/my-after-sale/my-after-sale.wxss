@@ -35,3 +35,6 @@
 .returnType{
   margin-right: 38rpx;
 }
+.typeName{
+  margin-left: 8rpx;
+}

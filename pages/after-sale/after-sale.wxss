@@ -12,9 +12,9 @@
 .tips-exchange{
   height: 200rpx;
   align-items: flex-start;
-  padding-left: 80rpx;
+  padding-left: 30rpx;
   color: #fff;
-  background: transparent url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/sale-after-bg.png) no-repeat; 
+  background: transparent url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/sale-after-bg.png) no-repeat;
   background-size: 100%;
 }
 .after-sale-line{
@@ -55,5 +55,9 @@
 }
 .exchange-content>view{
   margin-bottom: 18rpx;
+  padding: 0 30rpx;
+}
+.refusalReason{
+  height: 84rpx;
   padding: 0 30rpx;
 }

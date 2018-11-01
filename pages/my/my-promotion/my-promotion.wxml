@@ -4,7 +4,7 @@
 
 <view class='bg-area boxSize'>
   <view class="img-area flexR">
-    <image class="avatar-img" src="{{userLevelInfo.headImg||'/img/default-userImg.png'}}" alt="" mode='widthFix'></image>
+    <image class="avatar-img" src="{{userLevelInfo.headImg||'/img/default-userImg.png'}}" alt=""></image>
   </view>
   <view class='levelName boxSize flexR'>
     <text>{{userLevelInfo.levelName}}</text>
@@ -32,14 +32,16 @@
 </view>
 </view>
 
-<view class='growing-question whiteBg'>
-  <!-- <view class='title ellipsis font-28'>题目：没有掉接口</view>
-  <view class='ellipsis gray font-26'>去问产品这块是干啥的</view> -->
-  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+<view class='growing-question'>
+  <view class='title ellipsis font-28 whiteBg'>预计晋升后可获得哪些福利？</view>
+  <!-- <view class='ellipsis gray font-26'>去问产品这块是干啥的</view> -->
+  <view>
+   <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+  </view>
 </view>
 
 <view class='base-bar flexR {{isIPhoneX.className}}'>
-  <view class='flexR' catchtap='goPage' data-index='0'>邀请好友</view>
+  <view class='flexR whiteBg' catchtap='goPage' data-index='0'>邀请好友</view>
   <view class='redBg flexR' catchtap='goPage' data-index='1'>去购物</view>
 </view>
 

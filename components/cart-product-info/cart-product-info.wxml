@@ -2,6 +2,9 @@
   <view class="cart-product-info flexR" catchtap='cartProductClicked' data-id = '{{productId}}' data-state='{{status}}'>
     <view class='leftbar'>
       <image src='{{showImg}}' class='search-img' style='width:{{imgSize}}rpx;height:{{imgSize}}rpx'></image>
+      <view class='statusImg' wx:if='{{status!==1 || stock===0}}'>
+        <image src='{{status!==1?  "https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/shixiao-icon.png":"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/qiangguang-icon.png"}}' mode='widthFix'></image>
+      </view>
     </view>
     <view class='right-bar' style='width:{{480}}rpx'>
       <view class='ellipsis-2 prdName'>

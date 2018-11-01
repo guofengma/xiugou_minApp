@@ -65,7 +65,13 @@
     "pages/my/extension/extension",
     "pages/my/extension/extension-type/extension-type",
     "pages/my/extension/extension-detail/extension-detail",
-    "pages/my/extension/pay/pay"
+    "pages/my/extension/pay/pay",
+    "pages/my/extension/extension-explain/extension-explain",
+    "pages/my/task/task",
+    "pages/my/task/task-detail/task-detail",
+    "pages/my/task/task-share/task-share",
+    "pages/register/red-envelopes/red-envelopes",
+    "pages/signIn/rule/rule"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -87,16 +93,16 @@
         "selectedIconPath": "/img/tabbar/index_selected.png"
       },
       {
+        "pagePath": "pages/discover/discover",
+        "text": "发现",
+        "iconPath": "/img/tabbar/discover_unselected.png",
+        "selectedIconPath": "/img/tabbar/discover_selected.png"
+      },
+      {
         "pagePath": "pages/download-app/download-app",
         "text": "拼店",
         "iconPath": "/img/tabbar/group_tab_unselected.png",
         "selectedIconPath": "/img/tabbar/group_tab_selected.png"
-      },
-      {
-        "pagePath": "pages/download-app/download-app",
-        "text": "发现",
-        "iconPath": "/img/tabbar/discover_unselected.png",
-        "selectedIconPath": "/img/tabbar/discover_selected.png"
       },
       {
         "pagePath": "pages/shopping-cart/shopping-cart",

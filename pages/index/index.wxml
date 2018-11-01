@@ -2,7 +2,7 @@
   <!--轮播  -->
   <view class='ad'>
     <view class='search-bar boxSize flexR-sb fixed-top'>
-      <image src='/img/logo-img.png' mode='widthFix'></image>
+      <image-sub imgStyle='{{"width:64rpx"}}' imgSrc="{{'logo@2x.png'}}"/>
       <view class='bar flexR-sb gray font-28' catchtap='searchClicked'>
         <image-sub imgStyle='{{"width:32rpx"}}' imgSrc="{{'home_icon_search_nor@2x.png'}}"/>
         <text>请输入关键字搜索</text>
@@ -11,7 +11,8 @@
        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'home_icon_xiaoxi@2x.png'}}"/>
       </view>
     </view>
-    <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:{{imgheights[0]}}rpx;min-height:400rpx' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff' circular="true">
+    <!-- height:{{imgheights[0]}}rpx;min-height:400rpx -->
+    <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:460rpx' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff' circular="true">
     <block wx:for="{{imgUrls}}" wx:key='unique'>
       <swiper-item>
         <image src="{{item.imgUrl}}" class="slide-image" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' bindload="imageLoad" />
@@ -24,9 +25,10 @@
  
   <view  class='index-items-view boxSize whiteBg flexR'>
     <block wx:for='{{iconArr}}' wx:key='unique'>
-      <view class='flexC items-sub' catchtap='goPages' data-index='{{index}}'>
-        <image-sub imgStyle='{{"width:96rpx"}}' imgSrc="{{item.icon}}"/>
-        <text class='font-24 gray item-name'>{{item.name}}</text>
+      <view class='flexC items-sub boxSize' catchtap='goPages' data-index='{{index}}'>
+        <image-sub imgStyle='{{"width:96rpx"}}' imgSrc="{{item.img}}" wx:if='{{index<5}}'/>
+        <image wx:else src='{{item.img}}' mode='widthFix' style='width:96rpx'></image>
+        <view class='font-24 gray item-name ellipsis'>{{item.name}}</view>
       </view>
     </block>
   </view>
@@ -80,22 +82,22 @@
       <view>秀场</view>
       <view>头条</view>
     </view>
-    <view class='notice-rightBar boxSize'>
-      <swiper autoplay="true" interval='3000' vertical='true'  style='height:80rpx;'  bindchange='noticeChange' circular="true">
+    <view class='notice-rightBar boxSize flexR-sb'>
+      <swiper autoplay="true" interval='3000' vertical='true'  style='height:80rpx;'  bindchange='noticeChange' circular="true" class='swiper'>
         <block wx:for="{{noticeArr}}" wx:for-item="list" wx:for-index='key' wx:key='{{key}}' >
           <swiper-item class='swiper-item-notice' >
             <block wx:for="{{list}}" wx:key='{{index}}'>
               <view class='ellipsis font-22 gray notice-line' catchtap='noticeClicked' data-id='{{item.id}}'>
-                <text class='notice-label red font-22' wx:if='{{item.generalize==2}}'>最热</text>
+                <text class='notice-label red font-22'>{{noticeLabel[item.generalize]}}</text>
                 {{item.title}}
-              </view>
-              <view class='notice-img' wx:if="{{index%2==0}}" >
-                <image src='{{item.coverImg}}' mode='widthFix' catchtap='noticeClicked' data-id='{{item.id}}'></image>
               </view>
             </block> 
           </swiper-item>
         </block>
       </swiper>
+      <view class='notice-img'>
+                <image src='{{noticeArr[0][0].img}}' mode='widthFix' catchtap='noticeClicked' data-id='{{noticeArr[0][0].id}}'></image>
+              </view>
     </view>
   </view>
 
@@ -158,7 +160,7 @@
     <view class='index-item-title flexR font-38'>超值热卖</view>
     <view class='hot-sale-item' wx:for="{{hotSale}}"  wx:for-index="key" wx:for-item='list' wx:key="{{key}}" >
       <view class='hot-sale-img'>
-        <image src='{{list.imgUrl}}' mode='widthFix' catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'></image>
+        <image src='{{list.imgUrl}}'catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'></image>
       </view>
       <scroll-view scroll-x="true"   class='hot-sale-scroll' wx:if='{{list.topicBannerProductDTOList.length>0}}'>
         <view class='hot-sale-content  boxSize'>
@@ -166,7 +168,7 @@
             <view class='hot-sale-prd flexC'  catchtap='adListClicked' data-prodtype='{{item.productType}}' data-val='{{item.prodCode}}'>
               <image src='{{item.specImg}}'></image>
               <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName || ''}}</view>
-            <view class='red font-28'>¥{{item.originalPrice || 0}}起</view>
+            <view class='red font-28'>¥{{item.showPrice || 0}}起</view>
           </view>     
           </block>
            <!-- 查看更多  -->
@@ -191,7 +193,7 @@
          <view class='ellipsis font-24 gray'>{{item.title}}</view>
         </view>
         <view class='recommend-prd-info'>
-          <view class='font-20 gold'>自营 | 满减</view>
+          <!-- <view class='font-20 gold'>自营 | 满减</view> -->
           <view class='ellipsis-2 font-24 prd-name'>{{item.name}}</view>
           <view class='red font-28'>¥{{item.price || 0}}起</view>
         </view>
@@ -200,7 +202,21 @@
   </view>
 
   <!-- 任务 -->
-  <view class='duty'>
+  <view class='duty' wx:if="{{hasTask}}" style="right: {{isScroll?-80:0}}rpx" catchtap='toggleCardShow'>
    <image-sub imgStyle='{{"width:165rpx"}}' imgSrc="{{'home_icon_activity.png'}}"/>
   </view>
+  <task-card 
+    bind:close="close" 
+    bind:get="getJob" 
+    type="loading"
+    desc="{{taskDetail.desc}}"
+    name="{{taskDetail.name || ''}}"
+    wx:if="{{showCard}}"  
+  ></task-card> 
 </view>
+
+<!-- 公告 -->
+
+<notice visiable="{{isShowNotice}}"
+  bind:isShowNotice='isShowNotice'
+/>

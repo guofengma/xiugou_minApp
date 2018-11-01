@@ -4,7 +4,7 @@
       <view class='close-view flexR' bindtap='closeClicked'>X</view>
       {{reason.title}}
     </view>
-    <scroll-view scroll-y style='height:380rpx;'>
+    <scroll-view scroll-y class='scroll-view'>
       <block wx:for='{{reason.list}}' wx:key='unique' >
         <view class='reason-cell' bindtap='reasonClicked' data-content='{{item}}' data-index='{{index}}' data-id='{{item.id}}'>
           <view class='{{activeIndex===index? "active":""}}'>{{item.value}}</view>

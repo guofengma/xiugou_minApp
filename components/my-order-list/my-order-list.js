@@ -56,9 +56,11 @@ Component({
           let item = req.responseObject.data.data[i];
           item.createTime = Tool.formatTime(item.createTime);
           item.finishTime = Tool.formatTime(item.finishTime);
+          item.showFinishTime = item.deliverTime ? Tool.formatTime(item.deliverTime) : Tool.formatTime(item.finishTime);
           item.sendTime = Tool.formatTime(item.sendTime);
           item.payTime = Tool.formatTime(item.payTime);
           item.cancelTime = Tool.formatTime(item.cancelTime);
+          item.payEndTime = Tool.formatTime(item.shutOffTime);
           // item.createTime = Tool.formatTime(item.orderCreateTime);
           // 礼包不显示产品描述
           // if (item.orderProductList[0].orderType == 98) item.orderProduct[0].spec=''
@@ -108,7 +110,7 @@ Component({
     },
     //跳到订单详情
     toOrderDetail(e) {
-      Tool.navigateTo('/pages/my/orderDetail/orderDetail?orderId=' + e.currentTarget.dataset.id + '&status=' + e.currentTarget.dataset.status)
+      Tool.navigateTo('/pages/my/orderDetail/orderDetail?orderId=' + e.currentTarget.dataset.id + '&status=' + e.currentTarget.dataset.status+'&num='+this.data.num)
     },
     //跳到物流页面
     logistics(e) {
@@ -163,7 +165,6 @@ Component({
       r.addToQueue();
     },
     cancelOrder() {
-      console.log(1111)
       this.setData({
         isCancel: false,
         list: [],
@@ -186,7 +187,8 @@ Component({
       let list = this.data.list[index]
       list.orderProductList.forEach((item,index)=>{
         let returnProductStatus = item.returnProductStatus || 99999
-        if (returnProductStatus < 6 && returnProductStatus!=3){
+        // returnProductStatus < 6 && returnProductStatus!=3
+        if (returnProductStatus ==1){
           content = '确认收货将关闭' + this.data.returnTypeArr[item.returnType]+"申请，确认收货吗？"
         }
       })

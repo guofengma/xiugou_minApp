@@ -15,7 +15,7 @@
   <view class="question-area">
       <view class="question-item" wx:for='{{list}}' wx:key='unique' >
           <view class="left" catchtap="questionList" data-typeid='{{item.name}}'>
-              <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/help_order.png" class="icon"></image>
+              <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_order.png" class="icon"></image>
               <view>{{item.name}}</view>
           </view>
           <view class="right">
@@ -29,27 +29,27 @@
 
   <view class="wrap">
       <view>
-          <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/help_refund.png" class="icon"></image>
+          <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_refund.png" class="icon"></image>
           <view>退款进度</view>
       </view>
       <view bindtap="questionFeedback">
-            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/help_feedback.png" class="icon"></image>
+            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_feedback.png" class="icon"></image>
           <view>问题反馈</view>
       </view>
       <view>
-            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/help_autorefund.png" class="icon"></image>
+            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_autorefund.png" class="icon"></image>
           <view>自动退款</view>
       </view>
   </view>
   <view class="footer {{isIPhoneX.className}}">
       <view bindtap='makePhoneCall'>
-          <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/help_phone.png" class=""></image>
+          <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_phone.png" class=""></image>
           <view>咨询电话</view>
-          <view>09:00-18:00</view>
+          <view>8:30-24:00</view>
       </view>
       <view>
             <!-- <button class="go-cart-view contact" open-type="contact" >
-            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/help_customer.png" class=""></image>
+            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_customer.png" class=""></image>
             <view>在线客服</view>
             <view>09:00-18:00</view>
           </button>  -->
@@ -57,11 +57,11 @@
             session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"
             open-type="contact"
             >
-            <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/help_customer.png" class=""></image>
+            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_customer.png" class=""></image>
             <view>在线客服</view>
-            <view>09:00-18:00</view>  
+            <view>8:30-24:00</view>  
           </button>
-          <!-- <image src="https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/help_customer.png" class=""></image>
+          <!-- <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_customer.png" class=""></image>
           <view>在线客服</view>
           <view>09:00-18:00</view>  -->
       </view>

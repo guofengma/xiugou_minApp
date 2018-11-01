@@ -1,10 +1,12 @@
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
 <view class='prd-info-type' bindtap='isVisiableClicked'>
   <slot></slot>
   <!-- <image mode='widthFix' src='/img/common-accessory-icon.png' class='jt-imgs'></image> -->
 </view>
 
 <view class='model-view-bg ' wx:if="{{visiable}}">
- <view class='product-specification {{isIphoneX? "isIphoneX":""}}'>
+ <view class='product-specification {{isIPhoneX.className}}'>
     <view class='header {{showImgs? "":"active"}}'>
       <view wx:if='{{showImgs}}'>
         <view class='img-view'>
@@ -52,3 +54,6 @@
     <view class='btn redBg' bindtap='makeSureType'>确认</view>
  </view>
 </view>
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

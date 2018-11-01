@@ -17,9 +17,14 @@ Page({
     Event.on('updateShoppingCart', this.getShoppingCartList, this)
     Event.on('updateStorageShoppingCart', this.getRichItemList, this)
     Event.on('didLogin', this.getLoginCart, this);
-    Event.on('continueBuy', this.shoppingCartLimit, this);
+    Event.on('continueBuy', this.shoppingcart0neMoreOrder, this);
   },
   onShow: function () {
+
+  },
+  onPullDownRefresh: function () {
+    this.myRecordingA(1, answerUrl);
+    wx.stopPullDownRefresh();
 
   },
   getLoginCart(){
@@ -32,6 +37,9 @@ Page({
         this.getShoppingCartList()
       }
     } else {
+      this.setData({
+        items: [], 
+      })
       this.getStorageShoppingCart()
     }
   },
@@ -72,6 +80,21 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
+      this.formatShoppingListData(req)
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  shoppingcart0neMoreOrder(){
+    let isArrParams = this.getFormCookieToSessionParams()
+    let params = {
+      cacheList: isArrParams,
+      reqName: '再来一单的时候批量加入购物车',
+      url: Operation.shoppingcart0neMoreOrder,
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      Storage.clearShoppingCart()
       this.formatShoppingListData(req)
     };
     Tool.showErrMsg(r)
@@ -164,7 +187,7 @@ Page({
         if (this.data.items.length > 0) {
           let arr = this.data.items
           for (let i = 0; i < arr.length; i++) {
-            if (arr[i].id == item.id) {
+            if (arr[i].priceId== item.priceId) {
               item.isSelect = arr[i].isSelect
             }
           }
@@ -206,11 +229,9 @@ Page({
     // 点击选择
     let index = e.currentTarget.dataset.index 
     let prdList = this.data.items
-    // if (prdList[index].activityType) {
-    //   Tool.showAlert('请至详情页购买')
-    //   return
-    // }
-    
+    if (!prdList[index].stock || prdList[index].status!=1) {
+      return
+    }
     prdList[index].isSelect = !prdList[index].isSelect
     
     this.isSelectAllPrd(prdList)
@@ -348,17 +369,21 @@ Page({
     //点击全选 
     let items = this.data.items
     let selectAll = this.data.selectAll
+    let num =0
     for (let i = 0; i < items.length; i++) {
-      // if (!items[i].activityType){
-      //   items[i].isSelect = !selectAll
-      // } 
-      items[i].isSelect = !selectAll
+      if (items[i].stock && items[i].status==1){
+        num++;
+        items[i].isSelect = !selectAll
+      } 
     }
-    this.setData({
-      selectAll: !selectAll,
-      items: items
-    })
-    this.getTotalPrice()
+    if(num){
+      this.setData({
+        selectAll: !selectAll,
+        items: items
+      })
+      this.getTotalPrice()
+    }
+    
   },
   makeOrder(){
     let params = JSON.stringify({
@@ -369,7 +394,7 @@ Page({
     // 如果没有登录 那么就跳转到登录页面
     
     if(!this.data.didLogin){
-      Tool.navigateTo('/pages/login/login-wx/login-wx?isBack=' + true)
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
       return
     }
     if (this.data.selectList.length==0){
@@ -389,6 +414,7 @@ Page({
     Event.off('updateStorageShoppingCart', this.getStorageShoppingCart);
     Event.off('updateShoppingCart', this.getShoppingCartList);
     Event.off('didLogin', this.didLogin);
+    Event.on('continueBuy', this.shoppingcart0neMoreOrder);
   },
   test(){
     // 阻止冒泡 

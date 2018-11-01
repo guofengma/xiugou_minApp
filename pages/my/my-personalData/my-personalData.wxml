@@ -7,7 +7,7 @@
             </view>
             <view>
                 <image class="user-img" src="{{ userInfos.headImg ||'/img/default-userImg.png'}}"></image>
-                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+                <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/xjt_10@2x.png' mode='widthFix'></image>
             </view>
         </view>
         <view class="item">
@@ -16,7 +16,7 @@
             </view>
             <view bindtap="nickname">
                 <text>{{userInfos.nickname}}</text>
-                <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png' mode='widthFix'></image>
+                <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/xjt_10@2x.png' mode='widthFix'></image>
             </view>
         </view>
     </view>
@@ -55,7 +55,7 @@
               </view>
               <view class='region flexR-sb'>
                   <text class='ellipsis'>{{ userInfos.showRegion ||''}}</text>
-                  <image class="jt-img" src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/xjt_10@2x.png'
+                  <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/xjt_10@2x.png'
                         mode='widthFix'></image>
               </view>
           </view>

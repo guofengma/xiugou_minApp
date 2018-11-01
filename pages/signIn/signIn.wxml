@@ -1,5 +1,5 @@
 <view class='sign-page sub-page'>
-  <view class='gray-9 font-24 rule'>
+  <view class='gray-9 font-24 rule' catchtap='ruleClicked'>
     <image-sub imgStyle='{{"width:30rpx"}}' imgSrc="{{'home_icon.png'}}"/>
     <text> 签到规则</text>
   </view>
@@ -48,7 +48,7 @@
         <text class='coinNum'>1</text>元
       </view>
       <view class='right'>
-        <view class='font-28'>现金抵扣卷</view>
+        <view class='font-28'>现金抵扣劵</view>
         <view class='gray font-24'>全场通用/无时间限制</view>
       </view>
     </view>
@@ -60,7 +60,7 @@
   </view>
   <!-- 备注 -->
   <view class='font-24 gray-9 tips'>
-    注：{{needXD}}秀豆兑换张劵，无兑换限制，点击即可兑换
+    注：{{needXD}}秀豆兑换1张劵，无兑换限制，点击即可兑换
   </view>
 
   <!-- 优惠卷张数 -->

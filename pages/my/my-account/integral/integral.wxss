@@ -6,7 +6,7 @@
     height: 190rpx;
     color: #fff;
     margin-bottom: 20rpx;
-    background: url("https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/icon11_03@2x.png") no-repeat top center;
+    background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon11_03@2x.png") no-repeat top center;
     background-size:100% 100%;
     padding: 30rpx;
     align-items: flex-start;

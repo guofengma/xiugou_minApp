@@ -1,66 +1,57 @@
-// pages/my/extension/extension-detail/extension-detail.js
+let { Tool, RequestFactory, Storage, Event, Operation } = global
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    page: 1,
+    pagesize: 10,
+    list:[]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-
+    this.setData({
+      packageId: options.packageId
+    })
+    this.queryPromotionReceiveRecordPageList()
+    Tool.isIPhoneX(this)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  queryPromotionReceiveRecordPageList() {
+    let params = {
+      packageId: this.data.packageId,
+      page: this.data.page,
+      pageSize: this.data.pagesize,
+      reqName: '分页查询用户领取红包记录列表',
+      url: Operation.queryPromotionReceiveRecordPageList
+    };
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let datas = req.responseObject.data || {}
+      datas.data.forEach((item, index) => {
+        item.createTime = Tool.formatTime(item.createTime)
+        if (item.phone)
+        item.showPhone = item.phone.slice(0, 3) + "*****" + item.phone.slice(7)
+      })
+      this.setData({
+        list: this.data.list.concat(datas.data),
+        totalPage: datas.totalPage
+      })
+    }
+    Tool.showErrMsg(r)
+    r.addToQueue();
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  onReachBottom() {
+    this.data.page++;
+    if (this.data.page > this.data.totalPage) {
+      return
+    }
+    this.setData({
+      page: this.data.page,
+    })
+    this.queryPromotionReceiveRecordPageList()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  onShareAppMessage: function (res) {
+    return {
+      title: name,
+      path: '/pages/my/extension/extension-detail/extension-detail',
+      imageUrl: imgUrl
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

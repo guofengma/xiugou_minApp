@@ -12,8 +12,11 @@ Page({
     addressList:[],
     remark:'', // 买家留言
     door:'', // 1秒杀 2降价 3优惠套餐 4助力免费领 5礼包 99 普通
-    coupon: { id: "", nickname: '未使用优惠劵', canClick:true}, //优惠券信息
+    coupon: { id: "", name: '选择优惠劵', canClick:true}, //优惠券信息
     useOneCoinNum:0, // 1元劵张数
+    couponArr:[1,2], // 不支持优惠卷 不支持1元劵
+    canUseTokenCoin: true,//支持使用支持1元劵
+    canUseCoupon: true//支持使用优惠卷
   },
   onLoad: function (options) {
     Tool.getUserInfos(this)
@@ -26,39 +29,31 @@ Page({
     this.availableDiscountCouponForProduct()
     Event.on('updateOrderAddress', this.updateOrderAddress,this)
     Event.on('updateCoupon', this.couponClick,this)
-    Event.on('getTokenCoin', this.getTokenCoin,this)
+    Event.on('getTokenCoin', this.tokenCoinClick,this)
   },
   onShow: function () {
     this.updateCoupon()
+    this.getTokenCoin()
   },
   getTokenCoin(){ // 1元劵计算
+    if (!this.data.tokenCoinClick) return
     let useOneCoinNum = Storage.getTokenCoin() || 0
-    if (useOneCoinNum > this.data.orderInfos.totalAmounts){
-      useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
-    }
     this.data.params.tokenCoin = Number(useOneCoinNum)
     this.setData({
       params: this.data.params
     })
     let callBack = ()=>{
       this.setData({
-        useOneCoinNum: Number(useOneCoinNum)
+        useOneCoinNum: this.data.params.tokenCoin,
+        tokenCoinClick:false
       })
     }
-    if (useOneCoinNum>0)
     this.requestOrderInfo(callBack)
-    // if (this.data.orderInfos.totalAmounts>=1){
-    //   this.data.orderInfos.showTotalAmounts = Tool.sub(Math.floor(this.data.orderInfos.totalAmounts), useOneCoinNum)
-    //   if (this.data.orderInfos.showTotalAmounts<0){
-    //     this.data.orderInfos.showTotalAmounts = 0
-    //     useOneCoinNum = Math.floor(this.data.orderInfos.totalAmounts)
-    //   }
-    //   this.data.orderInfos.showTotalAmounts = Tool.sub(this.data.orderInfos.totalAmounts, useOneCoinNum)
-    //   this.setData({
-    //     useOneCoinNum: Number(useOneCoinNum),
-    //     orderInfos: this.data.orderInfos
-    //   })
-    // }
+  },
+  tokenCoinClick(){
+    this.setData({
+      tokenCoinClick: true
+    })
   },
   couponClick() { // 是否点击了优惠卷
     this.setData({
@@ -69,14 +64,21 @@ Page({
     if (!this.data.couponClick) return
     let coupon = Storage.getCoupon()
     this.data.params.couponId = coupon.id
+    this.data.params.tokenCoin = 0
     this.setData({
-      params: this.data.params
+      params: this.data.params,
     })
-    let callBack = ()=>{
+    let callBack = (item)=>{
       this.setData({
         coupon: coupon,
         couponClick: false
       })
+      if (this.data.useOneCoinNum>item.totalAmounts){
+        Tool.showAlert("一元劵最多只能使用" + Math.floor(item.totalAmounts)+'张')
+        this.setData({
+          useOneCoinNum:0
+        })
+      }
     }
     this.requestOrderInfo(callBack)
   },
@@ -99,7 +101,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      wx.stopPullDownRefresh() //停止下拉刷新
+      wx.stopPullDownRefresh() //停止下拉刷新du
       let item = req.responseObject.data || {}
       // 渲染地址列表
       let userAdress = item.userAddress
@@ -112,6 +114,7 @@ Page({
      
       //渲染产品信息列表
       let showProduct =[]
+      let canUseTokenCoin = false, canUseCoupon = false
       item.orderProductList.forEach((item0,index)=>{
         showProduct.push({
           showImg: item0.specImg,
@@ -121,6 +124,19 @@ Page({
           showQnt: item0.num,
           status: 1,
           stock: item0.stock,
+        })
+        let arr = Tool.bitOperation(this.data.couponArr, item0.restrictions)
+        console.log(item0.restrictions)
+        let couponType = this.data.couponArr.filter(function (n) {
+          return arr.indexOf(n) == -1
+        });
+        couponType.forEach((item,index)=>{
+          if(item==this.data.couponArr[0]){
+            canUseCoupon = true
+          }
+          if (item == this.data.couponArr[1]) {
+            canUseTokenCoin = true
+          }
         })
       })
 
@@ -142,7 +158,9 @@ Page({
 
       this.setData({
         orderInfos: item,
-        addressList: addressList
+        addressList: addressList,
+        canUseCoupon: canUseCoupon,
+        canUseTokenCoin: canUseTokenCoin
       })
       // if (this.data.useOneCoinNum>0){
       //   this.getTokenCoin()
@@ -222,7 +240,7 @@ Page({
       "provinceCode": orderAddress.provinceCode || '',
       "receiver": orderAddress.receiver || '',
       "recevicePhone": orderAddress.receiverPhone || '',
-      tokenCoin: Number(this.data.useOneCoinNum), // 一元劵  
+      tokenCoin: this.data.params.tokenCoin, // 一元劵  
       reqName: '订单结算', 
     }
     let orderTypeParmas ={}
@@ -264,10 +282,14 @@ Page({
   },
   iconClicked(){ // 点击使用1元劵跳转
     let useOneCoinNum = this.data.useOneCoinNum ? this.data.useOneCoinNum : Math.floor(this.data.orderInfos.totalAmounts)
-    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + useOneCoinNum)
+    let maxUseCoin= this.data.orderInfos.totalAmounts
+    if (this.data.useOneCoinNum){
+      maxUseCoin = Tool.add(this.data.orderInfos.totalAmounts, useOneCoinNum)
+    }
+    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + useOneCoinNum + '&maxUseCoin=' + maxUseCoin)
   },
   couponClicked(){ // 点击使用优惠卷跳转
-    if ((this.data.door != 99 && this.data.door ==5)|| this.data.coupon.canClick===false) return
+    if ((this.data.door != 99 && this.data.door == 5) || this.data.coupon.canClick === false || !this.data.canUseCoupon) return
     let productIds = this.getCouponProductPriceIds()
     Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=2&productIds=" + JSON.stringify(productIds))
   },
@@ -296,8 +318,8 @@ Page({
         this.setData({
           coupon:{
             id:'',
-            nickname:"暂无可用优惠劵",
-            canClick:false,
+            name:"暂无可用优惠劵",
+            canClick:true,
           }
         })
       }      
@@ -311,6 +333,7 @@ Page({
   onUnload: function () {
     Event.off('updateOrderAddress', this.updateOrderAddress)
     Event.off('updateCoupon', this.couponClick)
+    Event.off('getTokenCoin', this.tokenCoinClick)
   },
   // switchChange(){
   //   if (!this.data.orderInfos.canUseScore) return

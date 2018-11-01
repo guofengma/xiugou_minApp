@@ -81,7 +81,8 @@ Page({
         // this.test(payType, req)
         // this.wxPay(payType, req.responseObject.data.outTradeNo)
         if (payType==1){
-          this.showResult(true)
+          this.paySuccess(payType, req.responseObject.data.outTradeNo)
+          // this.showResult(true)
         } else {
           let datas = req.responseObject.data
           this.wxPay(payType, datas.outTradeNo, datas.prePayStr)
@@ -102,6 +103,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
+        // this.paySuccess(payType, req.responseObject.data.outTradeNo)
         this.showResult(true)
       };
       Tool.showErrMsg(r)
@@ -151,7 +153,8 @@ Page({
         // this.test(payType, req)
         // this.wxPay(payType, req.responseObject.data.outTradeNo)
         if (payType == 1) {
-          this.showResult(true)
+          this.paySuccess(payType, req.responseObject.data.outTradeNo)
+          //this.showResult(true)
         } else {
           let datas = req.responseObject.data
           this.wxPay(payType, datas.outTradeNo, datas.prePayStr)

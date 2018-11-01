@@ -114,6 +114,7 @@ button::after{
 }
 .grayBg{
   background-color:#F8F8F8;
+  color: #FFF;
 }
 .whiteBg{
   background-color:#fff;
@@ -145,7 +146,7 @@ button::after{
 
 .address.active{
   padding:30rpx;
-  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/line-bg.png) no-repeat left bottom; 
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/line-bg.png) no-repeat left bottom;
   background-size: 100%;
 }
 .add-address-btn{

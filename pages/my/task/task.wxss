@@ -1,0 +1,23 @@
+.container {
+  padding: 20rpx 30rpx;
+  font-size: 24rpx;
+}
+.task-thumb {
+  width: 100%;
+  margin-top: 30rpx;
+}
+.fixed-height {
+  height: 156rpx;
+}
+.share {
+  position: fixed;
+  width: 690rpx;
+  height:96rpx;
+  line-height: 96rpx;
+  background:rgba(213,18,67,1);
+  border-radius:10rpx;
+  font-size: 32rpx;
+  color: #fff;
+  text-align: center;
+  bottom: 30rpx;
+}

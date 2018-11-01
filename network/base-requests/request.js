@@ -110,7 +110,6 @@ export default class Request {
     let body = this.body();
 
     let rsa_headers = '';
-    console.log(url);
     // 只需对白名单内的url做加签处理
     if (RSA.checkInWhiteList(url)) {
       console.log(`对${url}进行加签处理`);
@@ -119,6 +118,7 @@ export default class Request {
         rsa_headers = RSA.sign(this.query2Object(url));
       }
     }
+    let app = getApp();
     wx.request({
       url: url,
       data: body,
@@ -129,7 +129,8 @@ export default class Request {
         // 'Cookie': this.hasCookie(),
         'device': global.Storage.getPlatform() || '',
         'platform': this.bodyParam.systemVersion,
-        'sg-token': global.Storage.getToken() || ''
+        'sg-token': global.Storage.getToken() || '',
+        ...rsa_headers
       },
       success: function (res) {
         if (that.managerLoadingPrompt) {
@@ -156,10 +157,19 @@ export default class Request {
         else {
           //弹窗，提示服务器错误
           that.failBlock(that);
+          app.aldstat.sendEvent(url,{
+            url: url,
+            errMsg: res.data.msg
+          })
+          console.log('==============='+res.data.msg+'===================')
           // global.Tool.showAlert(res.data.msg);
         }
       },
       fail: function () {
+        app.aldstat.sendEvent(url+':interface error try again', {
+          url: url,
+          count: that.tryCount,
+        })
         that.tryCount++;
 
         console.debug('<============================== 请求结束：' + that.name + '第' + that.tryCount + '次请求');
@@ -181,10 +191,17 @@ export default class Request {
           global.Tool.showAlert('请求失败，请稍后重试')
         }
       },
-      complete: function () {
+      complete: function (res) {
+        console.log(res.data)
         that.requestStatus = RequestStatus.finish;
         that.completeBlock(that);
-
+        if(res.statusCode != 200) {
+          app.aldstat.sendEvent(url+':interface status code err',{
+            url: url,
+            code: res.statusCode,
+            msg: res.data
+          })
+        }
         if (that.isManagedByQueue) {
           RequestQueue.removeRequest(that);
         }
@@ -199,7 +216,6 @@ export default class Request {
 
   //拼接url
   url() {
-    console.log(this.baseUrl,this.bodyParam.url)
     this._url = this.baseUrl + this.bodyParam.url
     return this._url;
   }

@@ -21,7 +21,7 @@
  margin: -8rpx 14rpx 0 20rpx;
 }
 .search-bar image{
-  width: 42rpx;
+  width: 46rpx;
 }
 .slide-image{
   width: 100%;
@@ -38,10 +38,16 @@
 }
 .items-sub{
   margin:0rpx 26rpx 30rpx 26rpx;
+  width: 96rpx;
+}
+.items-sub>view{
+  width: 100%;
+  text-align: center;
 }
 /* 会员等级 */
 .index-level-view{
   padding:20rpx 30rpx; 
+  padding-bottom: 0;
 }
 .index-level-view>view{
   width:690rpx;
@@ -88,9 +94,9 @@
 }
 .notice-img{
   width:93rpx;
-  position:absolute;
+  /* position:absolute;
   right:0;
-  top:0;
+  top:0; */
   height:80rpx;
 }
 .notice-img image{
@@ -99,11 +105,14 @@
 .notice-line{
   height: 40rpx;
   line-height: 40rpx;
-  width: calc(100% - 124rpx);
+  width: calc(100% - 24rpx);
 }
 .notice-leftBar{
   width: 70rpx;
   border-right: 1rpx solid #EAEAEA;
+}
+.swiper{
+  width: calc(100% - 93rpx);
 }
 .notice-rightBar{
   width: calc(100% - 70rpx);
@@ -194,6 +203,7 @@
 }
 .hot-sale-img image{
   width: 100%;
+  height: 360rpx;
   border-radius: 10rpx;
 }
 .hot-sale-prd image,.hot-sale-prd,.hot-sale-prd>view{

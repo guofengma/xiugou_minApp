@@ -13,7 +13,7 @@
 }
 .order-state{
   height: 200rpx;
-  background: transparent url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/myOrder-detail-bg.png) no-repeat; 
+  background: transparent url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/myOrder-detail-bg.png) no-repeat;
   color: #fff;
   padding-top: 35rpx;
   padding-left: 50rpx;
@@ -25,7 +25,7 @@
 }
 .order-state-icon,.detail-tips{
   padding-left: 70rpx;
-  /*background: transparent url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/order-state-1.png) no-repeat 10rpx center;*/
+  /*background: transparent url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/order-state-1.png) no-repeat 10rpx center;*/
   /*background-size: 42rpx 42rpx;*/
     /*width: 42rpx;*/
     /*height: 42rpx;*/
@@ -159,11 +159,12 @@
 /*已发货的物流信息  */
 .logistics{
   padding-left: 70rpx;
-  background: #fff url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/order-state-3-dark.png) no-repeat 10rpx center;
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/order-state-3-dark.png) no-repeat 10rpx center;
   background-size: 40rpx 40rpx
 }
 .logistics .info{
   font-size: 30rpx;
+  width: 500rpx;
 }
 .right-icon{
   width: 22rpx;
@@ -172,4 +173,24 @@
 
 .gift-view{
   padding:15rpx 30rpx 0 30rpx;
+}
+.coupon-line>view{
+  border-bottom: 1rpx solid #eee;
+  padding: 0 76rpx;
+  height: 88rpx;
+}
+.product-ifo-list>view{
+  border-bottom: 1rpx solid #eee;
+}
+.product-ifo-list>view:last-child{
+  border-bottom: 0
+}
+.coupon-line>view:first-child{
+  border-top: 1rpx solid #eee;
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/iconForobtain.png) no-repeat 30rpx 25rpx;
+  background-size:32rpx 32rpx;
+}
+.gift-sale-after{
+  border-bottom:0;
+
 }

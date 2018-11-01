@@ -3,7 +3,8 @@ Component({
   properties: {
     isCancel: Boolean,
     orderNum:String,
-    door:Number
+    door:Number,
+    num:Number,
   },
   data: {
     reason:'',
@@ -54,7 +55,7 @@ Component({
         if (this.data.door == 1) {
           this.triggerEvent('cancelOrder', { ...this.data });
         } else {
-          Tool.navigateTo('/pages/my/my-order/my-order')
+          Tool.navigateTo('/pages/my/my-order/my-order?query='+this.data.num)
         }
       };
       Tool.showErrMsg(r)

@@ -4,7 +4,7 @@
   box-sizing: border-box; 
   height: 220rpx;
   font-size: 22rpx;
-  background:url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/youhuiquan_bg_zhihui@3x.png) no-repeat left top;
+  background:url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/youhuiquan_bg_zhihui@3x.png) no-repeat left top;
   background-size: 100%;
 }
 .topBar-item{
@@ -15,22 +15,23 @@
   padding:0 30rpx;
 }
 .item-ans.active{
-  background-image: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/youhuiquan_bg_nor@3x.png)
+  background-image: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/youhuiquan_bg_nor@3x.png)
 }
 .coupon-right{
   width: 110rpx;
-  background:url() no-repeat 0rpx -8rpx;
-  background-size: 130rpx;
   height: 154rpx;
 }
 .coupon-right-unUsed{
-  background-image: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/youhuiquan_icon_yishiyong_nor@3x.png)
+  background: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/youhuiquan_icon_daijihuo_nor@3x.png) no-repeat 0rpx -8rpx;
+   background-size: 130rpx;
 }
 .coupon-right-used{
-  background-image: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/youhuiquan_icon_yishiyong_nor@3x.png)
+  background: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/youhuiquan_icon_yishiyong_nor@3x.png) no-repeat 0rpx -8rpx;
+   background-size: 130rpx;
 }
 .coupon-right-lose{
-  background-image: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/youhuiquan_icon_yishixiao_nor@3x.png)
+  background: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/youhuiquan_icon_yishixiao_nor@3x.png) no-repeat 0rpx -8rpx;
+   background-size: 130rpx;
 }
 .coupon-left{
   width: 162rpx;
