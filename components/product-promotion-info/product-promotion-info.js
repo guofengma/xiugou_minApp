@@ -29,6 +29,8 @@ Component({
     endTime: 0,
     delay: 90, //倒计时间隔
     tryCount: 5,
+    tryFlag: false,
+    commingSoon: false, // 即将开始标记 如果4分钟进来在3分钟的时候要去重新请求来更新文案
   },
   methods: {
     // 倒计时 到毫秒
@@ -37,17 +39,36 @@ Component({
       let delay = this.data.delay;
       if (typeof time !== 'number' || time <= 0 || !time) {
         clearInterval(this.data.interval);
+        if(this.data.prop.status >= 3) return;
         if(this.data.tryCount <= 0 ) return;
+        if(this.data.tryFlag) return;
+        console.log('------------ 轮询')
+        this.setData({
+          tryFlag: true
+        })
         setTimeout(()=>{
           console.log('try again');
           this.triggerEvent('countdown', true);
           this.setData({
-            tryCount: this.data.tryCount-1
+            tryCount: this.data.tryCount-1,
+            tryFlag: false
           })
-        },500)
+        },1000)
         return time;
       }
       time -= delay;
+      if(this.data.prop.status == 1 && time < 3 * 60 * 1000) {
+        if(!this.data.commingSoon){
+          console.log('================ 倒计时')
+          this.setData({
+            commingSoon: true
+          });
+          setTimeout(()=>{
+            this.triggerEvent('countdown', true);
+          },1000)
+          
+        }
+      }
       if (time <= delay) {
         clearInterval(this.data.interval)
         this.setData({
@@ -142,9 +163,9 @@ Component({
       return str;
     },
     init() {
+      this.data.interval && clearInterval(this.data.interval);
       this.checkPromotionInfo();
       let prop = this.data.prop;
-      console.log(prop);
       let t = prop.endTime;
       if (prop.status === 2 && this.data.promotionType == 2) {
         t = prop.activityTime;
@@ -158,7 +179,8 @@ Component({
       }
       let serverTime = prop.date || +new Date();//万一取不到就用当前时间
       this.setData({
-        endTime: t - serverTime  //date为服务器时间 用new date()的话存在用户修改手机系统时间的情况
+        endTime: t - serverTime,  //date为服务器时间 用new date()的话存在用户修改手机系统时间的情况
+        commingSoon: t -serverTime < 3 * 60000 ? true : false
       });
       if ([1, 2, 3].includes(prop.status)) {
         this.data.interval = setInterval(() => {

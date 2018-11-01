@@ -8,17 +8,20 @@ Page({
     inputFocus: false,
     phone: '',
     inviteId: '',
+    jobId: '',
     isNewUser: false,
     scratchCard: {
       status: 1, //是否领取 1. 是 2.否
       typeStatus: 1
     },//刮刮卡信息
+    scratchCode: '',
   },
   onLoad (options) {
     // 现获取用户openid
-    let inviteId = options.inviteId || '';
+    console.log(options);
     this.setData({
-      inviteId: inviteId
+      inviteId: options.inviteId || '',
+      jobId: options.jobId || ''
     })
 
     if (!app.globalData.systemInfo) {
@@ -27,7 +30,26 @@ Page({
     app.wxLogin();
     Event.on('didLogin', this.didLogin, this);
   },
-
+  jobIncrHits() {
+    let params = {
+      url: Operation.jobIncrHits,
+      openId: this.data.userInfos.openid,
+      userJobId: this.data.jobId
+    };
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let data = req.responseObject.data || {};
+      
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
+  checkScratchCodeStatus() {
+    let params = {
+      url: Operation.checkScratchCodeStatus,
+      
+    }
+  },
   onReady () {
 
   },
@@ -44,11 +66,13 @@ Page({
     Event.off('didLogin', this.didLogin);
   },
   toRegister() {
-    Tool.navigateTo('/pages/register/register?inviteId=' + this.data.inviteId)
+    let from = encodeURIComponent('/pages/my/task/task-share/task-share');
+    Tool.navigateTo(`/pages/register/register?from=${from}&inviteId=${this.data.inviteId}`)
   },
   didLogin() {
     Tool.didLogin(this)
     this.getUserInfo();
+    this.jobIncrHits();
     // this.checkUserExist();    
   },
   checkUserExist() {

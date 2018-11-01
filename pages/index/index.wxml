@@ -202,7 +202,7 @@
 
   <!-- 任务 -->
   <view class='duty' wx:if="{{hasTask}}" style="right: {{isScroll?-80:0}}rpx" catchtap='toggleCardShow'>
-   <image-sub imgStyle='{{"width:165rpx"}}' imgSrc="{{'home_icon_activity.png'}}"/>
+   <image style='width:164rpx;height:112rpx;' src="/img/task@3.png" > </image>
   </view>
   <task-card 
     bind:close="close" 

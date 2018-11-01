@@ -29,7 +29,7 @@
   background-size: 100%;
 }
 .task-info-detail {
-  margin-left: 342rpx;
+  margin-left: 322rpx;
   padding-top: 90rpx;
   text-align: center;
   color: #fff;
@@ -57,4 +57,14 @@
   width: 28rpx;
   height: 28rpx;
   margin-right: 10rpx;
+}
+.task-result {
+  margin-top: 20rpx;
+}
+.task-result-detail {
+  font-size: 26rpx;
+}
+.task-result-detail text {
+  color: #FFFC00;
+  font-size: 48rpx;
 }

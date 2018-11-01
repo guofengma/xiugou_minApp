@@ -4,7 +4,7 @@ Page({
     jobs: []
   },
   onLoad(options) {
-    this.getTask();
+    // this.getTask();
   },
   getTask() {
     let params = {
@@ -29,7 +29,7 @@ Page({
 
   },
   onShow () {
-
+    this.getTask();
   },
   onHide () {
 
@@ -38,10 +38,10 @@ Page({
 
   },
   onShareAppMessage(e) {
-    console.log('/pages/my/task/task-share/task-share?inviteId=' + Storage.getterFor('userAccountInfo').inviteId)
+    let data = e.target.dataset;
     return ({
-      title: e.target.dataset.remark,
-      path: '/pages/my/task/task-share/task-share?inviteId=' + Storage.getterFor('userAccountInfo').inviteId,
+      title: data.remark,
+      path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').inviteId}&jobId=${data.id}`,
       imageUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png'
     });
   }
