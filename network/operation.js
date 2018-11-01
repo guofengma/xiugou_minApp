@@ -579,6 +579,25 @@ export default class Operation {
 
         this.findByJobId = '/user/userJobs/findByJobId'
 
+
+      /************************** 优惠券 *******************************/
+
+        // 推广红包列表
+
+        this.queryPromotionPackagePageList = '/user/promotionPackage/queryPromotionPackagePageList';
+
+        // 分页查询用户购买信息列表
+
+        this.queryUserBuyPromotionPromoter = '/promotion/promotionPromoter/queryUserBuyPromotionPromoter';
+
+        // 用户领取红包
+
+        this.userReceivePackage = '/promotion/promotionPromoter/userReceivePackage';
+
+        // 分页查询用户领取红包记录列表
+
+        this.queryPromotionReceiveRecordPageList = '/promotion/promotionReceiveRecord/queryPromotionReceiveRecordPageList'
+
         __instance(this);
 
     }

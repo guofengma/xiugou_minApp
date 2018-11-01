@@ -85,6 +85,7 @@ Page({
             }else{
                 detail.sendTime=''
             }
+        detail.orderPayRecord = detail.orderPayRecord || {}
         detail.payWay = Tool.bitOperation(this.data.payTypeArr,detail.orderPayRecord.type)
         if (detail.payWay.includes(this.data.payTypeArr[0])){
           detail.showPlatformTime = Tool.formatTime(detail.platformPayTime)

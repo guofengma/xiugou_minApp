@@ -1,18 +1,23 @@
 <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 
 <view class='extension-page'>
-  <view class='extension-view whiteBg' wx:for='{{6}}' wx:key='{{index}}' data-index='{{index}}' catchtap='itemClicked'>
+  <view class='extension-view whiteBg' wx:for='{{list}}' wx:key='{{index}}' data-index='{{index}}' catchtap='itemClicked' data-id='{{item.id}}'>
     <view class='flexR-sb topBar'>
       <view>
-        <view class='ellipsis font-32 extension-name'>50元推广试用套餐</view>
-        <view class='gray font-26'>剩余推广金额¥20.03 || 已结束</view>
+        <view class='ellipsis font-32 extension-name'>{{item.packageName}}</view>
+        <view class='gray font-26'>
+          <text wx:if='{{item.status==0 || item.status==1 }}'>剩余推广金额¥{{item.showRemianPrice}}</text>
+          <text wx:else>{{stauts[item.status]}}</text>
+        </view>
       </view>
       <!-- 根据实际情况判断按钮显示状态 -->
-      <view class='extension-btn font-26 flexC {{index==1? "red":"gray"}}'>
-        {{index==1? "继续支付":"推广详情"}}
+      <view class='extension-btn font-26 flexC gray'>
+        推广详情
       </view>
     </view>
-    <view class='gray extension-time font-26 flexR-sb'>购买时间：2018-09-18 10：38：56</view> 
+    <view class='gray extension-time font-26 flexR-sb'>
+      购买时间：{{item.createTime}} 
+    </view> 
   </view>
   <view class='font-26 gray flexR explain' catchtap='goPage'>
     <view class='label flexR font-24'>i</view>推广说明

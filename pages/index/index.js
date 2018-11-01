@@ -95,7 +95,6 @@ Page({
         isScroll: true,
       })
       let timer = setTimeout(()=>{
-        console.log(11);
         this.setData({
           isScroll: false,
           scrollTimer: timer

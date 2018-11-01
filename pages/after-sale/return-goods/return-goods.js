@@ -7,7 +7,7 @@ Page({
       { state: "其他" },
       { state: "等待商家处理", info: "商家已同意退货退款申请，请尽快发货", time: '' },
       { state: "商家已通过", info: "请在规定时间内退货给卖家", tips: "退款中", time: '' },
-      { state: "商家拒绝退货申请", info: "" },
+      { state: "商家拒绝退货退款申请", info: "" },
       { state: "请退货请商家", info: "等待商家确认" },
       { state: "等待商家确认", info: "", time: '' },
       { state: "退货完成", info: "", time: '' },
