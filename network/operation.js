@@ -602,6 +602,14 @@ export default class Operation {
 
         this.queryPromotionReceiveRecordPageList = '/promotion/promotionReceiveRecord/queryPromotionReceiveRecordPageList'
 
+        // 获取分享详情
+
+        this.jobIncrHits = '/user/userJobs/incrHits'
+
+        // 验证刮刮卡使用状态
+
+        this.checkScratchCodeStatus = ''
+
         __instance(this);
 
     }

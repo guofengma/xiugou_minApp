@@ -1,10 +1,14 @@
 let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
 Page({
   data: {
-    detail: {}
+    detail: {},
+    jobId: ''
   },
   onLoad (options) {
     console.log(options)
+    this.setData({
+      jobId: options.jobId
+    })
     this.getTaskDetail(options.jobId)
   },
   getTaskDetail(jobId) {
@@ -25,8 +29,8 @@ Page({
   },
   onShareAppMessage () {
     return ({
-      title: '',
-      path: '/pages/my/task/task-share/task-share?from=',
+      title: this.data.detail.remarks,
+      path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id || ''}&jobId=${this.data.jobId}`,
       imageUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png'
     });
   }

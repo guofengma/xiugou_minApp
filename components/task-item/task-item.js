@@ -65,6 +65,13 @@ Component({
 
     }
   },
+  onShareAppMessage() {
+    return ({
+      title: '',
+      path: '/pages/my/task/task-share/task-share?inviteId=' + Storage.userAccountInfo.id || '',
+      imageUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png'
+    });
+  },
   ready() {
     this.countdown();
   }
