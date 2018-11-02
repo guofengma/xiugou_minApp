@@ -90,6 +90,15 @@ Page({
     // 滚动的时候任务要缩进去
     onPageScroll(e){
       // 这里加个判断 如果没任务的话也return
+      let changeBg = this.data.changeBg
+      if (e.scrollTop>160){
+        changeBg=true
+      }else{
+        changeBg = false
+      }
+      this.setData({
+        changeBg:changeBg
+      })
       clearTimeout(this.data.scrollTimer);
       if (this.data.isScroll) return;
       this.setData({

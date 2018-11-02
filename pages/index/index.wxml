@@ -1,14 +1,14 @@
 <view class='sub-page'>
   <!--轮播  -->
   <view class='ad'>
-    <view class='search-bar boxSize flexR-sb fixed-top'>
+    <view class='search-bar boxSize flexR-sb fixed-top {{changeBg? "search-bar-scroll":""}}'>
       <image-sub imgStyle='{{"width:64rpx"}}' imgSrc="{{'logo@2x.png'}}"/>
       <view class='bar flexR-sb gray font-28' catchtap='searchClicked'>
-        <image-sub imgStyle='{{"width:32rpx"}}' imgSrc="{{'home_icon_search_nor@2x.png'}}"/>
+        <image-sub  imgStyle='{{"width:32rpx"}}' imgSrc="{{'home_icon_search_nor@2x.png'}}"/>
         <text>请输入关键字搜索</text>
       </view>
       <view catchtap='msgClicked'>
-       <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'home_icon_xiaoxi@2x.png'}}"/>
+       <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{changeBg? 'tongyong_icon_xiaoxi_nor@2x.png':'home_icon_xiaoxi@2x.png'}}"/>
       </view>
     </view>
     <!-- height:{{imgheights[0]}}rpx;min-height:400rpx -->
