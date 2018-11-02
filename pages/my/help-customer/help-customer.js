@@ -5,7 +5,6 @@ Page({
       list:''
     },
     onLoad: function (options) {
-      Tool.isIPhoneX(this)
       // Tool.getUserInfos(this)
       this.queryHelpQuestionList()
     },

@@ -76,4 +76,4 @@
 
 <!--联系卖家  -->
 
- <contact-seller phone='{{13336092569}}'></contact-seller> 
+ <contact-seller></contact-seller> 

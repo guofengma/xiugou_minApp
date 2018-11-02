@@ -119,13 +119,10 @@
 
 <tips-info isShoW='{{isShowGiftTips}}' header='温馨提示' bind:closeMask='closeMask'>
   <view class='tips-title ellipsis'>{{productInfo.name}}</view>
-  <view class='tips-line font-30'>升级礼包为定制产品</view>
+  <view class='tips-line font-30'>升级礼包为定制特殊商品</view>
   <view class='font-28 tips-content'>
     <view class='first-tips'>
-      购买后即可升级成为XX{{isShowGiftTips.nextLevel}}级用户，可享受XX{{isShowGiftTips.nextLevel}}用户
-    </view>
-    <view>
-      消费权限，该礼包产品不可退换货，如有产品质量问题，可联系客服进行申诉
+      购买后即可立即享受晋升权限，该礼包产品不可退换货，如有产品质量问题，可联系客服进行申诉。
     </view>
   </view>
 </tips-info>

@@ -58,4 +58,4 @@
 
 <!--联系卖家  -->
 
-<contact-seller phone='{{18968047924}}' userInfos='{{userInfos}}'></contact-seller> 
+<contact-seller userInfos='{{userInfos}}'></contact-seller> 

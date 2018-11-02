@@ -3,8 +3,8 @@
 <template name="address-saler">
   <!--商家地址  -->
   <view class='flexR-sb address-view whiteBg boxSize'>
-    <view class='address-right'>
-      <view class='flexC redBg'>
+    <view class='address-right red'>
+      <view class='flexC'>
         <text>寄回</text>
         <text>地址</text>
       </view>

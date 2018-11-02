@@ -7,7 +7,7 @@ Page({
     state:'',
     datas:[],
     stateInfo:[
-      "", "商家退款审核中", "商家已同意您的退款请求", "商家拒绝退款", '商家退款中', '商家退款中','退款成功','已关闭','超时处理'
+      "", "商家审核中", "商家已同意您的退款请求", "商家拒绝退款", '商家退款中', '商家退款中','退款成功','已关闭','超时处理'
     ]
   },
   onLoad: function (options) {
@@ -34,6 +34,8 @@ Page({
       } else if (datas.status == 3){
         datas.statusName = '商家拒绝你的请求' 
         datas.showRefundTime = Tool.formatTime(datas.refuseTime)
+      } else if (datas.status == 1) {
+        datas.showRefundTime = datas.applyTime
       }
       this.setData({
         datas: datas

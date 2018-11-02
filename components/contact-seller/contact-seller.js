@@ -29,5 +29,6 @@ Component({
   },
   ready: function () {
     this.refreshMemberInfoNotice()
+    Tool.isIPhoneX(this)
   },
 })
