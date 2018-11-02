@@ -27,8 +27,9 @@ Page({
     if (!app.globalData.systemInfo) {
       app.getSystemInfo()
     }
-    app.wxLogin();
-    Event.on('didLogin', this.didLogin, this);
+    app.wxLogin(()=> {
+      this.didLogin();
+    });
   },
   jobIncrHits() {
     let params = {
@@ -68,11 +69,10 @@ Page({
 
   },
   onUnload () {
-    Event.off('didLogin', this.didLogin);
   },
   toRegister() {
-    let from = encodeURIComponent(`/pages/my/task/task-share/task-share?inviteId=${this.data.inviteId}`);
-    Tool.navigateTo(`/pages/register/register?from=${from}&inviteCode=${this.data.inviteId}`)
+    let from = encodeURIComponent(`/pages/my/task/task-share/task-share?inviteId=${this.data.inviteId}&jobId=${this.data.jobId}`);
+    Tool.navigateTo(`/pages/register/register?from=${from}&inviteCode=${this.data.inviteId}&phone=${this.data.phone}`)
   },
   didLogin() {
     Tool.didLogin(this)
@@ -92,7 +92,6 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let data = req.responseObject.data;
-    
       if(!data) {
         this.toRegister();        
       } else {

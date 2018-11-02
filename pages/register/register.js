@@ -22,11 +22,13 @@ Page({
     urlFrom: null,
   },
   onLoad: function (options) {
+    console.log(options);
     this.setData({
       codeId: options.inviteCode || '',
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
-      urlFrom: options.from || null
+      urlFrom: options.from || null,
+      phone: options.phone || ''
     })
     if (options.inviteCode){
       let callBack = () => {
