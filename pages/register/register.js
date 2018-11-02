@@ -18,13 +18,15 @@ Page({
       invalid:false,
       tips:''
     },
-    isAgree:false
+    isAgree:false,
+    urlFrom: null,
   },
   onLoad: function (options) {
     this.setData({
       codeId: options.inviteCode || '',
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
+      urlFrom: options.from || null
     })
     if (options.inviteCode){
       let callBack = () => {
@@ -99,7 +101,8 @@ Page({
       let callBack = () => {
         Storage.setMemberId(req.responseObject.data.id)
         Tool.loginOpt(req)
-        Tool.switchTab('/pages/index/index')
+        if (this.data.urlFrom) Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
+        else Tool.switchTab('/pages/index/index')
       }
       Tool.showSuccessToast('注册成功', callBack)
     }

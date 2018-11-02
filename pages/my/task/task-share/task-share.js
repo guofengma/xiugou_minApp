@@ -83,17 +83,20 @@ Page({
   checkUserExist() {
     let params = {
       openid: Storage.getterFor('openid'),
-      reqName: '根据openid判断用户是否存在',
-      url: Operation.userExistByOpenid
+      phone: this.data.phone,
+      source: 1, // 1. 小程序 2. H5
+      reqName: '查询用户是否已注册',
+      url: Operation.userExtVerify,
+      requestMethod: 'GET'
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      let data = req.responseObject.data || {}; 
-      if(data.phone) {
-        this.setData({
-          phone: data.phpne,
-          isNewUser: true
-        })
+      let data = req.responseObject.data;
+    
+      if(!data) {
+        this.toRegister();        
+      } else {
+        this.getAward();
       }
     };
     Tool.showErrMsg(r)
@@ -114,11 +117,11 @@ Page({
     if(phone) {
       this.getAward();
     } else {
-      this.toRegister();
       this.setData({
         showPhoneModal: !this.data.showPhoneModal,
         inputFocus: !this.data.inputFocus
       })
+
     }
   },
   // 验证手机并领取奖励
@@ -140,7 +143,7 @@ Page({
       })
       return;
     }
-    this.checkUserExist();
+    this.checkUserExist();    
   },
   // 刮刮卡
   getScratchCard() {
@@ -163,8 +166,21 @@ Page({
   },
   // 获取奖励
   getAward() {
+    console.log('get award');
+    let _ = this;
     let params = {
-      url: Operation
+      url: Operation.getScratchAward,
+      id: _.data.scratchCard.id,
+      phone: _.data.userInfos.phone,
+      requestMethod: 'GET'
     }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      if(req.responseObject.code == 10000) {
+        _.checkScratchCodeStatus(); 
+      }
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   }
 })

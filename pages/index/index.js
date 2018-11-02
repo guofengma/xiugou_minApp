@@ -98,7 +98,7 @@ Page({
     onLoad: function () {
       Event.on('getLevel', this.getLevel,this)
       this.discoverNotice()
-      // this.findUserJobsByUserId();
+      this.findUserJobsByUserId();
       this.queryAdList(1,'轮播图片',(datas)=>{
         this.setData({
           imgUrls:datas
