@@ -8,12 +8,12 @@
       session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"
       open-type="contact"
       >
-        <view>联系卖家</view>
+        <view>在线客服</view>
         <view class='gray'>8:30-24:00</view>
     </button>
   <!-- </view> -->
   <view class='flexC' bindtap='makePhoneCall'>
-    <view>拨打电话</view>
+    <view>咨询电话</view>
     <view class='gray'>8:30-24:00</view>
   </view>
 </view>
