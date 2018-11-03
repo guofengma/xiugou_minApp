@@ -1,4 +1,4 @@
-let { Tool, Config } = global;
+let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
 Component({
   properties: {
     item: {
@@ -13,7 +13,8 @@ Component({
     countdownTime: '00:00:00:00',
     showDetail: false,
     delay: 90,
-    cardType: 'loading'
+    cardType: 'loading',
+    cardData: {}
   },
   methods: {
     toggleShowDetail() {
@@ -61,14 +62,33 @@ Component({
       })
     },
     // 开启奖励
-    openAward() {
-
+    openAward(e) {
+      let dataset = e.currentTarget.dataset;
+      let params = {
+        url: Operation.receiveJobMoney,
+        id: dataset.id,
+        requestMethod: 'GET'
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let data = req.responseObject.data || {};
+        console.log(data);
+        this.setData({
+          cardType: 'success',
+          cardData: data
+        });
+        this.toggleCardShow();
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+      
     }
   },
   onShareAppMessage() {
+    let data = e.target.dataset;
     return ({
-      title: '',
-      path: '/pages/my/task/task-share/task-share?inviteId=' + Storage.userAccountInfo.id || '',
+      title: data.remark,
+      path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id || ''}&jobId=${data.id}`,
       imageUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png'
     });
   },

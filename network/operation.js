@@ -610,6 +610,18 @@ export default class Operation {
 
         this.checkScratchCodeStatus = '/scratch/scratchCardInformation/findByCode'
 
+        // 领取刮刮卡奖励
+
+        this.getScratchAward = '/scratch/scratchCardInformation/findById'
+
+        // 领取任务奖励
+
+        this.receiveJobMoney = '/user/userJobs/receiveMoney'
+
+        // 用户校验
+
+        this.userExtVerify = '/user/userLogin/scratchUserVerify'
+
         __instance(this);
 
     }

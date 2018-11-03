@@ -41,7 +41,7 @@ Page({
     let data = e.target.dataset;
     return ({
       title: data.remark,
-      path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').inviteId}&jobId=${data.id}`,
+      path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id}&jobId=${data.id}`,
       imageUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png'
     });
   }

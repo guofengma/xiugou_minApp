@@ -1,4 +1,4 @@
-let {Config } = global;
+let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
 Component({
   properties: {
     type: {
@@ -9,6 +9,10 @@ Component({
       type: String,
       value: ''
     },
+    card: {
+      type: Object,
+      value: {}
+    }
   },
   data: {
     imgUrl: Config.imgBaseUrl
@@ -19,6 +23,12 @@ Component({
     },
     getJob() {
       this.triggerEvent('get')
+    },
+    showAccount() {
+      Tool.navigateTo('/pages/my/my');
     }
+  },
+  ready(){
+    console.log(this.data.card);
   }
 })

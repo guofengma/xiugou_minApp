@@ -268,6 +268,18 @@
 					"name": "任务分享",
 					"pathName": "pages/my/task/task-share/task-share",
 					"query": ""
+        },
+				{
+          "id": 37,
+					"name": "任务详情",
+					"pathName": "pages/my/task/task-detail/task-detail",
+					"query": "jobId=12"
+				},
+				{
+					"id": 38,
+					"name": "任务分享",
+					"pathName": "pages/my/task/task-share/task-share",
+					"query": "jobId=12"
 				},
 				{
 					"id": -1,

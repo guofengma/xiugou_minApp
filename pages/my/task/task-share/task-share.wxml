@@ -32,7 +32,7 @@
       <view 
         class='lottery_btn {{scratchCard.status == 2 ? "active":"inactive"}}' 
         catchtap='toggleModalShow'
-      >立即领取</view>
+      >{{scratchCard.status == 2 ? '立即领取':'已领取'}}</view>
     </view>
     <view class='task-detail-desc'>
       <image mode='widthFix' src='{{imgUrl}}task_detail_bg.png' class='task-thumb'></image>
