@@ -73,10 +73,10 @@ Page({
     this.queryPromotionReceiveRecordPageList()
   },
   onShareAppMessage: function (res) {
+    console.log(111111)
     return {
-      title: name,
-      path: '/pages/my/extension/extension-detail/extension-detail',
-      imageUrl: imgUrl
+      title: '推广红包',
+      path: '/pages/web-view/web-view?id=' + this.data.packageId,
     }
   },
   onUnload: function () {

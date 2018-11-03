@@ -1,7 +1,7 @@
 let { Tool, RequestFactory, Storage, Operation, Event } = global;
 Page({
   data: {
-    isShow:true
+    isShow:false
   },
   onLoad: function (options) {
 
@@ -9,9 +9,13 @@ Page({
   goPage(){
     Tool.navigateTo('/pages/register/write-invite-code/write-invite-code') 
   },
-  isShow(){
-    this.setData({
-      isShow: !this.data.isShow
-    })
+  btnClicked(){
+    this.selectComponent('#redEnvelopes').btnClick();
+  },
+  dismiss(){
+    let callBack = () => {
+      Tool.switchTab('/pages/index/index')
+    }
+    Tool.showSuccessToast('注册成功', callBack)
   }
 })

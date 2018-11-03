@@ -39,7 +39,6 @@ Page({
     })
   },
   onLoad: function (options) {
-    console.log(options);
     this.setData({
       productId: options.productId || '',
       prodCode: options.prodCode || '',
@@ -60,7 +59,6 @@ Page({
     this.requestFindProductByIdApp()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
-    this.refreshMemberInfoNotice()
   },
   onShow: function () {
   
@@ -73,6 +71,10 @@ Page({
   },
   didLogin() {
     Tool.didLogin(this)
+    this.refreshMemberInfoNotice()
+    if (!this.data.userInfos.upUserid){
+      this.selectComponent('#redEnvelopes').btnClick();
+    }
   },
   swiperImgCliked(e){
     let index = e.currentTarget.dataset.index

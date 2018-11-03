@@ -104,7 +104,7 @@ Page({
         Storage.setMemberId(req.responseObject.data.id)
         Tool.loginOpt(req)
         if (this.data.urlFrom) Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
-        else Tool.navigateTo('/pages/register/write-invite-code/write-invite-code')
+        else Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
         // Tool.switchTab('/pages/index/index')
       // }
       // Tool.showSuccessToast('注册成功', callBack)

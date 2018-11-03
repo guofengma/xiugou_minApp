@@ -31,6 +31,19 @@ Page({
   payClicked(){
 
   },
+  promotionPromoterPay(){
+    let params = {
+      packageId: this.data.code,
+      reqName: '支付红包推广费用',
+      url: Operation.promotionPromoterPay,
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
   wxPay(payType, outTradeNo, payList) { //微信支付
     payList = JSON.parse(payList)
     let that = this

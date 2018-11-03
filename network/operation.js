@@ -601,6 +601,14 @@ export default class Operation {
 
         this.userReceivePackage = '/promotion/promotionPromoter/userReceivePackage';
 
+        // 详情页用户领取红包
+
+        this.givingPackageToUser = '/promotion/promotionPromoter/givingPackageToUser'
+
+        // 支付红包费用
+
+        this.promotionPromoterPay='/promotion/promotionPromoter/pay'
+
         // 分页查询用户领取红包记录列表
 
         this.queryPromotionReceiveRecordPageList = '/promotion/promotionReceiveRecord/queryPromotionReceiveRecordPageList'

@@ -8,9 +8,9 @@ Page({
   },
   updateUserCodeById(){
     let params = {
-      upCode: productId,
+      upCode: this.data.code,
       reqName: 'code绑定',
-      url: Operation.activityByProductId,
+      url: Operation.updateUserCodeById,
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
@@ -21,7 +21,7 @@ Page({
     r.addToQueue();
   },
   changeInput(e){
-    if (e.detail.value.length>=11){
+    if (e.detail.value.length>=3){
       this.setData({
         code: e.detail.value,
         disabled:false

@@ -1,1 +1,1 @@
-<web-view src="https://uath5.sharegoodsmall.com/demo"></web-view>
+<web-view src="{{url}}"></web-view>
