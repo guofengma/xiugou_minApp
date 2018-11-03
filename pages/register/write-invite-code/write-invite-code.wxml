@@ -6,6 +6,6 @@
   <button class='loginBtn redBg' disabled='{{disabled}}' bindtap='next'>确认</button>
 </view>
 
-<view class='flexR dismiss font-26 gray '>
+<view class='flexR dismiss font-26 gray ' catchtap='dismiss'>
   <text>跳过</text>
 </view>

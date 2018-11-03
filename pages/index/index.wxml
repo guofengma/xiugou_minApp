@@ -77,7 +77,7 @@
   
   <!-- 头条 -->
 
-  <view class='index-notice-view whiteBg flexR-sb'>
+  <view class='index-notice-view whiteBg flexR-sb' wx:if='{{noticeArr.length>0}}'>
     <view class='notice-leftBar font-32'>
       <view>秀场</view>
       <view>头条</view>

@@ -149,13 +149,14 @@ function html2json(html, bindName) {
                 node.imgIndex = results.images.length;
                 var imgUrl = node.attr.src;
                 if(imgUrl.indexOf('http') == -1){
-                    imgUrl = 'https://www.babymarkt.com.cn' + imgUrl;
+                  imgUrl = 'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource' + imgUrl;
                 }
                 if (imgUrl[0] == '') {
                     imgUrl.splice(0, 1);
                 }
                 imgUrl = wxDiscode.urlToHttpUrl(imgUrl, __placeImgeUrlHttps);
                 node.attr.src = imgUrl;
+              node.attr.width = node.width
                 node.from = bindName;
                 results.images.push(node);
                 results.imageUrls.push(imgUrl);

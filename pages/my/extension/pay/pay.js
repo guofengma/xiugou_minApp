@@ -31,6 +31,26 @@ Page({
   payClicked(){
 
   },
+  wxPay(payType, outTradeNo, payList) { //微信支付
+    payList = JSON.parse(payList)
+    let that = this
+    wx.requestPayment({
+      'timeStamp': payList.timeStamp,
+      'nonceStr': payList.nonceStr,
+      'package': payList.package,
+      'signType': 'MD5',
+      'paySign': payList.paySign,
+      'success': function (res) {
+        this.setData({
+          isShow:true,
+          result:true
+        })
+      },
+      'fail': function (res) {
+        Tool.showAlert("支付失败")
+      }
+    })
+  },
   onHide: function () {
 
   },

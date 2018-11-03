@@ -34,7 +34,10 @@ export default class Operation {
         // 获取推荐人列表
         this.queryInviterList = '/user/userSign/queryInviterList'
 
+        // 邀请码注册
 
+        this.updateUserCodeById = '/user/updateUserCodeById'
+        
     /**********  获取省市区 *******************/
 
       // 获取省

@@ -66,12 +66,15 @@ function wxParseImgTap(e) {
  * 图片视觉宽高计算函数区 
  **/
 function wxParseImgLoad(e) {
-    var that = this;
-    var tagFrom = e.target.dataset.from;
-    var idx = e.target.dataset.idx;
-    if (typeof (tagFrom) != 'undefined' && tagFrom.length > 0) {
-        calMoreImageInfo(e, idx, that, tagFrom)
-    }
+  var that = this;
+  var tagFrom = e.target.dataset.from;
+  var idx = e.target.dataset.idx;
+  if (typeof (tagFrom) != 'undefined' && tagFrom.length > 0) {
+    calMoreImageInfo(e, idx, that, tagFrom)
+  }
+}
+function wxParseImgErrorLoad(e){
+  console.log(e)
 }
 // 假循环获取计算图片视觉最佳宽高
 function calMoreImageInfo(e, idx, that, bindName) {
@@ -81,6 +84,9 @@ function calMoreImageInfo(e, idx, that, bindName) {
     }
     var temImages = temData.images;
     //因为无法获取view宽度 需要自定义padding进行计算，稍后处理
+    if (e.detail.width <= 1 && e.detail.height<=1) {
+      temImages[idx].noSrc = true
+    }
     var recal = wxAutoImageCal(e.detail.width, e.detail.height, that, bindName);
     // temImages[idx].width = recal.imageWidth;
     // temImages[idx].height = recal.imageheight; 
@@ -88,14 +94,16 @@ function calMoreImageInfo(e, idx, that, bindName) {
     // var bindData = {};
     // bindData[bindName] = temData;
     // that.setData(bindData);
+  
     var index = temImages[idx].index
     var key = `${bindName}`
     for (var i of index.split('.')) key += `.nodes[${i}]`
     var keyW = key + '.width'
     var keyH = key + '.height'
     that.setData({
-        [keyW]: recal.imageWidth,
-        [keyH]: recal.imageheight,
+      [keyW]: recal.imageWidth,
+      [keyH]: recal.imageheight,
+      [bindName]:that.data[bindName]
     })
 }
 
