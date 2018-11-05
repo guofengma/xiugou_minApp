@@ -1,14 +1,16 @@
 const app = getApp()
 
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, Config, Storage, Event} = global
 
 Page({
   data: {
-    webUrl: 'https://uath5.sharegoodsmall.com',
+    webUrl: '',
     url:""
   },
   onLoad: function (options) {
-    
+    this.setData({
+      webUrl: Config.h5webUrl
+    })
     let callBack = ()=>{
       let url = this.data.webUrl + '/promote?id=' + options.id + '&openid=' + Storage.getWxOpenid()
       //Tool.showAlert("红包id"+options.id+"openid:"+Storage.getWxOpenid())

@@ -49,7 +49,6 @@ Page({
       } else if (currentTab==1){
         this.getDiscountCouponLosed();
       } else if (currentTab == 2) {
-        
         this.getDiscountCouponUserd();
       }
     },
