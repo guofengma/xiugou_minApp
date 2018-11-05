@@ -16,7 +16,8 @@
           <view class='tips-title'>支付失败！</view>
           <view class='gray'>请重新支付，以免订单超时</view>
           <view class='gray'>交易失败</view>
-          <view class='btn flexR' bindtap='payResultClicked' data-index='3'>去支付</view>
+          <view class='btn flexR' bindtap='payResultClicked' data-index='3' wx:if='{{isContinue}}'>去支付</view>
+          <view class='btn flexRn' wx:else></view>
       </block>
     </view>
   </view>

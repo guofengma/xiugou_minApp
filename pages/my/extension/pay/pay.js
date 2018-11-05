@@ -12,6 +12,7 @@ Page({
       num: options.num,
       price: options.price,
       total: options.total,
+      id: options.id
     })
   },
   selectIcon(){
@@ -29,23 +30,32 @@ Page({
     let index = e.currentTarget.dataset.index
   },
   payClicked(){
-
-  },
-  promotionPromoterPay(){
+    let payType = this.data.total == 0 ? 1 : 2
     let params = {
-      packageId: this.data.code,
+      packageId: this.data.id,
       reqName: '支付红包推广费用',
+      requestMethod: 'GET',
+      openid: Storage.getWxOpenid(),
       url: Operation.promotionPromoterPay,
+      "type": payType,
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      
+      if (payType == 1) {
+        this.setData({
+          isShow: true,
+          result: true
+        })
+      } else {
+        let datas = req.responseObject.data
+        this.wxPay(datas)
+      }
     };
     Tool.showErrMsg(r)
     r.addToQueue();
   },
-  wxPay(payType, outTradeNo, payList) { //微信支付
-    payList = JSON.parse(payList)
+  wxPay(payList) { //微信支付
+    // payList = JSON.parse(payList)
     let that = this
     wx.requestPayment({
       'timeStamp': payList.timeStamp,
@@ -54,13 +64,16 @@ Page({
       'signType': 'MD5',
       'paySign': payList.paySign,
       'success': function (res) {
-        this.setData({
+        that.setData({
           isShow:true,
           result:true
         })
       },
       'fail': function (res) {
-        Tool.showAlert("支付失败")
+        that.setData({
+          isShow: true,
+          result: false,
+        })
       }
     })
   },

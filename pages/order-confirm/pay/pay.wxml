@@ -66,4 +66,4 @@
 </view>
 
 
-<template  is="pay-result-tips" data='{{isShow,tipsBtn,result,tipsContent}}'/>
+<template  is="pay-result-tips" data='{{isShow,tipsBtn,result,tipsContent,isContinue:true}}'/>
