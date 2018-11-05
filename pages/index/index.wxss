@@ -273,7 +273,7 @@
   padding: 20rpx 12rpx;
 }
 .prd-name{
-  height: 72rpx;
+  height: 64rpx;
 }
 /* 任务 */
 .duty{
