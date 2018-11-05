@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation, Config} = global;
+let { Tool, RequestFactory, Operation, Config, Storage} = global;
 Page({
     data: {
       account:'',
@@ -72,7 +72,7 @@ Page({
     onLoad: function (options) {
       this.getData();
       this.setData({
-        account: options.query || 0,
+        account: options.query || Storage.getUserAccountInfo().userScore || '0.00',
         imgBaseUrl: Config.imgBaseUrl
       })
     },

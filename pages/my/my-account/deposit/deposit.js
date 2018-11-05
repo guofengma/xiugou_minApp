@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event, Operation, Config } = global;
+let { Tool, RequestFactory, Event, Operation, Config, Storage} = global;
 
 Page({
     data: {
@@ -87,7 +87,7 @@ Page({
     },
     onLoad: function (options) {
       this.setData({
-        account: options.query || '0.00',
+        account: options.query || Storage.getUserAccountInfo().blockedBalance || '0.00',
         imgBaseUrl: Config.imgBaseUrl
       })
       this.getData()

@@ -30,6 +30,7 @@ Component({
       r.addToQueue();
     },
     goPage(){
+      Event.emit('getLevel') 
       Tool.navigateTo('/pages/my/my-account/cash/cash')
     },
     btnClick(){

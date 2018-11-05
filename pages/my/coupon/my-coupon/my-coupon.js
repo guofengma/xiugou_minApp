@@ -60,6 +60,29 @@ Page({
       });
       this.checkCor();
     },
+    //判断当前滚动超过一屏时，设置tab标题滚动条。
+    checkCor: function () {
+      if (this.data.currentTab > 3) {
+        this.setData({  
+          scrollLeft: 300
+        })
+      } else {
+        this.setData({
+          scrollLeft: 0
+        })
+      }
+    },
+    // 点击标题切换当前页时改变样式
+    swichNav: function (e) {
+      var cur = e.target.dataset.current;
+      if (this.data.currentTaB == cur) {
+        return false;
+      }else {
+        this.setData({
+          currentTab: cur,
+        })
+      }
+    },
     getCouponType(item){
       // 优惠卷的类型
       let typeObj = this.data.types
@@ -166,19 +189,6 @@ Page({
       }
       this.formatCouponInfos(params, 2, false, 'coupon-right-lose')
     },
-
-    // 点击标题切换当前页时改变样式
-    swichNav: function (e) {
-        var cur = e.target.dataset.current;
-        if (this.data.currentTaB == cur) {
-            return false;
-        }
-        else {
-            this.setData({
-                currentTab: cur,
-            })
-        }
-    },
     //优惠券详情
     toDetail(e){
       let index = e.currentTarget.dataset.index
@@ -233,18 +243,6 @@ Page({
       Storage.setCoupon({ id: "", name: '选择优惠劵', canClick:true })
       Event.emit("updateCoupon")
       Tool.navigationPop()
-    },
-    //判断当前滚动超过一屏时，设置tab标题滚动条。
-    checkCor: function () {
-        if (this.data.currentTab > 3) {
-            this.setData({
-                scrollLeft: 300
-            })
-        } else {
-            this.setData({
-                scrollLeft: 0
-            })
-        }
     },
     onLoad: function (options) {
       let userInfo = Storage.getUserAccountInfo() || {}
