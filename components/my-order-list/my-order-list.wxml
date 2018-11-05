@@ -79,7 +79,9 @@
   </view>
 </view>
 <!--搜索结果异常显示 tipVal  -->
-<template is="result-tips" wx-if='{{tipVal}}' data="{{tipVal}}" />
+<!-- <view class='sub-page'> -->
+  <template is="result-tips"  wx-if='{{tipVal}}' data="{{tipVal}}" />
+<!-- </view> -->
 
 <!--提示框  -->
 <!-- <template is="tips-cancel-order" data='{{isCancel,reason,content}}'/> -->

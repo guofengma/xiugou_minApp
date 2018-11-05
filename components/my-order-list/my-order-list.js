@@ -81,7 +81,7 @@ Component({
         console.log(this.data.list)
         if (!req.responseObject.data.totalPage) {
           this.setData({
-            tipVal: 2
+            tipVal: 7
           });
         } else {
           this.setData({
@@ -277,7 +277,7 @@ Component({
             }
             if (orderArry.length==0){
               this.setData({
-                tipVal:2
+                tipVal:7
               })
             }
             this.setData({

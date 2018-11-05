@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "tips-cancel-order": "/components/tips-cancel-order/tips-cancel-order"
+    "tips-cancel-order": "/components/tips-cancel-order/tips-cancel-order",
+    "image-sub": "/components/image-sub/image-sub"
   }
 }

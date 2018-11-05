@@ -244,6 +244,9 @@ Page({
       Event.emit("updateCoupon")
       Tool.navigationPop()
     },
+    lookAround() {
+      Tool.switchTab('/pages/index/index')
+    },
     onLoad: function (options) {
       let userInfo = Storage.getUserAccountInfo() || {}
       this.data.coinData.num = userInfo.tokenCoin || 0

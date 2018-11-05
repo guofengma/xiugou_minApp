@@ -1,3 +1,6 @@
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
+
 <view class='logistics' wx:if="{{list.length>0}}">
   <view class="title flexR-sb font-30">
     <text>{{expTextName}}：{{mailNo}}</text>
@@ -46,8 +49,7 @@
   </view>
 </view>
 
-<view class='no-logistics flexC' wx:else>
-  <image src='/img/wuliu-tips.png' mode='widthFix'></image>
-  <view class='gray font-30'>{{tips}}</view>
+<view class='sub-page' wx:else>
+  <template is="result-tips"  data="{{tipVal:6,tips}}" />
 </view>
  

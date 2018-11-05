@@ -1,6 +1,4 @@
-/*无数据  */
 
-@import  "/components/nodata-tips/nodata-tips";
 .time{
     height: 70rpx;
     line-height: 70rpx;

@@ -1,14 +1,48 @@
 <template name="result-tips">
-  <view class='tips-img-view' wx:if="{{tipVal == 1}}" bindtap='reloadNet'>
-    <image src='/img/search-result-1.png' mode='widthFix'></image>
-    <view>网络异常,请点击重新加载~</view>
+  <view class='tips-img-view flexC'>
+    <view  wx:if="{{tipVal == 1}}" bindtap='reloadNet'>
+      <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-network'}}"/>
+      <view>网络异常,请点击重新加载~</view>
+    </view>
+    <view  wx:if="{{tipVal == 2}}">
+      <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-search.png'}}"/>
+      <view>很抱歉</view>
+      <view class='font-24'>没有找到任何内容</view>
+    </view>
+    <view wx:if="{{tipVal == 3}}">
+      <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-cart.png'}}"/>
+      <view>去添加点什么吧</view>
+    </view>
+    <!-- 优惠卷 -->
+    <view wx:if="{{tipVal == 4}}">
+      <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-yhj.png'}}"/>
+      <view>还没有优惠卷哦</view>
+    </view>
+    <!--  暂无消息通知-->
+    <view wx:if="{{tipVal == 5}}">
+      <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-msg.png'}}"/>
+      <view>暂无消息通知~</view>
+    </view>
+    <!-- 暂无物流信息 -->
+    <view wx:if="{{tipVal == 6}}">
+      <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-wl.png'}}"/>
+      <view>{{tips}}</view>
+    </view>
+    <!-- 暂无订单 -->
+    <view wx:if="{{tipVal == 7}}">
+      <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-order.png'}}"/>
+      <view>暂无订单</view>
+    </view>
+    <!-- 收藏为空 -->
+    <view wx:if="{{tipVal == 8}}">
+      <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-collect.png'}}"/>
+      <view>去收藏点什么吧</view>
+    </view>
+    <!-- 是否展示去逛逛的提示 -->
+    <view wx:if='{{showBtn}}'>
+      <view class='font-24'>快去商城逛逛吧</view>
+      <view class='result-tips-btn flexC red' catchtap='lookAround'>去逛逛</view>
+    </view>
   </view>
-  <view class='tips-img-view' wx:if="{{tipVal == 2}}">
-    <image src='/img/search-result-2.png' mode='widthFix'></image>
-    <view>暂无数据~</view>
-  </view>
-  <view class='tips-img-view' wx:if="{{tipVal == 3}}">
-    <image src='/img/search-result-3.png' mode='widthFix'></image>
-    <view>页面报错~</view>
-  </view>
+  
 </template>

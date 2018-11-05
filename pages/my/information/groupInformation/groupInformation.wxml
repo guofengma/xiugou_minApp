@@ -1,5 +1,5 @@
-<!--无数据-->
-<import src='/components/nodata-tips/nodata-tips.wxml' />
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
 <view class="information-item sub-page" wx:if="{{time}}">
     <view class="time">{{time}}</view>
     <view class="title">拼店消息提醒：</view>
@@ -11,5 +11,5 @@
     </view>
 </view>
 <view wx:else class='sub-page'>
-    <template is="nodata-tips" />
+   <template is="result-tips"  data="{{tipVal:5}}" />
 </view>

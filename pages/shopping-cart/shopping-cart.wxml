@@ -27,7 +27,7 @@
     </view>
   </view>
   <!--搜索结果异常显示 tipVal  -->
-  <template is="result-tips" wx-if='{{tipVal}}' data="{{tipVal}}" />
+  <template is="result-tips" wx-if='{{tipVal}}' data="{{tipVal,showBtn:true}}" />
 <!-- </scroll-view> -->
 
 <!--底部的bar  -->

@@ -5,7 +5,7 @@ Page({
     ysf: { title: '售后服务' },
     list:{},
     afterSaleTypeArr: [4, 16, 8],// 不支持退款 不支持退货 不支持换货
-    afterSaleType: [true, true, true], // 支持退款 支持换货 支持退货
+    afterSaleType: [false, false, false], // 支持退款 支持换货 支持退货
   },
   onLoad: function (options) {
     this.setData({
