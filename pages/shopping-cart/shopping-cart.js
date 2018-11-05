@@ -24,6 +24,7 @@ Page({
   },
   onPullDownRefresh: function () {
     this.initDatas()
+    wx.stopPullDownRefresh();
   },
   // onPullDownRefresh: function () {
   //   // this.myRecordingA(1, answerUrl);
@@ -34,7 +35,6 @@ Page({
     this.initDatas()
   },
   initDatas(){
-    wx.stopPullDownRefresh();
     if (this.data.didLogin) {
       let hasStorageShoppingCart = this.hasStorageShoppingCart()
       if (hasStorageShoppingCart) {

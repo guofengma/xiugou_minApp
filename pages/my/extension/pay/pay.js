@@ -35,7 +35,7 @@ Page({
       packageId: this.data.id,
       reqName: '支付红包推广费用',
       requestMethod: 'GET',
-      openid: Storage.getWxOpenid(),
+      // openid: Storage.getWxOpenid(),
       url: Operation.promotionPromoterPay,
       "type": payType,
     }

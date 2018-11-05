@@ -35,7 +35,6 @@ Page({
     },
     //获取数据
     getData(createdTime) {
-      wx.stopPullDownRefresh();
         if (this.data.hasNext) {
           let params = {
             pageSize: this.data.pageSize,
@@ -142,6 +141,7 @@ Page({
     },
     onPullDownRefresh: function () {
       this.getData()
+      wx.stopPullDownRefresh();
     },
     onShow: function () {
 

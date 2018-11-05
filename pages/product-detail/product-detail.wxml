@@ -126,7 +126,7 @@
         加入购物车
       </view>
     </view>
-    <view wx:else class="bottom-bar flexR boxSize {{isIPhoneX.className}} no-sale">此商品已下架</view>
+    <view wx:if='{{!productInfoList.onSale}}' class="bottom-bar flexR boxSize {{isIPhoneX.className}} no-sale">此商品已下架</view>
     <!--置顶的按钮-->
     <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
       <image src='/img/top-icon.png' mode='widthFix'></image>

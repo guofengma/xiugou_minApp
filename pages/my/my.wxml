@@ -8,7 +8,8 @@
       </view>
     </view>
     <view class='my-avatar' catchtap='itemClicked' data-page='2'>
-      <image src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></image>
+      <cover-image  src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></cover-image>
+      <!-- <image src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></image> -->
       <view>
         <view class='my-info-item' catchtap='itemClicked' data-page='2' >
           <text class='my-name'> {{userInfos.nickname}}</text>
