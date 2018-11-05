@@ -15,6 +15,7 @@ Page({
       typeStatus: 1
     },//刮刮卡信息
     scratchCode: '',
+    deadline: ''
   },
   onLoad (options) {
     // 现获取用户openid
@@ -59,11 +60,15 @@ Page({
     r.successBlock = (req) => {
       let data = req.responseObject.data || {};
       this.setData({
-        scratchCard: data
+        scratchCard: data,
+        deadline: this.getDate(data.updateTime) + ' - ' + this.getDate(data.endTime)
       })
     };
     Tool.showErrMsg(r)
     r.addToQueue();
+  },
+  getDate(timestamp) {
+    return Tool.formatTime(timestamp).split(' ')[0] || '';
   },
   onReady () {
 
