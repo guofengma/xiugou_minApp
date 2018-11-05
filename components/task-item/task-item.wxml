@@ -20,7 +20,7 @@
           <button wx:elif="{{item.status == 2}}">等待开奖</button>
           <button bindtap='openAward' data-id="{{item.id}}" wx:elif="{{item.status == 3}}">开启奖励</button>
           <view class='task-result' wx:else>
-            <view class='task-result-detail' wx:if="{{item.shareMoney > 0}}">获得了<text>{{item.shareMoney}}</text>元现金奖励</view>
+            <view class='task-result-detail' wx:if="{{item.recieveMoney > 0}}">获得了<text>{{item.recieveMoney}}</text>元现金奖励</view>
             <view class='task-result-detail' wx:else>
               <view>没有任何秀友帮你激活~</view>
               <view>下次再接再励~</view>
