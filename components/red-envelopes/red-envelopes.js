@@ -25,12 +25,12 @@ Component({
         this.setData({
           succ:true
         })
+        Event.emit('getLevel') 
       };
       Tool.showErrMsg(r)
       r.addToQueue();
     },
     goPage(){
-      Event.emit('getLevel') 
       Tool.navigateTo('/pages/my/my-account/cash/cash')
     },
     btnClick(){

@@ -3,7 +3,7 @@
 <!--搜索结果异常显示  -->
 <import src='/components/result-tips/result-tips.wxml' />
 
-<scroll-view class="search-result" scroll-y >
+<!-- <scroll-view class="search-result" scroll-y > -->
   <view class='shopping-cart'>
     <view wx:for='{{items}}'  data-index='{{index}}'  wx:key='unique' class='shopping-cart-line '>
       <view class='flexR-sb whiteBg' >
@@ -28,7 +28,7 @@
   </view>
   <!--搜索结果异常显示 tipVal  -->
   <template is="result-tips" wx-if='{{tipVal}}' data="{{tipVal}}" />
-</scroll-view>
+<!-- </scroll-view> -->
 
 <!--底部的bar  -->
 <view class='cart-bar flexR-sb fixed-bottom' wx:if='{{items.length>0}}'>

@@ -23,22 +23,28 @@ Page({
 
   },
   onPullDownRefresh: function () {
-    this.myRecordingA(1, answerUrl);
-    wx.stopPullDownRefresh();
-
+    this.initDatas()
   },
+  // onPullDownRefresh: function () {
+  //   // this.myRecordingA(1, answerUrl);
+  //   // wx.stopPullDownRefresh();
+  // },
   getLoginCart(){
     Tool.didLogin(this)
+    this.initDatas()
+  },
+  initDatas(){
+    wx.stopPullDownRefresh();
     if (this.data.didLogin) {
       let hasStorageShoppingCart = this.hasStorageShoppingCart()
-      if (hasStorageShoppingCart){
+      if (hasStorageShoppingCart) {
         this.shoppingCartLimit()
       } else {
         this.getShoppingCartList()
       }
     } else {
       this.setData({
-        items: [], 
+        items: [],
       })
       this.getStorageShoppingCart()
     }

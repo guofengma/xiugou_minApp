@@ -4,5 +4,6 @@
   "usingComponents": {
     "adder-subtractor": "/components/adder-subtractor/adder-subtractor",
     "delete-bar":"/components/delete-bar/delete-bar"
-  }
+  },
+  "enablePullDownRefresh": true
 }
