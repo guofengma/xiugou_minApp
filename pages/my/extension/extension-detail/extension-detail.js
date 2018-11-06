@@ -73,9 +73,8 @@ Page({
     this.queryPromotionReceiveRecordPageList()
   },
   onShareAppMessage: function (res) {
-    console.log(111111)
     return {
-      title: '推广红包',
+      title: '秀购随机红包',
       path: '/pages/web-view/web-view?id=' + this.data.packageId,
     }
   },

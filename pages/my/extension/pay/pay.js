@@ -4,7 +4,14 @@ Page({
     select:true,
     isShow:false,
     tipsContent:['系统将会在明天0点进行站内推广','每成功获取一个下级讲收到站内消息推送'],
-    tipsBtn:['我的推广','站内分享推广'],
+    tipsBtn:[
+      { name: '我的推广',btnType:""},
+      { name: '站外分享推广', btnType: ""}
+    ],
+    page:[
+      '',
+      '/pages/my/extension/extension'
+    ],
     result:false,
   },
   onLoad: function (options) {
@@ -28,6 +35,15 @@ Page({
   },
   payResultClicked(e){
     let index = e.currentTarget.dataset.index
+    if(index==1){
+      Tool.navigateTo(this.data.page[index])
+    } else if(index==3){
+      //Tool.navigationPop()
+      this.setData({
+        isShow:false
+      })
+    }
+    
   },
   payClicked(){
     let payType = this.data.total == 0 ? 1 : 2
@@ -77,6 +93,12 @@ Page({
       }
     })
   },
+  // onShareAppMessage: function (res) {
+  //   return {
+  //     title: '秀购随机红包',
+  //     path: '/pages/web-view/web-view?id=' + this.data.id,
+  //   }
+  // },
   onHide: function () {
 
   },

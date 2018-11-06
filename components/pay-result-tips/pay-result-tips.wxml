@@ -5,9 +5,10 @@
         <image src='/img/pay-right.png' mode='widthFix'></image>
         <view class='tips-title'>支付成功！</view>
         <view class='gray' wx:for='{{tipsContent}}' wx:key='{{index}}'>{{item}}</view>
-        <view class='font-26 red flexR-sb btn-sm-veiw'>
+        <view class='font-26 red flexR btn-sm-veiw'>
           <block wx:for='{{tipsBtn}}' wx:key='{{index}}'>
-            <view class='btn-sm flexR' bindtap='payResultClicked' data-index='{{index+1}}'>{{item}}</view>
+            <view class='btn-sm flexR' wx:if='{{!item.btnType}}' bindtap='payResultClicked' data-index='{{index+1}}'>{{item.name}}</view>
+            <button wx:else class='button-sm red font-26' open-type='{{item.btnType}}'>{{item.name}}</button>
           </block>
         </view>
       </block>
@@ -17,7 +18,7 @@
           <view class='gray'>请重新支付，以免订单超时</view>
           <view class='gray'>交易失败</view>
           <view class='btn flexR' bindtap='payResultClicked' data-index='3' wx:if='{{isContinue}}'>去支付</view>
-          <view class='btn flexRn' wx:else></view>
+          <view class='btn-sm-veiw  btn-sm flexR red' wx:else  data-index='3' bindtap='payResultClicked'>重新支付</view>
       </block>
     </view>
   </view>

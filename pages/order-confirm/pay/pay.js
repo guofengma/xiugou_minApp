@@ -6,7 +6,10 @@ Page({
       payList:'',
       isShow:false, // 显示支付结果
       tipsContent: ['已通知商家，会给你尽快发货', '请耐心等待'],
-      tipsBtn: ['返回首页', '查看订单'],
+      tipsBtn: [
+        { name: '返回首页', btnType: "" },
+        { name: '查看订单', btnType: "" }
+      ],
       result: false,
       payWayActive:[false,true,false],
       useAmount:[false,false],

@@ -3,10 +3,14 @@ Component({
   properties: {
     // visiable: Boolean,
     door:Number, // 1注册页面领取 2 产品页面
+    classNameIndex:Number,
   },
   data: {
     visiable:false,
     succ:false,
+    className:[
+      '', 'zoomIn-lt', 'zoomIn-rt', 'zoomIn-lb','zoomIn-rb'
+    ]
   },
   methods: {
     close() {
@@ -47,7 +51,7 @@ Component({
       r.addToQueue();
     },
     setReqData(req){
-      let datas = req.responseObject.data
+      let datas = req.responseObject.data || {}
       if (datas.phone) {
         datas.showPhone = datas.phone.slice(0, 3) + "*****" + datas.phone.slice(7)
       }

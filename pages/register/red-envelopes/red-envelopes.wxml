@@ -1,14 +1,28 @@
 <view class='red-envelopes'>
   <view class='flexR-sb font-26 topBar gray'>
     <text class=''>请选择一个红包</text>
-    <view class='flexR'>
+    <view class='flexR' catchtap='changeClicked'>
       <image-sub imgStyle='{{"width:32rpx"}}' imgSrc="{{'shuaxin-icon.png'}}"/>
       换一换
     </view>
   </view>
-  <view class='content flexR-sb' catchtap='btnClicked'>
-    <view wx:for='{{4}}' wx:key='{{index}}'>
+  <view class='content flexR-sb' >
+  <!--  wx:for='{{4}}' wx:key='{{index}}' -->
+    <view animation="{{animationData0}}" catchtap='btnClicked' data-index='1'>
       <view class='font-26 title flexR'>赠送红包</view>
+      <view class='font-26 ling flexR'>领</view>
+    </view>
+    <view animation="{{animationData1}}" catchtap='btnClicked' data-index='2'>
+      <view class='font-26 title flexR'>赠送红包</view>
+      <view class='font-26 ling flexR'>领</view>
+    </view>
+    <view animation="{{animationData2}}" catchtap='btnClicked' data-index='3'>
+      <view class='font-26 title flexR'>赠送红包</view>
+      <view class='font-26 ling flexR'>领</view>
+    </view>
+    <view animation="{{animationData3}}" catchtap='btnClicked' data-index='4'>
+      <view class='font-26 title flexR'>赠送红包</view>
+      <view class='font-26 ling flexR'>领</view>
     </view>
   </view>
   <view class='dismiss font-26 flexR' catchtap='dismiss'>
@@ -17,4 +31,4 @@
   <view class='code-btn gray flexR font-26' catchtap='goPage'>填写授权码</view>
 </view>
 
-<red-envelopes  id='redEnvelopes' door='1'/>
+<red-envelopes  id='redEnvelopes' door='1'  classNameIndex='{{activeIndex}}'/>

@@ -1,5 +1,5 @@
 <view class='model-view-bg ' wx:if="{{visiable}}">
-  <view class='container'>
+  <view class='container animated {{visiable? className[classNameIndex]:""}}'>
     <view class='red-envelopes-view'>
       <view class='red-info'>
         <view>{{datas.showPhone}}</view>
