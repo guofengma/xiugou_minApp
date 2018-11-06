@@ -1,4 +1,4 @@
-<view class='model-view-bg ' wx:if="{{visiable}}">
+<view class='model-view-bg ' wx:if="{{visiable}}" >
   <view class='container animated {{visiable? className[classNameIndex]:""}}'>
     <view class='red-envelopes-view'>
       <view class='red-info'>

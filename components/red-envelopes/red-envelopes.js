@@ -17,6 +17,9 @@ Component({
       this.setData({
         visiable:false
       })
+      if (this.data.door == 1) {
+        this.goPage()
+      }
     },
     givingPackageToUser(){
       let params = {
@@ -35,7 +38,7 @@ Component({
       r.addToQueue();
     },
     goPage(){
-      Tool.navigateTo('/pages/my/my-account/cash/cash')
+      Tool.redirectTo('/pages/my/my-account/cash/cash')
     },
     btnClick(){
       let params = {
@@ -46,8 +49,21 @@ Component({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         this.setReqData(req)
+        let that = this
+        if(this.data.door==1){
+          this.setReqData(req)
+          let that = this
+          if (this.data.door == 1) {
+            Event.emit('getLevel')
+            setTimeout(function () {
+              that.goPage()
+            }, 3000)
+          }
+        }
       };
-      //Tool.showErrMsg(r)
+      if(this.data.door==1){
+        Tool.showErrMsg(r)
+      }
       r.addToQueue();
     },
     setReqData(req){
@@ -60,5 +76,8 @@ Component({
         datas: datas
       })
     }
+  },
+  ready(){
+    
   }
 })

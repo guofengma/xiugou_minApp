@@ -394,6 +394,7 @@ Page({
     },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);
+      Event.off('getLevel', this.getLevel)
     },
     onShow:function (){
       this.setData({
