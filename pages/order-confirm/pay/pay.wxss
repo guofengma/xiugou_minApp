@@ -21,7 +21,7 @@
 
 .left {
     float: left;
-    width: 50%;
+    width: 30%;
     display: flex;
     justify-content: left
 }
@@ -31,14 +31,14 @@
 
 .right {
     float: right;
-    width: 50%;
+    width: 70%;
     text-align: right;
 }
 .right image{
   width: 44rpx;
 	height: 44rpx;
   vertical-align: middle;
-  margin-left: 30rpx;
+  margin-left: 20rpx;
   margin-top: -5rpx;
 }
 .clearfix {

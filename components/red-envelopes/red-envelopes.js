@@ -43,7 +43,7 @@ Component({
       r.successBlock = (req) => {
         this.setReqData(req)
       };
-      Tool.showErrMsg(r)
+      //Tool.showErrMsg(r)
       r.addToQueue();
     },
     setReqData(req){

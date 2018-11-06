@@ -113,7 +113,6 @@ Page({
     },
     onLoad: function () {
       Event.on('getLevel', this.getLevel,this)
-      this.findUserJobsByUserId();
       this.queryAdList(1,'轮播图片',(datas)=>{
         this.setData({
           imgUrls:datas
@@ -187,6 +186,7 @@ Page({
       Tool.didLogin(this)
       if (this.data.didLogin){
         // this.getLevelInfos()
+        this.findUserJobsByUserId();
         this.getLevel()
       }
     },

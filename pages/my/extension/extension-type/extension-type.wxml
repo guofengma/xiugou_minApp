@@ -6,7 +6,8 @@
   <view class='content'>
     <block wx:for='{{list}}' wx:key='{{index}}'>
       <view class='font-26 flexC {{item.userBuy? "":"disabledBg"}}' catchtap='itemClicked' data-index='{{index}}'>
-        {{item.name}}
+        {{item.name}}/推广周期{{item.cycle}}天
+        <view wx:if='{{!item.userBuy}}'>每人限购{{item.buyLimit}}份</view>
       </view>
     </block>
     <!-- <view class='whiteBg font-26 flexR' catchtap='itemClicked' data-num='50'>50元推广试用套餐/推广周期7天</view>

@@ -359,8 +359,11 @@ Page({
             middle = { id: 4, content: '退换' }
           } else{
             let index = this.data.afterSaleTypeArr.indexOf(afterSaleType[0])
-            if(index!=-1){
-              middle = { id: index+1, content: this.data.types[index] }
+            if (index != -1) {
+              let btnId = 0
+              // [4, 8, 16],// 退款 换货 退货 
+              btnId = afterSaleType[0] == 4 ? 1 : afterSaleType[0] == 16 ? 2:3
+              middle = { id: btnId, content: this.data.types[index] }
             }
           }
           
@@ -425,9 +428,10 @@ Page({
 
         page = '/pages/after-sale/exchange-goods/exchange-goods'
 
-      } else if (btnTypeId == 1) {
+      } else if (btnTypeId > 0 && btnTypeId <4) {
         params = ''
-        page = '/pages/after-sale/apply-sale-after/apply-sale-after?refundType=0'
+        // 0为仅退款 1为退货退款  2为换货
+        page = '/pages/after-sale/apply-sale-after/apply-sale-after?refundType=' + (btnTypeId-1)
 
       } else if (btnTypeId == 4) {   
         page = '/pages/after-sale/choose-after-sale/choose-after-sale' 
