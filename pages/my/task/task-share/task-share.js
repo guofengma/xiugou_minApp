@@ -85,8 +85,7 @@ Page({
   didLogin() {
     Tool.didLogin(this)
     this.getUserInfo();
-    this.jobIncrHits();
-    // this.checkUserExist();    
+    this.jobIncrHits();    
   },
   checkUserExist() {
     let params = {
@@ -156,6 +155,7 @@ Page({
   },
   // 刮刮卡
   getScratchCard() {
+    if (!this.data.scratchCode) return;
     let params = {
       scratchCardCode: this.data.scratchCode,
       openid: Storage.getterFor('openid'),
@@ -186,11 +186,18 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
+      this.setData({
+        showPhoneModal: false,
+        inputFocus: false
+      })
       if(req.responseObject.code == 10000) {
         _.checkScratchCodeStatus(); 
       }
     };
     Tool.showErrMsg(r)
     r.addToQueue();
+  },
+  toIndex() {
+    Tool.switchTab('/pages/index/index')
   }
 })
