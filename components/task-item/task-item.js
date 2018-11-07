@@ -62,9 +62,6 @@ Component({
         showCard: !this.data.showCard
       })
     },
-    emptyEvent() {
-      return;
-    },
     // 开启奖励
     openAward(e) {
       let dataset = e.currentTarget.dataset;
@@ -88,8 +85,8 @@ Component({
       
     },
     toDetail(e) {
-      let id = e.currentTarget.dataset.id;
-      Tool.navigateTo('/pages/my/task/task-detail/task-detail?jobId=' + id)
+      let data = e.currentTarget.dataset;
+      Tool.navigateTo(`/pages/my/task/task-detail/task-detail?jobId=${data.id}&status=${data.status}`)
     },
   },
   onShareAppMessage() {

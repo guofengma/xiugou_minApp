@@ -4,7 +4,6 @@ Page({
     jobs: []
   },
   onLoad(options) {
-    // this.getTask();
   },
   getTask() {
     let params = {
@@ -14,7 +13,6 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let data = req.responseObject.data || [];
-      console.log(data);
       this.setData({
         jobs: data
       })
