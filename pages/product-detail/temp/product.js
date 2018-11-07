@@ -75,11 +75,15 @@ const ProductFac = {
     Tool.showErrMsg(r)
     r.addToQueue();
   },
-  msgTipsClicked(e) { // 轮播右上角分享点击事件
+  msgTipsClicked(e, didLogin) { // 轮播右上角分享点击事件
     let n = parseInt(e.currentTarget.dataset.index)
     switch (n) {
       case 1:
-        Tool.navigateTo('/pages/my/information/information')
+        if (!didLogin) {
+          Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
+        } else {
+          Tool.navigateTo('/pages/my/information/information')
+        }
         break;
       case 2:
         Tool.switchTab('/pages/index/index')
