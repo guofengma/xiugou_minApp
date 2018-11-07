@@ -1,11 +1,7 @@
 <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
-<!--商品展示竖向  -->
-<!-- <import src='/components/product-info-column/product-info-column.wxml' /> -->
 
 <!-- 消息显示模板 -->
 <import src= "/components/msg-tips/msg-tips.wxml"/>
-
-<import src="../../libs/wxParse/wxParse.wxml" />
 
 <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%">
   <view class='prduct-detail-view'>
@@ -15,36 +11,16 @@
       <view class='msg-view fr' bindtap='msgClicked'></view>
       <template is="msg-tips" data="{{msgShow}}" /> 
     </view>
-    <view class='slider' style='height:{{imgheights[0]}}rpx;min-height:400rpx;'>
-      <!--广告轮播  -->
-      <view class='slider-nav boxSize'>
-        <!-- <image src='/img/back-icon.png' mode='widthFix' class='fl'></image> -->
-        <image src='/img/msg-icon.png' mode='widthFix' class='fr' bindtap='msgClicked'></image>
-        <template is="msg-tips" data="{{msgShow}}" /> 
-      </view>
-      <!-- <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
-        <video  src="{{productInfo.videoUrl}}"   bindplay='videoClicked' bindpause='videoPause' bindended='videoPause' show-fullscreen-btn='{{false}}' custom-cache="{{false}}" enable-progress-gesture='{{false}}'></video> 
-      </view> -->
-      <swiper autoplay="{{autoplay}}" interval='3000' bindchange='sliderChange'>
-        <block wx:for="{{imgUrls}}" wx:key="unique">
-          <swiper-item> 
-            <image src="{{item.smallImg}}" class="slide-image" bindload="imageLoad" bindtap='swiperImgCliked' data-index='{{index}}'/>
-          </swiper-item>
-        </block>
-      </swiper>
-      <view wx:if='{{imgUrls.length>0}}' class="activeIndex">
-        {{activeIndex+"/"+ imgUrls.length}}
-      </view>
-    </view>
+    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}'/>
     <view wx:if='{{proNavData}}' catchtap='goPage'>
       <product-promotion-info 
-     id="promotion"
-     bind:countdown="timeout" 
-     prop="{{proNavData}}"
-     promotionBg="{{'comming'}}" 
-     promotionDesc="{{promotionDesc}}"
-     from="normal"
-     promotionType="{{activityType}}" ></product-promotion-info>
+      id="promotion"
+      bind:countdown="timeout" 
+      prop="{{proNavData}}"
+      promotionBg="{{'comming'}}" 
+      promotionDesc="{{promotionDesc}}"
+      from="normal"
+      promotionType="{{activityType}}" />
     </view>
     <!-- 产品信息 -->
     <view class='prd-info boxSize'>
@@ -85,33 +61,10 @@
         <text wx:else>无售后服务</text>
       </view>
     </view>
-    <!--产品图文详情切换  -->
-    <view  class='prd-info-box'>
-      <view class='prd-info-line'>
-        <view class='first-line' bindtap='infoChoose' data-show='1'>
-          <text class='{{show? "red":""}}'>详情</text>
-        </view>
-        <view bindtap='infoChoose' data-show='2'>
-          <text class='{{!show? "red":""}}'>参数</text>
-        </view>
-      </view>
-      <view  class='prd-info-cell'>
-        <view wx:if='{{show}}'>
-          <template is="wxParse" data="{{wxParseData:article.nodes}}" />
-        </view>
-        <view wx:else class='table-view'>
-           <rich-text nodes="{{nodes}}" bindtap="tap"></rich-text>
-        </view>
-      </view>
-    </view>
-    <!--价格说明  -->
-    <view class='price-tips-box'>
-      <view class='price-tips'>价格说明</view>
-      <view class='gray'>
-        <view style='margin-bottom:10rpx'>划线价格：指商品的专柜价、吊牌价、正品零售价、厂商指导价或该商品的曾经展示过销售价等，并非原价，仅供参考</view> 
-        <view>未划线价格：指商品的实时价格，不因表述的差异改变性质。具体成交价格根据商品参加活动，或会员使用优惠券、积分等发生变化最终以订单结算页价格为准。</view>
-  </view>
-    </view>
+
+     <!--产品图文详情切换  -->
+    <product-infos article='{{article}}' nodes='{{nodes}}'/>
+   
     <!-- 详情页 tabar  -->
     <view class="bottom-bar flexR boxSize {{isIPhoneX.className}}" wx:if='{{productInfoList.onSale}}'>
       <view class='cart font-22 flexC' bindtap='cartClicked'>
@@ -130,7 +83,6 @@
     <!--置顶的按钮-->
     <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
       <image src='/img/top-icon.png' mode='widthFix'></image>
-      <!-- <view>顶部</view> -->
     </view>
   </view>
   

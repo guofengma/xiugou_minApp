@@ -7,7 +7,6 @@ Page({
     door:2,
     didLogin: false,
     imgUrls: [],
-    activeIndex: 1, // 轮播图片的index 
     show: true,
     msgShow: false,
     selectType: {}, // 是否选择了商品类型
@@ -38,7 +37,6 @@ Page({
     },
     showRegular: false,
     jumpCommonProductTimer: null, // 定时跳转普通商品倒计时
-    autoplay: true,
     screenShow: false, // 用于判断是否锁屏
   },
   onLoad: function (options) {
@@ -194,20 +192,6 @@ Page({
   didLogin() {
     Tool.didLogin(this)
   },
-  msgTipsClicked(e) {
-    let n = parseInt(e.currentTarget.dataset.index)
-    switch (n) {
-      case 1:
-        Tool.navigateTo('/pages/my/information/information')
-        break;
-      case 2:
-        Tool.switchTab('/pages/index/index')
-        break;
-      case 3:
-
-        break;
-    }
-  },
   makeSureOrder() {
     // 立即购买
     if (!this.data.didLogin) {
@@ -232,9 +216,6 @@ Page({
     let productInfo = this.data.productInfo
     r.successBlock = (req) => {
       let datas = req.responseObject.data
-      // datas.product.videoUrl && datas.productImgList.unshift({
-      //   videoUrl: datas.product.videoUrl
-      // })
       this.setData({
         imgUrls: datas.productImgList,
         productInfo: datas.product,
@@ -291,19 +272,6 @@ Page({
       this.makeSureOrder()
     }
   },
-  sliderChange(e) {
-    this.setData({
-      activeIndex: e.detail.current + 1,
-      autoplay: true
-    })
-  },
-  // 切换 tabar
-  infoChoose(e) {
-    let show = e.currentTarget.dataset.show == 1 ? true : false
-    this.setData({
-      show: show
-    })
-  },
   btnClicked(e) {
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
@@ -354,10 +322,6 @@ Page({
       path: '/pages/product-detail/discount-detail/discount-detail?code=' + this.data.prodCode,
       imageUrl: imgUrl
     }
-  },
-  wxParseTagATap: function (e) {
-    let link = e.currentTarget.dataset.src
-    console.log(link)
   },
   hiddenTips() {
     this.setData({

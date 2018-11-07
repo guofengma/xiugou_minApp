@@ -7,8 +7,6 @@ Page({
     door:1,
     didLogin: false,
     imgUrls: [],
-    activeIndex: 1, // 轮播图片的index 
-    show: true,
     msgShow: false,
     selectType: {}, // 是否选择了商品类型
     floorstatus: false, // 是否显示置顶的按钮
@@ -64,31 +62,6 @@ Page({
   toggleScreenShowStatus() {
     this.setData({
       screenShow: !this.data.screenShow
-    })
-  },
-  videoClicked() {
-    this.setData({
-      autoplay: false
-    })
-    // Tool.navigateTo('/pages/my/information/information')
-  },
-  videoPause() {
-    this.setData({
-      autoplay: true
-    })
-  },
-  swiperImgCliked(e) {
-    let index = e.currentTarget.dataset.index
-    let src = this.data.imgUrls[index].smallImg
-    let urls = []
-    this.data.imgUrls.forEach((item) => {
-      if (item.smallImg) {
-        urls.push(item.smallImg)
-      }
-    })
-    wx.previewImage({
-      current: src, // 当前显示图片的http链接
-      urls: urls// 需要预览的图片http链接列表
     })
   },
   //获取专题活动数据  JJP201810100001
@@ -197,20 +170,6 @@ Page({
   didLogin() {
     Tool.didLogin(this)
   },
-  msgTipsClicked(e) {
-    let n = parseInt(e.currentTarget.dataset.index)
-    switch (n) {
-      case 1:
-        Tool.navigateTo('/pages/my/information/information')
-        break;
-      case 2:
-        Tool.switchTab('/pages/index/index')
-        break;
-      case 3:
-
-        break;
-    }
-  },
   makeSureOrder() {
     // 立即购买
     if (!this.data.didLogin) {
@@ -294,19 +253,6 @@ Page({
       this.makeSureOrder()
     }
   },
-  sliderChange(e) {
-    this.setData({
-      activeIndex: e.detail.current + 1,
-      autoplay: true
-    })
-  },
-  // 切换 tabar
-  infoChoose(e) {
-    let show = e.currentTarget.dataset.show == 1 ? true : false
-    this.setData({
-      show: show
-    })
-  },
   btnClicked(e) {
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
@@ -357,10 +303,6 @@ Page({
       path: '/pages/product-detail/seckill-detail/seckill-detail?code=' + this.data.prodCode,
       imageUrl: imgUrl
     }
-  },
-  wxParseTagATap: function (e) {
-    let link = e.currentTarget.dataset.src
-    console.log(link)
   },
   hiddenTips() {
     this.setData({

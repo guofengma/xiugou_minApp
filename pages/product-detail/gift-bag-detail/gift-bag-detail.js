@@ -7,7 +7,6 @@ Page({
     ysf: { title: '礼包详情' },
     didLogin: false,
     imgUrls: [],
-    activeIndex: 1, // 轮播图片的index 
     show: true,
     msgShow: false,
     selectType: {}, // 是否选择了商品类型
@@ -75,20 +74,6 @@ Page({
   didLogin() {
     Tool.didLogin(this)
     Tool.isIPhoneX(this)
-  },
-  msgTipsClicked(e) {
-    let n = parseInt(e.currentTarget.dataset.index)
-    switch (n) {
-      case 1:
-        Tool.navigateTo('/pages/my/information/information')
-        break;
-      case 2:
-        Tool.switchTab('/pages/index/index')
-        break;
-      case 3:
-
-        break;
-    }
   },
   giftBagClicked() {
     // 立即购买
@@ -223,20 +208,6 @@ Page({
       selectType: e.detail
     })
     this.giftBagClicked()
-  },
-  sliderChange(e) {
-    this.setData({
-      // activeIndex: e.detail.current + 1,
-      activeIndex: e.detail.current + 1,
-      autoplay:true,
-    })
-  },
-  // 切换 tabar
-  infoChoose(e) {
-    let show = e.currentTarget.dataset.show == 1 ? true : false
-    this.setData({
-      show: show
-    })
   },
   btnClicked(e) {
     if (this.data.dismiss) return

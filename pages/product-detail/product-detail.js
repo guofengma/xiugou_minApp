@@ -6,7 +6,6 @@ Page({
   data: {
     didLogin:false,
     imgUrls: [],
-    activeIndex:1, // 轮播图片的index 
     show:true,
     msgShow:false,
     selectType:{}, // 是否选择了商品类型
@@ -25,18 +24,6 @@ Page({
     }],
     size:0,
     userInfos:{},
-    autoplay:true,
-  },
-  videoClicked(){
-    this.setData({
-      autoplay: false
-    })
-    // Tool.navigateTo('/pages/my/information/information')
-  },
-  videoPause() {
-    this.setData({
-      autoplay: true
-    })
   },
   onLoad: function (options) {
     this.setData({
@@ -66,42 +53,11 @@ Page({
   refreshMemberInfoNotice() {
     Tool.getUserInfos(this)
   },
-  imageLoad(e) {
-    Tool.getAdaptHeight(e, this)
-  },
   didLogin() {
     Tool.didLogin(this)
     this.refreshMemberInfoNotice()
     if (!this.data.userInfos.upUserid){
       this.selectComponent('#redEnvelopes').btnClick();
-    }
-  },
-  swiperImgCliked(e){
-    let index = e.currentTarget.dataset.index
-    let src = this.data.imgUrls[index].smallImg
-    let urls = []
-    this.data.imgUrls.forEach((item)=>{
-      if (item.smallImg) {
-        urls.push(item.smallImg)
-      }
-    })
-    wx.previewImage({
-      current: src, // 当前显示图片的http链接
-      urls: urls// 需要预览的图片http链接列表
-    })
-  },
-  msgTipsClicked(e){
-    let n = parseInt(e.currentTarget.dataset.index) 
-    switch (n) {
-      case 1:
-        Tool.navigateTo('/pages/my/information/information')
-        break;
-      case 2:
-        Tool.switchTab('/pages/index/index')
-        break;
-      case 3:
-        
-        break;  
     }
   },
   setStoragePrd(params,index){
@@ -154,9 +110,6 @@ Page({
             typeDesc: datas.activityType == 1 ? '秒杀价':"起拍价"
           },
         })
-        // if (this.data.door == 100) {
-        //   this.goPage()
-        // }
        this.selectComponent('#promotion').init();
       }
     };
@@ -223,9 +176,6 @@ Page({
     r.successBlock = (req) => {
       let datas = req.responseObject.data || {}
       datas.priceLable = datas.priceType == 1 ? '原价' : datas.priceType == 2 ? "拼店价" : this.data.userInfos.levelName+"价"
-      // datas.product.videoUrl && datas.productImgList.unshift({
-      //   videoUrl: datas.product.videoUrl
-      // })
       this.setData({
         imgUrls: datas.productImgList,
         productInfo: datas.product,
@@ -284,19 +234,6 @@ Page({
       this.makeSureOrder()
     }
   },
-  sliderChange(e){
-    this.setData({
-      activeIndex: e.detail.current+1,
-      autoplay:true
-    })
-  },
-  // 切换 tabar
-  infoChoose(e){
-    let show = e.currentTarget.dataset.show ==1 ?  true:false
-    this.setData({
-      show: show
-    })
-  },
   cartClicked(){
     Tool.switchTab('/pages/shopping-cart/shopping-cart')
   },
@@ -310,7 +247,6 @@ Page({
     })
   },
   scroll: function (e, res) {
-    
     this.setData({
       msgShow: false
     });
