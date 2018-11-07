@@ -95,7 +95,7 @@ Page({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let data = req.responseObject.data || {};
-        Tool.navigateTo('/pages/my/task/task-detail/task-detail?jobId=' + data.id)
+        Tool.navigateTo(`/pages/my/task/task-detail/task-detail?jobId=${data.id}&status=1`)
       };
       Tool.showErrMsg(r)
       r.addToQueue();
