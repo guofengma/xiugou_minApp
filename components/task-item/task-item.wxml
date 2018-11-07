@@ -41,7 +41,7 @@
     <view class='task-status' wx:else>
       任务倒计时： 已结束
     </view>
-    <view class="task-delay flexR-sb" wx:if="{{item.status==3}}">
+    <view class="task-delay flexR-sb" wx:if="{{item.status==2 || item.status==3}}">
         <image class='redpackage' src='/img/redpackage.png'></image> 
         <text>待开奖</text> 
     </view>
