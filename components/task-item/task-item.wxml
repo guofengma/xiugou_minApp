@@ -7,7 +7,7 @@
     <view class='task-detail' wx:if="{{showDetail}}">
       <view class='task-desc'>任务说明：{{item.remarks}}</view>
       <view class='task-start'>任务开始时间：{{startTime}}</view>
-      <view class='task-info-wrap' catchtap='toDetail' data-id="{{item.jobId}}" data-status="{{item.status}}" id="wrap">
+      <view class='task-info-wrap' catchtap='toDetail' data-id="{{item.id}}" data-status="{{item.status}}" id="wrap">
         <view class='task-info-detail'>
         <!-- 任务状态 status: 1进行中 2已结束 -->
           <view class='task-status' wx:if="{{item.status == 1}}">
