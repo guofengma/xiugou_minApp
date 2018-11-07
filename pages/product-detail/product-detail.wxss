@@ -53,35 +53,6 @@
   width: 90rpx;
 }
 
-/*topbar  */
-.topbar image{
-  width: 76rpx;
-  height: 76rpx; 
-}
-.topbar{
-  height: 90rpx;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 9999;
-  border-bottom: 1rpx solid #eee;
-  border-top: 1rpx solid #eee;
-}
-.msg-view{
-  width: 100rpx;
-  height: 100%;
-  position: absolute;
-  right: 0rpx;
-}
-.msg-view:after{ 
-  content:"";
-  width: 8rpx;
-  height: 40rpx;
-  position: absolute;
-  border-left: 8rpx dotted #222;
-  right: 50rpx;
-  top:25rpx;
-}
 
 .cell-name{
   color: #999;

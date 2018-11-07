@@ -26,7 +26,6 @@ Page({
     isShowGiftTips:false, //是否显示礼包升级提示
     size: 0,
     dismiss:false, // 能否可以购买礼包
-    autoplay:true, 
   },
   onLoad: function (options) {
     this.setData({
