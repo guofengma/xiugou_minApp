@@ -10,9 +10,10 @@ Page({
     inviteId: '',
     jobId: '',
     isNewUser: false,
+    tableId: '',
     scratchCard: {
-      status: 1, //是否领取 1. 是 2.否
-      typeStatus: 1
+      // status: 1, //是否领取 1. 是 2.否
+      // typeStatus: 1
     },//刮刮卡信息
     scratchCode: '',
     deadline: ''
@@ -42,7 +43,8 @@ Page({
     r.successBlock = (req) => {
       let data = req.responseObject.data || {};
       this.setData({
-        scratchCode: data.scratchCode
+        scratchCode: data.scratchCode,
+        tableId: data.id,
       });
       this.checkScratchCodeStatus();
     };
@@ -53,8 +55,9 @@ Page({
     let params = {
       url: Operation.checkScratchCodeStatus,
       openid: this.data.userInfos.openid,
-      code: this.data.scratchCode,
-      requestMethod: 'GET'
+      scratchCardCode: this.data.scratchCode,
+      tableId: this.data.tableId,
+      type: 1 // 1.秀值
     };
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
@@ -115,7 +118,9 @@ Page({
     })
   },
   // 显示手机号填写弹窗
-  toggleModalShow() {
+  toggleModalShow(e) {
+    const dataset = e.currentTarget.dataset;
+    if(dataset.status == 1) return;
     let phone = this.data.userInfos.phone || this.data.phone;
     // 如果开始获取到手机了就不需要填了
     if(phone) {
@@ -152,11 +157,12 @@ Page({
   // 刮刮卡
   getScratchCard() {
     let params = {
-      code: this.data.scratchCode,
+      scratchCardCode: this.data.scratchCode,
       openid: Storage.getterFor('openid'),
       url: Operation.getScratchCard,
+      tableId: this.data.tableId,
+      type: 1,
       reqName: '获取刮刮卡',
-      requestMethod: 'GET'
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {

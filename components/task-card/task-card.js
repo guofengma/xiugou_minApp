@@ -9,6 +9,10 @@ Component({
       type: String,
       value: ''
     },
+    desc: {
+      type: String,
+      value: ''
+    },
     card: {
       type: Object,
       value: {}
