@@ -16,13 +16,6 @@ Page({
     productTypeList: [],
     productBuyCount: 1, //商品购买数量
     priceList: [],
-    nodes: [{
-      name: "table",
-      attrs: {
-        class: "table"
-      },
-      children: [],
-    }],
     proNavData: {},
     promotionDesc: {
       commingDesc: '',
@@ -41,12 +34,10 @@ Page({
     screenShow: false, // 用于判断是否锁屏
   },
   onLoad: function (options) {
-    
     this.setData({
       productId: options.productId ||1,
       prodCode: options.code
     })
-    
     this.didLogin()
     this.getTopicActivityData(this.data.prodCode);    
     Tool.isIPhoneX(this)
@@ -58,9 +49,6 @@ Page({
   },
   onHide() {
     this.toggleScreenShowStatus();
-  },
-  msgTipsClicked(e) { // 轮播右上角分享点击事件
-    ProductFac.msgTipsClicked(e)
   },
   toggleScreenShowStatus() {
     this.setData({
@@ -115,10 +103,6 @@ Page({
   refactorProductsData(originData = []) {
     let newData = {};
     originData.forEach(function (item) {
-      // newData[item.specName] = {};
-      // newData[item.specName].id = item.id;
-      // newData[item.specName].specName = item.specName;
-      // newData[item.specName].specValue = item.specValue;
       newData[item.specName] = [];
       newData[item.specName].push({
         id: item.id,
@@ -218,9 +202,9 @@ Page({
       });
     }
   },
-  msgClicked() {
+  hiddenTips() {
     this.setData({
-      msgShow: !this.data.msgShow
+      msgShow: false
     })
   },
   onShareAppMessage: function (res) {
@@ -228,9 +212,6 @@ Page({
     this.setData({
       msgShow: !this.data.msgShow
     })
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-    }
     let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img : ''
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
@@ -238,11 +219,6 @@ Page({
       path: '/pages/index/index?type=1&id=' + this.data.prodCode,
       imageUrl: imgUrl
     }
-  },
-  hiddenTips() {
-    this.setData({
-      msgShow: false
-    })
   },
   onUnload: function () {
     Event.off('didLogin', this.didLogin);

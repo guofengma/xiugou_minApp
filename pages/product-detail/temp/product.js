@@ -28,8 +28,15 @@ const ProductFac = {
         productId: datas.product.id ? datas.product.id : this.page.data.productId
       })
       // 渲染表格
+      let tbody = [{
+        name:  "table",
+        attrs: {
+          class: "table"
+        },
+        children: [],
+      }]
       let tr = []
-      let tbody = this.page.data.nodes
+      // let tbody = this.page.data.nodes
       for (let i = 0; i < datas.paramList.length; i++) {
         tr.push(
           {

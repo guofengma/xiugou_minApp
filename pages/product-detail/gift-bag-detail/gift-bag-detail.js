@@ -43,9 +43,6 @@ Page({
   onShow: function () {
     this.getGiftBagDetail()
   },
-  msgTipsClicked(e) { // 轮播右上角分享点击事件
-    ProductFac.msgTipsClicked(e)
-  },
   swiperImgCliked(e) {
     let index = e.currentTarget.dataset.index
     let src = this.data.imgUrls[index].smallImg
@@ -212,11 +209,6 @@ Page({
         floorstatus: false
       });
     }
-  },
-  msgClicked() {
-    this.setData({
-      msgShow: !this.data.msgShow
-    })
   },
   onShareAppMessage: function (res) {
     let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode

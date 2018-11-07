@@ -1,0 +1,8 @@
+<!-- 消息显示模板 -->
+<import src= "/components/msg-tips/msg-tips.wxml"/>
+
+<view class='topbar flexR whiteBg' wx:if='{{floorstatus}}' >
+  <image src='{{imgUrl}}' ></image>
+  <view class='msg-view fr' bindtap='msgClicked'></view>
+  <template is="msg-tips" data="{{msgShow}}" /> 
+</view>

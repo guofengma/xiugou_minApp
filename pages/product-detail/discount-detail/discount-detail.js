@@ -7,7 +7,6 @@ Page({
     door:2,
     didLogin: false,
     imgUrls: [],
-    show: true,
     msgShow: false,
     selectType: {}, // 是否选择了商品类型
     floorstatus: false, // 是否显示置顶的按钮
@@ -16,13 +15,6 @@ Page({
     productTypeList: [],
     productBuyCount: 1, //商品购买数量
     priceList: [],
-    nodes: [{
-      name: "table",
-      attrs: {
-        class: "table"
-      },
-      children: [],
-    }],
     proNavData: {},
     promotionDesc: {
       commingDesc: '',
@@ -58,9 +50,6 @@ Page({
   },
   onHide() {
     this.toggleScreenShowStatus();
-  },
-  msgTipsClicked(e) { // 轮播右上角分享点击事件
-    ProductFac.msgTipsClicked(e)
   },
   toggleScreenShowStatus(){
     this.setData({
@@ -169,9 +158,6 @@ Page({
       this.btnClicked(e);
     }
   },
-  imageLoad(e) {
-    Tool.getAdaptHeight(e, this)
-  },
   didLogin() {
     Tool.didLogin(this)
   },
@@ -204,7 +190,6 @@ Page({
     })
   },
   scroll: function (e, res) {
-
     this.setData({
       msgShow: false
     });
@@ -218,9 +203,9 @@ Page({
       });
     }
   },
-  msgClicked() {
+  hiddenTips() {
     this.setData({
-      msgShow: !this.data.msgShow
+      msgShow: false
     })
   },
   onShareAppMessage: function (res) {
@@ -228,10 +213,6 @@ Page({
     this.setData({
       msgShow: !this.data.msgShow
     })
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
     let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img : ''
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
@@ -239,11 +220,6 @@ Page({
       path: '/pages/index/index?type=2&id=' + this.data.prodCode,
       imageUrl: imgUrl
     }
-  },
-  hiddenTips() {
-    this.setData({
-      msgShow: false
-    })
   },
   onUnload: function () {
     Event.off('didLogin', this.didLogin);

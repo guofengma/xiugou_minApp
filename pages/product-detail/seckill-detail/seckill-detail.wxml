@@ -8,11 +8,7 @@
 <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%">
   <view class='prduct-detail-view'>
     <!--topbar  -->
-    <view class='topbar flexR' wx:if='{{floorstatus}}' >
-      <image src='{{productInfo.imgUrl}}' ></image>
-      <view class='msg-view fr' bindtap='msgClicked'></view>
-      <template is="msg-tips" data="{{msgShow}}" /> 
-    </view>
+    <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}'/>
     <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}'/>
     <product-promotion-info 
      id="promotion"

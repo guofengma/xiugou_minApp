@@ -15,13 +15,6 @@ Page({
     productTypeList:[],
     productBuyCount:1, //商品购买数量
     priceList:[],
-    nodes:  [{
-      name:  "table",
-      attrs:  {
-        class: "table"
-      },
-      children: [],
-    }],
     size:0,
     userInfos:{},
   },
@@ -55,9 +48,6 @@ Page({
   },
   refreshMemberInfoNotice() {
     Tool.getUserInfos(this)
-  },
-  msgTipsClicked(e) { // 轮播右上角分享点击事件
-    ProductFac.msgTipsClicked(e)
   },
   didLogin() {
     Tool.didLogin(this)
@@ -203,11 +193,6 @@ Page({
         floorstatus: false
       });
     }
-  },
-  msgClicked(){
-    this.setData({
-      msgShow: !this.data.msgShow
-    })
   },
   counterInputOnChange(e){
     this.setData({
