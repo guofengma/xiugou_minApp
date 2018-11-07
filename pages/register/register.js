@@ -42,7 +42,7 @@ Page({
   sweepCode(id){ // 判断邀请码是否过期等
     let params = {
       code: id,
-      identity: Storage.getd(),
+      identity: Storage.getWxOpenid(),
       reqName: '邀请码是否过期',
       url: Operation.sweepCode
     }
