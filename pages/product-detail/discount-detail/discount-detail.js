@@ -1,13 +1,12 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
-
+import ProductFac from '../temp/product.js'
 Page({
   data: {
     door:2,
     didLogin: false,
     imgUrls: [],
-    activeIndex: 1, // 轮播图片的index 
     show: true,
     msgShow: false,
     selectType: {}, // 是否选择了商品类型
@@ -38,17 +37,14 @@ Page({
     },
     showRegular: false,
     jumpCommonProductTimer: null, // 定时跳转普通商品倒计时
-    autoplay: true,
     screenShow: false, // 用于判断是否锁屏
   },
   onLoad: function (options) {
     this.setData({
-      // productId: options.productId || 1,
       prodCode: options.code
     })
     this.didLogin()
-    this.getTopicActivityData(this.data.prodCode);    
-    // this.requestFindProductByIdApp()
+    this.getTopicActivityData(this.data.prodCode);
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -66,31 +62,6 @@ Page({
   toggleScreenShowStatus(){
     this.setData({
       screenShow: !this.data.screenShow
-    })
-  },
-  videoClicked() {
-    this.setData({
-      autoplay: false
-    })
-    // Tool.navigateTo('/pages/my/information/information')
-  },
-  videoPause() {
-    this.setData({
-      autoplay: true
-    })
-  },
-  swiperImgCliked(e) {
-    let index = e.currentTarget.dataset.index
-    let src = this.data.imgUrls[index].smallImg
-    let urls = []
-    this.data.imgUrls.forEach((item) => {
-      if (item.smallImg) {
-        urls.push(item.smallImg)
-      }
-    })
-    wx.previewImage({
-      current: src, // 当前显示图片的http链接
-      urls: urls// 需要预览的图片http链接列表
     })
   },
   //获取专题活动数据  JJP201810100001
@@ -121,9 +92,16 @@ Page({
         proNavData: data,
         specIds: specIds,
         // productSpec: productSpec
-        jumpCommonProductTimer: jumpTimer
+        jumpCommonProductTimer: jumpTimer,
+        productId: data.productId
       })
-      this.requestFindProductByIdApp(data.productId, productSpec)
+      let callBack = ()=>{
+        this.setData({
+          productSpec: productSpec, // 规格描述
+        })
+      }
+      ProductFac.requestFindProductByIdApp(this, callBack)
+      //this.requestFindProductByIdApp(data.productId, productSpec)
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
       data.id && this.selectComponent('#promotion').init();
     };
@@ -194,20 +172,6 @@ Page({
   didLogin() {
     Tool.didLogin(this)
   },
-  msgTipsClicked(e) {
-    let n = parseInt(e.currentTarget.dataset.index)
-    switch (n) {
-      case 1:
-        Tool.navigateTo('/pages/my/information/information')
-        break;
-      case 2:
-        Tool.switchTab('/pages/index/index')
-        break;
-      case 3:
-
-        break;
-    }
-  },
   makeSureOrder() {
     // 立即购买
     if (!this.data.didLogin) {
@@ -221,88 +185,11 @@ Page({
     }
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + '&type=' + this.data.door)
   },
-  requestFindProductByIdApp(productId, productSpec) {
-    let params = {
-      id: productId,
-      requestMethod: 'GET',
-      reqName: '获取商品详情页',
-      url: Operation.findProductByIdApp
-    }
-    let r = RequestFactory.wxRequest(params);
-    let productInfo = this.data.productInfo
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
-      // datas.product.videoUrl && datas.productImgList.unshift({
-      //   videoUrl: datas.product.videoUrl
-      // })
-      this.setData({
-        imgUrls: datas.productImgList,
-        productInfo: datas.product,
-        productInfoList: datas,
-        priceList: datas.priceList, // 价格表
-        productSpec: productSpec, // 规格描述
-      })
-      // 渲染表格
-      let tr = []
-      let tbody = this.data.nodes
-      for (let i = 0; i < datas.paramList.length; i++) {
-        tr.push(
-          {
-            name: "tr",
-            attrs: { class: "tr" },
-            children: [ {
-              name: "td",
-              attrs: { class: 'td frist-td' },
-              children: [{
-                type: "text",
-                text: datas.paramList[i].paramName
-              }]
-            },
-            {
-              name: "td",
-              attrs: { class: 'td td2' },
-              children: [{
-                type: "text",
-                text: datas.paramList[i].paramValue
-              }]
-            }
-            ]
-          }
-
-        )
-      }
-      tbody[0].children = tr
-      this.setData({
-        nodes: tbody
-      })
-      let html = datas.product.content
-      WxParse.wxParse('article', 'html', html, this, 5);
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
   typeSubClicked(e) {
     this.setData({
       selectType: e.detail
     })
-    if (this.data.selectType.typeClicked == 1) {
-      this.addToShoppingCart(1)
-    } else if (this.data.selectType.typeClicked == 2) {
-      this.makeSureOrder()
-    }
-  },
-  sliderChange(e) {
-    this.setData({
-      activeIndex: e.detail.current + 1,
-      autoplay: true
-    })
-  },
-  // 切换 tabar
-  infoChoose(e) {
-    let show = e.currentTarget.dataset.show == 1 ? true : false
-    this.setData({
-      show: show
-    })
+    this.makeSureOrder()
   },
   btnClicked(e) {
     let n = parseInt(e.currentTarget.dataset.key)
@@ -333,11 +220,6 @@ Page({
       msgShow: !this.data.msgShow
     })
   },
-  counterInputOnChange(e) {
-    this.setData({
-      productBuyCount: e.detail
-    })
-  },
   onShareAppMessage: function (res) {
     // 这里要把下拉列表给隐藏掉  不然分享出去的图片里会显示列表下拉的状态
     this.setData({
@@ -354,10 +236,6 @@ Page({
       path: '/pages/product-detail/discount-detail/discount-detail?code=' + this.data.prodCode,
       imageUrl: imgUrl
     }
-  },
-  wxParseTagATap: function (e) {
-    let link = e.currentTarget.dataset.src
-    console.log(link)
   },
   hiddenTips() {
     this.setData({

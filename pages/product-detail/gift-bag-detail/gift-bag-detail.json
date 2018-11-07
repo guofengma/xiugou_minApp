@@ -2,6 +2,8 @@
   "navigationBarTitleText": "礼包详情",
   "usingComponents": {
     "product-specification": "/components/gift-bag-specification/gift-bag-specification",
-    "tips-info": "/components/tips-info/tips-info"
+    "tips-info": "/components/tips-info/tips-info",
+    "swiper-product": "/pages/product-detail/temp/swiper/swiper-product",
+    "product-infos": "/pages/product-detail/temp/product-infos/product-infos"
   }
 }

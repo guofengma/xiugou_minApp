@@ -8,7 +8,7 @@ Component({
   data: {
     userInfos:{},
     ysf: { title: '售后页面' },
-    phone:'10086'
+    phone:'400-9696-365'
   },
 
   /**

@@ -1,0 +1,28 @@
+  <import src="/libs/wxParse/wxParse.wxml" />
+
+  <view  class='prd-info-box whiteBg'>
+    <view class='prd-info-line'>
+      <view class='first-line' bindtap='infoChoose' data-show='1'>
+        <text class='{{show? "red":""}}'>详情</text>
+      </view>
+      <view bindtap='infoChoose' data-show='2'>
+        <text class='{{!show? "red":""}}'>参数</text>
+      </view>
+    </view>
+    <view  class='prd-info-cell'>
+      <view wx:if='{{show}}'>
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      </view>
+      <view wx:else class='table-view'>
+        <rich-text nodes="{{nodes}}" bindtap="tap"></rich-text>
+      </view>
+    </view>
+  </view>
+  <!--价格说明  -->
+  <view class='price-tips-box whiteBg'>
+    <view class='price-tips'>价格说明</view>
+    <view class='gray'>
+      <view style='margin-bottom:10rpx'>划线价格：指商品的专柜价、吊牌价、正品零售价、厂商指导价或该商品的曾经展示过销售价等，并非原价，仅供参考</view> 
+      <view>未划线价格：指商品的实时价格，不因表述的差异改变性质。具体成交价格根据商品参加活动，或会员使用优惠券、积分等发生变化最终以订单结算页价格为准。</view>
+    </view>
+  </view>

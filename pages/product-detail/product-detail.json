@@ -4,6 +4,8 @@
     "product-promotion-info": "/components/product-promotion-info/product-promotion-info",
     "product-specification": "/components/product-specification/product-specification",
     "tips-info": "/components/tips-info/tips-info",
-    "red-envelopes": "/components/red-envelopes/red-envelopes"
+    "red-envelopes": "/components/red-envelopes/red-envelopes",
+    "swiper-product": "/pages/product-detail/temp/swiper/swiper-product",
+    "product-infos": "/pages/product-detail/temp/product-infos/product-infos"
   }
 }

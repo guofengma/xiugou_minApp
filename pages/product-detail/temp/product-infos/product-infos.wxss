@@ -1,0 +1,84 @@
+@import "/css/app";
+.table-view{
+  text-align: center;
+  padding:30rpx;
+}
+.table {
+  width: 99%;
+  border: 1rpx solid #ddd;
+  border-collapse:collapse;
+  font-size: 24rpx;
+  table-layout:fixed;
+  white-space: normal;
+  word-break:break-all;
+}
+.table .td.frist-td{
+  background: #F8F8F8;
+  width: 24%;
+  color: #222;
+  overflow: hidden
+}
+.table .td2{
+  width: 76%;
+  color: #999999;
+  height: 80rpx;
+  text-align: left;
+  padding-left: 30rpx;
+  overflow: hidden
+}
+.table .tr{
+  border: 1rpx solid #ddd;
+}
+
+.prd-info-line{
+  font-size: 30rpx;
+  border-top: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+}
+.prd-info-line>view{
+  width: 50%;
+  display: inline-block;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.first-line{
+  position: relative;
+}
+.first-line:after{ 
+  content:"";
+  width: 2rpx;
+  height: 50rpx;
+  position: absolute;
+  background: #eee;
+  right: 0;
+  top: 15rpx;
+}
+.prd-info-line text{
+  display: inline-block;
+  height: 100%;
+  box-sizing: border-box;
+  line-height: 80rpx;
+  border-bottom: 6rpx solid transparent;
+  padding: 0 16rpx;
+}
+.prd-info-line text.red{
+  border-bottom: 6rpx solid;
+}
+.prd-info-cell>view{
+  min-height: 400rpx;
+}
+.price-tips-box{
+  font-size: 26rpx;
+  padding:0  30rpx;
+  margin-top: 20rpx;
+}
+.price-tips{
+  font-size: 30rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.price-tips-box .gray{
+  padding: 30rpx 0;
+}
