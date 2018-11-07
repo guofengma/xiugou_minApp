@@ -100,13 +100,14 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      let callBack = () => {
+      // let callBack = () => {
         Storage.setMemberId(req.responseObject.data.id)
         Tool.loginOpt(req)
         if (this.data.urlFrom) Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
-        else Tool.switchTab('/pages/index/index')
-      }
-      Tool.showSuccessToast('注册成功', callBack)
+        else Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
+        // Tool.switchTab('/pages/index/index')
+      // }
+      // Tool.showSuccessToast('注册成功', callBack)
     }
     Tool.showErrMsg(r)
     r.addToQueue();

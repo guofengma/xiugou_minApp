@@ -15,3 +15,6 @@
   padding: 30rpx;
   border-top: 1rpx solid #ddd;
 }
+.amend-view{
+  margin-bottom: 20rpx;
+}

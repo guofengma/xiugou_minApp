@@ -21,14 +21,22 @@
   background-color: #eeeeee;
   margin-top: 50rpx;
 }
-
-.btn-sm{
+.btn-sm-veiw{
+  margin: 50rpx 0 35rpx 0;
+  width: 74%
+}
+.btn-sm,.button-sm{
   width: 186rpx;
 	height: 60rpx;
 	border-radius: 10rpx;
 	border:  1rpx solid #d51243;
+  background: transparent;
 }
-.btn-sm-veiw{
-  margin: 50rpx 0 35rpx 0;
-  width: 74%
+
+.button-sm{
+ height: 64rpx;
+  padding: 0
+}
+.btn-sm-veiw>view:last-child{
+  margin-left: 30rpx;
 }

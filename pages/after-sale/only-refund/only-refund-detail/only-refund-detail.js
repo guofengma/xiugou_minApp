@@ -7,19 +7,20 @@ Page({
     state:'',
     datas:[],
     stateInfo:[
-      "", "申请中", "商家已同意您的退款请求", "商家拒绝您的退款请求", '退款中', '退款中','退款成功','已关闭','超时处理'
+      "", "商家审核中", "商家已同意您的退款请求", "商家拒绝退款", '商家退款中', '商家退款中','退款成功','已关闭','超时处理'
     ]
   },
   onLoad: function (options) {
     this.setData({
-      list: Storage.getInnerOrderList() || ''
+      list: Storage.getInnerOrderList() || '',
+      returnProductId: options.returnProductId
     })
-    this.findReturnProductById(options.returnProductId)
+    this.findReturnProductById()
   },
   findReturnProductById(returnProductId) {
     let list = this.data.list
     let params = {
-      returnProductId: returnProductId || this.data.list.returnProductId,
+      returnProductId: this.data.returnProductId || this.data.list.returnProductId,
       reqName: '查看退款退货换货情况',
       url: Operation.findReturnProductById
     }
@@ -33,6 +34,8 @@ Page({
       } else if (datas.status == 3){
         datas.statusName = '商家拒绝你的请求' 
         datas.showRefundTime = Tool.formatTime(datas.refuseTime)
+      } else if (datas.status == 1) {
+        datas.showRefundTime = datas.applyTime
       }
       this.setData({
         datas: datas

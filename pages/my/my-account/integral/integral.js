@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation, Config} = global;
+let { Tool, RequestFactory, Operation, Config, Storage} = global;
 Page({
     data: {
       account:'',
@@ -13,6 +13,8 @@ Page({
         { name: '注册赠送', icon:'zczs-icon.png'},
         { name: '活动赠送', icon: 'hdzs-icon.png' },
         { name: '商品购买抵扣', icon: 'xdxf-icon.png' },
+        { name: '兑换一元券', icon: 'xdxf-icon.png' },
+        { name: '签到', icon: 'zczs-icon.png' },
       ]
     },
     //获取数据
@@ -70,7 +72,7 @@ Page({
     onLoad: function (options) {
       this.getData();
       this.setData({
-        account: options.query || 0,
+        account: options.query || Storage.getUserAccountInfo().userScore || '0.00',
         imgBaseUrl: Config.imgBaseUrl
       })
     },

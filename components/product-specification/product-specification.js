@@ -10,6 +10,7 @@ Component({
     commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包 5 换货
     exchangeNum:Number, // 换货的数量
     specIds: Array,
+    productPriceId:Number, // 换货的价格id
   },
   data: {
     visiable:false,
@@ -61,10 +62,10 @@ Component({
       stockList.forEach((item)=>{
         totalStock += item.stock
         // 换货的时候 去掉价格不等的清单
-        if (this.data.commodityType == 5 & item.price == this.data.price){
+        // 可以更换同价格的其他型号 或者 同型号的比购买时候低的同一种型号（同型号的价格低于或者等于购买时的价格）
+        if (this.data.commodityType == 5 && (item.id == this.data.productPriceId || item.price == this.data.price) ){
           priceList.push(item)
         }
-        console.log(this.data.commodityType, item.specIds,this.data.specIds)
         if ((this.data.commodityType == 2 || this.data.commodityType == 3) && item.specIds == this.data.specIds.join(',')){
           priceList.push(item)
         }
@@ -81,16 +82,18 @@ Component({
       }) 
       // 渲染提示语
       this.getTipsSpec()
-      //this.initTypeSelected()
+      // 如果是降价拍和秒杀 默认都选中
+      if (this.data.commodityType == 2 || this.data.commodityType == 3){
+        this.initTypeSelected()
+      }
     },
-    initTypeSelected(){ // 默认第一个选中
+    initTypeSelected(){ // 默认选中
       let productSpecArr = [...this.data.productSpec]
       productSpecArr.forEach((item,index)=>{
         let productSpec= item.list
-        console.log("***********" ,productSpec)
         let specValue = productSpec[0].specValue
         let id = productSpec[0].id
-        this.renderSpecVeiw(0, 0, specValue, id)
+        this.renderSpecVeiw(index, 0, specValue, id)
       })
     },
     typeListClicked(e) { // 规格点击事件

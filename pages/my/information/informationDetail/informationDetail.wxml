@@ -8,17 +8,17 @@
         </view>
         <view class="header red font-30" wx:else>
             <view class="title">订单退款</view>
-            <view class="money">+{{list.param.tradeAmount}}</view>
+            <view class="money">+{{list.param.refundPrice}}</view>
             <view class="result success">退款成功</view>
         </view>
         <view class="wrap">
             <block>
                 <view class="item line" bindtap="myAccount">
                     <view>
-                        <text>{{ list.paramType==100? "付款方式":"退款账户"}}</text>
+                        <text>{{ list.paramType==100? "付款编号":"退款编号"}}</text>
                     </view>
                     <view>
-                        <text>{{list.payName}}</text>
+                        <text>{{list.paramType==100? list.param.outTradeNo:list.param.refundNo}}</text>
                     </view>
                 </view>
                 <!--<view class="item line" bindtap="information">-->

@@ -6,14 +6,14 @@ Page({
     src:'/img/address-icon-gray.png',
     result:[ // 换货
       { state:"其他"},
-      { state: "申请中", info: "等待商家通过", time: '' },
-      { state: "商家已通过", info: "请在规定时间内退货给卖家", time: ''},
-      { state: "商家拒绝您的请求", info: "请联系客服" },
-      { state: "换货中", info: "等待商家确认" },
-      { state: "换货中", info: "等待买家确认收货",time:'' },
+      { state: "等待商家处理", info: "", time: '' },
+      { state: "商家已同意", info: "请在规定时间内退货给卖家", time: ''},
+      { state: "商家拒绝换货申请", info: "请联系客服" },
+      { state: "请退货请商家", info: "等待商家确认" },
+      { state: "等待商家确认", info: "",time:'' },
       { state: "换货完成", info: "" },
-      { state: "换货申请已撤销", info: "请联系客服" },
-      { state: "换货时间超时", info: "请联系客服" }
+      { state: "换货申请已撤销", info: "" },
+      { state: "订单异常", info: "请联系客服" }
     ],
     resultIndex:0,
     expressNo: { id: 0, content:"填写寄回的物流信息"},
@@ -34,10 +34,9 @@ Page({
     this.findReturnProductById(this.data.returnProductId)
   },
   findReturnProductById(returnProductId) {
-    console.log(returnProductId)
     let list = this.data.list
     let params = {
-      returnProductId: Number(returnProductId) || this.data.list.returnProductId,
+      returnProductId: Number(this.data.returnProductId) || this.data.list.returnProductId,
       reqName: '查看退款退货换货情况',
       url: Operation.findReturnProductById
     }
@@ -53,6 +52,9 @@ Page({
       let expressNo = this.data.expressNo
       let SaleExpressNo = this.data.SaleExpressNo
       let time =''
+      if (status == 1) {
+        this.data.result[status].time = datas.applyTime
+      }
       if (status == 2) {
         let self = this
         if (!datas.expressNo) {

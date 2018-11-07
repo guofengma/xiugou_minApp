@@ -6,7 +6,10 @@ Page({
       payList:'',
       isShow:false, // 显示支付结果
       tipsContent: ['已通知商家，会给你尽快发货', '请耐心等待'],
-      tipsBtn: ['返回首页', '查看订单'],
+      tipsBtn: [
+        { name: '返回首页', btnType: "" },
+        { name: '查看订单', btnType: "" }
+      ],
       result: false,
       payWayActive:[false,true,false],
       useAmount:[false,false],
@@ -81,7 +84,8 @@ Page({
         // this.test(payType, req)
         // this.wxPay(payType, req.responseObject.data.outTradeNo)
         if (payType==1){
-          this.showResult(true)
+          this.paySuccess(payType, req.responseObject.data.outTradeNo)
+          // this.showResult(true)
         } else {
           let datas = req.responseObject.data
           this.wxPay(payType, datas.outTradeNo, datas.prePayStr)
@@ -102,6 +106,7 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
+        // this.paySuccess(payType, req.responseObject.data.outTradeNo)
         this.showResult(true)
       };
       Tool.showErrMsg(r)
@@ -151,7 +156,8 @@ Page({
         // this.test(payType, req)
         // this.wxPay(payType, req.responseObject.data.outTradeNo)
         if (payType == 1) {
-          this.showResult(true)
+          this.paySuccess(payType, req.responseObject.data.outTradeNo)
+          //this.showResult(true)
         } else {
           let datas = req.responseObject.data
           this.wxPay(payType, datas.outTradeNo, datas.prePayStr)

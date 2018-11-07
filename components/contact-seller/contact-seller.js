@@ -4,11 +4,11 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    phone:String
   },
   data: {
     userInfos:{},
-    ysf: { title: '售后页面' }
+    ysf: { title: '售后页面' },
+    phone:'10086'
   },
 
   /**
@@ -17,7 +17,7 @@ Component({
   methods: {
     makePhoneCall () {
       wx.makePhoneCall({
-        phoneNumber: this.properties.phone,
+        phoneNumber: this.data.phone,
         success: ()=>{
           console.log("成功拨打电话")
         }
@@ -29,5 +29,6 @@ Component({
   },
   ready: function () {
     this.refreshMemberInfoNotice()
+    Tool.isIPhoneX(this)
   },
 })

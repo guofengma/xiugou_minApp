@@ -55,7 +55,7 @@
         <text class='label-pd redBg'>{{productInfoList.priceLable}}</text>
       </view>
       <view class='shippingInfo gray'>
-        <text style='margin-right:158rpx'>快递：{{productInfoList.freight}}</text> 
+        <text style='margin-right:158rpx'>快递：{{productInfoList.freight || '包邮'}}</text> 
         <text>月销售{{productInfoList.monthSaleTotal}}笔</text>
       </view>
     </view>
@@ -82,6 +82,7 @@
       <view class='gray'>
         <text class='label red' >服务</text>
         正品保障·急速发货 <text wx:if='{{productInfo.afterSaleServiceDays>0}}'>{{productInfo.afterSaleServiceDays>30? 30:productInfo.afterSaleServiceDays}}天无理由退换货</text>
+        <text wx:else>无售后服务</text>
       </view>
     </view>
     <!--产品图文详情切换  -->
@@ -125,7 +126,7 @@
         加入购物车
       </view>
     </view>
-    <view wx:else class="bottom-bar flexR boxSize {{isIPhoneX.className}} no-sale">此商品已下架</view>
+    <view wx:if='{{!productInfoList.onSale}}' class="bottom-bar flexR boxSize {{isIPhoneX.className}} no-sale">此商品已下架</view>
     <!--置顶的按钮-->
     <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
       <image src='/img/top-icon.png' mode='widthFix'></image>
@@ -140,14 +141,4 @@
 <!--适配iPhone X  -->
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
 
-<!-- <tips-info isShoW='{{isShowGiftTips}}' header='温馨提示' bind:closeMask=''>
-  <view class='tips-title'>XXX升级礼包为定制产品</view>
-  <view class='font-28 tips-content'>
-    <view class='first-tips'>
-      购买后即可升级成为V2级用户，可享受V2用户
-    </view>
-    <view>
-      消费权限，该礼包产品不可退换货，如有产品质量问题，可联系客服进行申诉
-    </view>
-  </view>
-</tips-info> -->
+<red-envelopes  id='redEnvelopes' door='2'/>

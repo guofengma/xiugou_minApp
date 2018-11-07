@@ -5,13 +5,18 @@
 <import src='/pages/after-sale/temp/refund-explain/refund-explain'/>
 
 <view class='flexC tips-exchange font-26'>
-  <view class='tips-title'>{{datas.statusName}}</view>
+  <view class='flexR'>
+    <image-sub wx:if='{{datas.status==3}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
+    <view>
+     <view class='tips-title'>{{datas.statusName}}</view>
+     <view wx:if='{{datas.showRefundTime}}'>{{datas.showRefundTime}}</view>
+    </view>
+  </view>
   <!--退款中不需要要显示时间  -->
-  <view wx:if='{{datas.status==6 || datas.status==3}}'>{{datas.showRefundTime}}</view>
 </view>
 <view wx:if='{{datas.status==3}}' class='refusalReason whiteBg font-26 flexR-sb'>拒绝原因：{{datas.refusalReason}}</view>
 <view wx:if='{{datas.status==1}}'>
-   <amend-application applyType='{{"退款"}}' list='{{datas}}'/>
+   <amend-application applyType='{{"退款"}}' list='{{datas}}' returnProductId='{{returnProductId}}' bind:reloadPage='findReturnProductById'/>
 </view>
 <!--退款成功以后才显示以下内容  -->
 
@@ -27,4 +32,4 @@
 
 <!--联系卖家  -->
 
- <contact-seller phone='{{18968047924}}'></contact-seller> 
+ <contact-seller></contact-seller> 

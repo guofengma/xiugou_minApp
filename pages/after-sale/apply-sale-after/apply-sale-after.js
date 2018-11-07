@@ -4,6 +4,7 @@ Page({
   data: {
     ysf: { title: '申请售后' },
     hidden:false,
+    textarea:true,
     selectType:{}, // 换货参数
     reason:[
       {
@@ -12,7 +13,8 @@ Page({
         choose:'退款原因',
         info: "退款说明",
         placeholder:"请填写退款说明",
-        list: []
+        list: [],
+        tips:''
       },
       {
         navbar: '申请退货',
@@ -20,7 +22,8 @@ Page({
         choose: '退货原因',
         info:"退货说明",
         placeholder: "请填写退货说明",
-        list: []
+        list: [],
+        tips: '退回商品需由买家承担运费，请确保商品不影响二次销售'
       },
       {
         navbar: '申请换货',
@@ -28,7 +31,8 @@ Page({
         choose: '换货原因',
         info: "换货说明",
         placeholder: "请填写退货说明",
-        list: []
+        list: [],
+        tips: '仅可更换同规格或者同价格的商品'
       }
     ],
     activeIndex:'',
@@ -153,7 +157,7 @@ Page({
   },
   hiddenTips() { 
     this.setData({
-      hidden: !this.data.hidden,
+      textarea: !this.data.textarea,
     })
   },
   makeSureReason(e){

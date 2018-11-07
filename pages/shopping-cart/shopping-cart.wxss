@@ -10,7 +10,7 @@
 }
 .shopping-cart{
   padding-top: 5rpx;
-  padding-bottom: 30rpx;
+  padding-bottom: 130rpx;
 }
 .shopping-cart-line.flexR-sb{
   box-sizing: border-box;
@@ -26,9 +26,9 @@
   width:11%;
   text-align: right;
 }
-.search-result{
+/* .search-result{
   height:calc(100% - 100rpx);
-}
+} */
 /*底部bar  */
 .cart-bar{
   height:100rpx;

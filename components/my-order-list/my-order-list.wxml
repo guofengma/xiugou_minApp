@@ -27,7 +27,7 @@
       <view class="item" wx:for="{{item.orderProductList}}" wx:key="item" wx:for-item="oItem">
         <image src="{{oItem.specImg}}" alt=""></image>
         <view class="goods-inf">
-          <view class="ellipsis-2">
+          <view class="ellipsis-2 label-line">
             <text class='label-red-border' wx:if='{{item.orderType==98 || item.orderType==5}}'>礼包</text> {{oItem.productName}}
           </view>
           <view class="color-classify">{{oItem.spec}} </view>
@@ -42,7 +42,7 @@
 
     <view class="amount">
       <text>共{{item.orderProductList.length}}件商品 合计：</text>
-      <text class="red font-30">￥{{item.totalPrice+item.freightPrice}}</text>
+      <text class="red font-30">￥{{item.needPrice}}</text>
       <text class="freight">(含运费￥{{item.freightPrice}})</text>
     </view>
     <view class="time">
@@ -50,6 +50,7 @@
       <text wx:elif="{{ item.status==3 }}">发货时间：{{item.sendTime}}</text>
       <text wx:elif="{{ item.status==2 }}">付款时间：{{item.payTime}}</text>
       <text wx:elif="{{ item.status==7 }}">取消时间：{{item.cancelTime}}</text>
+      <text wx:elif="{{ item.status==8 }}">关闭时间：{{item.payEndTime}}</text>
       <text wx:else>创建时间：{{item.createTime}}</text>
     </view>
     <view>
@@ -78,7 +79,9 @@
   </view>
 </view>
 <!--搜索结果异常显示 tipVal  -->
-<template is="result-tips" wx-if='{{tipVal}}' data="{{tipVal}}" />
+<!-- <view class='sub-page'> -->
+  <template is="result-tips"  wx-if='{{tipVal}}' data="{{tipVal}}" />
+<!-- </view> -->
 
 <!--提示框  -->
 <!-- <template is="tips-cancel-order" data='{{isCancel,reason,content}}'/> -->

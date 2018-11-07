@@ -7,16 +7,19 @@ Page({
     currentPage: 1, // 当前的页数
     pageSize: 5, // 每次加载请求的条数 默认10
     lists:[],
-    typeState: ["其他",'申请中', '已同意', '拒绝', '中','中','已完成','已关闭','已超时'],
+    typeState: ["其他",'申请中', '已同意', '拒绝', '中','中','完成','关闭','超时'],
     typeArr:[
       { name: '其他'},
       { name: '仅退款', 
+        icon: 'shouhou_icon_tuikuan_nor@2x.png',
         page:'/pages/after-sale/only-refund/only-refund-detail/only-refund-detail'
       },
-      { name: '退货',
+      { name: '退货退款',
+        icon: 'shouhou_icon_tuihuo_nor@2x.png',
         page: '/pages/after-sale/return-goods/return-goods' 
       },
       { name: '换货', 
+        icon:'shouhou_icon_huanhuo_nor@2x.png',
         page: '/pages/after-sale/exchange-goods/exchange-goods'
       },
     ],
@@ -80,6 +83,7 @@ Page({
       if (datas.totalPage>0){
         datas.data.forEach((item)=>{
           item.imgUrl = item.specImg
+          item.icon = this.data.typeArr[item.type].icon
           item.typeName = this.data.typeArr[item.type].name
           item.typeState = this.data.typeState[item.status]
           console.log(item.type)

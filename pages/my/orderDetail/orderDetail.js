@@ -34,6 +34,14 @@ Page({
       detail: {},//详情信息
       orderId: '',//订单ID
       status: '',//订单状态
+      payTypeArr: [1, 2, 4, 8, 16], // 平台支付 微信支付 微信支付 支付宝支付 银联支付
+      payType: {
+        1: '平台支付',
+        2: '微信支付',
+        4: '微信支付',
+        8: '支付宝支付',
+        16: '银联支付'
+      },
     },
     onLoad: function (options) {
         this.setData({
@@ -66,6 +74,7 @@ Page({
             detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
             detail.showFinishTime = detail.deliverTime? Tool.formatTime(detail.deliverTime) : Tool.formatTime(detail.finishTime)
             detail.deliverTime = Tool.formatTime(detail.deliverTime)
+            detail.shutOffTime = Tool.formatTime(detail.shutOffTime)
             let address = {}
             address.receiver = detail.receiver;
             address.recevicePhone = detail.recevicePhone;
@@ -76,7 +85,14 @@ Page({
             }else{
                 detail.sendTime=''
             }
-            
+        detail.orderPayRecord = detail.orderPayRecord || {}
+        detail.payWay = Tool.bitOperation(this.data.payTypeArr,detail.orderPayRecord.type)
+        if (detail.payWay.includes(this.data.payTypeArr[0])){
+          detail.showPlatformTime = Tool.formatTime(detail.platformPayTime)
+        }
+        if (detail.payWay.length > 1 || (detail.payWay.length == 1 && !detail.payWay.includes(this.data.payTypeArr[0]))){
+          detail.isUsedThirdPay = true
+        }
             if (detail.status == 1 || detail.status == 3) { // 开始倒计时
               let that = this
               let time = setInterval(function () { that.time() }, 1000)
@@ -100,9 +116,7 @@ Page({
             if (detail.expressNo) {
               this.getDelivery(detail)
             }
-            if (detail.orderType != 5){
-              this.middleBtn()
-            }
+            this.middleBtn()
         };
         Tool.showErrMsg(r)
         r.addToQueue();
@@ -320,7 +334,7 @@ Page({
     middleBtn(){
       let detail = this.data.detail
       let outOrderState = detail.status // 外订单状态
-      let childrenList = detail.orderProductList 
+      let childrenList = detail.orderProductList
       let state = this.data.state
       let btnArr = []
       childrenList.forEach((item,index)=>{
@@ -345,8 +359,11 @@ Page({
             middle = { id: 4, content: '退换' }
           } else{
             let index = this.data.afterSaleTypeArr.indexOf(afterSaleType[0])
-            if(index!=-1){
-              middle = { id: index+1, content: this.data.types[index] }
+            if (index != -1) {
+              let btnId = 0
+              // [4, 8, 16],// 退款 换货 退货 
+              btnId = afterSaleType[0] == 4 ? 1 : afterSaleType[0] == 16 ? 2:3
+              middle = { id: btnId, content: this.data.types[index] }
             }
           }
           
@@ -411,9 +428,10 @@ Page({
 
         page = '/pages/after-sale/exchange-goods/exchange-goods'
 
-      } else if (btnTypeId == 1) {
+      } else if (btnTypeId > 0 && btnTypeId <4) {
         params = ''
-        page = '/pages/after-sale/apply-sale-after/apply-sale-after?refundType=0'
+        // 0为仅退款 1为退货退款  2为换货
+        page = '/pages/after-sale/apply-sale-after/apply-sale-after?refundType=' + (btnTypeId-1)
 
       } else if (btnTypeId == 4) {   
         page = '/pages/after-sale/choose-after-sale/choose-after-sale' 

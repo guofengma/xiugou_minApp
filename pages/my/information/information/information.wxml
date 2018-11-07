@@ -1,5 +1,5 @@
-<!--无数据-->
-<import src='/components/nodata-tips/nodata-tips.wxml'/>
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
 <view class='sub-page'>
 
 <block wx:if="{{list.length>0}}">
@@ -35,10 +35,10 @@
         <view class="content">
             <view class="item">{{item.title}}</view>
             <view class="info gray-9">{{item.content}}</view>
-            <view wx:if='{{item.paramType==100 || item.paramType==101}}'>
-              <!-- <view>付款方式：{{item.payName}}</view> -->
+            <!-- <view wx:if='{{item.paramType==100 || item.paramType==101}}'>
+              <view>付款方式：{{item.payName}}</view>
               <view>交易订单：{{item.orderNum}}</view>
-            </view>
+            </view> -->
         </view>
         <view class="watch-detail" bindtap="informationDetail" wx:if='{{title[item.paramType][1]}}' data-type="{{item.paramType}}" data-param="{{item.param}}" data-index='{{index}}'>查看详情
             <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/detail-btn.png"></image>
@@ -115,7 +115,7 @@
 
 <block wx:else>
     <view class='sub-page'>
-        <template is="nodata-tips"/>
+        <template is="result-tips"  data="{{tipVal:5}}" />
     </view>
 </block>
 </view>

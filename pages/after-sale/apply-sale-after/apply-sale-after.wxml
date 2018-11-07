@@ -10,8 +10,7 @@
 
 
 <view class='apply-sale-after-page'>
-  <view class='redBg flexR tips font-26'>退回商品需由买家承担运费，请确保不影响商品完好</view>
-
+  <view class='redBg flexR tips font-26' wx:if='{{reason[refundType].tips}}'>{{reason[refundType].tips}}</view>
   <view class='order-info'>
     <view class='cell-line whiteBg'>订单编号：{{orderInfos.orderNum}}</view>
     <template is="my-order-product-info" data="{{...orderInfos}}"/>
@@ -32,7 +31,7 @@
       <template is="address-info" data="{{addressType:1,...list.address,hasData:true}}"/>
     </view>
     <view class='cell-line'>{{reason[refundType].info}}</view>
-    <textarea wx:if='{{!hidden}}'   class='textarea' placeholder="{{placeholder.placeholder}}" disabled='{{placeholder.disabled}}' placeholder-class='textarea gray' bindinput='inputChange' value='{{remark}}'/>
+    <textarea wx:if='{{textarea}}'   class='textarea' placeholder="{{placeholder.placeholder}}" disabled='{{placeholder.disabled}}' placeholder-class='textarea gray' bindinput='inputChange' value='{{remark}}'/>
     <view class='textarea' wx:else></view>
   </view>
   <view class='cell-line'>上传凭证</view>
@@ -65,5 +64,6 @@
   showImgs='{{true}}' 
   isIphoneX='{{isIPhoneX.isIPhoneX}}'
   commodityType = '5'
-  bind:hiddenTips='hiddenTips'
+  bind:hiddenTips ='hiddenTips'
+  productPriceId = '{{productPriceId.productPriceId}}'
 />

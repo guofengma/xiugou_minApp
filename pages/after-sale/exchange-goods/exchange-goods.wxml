@@ -11,10 +11,14 @@
   商家已同意换货申请，请尽快发货
 </view>
 <view class='flexC tips-exchange font-26'>
-  <view class='tips-title'>{{result[resultIndex].state}}</view>
-  <view wx:if='{{datas.status!=3}}'>{{result[resultIndex].info}}</view>
-  <view>{{distanceTime}}</view>
-  <view wx:if='{{datas.status==6 || datas.status==3}}'>{{result[resultIndex].time}}</view>
+   <view class='flexR'>
+    <image-sub wx:if='{{datas.status==3}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
+    <view>
+      <view class='tips-title'>{{result[resultIndex].state}}</view>
+      <view>{{distanceTime}}</view>
+      <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view>
+    </view>
+  </view>
 </view>
 <view wx:if='{{datas.status==3}}' class='refusalReason whiteBg font-26 flexR-sb'>拒绝原因：{{result[resultIndex].info}}</view>
 <view wx:if='{{datas.status>1&&datas.status!=3}}'>
@@ -38,7 +42,7 @@
 </view>
 
 <view wx:if='{{datas.status==1}}'>
-   <amend-application applyType='{{"换货"}}' list='{{datas}}'/>
+   <amend-application applyType='{{"换货"}}' list='{{datas}}' returnProductId='{{returnProductId}}' bind:reloadPage='findReturnProductById'/>
 </view>
 <!--换货信息  -->
 
@@ -67,4 +71,4 @@
 
 <!--联系卖家  -->
 
- <contact-seller phone='{{13336092569}}'></contact-seller> 
+ <contact-seller></contact-seller> 

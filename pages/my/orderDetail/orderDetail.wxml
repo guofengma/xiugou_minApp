@@ -58,10 +58,14 @@
           <view catchtap='productClicked' data-productid='{{item.productId}}'>
             <template is="my-order-product-info" data="{{...item}}"/>
           </view>
-          <view class='sale-after flexR' wx:if="{{item.middleBtn}}">
+          <view class='sale-after flexR' wx:if="{{item.middleBtn&&detail.orderType!=5&& detail.orderType!=98}}">
             <view class='order-btn btn-left flexR' catchtap='subBtnClicked' data-id='{{item.middleBtn.id}}' data-returntype='{{item.middleBtn.returnType}}' data-index='{{index}}'>{{item.middleBtn.content}}</view>
           </view>
         </block>
+      </view>
+      <!-- 判断礼包的按钮 -->
+      <view class='sale-after gift-sale-after flexR' wx:if="{{detail.orderProductList[0].middleBtn&&(detail.orderType==5 || detail.orderType==98)}}">
+        <view class='order-btn btn-left flexR' catchtap='subBtnClicked' data-id='{{detail.orderProductList[0].middleBtn.id}}' data-returntype='{{detail.orderProductList[0].middleBtn.returnType}}' data-index='{{0}}'>{{detail.orderProductList[0].middleBtn.content}}</view>
       </view>
       <view wx:if='{{detail.orderType==5 || detail.orderType==98}}' class='gray font-24 whiteBg coupon-line'>
         <view class='flexR-sb' wx:for='{{detail.orderProductList[0].giftBagCoupons}}'>
@@ -82,7 +86,7 @@
             <text>-¥{{detail.couponPrice || 0}}</text>
         </view>
         <view class='flexR-sb'>
-            <text>1元劵现金劵</text>
+            <text>1元现金券</text>
             <text>-¥{{detail.tokenCoin || 0}}</text>
         </view>
         <view class='flexR-sb'>
@@ -111,12 +115,13 @@
             <text selectable="true">{{detail.orderNum}}</text>
           </view>
           <view>创建时间：{{detail.createTime}}</view>
-          <!-- <view wx:if='{{detail.sysPayTime}}'>平台付款时间：{{detail.sysPayTime}}</view> -->
-          <view wx:if='{{detail.payTime&&status!=1}}'>三方付款时间：{{detail.payTime}}</view>
-          <view wx:if='{{detail.outTradeNo&&status!=1}}'>三方交易号：{{detail.outTradeNo}}</view>
+          <view wx:if='{{detail.showPlatformTime}}'>平台付款时间：{{detail.showPlatformTime}}</view>
+          <view wx:if='{{detail.payTime&&status!=1&&status!=8&&detail.isUsedThirdPay}}'>三方付款时间：{{detail.payTime}}</view>
+          <view wx:if='{{detail.outTradeNo&&status!=1&&status!=8&&detail.isUsedThirdPay}}'>三方交易号：{{detail.outTradeNo}}</view>
           <view wx:if='{{detail.sendTime}}'>发货时间：{{detail.sendTime}}</view>
           <view wx:if='{{status==4 || status==5}}'>成交时间：{{detail.showFinishTime}}</view>
-          <view wx:if='{{detail.cancelTime}}'>取消时间：{{detail.cancelTime}}</view>
+          <view wx:if='{{status==6}}'>取消时间：{{detail.cancelTime}}</view>
+          <view wx:if='{{status==8}}'>关闭时间：{{detail.shutOffTime}}</view>
         </view>
     </view>
 

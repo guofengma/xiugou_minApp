@@ -26,15 +26,15 @@
     text-align: center;
     margin-bottom: 20rpx;
     font-size: 32rpx;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    position: relative;
 }
 .has-help text{
     position: absolute;
     font-size: 28rpx;
     top: -10rpx;
     right:50rpx
+}
+.has-help{
+  margin-left: 20rpx;
 }
 .has-help image{
     width:42rpx ;

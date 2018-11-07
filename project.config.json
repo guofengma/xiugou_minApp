@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 38,
+			"current": 44,
 			"list": [
 				{
 					"id": 0,
@@ -258,6 +258,18 @@
 					"query": ""
 				},
 				{
+					"id": -1,
+					"name": "任务详情",
+					"pathName": "pages/my/task/task-detail/task-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "任务分享",
+					"pathName": "pages/my/task/task-share/task-share",
+					"query": ""
+				},
+				{
 					"id": 37,
 					"name": "任务详情",
 					"pathName": "pages/my/task/task-detail/task-detail",
@@ -284,6 +296,18 @@
 				{
 					"id": 38,
 					"name": "填写邀请码",
+					"pathName": "pages/register/write-invite-code/write-invite-code",
+					"query": ""
+				},
+				{
+					"id": 44,
+					"name": "webview",
+					"pathName": "pages/web-view/web-view",
+					"query": "id=1"
+				},
+				{
+					"id": -1,
+					"name": "邀请码",
 					"pathName": "pages/register/write-invite-code/write-invite-code",
 					"query": ""
 				}

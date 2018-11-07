@@ -34,11 +34,12 @@ Page({
         16: '银联支付'},
     },
     //获取数据
-    getData() {
+    getData(createdTime) {
         if (this.data.hasNext) {
           let params = {
             pageSize: this.data.pageSize,
             page: this.data.currentPage,
+            createdTime: createdTime || '',
             'type':100,
             reqName: '消息',
             url: Operation.queryMessage
@@ -94,7 +95,7 @@ Page({
 
     // 上拉加载更多
     onReachBottom() {
-        this.getData();
+      this.getData(this.data.list[this.data.list.length - 1].createdTime);
     },
     //支付方式
     payStyle(num){
@@ -135,8 +136,12 @@ Page({
       Tool.navigateTo(page+query)
     },
     onLoad: function (options) {
-        this.getData()
+      this.getData()
 
+    },
+    onPullDownRefresh: function () {
+      this.getData()
+      wx.stopPullDownRefresh();
     },
     onShow: function () {
 

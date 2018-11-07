@@ -11,10 +11,10 @@
           </view>
           <view>
             <!-- <view class="btn flexR" bindtap="change">兑换秀豆</view> -->
-            <view class="explain" bindtap="explain">
+            <!-- <view class="explain" bindtap="explain">
                 <image src="{{imgBaseUrl+'icon01_07@2x.png'}}"></image>
                 <text class='font-22'>提现说明</text>
-            </view>
+            </view> -->
           </view>
         </view>
     </view>

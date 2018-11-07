@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "拼店消息"
+  "navigationBarTitleText": "拼店消息",
+  "usingComponents": {
+    "image-sub": "/components/image-sub/image-sub"
+  }
 }

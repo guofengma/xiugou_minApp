@@ -34,7 +34,10 @@ export default class Operation {
         // 获取推荐人列表
         this.queryInviterList = '/user/userSign/queryInviterList'
 
+        // 邀请码注册
 
+        this.updateUserCodeById = '/user/updateUserCodeById'
+        
     /**********  获取省市区 *******************/
 
       // 获取省
@@ -133,7 +136,10 @@ export default class Operation {
 
       this.getRichItemList  ='/user/shoppingcart/getRichItemList'
 
+       // 再来一单的时候批量加入购物车
 
+      this.shoppingcart0neMoreOrder = '/user/shoppingcart/oneMoreOrder'
+      
     /********************** 地址管理 *********************/
         // 新增地址 或 修改地址(传id)
 
@@ -473,6 +479,10 @@ export default class Operation {
 
         this.addFeedback = '/user/feedback/addFeedback'
 
+        // 获取帮助次数
+
+        this.findQuestionEffectById = '/help/helpQuestion/findQuestionEffectById'
+
         /************************** 优惠券 *******************************/
 
         // 未使用优惠劵列表 status 优惠券状态 0-未使用 1-已使用 2-已失效 3-未激活
@@ -575,6 +585,36 @@ export default class Operation {
         // 获取任务详情
 
         this.findByJobId = '/user/userJobs/findByJobId'
+
+
+      /************************** 优惠券 *******************************/
+
+        // 推广红包列表
+
+        this.queryPromotionPackagePageList = '/user/promotionPackage/queryPromotionPackagePageList';
+
+        // 分页查询用户购买信息列表
+
+        this.queryUserBuyPromotionPromoter = '/promotion/promotionPromoter/queryUserBuyPromotionPromoter';
+
+        // 用户领取红包
+
+        this.userReceivePackage = '/promotion/promotionPromoter/userReceivePackage';
+
+        // 详情页用户领取红包
+
+        this.givingPackageToUser = '/promotion/promotionPromoter/givingPackageToUser'
+
+        // 支付红包费用
+
+        this.promotionPromoterPay='/promotion/promotionPromoter/pay'
+
+        // 分页查询用户领取红包记录列表
+
+        this.queryPromotionReceiveRecordPageList = '/promotion/promotionReceiveRecord/queryPromotionReceiveRecordPageList'
+
+
+        /************************** 任务 *******************************/
 
         // 获取分享详情
 

@@ -39,7 +39,15 @@ Page({
       showCard: false, // 任务领取窗口展示
       isScroll: false,
       scrollTimer: null,
-      taskDetail:{}
+      downPriceParam:{
+        1: 'startPrice',
+        2: 'markdownPrice',
+        3: 'markdownPrice',
+        4: 'markdownPrice',
+        5: 'markdownPrice'
+      },
+      taskDetail:{},
+      width:0
     },
     close() {
       this.toggleCardShow();
@@ -82,13 +90,21 @@ Page({
     // 滚动的时候任务要缩进去
     onPageScroll(e){
       // 这里加个判断 如果没任务的话也return
+      let changeBg = this.data.changeBg
+      if (e.scrollTop>160){
+        changeBg=true
+      }else{
+        changeBg = false
+      }
+      this.setData({
+        changeBg:changeBg
+      })
       clearTimeout(this.data.scrollTimer);
       if (this.data.isScroll) return;
       this.setData({
         isScroll: true,
       })
       let timer = setTimeout(()=>{
-        console.log(11);
         this.setData({
           isScroll: false,
           scrollTimer: timer
@@ -97,8 +113,6 @@ Page({
     },
     onLoad: function () {
       Event.on('getLevel', this.getLevel,this)
-      this.discoverNotice()
-      this.findUserJobsByUserId();
       this.queryAdList(1,'轮播图片',(datas)=>{
         this.setData({
           imgUrls:datas
@@ -120,6 +134,20 @@ Page({
         })
       });
       this.queryAdList(6, '超值热卖', (datas) => {
+        datas.forEach((item,index)=>{
+          let  topicBannerProductDTOList = item.topicBannerProductDTOList || []
+          topicBannerProductDTOList.forEach((item0,index0)=>{
+            if (item0.productType === 2){
+              item0.showPrice = item0[this.data.downPriceParam[item0.status]]
+            }
+            else if (item0.productType === 1) {
+              item0.showPrice = item0.seckillPrice
+            }
+            else {
+              item0.showPrice = item0.originalPrice
+            }
+          })
+        })
         this.setData({
           hotSale:datas
         })
@@ -157,7 +185,8 @@ Page({
     didLogin() {
       Tool.didLogin(this)
       if (this.data.didLogin){
-        this.getLevelInfos()
+        // this.getLevelInfos()
+        this.findUserJobsByUserId();
         this.getLevel()
       }
     },
@@ -221,6 +250,7 @@ Page({
         this.setData({
           userInfos: req.responseObject.data
         })
+        this.getLevelInfos()
       };
       Tool.showErrMsg(r)
       r.addToQueue();
@@ -233,8 +263,35 @@ Page({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data || []
+        let userInfos = this.data.userInfos
+        let levelId = userInfos.levelId
+        // let levelId = 1
+        let userExp = userInfos.experience
+        // let userExp = 1300
+        let levelObj = datas.filter((item) =>{
+          return item.id == levelId
+        }) 
+        let index = datas.indexOf(levelObj[0])
+        // 下一等级
+        let nextLevel = datas[index+1]
+        // 当前等级
+        let preLevel = datas[index]
+        let width = 0
+        // 是否升级
+        let isUpdateLevel = !(userExp > nextLevel.upgradeExp)
+        userExp = userExp > nextLevel.upgradeExp? nextLevel.upgradeExp : userExp
+        if(index==0){
+          let Denominator = isUpdateLevel ? userExp / nextLevel.upgradeExp : userExp / nextLevel.upgradeExp - 0.01
+          width = Denominator  * (1 / (datas.length - 2))
+        } else if (index==datas.length-1){
+          width =1 
+        } else {
+          let Denominator = isUpdateLevel ? (userExp - preLevel.upgradeExp) / (nextLevel.upgradeExp - preLevel.upgradeExp) : (userExp - preLevel.upgradeExp) / (nextLevel.upgradeExp - preLevel.upgradeExp) - 0.01
+          width = index / (datas.length - 2) + Denominator * (1 / (datas.length - 2))
+        }
         this.setData({
-          levelList:datas
+          levelList:datas,
+          width: width*100
         })
       };
       Tool.showErrMsg(r)
@@ -284,6 +341,10 @@ Page({
       let r = RequestFactory.wxRequest(params);
         r.successBlock = (req) => {
           let datas = req.responseObject.data
+          let list = datas.data || []
+          list.forEach((item,index)=>{
+
+          })
           this.setData({
             recommendArr: this.data.recommendArr.concat(datas.data),
             recommendTotalPage: datas.totalPage,
@@ -333,11 +394,13 @@ Page({
     },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);
+      Event.off('getLevel', this.getLevel)
     },
     onShow:function (){
       this.setData({
         isChange:true
       })
+      this.discoverNotice()
     },
     onHide: function () {
       this.setData({

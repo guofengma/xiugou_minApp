@@ -17,23 +17,34 @@ Page({
     Event.on('updateShoppingCart', this.getShoppingCartList, this)
     Event.on('updateStorageShoppingCart', this.getRichItemList, this)
     Event.on('didLogin', this.getLoginCart, this);
-    Event.on('continueBuy', this.shoppingCartLimit, this);
+    Event.on('continueBuy', this.shoppingcart0neMoreOrder, this);
   },
   onShow: function () {
 
   },
+  onPullDownRefresh: function () {
+    this.initDatas()
+    wx.stopPullDownRefresh();
+  },
+  // onPullDownRefresh: function () {
+  //   // this.myRecordingA(1, answerUrl);
+  //   // wx.stopPullDownRefresh();
+  // },
   getLoginCart(){
     Tool.didLogin(this)
+    this.initDatas()
+  },
+  initDatas(){
     if (this.data.didLogin) {
       let hasStorageShoppingCart = this.hasStorageShoppingCart()
-      if (hasStorageShoppingCart){
+      if (hasStorageShoppingCart) {
         this.shoppingCartLimit()
       } else {
         this.getShoppingCartList()
       }
     } else {
       this.setData({
-        items: [], 
+        items: [],
       })
       this.getStorageShoppingCart()
     }
@@ -80,6 +91,21 @@ Page({
     Tool.showErrMsg(r)
     r.addToQueue();
   },
+  shoppingcart0neMoreOrder(){
+    let isArrParams = this.getFormCookieToSessionParams()
+    let params = {
+      cacheList: isArrParams,
+      reqName: '再来一单的时候批量加入购物车',
+      url: Operation.shoppingcart0neMoreOrder,
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      Storage.clearShoppingCart()
+      this.formatShoppingListData(req)
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
   shoppingCartLimit(){
     let isArrParams = this.getFormCookieToSessionParams()
     let params = {
@@ -102,7 +128,7 @@ Page({
       this.getRichItemList()
     } else {
       this.setData({
-        tipVal: 2
+        tipVal: 3
       })
     }
   },
@@ -167,7 +193,7 @@ Page({
         if (this.data.items.length > 0) {
           let arr = this.data.items
           for (let i = 0; i < arr.length; i++) {
-            if (arr[i].id == item.id) {
+            if (arr[i].priceId== item.priceId) {
               item.isSelect = arr[i].isSelect
             }
           }
@@ -186,7 +212,7 @@ Page({
       this.getTotalPrice()
     } else {
       this.setData({
-        tipVal: 2,
+        tipVal: 3,
         items: []
       })
     }
@@ -328,7 +354,7 @@ Page({
       })
       if (items.length == 0) {
         this.setData({
-          tipVal: 2
+          tipVal: 3
         })
       }
       this.isSelectAllPrd(items)
@@ -374,7 +400,7 @@ Page({
     // 如果没有登录 那么就跳转到登录页面
     
     if(!this.data.didLogin){
-      Tool.navigateTo('/pages/login/login-wx/login-wx?isBack=' + true)
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
       return
     }
     if (this.data.selectList.length==0){
@@ -390,10 +416,14 @@ Page({
       Tool.navigateTo('/pages/product-detail/product-detail?door=100&productId=' + e.currentTarget.dataset.id)
     }
   },
+  lookAround(){
+    Tool.switchTab('/pages/index/index')
+  },
   onUnload: function () {
     Event.off('updateStorageShoppingCart', this.getStorageShoppingCart);
     Event.off('updateShoppingCart', this.getShoppingCartList);
     Event.off('didLogin', this.didLogin);
+    Event.on('continueBuy', this.shoppingcart0neMoreOrder);
   },
   test(){
     // 阻止冒泡 

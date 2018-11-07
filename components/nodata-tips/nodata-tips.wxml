@@ -1,6 +1,0 @@
-<template name="nodata-tips">
-  <view class='tips-img-view flexC'>
-    <image src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/no-information.png' mode='widthFix'></image>
-    <view>暂无消息通知~</view>
-  </view>
-</template>

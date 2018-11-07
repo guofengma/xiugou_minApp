@@ -1,4 +1,8 @@
 @import "/css/app";
+.model-view-bg{
+  align-items: flex-start;
+  padding-top: 80rpx;
+}
 .container{
   width: 514rpx;
   padding-top:80rpx;
@@ -17,7 +21,8 @@
 }
 .red-envelopes-view{
   color: #fff;
-  text-align: center
+  text-align: center;
+  position: relative;
 }
 .red-info{
   font-size: 28rpx;
@@ -41,3 +46,30 @@
   font-size: 28rpx;
   color: #80522A
 }
+@keyframes zoomIn{
+  0%{
+    opacity:0;
+    transform:scale3d(.3,.3,.3);
+  }
+  50%{
+    opacity:1
+  }
+}
+.zoomIn-lt{
+  animation-name:zoomIn;
+  transform-origin:0 0;
+}
+.zoomIn-rt{
+  animation-name:zoomIn;
+  transform-origin:100% 0;
+}
+.zoomIn-lb{
+  animation-name:zoomIn;
+  transform-origin:0 100%;
+}
+.zoomIn-rb{
+  animation-name:zoomIn;
+  transform-origin:100% 100%;
+}
+.animated{animation-duration:.5s;animation-fill-mode:both}
+

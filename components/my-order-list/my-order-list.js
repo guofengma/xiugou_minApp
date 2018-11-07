@@ -60,6 +60,7 @@ Component({
           item.sendTime = Tool.formatTime(item.sendTime);
           item.payTime = Tool.formatTime(item.payTime);
           item.cancelTime = Tool.formatTime(item.cancelTime);
+          item.payEndTime = Tool.formatTime(item.shutOffTime);
           // item.createTime = Tool.formatTime(item.orderCreateTime);
           // 礼包不显示产品描述
           // if (item.orderProductList[0].orderType == 98) item.orderProduct[0].spec=''
@@ -80,7 +81,7 @@ Component({
         console.log(this.data.list)
         if (!req.responseObject.data.totalPage) {
           this.setData({
-            tipVal: 2
+            tipVal: 7
           });
         } else {
           this.setData({
@@ -276,7 +277,7 @@ Component({
             }
             if (orderArry.length==0){
               this.setData({
-                tipVal:2
+                tipVal:7
               })
             }
             this.setData({

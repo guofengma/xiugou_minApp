@@ -14,8 +14,11 @@
       </view>
       <view class='after-sale-bottom flexR-sb whiteBg'>
         <view class='red font-26 flexR-sb'>
-          <view class='returnType'>{{item.typeName}}</view>
-          <view>{{item.typeState}}</view>
+          <view class='returnType flexR-sb'>
+            <image-sub imgStyle='{{"width:34rpx"}}' imgSrc="{{item.icon}}"/>
+            <text class='typeName'>{{item.typeName}}</text>
+          </view>
+          <view>{{item.typeName+item.typeState}}</view>
         </view>
         <view class='after-sale-btn flexR font-26' catchtap='goPage' data-prdid='{{item.returnProductId}}' data-id='{{item.type}}'>查看详情</view> 
       </view>

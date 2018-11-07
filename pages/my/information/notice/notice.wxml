@@ -1,5 +1,5 @@
-<!--无数据-->
-<import src='/components/nodata-tips/nodata-tips.wxml' />
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
 
 <import src="../../../../libs/wxParse/wxParse.wxml" />
 <view class='sub-page'>
@@ -14,6 +14,6 @@
       </view>
   </block>
   <view wx:else class='sub-page'>
-      <template is="nodata-tips" />
+    <template is="result-tips"  data="{{tipVal:5}}" />
   </view>
 </view>
