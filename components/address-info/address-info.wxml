@@ -18,7 +18,7 @@
            <text>{{receiverPhone || receivePhone || recevicePhone}}</text>
         </view>
       </view>
-      <view class='address-content gray'>
+      <view class='address-content gray' wx:if='{{hasData}}'>
         {{door==1? "收货地址：":""}}{{addressInfo || receiveAddress}}
       </view>
     </view>
