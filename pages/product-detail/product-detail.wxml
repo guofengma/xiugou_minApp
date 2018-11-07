@@ -3,6 +3,8 @@
 <!-- 消息显示模板 -->
 <import src= "/components/msg-tips/msg-tips.wxml"/>
 
+<import src= "/pages/product-detail/temp/product-price-infos/product-price-infos.wxml"/>
+
 <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%">
   <view class='prduct-detail-view'>
     <!--topbar  -->
@@ -11,55 +13,25 @@
       <view class='msg-view fr' bindtap='msgClicked'></view>
       <template is="msg-tips" data="{{msgShow}}" /> 
     </view>
+    <!-- 轮播 -->
     <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}'/>
+    <!-- 活动产品倒计时提示 -->
     <view wx:if='{{proNavData}}' catchtap='goPage'>
       <product-promotion-info 
-      id="promotion"
-      bind:countdown="timeout" 
-      prop="{{proNavData}}"
-      promotionBg="{{'comming'}}" 
-      promotionDesc="{{promotionDesc}}"
-      from="normal"
-      promotionType="{{activityType}}" />
+        id="promotion"
+        bind:countdown="timeout" 
+        prop="{{proNavData}}"
+        promotionBg="{{'comming'}}" 
+        promotionDesc="{{promotionDesc}}"
+        from="normal"
+        promotionType="{{activityType}}" 
+      />
     </view>
     <!-- 产品信息 -->
-    <view class='prd-info boxSize'>
-      <view class='prd-name ellipsis-2'>{{productInfo.name}}</view>
-      <view class='price'>
-        <text class='price1 red'>¥ {{productInfoList.price}}<text class='font-24'>起</text></text>
-        <text class='price2 gray'>¥ {{productInfoList.originalPrice}}</text>
-        <text class='label-pd redBg'>{{productInfoList.priceLable}}</text>
-      </view>
-      <view class='shippingInfo gray'>
-        <text style='margin-right:158rpx'>快递：{{productInfoList.freight || '包邮'}}</text> 
-        <text>月销售{{productInfoList.monthSaleTotal}}笔</text>
-      </view>
-    </view>
+    <template is="product-info" data="{{productInfo,productInfoList,showPrice:true}}" />
     <!--产品规格选择  -->
     <view class='chooseBox'>
-      <!-- <view> -->
-        <product-specification id='prd-info-type' 
-            bind:subClicked="typeSubClicked"  
-            productSpec='{{productSpec}}' 
-            price = '{{productInfoList.price}}'
-            priceList='{{priceList}}' 
-            bind:counterInputOnChange='counterInputOnChange' 
-            imgUrl="{{productInfo.imgUrl}}" 
-            showImgs='{{true}}'
-            isInit="{{false}}" 
-            bind:hiddenTips='hiddenTips'
-            isIphoneX='{{isIPhoneX.isIPhoneX}}'
-            commodityType = '{{activityType}}'
-        >
-        <!-- <view class='cell-name'>规格</view>
-        <view class='cell-content'>{{selectType.productType? selectType.productType:'选择产品规格'}}</view> -->
-        </product-specification >
-      <!-- </view> -->
-      <view class='gray'>
-        <text class='label red' >服务</text>
-        正品保障·急速发货 <text wx:if='{{productInfo.afterSaleServiceDays>0}}'>{{productInfo.afterSaleServiceDays>30? 30:productInfo.afterSaleServiceDays}}天无理由退换货</text>
-        <text wx:else>无售后服务</text>
-      </view>
+      <template is="product-info-chooseBox" data="{{productInfo}}" />
     </view>
 
      <!--产品图文详情切换  -->
@@ -94,3 +66,19 @@
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
 
 <red-envelopes  id='redEnvelopes' door='2'/>
+
+<!-- 产品规格 -->
+
+<product-specification id='prd-info-type' 
+    bind:subClicked="typeSubClicked"  
+    productSpec='{{productSpec}}' 
+    price = '{{productInfoList.price}}'
+    priceList='{{priceList}}' 
+    bind:counterInputOnChange='counterInputOnChange' 
+    imgUrl="{{productInfo.imgUrl}}" 
+    showImgs='{{true}}'
+    isInit="{{false}}" 
+    bind:hiddenTips='hiddenTips'
+    isIphoneX='{{isIPhoneX.isIPhoneX}}'
+    commodityType = '{{activityType}}'
+/>

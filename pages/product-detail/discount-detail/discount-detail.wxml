@@ -1,13 +1,12 @@
 <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
-<!--商品展示竖向  -->
-<!-- <import src='/components/product-info-column/product-info-column.wxml' /> -->
 
 <!-- 消息显示模板 -->
 <import src= "/components/msg-tips/msg-tips.wxml"/>
 
-<import src="../../../libs/wxParse/wxParse.wxml" />
-
 <import src='/components/cell-line/cell-line.wxml'/>
+
+<import src= "/pages/product-detail/temp/product-price-infos/product-price-infos.wxml"/>
+
 
 <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%">
   <view class='prduct-detail-view'>
@@ -27,43 +26,13 @@
      promotionType="2"
      wx:if="{{proNavData.id}}"/>
     <!-- 产品信息 -->
-    <view class='prd-info boxSize'>
-      <view class='prd-name ellipsis-2'>{{productInfo.name}}</view>
-      <view class='shippingInfo gray'>
-        <text style='margin-right:158rpx'>快递：{{productInfoList.freight  || '包邮'}}</text> 
-        <text>月销售{{productInfoList.monthSaleTotal}}笔</text>
-      </view>
-    </view>
-    <!--产品规格选择  -->
+    <template is="product-info" data="{{productInfo,productInfoList,showPrice:false}}" />
+    <!-- 规则 -->
     <view class='chooseBox'>
-      <!-- <view> -->
-        <product-specification id='prd-info-type' 
-            bind:subClicked="typeSubClicked"  
-            productSpec='{{productSpec}}' 
-            price = '{{proNavData.markdownPrice}}'
-            priceList='{{priceList}}' 
-            bind:counterInputOnChange='counterInputOnChange' 
-            imgUrl="{{productInfo.imgUrl}}" 
-            showImgs='{{true}}'
-            isInit="{{false}}" 
-            commodityType='3'
-            bind:hiddenTips='hiddenTips'
-            specIds='{{specIds}}'
-            isIphoneX='{{isIPhoneX.isIPhoneX}}'
-        >
-        <!-- <view class='cell-name'>规格</view>
-        <view class='cell-content'>{{selectType.productType? selectType.productType:'选择产品规格'}}</view> -->
-        </product-specification >
-        <view bindtap='toggleShowRegular' style="padding: 0">
-          <template is="cell-line" data="{{name:'抢拍规则',placeholder:''}}"  /> 
-        </view>
-          
-      <!-- </view> -->
-      <view class='gray'>
-       <text class='label red' >服务</text>
-        正品保障·急速发货 <text wx:if='{{productInfo.afterSaleServiceDays>0}}'>{{productInfo.afterSaleServiceDays>30? 30:productInfo.afterSaleServiceDays}}天无理由退换货</text>
-        <text wx:else>无售后服务</text>
+      <view bindtap='toggleShowRegular' style="padding: 0">
+        <template is="cell-line" data="{{name:'抢拍规则',placeholder:''}}"  /> 
       </view>
+      <template is="product-info-chooseBox" data="{{productInfo}}" />
     </view>
     <!--产品图文详情切换  -->
     <product-infos article='{{article}}' nodes='{{nodes}}'/>
@@ -85,6 +54,20 @@
 
 </scroll-view>
 
+<!--产品规格选择  -->
+<product-specification id='prd-info-type' 
+  bind:subClicked="typeSubClicked"  
+  productSpec='{{productSpec}}' 
+  price = '{{proNavData.markdownPrice}}'
+  priceList='{{priceList}}' 
+  imgUrl="{{productInfo.imgUrl}}" 
+  showImgs='{{true}}'
+  isInit="{{false}}" 
+  commodityType='3'
+  bind:hiddenTips='hiddenTips'
+  specIds='{{specIds}}'
+  isIphoneX='{{isIPhoneX.isIPhoneX}}'
+></product-specification >
 
 <!--适配iPhone X  -->
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
@@ -96,3 +79,5 @@
  catchtouchmove="regularTouch"
  wx:if="{{showRegular}}"
  ></product-regular-toast>
+
+

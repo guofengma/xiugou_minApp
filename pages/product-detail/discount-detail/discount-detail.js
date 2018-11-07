@@ -1,7 +1,7 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
-
+import ProductFac from '../temp/product.js'
 Page({
   data: {
     door:2,
@@ -41,12 +41,10 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      // productId: options.productId || 1,
       prodCode: options.code
     })
     this.didLogin()
-    this.getTopicActivityData(this.data.prodCode);    
-    // this.requestFindProductByIdApp()
+    this.getTopicActivityData(this.data.prodCode);
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -64,31 +62,6 @@ Page({
   toggleScreenShowStatus(){
     this.setData({
       screenShow: !this.data.screenShow
-    })
-  },
-  videoClicked() {
-    this.setData({
-      autoplay: false
-    })
-    // Tool.navigateTo('/pages/my/information/information')
-  },
-  videoPause() {
-    this.setData({
-      autoplay: true
-    })
-  },
-  swiperImgCliked(e) {
-    let index = e.currentTarget.dataset.index
-    let src = this.data.imgUrls[index].smallImg
-    let urls = []
-    this.data.imgUrls.forEach((item) => {
-      if (item.smallImg) {
-        urls.push(item.smallImg)
-      }
-    })
-    wx.previewImage({
-      current: src, // 当前显示图片的http链接
-      urls: urls// 需要预览的图片http链接列表
     })
   },
   //获取专题活动数据  JJP201810100001
@@ -119,9 +92,16 @@ Page({
         proNavData: data,
         specIds: specIds,
         // productSpec: productSpec
-        jumpCommonProductTimer: jumpTimer
+        jumpCommonProductTimer: jumpTimer,
+        productId: data.productId
       })
-      this.requestFindProductByIdApp(data.productId, productSpec)
+      let callBack = ()=>{
+        this.setData({
+          productSpec: productSpec, // 规格描述
+        })
+      }
+      ProductFac.requestFindProductByIdApp(this, callBack)
+      //this.requestFindProductByIdApp(data.productId, productSpec)
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
       data.id && this.selectComponent('#promotion').init();
     };
@@ -205,72 +185,11 @@ Page({
     }
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + '&type=' + this.data.door)
   },
-  requestFindProductByIdApp(productId, productSpec) {
-    let params = {
-      id: productId,
-      requestMethod: 'GET',
-      reqName: '获取商品详情页',
-      url: Operation.findProductByIdApp
-    }
-    let r = RequestFactory.wxRequest(params);
-    let productInfo = this.data.productInfo
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
-      this.setData({
-        imgUrls: datas.productImgList,
-        productInfo: datas.product,
-        productInfoList: datas,
-        priceList: datas.priceList, // 价格表
-        productSpec: productSpec, // 规格描述
-      })
-      // 渲染表格
-      let tr = []
-      let tbody = this.data.nodes
-      for (let i = 0; i < datas.paramList.length; i++) {
-        tr.push(
-          {
-            name: "tr",
-            attrs: { class: "tr" },
-            children: [ {
-              name: "td",
-              attrs: { class: 'td frist-td' },
-              children: [{
-                type: "text",
-                text: datas.paramList[i].paramName
-              }]
-            },
-            {
-              name: "td",
-              attrs: { class: 'td td2' },
-              children: [{
-                type: "text",
-                text: datas.paramList[i].paramValue
-              }]
-            }
-            ]
-          }
-
-        )
-      }
-      tbody[0].children = tr
-      this.setData({
-        nodes: tbody
-      })
-      let html = datas.product.content
-      WxParse.wxParse('article', 'html', html, this, 5);
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
   typeSubClicked(e) {
     this.setData({
       selectType: e.detail
     })
-    if (this.data.selectType.typeClicked == 1) {
-      this.addToShoppingCart(1)
-    } else if (this.data.selectType.typeClicked == 2) {
-      this.makeSureOrder()
-    }
+    this.makeSureOrder()
   },
   btnClicked(e) {
     let n = parseInt(e.currentTarget.dataset.key)
@@ -299,11 +218,6 @@ Page({
   msgClicked() {
     this.setData({
       msgShow: !this.data.msgShow
-    })
-  },
-  counterInputOnChange(e) {
-    this.setData({
-      productBuyCount: e.detail
     })
   },
   onShareAppMessage: function (res) {

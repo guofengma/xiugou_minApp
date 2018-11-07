@@ -1,12 +1,12 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
+import ProductFac from './temp/product.js'
 const app = getApp()
 Page({
   data: {
     didLogin:false,
     imgUrls: [],
-    show:true,
     msgShow:false,
     selectType:{}, // 是否选择了商品类型
     floorstatus:false, // 是否显示置顶的按钮
@@ -43,7 +43,10 @@ Page({
     } else {
       this.getShoppingCartList()
     }
-    this.requestFindProductByIdApp()
+    let callBack2 =()=>{
+      this.activityByProductId(this.data.productId)
+    }
+    ProductFac.requestFindProductByIdApp(this, callBack2)
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -162,68 +165,6 @@ Page({
     Tool.showErrMsg(r)
     r.addToQueue();
   },
-  requestFindProductByIdApp(){
-    let url = this.data.prodCode? Operation.getProductDetailByCode : Operation.findProductByIdApp
-    let params = {
-      id: this.data.productId,
-      code:this.data.prodCode,
-      requestMethod: 'GET',
-      reqName: '获取商品详情页',
-      url: url
-    }
-    let r = RequestFactory.wxRequest(params);
-    let productInfo = this.data.productInfo
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data || {}
-      datas.priceLable = datas.priceType == 1 ? '原价' : datas.priceType == 2 ? "拼店价" : this.data.userInfos.levelName+"价"
-      this.setData({
-        imgUrls: datas.productImgList,
-        productInfo: datas.product,
-        productInfoList: datas,
-        priceList: datas.priceList, // 价格表
-        productSpec: datas.specMap, // 规格描述
-        productId: datas.product.id ? datas.product.id : this.data.productId
-      })
-      this.activityByProductId(this.data.productId)
-      // 渲染表格
-      let tr = []
-      let tbody = this.data.nodes
-      for (let i = 0; i < datas.paramList.length;i++){ 
-        tr.push(
-          {
-            name: "tr",
-            attrs: { class: "tr" },
-            children: [ {
-              name: "td",
-              attrs: { class:'td frist-td'},
-              children: [{
-                type: "text",
-                text: datas.paramList[i].paramName
-              }]
-            },
-            {
-              name: "td",
-              attrs: { class: 'td td2'},
-              children: [{
-                type: "text",
-                text: datas.paramList[i].paramValue
-              }]
-            }
-            ]
-          }  
-
-        )
-      }
-      tbody[0].children = tr
-      this.setData({
-        nodes: tbody
-      })
-      let html = datas.product.content 
-      WxParse.wxParse('article', 'html', html, this, 5);
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
   typeSubClicked(e){
     this.setData({
       selectType: e.detail
@@ -271,10 +212,8 @@ Page({
     })
   },
   onShareAppMessage: function (res) {
-
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
     }
     let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
     let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img:''
