@@ -2,12 +2,14 @@ let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
 Page({
   data: {
     detail: {},
-    jobId: ''
+    jobId: '',
+    statsus: 1
   },
   onLoad (options) {
     console.log(options)
     this.setData({
-      jobId: options.jobId
+      jobId: options.jobId,
+      status: options.status || 1
     })
     this.getTaskDetail(options.jobId)
   },

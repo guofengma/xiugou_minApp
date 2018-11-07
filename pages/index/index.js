@@ -46,7 +46,6 @@ Page({
       hasTask: false,
       showCard: false, // 任务领取窗口展示
       isScroll: false,
-      scrollTimer: null,
       downPriceParam:{
         1: 'startPrice',
         2: 'markdownPrice',
@@ -61,6 +60,12 @@ Page({
       this.toggleCardShow();
     },
     toggleCardShow() {
+      if(this.data.isScroll) {
+        this.setData({
+          isScroll: false
+        })
+        return;
+      }
       this.setData({
         showCard: !this.data.showCard
       })
@@ -107,17 +112,10 @@ Page({
       this.setData({
         changeBg:changeBg
       })
-      clearTimeout(this.data.scrollTimer);
-      if (this.data.isScroll) return;
+      if (this.data.isScroll) return;  
       this.setData({
         isScroll: true,
       })
-      let timer = setTimeout(()=>{
-        this.setData({
-          isScroll: false,
-          scrollTimer: timer
-        });
-      },1000);
     },
     onLoad: function (options) {
       Event.on('getLevel', this.getLevel,this)

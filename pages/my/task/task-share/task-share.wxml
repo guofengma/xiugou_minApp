@@ -32,10 +32,15 @@
         <view class='noting-msg'>{{scratchCard.priceInfo}}</view>
       </view>
       <view 
-        class='lottery_btn {{scratchCard.status == 2 ? "active":"inactive"}}' 
+        class='lottery_btn active' 
         catchtap='toggleModalShow'
-        data-status="{{scratchCard.status}}"
-      >{{scratchCard.status == 2 ? '立即领取':'已领取'}}</view>
+        wx:if="{{scratchCard.status == 2}}"
+      >立即领取}</view>
+      <view 
+        class='lottery_btn active' 
+        catchtap='toIndex'
+        wx:else
+      >去使用</view>
     </view>
     <view class='task-detail-desc'>
       <image mode='widthFix' src='{{imgUrl}}task_detail_bg.png' class='task-thumb'></image>
