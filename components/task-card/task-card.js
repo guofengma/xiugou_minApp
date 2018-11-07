@@ -29,7 +29,7 @@ Component({
       this.triggerEvent('get')
     },
     showAccount() {
-      Tool.navigateTo('/pages/my/my');
+      Tool.navigateTo('/pages/my/my-account/cash/cash');
     }
   },
   ready(){
