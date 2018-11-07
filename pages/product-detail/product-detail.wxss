@@ -18,56 +18,6 @@
   box-sizing: border-box;
   padding: 0 30rpx;
 }
-/* .prd-info{
-  color: #bbb;
-  font-size: 22rpx;
-  padding: 30rpx;
-}
-.prd-name{
-  font-size: 30rpx;
-  color: #222;
-  max-height: 80rpx;
-  margin-bottom: 25rpx;
-}
-.price1{
-  font-size: 36rpx;
-}
-.price2,.label-pd{
-  font-size: 20rpx;
-  margin-left: 7rpx;
-}
-.label-pd{
-  border-radius: 6rpx;
-  padding: 4rpx 10rpx;
-  margin-right: 30rpx;
-}
-.chooseBox .label,.price3{
-  border:1rpx solid;
-  border-radius: 6rpx;
-  padding: 4rpx 16rpx;
-}
-.chooseBox .label{
-  font-size: 26rpx;
-  margin-right: 20rpx;
-}
-.price3{
-  font-size: 18rpx;
-  margin-right: 23rpx;
-}
-.shippingInfo{
-  margin-top: 25rpx;
-}
-.chooseBox{
-  margin: 24rpx 0;
-  font-size: 26rpx;
-}
-.chooseBox>view{
-  height: 90rpx;
-  line-height: 90rpx;
-  box-sizing: border-box;
-  padding: 0 30rpx;
-} */
-
 
 /*底部的bar   */
 .bottom-bar{

@@ -14,6 +14,14 @@ Page({
         '/pages/product-detail/seckill-detail/seckill-detail?code=',
         '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
       ],
+      redirectTo:{
+        1:'/pages/product-detail/seckill-detail/seckill-detail?code=',
+        2:'/pages/product-detail/discount-detail/discount-detail?code=',
+        3:'/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
+        4:'/pages/index/index',
+        5:'/pages/topic/topic?code=',
+        99:'/pages/product-detail/product-detail?productId='
+      },// 1.秒杀 2.降价拍 3.礼包 4.助力免费领 5.专题 99.普通产品
       iconArr:[ // icon 图标
         { name: '赚钱', img:'home-icon-xueyuan.png',page:''},
         { name: '分享', img: 'home_icon_share.png', page: '' },
@@ -111,7 +119,7 @@ Page({
         });
       },1000);
     },
-    onLoad: function () {
+    onLoad: function (options) {
       Event.on('getLevel', this.getLevel,this)
       this.queryAdList(1,'轮播图片',(datas)=>{
         this.setData({
@@ -159,6 +167,9 @@ Page({
       }
       app.wxLogin()
       Event.on('didLogin', this.didLogin, this);
+      if (options.type) { // 页面跳转
+        Tool.navigateTo(this.data.redirectTo[options.type] + options.id)
+      }
     },
     goPages(e){
       let index = e.currentTarget.dataset.index
