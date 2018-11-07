@@ -35,7 +35,7 @@
         class='lottery_btn active' 
         catchtap='toggleModalShow'
         wx:if="{{scratchCard.status == 2}}"
-      >立即领取}</view>
+      >立即领取</view>
       <view 
         class='lottery_btn active' 
         catchtap='toIndex'
