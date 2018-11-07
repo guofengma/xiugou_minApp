@@ -95,7 +95,7 @@
       },
       {
         "pagePath": "pages/discover/discover",
-        "text": "发现",
+        "text": "秀场",
         "iconPath": "/img/tabbar/discover_unselected.png",
         "selectedIconPath": "/img/tabbar/discover_selected.png"
       },
