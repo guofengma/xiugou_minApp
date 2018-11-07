@@ -3,13 +3,13 @@ Page({
   data: {
     detail: {},
     jobId: '',
-    statsus: 1
+    statsus: ''
   },
   onLoad (options) {
     console.log(options)
     this.setData({
       jobId: options.jobId,
-      status: options.status || 1
+      status: options.status || ''
     })
     this.getTaskDetail(options.jobId)
   },

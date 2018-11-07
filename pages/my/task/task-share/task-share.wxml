@@ -11,7 +11,7 @@
         <view class='coupon-money'>{{scratchCard.value}}<text class='symbol'>元</text></view>
         <view class='coupon-info'>
           <view class='coupon-title'>{{scratchCard.name || ''}}</view>
-          <view class='coupon-detail'>满{{useConditions||'0'}}减{{scratchCard.value}}{{scratchCard.couponType == 3? '折': '元'}}
+          <view class='coupon-detail'>{{scratchCard.couponName}}
           <!-- 优惠劵类型 1: 满减 2:抵价 3:折扣 4:抵扣 -->
           </view>
           <view class='coupon-time' wx:if="{{scratchCard.status == 1}}">使用期限：
