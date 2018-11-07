@@ -6,15 +6,17 @@
       <view class='lottery_btn inactive'>立即领取</view>
     </view>
     <view class='task-share-card' wx:else>
-      <!-- 抽中优惠券 -->
+      <!-- typeStatus：是否抽中优惠券 couponType：优惠券类型 status：是否领取-->
       <view class='task-card coupon flexR' wx:if="{{scratchCard.typeStatus == 1}}">
         <view class='coupon-money'>{{scratchCard.value}}<text class='symbol'>元</text></view>
         <view class='coupon-info'>
           <view class='coupon-title'>{{scratchCard.name || ''}}</view>
-          <view class='coupon-detail'>满{{useConditions||'0'}}减{{scratchCard.value}}{{scratchCard.type == 3? '折': '元'}}
+          <view class='coupon-detail'>满{{useConditions||'0'}}减{{scratchCard.value}}{{scratchCard.couponType == 3? '折': '元'}}
           <!-- 优惠劵类型 1: 满减 2:抵价 3:折扣 4:抵扣 -->
           </view>
-          <view class='coupon-time' wx:if="{{scratchCard.status == 1}}">使用期限：{{deadline}}</view>
+          <view class='coupon-time' wx:if="{{scratchCard.status == 1}}">使用期限：
+            <view>{{deadline}}</view>
+          </view>
         </view>
       </view>
       <!-- 秀豆 -->
@@ -32,6 +34,7 @@
       <view 
         class='lottery_btn {{scratchCard.status == 2 ? "active":"inactive"}}' 
         catchtap='toggleModalShow'
+        data-status="{{scratchCard.status}}"
       >{{scratchCard.status == 2 ? '立即领取':'已领取'}}</view>
     </view>
     <view class='task-detail-desc'>

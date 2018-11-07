@@ -12,9 +12,10 @@ Component({
     showCard: false,    
     countdownTime: '00:00:00:00',
     showDetail: false,
-    delay: 90,
+    delay: 1000,
     cardType: 'loading',
-    cardData: {}
+    cardData: {},
+    startTime: ''
   },
   methods: {
     toggleShowDetail() {
@@ -50,8 +51,8 @@ Component({
       let h = parseInt(c / 1000 / 60 / 60) - (24 * d);
       let m = parseInt(c / 1000 / 60 - (24 * 60 * d) - (60 * h));
       let s = parseInt(c / 1000 - (24 * 60 * 60 * d) - (60 * 60 * h) - (60 * m)); //
-      let ms = Math.floor((c - (24 * 60 * 60 * 1000 * d) - (60 * 60 * 1000 * h) - (60 * 1000 * m) - (s * 1000)) / 10);
-      return ([h + d * 24, m, s, ms]).map(Tool.formatNumber).join(':');
+      // let ms = Math.floor((c - (24 * 60 * 60 * 1000 * d) - (60 * 60 * 1000 * h) - (60 * 1000 * m) - (s * 1000)) / 10);
+      return ([h + d * 24, m, s]).map(Tool.formatNumber).join(':');
     },
     close() {
       this.toggleCardShow();
@@ -60,6 +61,9 @@ Component({
       this.setData({
         showCard: !this.data.showCard
       })
+    },
+    emptyEvent() {
+      return;
     },
     // 开启奖励
     openAward(e) {
@@ -82,7 +86,11 @@ Component({
       Tool.showErrMsg(r)
       r.addToQueue();
       
-    }
+    },
+    toDetail(e) {
+      let id = e.currentTarget.dataset.id;
+      Tool.navigateTo('/pages/my/task/task-detail/task-detail?jobId=' + id)
+    },
   },
   onShareAppMessage() {
     let data = e.target.dataset;
@@ -94,5 +102,8 @@ Component({
   },
   ready() {
     this.countdown();
+    this.setData({
+      startTime: Tool.formatTime(this.data.item.createTime).split(' ')[0] || ''
+    })
   }
 })

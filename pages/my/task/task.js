@@ -31,12 +31,6 @@ Page({
   onShow () {
     this.getTask();
   },
-  onHide () {
-
-  },
-  onUnload () {
-
-  },
   onShareAppMessage(e) {
     let data = e.target.dataset;
     return ({
