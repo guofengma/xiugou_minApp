@@ -68,5 +68,19 @@ const ProductFac = {
     Tool.showErrMsg(r)
     r.addToQueue();
   },
+  msgTipsClicked(e) { // 轮播右上角分享点击事件
+    let n = parseInt(e.currentTarget.dataset.index)
+    switch (n) {
+      case 1:
+        Tool.navigateTo('/pages/my/information/information')
+        break;
+      case 2:
+        Tool.switchTab('/pages/index/index')
+        break;
+      case 3:
+
+        break;
+    }
+  },
 }
 export default ProductFac

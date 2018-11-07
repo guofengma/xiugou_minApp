@@ -59,6 +59,9 @@ Page({
   onHide() {
     this.toggleScreenShowStatus();
   },
+  msgTipsClicked(e) { // 轮播右上角分享点击事件
+    ProductFac.msgTipsClicked(e)
+  },
   toggleScreenShowStatus(){
     this.setData({
       screenShow: !this.data.screenShow
@@ -233,7 +236,7 @@ Page({
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/discount-detail/discount-detail?code=' + this.data.prodCode,
+      path: '/pages/index/index?type=2&id=' + this.data.prodCode,
       imageUrl: imgUrl
     }
   },

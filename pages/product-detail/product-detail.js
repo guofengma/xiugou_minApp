@@ -56,6 +56,9 @@ Page({
   refreshMemberInfoNotice() {
     Tool.getUserInfos(this)
   },
+  msgTipsClicked(e) { // 轮播右上角分享点击事件
+    ProductFac.msgTipsClicked(e)
+  },
   didLogin() {
     Tool.didLogin(this)
     this.refreshMemberInfoNotice()
@@ -212,15 +215,12 @@ Page({
     })
   },
   onShareAppMessage: function (res) {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-    }
     let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
     let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img:''
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/product-detail?productId=' + this.data.productInfo.id + '&inviteCode=' + inviteCode,
+      path: '/pages/index/index?type=99&id=' + this.data.productInfo.id + '&inviteCode=' + inviteCode,
       imageUrl: imgUrl
     }
   },

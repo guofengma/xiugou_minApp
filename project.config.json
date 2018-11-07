@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 44,
+			"current": 46,
 			"list": [
 				{
 					"id": 0,
@@ -310,6 +310,11 @@
 					"name": "邀请码",
 					"pathName": "pages/register/write-invite-code/write-invite-code",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "支付成功",
+					"pathName": "pages/my/information/informationDetail/informationDetail"
 				}
 			]
 		}

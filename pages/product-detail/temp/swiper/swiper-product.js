@@ -1,4 +1,5 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
+import ProductFac from '../product.js'
 
 Component({
   properties: {
@@ -32,18 +33,7 @@ Component({
       })
     },
     msgTipsClicked(e) { // 轮播右上角分享点击事件
-      let n = parseInt(e.currentTarget.dataset.index)
-      switch (n) {
-        case 1:
-          Tool.navigateTo('/pages/my/information/information')
-          break;
-        case 2:
-          Tool.switchTab('/pages/index/index')
-          break;
-        case 3:
-
-          break;
-      }
+      ProductFac.msgTipsClicked(e)
     },
     sliderChange(e) { // 轮播切换事件
       this.setData({

@@ -1,13 +1,13 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
+import ProductFac from '../temp/product.js'
 
 Page({
   data: {
     ysf: { title: '礼包详情' },
     didLogin: false,
     imgUrls: [],
-    show: true,
     msgShow: false,
     selectType: {}, // 是否选择了商品类型
     floorstatus: false, // 是否显示置顶的按钮
@@ -43,18 +43,8 @@ Page({
   onShow: function () {
     this.getGiftBagDetail()
   },
-  videoClicked() {
-    this.setData({
-      autoplay: false
-    })
-  },
-  videoPause(){
-    this.setData({
-      autoplay: true
-    })
-  },
-  imageLoad(e) {
-    Tool.getAdaptHeight(e, this)
+  msgTipsClicked(e) { // 轮播右上角分享点击事件
+    ProductFac.msgTipsClicked(e)
   },
   swiperImgCliked(e) {
     let index = e.currentTarget.dataset.index
@@ -228,18 +218,13 @@ Page({
       msgShow: !this.data.msgShow
     })
   },
-  counterInputOnChange(e) {
-    this.setData({
-      productBuyCount: e.detail
-    })
-  },
   onShareAppMessage: function (res) {
     let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
     let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img : ''
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.giftBagId + '&inviteCode=' + inviteCode,
+      path: '/pages/index/index?type=3&id=' + this.data.giftBagId + '&inviteCode=' + inviteCode,
       imageUrl: imgUrl
     }
   },
