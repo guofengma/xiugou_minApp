@@ -21,8 +21,9 @@ Page({
         4:'/pages/index/index',
         5:'/pages/topic/topic?code=',
         99:'/pages/product-detail/product-detail?productId=',
-        100:'/pages/web-view/web-view?id='
-      },// 1.秒杀 2.降价拍 3.礼包 4.助力免费领 5.专题 99.普通产品 100:嵌入H5的页面地址
+        100:'/pages/web-view/web-view?id=',
+        101:'/pages/register/register?inviteId='
+      },// 1.秒杀 2.降价拍 3.礼包 4.助力免费领 5.专题 99.普通产品 100:嵌入H5的页面地址 101注册
       iconArr:[ // icon 图标
         { name: '赚钱', img:'home-icon-xueyuan.png',page:''},
         { name: '分享', img: 'home_icon_share.png', page: '' },

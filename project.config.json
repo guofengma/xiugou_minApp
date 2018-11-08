@@ -41,7 +41,7 @@
 					"id": 0,
 					"name": "注册",
 					"pathName": "pages/register/register",
-					"query": "inviteCode="
+					"query": "inviteId=null"
 				},
 				{
 					"id": 1,
