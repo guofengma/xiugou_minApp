@@ -1,7 +1,8 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
-import ProductFac from './temp/product.js'
+// import ProductFac from './temp/product.js'
+import ProductFactory from './temp/product.js'
 const app = getApp()
 Page({
   data: {
@@ -39,9 +40,9 @@ Page({
     let callBack2 =()=>{
       this.activityByProductId(this.data.productId)
     }
-    console.log(ProductFac)
-    // let ProductFac = new ProductFac()
-    ProductFac.requestFindProductByIdApp(this,callBack2)
+    // console.log(ProductFac)
+    let ProductFactory = new ProductFactory(this)
+    ProductFactory.requestFindProductByIdApp(callBack2)
     
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);

@@ -1,7 +1,7 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
-import ProductFac from '../temp/product.js'
+import ProductFactory from '../temp/product.js'
 
 Page({
   data: {

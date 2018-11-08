@@ -1,4 +1,4 @@
-import ProductFac from '../product.js'
+import ProductFactory from '../product.js'
 Component({
   properties: {
     imgUrl:String,
@@ -16,7 +16,7 @@ Component({
       })
     },
     msgTipsClicked(e) { // 轮播右上角分享点击事件
-      new ProductFac.msgTipsClicked(e,this.data.didLogin)
+      new ProductFactory().msgTipsClicked(e,this.data.didLogin)
     },
   }
 })

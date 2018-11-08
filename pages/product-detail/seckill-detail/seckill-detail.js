@@ -1,7 +1,7 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
-import ProductFac from '../temp/product.js'
+import ProductFactory from '../temp/product.js'
 
 Page({
   data: {
@@ -89,7 +89,8 @@ Page({
           productSpec: productSpec, // 规格描述
         })
       }
-      new ProductFac.requestFindProductByIdApp(this, callBack)
+      let ProductFactory = new ProductFactory(this)
+      ProductFactory.requestFindProductByIdApp(callBack2)
       //this.requestFindProductByIdApp(data.productId, productSpec)
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
 
