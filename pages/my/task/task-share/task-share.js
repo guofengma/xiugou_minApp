@@ -12,8 +12,9 @@ Page({
     isNewUser: false,
     tableId: '',
     scratchCard: {
-      // status: 1, //是否领取 1. 是 2.否
-      // typeStatus: 1
+      "id": 1,
+      "typeStatus": 0,
+      "status": 1
     },//刮刮卡信息
     scratchCode: '',
     deadline: ''
@@ -199,5 +200,27 @@ Page({
   },
   toIndex() {
     Tool.switchTab('/pages/index/index')
+  },
+  
+  seesese() {
+    if (this.data.userInfos.phone) {
+      Tool.switchTab('/pages/index/index');
+
+    } else {
+      let params = {
+        url: Operation.existedUserByOpenId,
+        openid: Storage.getterFor('openid')
+      };
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        if (req.responseObject.data) {
+          Tool.switchTab('/pages/index/index');
+        } else {
+          Tool.navigateTo('/pages/register/register');
+        }
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    }
   }
 })

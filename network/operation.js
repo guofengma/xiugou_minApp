@@ -636,6 +636,10 @@ export default class Operation {
 
         this.userExtVerify = '/user/userLogin/scratchUserVerify'
 
+        // 根据用户openid检验是否注册
+
+        this.existedUserByOpenId = '/user/userLogin/existedUserByOpenId'
+
         __instance(this);
 
     }

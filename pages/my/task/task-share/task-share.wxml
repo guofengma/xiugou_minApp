@@ -41,8 +41,13 @@
       >立即领取</view>
       <view 
         class='lottery_btn active' 
+        catchtap='seesese'
+        wx:elif="{{scratchCard.typeStatus === 0}}"
+      >再逛逛~</view>
+      <view 
+        class='lottery_btn active' 
         catchtap='toIndex'
-        wx:else
+        wx:elif="{{scratchCard.status == 1}}"
       >去使用</view>
     </view>
     <view class='task-detail-desc'>
