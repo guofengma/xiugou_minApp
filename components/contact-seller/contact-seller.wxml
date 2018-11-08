@@ -1,4 +1,6 @@
-<view class='contact-seller'>
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<view class='contact-seller {{isIPhoneX.className}}'>
   <!-- <view class='flexC'> -->
     <!-- <view>联系卖家</view>
     <view class='gray'>9:00-17:00</view> -->
@@ -6,12 +8,14 @@
       session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"
       open-type="contact"
       >
-        <view>联系卖家</view>
+        <view>在线客服</view>
         <view class='gray'>8:30-24:00</view>
     </button>
   <!-- </view> -->
   <view class='flexC' bindtap='makePhoneCall'>
-    <view>拨打电话</view>
+    <view>咨询电话</view>
     <view class='gray'>8:30-24:00</view>
   </view>
 </view>
+  <!--适配iPhone X  -->
+  <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

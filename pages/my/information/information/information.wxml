@@ -1,5 +1,5 @@
-<!--无数据-->
-<import src='/components/nodata-tips/nodata-tips.wxml'/>
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
 <view class='sub-page'>
 
 <block wx:if="{{list.length>0}}">
@@ -115,7 +115,7 @@
 
 <block wx:else>
     <view class='sub-page'>
-        <template is="nodata-tips"/>
+        <template is="result-tips"  data="{{tipVal:5}}" />
     </view>
 </block>
 </view>

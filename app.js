@@ -20,7 +20,6 @@ App({
       global.Operation = Operation
       global.Config = config
       this.getSystemInfo();
-      // this.wxLogin()
       if (!Storage.getPlatform()){
         let uuid = Tool.getUUID()
         Storage.setPlatform(uuid)
@@ -33,12 +32,9 @@ App({
         userInfo: null,
         openid: null,
         code: null,
-        flag: false,//退出登录使用参数
-        isGoLogin:true
     },
     wxLogin(callBack=()=>{}){
       // 小程序登录
-      // this.globalData.isGoLogin = isGoLogin
       wx.login({
         success: res => {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -63,9 +59,6 @@ App({
         Tool.loginOpt(req)
         let datas = req.responseObject.data
         Storage.setWxOpenid(datas.openid)
-        // if (!datas.id && this.globalData.isGoLogin){
-        //   Tool.navigateTo('/pages/login-wx/login-wx')
-        // }
         callBack()
       }
       Tool.showErrMsg(r)
@@ -95,7 +88,6 @@ App({
           res.windowHeight = res.windowHeight * res.rate;
           res.windowWidth = res.windowWidth * res.rate;
           Storage.setSysInfo(res);
-          // that.toLogin(that.globalData.code)
           that.globalData.systemInfo = res
           typeof cb == "function" && cb(that.globalData.systemInfo)
         }

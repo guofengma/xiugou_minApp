@@ -6,8 +6,22 @@ Page({
   onLoad: function (options) {
   
   },
+  updateUserCodeById(){
+    let params = {
+      upCode: this.data.code,
+      reqName: 'code绑定',
+      url: Operation.updateUserCodeById,
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let datas = req.responseObject.data
+      this.next()
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  },
   changeInput(e){
-    if (e.detail.value.length>=11){
+    if (e.detail.value.length>=3){
       this.setData({
         code: e.detail.value,
         disabled:false
@@ -19,5 +33,11 @@ Page({
       Tool.switchTab('/pages/index/index')
     }
     Tool.showSuccessToast('注册成功', callBack)
+  },
+  dismiss(){
+    this.next()
+  },
+  onUnload(){
+    Tool.showSuccessToast('注册成功')
   }
 })

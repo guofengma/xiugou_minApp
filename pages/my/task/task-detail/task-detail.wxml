@@ -7,5 +7,5 @@
     </view>
   </view>
   <view class='fixed-height'></view>
-  <button class='share' open-type='share'>分享好友帮您点击</button>
+  <button class='share' open-type='share' wx:if="{{status == 1}}">分享好友帮您点击</button>
 </view>

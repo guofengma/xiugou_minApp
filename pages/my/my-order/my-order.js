@@ -18,7 +18,7 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      num: options.query
+      num: options.query || ''
     });
     this.selectComponent("#orderList").getData(this.data.num);
   },

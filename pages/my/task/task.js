@@ -4,7 +4,6 @@ Page({
     jobs: []
   },
   onLoad(options) {
-    this.getTask();
   },
   getTask() {
     let params = {
@@ -14,7 +13,6 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let data = req.responseObject.data || [];
-      console.log(data);
       this.setData({
         jobs: data
       })
@@ -29,19 +27,13 @@ Page({
 
   },
   onShow () {
-
-  },
-  onHide () {
-
-  },
-  onUnload () {
-
+    this.getTask();
   },
   onShareAppMessage(e) {
-    console.log('/pages/my/task/task-share/task-share?inviteId=' + Storage.getterFor('userAccountInfo').inviteId)
+    let data = e.target.dataset;
     return ({
-      title: e.target.dataset.remark,
-      path: '/pages/my/task/task-share/task-share?inviteId=' + Storage.getterFor('userAccountInfo').inviteId,
+      title: data.remark,
+      path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id}&jobId=${data.id}`,
       imageUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png'
     });
   }

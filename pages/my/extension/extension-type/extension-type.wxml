@@ -1,13 +1,21 @@
-<view class='extension-banner font-26'>
+<view class='sub-page'>
+ <view class='extension-banner font-26'>
   <image-sub imgStyle='{{"width:100%"}}' imgSrc="{{'banner-extension@2x.png'}}"/>
-</view>
-
-<view class='content'>
-  <view class='whiteBg font-26 flexR' catchtap='itemClicked' data-num='50'>50元推广试用套餐/推广周期7天</view>
-  <view class='font-26 flexC disabledBg' catchtap='itemClicked' data-num='100'>
-    100元推广试用套餐/推广周期14天
-    <view>每人限购一份</view>
   </view>
-  <view class='whiteBg font-26 flexR' catchtap='itemClicked' data-num='500'>500元推广试用套餐/推广周期30天</view>
-  <view class='whiteBg font-26 flexR'  catchtap='itemClicked' data-num='1000'>1000元推广试用套餐/推广周期30天</view>
+
+  <view class='content'>
+    <block wx:for='{{list}}' wx:key='{{index}}'>
+      <view class='font-26 flexC {{item.userBuy? "":"disabledBg"}}' catchtap='itemClicked' data-index='{{index}}'>
+        {{item.name}}/推广周期{{item.cycle}}天
+        <view wx:if='{{!item.userBuy}}'>每人限购{{item.buyLimit}}份</view>
+      </view>
+    </block>
+    <!-- <view class='whiteBg font-26 flexR' catchtap='itemClicked' data-num='50'>50元推广试用套餐/推广周期7天</view>
+    <view class='font-26 flexC disabledBg' catchtap='itemClicked' data-num='100'>
+      100元推广试用套餐/推广周期14天
+      <view>每人限购一份</view>
+    </view>
+    <view class='whiteBg font-26 flexR' catchtap='itemClicked' data-num='500'>500元推广试用套餐/推广周期30天</view>
+    <view class='whiteBg font-26 flexR'  catchtap='itemClicked' data-num='1000'>1000元推广试用套餐/推广周期30天</view> -->
+  </view>
 </view>

@@ -3,6 +3,8 @@
   "component": true,
   "usingComponents": {
     "adder-subtractor": "/components/adder-subtractor/adder-subtractor",
-    "delete-bar":"/components/delete-bar/delete-bar"
-  }
+    "delete-bar":"/components/delete-bar/delete-bar",
+    "image-sub": "/components/image-sub/image-sub"
+  },
+  "enablePullDownRefresh": true
 }

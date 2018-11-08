@@ -34,11 +34,12 @@
     border-bottom: 1px solid #eee
 }
 
-.item image {
+.item image,.item cover-image  {
     width: 35rpx;
     height: 30rpx;
     vertical-align: middle;
     margin-right: 5rpx;
+    display:inline-block;
 }
 
 

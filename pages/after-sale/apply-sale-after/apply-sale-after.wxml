@@ -31,7 +31,7 @@
       <template is="address-info" data="{{addressType:1,...list.address,hasData:true}}"/>
     </view>
     <view class='cell-line'>{{reason[refundType].info}}</view>
-    <textarea wx:if='{{!hidden}}'   class='textarea' placeholder="{{placeholder.placeholder}}" disabled='{{placeholder.disabled}}' placeholder-class='textarea gray' bindinput='inputChange' value='{{remark}}'/>
+    <textarea wx:if='{{textarea}}'   class='textarea' placeholder="{{placeholder.placeholder}}" disabled='{{placeholder.disabled}}' placeholder-class='textarea gray' bindinput='inputChange' value='{{remark}}'/>
     <view class='textarea' wx:else></view>
   </view>
   <view class='cell-line'>上传凭证</view>
@@ -64,5 +64,6 @@
   showImgs='{{true}}' 
   isIphoneX='{{isIPhoneX.isIPhoneX}}'
   commodityType = '5'
+  bind:hiddenTips ='hiddenTips'
   productPriceId = '{{productPriceId.productPriceId}}'
 />

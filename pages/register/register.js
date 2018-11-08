@@ -18,13 +18,16 @@ Page({
       invalid:false,
       tips:''
     },
-    isAgree:false
+    isAgree:false,
+    urlFrom: null,
   },
   onLoad: function (options) {
     this.setData({
       codeId: options.inviteCode || '',
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
+      urlFrom: options.from || null,
+      phone: options.phone || ''
     })
     if (options.inviteCode){
       let callBack = () => {
@@ -39,7 +42,7 @@ Page({
   sweepCode(id){ // 判断邀请码是否过期等
     let params = {
       code: id,
-      identity: Storage.getd(),
+      identity: Storage.getWxOpenid(),
       reqName: '邀请码是否过期',
       url: Operation.sweepCode
     }
@@ -96,12 +99,14 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      let callBack = () => {
+      // let callBack = () => {
         Storage.setMemberId(req.responseObject.data.id)
         Tool.loginOpt(req)
-        Tool.switchTab('/pages/index/index')
-      }
-      Tool.showSuccessToast('注册成功', callBack)
+        if (this.data.urlFrom) Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
+        else Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
+        // Tool.switchTab('/pages/index/index')
+      // }
+      // Tool.showSuccessToast('注册成功', callBack)
     }
     Tool.showErrMsg(r)
     r.addToQueue();

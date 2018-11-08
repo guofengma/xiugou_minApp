@@ -1,4 +1,4 @@
-<view class='whiteBg'>
+<view class='whiteBg amend-view'>
   <view class='font-30 amend-tips-view flexR-sb'>
     您已成功发起{{applyType}}申请，请耐心等待商家处理。
   </view>

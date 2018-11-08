@@ -105,27 +105,6 @@
 .wrap .icon{
     margin-top: 32rpx;
 }
-.footer{
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    height:117rpx ;
-    background: #fff;
-    font-size: 22rpx;
-    color: #666666;
-    padding:15rpx 0;
-    border-top:1rpx solid #eee;
-}
-.footer image{
-    width: 50rpx;
-    height: 50rpx;
-}
-.footer>view{
-    width: 50%;
-}
-.footer>view:first-child{
-    border-right: 1rpx solid #ddd;
-}
 .go-cart-view{
   background: transparent;
   padding: 0;

@@ -6,8 +6,8 @@
     </view>
     <view class='task-detail' wx:if="{{showDetail}}">
       <view class='task-desc'>任务说明：{{item.remarks}}</view>
-      <view class='task-start'>任务开始时间： 2018-10-29</view>
-      <view class='task-info-wrap'>
+      <view class='task-start'>任务开始时间：{{startTime}}</view>
+      <view class='task-info-wrap' catchtap='toDetail' data-id="{{item.id}}" data-status="{{item.status}}" id="wrap">
         <view class='task-info-detail'>
         <!-- 任务状态 status: 1进行中 2已结束 -->
           <view class='task-status' wx:if="{{item.status == 1}}">
@@ -16,10 +16,20 @@
           <view class='task-status' wx:else>
             任务已结束
           </view>
-          <button open-type='share' data-remark="{{item.remarks}}" wx:if="{{item.status == 1}}">继续分享</button>
+          <button data-remark="{{item.remarks}}" data-id="{{item.id}}" wx:if="{{item.status == 1}}">继续分享</button>
           <button wx:elif="{{item.status == 2}}">等待开奖</button>
-          <button bindtap='openAward' wx:elif="{{item.status == 3}}">开启奖励</button>
-          <view class='task-info-tip' wx:if="{{item.status<=3}}">{{item.shareHits>0?'明天12点开奖':'暂无好友激活'}} </view>
+          <button catchtap='openAward' data-id="{{item.id}}" wx:elif="{{item.status == 3}}">开启奖励</button>
+          <view class='task-result' wx:else>
+            <view class='task-result-detail' wx:if="{{item.recieveMoney > 0}}">获得了<text>{{item.recieveMoney}}</text>元现金奖励</view>
+            <view class='task-result-detail' wx:else>
+              <view>没有任何秀友帮你激活~</view>
+              <view>下次再接再厉~</view>
+            </view>
+          </view>
+          <view class='task-info-tip' wx:if="{{item.status<=3}}">
+            <text wx:if="{{item.status == 1 && item.shareHits == 0}}">暂无好友激活</text>
+            <text wx:if="{{(item.status == 1 && item.shareHits > 0) || item.status == 2 }}">{{item.desc}}</text>
+          </view>
         </view>
       </view>
     </view>
@@ -31,10 +41,10 @@
     <view class='task-status' wx:else>
       任务倒计时： 已结束
     </view>
-    <view class="task-delay flexR-sb" wx:if="{{item.status==3}}">
+    <view class="task-delay flexR-sb" wx:if="{{item.status==2 || item.status==3}}">
         <image class='redpackage' src='/img/redpackage.png'></image> 
         <text>待开奖</text> 
     </view>
   </view>
-  <task-card bind:close="close" wx:if="{{showCard}}" type="{{cardType}}"></task-card>  
+  <task-card bind:close="close" wx:if="{{showCard}}" card="{{cardData}}" type="{{cardType}}"></task-card>  
 </view>

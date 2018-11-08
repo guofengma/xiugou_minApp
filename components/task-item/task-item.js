@@ -1,4 +1,4 @@
-let { Tool, Config } = global;
+let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
 Component({
   properties: {
     item: {
@@ -12,8 +12,10 @@ Component({
     showCard: false,    
     countdownTime: '00:00:00:00',
     showDetail: false,
-    delay: 90,
-    cardType: 'loading'
+    delay: 1000,
+    cardType: 'loading',
+    cardData: {},
+    startTime: ''
   },
   methods: {
     toggleShowDetail() {
@@ -49,8 +51,8 @@ Component({
       let h = parseInt(c / 1000 / 60 / 60) - (24 * d);
       let m = parseInt(c / 1000 / 60 - (24 * 60 * d) - (60 * h));
       let s = parseInt(c / 1000 - (24 * 60 * 60 * d) - (60 * 60 * h) - (60 * m)); //
-      let ms = Math.floor((c - (24 * 60 * 60 * 1000 * d) - (60 * 60 * 1000 * h) - (60 * 1000 * m) - (s * 1000)) / 10);
-      return ([h + d * 24, m, s, ms]).map(Tool.formatNumber).join(':');
+      // let ms = Math.floor((c - (24 * 60 * 60 * 1000 * d) - (60 * 60 * 1000 * h) - (60 * 1000 * m) - (s * 1000)) / 10);
+      return ([h + d * 24, m, s]).map(Tool.formatNumber).join(':');
     },
     close() {
       this.toggleCardShow();
@@ -61,11 +63,44 @@ Component({
       })
     },
     // 开启奖励
-    openAward() {
-
-    }
+    openAward(e) {
+      let dataset = e.currentTarget.dataset;
+      let params = {
+        url: Operation.receiveJobMoney,
+        id: dataset.id,
+        requestMethod: 'GET'
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let data = req.responseObject.data || {};
+        console.log(data);
+        this.setData({
+          cardType: 'success',
+          cardData: data
+        });
+        this.toggleCardShow();
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+      
+    },
+    toDetail(e) {
+      let data = e.currentTarget.dataset;
+      Tool.navigateTo(`/pages/my/task/task-detail/task-detail?jobId=${data.id}&status=${data.status}`)
+    },
+  },
+  onShareAppMessage() {
+    let data = e.target.dataset;
+    return ({
+      title: data.remark,
+      path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id || ''}&jobId=${data.id}&status=${data.status}`,
+      imageUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png'
+    });
   },
   ready() {
     this.countdown();
+    this.setData({
+      startTime: Tool.formatTime(this.data.item.createTime).split(' ')[0] || ''
+    })
   }
 })

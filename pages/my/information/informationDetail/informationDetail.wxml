@@ -8,17 +8,20 @@
         </view>
         <view class="header red font-30" wx:else>
             <view class="title">订单退款</view>
-            <view class="money">+{{list.param.tradeAmount}}</view>
+            <view class="money">+{{list.param.refundPrice}}</view>
             <view class="result success">退款成功</view>
         </view>
+        <!-- <view class="wrap">
+
+        </view> -->
         <view class="wrap">
-            <block>
+             <block>
                 <view class="item line" bindtap="myAccount">
                     <view>
-                        <text>{{ list.paramType==100? "付款方式":"退款账户"}}</text>
+                        <text>{{ list.paramType==100? "付款编号":"退款编号"}}</text>
                     </view>
                     <view>
-                        <text>{{list.payName}}</text>
+                        <text>{{list.paramType==100? list.param.outTradeNo:list.param.refundNo}}</text>
                     </view>
                 </view>
                 <!--<view class="item line" bindtap="information">-->
@@ -30,50 +33,6 @@
                     <!--</view>-->
                 <!--</view>-->
             </block>
-           <!--<block wx:else>
-               <view class="item line" bindtap="myAccount">
-                   <view>
-                       <text>退款账户</text>
-                   </view>
-                   <view>
-                       <text>现金账户 ￥ {{detail.actual_amounts}}</text>
-                   </view>
-               </view>
-               <view class="item line" bindtap="information">
-                   <view>
-                       <text>退款账户</text>
-                   </view>
-                   <view>
-                       <text>余额账户 ￥ {{detail.actual_balance}}</text>
-                   </view>
-               </view>
-               <view class="item line" bindtap="myAccount">
-                   <view>
-                       <text>退款账户</text>
-                   </view>
-                   <view>
-                       <text>代币账户 {{detail.actual_token_coin}}</text>
-                   </view>
-               </view>
-               <view class="item line" bindtap="information">
-                   <view>
-                       <text>退款账户</text>
-                   </view>
-                   <view>
-                       <text>积分账户 {{detail.actual_user_score}}</text>
-                   </view>
-               </view>
-           </block>-->
-            <!-- <view class="item" bindtap="information">
-                <view>
-                    <text>商品说明</text>
-                </view>
-                <view>
-                    <text>男士短袖</text>
-                </view>
-            </view> -->
-        </view>
-        <view class="wrap">
             <view class="item line" bindtap="information">
                 <view>
                     <text>创建时间</text>
@@ -102,18 +61,18 @@
                     <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/xjt_10@2x.png' mode='widthFix'></image>
                 </view>
             </view>
-            <view class="item">
-              <button class="go-cart-view contact-btn flexR-sb" 
+            <view class="item" catchtap='feedback'>
+              <!-- <button class="go-cart-view contact-btn flexR-sb" 
                 session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"
                 open-type="contact"
-              >
+              > -->
               <view>
                   <text>投诉</text>
               </view>
               <view>
                 <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/xjt_10@2x.png' mode='widthFix'></image>
               </view>
-            </button>
+            <!-- </button> -->
 
             </view>
         </view>

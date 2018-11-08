@@ -14,6 +14,14 @@ Page({
         '/pages/product-detail/seckill-detail/seckill-detail?code=',
         '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
       ],
+      redirectTo:{
+        1:'/pages/product-detail/seckill-detail/seckill-detail?code=',
+        2:'/pages/product-detail/discount-detail/discount-detail?code=',
+        3:'/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
+        4:'/pages/index/index',
+        5:'/pages/topic/topic?code=',
+        99:'/pages/product-detail/product-detail?productId='
+      },// 1.秒杀 2.降价拍 3.礼包 4.助力免费领 5.专题 99.普通产品
       iconArr:[ // icon 图标
         { name: '赚钱', img:'home-icon-xueyuan.png',page:''},
         { name: '分享', img: 'home_icon_share.png', page: '' },
@@ -38,7 +46,6 @@ Page({
       hasTask: false,
       showCard: false, // 任务领取窗口展示
       isScroll: false,
-      scrollTimer: null,
       downPriceParam:{
         1: 'startPrice',
         2: 'markdownPrice',
@@ -46,12 +53,19 @@ Page({
         4: 'markdownPrice',
         5: 'markdownPrice'
       },
-      taskDetail:{}
+      taskDetail:{},
+      width:0
     },
     close() {
       this.toggleCardShow();
     },
     toggleCardShow() {
+      if(this.data.isScroll) {
+        this.setData({
+          isScroll: false
+        })
+        return;
+      }
       this.setData({
         showCard: !this.data.showCard
       })
@@ -68,7 +82,7 @@ Page({
         data.receiveFlag &&
         this.setData({
           taskDetail: data,
-          hasTask: !!data.receiveFlag
+          hasTask: data.receiveFlag
         })
       };
       Tool.showErrMsg(r)
@@ -81,7 +95,7 @@ Page({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let data = req.responseObject.data || {};
-        Tool.navigateTo('/pages/my/task/task-detail/task-detail?jobId=' + this.data.taskDetail.id)
+        Tool.navigateTo(`/pages/my/task/task-detail/task-detail?jobId=${data.id}&status=1`)
       };
       Tool.showErrMsg(r)
       r.addToQueue();
@@ -89,22 +103,22 @@ Page({
     // 滚动的时候任务要缩进去
     onPageScroll(e){
       // 这里加个判断 如果没任务的话也return
-      clearTimeout(this.data.scrollTimer);
-      if (this.data.isScroll) return;
+      let changeBg = this.data.changeBg
+      if (e.scrollTop>160){
+        changeBg=true
+      }else{
+        changeBg = false
+      }
+      this.setData({
+        changeBg:changeBg
+      })
+      if (this.data.isScroll) return;  
       this.setData({
         isScroll: true,
       })
-      let timer = setTimeout(()=>{
-        this.setData({
-          isScroll: false,
-          scrollTimer: timer
-        });
-      },1000);
     },
-    onLoad: function () {
+    onLoad: function (options) {
       Event.on('getLevel', this.getLevel,this)
-      this.discoverNotice()
-      this.findUserJobsByUserId();
       this.queryAdList(1,'轮播图片',(datas)=>{
         this.setData({
           imgUrls:datas
@@ -151,6 +165,9 @@ Page({
       }
       app.wxLogin()
       Event.on('didLogin', this.didLogin, this);
+      if (options.type) { // 页面跳转
+        Tool.navigateTo(this.data.redirectTo[options.type] + options.id)
+      }
     },
     goPages(e){
       let index = e.currentTarget.dataset.index
@@ -177,7 +194,8 @@ Page({
     didLogin() {
       Tool.didLogin(this)
       if (this.data.didLogin){
-        this.getLevelInfos()
+        // this.getLevelInfos()
+        this.findUserJobsByUserId();
         this.getLevel()
       }
     },
@@ -241,6 +259,7 @@ Page({
         this.setData({
           userInfos: req.responseObject.data
         })
+        this.getLevelInfos()
       };
       Tool.showErrMsg(r)
       r.addToQueue();
@@ -253,8 +272,35 @@ Page({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data || []
+        let userInfos = this.data.userInfos
+        let levelId = userInfos.levelId
+        // let levelId = 1
+        let userExp = userInfos.experience
+        // let userExp = 1300
+        let levelObj = datas.filter((item) =>{
+          return item.id == levelId
+        }) 
+        let index = datas.indexOf(levelObj[0])
+        // 下一等级
+        let nextLevel = datas[index+1]
+        // 当前等级
+        let preLevel = datas[index]
+        let width = 0
+        // 是否升级
+        let isUpdateLevel = !(userExp > nextLevel.upgradeExp)
+        userExp = userExp > nextLevel.upgradeExp? nextLevel.upgradeExp : userExp
+        if(index==0){
+          let Denominator = isUpdateLevel ? userExp / nextLevel.upgradeExp : userExp / nextLevel.upgradeExp - 0.01
+          width = Denominator  * (1 / (datas.length - 2))
+        } else if (index==datas.length-1){
+          width =1 
+        } else {
+          let Denominator = isUpdateLevel ? (userExp - preLevel.upgradeExp) / (nextLevel.upgradeExp - preLevel.upgradeExp) : (userExp - preLevel.upgradeExp) / (nextLevel.upgradeExp - preLevel.upgradeExp) - 0.01
+          width = index / (datas.length - 2) + Denominator * (1 / (datas.length - 2))
+        }
         this.setData({
-          levelList:datas
+          levelList:datas,
+          width: width*100
         })
       };
       Tool.showErrMsg(r)
@@ -357,11 +403,13 @@ Page({
     },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);
+      Event.off('getLevel', this.getLevel)
     },
     onShow:function (){
       this.setData({
         isChange:true
       })
+      this.discoverNotice()
     },
     onHide: function () {
       this.setData({

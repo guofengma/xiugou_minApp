@@ -1,14 +1,13 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
+import ProductFac from '../temp/product.js'
 
 Page({
   data: {
     ysf: { title: '礼包详情' },
     didLogin: false,
     imgUrls: [],
-    activeIndex: 1, // 轮播图片的index 
-    show: true,
     msgShow: false,
     selectType: {}, // 是否选择了商品类型
     floorstatus: false, // 是否显示置顶的按钮
@@ -27,7 +26,6 @@ Page({
     isShowGiftTips:false, //是否显示礼包升级提示
     size: 0,
     dismiss:false, // 能否可以购买礼包
-    autoplay:true, 
   },
   onLoad: function (options) {
     this.setData({
@@ -43,19 +41,6 @@ Page({
   },
   onShow: function () {
     this.getGiftBagDetail()
-  },
-  videoClicked() {
-    this.setData({
-      autoplay: false
-    })
-  },
-  videoPause(){
-    this.setData({
-      autoplay: true
-    })
-  },
-  imageLoad(e) {
-    Tool.getAdaptHeight(e, this)
   },
   swiperImgCliked(e) {
     let index = e.currentTarget.dataset.index
@@ -75,20 +60,6 @@ Page({
   didLogin() {
     Tool.didLogin(this)
     Tool.isIPhoneX(this)
-  },
-  msgTipsClicked(e) {
-    let n = parseInt(e.currentTarget.dataset.index)
-    switch (n) {
-      case 1:
-        Tool.navigateTo('/pages/my/information/information')
-        break;
-      case 2:
-        Tool.switchTab('/pages/index/index')
-        break;
-      case 3:
-
-        break;
-    }
   },
   giftBagClicked() {
     // 立即购买
@@ -149,21 +120,11 @@ Page({
         })
       }
       
-      // datas.specPriceList.forEach((items,index) => {
-      //   console.log(index)
-      //   let total = 0
-      //   items.value.forEach((item) => {
-      //     total += item.stock
-      //   })
-      //   giftStock.push(total)
-      // })
 
       // 显示各礼包总库存里面的最小库存
 
       datas.showStock = Math.min(...giftStock)
-      // datas.videoUrl && datas.imgFileList.unshift({
-      //   videoUrl: datas.videoUrl
-      // })
+
       this.setData({
         imgUrls: datas.imgFileList,
         productInfo: datas,
@@ -224,20 +185,6 @@ Page({
     })
     this.giftBagClicked()
   },
-  sliderChange(e) {
-    this.setData({
-      // activeIndex: e.detail.current + 1,
-      activeIndex: e.detail.current + 1,
-      autoplay:true,
-    })
-  },
-  // 切换 tabar
-  infoChoose(e) {
-    let show = e.currentTarget.dataset.show == 1 ? true : false
-    this.setData({
-      show: show
-    })
-  },
   btnClicked(e) {
     if (this.data.dismiss) return
     let n = parseInt(e.currentTarget.dataset.key)
@@ -262,23 +209,13 @@ Page({
       });
     }
   },
-  msgClicked() {
-    this.setData({
-      msgShow: !this.data.msgShow
-    })
-  },
-  counterInputOnChange(e) {
-    this.setData({
-      productBuyCount: e.detail
-    })
-  },
   onShareAppMessage: function (res) {
     let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
     let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img : ''
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.giftBagId + '&inviteCode=' + inviteCode,
+      path: '/pages/index/index?type=3&id=' + this.data.giftBagId + '&inviteCode=' + inviteCode,
       imageUrl: imgUrl
     }
   },

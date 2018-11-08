@@ -1,7 +1,3 @@
-/*无数据  */
-
-@import  "/components/nodata-tips/nodata-tips";
-
 @import "/libs/wxParse/wxParse.wxss";
 
 .time{

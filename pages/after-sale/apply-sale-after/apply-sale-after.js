@@ -4,6 +4,7 @@ Page({
   data: {
     ysf: { title: '申请售后' },
     hidden:false,
+    textarea:true,
     selectType:{}, // 换货参数
     reason:[
       {
@@ -156,7 +157,7 @@ Page({
   },
   hiddenTips() { 
     this.setData({
-      hidden: !this.data.hidden,
+      textarea: !this.data.textarea,
     })
   },
   makeSureReason(e){

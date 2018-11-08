@@ -1,3 +1,6 @@
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
+
 <view class='logistics' wx:if="{{list.length>0}}">
   <view class="title flexR-sb font-30">
     <text>{{expTextName}}：{{mailNo}}</text>
@@ -8,17 +11,7 @@
       <view class='flexR'>
         <image src='/img/wuliu-icon-de.png' mode='widthFix' class='logo-w'></image>
         <!--<view>本数据由 <text class='blue'>百世汇通</text> 提供</view>-->
-        <view>物流状态 <text class='blue'><span wx:if="{{status==0}}">查询异常</span>
-          <span wx:if="{{status==1}}">暂无记录</span>
-          <span wx:if="{{status==2}}">在途中</span>
-          <span wx:if="{{status==3}}">派送中</span>
-          <span wx:if="{{status==4}}">已签收</span>
-          <span wx:if="{{status==5}}">用户拒签</span>
-          <span wx:if="{{status==6}}">疑难件</span>
-          <span wx:if="{{status==7}}">无效单</span>
-          <span wx:if="{{status==8}}">超时单</span>
-          <span wx:if="{{status==9}}">签收失败</span>
-          <span wx:if="{{status==10}}">退回</span></text></view>
+        <view>物流状态 <text class='blue'>{{statusText[status]}}</text></view>
       </view>
     </view>
     <view class='infos'>
@@ -46,8 +39,7 @@
   </view>
 </view>
 
-<view class='no-logistics flexC' wx:else>
-  <image src='/img/wuliu-tips.png' mode='widthFix'></image>
-  <view class='gray font-30'>{{tips}}</view>
+<view class='sub-page' wx:else>
+  <template is="result-tips"  data="{{tipVal:6,tips}}" />
 </view>
  

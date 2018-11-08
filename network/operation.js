@@ -34,7 +34,10 @@ export default class Operation {
         // 获取推荐人列表
         this.queryInviterList = '/user/userSign/queryInviterList'
 
+        // 邀请码注册
 
+        this.updateUserCodeById = '/user/updateUserCodeById'
+        
     /**********  获取省市区 *******************/
 
       // 获取省
@@ -476,6 +479,10 @@ export default class Operation {
 
         this.addFeedback = '/user/feedback/addFeedback'
 
+        // 获取帮助次数
+
+        this.findQuestionEffectById = '/help/helpQuestion/findQuestionEffectById'
+
         /************************** 优惠券 *******************************/
 
         // 未使用优惠劵列表 status 优惠券状态 0-未使用 1-已使用 2-已失效 3-未激活
@@ -561,7 +568,7 @@ export default class Operation {
 
         // 获取刮刮卡
 
-        this.getScratchCard = '/scratch/scratchCard/updateScratchCard'
+        this.getScratchCard = '/scratch/scratchCard/findByCode'
 
         // 获取我的任务列表
 
@@ -594,9 +601,40 @@ export default class Operation {
 
         this.userReceivePackage = '/promotion/promotionPromoter/userReceivePackage';
 
+        // 详情页用户领取红包
+
+        this.givingPackageToUser = '/promotion/promotionPromoter/givingPackageToUser'
+
+        // 支付红包费用
+
+        this.promotionPromoterPay='/promotion/promotionPromoter/pay'
+
         // 分页查询用户领取红包记录列表
 
         this.queryPromotionReceiveRecordPageList = '/promotion/promotionReceiveRecord/queryPromotionReceiveRecordPageList'
+
+
+        /************************** 任务 *******************************/
+
+        // 获取分享详情
+
+        this.jobIncrHits = '/user/userJobs/incrHits'
+
+        // 验证刮刮卡使用状态
+
+        this.checkScratchCodeStatus = '/scratch/scratchCardInformation/findByCode'
+
+        // 领取刮刮卡奖励
+
+        this.getScratchAward = '/scratch/scratchCardInformation/findById'
+
+        // 领取任务奖励
+
+        this.receiveJobMoney = '/user/userJobs/receiveMoney'
+
+        // 用户校验
+
+        this.userExtVerify = '/user/userLogin/scratchUserVerify'
 
         __instance(this);
 

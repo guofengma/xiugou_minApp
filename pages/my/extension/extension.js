@@ -21,8 +21,11 @@ Page({
   },
   itemClicked(e){
     let id = e.currentTarget.dataset.id
+    let index = e.currentTarget.dataset.index
+    let endTime = this.data.list[index].endTime
+    let status = this.data.list[index].status
     // Tool.navigateTo('/pages/my/extension/pay/pay?num=')
-    Tool.navigateTo('/pages/my/extension/extension-detail/extension-detail?packageId='+id)
+    Tool.navigateTo('/pages/my/extension/extension-detail/extension-detail?packageId=' + id + '&endTime=' + endTime + '&status=' +status)
   },
   goPage() {
     Tool.navigateTo('/pages/my/extension/extension-explain/extension-explain')

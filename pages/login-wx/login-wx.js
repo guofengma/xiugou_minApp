@@ -80,7 +80,7 @@ Page({
       if (req.responseObject.code == 34005){
         Tool.navigateTo('/pages/register/register?inviteCode=' + this.data.inviteCode)
       } else if (req.responseObject.code == 40000){
-        Tool.navigateTo('/pages/download-app/download-app?door=1')
+        Tool.navigateTo('/pages/download-app/oldUser-downLoad/oldUser-downLoad')
       } else {
         Tool.showAlert(req.responseObject.msg)
       }

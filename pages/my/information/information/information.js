@@ -34,7 +34,7 @@ Page({
         16: '银联支付'},
     },
     //获取数据
-  getData(createdTime) {
+    getData(createdTime) {
         if (this.data.hasNext) {
           let params = {
             pageSize: this.data.pageSize,
@@ -136,8 +136,12 @@ Page({
       Tool.navigateTo(page+query)
     },
     onLoad: function (options) {
-        this.getData()
+      this.getData()
 
+    },
+    onPullDownRefresh: function () {
+      this.getData()
+      wx.stopPullDownRefresh();
     },
     onShow: function () {
 

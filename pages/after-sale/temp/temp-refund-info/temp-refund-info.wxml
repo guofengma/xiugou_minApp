@@ -1,10 +1,11 @@
 <template name="temp-refund-info">
-  <view class='suc-refound' wx:if='{{status>1&&status!=3}}'>
+  <view class='suc-refound'>
     <view class='whiteBg after-sale-line  flexR-sb'>
       <view>退款金额：<text class='red'>¥{{totalRefundPrice}}</text></view>
       <view wx:if="{{status==6}}">已退款</view>
       <view wx:if="{{status==1}}">退款中</view>
     </view>
+    <!-- wx:if='{{status>1&&status!=3}}' -->
     <block wx:if='{{orderReturnAmounts}}'>
       <view class='after-sale-line'>退款明细</view>
       <view class='after-sale-line whiteBg flexR-sb'>

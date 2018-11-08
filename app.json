@@ -71,7 +71,8 @@
     "pages/my/task/task-detail/task-detail",
     "pages/my/task/task-share/task-share",
     "pages/register/red-envelopes/red-envelopes",
-    "pages/signIn/rule/rule"
+    "pages/signIn/rule/rule",
+    "pages/web-view/web-view"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -94,7 +95,7 @@
       },
       {
         "pagePath": "pages/discover/discover",
-        "text": "发现",
+        "text": "秀场",
         "iconPath": "/img/tabbar/discover_unselected.png",
         "selectedIconPath": "/img/tabbar/discover_selected.png"
       },

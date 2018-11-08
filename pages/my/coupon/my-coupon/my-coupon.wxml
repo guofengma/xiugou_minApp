@@ -1,5 +1,8 @@
 <import src='/pages/my/coupon/temp/coupon-temp.wxml'/>
 
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
+
 <view class='pagesize'>
     <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
         <view class="tab-item {{currentTab==0?'red':'gray'}}"  data-current="0" bindtap="swichNav">未使用</view>
@@ -13,8 +16,9 @@
                 <template is="coupon-temp" data="{{item,index,key}}"/>
               </block>
               <view wx:if='{{list.length==0}}' class='flexC coupon-img'>
-                <image src='/img/coupon-icon.png' mode='widthFix'></image>
-                <view class='gray font-30'>暂无优惠券~</view>
+                <!-- <image src='/img/coupon-icon.png' mode='widthFix'></image>
+                <view class='gray font-30'>暂无优惠券~</view> -->
+                <template is="result-tips"  data="{{tipVal:4,showBtn:true}}" />
               </view>
             </scroll-view>
         </swiper-item>

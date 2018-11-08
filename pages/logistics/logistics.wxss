@@ -18,12 +18,12 @@
   padding-top: 20rpx;
   padding-bottom: 70rpx;
 }
-.no-logistics{
+/* .no-logistics{
   height: 100%;
 }
 .no-logistics image{
   width: 186rpx;
-}
+} */
 .logo-w{
   width: 54rpx;
   margin-right: 16rpx;

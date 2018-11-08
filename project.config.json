@@ -8,7 +8,8 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.2.5",
@@ -33,7 +34,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 34,
+			"current": 46,
 			"list": [
 				{
 					"id": 0,
@@ -270,6 +271,18 @@
 					"query": ""
 				},
 				{
+					"id": 37,
+					"name": "任务详情",
+					"pathName": "pages/my/task/task-detail/task-detail",
+					"query": "jobId=12"
+				},
+				{
+					"id": 38,
+					"name": "任务分享",
+					"pathName": "pages/my/task/task-share/task-share",
+					"query": "jobId=12"
+				},
+				{
 					"id": -1,
 					"name": "红包",
 					"pathName": "pages/register/red-envelopes/red-envelopes",
@@ -286,6 +299,23 @@
 					"name": "填写邀请码",
 					"pathName": "pages/register/write-invite-code/write-invite-code",
 					"query": ""
+				},
+				{
+					"id": 44,
+					"name": "webview",
+					"pathName": "pages/web-view/web-view",
+					"query": "id=1"
+				},
+				{
+					"id": -1,
+					"name": "邀请码",
+					"pathName": "pages/register/write-invite-code/write-invite-code",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "支付成功",
+					"pathName": "pages/my/information/informationDetail/informationDetail"
 				}
 			]
 		}

@@ -3,9 +3,9 @@
     <view class='gray'>授权码录入</view>
     <input placeholder='请输入邀请人授权码' class='font-26' value='{{code}}' bindinput='changeInput' placeholder-style='color:#999'></input>
   </view>
-  <button class='loginBtn redBg' disabled='{{disabled}}' bindtap='next'>确认</button>
+  <button class='loginBtn redBg' disabled='{{disabled}}' bindtap='updateUserCodeById'>确认</button>
 </view>
 
-<view class='flexR dismiss font-26 gray '>
+<view class='flexR dismiss font-26 gray ' catchtap='dismiss'>
   <text>跳过</text>
 </view>

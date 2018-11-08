@@ -82,16 +82,18 @@ Component({
       }) 
       // 渲染提示语
       this.getTipsSpec()
-      //this.initTypeSelected()
+      // 如果是降价拍和秒杀 默认都选中
+      if (this.data.commodityType == 2 || this.data.commodityType == 3){
+        this.initTypeSelected()
+      }
     },
-    initTypeSelected(){ // 默认第一个选中
+    initTypeSelected(){ // 默认选中
       let productSpecArr = [...this.data.productSpec]
       productSpecArr.forEach((item,index)=>{
         let productSpec= item.list
-        console.log("***********" ,productSpec)
         let specValue = productSpec[0].specValue
         let id = productSpec[0].id
-        this.renderSpecVeiw(0, 0, specValue, id)
+        this.renderSpecVeiw(index, 0, specValue, id)
       })
     },
     typeListClicked(e) { // 规格点击事件

@@ -28,7 +28,7 @@
   position: relative;
 }
 .right-bar .topbar{
-  width: 400rpx;
+  max-width: 400rpx;
 }
 .my-order-product-info .flexR-sb{
   align-items: flex-start
@@ -43,4 +43,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
+}
+.right-price{
+  align-items: flex-end
 }

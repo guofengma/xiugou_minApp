@@ -4,7 +4,7 @@
    <view class='gray font-26 pay-tips'>固定金额红包</view>
    <view catchtap='selectIcon' class='flexR-sb whiteBg pay-content'>
      <view class='font-26'>
-       红包金额：2元 <text class='font-24 gray'>(共发放{{num}}个红包)</text>
+       红包金额：{{price}}元 <text class='font-24 gray'>(共发放{{num}}个红包)</text>
      </view>
      <image mode='widthFix' src='{{select? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' class='selectImg'></image>
    </view>

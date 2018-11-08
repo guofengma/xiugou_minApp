@@ -6,7 +6,8 @@
                 <text>头像</text>
             </view>
             <view>
-                <image class="user-img" src="{{ userInfos.headImg ||'/img/default-userImg.png'}}"></image>
+              <cover-image  class="user-img" src="{{ userInfos.headImg ||'/img/default-userImg.png'}}"></cover-image>
+                <!-- <image class="user-img" src="{{ userInfos.headImg ||'/img/default-userImg.png'}}"></image> -->
                 <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/xjt_10@2x.png' mode='widthFix'></image>
             </view>
         </view>

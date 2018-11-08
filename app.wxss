@@ -1,5 +1,9 @@
 @import "/components/iPhoneX-line/iPhoneX-line";
 
+/*搜索产品异常显示  */
+
+@import  "/components/result-tips/result-tips";
+
 @import "/css/app.wxss";
 
 page{

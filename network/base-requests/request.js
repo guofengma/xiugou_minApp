@@ -229,15 +229,5 @@ export default class Request {
     this._body = this.bodyParam
     return this._body;
   }
-
-  // 是否带上cookie 请求 
-  hasCookie() {
-    if (this.bodyParam.hasCookie) {
-      delete this.bodyParam.hasCookie
-      this.cookie = global.Storage.getUserCookie() || ' '
-      return this.cookie
-    }
-    delete this.bodyParam.hasCookie
-  }
 }
 

@@ -17,7 +17,7 @@ Component({
         pageSize: 5,
         page: 1,
         reqName: '通知详情',
-        'type': 200,
+        'type': 100,
         url: Operation.queryNoticeMessage
       }
       let r = RequestFactory.wxRequest(params);

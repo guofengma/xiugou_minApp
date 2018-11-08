@@ -32,6 +32,7 @@ Page({
       this.refreshMemberInfoNotice()
       Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
       Event.on('didLogin', this.didLogin, this);
+      
     },
     onShow: function () {
       this.setData({

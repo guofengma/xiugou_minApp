@@ -23,22 +23,28 @@ Page({
 
   },
   onPullDownRefresh: function () {
-    this.myRecordingA(1, answerUrl);
+    this.initDatas()
     wx.stopPullDownRefresh();
-
   },
+  // onPullDownRefresh: function () {
+  //   // this.myRecordingA(1, answerUrl);
+  //   // wx.stopPullDownRefresh();
+  // },
   getLoginCart(){
     Tool.didLogin(this)
+    this.initDatas()
+  },
+  initDatas(){
     if (this.data.didLogin) {
       let hasStorageShoppingCart = this.hasStorageShoppingCart()
-      if (hasStorageShoppingCart){
+      if (hasStorageShoppingCart) {
         this.shoppingCartLimit()
       } else {
         this.getShoppingCartList()
       }
     } else {
       this.setData({
-        items: [], 
+        items: [],
       })
       this.getStorageShoppingCart()
     }
@@ -122,7 +128,7 @@ Page({
       this.getRichItemList()
     } else {
       this.setData({
-        tipVal: 2
+        tipVal: 3
       })
     }
   },
@@ -206,7 +212,7 @@ Page({
       this.getTotalPrice()
     } else {
       this.setData({
-        tipVal: 2,
+        tipVal: 3,
         items: []
       })
     }
@@ -348,7 +354,7 @@ Page({
       })
       if (items.length == 0) {
         this.setData({
-          tipVal: 2
+          tipVal: 3
         })
       }
       this.isSelectAllPrd(items)
@@ -409,6 +415,9 @@ Page({
     if(state == 1) {
       Tool.navigateTo('/pages/product-detail/product-detail?door=100&productId=' + e.currentTarget.dataset.id)
     }
+  },
+  lookAround(){
+    Tool.switchTab('/pages/index/index')
   },
   onUnload: function () {
     Event.off('updateStorageShoppingCart', this.getStorageShoppingCart);

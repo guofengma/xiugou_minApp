@@ -56,7 +56,7 @@ Page({
         }
       }
       if (status == 1) {
-        this.data.result[status].time = Tool.formatTime(datas.applyTime)
+        this.data.result[status].time = datas.applyTime
       }
       if (datas.expressNo) {
         expressNo = { id: 2, content: datas.expressNo }

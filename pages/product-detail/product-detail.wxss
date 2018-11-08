@@ -1,87 +1,12 @@
 @import "/components/msg-tips/msg-tips.wxss";
-
 @import "/libs/wxParse/wxParse.wxss";
+@import "/pages/product-detail/temp/product-price-infos/product-price-infos.wxss";
 
 .prduct-detail-view{
   padding-bottom: 150rpx;
 }
-/*轮播部分  */
-.slider{
-  height: 710rpx;
-  width: 100%;
-  position: relative;
-}
-.slider .slide-image{
-  width: 100%;
-  height: 100%;
-}
-.slider swiper{
-  height: 100%;
-}
-.activeIndex{
-  background: rgba(0,0,0,0.7);
-  font-size: 26rpx;
-  color: #fff;
-  padding: 8rpx 24rpx;
-  position: absolute;
-  right: 30rpx;
-  bottom: 30rpx;
-  border-radius: 20rpx;
-  z-index: 100;
-}
-.slider-nav{
-  position: absolute;
-  width: 100%;
-  padding: 0 30rpx;
-  left: 0;
-  top: 12rpx;
-  z-index: 100;
-  min-height: 50rpx;
-}
-.slider-nav>image{
-  width: 70rpx;
-}
 .prduct-detail-view>view{
   background: #fff;
-}
-.prd-info{
-  color: #bbb;
-  font-size: 22rpx;
-  padding: 30rpx;
-}
-.prd-name{
-  font-size: 30rpx;
-  color: #222;
-  max-height: 80rpx;
-  margin-bottom: 25rpx;
-}
-.price1{
-  font-size: 36rpx;
-}
-.price2,.label-pd{
-  font-size: 20rpx;
-  margin-left: 7rpx;
-}
-.label-pd{
-  border-radius: 6rpx;
-  padding: 4rpx 10rpx;
-  margin-right: 30rpx;
-}
-.chooseBox .label,.price3{
-  border:1rpx solid;
-  border-radius: 6rpx;
-  padding: 4rpx 16rpx;
-}
-.chooseBox .label{
-  font-size: 26rpx;
-  margin-right: 20rpx;
-}
-.price3{
-  font-size: 18rpx;
-  margin-right: 23rpx;
-}
-.shippingInfo{
-  margin-top: 25rpx;
 }
 .chooseBox{
   margin: 24rpx 0;
@@ -93,62 +18,6 @@
   box-sizing: border-box;
   padding: 0 30rpx;
 }
-/* .chooseBox view.gray{
-  border-top: 1rpx solid #eee
-} */
-.prd-info-line{
-  font-size: 30rpx;
-  border-top: 1rpx solid #eee;
-  border-bottom: 1rpx solid #eee;
-}
-.prd-info-line>view{
-  width: 50%;
-  display: inline-block;
-  text-align: center;
-  height: 80rpx;
-  line-height: 80rpx;
-}
-.first-line{
-  position: relative;
-}
-.first-line:after{ 
-  content:"";
-  width: 2rpx;
-  height: 50rpx;
-  position: absolute;
-  background: #eee;
-  right: 0;
-  top: 15rpx;
-}
-.prd-info-line text{
-  display: inline-block;
-  height: 100%;
-  box-sizing: border-box;
-  line-height: 80rpx;
-  border-bottom: 6rpx solid transparent;
-  padding: 0 16rpx;
-}
-.prd-info-line text.red{
-  border-bottom: 6rpx solid;
-}
-.prd-info-cell>view{
-  min-height: 400rpx;
-}
-.price-tips-box{
-  font-size: 26rpx;
-  padding:0  30rpx;
-  margin-top: 20rpx;
-}
-.price-tips{
-  font-size: 30rpx;
-  height: 80rpx;
-  line-height: 80rpx;
-  border-bottom: 1rpx solid #eee;
-}
-.price-tips-box .gray{
-  padding: 30rpx 0;
-}
-
 
 /*底部的bar   */
 .bottom-bar{
@@ -179,73 +48,11 @@
   right: 30rpx;
   bottom: 120rpx;
   background-color:transparent !important;
-  
 }
 .goTop image{
   width: 90rpx;
 }
 
-/*topbar  */
-.topbar image{
-  width: 76rpx;
-  height: 76rpx; 
-}
-.topbar{
-  height: 90rpx;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 9999;
-  border-bottom: 1rpx solid #eee;
-  border-top: 1rpx solid #eee;
-}
-.msg-view{
-  width: 100rpx;
-  height: 100%;
-  position: absolute;
-  right: 0rpx;
-}
-.msg-view:after{ 
-  content:"";
-  width: 8rpx;
-  height: 40rpx;
-  position: absolute;
-  border-left: 8rpx dotted #222;
-  right: 50rpx;
-  top:25rpx;
-}
-
-/*table的样式  */
-.table-view{
-  text-align: center;
-  padding:30rpx;
-}
-.table {
-  width: 99%;
-  border: 1rpx solid #ddd;
-  border-collapse:collapse;
-  font-size: 24rpx;
-  table-layout:fixed;
-  white-space: normal;
-  word-break:break-all;
-}
-.table .td.frist-td{
-  background: #F8F8F8;
-  width: 24%;
-  color: #222;
-  overflow: hidden
-}
-.table .td2{
-  width: 76%;
-  color: #999999;
-  height: 80rpx;
-  text-align: left;
-  padding-left: 30rpx;
-  overflow: hidden
-}
-.table .tr{
-  border: 1rpx solid #ddd;
-}
 
 .cell-name{
   color: #999;
@@ -276,25 +83,6 @@
   margin-right: 10rpx;
 }
 
-.video{
-  position: absolute;
-  top:0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  /* opacity: 0; */
-}
-.video video{
-  width: 100%;
-  height: 100%;
-}
-.swiper{
-  position: absolute;
-  top:0;
-  width: 100%;
-  height: 100%;
-  z-index: 20
-}
 .no-sale{
   justify-content: center;
   background: #ddd !important;

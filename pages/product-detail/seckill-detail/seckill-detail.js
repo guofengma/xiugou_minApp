@@ -1,14 +1,13 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
+import ProductFac from '../temp/product.js'
 
 Page({
   data: {
     door:1,
     didLogin: false,
     imgUrls: [],
-    activeIndex: 1, // 轮播图片的index 
-    show: true,
     msgShow: false,
     selectType: {}, // 是否选择了商品类型
     floorstatus: false, // 是否显示置顶的按钮
@@ -17,13 +16,6 @@ Page({
     productTypeList: [],
     productBuyCount: 1, //商品购买数量
     priceList: [],
-    nodes: [{
-      name: "table",
-      attrs: {
-        class: "table"
-      },
-      children: [],
-    }],
     proNavData: {},
     promotionDesc: {
       commingDesc: '',
@@ -37,50 +29,29 @@ Page({
       disabled: false,
     },
     showRegular: false,
-    autoplay: true,
     jumpCommonProductTimer: null, // 定时跳转普通商品倒计时
+    screenShow: false, // 用于判断是否锁屏
   },
   onLoad: function (options) {
-    
     this.setData({
       productId: options.productId ||1,
       prodCode: options.code
     })
-    
     this.didLogin()
     this.getTopicActivityData(this.data.prodCode);    
-    // this.requestFindProductByIdApp()
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
   onShow: function () {
-    this.selectComponent('#promotion').clearInterval();
-    clearTimeout(this.data.jumpCommonProductTimer);
-    this.getTopicActivityData(this.data.prodCode);
+    if (!this.data.screenShow) return;
+    this.onLoad({ code: this.data.prodCode })
   },
-  videoClicked() {
+  onHide() {
+    this.toggleScreenShowStatus();
+  },
+  toggleScreenShowStatus() {
     this.setData({
-      autoplay: false
-    })
-    // Tool.navigateTo('/pages/my/information/information')
-  },
-  videoPause() {
-    this.setData({
-      autoplay: true
-    })
-  },
-  swiperImgCliked(e) {
-    let index = e.currentTarget.dataset.index
-    let src = this.data.imgUrls[index].smallImg
-    let urls = []
-    this.data.imgUrls.forEach((item) => {
-      if (item.smallImg) {
-        urls.push(item.smallImg)
-      }
-    })
-    wx.previewImage({
-      current: src, // 当前显示图片的http链接
-      urls: urls// 需要预览的图片http链接列表
+      screenShow: !this.data.screenShow
     })
   },
   //获取专题活动数据  JJP201810100001
@@ -109,11 +80,17 @@ Page({
       specIds = Tool.bubbleSort(specIds)
       this.setData({
         proNavData: data,
-        // productSpec: productSpec,
         specIds: specIds,
         jumpCommonProductTimer: jumpTimer,
+        productId: data.productId
       })
-      this.requestFindProductByIdApp(data.productId, productSpec)
+      let callBack = () => {
+        this.setData({
+          productSpec: productSpec, // 规格描述
+        })
+      }
+      ProductFac.requestFindProductByIdApp(this, callBack)
+      //this.requestFindProductByIdApp(data.productId, productSpec)
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
 
       data.id && this.selectComponent('#promotion').init();
@@ -125,10 +102,6 @@ Page({
   refactorProductsData(originData = []) {
     let newData = {};
     originData.forEach(function (item) {
-      // newData[item.specName] = {};
-      // newData[item.specName].id = item.id;
-      // newData[item.specName].specName = item.specName;
-      // newData[item.specName].specValue = item.specValue;
       newData[item.specName] = [];
       newData[item.specName].push({
         id: item.id,
@@ -183,25 +156,8 @@ Page({
       this.btnClicked(e);
     }
   },
-  imageLoad(e) {
-    Tool.getAdaptHeight(e, this)
-  },
   didLogin() {
     Tool.didLogin(this)
-  },
-  msgTipsClicked(e) {
-    let n = parseInt(e.currentTarget.dataset.index)
-    switch (n) {
-      case 1:
-        Tool.navigateTo('/pages/my/information/information')
-        break;
-      case 2:
-        Tool.switchTab('/pages/index/index')
-        break;
-      case 3:
-
-        break;
-    }
   },
   makeSureOrder() {
     // 立即购买
@@ -216,88 +172,11 @@ Page({
     }
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + '&type=' + this.data.door)
   },
-  requestFindProductByIdApp(productId, productSpec) {
-    let params = {
-      id: productId,
-      requestMethod: 'GET',
-      reqName: '获取商品详情页',
-      url: Operation.findProductByIdApp
-    }
-    let r = RequestFactory.wxRequest(params);
-    let productInfo = this.data.productInfo
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
-      // datas.product.videoUrl && datas.productImgList.unshift({
-      //   videoUrl: datas.product.videoUrl
-      // })
-      this.setData({
-        imgUrls: datas.productImgList,
-        productInfo: datas.product,
-        productInfoList: datas,
-        priceList: datas.priceList, // 价格表
-        productSpec: productSpec, // 规格描述
-      })
-      // 渲染表格
-      let tr = []
-      let tbody = this.data.nodes
-      for (let i = 0; i < datas.paramList.length; i++) {
-        tr.push(
-          {
-            name: "tr",
-            attrs: { class: "tr" },
-            children: [ {
-              name: "td",
-              attrs: { class: 'td frist-td' },
-              children: [{
-                type: "text",
-                text: datas.paramList[i].paramName
-              }]
-            },
-            {
-              name: "td",
-              attrs: { class: 'td td2' },
-              children: [{
-                type: "text",
-                text: datas.paramList[i].paramValue
-              }]
-            }
-            ]
-          }
-
-        )
-      }
-      tbody[0].children = tr
-      this.setData({
-        nodes: tbody
-      })
-      let html = datas.product.content
-      WxParse.wxParse('article', 'html', html, this, 5);
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
   typeSubClicked(e) {
     this.setData({
       selectType: e.detail
     })
-    if (this.data.selectType.typeClicked == 1) {
-      this.addToShoppingCart(1)
-    } else if (this.data.selectType.typeClicked == 2) {
-      this.makeSureOrder()
-    }
-  },
-  sliderChange(e) {
-    this.setData({
-      activeIndex: e.detail.current + 1,
-      autoplay: true
-    })
-  },
-  // 切换 tabar
-  infoChoose(e) {
-    let show = e.currentTarget.dataset.show == 1 ? true : false
-    this.setData({
-      show: show
-    })
+    this.makeSureOrder()
   },
   btnClicked(e) {
     let n = parseInt(e.currentTarget.dataset.key)
@@ -309,7 +188,6 @@ Page({
     })
   },
   scroll: function (e, res) {
-
     this.setData({
       msgShow: false
     });
@@ -323,14 +201,9 @@ Page({
       });
     }
   },
-  msgClicked() {
+  hiddenTips() {
     this.setData({
-      msgShow: !this.data.msgShow
-    })
-  },
-  counterInputOnChange(e) {
-    this.setData({
-      productBuyCount: e.detail
+      msgShow: false
     })
   },
   onShareAppMessage: function (res) {
@@ -338,26 +211,13 @@ Page({
     this.setData({
       msgShow: !this.data.msgShow
     })
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
     let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img : ''
     let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
     return {
       title: name,
-      path: '/pages/product-detail/seckill-detail/seckill-detail?code=' + this.data.prodCode,
+      path: '/pages/index/index?type=1&id=' + this.data.prodCode,
       imageUrl: imgUrl
     }
-  },
-  wxParseTagATap: function (e) {
-    let link = e.currentTarget.dataset.src
-    console.log(link)
-  },
-  hiddenTips() {
-    this.setData({
-      msgShow: false
-    })
   },
   onUnload: function () {
     Event.off('didLogin', this.didLogin);

@@ -22,8 +22,8 @@
 <template name="wxParseImg">
   <image class="image" data-from="{{item.from}}" 
   data-src="{{item.attr.src}}" data-idx="{{item.imgIndex}}" 
-  src="{{item.attr.src}}"  
-  bindload="wxParseImgLoad" bindtap="wxParseImgTap" mode="widthFix"
+  src="{{item.attr.src}}"  data-width='{{item.width}}' wx:if='{{!item.noSrc}}'
+  bindload="wxParseImgLoad" binderror='wxParseImgErrorLoad' bindtap="wxParseImgTap" mode="widthFix"
   />
 
 </template>

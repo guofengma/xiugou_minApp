@@ -37,9 +37,9 @@
   border-right: 1rpx solid #eee;
 }
 
-.exchange-info{
+/* .exchange-info{
   margin-top: 10rpx;
-}
+} */
 
 .userImg{
   margin-top: 20rpx;

@@ -8,11 +8,11 @@
         <view class='card-success-item font-28'>获得现金奖励！</view>
         <view class='card-detail'>
           <view class='card-success-count'>
-            <text class='font-28'>¥</text>24
-            <text class='card-success-sup font-24'>+18秀豆</text>
+            <text class='font-28'>¥</text>{{card.recieveMoney || 0}}
+            <text class='card-success-sup font-24'>+{{card.recieveBean || 0}}秀豆</text>
           </view>
         </view>
-        <view class='btn-see'>查看账户</view>
+        <view class='btn-see' bindtap='showAccount'>查看账户</view>
         <view class='card-tip'>现金奖励已存入“现金账户”</view>
       </view>
     </view>
