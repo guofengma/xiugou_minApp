@@ -267,7 +267,6 @@ export default class Storage {
     } 
 
   static setPayInfoList(info) {
-    console.log(info)
     this.setterFor('payInfoList', info)
   }
 
