@@ -52,7 +52,6 @@ App({
         wechatCode: code,
         reqName:'获取openid和是否注册',
         url: Operation.verifyWechat,
-        hasCookie:false
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
