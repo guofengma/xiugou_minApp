@@ -79,8 +79,8 @@ Page({
   onUnload () {
   },
   toRegister() {
-    let from = encodeURIComponent(`/pages/my/task/task-share/task-share?inviteId=${this.data.userInfo.id}&jobId=${this.data.jobId}`);
-    Tool.navigateTo(`/pages/register/register?from=${from}&inviteCode=${this.data.inviteId}&phone=${this.data.phone}`)
+    let from = encodeURIComponent(`/pages/my/task/task-share/task-share?inviteId=${this.data.userInfos.id}&jobId=${this.data.jobId}`);
+    Tool.navigateTo(`/pages/register/register?from=${from}&inviteCode=${this.data.userInfos.id}&phone=${this.data.phone}`)
   },
   didLogin() {
     Tool.didLogin(this)

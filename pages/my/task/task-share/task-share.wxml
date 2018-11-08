@@ -18,6 +18,8 @@
           <view class='coupon-time' wx:if="{{scratchCard.status == 1}}">使用期限：
             <view>{{deadline}}</view>
           </view>
+          <view class='coupon-time' wx:elif="{{scratchCard.status == 2}}">自领取起{{scratchCard.effectiveDays || 0}}天有效
+          </view>
         </view>
       </view>
       <!-- 秀豆 -->
