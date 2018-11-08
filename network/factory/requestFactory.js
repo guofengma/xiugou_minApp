@@ -46,7 +46,7 @@ export default class RequestFactory {
 
     // 是否需要携带cookie
 
-    // if (params.hasCookie === undefined) params.hasCookie = true
+    if (params.hasCookie === undefined) params.hasCookie = true
 
     if (params.isShowLoading === undefined) params.isShowLoading = true
 
