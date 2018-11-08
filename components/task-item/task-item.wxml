@@ -7,7 +7,7 @@
     <view class='task-detail' wx:if="{{showDetail}}">
       <view class='task-desc'>任务说明：{{item.remarks}}</view>
       <view class='task-start'>任务开始时间：{{startTime}}</view>
-      <view class='task-info-wrap' catchtap='toDetail' data-id="{{item.id}}" data-status="{{item.status}}" id="wrap">
+      <view class='task-info-wrap' catchtap='toDetail' data-jobid="{{item.jobId}}" data-id="{{item.id}}" data-status="{{item.status}}" id="wrap">
         <view class='task-info-detail'>
         <!-- 任务状态 status: 1进行中 2已结束 -->
           <view class='task-status' wx:if="{{item.status == 1}}">
@@ -16,7 +16,7 @@
           <view class='task-status' wx:else>
             任务已结束
           </view>
-          <button data-remark="{{item.remarks}}" data-id="{{item.id}}" wx:if="{{item.status == 1}}">继续分享</button>
+          <button data-remark="{{item.remarks}}" wx:if="{{item.status == 1}}">继续分享</button>
           <button wx:elif="{{item.status == 2}}">等待开奖</button>
           <button catchtap='openAward' data-id="{{item.id}}" wx:elif="{{item.status == 3}}">开启奖励</button>
           <view class='task-result' wx:else>

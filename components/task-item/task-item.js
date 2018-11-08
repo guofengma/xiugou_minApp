@@ -86,7 +86,7 @@ Component({
     },
     toDetail(e) {
       let data = e.currentTarget.dataset;
-      Tool.navigateTo(`/pages/my/task/task-detail/task-detail?jobId=${data.id}&status=${data.status}`)
+      Tool.navigateTo(`/pages/my/task/task-detail/task-detail?jobId=${data.jobid}&status=${data.status}&id=${data.id}`)
     },
   },
   onShareAppMessage() {

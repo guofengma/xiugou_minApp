@@ -3,12 +3,14 @@ Page({
   data: {
     detail: {},
     jobId: '',
-    statsus: ''
+    statsus: '',
+    id: ''
   },
   onLoad (options) {
     console.log(options)
     this.setData({
-      jobId: options.jobId,
+      id: options.id || '',
+      jobId: options.jobId || '',
       status: options.status || ''
     })
     this.getTaskDetail(options.jobId)
@@ -30,9 +32,10 @@ Page({
     r.addToQueue();
   },
   onShareAppMessage () {
+    console.log(`/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id || ''}&jobId=${this.data.id}`);
     return ({
       title: this.data.detail.remarks,
-      path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id || ''}&jobId=${this.data.jobId}`,
+      path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id || ''}&jobId=${this.data.id}`,
       imageUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png'
     });
   }
