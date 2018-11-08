@@ -55,9 +55,9 @@ Component({
           let that = this
           if (this.data.door == 1) {
             Event.emit('getLevel')
-            setTimeout(function () {
-              that.goPage()
-            }, 3000)
+            // setTimeout(function () {
+            //   that.goPage()
+            // }, 3000)
           }
         }
       };
