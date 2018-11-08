@@ -181,7 +181,7 @@ Page({
     let params = {
       url: Operation.getScratchAward,
       id: _.data.scratchCard.id,
-      phone: _.data.userInfos.phone,
+      phone: _.data.userInfos.phone || _.data.phone,
       requestMethod: 'GET'
     }
     let r = RequestFactory.wxRequest(params);
