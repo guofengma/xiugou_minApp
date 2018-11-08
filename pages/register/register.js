@@ -27,7 +27,7 @@ Page({
       inviteId = ''
     }
     this.setData({
-      inviteCode: ioptions.inviteCode || '',
+      inviteCode: options.inviteCode || '',
       inviteId: inviteId,
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
