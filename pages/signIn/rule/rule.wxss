@@ -11,7 +11,7 @@
   top:-1rpx;
 }
 .rule-line{
-  border-left: 1rpx solid #D51243;
+  border-left: 1rpx solid #f00006;
   height: 98rpx;
   position: relative;
   padding-left:30rpx;

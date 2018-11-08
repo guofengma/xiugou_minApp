@@ -25,7 +25,7 @@
   display: block;
   height: 6rpx;
   width: 90rpx;
-  background: #D51243;
+  background: #f00006;
   position: absolute; 
   bottom: 0;
   left: 50%;
