@@ -34,7 +34,7 @@ Component({
       })
     },
     msgTipsClicked(e) { // 轮播右上角分享点击事件
-      ProductFac.msgTipsClicked(e, this.data.didLogin)
+      new ProductFac.msgTipsClicked(e, this.data.didLogin)
     },
     sliderChange(e) { // 轮播切换事件
       this.setData({

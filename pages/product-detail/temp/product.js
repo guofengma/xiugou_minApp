@@ -2,6 +2,9 @@ let { Tool, RequestFactory, Storage, Event, Operation } = global
 import WxParse from '../../../libs/wxParse/wxParse.js';
 
 const ProductFac = {
+  constructor(){
+    console.log(11111)
+  },
   requestFindProductByIdApp(page,callBack=()=>{}) { // 产品详情接口请求
     this.page = page
     let url = this.page.data.prodCode? Operation.getProductDetailByCode : Operation.findProductByIdApp
@@ -92,6 +95,6 @@ const ProductFac = {
 
         break;
     }
-  },
+  }
 }
 export default ProductFac

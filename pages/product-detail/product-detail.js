@@ -39,7 +39,10 @@ Page({
     let callBack2 =()=>{
       this.activityByProductId(this.data.productId)
     }
-    ProductFac.requestFindProductByIdApp(this, callBack2)
+    console.log(ProductFac)
+    // let ProductFac = new ProductFac()
+    ProductFac.requestFindProductByIdApp(this,callBack2)
+    
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },

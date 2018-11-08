@@ -92,7 +92,7 @@ Page({
           productSpec: productSpec, // 规格描述
         })
       }
-      ProductFac.requestFindProductByIdApp(this, callBack)
+      new ProductFac.requestFindProductByIdApp(this, callBack)
       //this.requestFindProductByIdApp(data.productId, productSpec)
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
       data.id && this.selectComponent('#promotion').init();

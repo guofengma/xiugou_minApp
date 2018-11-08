@@ -26,10 +26,6 @@ Page({
     this.initDatas()
     wx.stopPullDownRefresh();
   },
-  // onPullDownRefresh: function () {
-  //   // this.myRecordingA(1, answerUrl);
-  //   // wx.stopPullDownRefresh();
-  // },
   getLoginCart(){
     Tool.didLogin(this)
     this.initDatas()
