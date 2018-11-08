@@ -7,8 +7,10 @@
     color: #fff;
     margin-bottom: 20rpx;
     position: relative;
-    background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon1-1_03@2x.png") no-repeat top center;
-    background-size: 100% 100%;
+    /* background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon1-1_03@2x.png") no-repeat top center;
+    background-size: 100% 100%; */
+    background: #FF4F6E;
+    border-radius: 16rpx;
     align-items: flex-start;
     padding: 30rpx;
 }

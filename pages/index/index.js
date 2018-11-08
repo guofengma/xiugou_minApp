@@ -167,9 +167,17 @@ Page({
       }
       app.wxLogin()
       Event.on('didLogin', this.didLogin, this);
+      // 分享过来有邀请者id的那么存储在本地
+      let inviteId = options.inviteId
+      if (options.inviteId != 'null' && options.inviteId != 'undefined' && options.inviteId) {
+        Storage.setUpUserId(options.inviteId)
+      }
       if (options.type) { // 页面跳转
         Tool.navigateTo(this.data.redirectTo[options.type] + options.id)
       }
+    },
+    onUnload(){
+      Storage.setUpUserId(null)
     },
     goPages(e){
       let index = e.currentTarget.dataset.index

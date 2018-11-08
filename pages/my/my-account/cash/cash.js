@@ -9,13 +9,14 @@ Page({
       list: [],
       types:[
         { name:"其他"},
-        { name: "用户收益", icon: "yhsy-icon.png"},
+        { name: "用户收益", icon: "xjhb-icon.png"},
         { name: "提现支出", icon: "txzc-icon.png" },
-        { name: "消费支出", icon: "xdxf-icon.png" },
-        { name: "店主分红", icon: "yhsy-icon.png" },
-        { name: "店员分红", icon: "yhsy-icon.png" },
-        { name: "销售提成", icon: "tixian-icon-2.png" },
+        { name: "消费支出", icon: "xfzc-icon.png" },
+        { name: "店主分红", icon: "dzfh-icon.png" },
+        { name: "店员分红", icon: "dpfh-icon.png" },
+        { name: "销售提成", icon: "xstc-icon.png" },
         { name: "推广提成", icon: "tg_03-04@2x.png" },
+        { name: "任务奖励", icon: "xwjl-icon.png" },
       ]
     },
     //获取数据
@@ -25,7 +26,7 @@ Page({
         size: this.data.pageSize,
         requestMethod: 'GET',
         reqName: '分页查询现金账户',
-        'type':2,
+        'type':1,
         url: Operation.getuserBalance
       }
       this.setData({

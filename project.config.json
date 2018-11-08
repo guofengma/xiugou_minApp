@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 48,
 			"list": [
 				{
 					"id": 0,
@@ -324,6 +324,12 @@
 					"name": "我的推广订单详情",
 					"pathName": "pages/my/extension/extension-detail/extension-detail",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/index/index",
+					"query": "inviteId=250"
 				}
 			]
 		}

@@ -28,7 +28,7 @@ Page({
     }
     this.setData({
       inviteCode: options.inviteCode || '',
-      inviteId: inviteId,
+      inviteId: inviteId || Storage.getUpUserId(),
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
       urlFrom: options.from || null,
@@ -110,6 +110,7 @@ Page({
       let datas = req.responseObject.data
       Storage.setMemberId(req.responseObject.data.id)
       Tool.loginOpt(req)
+      Storage.setUpUserId(null)
       if (this.data.urlFrom){
         Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
       } else if (!datas.upUserid){

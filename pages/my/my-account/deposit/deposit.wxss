@@ -6,8 +6,10 @@
     height:190rpx;
     color: #fff;
     margin-bottom: 20rpx;
-    background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon08_03@2x.png") no-repeat top center;
-    background-size: 100% 100%;
+    /* background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon08_03@2x.png") no-repeat top center;
+    background-size: 100% 100%; */
+    background: #8EC7FF;
+    border-radius: 16rpx;
     padding: 30rpx;
     align-items: flex-start
 }
@@ -55,7 +57,7 @@
 }
 .money{
     font-size: 36rpx;
-    color: #222222;
+    /* color: #222222; */
     position: absolute;
     right: 30rpx;
 }
@@ -85,4 +87,7 @@
     font-size: 26rpx;
     color: #666666;
     margin-bottom: 20rpx;
+}
+.gray-text{
+  color: #666666;
 }

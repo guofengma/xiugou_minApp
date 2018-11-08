@@ -30,7 +30,6 @@ Page({
   onLoad: function (options) {
     this.setData({
       giftBagId: options.giftBagId || '',
-      inviteCode: options.inviteCode || ''
     })
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
@@ -50,7 +49,7 @@ Page({
   giftBagClicked() {
     // 立即购买
     if (!this.data.didLogin) { // 未登录
-      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true + '&inviteCode=' + this.data.inviteCode)
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true + '&inviteId=' + this.data.inviteCode)
       return
     }
     
