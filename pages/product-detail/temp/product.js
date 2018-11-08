@@ -1,11 +1,13 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 import WxParse from '../../../libs/wxParse/wxParse.js';
 
-const ProductFac = {
-  requestFindProductByIdApp(page,callBack=()=>{}) { // 产品详情接口请求
+export default class ProductFactorys  {
+  constructor(page) {
     this.page = page
-    let url = this.page.data.prodCode? Operation.getProductDetailByCode : Operation.findProductByIdApp
-    url = this.page.data.proNavData? Operation.findProductByIdApp : url
+  }
+  requestFindProductByIdApp(callBack = () => { }) { // 产品详情接口请求
+    let url = this.page.data.prodCode ? Operation.getProductDetailByCode : Operation.findProductByIdApp
+    url = this.page.data.proNavData ? Operation.findProductByIdApp : url
     let params = {
       id: this.page.data.productId,
       code: this.page.data.prodCode,
@@ -29,11 +31,11 @@ const ProductFac = {
       })
       // 渲染表格
       let tbody = [{
-        name:  "table",
-        attrs: {
+        name: "table",
+        attrs: {
           class: "table"
-        },
-        children: [],
+        },
+        children: [],
       }]
       let tr = []
       // let tbody = this.page.data.nodes
@@ -74,7 +76,7 @@ const ProductFac = {
     }
     Tool.showErrMsg(r)
     r.addToQueue();
-  },
+  }
   msgTipsClicked(e, didLogin) { // 轮播右上角分享点击事件
     let n = parseInt(e.currentTarget.dataset.index)
     switch (n) {
@@ -92,6 +94,30 @@ const ProductFac = {
 
         break;
     }
-  },
+  }
+
+  goTop (e) {
+    this.page.setData({
+      scrollTop: 0
+    })
+  }
+  scroll(e, res) {
+    this.page.setData({
+      msgShow: false
+    })
+    if (e.detail.scrollTop > 200) {
+      this.page.setData({
+        floorstatus: true
+      });
+    } else {
+      this.page.setData({
+        floorstatus: false
+      });
+    }
+  }
+  hiddenTips() {
+    this.page.setData({
+      msgShow: false
+    })
+  }
 }
-export default ProductFac

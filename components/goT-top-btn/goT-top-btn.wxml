@@ -1,0 +1,5 @@
+<template name="goT-top-btn">
+  <view class='goTop whiteBg' bindtap='goTop' wx:if='{{floorstatus}}'>
+    <image src='/img/top-icon.png' mode='widthFix'></image>
+  </view>
+</template>

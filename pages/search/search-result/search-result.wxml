@@ -10,6 +10,8 @@
 <!--搜索结果异常显示  -->
 <import src='/components/result-tips/result-tips.wxml' />
 
+<import src= "/components/goT-top-btn/goT-top-btn.wxml"/>
+
 <view class="search-result-container">
    <!-- <template is="search-field" data='{{keyword}}'/> -->
    <search-bar bind:getKeyword='getKeyword' bind:searchKeyword='searchKeyword' keyWord='{{keyword}}'/>
@@ -42,8 +44,5 @@
   </view>
 
   <!--置顶的按钮-->
-  <view class='goTop flexR' bindtap='goTop' wx:if='{{floorstatus}}'>
-    <image src='/img/top-icon.png' mode='widthFix'></image>
-    <!-- <view>顶部</view> -->
-  </view>
+  <template is="goT-top-btn" data='{{floorstatus}}'/>
 </view>
