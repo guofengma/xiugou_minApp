@@ -120,4 +120,14 @@ export default class ProductFactorys  {
       msgShow: false
     })
   }
+  onShareAppMessage(typeId,id){
+    let inviteCode = this.page.data.userInfos.inviteId || this.page.data.inviteCode || ''
+    let imgUrl = this.page.data.productInfo.imgUrl ? this.page.data.productInfo.imgUrl : ''
+    let name = this.page.data.productInfo.name.length > 10 ? this.page.data.productInfo.name.slice(0, 10) + "..." : this.page.data.productInfo.name
+    return {
+      title: name,
+      path: `/pages/index/index?type=${typeId}&id=${id}&inviteCode=${inviteCode}`,
+      imageUrl: imgUrl
+    }
+  }
 }

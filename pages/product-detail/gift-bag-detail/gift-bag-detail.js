@@ -2,6 +2,8 @@ let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
 
+import ProductFactorys from '../temp/product.js'
+
 Page({
   data: {
     ysf: { title: '礼包详情' },
@@ -23,7 +25,6 @@ Page({
             children: [],
     }],
     isShowGiftTips:false, //是否显示礼包升级提示
-    size: 0,
     dismiss:false, // 能否可以购买礼包
   },
   onLoad: function (options) {
@@ -34,6 +35,7 @@ Page({
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
     this.refreshMemberInfoNotice()
+    this.ProductFactory = new ProductFactorys(this)
   },
   refreshMemberInfoNotice() {
     Tool.getUserInfos(this)
@@ -174,34 +176,17 @@ Page({
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },
-  goTop: function (e) {
-    this.setData({
-      scrollTop: 0
-    })
+  goTop(e) {
+    this.ProductFactory.goTop(e)
   },
-  scroll: function (e, res) {
-    this.setData({
-      msgShow: false
-    });
-    if (e.detail.scrollTop > 200) {
-      this.setData({
-        floorstatus: true
-      });
-    } else {
-      this.setData({
-        floorstatus: false
-      });
-    }
+  scroll(e, res) {
+    this.ProductFactory.scroll(e)
+  },
+  hiddenTips() {
+    this.ProductFactory.hiddenTips()
   },
   onShareAppMessage: function (res) {
-    let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
-    let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img : ''
-    let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
-    return {
-      title: name,
-      path: '/pages/index/index?type=3&id=' + this.data.giftBagId + '&inviteCode=' + inviteCode,
-      imageUrl: imgUrl
-    }
+    return this.ProductFactory.onShareAppMessage(3, this.data.giftBagId)
   },
   productTypeListClicked(e) {
     this.setData({
@@ -211,11 +196,6 @@ Page({
   closeMask(){
     this.setData({
       isShowGiftTips: !this.data.isShowGiftTips
-    })
-  },
-  hiddenTips() {
-    this.setData({
-      msgShow: false
     })
   },
   onUnload: function () {

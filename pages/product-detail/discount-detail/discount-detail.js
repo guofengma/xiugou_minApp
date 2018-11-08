@@ -194,17 +194,7 @@ Page({
     this.ProductFactory.hiddenTips()
   },
   onShareAppMessage: function (res) {
-    // 这里要把下拉列表给隐藏掉  不然分享出去的图片里会显示列表下拉的状态
-    this.setData({
-      msgShow: !this.data.msgShow
-    })
-    let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img : ''
-    let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
-    return {
-      title: name,
-      path: '/pages/index/index?type=2&id=' + this.data.prodCode,
-      imageUrl: imgUrl
-    }
+    return this.ProductFactory.onShareAppMessage(2, this.data.prodCode)
   },
   onUnload: function () {
     Event.off('didLogin', this.didLogin);

@@ -189,14 +189,7 @@ Page({
     })
   },
   onShareAppMessage: function (res) {
-    let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
-    let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img:''
-    let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
-    return {
-      title: name,
-      path: '/pages/index/index?type=99&id=' + this.data.productInfo.id + '&inviteCode=' + inviteCode,
-      imageUrl: imgUrl
-    }
+    return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.id)
   },
   getStorageCartList() {
     let data = Storage.getShoppingCart() || []
