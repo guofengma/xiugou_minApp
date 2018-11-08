@@ -1,7 +1,7 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
-import ProductFactory from '../temp/product.js'
+import ProductFactorys from '../temp/product.js'
 
 Page({
   data: {
@@ -41,6 +41,7 @@ Page({
     this.getTopicActivityData(this.data.prodCode);    
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
+    this.ProductFactory = new ProductFactorys(this)
   },
   onShow: function () {
     if (!this.data.screenShow) return;
@@ -89,8 +90,7 @@ Page({
           productSpec: productSpec, // 规格描述
         })
       }
-      let ProductFactory = new ProductFactory(this)
-      ProductFactory.requestFindProductByIdApp(callBack2)
+      this.ProductFactory.requestFindProductByIdApp(callBack)
       //this.requestFindProductByIdApp(data.productId, productSpec)
       this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
 
@@ -183,29 +183,14 @@ Page({
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },
-  goTop: function (e) {
-    this.setData({
-      scrollTop: 0
-    })
+  goTop(e) {
+    this.ProductFactory.goTop(e)
   },
-  scroll: function (e, res) {
-    this.setData({
-      msgShow: false
-    });
-    if (e.detail.scrollTop > 200) {
-      this.setData({
-        floorstatus: true
-      });
-    } else {
-      this.setData({
-        floorstatus: false
-      });
-    }
+  scroll(e, res) {
+    this.ProductFactory.scroll(e)
   },
   hiddenTips() {
-    this.setData({
-      msgShow: false
-    })
+    this.ProductFactory.hiddenTips()
   },
   onShareAppMessage: function (res) {
     // 这里要把下拉列表给隐藏掉  不然分享出去的图片里会显示列表下拉的状态

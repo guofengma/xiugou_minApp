@@ -1,7 +1,6 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
-import ProductFactory from '../temp/product.js'
 
 Page({
   data: {
@@ -41,21 +40,6 @@ Page({
   },
   onShow: function () {
     this.getGiftBagDetail()
-  },
-  swiperImgCliked(e) {
-    let index = e.currentTarget.dataset.index
-    let src = this.data.imgUrls[index].smallImg
-    let urls = []
-
-    this.data.imgUrls.forEach((item) => {
-      if (item.smallImg){
-        urls.push(item.smallImg)
-      }
-    })
-    wx.previewImage({
-      current: src, // 当前显示图片的http链接
-      urls: urls// 需要预览的图片http链接列表
-    })
   },
   didLogin() {
     Tool.didLogin(this)
@@ -225,8 +209,6 @@ Page({
     })
   },
   closeMask(){
-    // let { isShowGiftTips} = this.data
-    // isShowGiftTips.show = !isShowGiftTips.show
     this.setData({
       isShowGiftTips: !this.data.isShowGiftTips
     })

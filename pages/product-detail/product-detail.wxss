@@ -1,4 +1,5 @@
 @import "/components/msg-tips/msg-tips.wxss";
+@import "/components/goT-top-btn/goT-top-btn.wxss";
 @import "/libs/wxParse/wxParse.wxss";
 @import "/pages/product-detail/temp/product-price-infos/product-price-infos.wxss";
 
@@ -41,18 +42,6 @@
 .buy-btn{
   border-right: 0;
 }
-
-/*置顶  */
-.goTop{
-  position: fixed;
-  right: 30rpx;
-  bottom: 120rpx;
-  background-color:transparent !important;
-}
-.goTop image{
-  width: 90rpx;
-}
-
 
 .cell-name{
   color: #999;

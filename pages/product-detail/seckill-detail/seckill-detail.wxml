@@ -5,6 +5,8 @@
 
 <import src= "/pages/product-detail/temp/product-price-infos/product-price-infos.wxml"/>
 
+<import src= "/components/goT-top-btn/goT-top-btn.wxml"/>
+
 <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%">
   <view class='prduct-detail-view'>
     <!--topbar  -->
@@ -36,10 +38,7 @@
       isIphoneX='{{isIPhoneX.isIPhoneX}}'
     ></product-promotion-footbar>
     <!--置顶的按钮-->
-    <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
-      <image src='/img/top-icon.png' mode='widthFix'></image>
-      <!-- <view>顶部</view> -->
-    </view>
+    <template is="goT-top-btn" data='{{floorstatus}}'/>
   </view>
 
 </scroll-view>

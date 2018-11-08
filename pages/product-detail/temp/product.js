@@ -1,6 +1,7 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 import WxParse from '../../../libs/wxParse/wxParse.js';
-export default class ProductFactory  {
+
+export default class ProductFactorys  {
   constructor(page) {
     this.page = page
   }
@@ -93,5 +94,30 @@ export default class ProductFactory  {
 
         break;
     }
+  }
+
+  goTop (e) {
+    this.page.setData({
+      scrollTop: 0
+    })
+  }
+  scroll(e, res) {
+    this.page.setData({
+      msgShow: false
+    })
+    if (e.detail.scrollTop > 200) {
+      this.page.setData({
+        floorstatus: true
+      });
+    } else {
+      this.page.setData({
+        floorstatus: false
+      });
+    }
+  }
+  hiddenTips() {
+    this.page.setData({
+      msgShow: false
+    })
   }
 }

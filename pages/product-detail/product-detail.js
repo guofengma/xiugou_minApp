@@ -2,7 +2,7 @@ let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
 // import ProductFac from './temp/product.js'
-import ProductFactory from './temp/product.js'
+import ProductFactorys from './temp/product.js'
 const app = getApp()
 Page({
   data: {
@@ -26,7 +26,6 @@ Page({
       door: options.door || '',
       inviteCode: options.inviteCode || ''
     })
-   
     this.didLogin()
     let callBack = ()=>{
       this.getShoppingCartList()
@@ -40,9 +39,8 @@ Page({
     let callBack2 =()=>{
       this.activityByProductId(this.data.productId)
     }
-    // console.log(ProductFac)
-    let ProductFactory = new ProductFactory(this)
-    ProductFactory.requestFindProductByIdApp(callBack2)
+    this.ProductFactory = new ProductFactorys(this)
+    this.ProductFactory.requestFindProductByIdApp(callBack2)
     
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
@@ -179,24 +177,11 @@ Page({
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },
-  goTop: function (e) {
-    this.setData({
-      scrollTop: 0
-    })
+  goTop (e) {
+    this.ProductFactory.goTop(e)
   },
-  scroll: function (e, res) {
-    this.setData({
-      msgShow: false
-    });
-    if (e.detail.scrollTop >200) {
-      this.setData({
-        floorstatus: true
-      });
-    } else {
-      this.setData({
-        floorstatus: false
-      });
-    }
+  scroll (e, res) {
+    this.ProductFactory.scroll(e)
   },
   counterInputOnChange(e){
     this.setData({
@@ -212,10 +197,6 @@ Page({
       path: '/pages/index/index?type=99&id=' + this.data.productInfo.id + '&inviteCode=' + inviteCode,
       imageUrl: imgUrl
     }
-  },
-  wxParseTagATap: function (e) {
-    let link = e.currentTarget.dataset.src
-    console.log(link)
   },
   getStorageCartList() {
     let data = Storage.getShoppingCart() || []
@@ -247,9 +228,7 @@ Page({
     r.addToQueue();
   },
   hiddenTips(){
-    this.setData({
-      msgShow:false
-    })
+    this.ProductFactory.hiddenTips()
   },
   timeout(){
     this.activityByProductId(this.data.productId)
