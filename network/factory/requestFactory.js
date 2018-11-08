@@ -19,7 +19,6 @@ export default class RequestFactory {
         reqName:'xxx', //请求的中文名称 可以不写 只是打印用
         requestMethod:'POST/GET',//  请求的方式 默认post
         isShowLoading:Boolean, // 是否展示loading 默认ture
-        hasCookie:Boolean, // 是否携带cookie
         otherParams:其他参数 即后端接口约定的参数 如 name:'XXX'
       } 
       
@@ -43,10 +42,6 @@ export default class RequestFactory {
       r.addToQueue();
     */
     let sysInfo = global.Storage.sysInfo()
-
-    // 是否需要携带cookie
-
-    if (params.hasCookie === undefined) params.hasCookie = true
 
     if (params.isShowLoading === undefined) params.isShowLoading = true
 

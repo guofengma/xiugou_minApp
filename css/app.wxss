@@ -44,7 +44,7 @@ button::after{
 }
 /* 按钮样式 */
 .btn-base{
-  background-color: #D51243;
+  background-color: #f00006;
   color: #fff;
   font-size: 32rpx;
   height: 96rpx;
@@ -53,7 +53,7 @@ button::after{
   width:580rpx;
   height:96rpx;
   line-height: 96rpx;
-  background-color: #D51243;
+  background-color: #f00006;
   color: #fff;
   font-size: 28rpx;
   border-radius: 10rpx;
@@ -97,7 +97,7 @@ button::after{
   color: #C2A38D
 }
 .red{
-  color: #D51243;
+  color: #f00006;
 }
 .gray {
   color: #666;
@@ -109,7 +109,7 @@ button::after{
   color: #fff;
 }
 .redBg{
-  background-color: #D51243;
+  background-color: #f00006;
   color: #fff;
 }
 .grayBg{
@@ -216,10 +216,10 @@ button::after{
   width: 100%;
 }
 .label-red-border{
-  border:1rpx solid #D51243;
+  border:1rpx solid #f00006;
   border-radius:6rpx;
   padding:0rpx 10rpx;
-  color: #D51243;
+  color: #f00006;
   font-size: 22rpx;
   margin-right: 20rpx;
 }

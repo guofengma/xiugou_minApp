@@ -25,7 +25,7 @@
   position: absolute;
   height: 28rpx;
   width: 6rpx;
-  background: #D51243;
+  background: #f00006;
   top:6rpx;
   left:-14rpx;
 }

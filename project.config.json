@@ -8,7 +8,9 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": false,
+		"uglifyFileName": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.2.5",
@@ -33,13 +35,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 44,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "注册",
 					"pathName": "pages/register/register",
-					"query": ""
+					"query": "inviteCode="
 				},
 				{
 					"id": 1,
@@ -309,6 +311,18 @@
 					"id": -1,
 					"name": "邀请码",
 					"pathName": "pages/register/write-invite-code/write-invite-code",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "支付成功",
+					"pathName": "pages/my/information/informationDetail/informationDetail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的推广订单详情",
+					"pathName": "pages/my/extension/extension-detail/extension-detail",
 					"query": ""
 				}
 			]

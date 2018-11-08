@@ -1,7 +1,8 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
-import ProductFac from './temp/product.js'
+// import ProductFac from './temp/product.js'
+import ProductFactorys from './temp/product.js'
 const app = getApp()
 Page({
   data: {
@@ -15,13 +16,6 @@ Page({
     productTypeList:[],
     productBuyCount:1, //商品购买数量
     priceList:[],
-    nodes:  [{
-      name:  "table",
-      attrs:  {
-        class: "table"
-      },
-      children: [],
-    }],
     size:0,
     userInfos:{},
   },
@@ -32,7 +26,6 @@ Page({
       door: options.door || '',
       inviteCode: options.inviteCode || ''
     })
-   
     this.didLogin()
     let callBack = ()=>{
       this.getShoppingCartList()
@@ -46,7 +39,9 @@ Page({
     let callBack2 =()=>{
       this.activityByProductId(this.data.productId)
     }
-    ProductFac.requestFindProductByIdApp(this, callBack2)
+    this.ProductFactory = new ProductFactorys(this)
+    this.ProductFactory.requestFindProductByIdApp(callBack2)
+    
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -182,29 +177,11 @@ Page({
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },
-  goTop: function (e) {
-    this.setData({
-      scrollTop: 0
-    })
+  goTop (e) {
+    this.ProductFactory.goTop(e)
   },
-  scroll: function (e, res) {
-    this.setData({
-      msgShow: false
-    });
-    if (e.detail.scrollTop >200) {
-      this.setData({
-        floorstatus: true
-      });
-    } else {
-      this.setData({
-        floorstatus: false
-      });
-    }
-  },
-  msgClicked(){
-    this.setData({
-      msgShow: !this.data.msgShow
-    })
+  scroll (e, res) {
+    this.ProductFactory.scroll(e)
   },
   counterInputOnChange(e){
     this.setData({
@@ -212,21 +189,7 @@ Page({
     })
   },
   onShareAppMessage: function (res) {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-    }
-    let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
-    let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img:''
-    let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
-    return {
-      title: name,
-      path: '/pages/product-detail/product-detail?productId=' + this.data.productInfo.id + '&inviteCode=' + inviteCode,
-      imageUrl: imgUrl
-    }
-  },
-  wxParseTagATap: function (e) {
-    let link = e.currentTarget.dataset.src
-    console.log(link)
+    return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.id)
   },
   getStorageCartList() {
     let data = Storage.getShoppingCart() || []
@@ -258,9 +221,7 @@ Page({
     r.addToQueue();
   },
   hiddenTips(){
-    this.setData({
-      msgShow:false
-    })
+    this.ProductFactory.hiddenTips()
   },
   timeout(){
     this.activityByProductId(this.data.productId)

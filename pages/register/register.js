@@ -22,7 +22,6 @@ Page({
     urlFrom: null,
   },
   onLoad: function (options) {
-    console.log(options);
     this.setData({
       codeId: options.inviteCode || '',
       userInfo: Storage.wxUserInfo() || false,
@@ -30,7 +29,7 @@ Page({
       urlFrom: options.from || null,
       phone: options.phone || ''
     })
-    if (options.inviteCode){
+    if (options.inviteCode != 'null' && options.inviteCode != 'undefined' && options.inviteCode){
       let callBack = () => {
         this.sweepCode(options.inviteCode)
       }
@@ -43,7 +42,7 @@ Page({
   sweepCode(id){ // 判断邀请码是否过期等
     let params = {
       code: id,
-      identity: Storage.getd(),
+      identity: Storage.getWxOpenid(),
       reqName: '邀请码是否过期',
       url: Operation.sweepCode
     }
@@ -96,18 +95,22 @@ Page({
       ...params,
       reqName: '判断手机号是否已经注册',
       url: Operation.findMemberByPhone,
-      // hasCookie: false
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      // let callBack = () => {
-        Storage.setMemberId(req.responseObject.data.id)
-        Tool.loginOpt(req)
-        if (this.data.urlFrom) Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
-        else Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
-        // Tool.switchTab('/pages/index/index')
-      // }
-      // Tool.showSuccessToast('注册成功', callBack)
+      let datas = req.responseObject.data
+      Storage.setMemberId(req.responseObject.data.id)
+      Tool.loginOpt(req)
+      if (this.data.urlFrom){
+        Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
+      } else if (!datas.upUserid){
+        Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
+      } else{
+        let callBack = ()=>{
+          Tool.switchTab('/pages/index/index')
+        }
+        Tool.showSuccessToast('注册成功', callBack)
+      }
     }
     Tool.showErrMsg(r)
     r.addToQueue();
@@ -163,7 +166,6 @@ Page({
       reqName: '发送短信',
       url: Operation.sendMessage,
       requestMethod: 'GET',
-      // hasCookie: false
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.sendMessage(params);

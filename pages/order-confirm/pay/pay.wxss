@@ -67,7 +67,7 @@
     width: 220rpx;
     color: #fff;
     font-size: 32rpx;
-    background: #D51243;
+    background: #f00006;
     text-align: center;
 }
 

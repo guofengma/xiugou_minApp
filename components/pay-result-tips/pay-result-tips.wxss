@@ -29,7 +29,7 @@
   width: 186rpx;
 	height: 60rpx;
 	border-radius: 10rpx;
-	border:  1rpx solid #d51243;
+	border:  1rpx solid #f00006;
   background: transparent;
 }
 

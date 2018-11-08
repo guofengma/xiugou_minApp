@@ -2,12 +2,13 @@ let { Tool, RequestFactory, Storage, Event, Operation } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
 
+import ProductFactorys from '../temp/product.js'
+
 Page({
   data: {
     ysf: { title: '礼包详情' },
     didLogin: false,
     imgUrls: [],
-    show: true,
     msgShow: false,
     selectType: {}, // 是否选择了商品类型
     floorstatus: false, // 是否显示置顶的按钮
@@ -24,9 +25,7 @@ Page({
             children: [],
     }],
     isShowGiftTips:false, //是否显示礼包升级提示
-    size: 0,
     dismiss:false, // 能否可以购买礼包
-    autoplay:true, 
   },
   onLoad: function (options) {
     this.setData({
@@ -36,40 +35,13 @@ Page({
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
     this.refreshMemberInfoNotice()
+    this.ProductFactory = new ProductFactorys(this)
   },
   refreshMemberInfoNotice() {
     Tool.getUserInfos(this)
   },
   onShow: function () {
     this.getGiftBagDetail()
-  },
-  videoClicked() {
-    this.setData({
-      autoplay: false
-    })
-  },
-  videoPause(){
-    this.setData({
-      autoplay: true
-    })
-  },
-  imageLoad(e) {
-    Tool.getAdaptHeight(e, this)
-  },
-  swiperImgCliked(e) {
-    let index = e.currentTarget.dataset.index
-    let src = this.data.imgUrls[index].smallImg
-    let urls = []
-
-    this.data.imgUrls.forEach((item) => {
-      if (item.smallImg){
-        urls.push(item.smallImg)
-      }
-    })
-    wx.previewImage({
-      current: src, // 当前显示图片的http链接
-      urls: urls// 需要预览的图片http链接列表
-    })
   },
   didLogin() {
     Tool.didLogin(this)
@@ -134,21 +106,11 @@ Page({
         })
       }
       
-      // datas.specPriceList.forEach((items,index) => {
-      //   console.log(index)
-      //   let total = 0
-      //   items.value.forEach((item) => {
-      //     total += item.stock
-      //   })
-      //   giftStock.push(total)
-      // })
 
       // 显示各礼包总库存里面的最小库存
 
       datas.showStock = Math.min(...giftStock)
-      // datas.videoUrl && datas.imgFileList.unshift({
-      //   videoUrl: datas.videoUrl
-      // })
+
       this.setData({
         imgUrls: datas.imgFileList,
         productInfo: datas,
@@ -214,44 +176,17 @@ Page({
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },
-  goTop: function (e) {
-    this.setData({
-      scrollTop: 0
-    })
+  goTop(e) {
+    this.ProductFactory.goTop(e)
   },
-  scroll: function (e, res) {
-    this.setData({
-      msgShow: false
-    });
-    if (e.detail.scrollTop > 200) {
-      this.setData({
-        floorstatus: true
-      });
-    } else {
-      this.setData({
-        floorstatus: false
-      });
-    }
+  scroll(e, res) {
+    this.ProductFactory.scroll(e)
   },
-  msgClicked() {
-    this.setData({
-      msgShow: !this.data.msgShow
-    })
-  },
-  counterInputOnChange(e) {
-    this.setData({
-      productBuyCount: e.detail
-    })
+  hiddenTips() {
+    this.ProductFactory.hiddenTips()
   },
   onShareAppMessage: function (res) {
-    let inviteCode = this.data.userInfos.inviteId || this.data.inviteCode
-    let imgUrl = this.data.imgUrls[0].original_img ? this.data.imgUrls[0].original_img : ''
-    let name = this.data.productInfo.name.length > 10 ? this.data.productInfo.name.slice(0, 10) + "..." : this.data.productInfo.name
-    return {
-      title: name,
-      path: '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.giftBagId + '&inviteCode=' + inviteCode,
-      imageUrl: imgUrl
-    }
+    return this.ProductFactory.onShareAppMessage(3, this.data.giftBagId)
   },
   productTypeListClicked(e) {
     this.setData({
@@ -259,15 +194,8 @@ Page({
     })
   },
   closeMask(){
-    // let { isShowGiftTips} = this.data
-    // isShowGiftTips.show = !isShowGiftTips.show
     this.setData({
       isShowGiftTips: !this.data.isShowGiftTips
-    })
-  },
-  hiddenTips() {
-    this.setData({
-      msgShow: false
     })
   },
   onUnload: function () {

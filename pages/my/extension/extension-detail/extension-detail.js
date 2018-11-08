@@ -75,7 +75,8 @@ Page({
   onShareAppMessage: function (res) {
     return {
       title: '秀购随机红包',
-      path: '/pages/web-view/web-view?id=' + this.data.packageId,
+      path: `/pages/index/index?type=100&id=${this.data.packageId}`,
+      // path: '/pages/web-view/web-view?id=' + this.data.packageId,
     }
   },
   onUnload: function () {

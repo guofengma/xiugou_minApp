@@ -1,9 +1,11 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
+import ProductFactorys from '../product.js'
 
 Component({
   properties: {
     imgUrls:Array,
     msgShow:Boolean,
+    didLogin: Boolean,
   },
   data: {
     activeIndex: 1, // 轮播图片的index 
@@ -32,18 +34,7 @@ Component({
       })
     },
     msgTipsClicked(e) { // 轮播右上角分享点击事件
-      let n = parseInt(e.currentTarget.dataset.index)
-      switch (n) {
-        case 1:
-          Tool.navigateTo('/pages/my/information/information')
-          break;
-        case 2:
-          Tool.switchTab('/pages/index/index')
-          break;
-        case 3:
-
-          break;
-      }
+      new ProductFactorys().msgTipsClicked(e, this.data.didLogin)
     },
     sliderChange(e) { // 轮播切换事件
       this.setData({

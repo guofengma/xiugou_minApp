@@ -6,7 +6,7 @@ Page({
     tipsContent:['系统将会在明天0点进行站内推广','每成功获取一个下级讲收到站内消息推送'],
     tipsBtn:[
       { name: '我的推广',btnType:""},
-      { name: '站外分享推广', btnType: ""}
+      // { name: '站外分享推广', btnType: ""}
     ],
     page:[
       '',
@@ -93,12 +93,6 @@ Page({
       }
     })
   },
-  // onShareAppMessage: function (res) {
-  //   return {
-  //     title: '秀购随机红包',
-  //     path: '/pages/web-view/web-view?id=' + this.data.id,
-  //   }
-  // },
   onHide: function () {
 
   },

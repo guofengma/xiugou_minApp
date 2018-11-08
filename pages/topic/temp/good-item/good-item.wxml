@@ -30,11 +30,11 @@
           <!-- productType 1:秒杀 2:降价拍 -->
           <view class='good-price-discount' 
             wx:if="{{productType == 2}}"
-            style="color:{{status === 2 ? '#D51243' : '#E60012'}}"
+            style="color:{{status === 2 ? '#f00006' : '#E60012'}}"
           >¥{{status === 1 ? startPrice : markdownPrice}}</view>
           <view class='good-price-discount' 
             wx:elif="{{productType === 1}}"
-            style="color:{{status === 2 ? '#D51243' : '#E60012'}}"
+            style="color:{{status === 2 ? '#f00006' : '#E60012'}}"
           >¥{{seckillPrice}}</view>
           <view class='good-price-origin'>¥{{originalPrice}}</view>
         </view>

@@ -34,7 +34,7 @@
   color: #999;
 }
 .tab-timeq-ing{
-  background: #D51243;
+  background: #f00006;
   position:relative;
 }
 /* 导航箭头 */
@@ -43,7 +43,7 @@
   content: '';
   width: 0;
   height: 0;
-  border-color: #D51243 transparent transparent;
+  border-color: #f00006 transparent transparent;
   border-style: solid;
   border-width: 30rpx;
   position: absolute;

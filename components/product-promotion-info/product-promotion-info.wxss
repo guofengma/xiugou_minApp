@@ -27,7 +27,7 @@
   background: #33B4FF;
 }
 .promotion-info-container.ing{
-  background: #D51243;
+  background: #f00006;
 }
 .promotion-info-left{
   color: #f7f7f7;
@@ -83,7 +83,7 @@
   display: none;
 }
 .promotion-info-container.ing .bottom {
-  color: #D51243;
+  color: #f00006;
   background:  #F1C11B;
 }
 .promotion-info-container.comming .top {

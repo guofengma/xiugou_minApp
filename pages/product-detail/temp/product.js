@@ -1,11 +1,13 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 import WxParse from '../../../libs/wxParse/wxParse.js';
 
-const ProductFac = {
-  requestFindProductByIdApp(page,callBack=()=>{}) { // 产品详情接口请求
+export default class ProductFactorys  {
+  constructor(page) {
     this.page = page
-    let url = this.page.data.prodCode? Operation.getProductDetailByCode : Operation.findProductByIdApp
-    url = this.page.data.proNavData? Operation.findProductByIdApp : url
+  }
+  requestFindProductByIdApp(callBack = () => { }) { // 产品详情接口请求
+    let url = this.page.data.prodCode ? Operation.getProductDetailByCode : Operation.findProductByIdApp
+    url = this.page.data.proNavData ? Operation.findProductByIdApp : url
     let params = {
       id: this.page.data.productId,
       code: this.page.data.prodCode,
@@ -28,8 +30,15 @@ const ProductFac = {
         productId: datas.product.id ? datas.product.id : this.page.data.productId
       })
       // 渲染表格
+      let tbody = [{
+        name: "table",
+        attrs: {
+          class: "table"
+        },
+        children: [],
+      }]
       let tr = []
-      let tbody = this.page.data.nodes
+      // let tbody = this.page.data.nodes
       for (let i = 0; i < datas.paramList.length; i++) {
         tr.push(
           {
@@ -67,6 +76,58 @@ const ProductFac = {
     }
     Tool.showErrMsg(r)
     r.addToQueue();
-  },
+  }
+  msgTipsClicked(e, didLogin) { // 轮播右上角分享点击事件
+    let n = parseInt(e.currentTarget.dataset.index)
+    switch (n) {
+      case 1:
+        if (!didLogin) {
+          Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
+        } else {
+          Tool.navigateTo('/pages/my/information/information')
+        }
+        break;
+      case 2:
+        Tool.switchTab('/pages/index/index')
+        break;
+      case 3:
+
+        break;
+    }
+  }
+
+  goTop (e) {
+    this.page.setData({
+      scrollTop: 0
+    })
+  }
+  scroll(e, res) {
+    this.page.setData({
+      msgShow: false
+    })
+    if (e.detail.scrollTop > 200) {
+      this.page.setData({
+        floorstatus: true
+      });
+    } else {
+      this.page.setData({
+        floorstatus: false
+      });
+    }
+  }
+  hiddenTips() {
+    this.page.setData({
+      msgShow: false
+    })
+  }
+  onShareAppMessage(typeId,id){
+    let inviteCode = this.page.data.userInfos.id || this.page.data.inviteCode || ''
+    let imgUrl = this.page.data.productInfo.imgUrl ? this.page.data.productInfo.imgUrl : ''
+    let name = this.page.data.productInfo.name.length > 10 ? this.page.data.productInfo.name.slice(0, 10) + "..." : this.page.data.productInfo.name
+    return {
+      title: name,
+      path: `/pages/index/index?type=${typeId}&id=${id}&inviteCode=${inviteCode}`,
+      imageUrl: imgUrl
+    }
+  }
 }
-export default ProductFac

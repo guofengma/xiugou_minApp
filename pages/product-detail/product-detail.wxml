@@ -5,16 +5,14 @@
 
 <import src= "/pages/product-detail/temp/product-price-infos/product-price-infos.wxml"/>
 
+<import src= "/components/goT-top-btn/goT-top-btn.wxml"/>
+
 <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%">
   <view class='prduct-detail-view'>
     <!--topbar  -->
-    <view class='topbar flexR' wx:if='{{floorstatus}}' >
-      <image src='{{productInfo.imgUrl}}' ></image>
-      <view class='msg-view fr' bindtap='msgClicked'></view>
-      <template is="msg-tips" data="{{msgShow}}" /> 
-    </view>
+    <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'/>
     <!-- 轮播 -->
-    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}'/>
+    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'/>
     <!-- 活动产品倒计时提示 -->
     <view wx:if='{{proNavData}}' catchtap='goPage'>
       <product-promotion-info 
@@ -53,9 +51,7 @@
     </view>
     <view wx:if='{{!productInfoList.onSale}}' class="bottom-bar flexR boxSize {{isIPhoneX.className}} no-sale">此商品已下架</view>
     <!--置顶的按钮-->
-    <view class='goTop' bindtap='goTop' wx:if='{{floorstatus}}'>
-      <image src='/img/top-icon.png' mode='widthFix'></image>
-    </view>
+    <template is="goT-top-btn" data='{{floorstatus}}'/>
   </view>
   
 

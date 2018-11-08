@@ -76,7 +76,7 @@
   text-align: center;
   font-size: 28rpx;
   color: #fff;
-  background: #D51243;
+  background: #f00006;
   border-radius: 40rpx;
   margin: 30rpx auto 0;
 }

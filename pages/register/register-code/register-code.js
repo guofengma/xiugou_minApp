@@ -48,7 +48,6 @@ Page({
       'openid': this.data.openid,
       reqName: '注册',
       url: Operation.signMember,
-      // hasCookie: false
     }
     // 如果不是被邀请的 那么就取授权码
     if (!this.data.accoutInfo.id) {
@@ -84,7 +83,6 @@ Page({
       amount: this.data.num,
       reqName: '获取邀请者列表',
       url: Operation.queryInviterList,
-      // hasCookie: false
     }
     let r = RequestFactory.wxRequest(params);
     // let r = RequestFactory.queryInviterList({ });

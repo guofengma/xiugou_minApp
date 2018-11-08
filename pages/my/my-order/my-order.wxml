@@ -13,7 +13,7 @@
           </view>
           <view class="tab-area">
               <view class="{{num==''?'active red':''}}" bindtap="getList" data-index="">全部</view>
-              <view class="{{num==1?'active red':''}}" bindtap="getList" data-index="1">待支付</view>
+              <view class="{{num==1?'active red':''}}" bindtap="getList" data-index="1">待付款</view>
               <view class="{{num==2?'active red':''}}" bindtap="getList" data-index="2">待发货</view>
               <view class="{{num==3?'active red':''}}" bindtap="getList" data-index="3">待收货</view>
               <view class="{{num==4?'active red':''}}" bindtap="getList" data-index="4">已完成</view>
