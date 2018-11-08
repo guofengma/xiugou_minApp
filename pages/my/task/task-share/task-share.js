@@ -80,7 +80,7 @@ Page({
   },
   toRegister() {
     let from = encodeURIComponent(`/pages/my/task/task-share/task-share?inviteId=${this.data.userInfos.id}&jobId=${this.data.jobId}`);
-    Tool.navigateTo(`/pages/register/register?from=${from}&inviteCode=${this.data.userInfos.id}&phone=${this.data.phone}`)
+    Tool.navigateTo(`/pages/register/register?from=${from}&inviteId=${this.data.userInfos.id}&phone=${this.data.phone}`)
   },
   didLogin() {
     Tool.didLogin(this)
