@@ -35,13 +35,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 46,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "注册",
 					"pathName": "pages/register/register",
-					"query": ""
+					"query": "inviteCode="
 				},
 				{
 					"id": 1,
@@ -316,7 +316,14 @@
 				{
 					"id": -1,
 					"name": "支付成功",
-					"pathName": "pages/my/information/informationDetail/informationDetail"
+					"pathName": "pages/my/information/informationDetail/informationDetail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的推广订单详情",
+					"pathName": "pages/my/extension/extension-detail/extension-detail",
+					"query": ""
 				}
 			]
 		}

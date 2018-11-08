@@ -29,7 +29,7 @@ Page({
       urlFrom: options.from || null,
       phone: options.phone || ''
     })
-    if (options.inviteCode){
+    if (options.inviteCode != 'null' && options.inviteCode != 'undefined' && options.inviteCode){
       let callBack = () => {
         this.sweepCode(options.inviteCode)
       }
@@ -98,14 +98,19 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      // let callBack = () => {
-        Storage.setMemberId(req.responseObject.data.id)
-        Tool.loginOpt(req)
-        if (this.data.urlFrom) Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
-        else Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
-        // Tool.switchTab('/pages/index/index')
-      // }
-      // Tool.showSuccessToast('注册成功', callBack)
+      let datas = req.responseObject.data
+      Storage.setMemberId(req.responseObject.data.id)
+      Tool.loginOpt(req)
+      if (this.data.urlFrom){
+        Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
+      } else if (!datas.upUserid){
+        Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
+      } else{
+        let callBack = ()=>{
+          Tool.switchTab('/pages/index/index')
+        }
+        Tool.showSuccessToast('注册成功', callBack)
+      }
     }
     Tool.showErrMsg(r)
     r.addToQueue();
