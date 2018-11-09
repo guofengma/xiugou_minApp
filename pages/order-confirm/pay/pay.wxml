@@ -15,7 +15,7 @@
     </view> -->
     <view class="wrap gray " >
         <view class="left">
-            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon_03-03@2x.png"></image>
+            <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'list_icon_yuezhifu@2x.png'}}"/>
             <view>余额支付</view>
         </view>
         <view class="right useBalance">
@@ -38,7 +38,7 @@
     </view> -->
     <view class="wrap" bindtap="payWay"  data-index='1' data-val='16'>
         <view class="left">
-            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon_03-08@2x.png"></image>
+            <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'icon_03-08@2x.png'}}"/>
             <view>微信支付</view>
         </view>
         <view class="right">
@@ -46,16 +46,6 @@
         </view>
         <view class="clearfix"></view>
     </view>
-    <!-- <view class="wrap">
-        <view class="left">
-            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon_03-09@2x.png"></image>
-            <view>支付宝支付</view>
-        </view>
-        <view class="right">
-            <image bindtap="payWay"  src="{{payWayActive[2]?'/img/choose-icon-c.png':'/img/choose-icon.png'}}" data-index='2'></image>
-        </view>
-        <view class="clearfix"></view>
-    </view> -->
     <view class="footer {{isIPhoneX.className}} whiteBg">
         <!--{{payList.scorePrice? '积分抵扣'+payList.scorePrice+'元,':""}}  -->
         <view>{{!isContinuePay ? '合计':'还需支付'}}：<text class='red'>￥{{payList.totalAmounts}}</text></view>

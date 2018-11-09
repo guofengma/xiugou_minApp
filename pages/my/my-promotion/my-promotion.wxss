@@ -1,6 +1,6 @@
 @import "/libs/wxParse/wxParse.wxss";
 .bg-area{
-  background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/dbj_02@2x.png") no-repeat top center;
+  background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-promotion-bg.png") no-repeat top center;
   background-size: cover;
   color: #fff;
   height: 364rpx;

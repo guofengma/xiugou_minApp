@@ -22,8 +22,8 @@
   text-align: center;
 }
 .discover-tab_item.active {
-  color: #D51234;
-  border-bottom: 2rpx solid #D51234;
+  color: #f00006;
+  border-bottom: 4rpx solid #f00006;
 }
 
 .discover-top-swiper {
