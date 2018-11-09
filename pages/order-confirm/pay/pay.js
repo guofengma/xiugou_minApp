@@ -79,7 +79,7 @@ Page({
       } 
       let payType = payWay.index == 0 ? 16 : 2
       if(this.data.door==1){
-        this.payOrderType()
+        this.payOrderType(payType)
       } else if (this.data.door==2){
         this.payPackage()
       }
@@ -123,7 +123,7 @@ Page({
         }
       })
     },
-    payOrderType(){
+    payOrderType(payType){
       if (this.data.payList.outTradeNo) {
         this.continuePay(payType)
       } else {
