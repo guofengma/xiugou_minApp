@@ -299,7 +299,7 @@ Page({
         outTradeNo: this.data.detail.outTradeNo||'', // 是否继续支付
       }
       Storage.setPayOrderList(params)
-      Tool.navigateTo('/pages/order-confirm/pay/pay?isContinuePay=' + true)
+      Tool.navigateTo('/pages/order-confirm/pay/pay?door=1&isContinuePay=' + true)
     },
     //再次购买
     continueBuy(){

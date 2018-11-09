@@ -93,5 +93,21 @@ App({
       catch (e) {
 
       }
-    }
+    },
+    getLevel(callBack=()=>{}) {
+      let params = {
+        isShowLoading: false,
+        reqName: '获取用户等级',
+        requestMethod: 'GET',
+        url: Operation.getLevel
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        let datas = req.responseObject.data
+        Storage.setUserAccountInfo(datas)
+        callBack(datas)
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    },
 })

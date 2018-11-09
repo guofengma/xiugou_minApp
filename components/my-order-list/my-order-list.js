@@ -219,7 +219,7 @@ Component({
         outTradeNo: item.outTradeNo  // 流水号
       };
       Storage.setPayOrderList(params)
-      Tool.navigateTo('/pages/order-confirm/pay/pay?isContinuePay=' + true + '&data=' + JSON.stringify(params))
+      Tool.navigateTo('/pages/order-confirm/pay/pay?door=1&isContinuePay=true')
     },
     //再次购买
     continueBuy(e) {
