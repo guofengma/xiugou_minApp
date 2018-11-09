@@ -13,7 +13,7 @@
    </view>
 </view>
 
-<view class='flexR btn-view redBg font-34 {{isIPhoneX.className}}' catchtap='payClicked'>
+<view class='flexR btn-view redBg font-34 {{isIPhoneX.className}}' catchtap='pay'>
   提交支付
   <!-- <button disabled='{{!select}}' class='redBg flexR' catchtap='payClicked'>提交支付</button> -->
 </view>

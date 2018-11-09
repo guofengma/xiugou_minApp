@@ -1,5 +1,5 @@
 let { Tool, RequestFactory, Event, Storage, Operation } = global
-
+const app = getApp()
 Page({
     data: {
       door:1, // 1：订单页面 2：推广红包支付
@@ -7,10 +7,24 @@ Page({
       payList:'',
       isShow:false, // 显示支付结果
       tipsContent: ['已通知商家，会给你尽快发货', '请耐心等待'],
-      tipsBtn: [
-        { name: '返回首页', btnType: "" },
-        { name: '查看订单', btnType: "" }
-      ],
+      tipsBtnArr: {
+        1:[
+          { name: '返回首页', btnType: "",index:1},
+          { name: '查看订单', btnType: "",index:2 }
+        ],
+        2:[
+          { name: '我的推广', btnType: "",index:3 },
+        ]
+      },// 按钮
+      redirectTo:{
+        1:{ page:'/pages/index/index',tab:true},
+        2:{ page:'/pages/my/my-order/my-order?query=""'},
+        3:{ page:'/pages/my/extension/extension'}
+      }, // 根据按钮的index跳转
+      errPage:{
+        1:'/pages/my/my-order/my-order?query=1',
+        2:'/pages/my/extension/extension-type/extension-type',     
+      }, // 失败支付跳转的页面 根据door跳转
       result: false,
       payWayActive:[false,true,false],
       useAmount:[false,false],
@@ -20,10 +34,19 @@ Page({
       payType:'',//上次支付时选择的支付方式
     },
     onLoad: function (options) {
+      this.setData({
+        door: options.door || 0
+      })
+      let callBack = (datas)=>{
+        this.setData({
+          availableBalance: Tool.formatNum(datas.availableBalance || 0)
+        })
+      }
+      app.getLevel(callBack)
       if (options.door==2){
         this.setData({
           packageId: options.packageId,
-          packagePrice:options.packagePrice
+          totalAmounts:options.packagePrice,
         })
       }else{
         // 提交订单时返回的数据
@@ -32,6 +55,7 @@ Page({
           payList: payList,
           isContinuePay: options.isContinuePay || false
         })
+        this.formatDatas()
         // 如果有值 去继续支付
         if (this.data.payList.outTradeNo) {
           this.continueToPay()
@@ -54,9 +78,55 @@ Page({
         return
       } 
       let payType = payWay.index == 0 ? 16 : 2
-      if (this.data.payList.outTradeNo){
+      if(this.data.door==1){
+        this.payOrderType()
+      } else if (this.data.door==2){
+        this.payPackage()
+      }
+    },
+    /******红包支付******* */
+    payPackage() {
+      let payType = this.data.total == 0 ? 1 : 2
+      let params = {
+        packageId: this.data.packageId,
+        reqName: '支付红包推广费用',
+        requestMethod: 'GET',
+        url: Operation.promotionPromoterPay,
+        "type": payType,
+      }
+      let r = RequestFactory.wxRequest(params);
+      r.successBlock = (req) => {
+        if (payType == 1) {
+          this.showResult(true)
+        } else {
+          let datas = req.responseObject.data
+          this.wxPayPackage(datas)
+        }
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
+    },
+    wxPayPackage(payList) { //微信支付
+      // payList = JSON.parse(payList)
+      let that = this
+      wx.requestPayment({
+        'timeStamp': payList.timeStamp,
+        'nonceStr': payList.nonceStr,
+        'package': payList.package,
+        'signType': 'MD5',
+        'paySign': payList.paySign,
+        'success': function (res) {
+          that.showResult(true)
+        },
+        'fail': function (res) {
+          that.showResult(false)
+        }
+      })
+    },
+    payOrderType(){
+      if (this.data.payList.outTradeNo) {
         this.continuePay(payType)
-      } else{
+      } else {
         this.payOrder(payType)
       }
     },
@@ -118,20 +188,25 @@ Page({
     },
     showResult(bool){
       this.setData({
+        tipsBtn: this.data.tipsBtnArr[this.data.door],
         isShow:true,
         result:bool,
       })
     },
     payResultClicked(e){
       let index = e.currentTarget.dataset.index
-      if(index == 1){
-        Tool.switchTab('/pages/index/index')
+      let isTab = false
+      let page = ''
+      if(index!=500){
+        isTab = this.data.redirectTo[index].tab
+        page = this.data.redirectTo[index].page
+      }else{
+        page = this.data.errPage[this.data.door]
+      }
+      if (index == isTab){
+        Tool.switchTab(page)
       } else {
-        let query = ''
-        if(index==3){
-          query =1
-        }
-        Tool.redirectTo('/pages/my/my-order/my-order?query=' + query)
+        Tool.redirectTo(page)
       }
       
     },
@@ -178,6 +253,7 @@ Page({
           payType: datas.type,
           payList:payList
         })
+        this.formatDatas()
       };
       Tool.showErrMsg(r)
       r.addToQueue();
@@ -197,6 +273,7 @@ Page({
         this.setData( {
           payList: payList
         })
+        this.formatDatas()
       };
       Tool.showErrMsg(r)
       r.addToQueue();
@@ -217,6 +294,11 @@ Page({
         'fail': function (res) {
           that.showResult(false)
         }
+      })
+    },
+    formatDatas(){
+      this.setData({
+        totalAmounts: this.data.payList.totalAmounts || 0,
       })
     },
     orderQuery(outTradeNo){

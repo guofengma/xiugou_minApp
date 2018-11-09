@@ -35,7 +35,7 @@ Page({
     })
   },
   pay(){
-    Tool.navigateTo(`pages/order-confirm/pay/pay?door=2&packageId=${this.data.id}&packagePrice=${this.data.total}&door=2`)
+    Tool.navigateTo(`/pages/order-confirm/pay/pay?door=2&packageId=${this.data.id}&packagePrice=${this.data.total}&door=2`)
   },
   payResultClicked(e){
     let index = e.currentTarget.dataset.index

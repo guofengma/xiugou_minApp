@@ -274,7 +274,7 @@ Page({
       Event.emit('updateShoppingCart')
       let data = req.responseObject.data
       Storage.setPayOrderList(data)
-      Tool.redirectTo('/pages/order-confirm/pay/pay?data=' + JSON.stringify(data))
+      Tool.redirectTo('/pages/order-confirm/pay/pay?door=1')
     };
     r.failBlock = (req) => {
       let callBack = ()=>{}
