@@ -94,7 +94,9 @@ Page({
       password: this.data.pwd,
       headImg: this.data.userInfo.avatarUrl,
       nickname: this.data.userInfo.nickName,
-      openid: this.data.openid,
+      openid: this.data.openid || Storage.getWxOpenid() || '',
+      upUserId: this.data.inviteId, // 邀请者id 非必填
+      inviteCode: this.data.inviteCode,//邀请码 非必填
     }
     // this.verifyPhone(e.detail.value)  // 改动了 
     this.verifyPhone(params)
