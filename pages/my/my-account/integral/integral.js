@@ -13,7 +13,7 @@ Page({
         { name: '注册赠送', icon:'zczs-icon.png'},
         { name: '活动赠送', icon: 'hdzs-icon.png' },
         { name: '商品购买抵扣', icon: 'xdxf-icon.png' },
-        { name: '兑换一元券', icon: 'xdxf-icon.png' },
+        { name: '1元现金券兑换', icon: 'xjqdh-icon.png' },
         { name: '签到赠送', icon: 'qdzs-icon.png' },
         { name: '任务奖励', icon: 'rwjl-icon.png' },
       ]

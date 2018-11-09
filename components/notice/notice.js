@@ -40,6 +40,7 @@ Component({
         this.setData({
           list: this.data.listContent,
         })
+        console.log(this.data.list)
         this.triggerEvent('isShowNotice')
       };
       Tool.showErrMsg(r)

@@ -25,11 +25,11 @@ Page({
         101:'/pages/register/register?inviteId='
       },// 1.秒杀 2.降价拍 3.礼包 4.助力免费领 5.专题 99.普通产品 100:嵌入H5的页面地址 101注册
       iconArr:[ // icon 图标
-        { name: '赚钱', img:'home-icon-xueyuan.png',page:''},
-        { name: '分享', img: 'home_icon_share.png', page: '' },
-        { name: '签到', img: 'home_icon_shengqian.png', page: '/pages/signIn/signIn',login:true },
-        { name: '学院', img: 'home-icon-xueyuan.png', page: ''},
-        { name: '秒杀', img: 'home_icon_chuxiao.png', page: ''},
+        { name: '分享', img: 'home_icon__fenxing_nor@3x.png', page:'/pages/topic/topic?code=ZT2018000019'},
+        { name: '秀场', img: 'home_icon_xiuchang_nor@3x.png', page: '/pages/discover/discover',tabbar:true},
+        { name: '签到', img: 'home_icon_qiangdao_nor@3x.png', page: '/pages/signIn/signIn',login:true },
+        { name: '必看', img: 'home_icon_bikan_nor@3x.png', page: '/pages/topic/topic?code=FX181109000001'},
+        { name: '秒杀', img: 'home_icon_miaoshao_nor@3x.png', page: '/pages/topic/topic?code=ZT2018000012'},
       ],
       imgUrls: [],// 轮播
       adArr:[],// 广告位
@@ -161,7 +161,7 @@ Page({
         })
       });
       this.queryFeaturedList()
-      this.indexQueryCategoryList()
+      // this.indexQueryCategoryList()
       if (!app.globalData.systemInfo){
         app.getSystemInfo()
       }
@@ -182,6 +182,7 @@ Page({
     goPages(e){
       let index = e.currentTarget.dataset.index
       let page = this.data.iconArr[index].page
+      let isTab = this.data.iconArr[index].tabbar
       if(index<5){
         if (this.data.iconArr[index].login) {
           let callBack = ''
@@ -194,7 +195,11 @@ Page({
         page ='/pages/product-classification/product-classification'
       }
       if (page) {
-        Tool.navigateTo(page)
+        if (isTab){
+          Tool.switchTab(page)
+        }else{
+          Tool.navigateTo(page)
+        } 
       }
       
     },

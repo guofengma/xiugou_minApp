@@ -13,8 +13,12 @@
   background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/index-notice-bg.png) no-repeat left top;
   background-size: 100%;
 }
+.title{
+  font-size: 30rpx;
+  margin-bottom: 10rpx;
+}
 .scroll-view{
-  padding-top: 180rpx;
+  padding-top: 140rpx;
 }
 
 .notice-scroll{

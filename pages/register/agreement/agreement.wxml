@@ -1,4 +1,4 @@
-<view class='sub-page whiteBg'>
+<!-- <view class='sub-page whiteBg'>
   <view class='top-view grayBg flexR'>
     <text class='red'>秀购</text>商城·用户协议
   </view>
@@ -12,4 +12,5 @@
     </view>
     <view class='line'>1.1 微信支付服务，指本公司依托微信及微信公众平台为收付款人之间提供的货币资金转移服务。（下称“本服务”）</view>
   </view>
-</view>
+</view> -->
+<web-view src='{{webUrl}}'></web-view>
