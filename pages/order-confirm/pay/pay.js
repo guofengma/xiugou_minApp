@@ -2,6 +2,7 @@ let { Tool, RequestFactory, Event, Storage, Operation } = global
 
 Page({
     data: {
+      door:1, // 1：订单页面 2：推广红包支付
       ysf: { title: '支付方式' },
       payList:'',
       isShow:false, // 显示支付结果
@@ -21,7 +22,8 @@ Page({
     onLoad: function (options) {
       if (options.door==2){
         this.setData({
-          
+          packageId: options.packageId,
+          packagePrice:options.packagePrice
         })
       }else{
         // 提交订单时返回的数据
@@ -230,20 +232,6 @@ Page({
           that.showResult(false)
         }
       })
-      // let params = {
-      //   productsDescription: outTradeNo,
-      //   openid: Storage.getWxOpenid(),
-      //   orderNum: outTradeNo,
-      //   totalFee: this.data.payList.showTotalAmounts
-      // }
-      // let r = RequestFactory.wxPay(params);
-      // r.successBlock = (req) => {
-      //   let that = this
-      //   let payList = req.responseObject.data
-       
-      // };
-      // Tool.showErrMsg(r)
-      // r.addToQueue();
     },
     orderQuery(outTradeNo){
       let params = {
