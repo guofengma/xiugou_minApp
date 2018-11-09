@@ -37,66 +37,66 @@ Page({
   pay(){
     Tool.navigateTo(`pages/order-confirm/pay/pay?door=2&packageId=${this.data.id}&packagePrice=${this.data.total}&door=2`)
   },
-  payResultClicked(e){
-    let index = e.currentTarget.dataset.index
-    if(index==1){
-      Tool.navigateTo(this.data.page[index])
-    } else if(index==3){
-      //Tool.navigationPop()
-      this.setData({
-        isShow:false
-      })
-    }
+  // payResultClicked(e){
+  //   let index = e.currentTarget.dataset.index
+  //   if(index==1){
+  //     Tool.navigateTo(this.data.page[index])
+  //   } else if(index==3){
+  //     //Tool.navigationPop()
+  //     this.setData({
+  //       isShow:false
+  //     })
+  //   }
     
-  },
-  payClicked(){
-    let payType = this.data.total == 0 ? 1 : 2
-    let params = {
-      packageId: this.data.id,
-      reqName: '支付红包推广费用',
-      requestMethod: 'GET',
-      // openid: Storage.getWxOpenid(),
-      url: Operation.promotionPromoterPay,
-      "type": payType,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      if (payType == 1) {
-        this.setData({
-          isShow: true,
-          result: true
-        })
-      } else {
-        let datas = req.responseObject.data
-        this.wxPay(datas)
-      }
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
-  wxPay(payList) { //微信支付
-    // payList = JSON.parse(payList)
-    let that = this
-    wx.requestPayment({
-      'timeStamp': payList.timeStamp,
-      'nonceStr': payList.nonceStr,
-      'package': payList.package,
-      'signType': 'MD5',
-      'paySign': payList.paySign,
-      'success': function (res) {
-        that.setData({
-          isShow:true,
-          result:true
-        })
-      },
-      'fail': function (res) {
-        that.setData({
-          isShow: true,
-          result: false,
-        })
-      }
-    })
-  },
+  // },
+  // payClicked(){
+  //   let payType = this.data.total == 0 ? 1 : 2
+  //   let params = {
+  //     packageId: this.data.id,
+  //     reqName: '支付红包推广费用',
+  //     requestMethod: 'GET',
+  //     // openid: Storage.getWxOpenid(),
+  //     url: Operation.promotionPromoterPay,
+  //     "type": payType,
+  //   }
+  //   let r = RequestFactory.wxRequest(params);
+  //   r.successBlock = (req) => {
+  //     if (payType == 1) {
+  //       this.setData({
+  //         isShow: true,
+  //         result: true
+  //       })
+  //     } else {
+  //       let datas = req.responseObject.data
+  //       this.wxPay(datas)
+  //     }
+  //   };
+  //   Tool.showErrMsg(r)
+  //   r.addToQueue();
+  // },
+  // wxPay(payList) { //微信支付
+  //   // payList = JSON.parse(payList)
+  //   let that = this
+  //   wx.requestPayment({
+  //     'timeStamp': payList.timeStamp,
+  //     'nonceStr': payList.nonceStr,
+  //     'package': payList.package,
+  //     'signType': 'MD5',
+  //     'paySign': payList.paySign,
+  //     'success': function (res) {
+  //       that.setData({
+  //         isShow:true,
+  //         result:true
+  //       })
+  //     },
+  //     'fail': function (res) {
+  //       that.setData({
+  //         isShow: true,
+  //         result: false,
+  //       })
+  //     }
+  //   })
+  // },
   onHide: function () {
 
   },
