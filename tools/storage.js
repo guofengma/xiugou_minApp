@@ -273,4 +273,12 @@ export default class Storage {
   static getPayInfoList(info) {
       return this.getterFor('payInfoList');
   }
+
+  static setUpUserId(info) {
+    this.setterFor('upUserId', info)
+  }
+
+  static getUpUserId(info) {
+    return this.getterFor('upUserId');
+  }
 }

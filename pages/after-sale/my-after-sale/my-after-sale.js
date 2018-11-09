@@ -43,16 +43,17 @@ Page({
   },
   searchKeyword() {
     let { params } = this.data
-    params.page = 1
-    params.productName = this.data.keyword
-    this.setData({
-      params: params
-    })
     if (Tool.isEmptyStr(this.data.keyword)){
       Tool.showAlert('请输入搜索内容')
       return
     }
-    this.queryAftermarketOrderPageList(this.data.params)
+    params.page = 1
+    params.condition = this.data.keyword
+    this.setData({
+      params: params,
+      lists:[]
+    })
+    this.queryAftermarketOrderPageList(this.data.params,2)
   },
   onScroll() {
     // 向下滑动的时候请求数据
@@ -67,7 +68,7 @@ Page({
     })
     this.queryAftermarketOrderPageList(this.data.params)
   },
-  queryAftermarketOrderPageList(params){
+  queryAftermarketOrderPageList(params,types=1){
     // returnProductStatus  1申请中 2已同意 3拒绝 4完成 5关闭 6超时
 
     // getReturnProductType 1退款 2退货 3退货 
@@ -91,9 +92,9 @@ Page({
             item.typeState = item.typeName + item.typeState
           }
         })
-        if (!Tool.isEmptyStr(this.data.keyword)){
-          lists=[]
-        }
+        // if (!Tool.isEmptyStr(this.data.keyword)){
+        //   lists=[]
+        // }
         this.setData({
           lists: lists.concat(datas.data),
           totalPage: req.responseObject.data.totalPage,

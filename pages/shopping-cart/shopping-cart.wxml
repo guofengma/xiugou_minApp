@@ -4,7 +4,7 @@
 <import src='/components/result-tips/result-tips.wxml' />
 
 <!-- <scroll-view class="search-result" scroll-y > -->
-  <view class='shopping-cart'>
+  <view class='shopping-cart' wx-if='{{!tipVal}}'>
     <view wx:for='{{items}}'  data-index='{{index}}'  wx:key='unique' class='shopping-cart-line '>
       <view class='flexR-sb whiteBg' >
         <view class='chooseImg'  bindtap='chooseClicked' data-index='{{index}}' >

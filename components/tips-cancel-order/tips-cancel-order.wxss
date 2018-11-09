@@ -13,7 +13,7 @@
 }
 .tips-content>view.active{
   background-color:#F8F8F8; 
-  background-image: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/choose-right-icon.png)
+  background-image: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/choose-icon-c.png)
 }
 .cancel-btn{
   width: 276rpx;

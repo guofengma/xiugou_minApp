@@ -24,7 +24,6 @@ Page({
       productId: options.productId || '',
       prodCode: options.prodCode || '',
       door: options.door || '',
-      inviteCode: options.inviteCode || ''
     })
     this.didLogin()
     let callBack = ()=>{
@@ -124,7 +123,7 @@ Page({
   makeSureOrder(){
     // 立即购买
     if (!this.data.didLogin) {
-      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true+'&inviteCode=' + this.data.inviteCode)
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true+'&inviteId=' + this.data.inviteCode)
       return
     }
     let params = {

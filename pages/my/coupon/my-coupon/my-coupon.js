@@ -119,9 +119,19 @@ Page({
       r.successBlock = (req) => {
         let datas = req.responseObject.data
         if (req.responseObject.data.totalPage == 0 || datas.data==null) return
-        datas.data.forEach((item,index)=>{
+        datas.data.forEach((item,index0)=>{
           item.outTime = Tool.timeStringForDateString(Tool.formatTime(item.expireTime),"YYYY.MM.DD");
           item.start_time = Tool.timeStringForDateString(Tool.formatTime(item.startTime), "YYYY.MM.DD");
+          
+          let userLevelId = this.data.userInfo.levelId
+          if(index==0){
+            let isNoLimitUsed = item.levels.includes(userLevelId)
+            // 是否等级受限
+            couponClassName = isNoLimitUsed ?  couponClassName:'coupon-right-limitLevel'
+            // 是否待激活
+            couponClassName = item.status == 3 ? 'coupon-right-unUsed':couponClassName
+            isActive = (!isNoLimitUsed || item.status == 3)?  false:true
+          }
           item.couponClassName = couponClassName;
           item.active = isActive;
           this.getCouponType(item)
@@ -154,20 +164,19 @@ Page({
         url: Operation.couponList,
         status:0
       }
-      params.pageSize = 5
       this.formatCouponInfos(params, 0, true,'')
     },
     // 待激活
-    getDiscountCouponNoActive() {
-      let params = {
-        ...this.data.params,
-        reqName: '待激活',
-        url: Operation.couponList,
-        status: 3
-      }
-      params.pageSize = 5
-      this.formatCouponInfos(params, 0, false, 'coupon-right-unUsed')
-    },
+    // getDiscountCouponNoActive() {
+    //   let params = {
+    //     ...this.data.params,
+    //     reqName: '待激活',
+    //     url: Operation.couponList,
+    //     status: 3
+    //   }
+    //   params.pageSize = 5
+    //   this.formatCouponInfos(params, 0, false, 'coupon-right-unUsed')
+    // },
     //已经优惠劵列表
     getDiscountCouponUserd() {
       let params = {
@@ -258,6 +267,7 @@ Page({
         lists: this.data.lists,
         productIds: options.productIds || '',
         coinData: this.data.coinData,
+        userInfo:userInfo
       })
       if (this.data.door == 1){
         let maxUseCoin = options.maxUseCoin || 0
@@ -274,7 +284,7 @@ Page({
         this.setData({
 
         })
-        this.getDiscountCouponNoActive()
+        // this.getDiscountCouponNoActive()
         this.getDiscountCouponNoUse();
       }
       this.getDiscountCouponUserd();

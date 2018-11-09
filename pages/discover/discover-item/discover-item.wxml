@@ -19,7 +19,7 @@
           <view class='discover_time'>{{item.time}}</view>  
         </view>
       </view>
-      <image class='discover-list-item-edit' wx:if="{{showEdit}}" src="{{item.checked?'/img/list_btn_gouxuan_sel@3x.png':'/img/choose-icon.png'}}" catchtap='manageItem' data-index="{{index}}"></image>
+      <image class='discover-list-item-edit' wx:if="{{showEdit}}" src="{{item.checked?'/img/choose-icon-c.png':'/img/choose-icon.png'}}" catchtap='manageItem' data-index="{{index}}"></image>
     </view>
   </view>
     <!-- discover item E -->
@@ -44,7 +44,7 @@
           <view class='discover_time'>{{item.time}}</view>  
         </view>
       </view>
-      <image class='discover-list-item-edit' wx:if="{{showEdit}}" src="{{item.checked?'/img/list_btn_gouxuan_sel@3x.png':'/img/choose-icon.png'}}"  catchtap='manageItem' data-index="{{index}}"></image>
+      <image class='discover-list-item-edit' wx:if="{{showEdit}}" src="{{item.checked?'/img/choose-icon-c.png':'/img/choose-icon.png'}}"  catchtap='manageItem' data-index="{{index}}"></image>
     </view>
     
   </view>

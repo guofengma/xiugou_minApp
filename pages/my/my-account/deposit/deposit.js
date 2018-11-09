@@ -42,7 +42,7 @@ Page({
         page: this.data.currentPage,
         size: this.data.pageSize,
         requestMethod: 'GET',
-        'type': 1,
+        'type': 2,
         reqName: '分页查询待提现账户',
         url: Operation.getuserBalance
       }
@@ -53,9 +53,10 @@ Page({
         if (datas.totalPage>0){
           datas.data.forEach((item)=>{
             item.createTime = Tool.formatTime(item.createTime);
-            item.add = item.type ==1?  true:false
-            item.showName = item.add ? "" : "退款"
-            item.showName = item.status == 2? "已冻结":item.showName
+            item.add = item.biType == 1 ? true : false
+            // item.add = item.type ==1?  true:false
+            // item.showName = item.add ? "" : "退款"
+            // item.showName = item.status == 2? "已冻结":item.showName
           })
           this.setData({
             list: list.concat(datas.data),

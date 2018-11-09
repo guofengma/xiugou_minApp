@@ -1,3 +1,4 @@
 <import src='/pages/download-app/temp/download-temp.wxml'/>
 
 <template is="download-temp" wx:if='{{imgUrl}}' data="{{src:imgUrl+'default_xinyonghu@2x.png'}}" /> 
+

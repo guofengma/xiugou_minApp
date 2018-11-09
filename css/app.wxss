@@ -185,6 +185,9 @@ button::after{
 .font-32{
   font-size: 32rpx;
 }
+.font-34{
+  font-size: 34rpx;
+}
 .font-38{
   font-size: 38rpx;
 }

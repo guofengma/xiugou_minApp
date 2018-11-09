@@ -77,7 +77,7 @@ Page({
     }
     r.failBlock = (req) => {
       if (req.responseObject.code == 34005){
-        Tool.navigateTo('/pages/register/register?inviteCode=' + this.data.inviteCode)
+        Tool.navigateTo('/pages/register/register?inviteId=' + this.data.inviteCode)
       } else if (req.responseObject.code == 40000){
         Tool.navigateTo('/pages/download-app/oldUser-downLoad/oldUser-downLoad')
       } else {

@@ -19,7 +19,7 @@
             <view class="detail">
               <view class="style">{{types[item.useType].name}}</view>
               <view class="time">{{item.createTime}}</view>
-              <view class="number">流水号：{{item.serialNo}}</view>
+              <view class="number">编号：{{item.serialNo}}</view>
             </view>
           </view>
             <view class="money {{item.add?'red':''}}">

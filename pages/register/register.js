@@ -22,18 +22,27 @@ Page({
     urlFrom: null,
   },
   onLoad: function (options) {
+    let inviteId = options.inviteId
+    if (options.inviteId == 'null' || options.inviteId == 'undefined' || !options.inviteId) {
+      inviteId = ''
+    }
     this.setData({
-      codeId: options.inviteCode || '',
+      inviteCode: options.inviteCode || '',
+      inviteId: inviteId || Storage.getUpUserId(),
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
       urlFrom: options.from || null,
       phone: options.phone || ''
     })
-    if (options.inviteCode != 'null' && options.inviteCode != 'undefined' && options.inviteCode){
+    
+    if (options.inviteCode){
       let callBack = () => {
         this.sweepCode(options.inviteCode)
       }
       app.wxLogin(callBack)
+    }
+    if (inviteId){
+      app.wxLogin()
     }
   },
   onShow: function () {
@@ -101,6 +110,7 @@ Page({
       let datas = req.responseObject.data
       Storage.setMemberId(req.responseObject.data.id)
       Tool.loginOpt(req)
+      Storage.setUpUserId(null)
       if (this.data.urlFrom){
         Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
       } else if (!datas.upUserid){
@@ -168,7 +178,6 @@ Page({
       requestMethod: 'GET',
     }
     let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.sendMessage(params);
     r.successBlock= (req) => {
       wx.showToast({
         title: '验证码已发送',
@@ -229,7 +238,6 @@ Page({
   toPage(){
     Tool.navigateTo('/pages/register/agreement/agreement')
   },
-
   agreeCilcked() {
     this.setData({
       isAgree: !this.data.isAgree

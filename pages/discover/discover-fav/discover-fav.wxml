@@ -18,7 +18,7 @@
   <view class='discover-fav-edit' wx:if="{{showEdit}}">
     <view class='checkAll' bindtap='checkAll'>
       <image class='checkAll-icon' 
-        src="{{isCheckAll?'/img/list_btn_gouxuan_sel@3x.png':'/img/choose-icon.png'}}"
+        src="{{isCheckAll?'/img/choose-icon-c.png':'/img/choose-icon.png'}}"
       ></image>
       <text>全选</text>
     </view>

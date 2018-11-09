@@ -21,6 +21,7 @@ Page({
       total: options.total,
       id: options.id
     })
+    Tool.isIPhoneX(this)
   },
   selectIcon(){
     this.setData({
@@ -33,6 +34,9 @@ Page({
       isShow:true,
     })
   },
+  // pay(){
+  //   Tool.navigateTo(`pages/order-confirm/pay/pay?door=2&packageId=${this.data.id}&packagePrice=${this.data.total}`)
+  // },
   payResultClicked(e){
     let index = e.currentTarget.dataset.index
     if(index==1){

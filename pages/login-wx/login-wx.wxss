@@ -16,7 +16,9 @@
   top:0;
   left: 0;
 }
-
+.loginBtn{
+  font-size: 34rpx;
+}
 .title{
     display: flex;
     justify-content: center;

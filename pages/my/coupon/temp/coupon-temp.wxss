@@ -25,6 +25,10 @@
   background: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/youhuiquan_icon_daijihuo_nor@3x.png) no-repeat 0rpx -8rpx;
    background-size: 130rpx;
 }
+.coupon-right-limitLevel{
+  background: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/youhuiquan_icon_dengjishouxian_nor.png) no-repeat 0rpx -8rpx;
+   background-size: 130rpx;
+}
 .coupon-right-used{
   background: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/youhuiquan_icon_yishiyong_nor@3x.png) no-repeat 0rpx -8rpx;
    background-size: 130rpx;

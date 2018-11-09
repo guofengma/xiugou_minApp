@@ -52,6 +52,6 @@
   margin-right: 10rpx;
   vertical-align:middle;
 }
-/* .rule.flexR{
-  justify-content: center;
-} */
+.loginBtn{
+  font-size: 34rpx;
+}

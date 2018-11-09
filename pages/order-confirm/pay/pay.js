@@ -19,19 +19,26 @@ Page({
       payType:'',//上次支付时选择的支付方式
     },
     onLoad: function (options) {
-      Tool.isIPhoneX(this) 
-      // 提交订单时返回的数据
-      let payList = Storage.getPayOrderList() || {}
-      this.setData({
-        payList: payList,
-        isContinuePay: options.isContinuePay || false
-      })
-      // 如果有值 去继续支付
-      if (this.data.payList.outTradeNo){
-        this.continueToPay()
-      } else if (!this.data.payList.outTradeNo && options.isContinuePay ){
-        // this.againToPrePay()
+      if (options.door==2){
+        this.setData({
+          
+        })
+      }else{
+        // 提交订单时返回的数据
+        let payList = Storage.getPayOrderList() || {}
+        this.setData({
+          payList: payList,
+          isContinuePay: options.isContinuePay || false
+        })
+        // 如果有值 去继续支付
+        if (this.data.payList.outTradeNo) {
+          this.continueToPay()
+        } else if (!this.data.payList.outTradeNo && options.isContinuePay) {
+          // this.againToPrePay()
+        }
       }
+      Tool.isIPhoneX(this) 
+      
     },
     formatNum(num){ // 保留两位小数不四舍五入
       num = num<0? 0:num
