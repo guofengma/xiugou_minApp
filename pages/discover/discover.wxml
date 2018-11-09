@@ -53,7 +53,7 @@
     <view class='discover-list' wx:if="{{topic.length}}">
       <view class='discover-topic-title'>推荐</view>
       <view class='discover-item-container'>
-        <template is="discover-item" data="{{showEdit,items:topic}}" />
+        <template is="discover-item" data="{{showEdit,items:topic,generalize: 3}}" />
       </view>
     </view>
     <view class='no-more' wx:if="{{currentTopicPage == totalTopicPage}}">已经到底啦~</view>
@@ -62,7 +62,7 @@
   <view class='discover-tab-new' wx:else>
     <view class='discover-list' wx:if="{{discover.length}}">
       <view class='discover-item-container'>
-        <template is="discover-item" data="{{showEdit,items:discover}}" />
+        <template is="discover-item" data="{{showEdit,items:discover,generalize: 4}}" />
       </view>
     </view>
     <view class='no-more' wx:if="{{currentDiscoverPage == totalDiscoverPage}}">已经到底啦~</view>
