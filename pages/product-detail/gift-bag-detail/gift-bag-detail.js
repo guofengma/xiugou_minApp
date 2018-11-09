@@ -175,11 +175,11 @@ Page({
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },
-  goTop(e) {
-    this.ProductFactory.goTop(e)
+  goTop() {
+    this.ProductFactory.goTop()
   },
-  scroll(e, res) {
-    this.ProductFactory.scroll(e)
+  onPageScroll(e) {
+    this.ProductFactory.onPageScroll(e)
   },
   hiddenTips() {
     this.ProductFactory.hiddenTips()

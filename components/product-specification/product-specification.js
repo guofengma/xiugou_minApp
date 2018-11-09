@@ -351,6 +351,9 @@ Component({
       }
     },
     counterInputOnChange(e) {
+      if (e.detail.innerCount == 200) {
+        Tool.showAlert('最多只能购买200件')
+      }
       this.prdCanBuyAmount(e.detail.innerCount)
     },
     prdCanBuyAmount(count){

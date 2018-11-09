@@ -44,7 +44,6 @@ Component({
         return
       }
       if (innerCount > 200) {
-        Tool.showAlert('最多只能购买200件')
         innerCount =200
       }
       this.setData({
@@ -57,7 +56,6 @@ Component({
       // 加
       let innerCount = this.data.count
       if (this.data.count>=200){
-        Tool.showAlert('最多只能购买200件')
         innerCount = 200
       } else {
         innerCount+=1

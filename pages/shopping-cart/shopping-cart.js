@@ -296,9 +296,9 @@ Page({
     let index = e.detail.e.currentTarget.dataset.index
     let btnName = e.detail.e.currentTarget.dataset.name
     let list = this.data.items
-
+  
     //  点击了加按钮 那么不做操作 而且超过库存了
-    if (btnName != 'reduce' && list[index].stock < count && count == 200) {
+    if (btnName != 'reduce' && list[index].stock < count) {
       count = list[index].showCount=list[index].stock
       let callBack = ()=>{
         this.updateShoppingCartWay(count, index)

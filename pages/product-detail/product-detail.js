@@ -35,17 +35,21 @@ Page({
     } else {
       this.getShoppingCartList()
     }
-    let callBack2 =()=>{
-      this.activityByProductId(this.data.productId)
-    }
+    
     this.ProductFactory = new ProductFactorys(this)
-    this.ProductFactory.requestFindProductByIdApp(callBack2)
+    this.initRequest()
     
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
   onShow: function () {
-  
+    
+  },
+  initRequest(){
+    let callBack2 = () => {
+      this.activityByProductId(this.data.productId)
+    }
+    this.ProductFactory.requestFindProductByIdApp(callBack2)
   },
   refreshMemberInfoNotice() {
     Tool.getUserInfos(this)
@@ -179,13 +183,17 @@ Page({
   goTop (e) {
     this.ProductFactory.goTop(e)
   },
-  scroll (e, res) {
-    this.ProductFactory.scroll(e)
+  onPageScroll(e) {
+    this.ProductFactory.onPageScroll(e)
   },
   counterInputOnChange(e){
     this.setData({
       productBuyCount:e.detail
     })
+  },
+  onPullDownRefresh: function () {
+    this.initRequest()
+    wx.stopPullDownRefresh();
   },
   onShareAppMessage: function (res) {
     return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.id)

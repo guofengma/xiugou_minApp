@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "商品详情",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "product-promotion-info": "/components/product-promotion-info/product-promotion-info",
     "product-specification": "/components/product-specification/product-specification",

@@ -95,16 +95,28 @@ export default class ProductFactorys  {
     }
   }
 
-  goTop (e) {
-    this.page.setData({
-      scrollTop: 0
-    })
+  // goTop (e) {
+  //   this.page.setData({
+  //     scrollTop: 0
+  //   })
+  // }
+  goTop() {
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
+    }
   }
-  scroll(e, res) {
+  onPageScroll(e) {
     this.page.setData({
       msgShow: false
     })
-    if (e.detail.scrollTop > 200) {
+    if (e.scrollTop > 200) {
       this.page.setData({
         floorstatus: true
       });
@@ -114,6 +126,20 @@ export default class ProductFactorys  {
       });
     }
   }
+  // scroll(e, res) {
+  //   this.page.setData({
+  //     msgShow: false
+  //   })
+  //   if (e.detail.scrollTop > 200) {
+  //     this.page.setData({
+  //       floorstatus: true
+  //     });
+  //   } else {
+  //     this.page.setData({
+  //       floorstatus: false
+  //     });
+  //   }
+  // }
   hiddenTips() {
     this.page.setData({
       msgShow: false

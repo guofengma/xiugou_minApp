@@ -7,7 +7,7 @@
 
 <import src= "/components/goT-top-btn/goT-top-btn.wxml"/>
 
-<scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%">
+<!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
   <view class='prduct-detail-view'>
     <!--topbar  -->
     <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'/>
@@ -41,7 +41,7 @@
     <template is="goT-top-btn" data='{{floorstatus}}'/>
   </view>
 
-</scroll-view>
+<!-- </scroll-view> -->
 
 
 <!--产品规格选择  -->
