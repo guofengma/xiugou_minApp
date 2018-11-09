@@ -121,7 +121,7 @@
           <view wx:if='{{detail.sendTime}}'>发货时间：{{detail.sendTime}}</view>
           <view wx:if='{{status==4 || status==5}}'>成交时间：{{detail.showFinishTime}}</view>
           <view wx:if='{{status==6}}'>取消时间：{{detail.cancelTime}}</view>
-          <view wx:if='{{status==8}}'>关闭时间：{{detail.shutOffTime}}</view>
+          <view wx:if='{{status==8}}'>关闭时间：{{detail.showShutOffTime}}</view>
         </view>
     </view>
 

@@ -6,7 +6,10 @@ Page({
       ysf: { title: '支付方式' },
       payList:'',
       isShow:false, // 显示支付结果
-      tipsContent: ['已通知商家，会给你尽快发货', '请耐心等待'],
+      tipsContentArr:{
+        1: ['已通知商家，会给你尽快发货', '请耐心等待'],
+        2: ['系统将会在明天0点进行站内推广', '每成功获取一个下级讲收到站内消息推送'],
+      },
       tipsBtnArr: {
         1:[
           { name: '返回首页', btnType: "",index:1},
@@ -189,6 +192,7 @@ Page({
     showResult(bool){
       this.setData({
         tipsBtn: this.data.tipsBtnArr[this.data.door],
+        tipsContent: this.data.tipsContentArr[this.data.door],
         isShow:true,
         result:bool,
       })

@@ -74,7 +74,7 @@ Page({
             detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
             detail.showFinishTime = detail.deliverTime? Tool.formatTime(detail.deliverTime) : Tool.formatTime(detail.finishTime)
             detail.deliverTime = Tool.formatTime(detail.deliverTime)
-            detail.shutOffTime = Tool.formatTime(detail.shutOffTime)
+            detail.showShutOffTime = Tool.formatTime(detail.shutOffTime)
             let address = {}
             address.receiver = detail.receiver;
             address.recevicePhone = detail.recevicePhone;
