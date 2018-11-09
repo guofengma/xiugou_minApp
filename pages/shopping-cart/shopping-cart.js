@@ -20,7 +20,12 @@ Page({
     Event.on('continueBuy', this.shoppingcart0neMoreOrder, this);
   },
   onShow: function () {
-
+    
+  },
+  updateShoppingCartByEmit(){
+    this.setData({
+      isUpdateCart:true
+    })
   },
   onPullDownRefresh: function () {
     this.initDatas()
@@ -403,8 +408,8 @@ Page({
       Tool.showAlert('请选择要购买的商品')
       return
     }
-    
-    Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + params+'&type=99')
+    Tool.navigateTo(`/pages/order-confirm/order-confirm?params=${params}&type=99&formCart=${true}`)
+    // Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + params+'&type=99')
   },
   cartProductClicked(e){
     let state = e.currentTarget.dataset.state

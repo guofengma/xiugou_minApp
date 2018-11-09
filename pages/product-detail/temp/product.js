@@ -38,7 +38,6 @@ export default class ProductFactorys  {
         children: [],
       }]
       let tr = []
-      // let tbody = this.page.data.nodes
       for (let i = 0; i < datas.paramList.length; i++) {
         tr.push(
           {

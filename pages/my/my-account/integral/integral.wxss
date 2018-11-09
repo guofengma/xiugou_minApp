@@ -49,7 +49,6 @@
     width: 100rpx;
     height: 100rpx;
     border-radius: 50%;
-    background-color: #ff7e00;
     margin-top: 10rpx;
     margin-right: 30rpx;
 }

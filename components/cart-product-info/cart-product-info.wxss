@@ -14,6 +14,9 @@
 .right-bar{
   padding-top: 15rpx;
 }
+.right-top-bar>view:first-child{
+  height:70rpx;
+}
 .right-bar .gray.ellipsis-2{
   margin-top: 5rpx;
   margin-bottom: 20rpx;
@@ -40,4 +43,5 @@
 }
 .statusImg image{
   width: 128rpx;
+  height: 128rpx;
 }

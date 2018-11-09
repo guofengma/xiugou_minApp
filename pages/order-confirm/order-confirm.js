@@ -23,6 +23,7 @@ Page({
     this.setData({
       params: JSON.parse(options.params),
       door: options.type,
+      formCart: options.formCart || false
     })
     this.requestOrderInfo()
     Tool.isIPhoneX(this)
@@ -247,7 +248,6 @@ Page({
     if (this.data.door == 2){
       orderTypeParmas = {
         ...this.data.params,
-        // "orderProducts": this.data.params.orderProducts,
         url: Operation.discountSubmitOrder
       }
     } else if (this.data.door == 5){
@@ -258,7 +258,6 @@ Page({
     } else if (this.data.door == 1){
       orderTypeParmas = {
         ...this.data.params,
-        // "orderProducts": this.data.params.orderProducts,
         url: Operation.seckillSubmitOrder
       }
     }
@@ -277,7 +276,26 @@ Page({
       Storage.setPayOrderList(data)
       Tool.redirectTo('/pages/order-confirm/pay/pay?data=' + JSON.stringify(data))
     };
-    Tool.showErrMsg(r)
+    r.failBlock = (req) => {
+      let callBack = ()=>{}
+      if (req.responseObject.code == 10009) { // 超时登录
+        callBack = () => {
+          Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
+        }
+      } else if (req.responseObject.code ==54001){
+        if (this.data.formCart){
+          callBack = () => {
+            Event.emit('updateShoppingCart')
+            Tool.switchTab('/pages/shopping-cart/shopping-cart')
+          }
+        } else {
+          callBack = () => {
+            Tool.navigationPop()
+          }
+        }
+      }
+      Tool.showAlert(req.responseObject.msg, callBack)
+    }
     r.addToQueue();
   },
   iconClicked(){ // 点击使用1元劵跳转
@@ -336,40 +354,5 @@ Page({
     Event.off('updateCoupon', this.couponClick)
     Event.off('getTokenCoin', this.tokenCoinClick)
   },
-  // switchChange(){
-  //   if (!this.data.orderInfos.canUseScore) return
-  //   this.setData({
-  //     isUseIntegral: !this.data.isUseIntegral,
-  //   })
-  //   this.getReducePrice()
-  // },
-  // getReducePrice(){
-  //   let { orderInfos, isUseIntegral} = this.data
-  //   if (isUseIntegral) {
-  //     orderInfos.totalAmounts = Tool.sub(orderInfos.totalAmounts, orderInfos.reducePrice) 
-  //   } else {
-  //     orderInfos.totalAmounts = Tool.add(orderInfos.totalAmounts, orderInfos.reducePrice) 
-  //   }
-  //   this.setData({
-  //     orderInfos: orderInfos
-  //   })
-  // },
-  // userScore(item){ // 计算积分
-  //   // 积分抵扣计算
-  //   let score = item.dealer.userScore > item.showTotalScore ? item.showTotalScore : item.dealer.userScore
-  //   item.showScore = score
-  //   // item.reducePrice = item.userScoreToBalance*score
-  //   item.reducePrice = Tool.mul(item.userScoreToBalance,score)
-  //   // 当商品可以使用积分 用户积分大于0的时候 显示可以使用积分
-  //   if (this.data.door != 0){
-  //     item.canUseScore = (item.showTotalScore > 0 && item.dealer.userScore) ? true : false
-  //     item.showTipsName = item.dealer.userScore <= 0? '暂无积分可用' : '不支持积分消费'
-  //   } else{
-  //     item.canUseScore =  false
-  //     item.showTipsName = '不支持积分消费'
-  //   }
-
-  //   return item
-  // },
 })
 
