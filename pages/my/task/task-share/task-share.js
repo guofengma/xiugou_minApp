@@ -12,9 +12,8 @@ Page({
     isNewUser: false,
     tableId: '',
     scratchCard: {
-      "id": 1,
-      "typeStatus": 0,
-      "status": 1
+      // status: 1, //是否领取 1. 是 2.否
+      // typeStatus: 1
     },//刮刮卡信息
     scratchCode: '',
     deadline: ''
