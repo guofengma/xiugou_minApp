@@ -3,7 +3,7 @@
   <view class='discover-list-item-aside'>
     <view class='discover-list-item' wx:for="{{items}}" wx:key="unique" wx:if="{{(index+1)%2 != 0}}" bindtap='handleItemClicked' data-id="{{item.id}}">
       <view class='discover-list-item_thumb'>
-        <image src='{{( (item.generalize == 1 || item.generalize == 2) && generalize == 3 ) ? item.img : (item.coverImg || item.img)}}' mode="widthFix"></image>
+        <image src='{{( (item.generalize == 1 || item.generalize == 2) && generalize == 4 ) ? item.img : (item.coverImg || item.img)}}' mode="widthFix"></image>
         <view class='discover_view'>
             <image src='/img/icon_view_white@3x.png'></image>
             <text>{{item.click || 0}}</text>
@@ -28,7 +28,7 @@
   <view class='discover-list-item-aside'>
     <view class='discover-list-item' wx:for="{{items}}" wx:key="unique" wx:if="{{(index+1)%2 == 0}}"  bindtap='handleItemClicked' data-id="{{item.id}}">
       <view class='discover-list-item_thumb' >
-        <image src='{{( (item.generalize == 1 || item.generalize == 2) && generalize == 3 ) ? item.img : (item.coverImg || item.img)}}' mode="widthFix"></image>
+        <image src='{{( (item.generalize == 1 || item.generalize == 2) && generalize == 4 ) ? item.img : (item.coverImg || item.img)}}' mode="widthFix"></image>
         <view class='discover_view'>
             <image src='/img/icon_view_white@3x.png'></image>
             <text>{{item.click || 0}}</text>
