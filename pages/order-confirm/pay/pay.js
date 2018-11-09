@@ -35,22 +35,9 @@ Page({
         // 如果有值 去继续支付
         if (this.data.payList.outTradeNo) {
           this.continueToPay()
-        } else if (!this.data.payList.outTradeNo && options.isContinuePay) {
-          // this.againToPrePay()
         }
       }
       Tool.isIPhoneX(this) 
-      
-    },
-    formatNum(num){ // 保留两位小数不四舍五入
-      num = num<0? 0:num
-      let index = String(num).lastIndexOf('.')
-      if(index != -1){
-        let num2 = num.toFixed(3);
-        num2 = num2.substring(0, num2.lastIndexOf('.') + 3) 
-        return num2
-      }
-      return num
     },
     payWay(e){
       let index = e.currentTarget.dataset.index
@@ -72,7 +59,6 @@ Page({
       } else{
         this.payOrder(payType)
       }
-      
     },
     payOrder(payType){
       if (this.data.payList.totalAmounts==0){

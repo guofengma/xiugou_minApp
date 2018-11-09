@@ -54,6 +54,8 @@ Page({
           datas.data.forEach((item)=>{
             item.createTime = Tool.formatTime(item.createTime);
             item.add = item.biType == 1 ? true : false
+            item.balance = Tool.formatNum(item.balance || '')
+            item.realBalance = Tool.formatNum(item.realBalance || '')
             // item.add = item.type ==1?  true:false
             // item.showName = item.add ? "" : "退款"
             // item.showName = item.status == 2? "已冻结":item.showName
@@ -87,8 +89,10 @@ Page({
       })
     },
     onLoad: function (options) {
+      let account = Storage.getUserAccountInfo().blockedBalance || 0
+      account = Tool.formatNum(account)
       this.setData({
-        account: options.query || Storage.getUserAccountInfo().blockedBalance || '0.00',
+        account: account,
         imgBaseUrl: Config.imgBaseUrl
       })
       this.getData()

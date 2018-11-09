@@ -38,6 +38,7 @@ Page({
           for (let i in req.responseObject.data.data) {
             let item = req.responseObject.data.data[i];
             item.createTime = Tool.formatTime(item.createTime);
+            item.userScore = Tool.formatNum(item.userScore || 0)
             // item.useTypeName = this.data.useTypeArr[item.usType]
             if (item.usType ==1) {
               item.add = true
@@ -72,8 +73,10 @@ Page({
     },
     onLoad: function (options) {
       this.getData();
+      let account = Storage.getUserAccountInfo().availableBalance || 0
+      account = Tool.formatNum(account)
       this.setData({
-        account: options.query || Storage.getUserAccountInfo().userScore || '0.00',
+        account: account,
         imgBaseUrl: Config.imgBaseUrl
       })
     },

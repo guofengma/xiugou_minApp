@@ -84,9 +84,13 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
-        Storage.setUserAccountInfo(req.responseObject.data)
+        let datas = req.responseObject.data
+        datas.availableBalance0 = Tool.formatNum(datas.availableBalance || 0)
+        datas.userScore0 = Tool.formatNum(datas.userScore || 0)
+        datas.blockedBalance0 = Tool.formatNum(datas.blockedBalance || 0)
+        Storage.setUserAccountInfo(datas)
         this.setData({
-          userInfos: req.responseObject.data
+          userInfos: datas
         })
       };
       Tool.showErrMsg(r)

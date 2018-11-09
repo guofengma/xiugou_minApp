@@ -1029,6 +1029,8 @@ export default class Tool {
       let num2 = num.toFixed(3);
       num2 = num2.substring(0, num2.lastIndexOf('.') + 3)
       return num2
+    } else {
+      num = num+'.00'
     }
     return num
   }

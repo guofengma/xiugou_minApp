@@ -40,6 +40,7 @@ Page({
           datas.data.forEach((item) => {
             item.createTime = Tool.formatTime(item.createTime);
             item.add = item.biType == 1 ? true : false
+            item.balance = Tool.formatNum(item.balance || 0)
           })
           this.setData({
             list: list.concat(datas.data),
@@ -68,8 +69,10 @@ Page({
     },
     onLoad: function (options) {
       this.getData();
+      let account = Storage.getUserAccountInfo().availableBalance || 0
+      account = Tool.formatNum(account)
       this.setData({
-        account: options.query || Storage.getUserAccountInfo().availableBalance || '0.00',
+        account: account,
         imgBaseUrl: Config.imgBaseUrl
       })
     },
