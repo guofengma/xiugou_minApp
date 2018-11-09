@@ -1,4 +1,5 @@
 <import src='/pages/discover/discover-item/discover-item.wxml'/>
+<import src= "/components/goT-top-btn/goT-top-btn.wxml"/>
 
 <view class="discover-fav-container" style="margin-bottom: {{showEdit ? '100' : '0'}}rpx">
   <view class='discover-fav-top flexR-sb'>
@@ -25,7 +26,5 @@
     <view class='delete' bindtap='deleteSelectItems'>删除</view>
   </view>
   <!-- operate E -->
-  <view class='goTop' bindtap='goTop' wx:if='{{showBackTop}}'>
-    <image src='/img/top-icon.png' mode='widthFix'></image>
-  </view>
+  <template is="goT-top-btn" data='{{floorstatus:showBackTop}}'/>
 </view>

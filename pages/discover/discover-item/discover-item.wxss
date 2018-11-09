@@ -1,3 +1,4 @@
+@import "/components/goT-top-btn/goT-top-btn.wxss";
 .discover-item-container {
   display: flex;
   flex-wrap: wrap;
@@ -81,7 +82,7 @@
   color: #939393;
 }
 
-.goTop{
+/* .goTop{
   position: fixed;
   right: 30rpx;
   bottom: 120rpx;
@@ -90,7 +91,7 @@
 }
 .goTop image{
   width: 90rpx;
-}
+} */
 
 .no-more {
   font-size: 24rpx;

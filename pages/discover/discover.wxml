@@ -1,5 +1,6 @@
 <import src='/pages/discover/discover-item/discover-item.wxml'/>
 <import src='/pages/discover/discover-article/discover-article.wxml'/>
+<import src= "/components/goT-top-btn/goT-top-btn.wxml"/>
 
 <view class='discover-container'>
   <!-- 导航 S -->
@@ -67,7 +68,7 @@
     </view>
     <view class='no-more' wx:if="{{currentDiscoverPage == totalDiscoverPage}}">已经到底啦~</view>
   </view>
-  <view class='goTop' bindtap='goTop' wx:if='{{showBackTop}}'>
-    <image src='/img/top-icon.png' mode='widthFix'></image>
-  </view>
+
+  <template is="goT-top-btn" data='{{floorstatus:showBackTop}}'/>
+
 </view>
