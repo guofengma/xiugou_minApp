@@ -12,7 +12,7 @@
           <view>
             <!-- <view class="btn flexR" bindtap="change">兑换秀豆</view> -->
             <view class="explain" bindtap="explain">
-                <image src="{{imgBaseUrl+'xstc-icon.png'}}"></image>
+                <image src="{{imgBaseUrl+'icon01_07@2x.png'}}"></image>
                 <text class='font-22'>提现说明</text>
             </view>
           </view>
@@ -21,7 +21,7 @@
     <view class="list-area">
         <view class="list-item flexR-sb" wx:for="{{list}}" wx:key='unique'>
           <view class='flexR-sb detail-content'>
-            <image src="{{imgBaseUrl+'tixian-icon-2.png'}}"></image>
+            <image src="{{imgBaseUrl+'xstc-icon.png'}}"></image>
             <view class="detail">
               <view class="style">
                 {{types[item.useType].name}}

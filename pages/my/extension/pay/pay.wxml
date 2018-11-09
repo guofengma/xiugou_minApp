@@ -1,5 +1,8 @@
 <import src='/components/pay-result-tips/pay-result-tips.wxml'/>
 
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+
 <view class='sub-page'>
    <view class='gray font-26 pay-tips'>固定金额红包</view>
    <view catchtap='selectIcon' class='flexR-sb whiteBg pay-content'>
@@ -10,8 +13,12 @@
    </view>
 </view>
 
-<view class='flexR btn-view'>
-   <button disabled='{{!select}}' class='redBg flexR' catchtap='payClicked'>提交支付</button>
+<view class='flexR btn-view redBg font-34 {{isIPhoneX.className}}' catchtap='pay'>
+  提交支付
+  <!-- <button disabled='{{!select}}' class='redBg flexR' catchtap='payClicked'>提交支付</button> -->
 </view>
 
 <template  is="pay-result-tips" data='{{isShow,tipsBtn,result,tipsContent}}'/>
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
