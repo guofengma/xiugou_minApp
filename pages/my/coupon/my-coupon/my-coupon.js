@@ -119,17 +119,19 @@ Page({
       r.successBlock = (req) => {
         let datas = req.responseObject.data
         if (req.responseObject.data.totalPage == 0 || datas.data==null) return
+        let userLevelId = this.data.userInfo.levelId
         datas.data.forEach((item,index0)=>{
           item.outTime = Tool.timeStringForDateString(Tool.formatTime(item.expireTime),"YYYY.MM.DD");
           item.start_time = Tool.timeStringForDateString(Tool.formatTime(item.startTime), "YYYY.MM.DD");
-          
-          let userLevelId = this.data.userInfo.levelId
+          // 未使用优惠卷
           if(index==0){
+            couponClassName = '', isActive=true
             let isNoLimitUsed = item.levels.includes(userLevelId)
             // 是否等级受限
             couponClassName = isNoLimitUsed ?  couponClassName:'coupon-right-limitLevel'
             // 是否待激活
             couponClassName = item.status == 3 ? 'coupon-right-unUsed':couponClassName
+            console.log(isNoLimitUsed)
             isActive = (!isNoLimitUsed || item.status == 3)?  false:true
           }
           item.couponClassName = couponClassName;
