@@ -131,7 +131,7 @@
   <!-- 今日榜单 -->
   <view class='today-list-view whiteBg' wx:if='{{todayList.length>0}}'>
     <view class='index-item-title flexR font-38'>今日榜单</view>
-    <swiper class="today-list-imageContainer" bindchange="handleChange" previous-margin="62rpx" next-margin="62rpx" circular autoplay>
+    <swiper class="today-list-imageContainer" previous-margin="62rpx" next-margin="62rpx" circular autoplay>
       <block wx:for="{{todayList}}" wx:key="{{index}}">
         <swiper-item class="today-list-item boxSize">
           <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item.imgUrl}}" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'></image>
@@ -143,7 +143,7 @@
   <!-- 精品推荐 -->
   <view class='today-list-view fine-quality-view whiteBg' wx:if='{{fineQuality.length>0}}'>
     <view class='index-item-title flexR font-38'>精品推荐</view>
-    <swiper class="today-list-imageContainer" bindchange="handleChange"  next-margin="150rpx" circular>
+    <swiper class="today-list-imageContainer"   next-margin="150rpx" circular>
       <block wx:for="{{fineQuality}}" wx:key="{{index}}">
         <swiper-item class="today-list-item boxSize">
           <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item.imgUrl}}" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'></image>
