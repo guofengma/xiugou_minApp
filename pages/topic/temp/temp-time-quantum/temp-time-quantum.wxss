@@ -10,6 +10,7 @@
 }
 .tab-timeq-item {
   display: inline-block;
+  background: #fff;
 }
 .tab-item-wrap {
   /* width: 150rpx; */
