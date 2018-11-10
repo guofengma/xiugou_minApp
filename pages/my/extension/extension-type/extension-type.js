@@ -31,9 +31,11 @@ Page({
     let num = this.data.list[index].count
     let total = this.data.list[index].total
     let price = this.data.list[index].price
+    let hasStock = this.data.list[index].status==2? false:true
     let id = this.data.list[index].id
-    if (this.data.list[index].userBuy)
-    Tool.navigateTo('/pages/my/extension/pay/pay?num=' + num + "&total=" + total + '&price=' + price+'&id='+id)
+    if (this.data.list[index].userBuy & hasStock)
+      Tool.navigateTo(`/pages/my/extension/pay/pay?num=${num}&total=${total}&price=${price}&id=${id}&hasStock=${hasStock}`)
+    // Tool.navigateTo('/pages/my/extension/pay/pay?num=' + num + "&total=" + total + '&price=' + price+'&id='+id)
   },
   onReachBottom() {
     this.data.page++;

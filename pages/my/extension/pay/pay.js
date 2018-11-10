@@ -4,13 +4,15 @@ Page({
     select:true,
     isShow:false,
     result:false,
+    hasStock:true,
   },
   onLoad: function (options) {
     this.setData({
       num: options.num,
       price: options.price,
       total: options.total,
-      id: options.id
+      id: options.id,
+      hasStock: options.hasStock=='true'?  true:false
     })
     Tool.isIPhoneX(this)
   },
@@ -26,7 +28,11 @@ Page({
     })
   },
   pay(){
-    Tool.navigateTo(`/pages/order-confirm/pay/pay?door=2&packageId=${this.data.id}&packagePrice=${this.data.total}&door=2`)
+    if (this.data.hasStock){
+      Tool.navigateTo(`/pages/order-confirm/pay/pay?door=2&packageId=${this.data.id}&packagePrice=${this.data.total}&door=2`)
+    } else{
+      Tool.navigationPop()
+    }
   },
   onHide: function () {
 

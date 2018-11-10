@@ -15,9 +15,7 @@
   width: 100%;
   height: 96rpx;
 }
-/* .btn-view button{
-  width: 690rpx;
-  font-size: 32rpx;
-  height: 96rpx;
-  border: 
-} */
+.disabled{
+  background: #CCCCCC;
+  color: #fff;
+}
