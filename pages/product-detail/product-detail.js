@@ -24,6 +24,7 @@ Page({
       productId: options.productId || '',
       prodCode: options.prodCode || '',
       door: options.door || '',
+      inviteId: options.inviteId || ''
     })
     this.didLogin()
     let callBack = ()=>{

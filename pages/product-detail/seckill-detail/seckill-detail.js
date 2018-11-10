@@ -35,7 +35,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       productId: options.productId ||1,
-      prodCode: options.code
+      prodCode: options.code,
+      inviteId: options.inviteId || ''
     })
     this.didLogin()
     this.getTopicActivityData(this.data.prodCode);    
@@ -45,7 +46,7 @@ Page({
   },
   onShow: function () {
     if (!this.data.screenShow) return;
-    this.onLoad({ code: this.data.prodCode })
+    this.onLoad({ code: this.data.prodCode, inviteId: this.data.inviteId })
   },
   onHide() {
     this.toggleScreenShowStatus();

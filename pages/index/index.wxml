@@ -35,11 +35,10 @@
   
   <!-- 我的等级 -->
   
-  <view class='index-level-view whiteBg' wx:if='{{didLogin}}'>
+  <!-- <view class='index-level-view whiteBg' wx:if='{{didLogin}}'>
     <view class='boxSize flexR-sb'>
       <view class='font-28'>
         <text class='font-28 levalName'>尊敬的{{userInfos.levelName}}会员您好</text>
-        <!-- 等级线 -->
         <view class='levelLineContent boxSize'>
           <view class='levelLine'>
             <view class='myLevelLine' style='width:{{width}}%' >
@@ -63,7 +62,7 @@
         <view>></view>
       </view>  
     </view>
-  </view>
+  </view> -->
 
   <!-- 广告位 -->
 

@@ -18,7 +18,7 @@ Page({
         1:'/pages/product-detail/seckill-detail/seckill-detail?code=',
         2:'/pages/product-detail/discount-detail/discount-detail?code=',
         3:'/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
-        4:'/pages/index/index',
+        4:'/pages/index/index?page=""',
         5:'/pages/topic/topic?code=',
         99:'/pages/product-detail/product-detail?productId=',
         100:'/pages/web-view/web-view?id=',
@@ -120,7 +120,7 @@ Page({
       })
     },
     onLoad: function (options) {
-      Event.on('getLevel', this.getLevel,this)
+      //Event.on('getLevel', this.getLevel,this)
       this.queryAdList(1,'轮播图片',(datas)=>{
         this.setData({
           imgUrls:datas
@@ -169,11 +169,12 @@ Page({
       Event.on('didLogin', this.didLogin, this);
       // 分享过来有邀请者id的那么存储在本地
       let inviteId = options.inviteId
+      let query =''
       if (options.inviteId != 'null' && options.inviteId != 'undefined' && options.inviteId) {
-        Storage.setUpUserId(options.inviteId)
+        query = '&inviteId='+options.inviteId
       }
       if (options.type) { // 页面跳转
-        Tool.navigateTo(this.data.redirectTo[options.type] + options.id)
+        Tool.navigateTo(this.data.redirectTo[options.type] + options.id + query)
       }
     },
     onUnload(){
@@ -209,9 +210,8 @@ Page({
     didLogin() {
       Tool.didLogin(this)
       if (this.data.didLogin){
-        // this.getLevelInfos()
         this.findUserJobsByUserId();
-        this.getLevel()
+        //this.getLevel()
       }
     },
     indexQueryCategoryList(){
@@ -418,7 +418,7 @@ Page({
     },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);
-      Event.off('getLevel', this.getLevel)
+      // Event.off('getLevel', this.getLevel)
     },
     onShow:function (){
       this.setData({

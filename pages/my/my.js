@@ -1,5 +1,8 @@
 // pages/my/account.js
 let { Tool, RequestFactory, Storage, Event, Operation} = global
+
+const app = getApp()
+
 Page({
     data: {
       userInfos:'',
@@ -76,15 +79,7 @@ Page({
     },
     getLevel(){
       if (!this.data.didLogin) return
-      let params = {
-        isShowLoading:false,
-        reqName: '获取用户等级',
-        requestMethod: 'GET',
-        url: Operation.getLevel
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data
+      let callBack =(datas)=>{
         datas.availableBalance0 = Tool.formatNum(datas.availableBalance || 0)
         datas.userScore0 = Tool.formatNum(datas.userScore || 0)
         datas.blockedBalance0 = Tool.formatNum(datas.blockedBalance || 0)
@@ -92,9 +87,8 @@ Page({
         this.setData({
           userInfos: datas
         })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }
+      app.getLevel(callBack)
     },
     onTabItemTap(item) {
       let tabClicked = this.data.tabClicked

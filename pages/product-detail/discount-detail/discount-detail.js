@@ -33,7 +33,8 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      prodCode: options.code
+      prodCode: options.code,
+      inviteId: options.inviteId || ''
     })
     this.didLogin()
     this.getTopicActivityData(this.data.prodCode);
@@ -43,7 +44,7 @@ Page({
   },
   onShow: function () {
     if (!this.data.screenShow) return;
-    this.onLoad({code:this.data.prodCode})
+    this.onLoad({ code: this.data.prodCode, inviteId: this.data.inviteId})
     // this.selectComponent('#promotion') && this.selectComponent('#promotion').clearInterval();
     // clearTimeout(this.data.jumpCommonProductTimer);
     // this.toggleScreenShowStatus();

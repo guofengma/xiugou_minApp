@@ -30,6 +30,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       giftBagId: options.giftBagId || '',
+      inviteId: options.inviteId || ''
     })
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);

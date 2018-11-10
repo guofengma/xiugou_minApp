@@ -1,4 +1,5 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global;
+const app = getApp()
 Component({
   properties: {
     // visiable: Boolean,
@@ -32,7 +33,7 @@ Component({
         this.setData({
           succ:true
         })
-        Event.emit('getLevel') 
+        app.getLevel()
       };
       Tool.showErrMsg(r)
       r.addToQueue();
@@ -54,10 +55,7 @@ Component({
           this.setReqData(req)
           let that = this
           if (this.data.door == 1) {
-            Event.emit('getLevel')
-            // setTimeout(function () {
-            //   that.goPage()
-            // }, 3000)
+            app.getLevel()
           }
         }
       };

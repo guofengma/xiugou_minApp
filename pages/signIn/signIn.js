@@ -1,4 +1,5 @@
 let { Tool, RequestFactory, Operation, Event, Storage} = global;
+const app = getApp()
 Page({
 
   /**
@@ -32,21 +33,12 @@ Page({
     r.addToQueue();
   },
   getLevel() {
-    let params = {
-      isShowLoading: false,
-      reqName: '获取用户等级',
-      requestMethod: 'GET',
-      url: Operation.getLevel
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      Storage.setUserAccountInfo(req.responseObject.data)
+    let callBack = (datas)=>{
       this.setData({
-        userInfos: req.responseObject.data
+        userInfos: datas
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }
+    app.getLevel(callBack)
   },
   querySignList(){
     let params = {

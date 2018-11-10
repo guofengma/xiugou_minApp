@@ -123,8 +123,8 @@ export default class ProductFactorys  {
     })
   }
   onShareAppMessage(typeId,id){
-    let inviteCode = this.page.data.userInfos.id || Storage.getUpUserId() || ''
-    let imgUrl = this.page.data.productInfo.imgUrl ? this.page.data.productInfo.imgUrl : ''
+    let inviteCode = this.page.data.userInfos.id || this.page.data.inviteId || ''
+    let imgUrl = this.page.data.productInfo.imgUrl? this.page.data.productInfo.imgUrl : ''
     let name = this.page.data.productInfo.name.length > 10 ? this.page.data.productInfo.name.slice(0, 10) + "..." : this.page.data.productInfo.name
     return {
       title: name,
