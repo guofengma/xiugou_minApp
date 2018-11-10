@@ -65,7 +65,7 @@ Page({
     },
     //提现
     beCash(){
-      Tool.navigateTo('/pages/download-app/oldUser-downLoad/oldUser-downLoad')
+      Tool.navigateTo('/pages/web-view/web-view?webType=3')
     },
     onLoad: function (options) {
       this.getData();

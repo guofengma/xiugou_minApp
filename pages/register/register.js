@@ -238,7 +238,7 @@ Page({
     })
   },
   toPage(){
-    Tool.navigateTo('/pages/register/agreement/agreement')
+    Tool.navigateTo('/pages/web-view/web-view?webType=2')
   },
   agreeCilcked() {
     this.setData({

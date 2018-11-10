@@ -28,7 +28,7 @@ Page({
     Tool.navigateTo('/pages/my/extension/extension-detail/extension-detail?packageId=' + id + '&endTime=' + endTime + '&status=' +status)
   },
   goPage() {
-    Tool.navigateTo('/pages/my/extension/extension-explain/extension-explain')
+    Tool.navigateTo('/pages/web-view/web-view?webType=1')
   },
   onShow: function () {
 
