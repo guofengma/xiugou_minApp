@@ -12,7 +12,7 @@
       <!-- <image src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></image> -->
       <view>
         <view class='my-info-item' catchtap='itemClicked' data-page='2' >
-          <text class='my-name'> {{userInfos.nickname}}</text>
+          <text class='my-name'> {{userInfos.nickname || ''}}</text>
           <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
         </view>
 
