@@ -56,7 +56,7 @@
     <view>
       <view class="footer">
         <!-- 倒计时  -->
-        <view class="left red" wx:if="{{item.status==1}}">
+        <view class="left red ellipsis" wx:if="{{item.status==1}}">
           {{item.countDownTime}}
         </view>
         <view class="right" wx:if="{{ item.status!=1 && item.status!=2 && item.status!=3 }}">

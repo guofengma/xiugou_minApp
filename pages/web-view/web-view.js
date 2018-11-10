@@ -10,6 +10,7 @@ Page({
       1:'/static/protocol/extensionExplain.html',// 推广协议
       2:'/static/protocol/service.html',// 用户协议
       3:'/download',//下载页面
+      4:'/static/protocol/signInRule.html', //签到协议
     }
   },
   onLoad: function (options) {

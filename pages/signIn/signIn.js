@@ -103,7 +103,8 @@ Page({
     r.addToQueue();
   },
   ruleClicked(){
-    Tool.navigateTo('/pages/signIn/rule/rule')
+    // Tool.navigateTo('/pages/signIn/rule/rule')
+    Tool.navigateTo('/pages/web-view/web-view?webType=4')
   },
   goPage(){
     Tool.navigateTo('/pages/my/coupon/my-coupon/my-coupon')

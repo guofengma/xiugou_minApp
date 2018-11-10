@@ -21,7 +21,8 @@ Component({
     from: {
       type: String,
       value: ''
-    }
+    },
+    isFormProductDetail:Boolean
   },
   data: {
     countdownTime: '00:00:00:00',

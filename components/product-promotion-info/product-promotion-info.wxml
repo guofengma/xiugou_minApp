@@ -12,15 +12,15 @@
         <text class='promotion-price-current' wx:else>Null</text>
       </view>
       <view class='promotion-detail inline'>
-        <view class='promotion-price-origin {{prop.status == 1 || !promotionType ? "": "line-through"}}'>
-        {{prop.status == 1 || !promotionType ? promotionDesc.typeDesc :'原价 ¥'+prop.originalPrice}}
+        <view class='promotion-price-origin {{prop.status == 1 || !promotionType || from? "": "line-through"}}'>
+        {{prop.status == 1 || !promotionType || from? promotionDesc.typeDesc :'原价 ¥'+prop.originalPrice}}
         </view>
-        <view class='promotion-desc' wx:if="{{ prop.status == 1 || promotionType === ''}}">
+        <view class='promotion-desc' wx:if="{{ (prop.status == 1 || promotionType === '') || from}}">
           <!-- 普通页面进来不显示价格 -->
           <view class='font-20 inline' wx:if="{{promotionType}}">
-            <text class='line-through pr10'>原价¥ {{prop.originalPrice}} </text> |
+            <text class='line-through pr10' wx:if='{{!from}}'>原价¥ {{prop.originalPrice}} |</text> 
           </view>
-          {{prop.reseCount || 0}}人关注             
+          {{prop.reseCount || prop.subscribeCount || 0}}人关注             
         </view>
         <view class='promotion-desc' wx:else>{{promotionDesc.typeDesc}}</view>
       </view>

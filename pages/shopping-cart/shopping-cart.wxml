@@ -16,7 +16,7 @@
         <!--侧滑删除代码  -->
         <view class='move-box'>
           <delete-bar  bind:deleteClicked="deleteClicked" item='{{items}}' index="{{index}}">
-            <template is="cart-product-info" data='{{innerCount:item.showCount,imgSize:160,countSize:50,index,...item}}'/>
+            <template is="cart-product-info" data='{{innerCount:item.showCount,imgSize:160,countSize:50,index,...item,inCart:true}}'/>
           </delete-bar>
         </view>
       </view>

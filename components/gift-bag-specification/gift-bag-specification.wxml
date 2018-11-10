@@ -12,7 +12,7 @@
           <image src='{{imgUrl}}'></image>
         </view>
         <!--产品信息  -->
-        <view class='header-content'>
+        <view class='header-content font-30'>
           <view class='price red'>¥ {{ productInfo.levelPrice}}</view>
           <view>库存{{productInfo.showStock}}件</view>
           <view class='tips ellipsis'>{{tips}}</view>
@@ -39,7 +39,7 @@
       </view>
       <!--数量选择器  -->
       <view class='counter'>
-        <text>购买数量 x1 </text>
+        <text class='font-30'>购买数量 x1 </text>
       </view>
     </scroll-view>
     

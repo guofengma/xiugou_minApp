@@ -33,7 +33,7 @@ Page({
     },
     didLogin(){
       if (!Tool.didLogin(this)){
-        Tool.navigateTo('/pages/login/login-wx/login-wx');
+        Tool.navigateTo('/pages/login-wx/login-wx');
         return false
       }
       return true
