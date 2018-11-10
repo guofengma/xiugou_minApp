@@ -57,7 +57,7 @@
       data-id="{{details.id}}"
     >
       <image class='icon' src="{{details.hadLike ? '/img/home_icon_zactive@3x.png' : '/img/home_icon_dianzan@3x.png'}}"></image>
-      <text>已赞·{{details.likeCount}}</text>
+      <text>{{details.hadLike ? '已': ''}}赞·{{details.likeCount}}</text>
     </view>
     <view class='operate fav'
      bindtap='toggleDiscoverLikeCollect' 
@@ -66,7 +66,7 @@
      data-id="{{details.id}}"
     >
       <image class='icon' src="{{details.hadCollect ? '/img/home_icon_yishoucan@3x.png' : '/img/home_icon_shoucan@3.png'}}"></image>
-      <text>已收藏·{{details.collectCount}}</text>
+      <text>{{details.hadCollect ? '已': ''}}收藏·{{details.collectCount}}</text>
     </view>
   </view>
   <!-- footer operate E -->
