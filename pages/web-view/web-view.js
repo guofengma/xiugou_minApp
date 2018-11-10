@@ -12,9 +12,11 @@ Page({
       webUrl: Config.h5webUrl
     })
     let callBack = ()=>{
+      
       let url = this.data.webUrl + '/promote?id=' + options.id + '&openid=' + Storage.getWxOpenid()
+      // Tool.showAlert(url)
       this.setData({
-        url: url
+        url: url + '?_=' + new Date().getTime()
       })
     }
     if (!app.globalData.systemInfo) {

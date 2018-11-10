@@ -129,9 +129,25 @@ Component({
           }
         }
       })
-      this.setData({
-        isActive: obj,
-      })
+      // 单规格的产品渲染 防止没有库存
+      let arr0 = []
+      if (this.data.productSpec.length == 1) {
+        arr0 = this.data.priceList.filter((item)=>{
+          return item.specIds == obj[0].id
+        })
+        if(arr0.length==0){
+          this.data.productSpec[0].list[obj[0].index].hasStock = false
+          this.setData({
+            productSpec: this.data.productSpec
+          })
+        }       
+      } 
+      // 多规格 或者 单规格选择的那个规格库存大于0的情况下active
+      if(this.data.productSpec.length > 1 || arr0.length>0){
+        this.setData({
+          isActive: obj,
+        })
+      }
       // 获取已选规格
       let selectIds = this.getSelectIds(obj)
       let all_ids = this.filterAttrs(selectIds)
@@ -158,6 +174,7 @@ Component({
 
     },
     isSelectAllTypes(){ // 全部选择规格以后渲染页面
+      console.log(this.data.priceList)
       if (this.isSelectAll()) {
         console.log("全部选择好了：。。。。。。。。。。", this.data.isActive)
         let selectTypes = []
@@ -165,14 +182,16 @@ Component({
           selectTypes.push(item.id)
         })
         selectTypes = Tool.bubbleSort(selectTypes)
+        
         let selectIds = selectTypes.join(',')
         this.data.priceList.forEach((item, index) => {
+          console.log(item.specIds,selectIds)
           if (item.specIds == selectIds) {
             this.setData({
               selectPrdList: item
             })
           }
-          // console.log(this.data.selectPrdList)
+          console.log(this.data.selectPrdList)
         })
         // 显示价格
         this.showCurrentInfo()

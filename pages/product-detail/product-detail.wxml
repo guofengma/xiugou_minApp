@@ -74,5 +74,5 @@
     isInit="{{false}}" 
     bind:hiddenTips='hiddenTips'
     isIphoneX='{{isIPhoneX.isIPhoneX}}'
-    commodityType = '{{activityType}}'
+    commodityType = '{{1}}'
 />
