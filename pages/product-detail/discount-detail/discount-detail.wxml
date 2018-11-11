@@ -33,7 +33,7 @@
       <template is="product-info-chooseBox" data="{{productInfo}}" />
     </view>
     <!--产品图文详情切换  -->
-    <product-infos article='{{article}}' nodes='{{nodes}}'/>
+    <product-infos  id='productInfos' nodes='{{nodes}}' datas='{{productInfo}}'/>
     <!-- 详情页 tabar  -->
     <product-promotion-footbar 
       id="promotionFootbar"

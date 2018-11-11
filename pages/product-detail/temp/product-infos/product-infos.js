@@ -1,6 +1,7 @@
+import WxParse from '../../../../libs/wxParse/wxParse.js';
 Component({
   properties: {
-    article:Object,
+    datas:Object,
     nodes:Array,
   },
   data: {
@@ -14,5 +15,12 @@ Component({
         show: show
       })
     },
+    initDatas(){
+      let html = this.data.datas.content
+      WxParse.wxParse('article', 'html', html, this, 5);
+    }
+  },
+  ready(){
+    
   }
 })

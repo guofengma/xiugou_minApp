@@ -1,7 +1,5 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 
-import WxParse from '../../../libs/wxParse/wxParse.js';
-
 import ProductFactorys from '../temp/product.js'
 
 Page({
@@ -151,8 +149,7 @@ Page({
       this.setData({
         nodes: tbody
       })
-      let html = datas.content
-      WxParse.wxParse('article', 'html', html, this, 5);
+      this.selectComponent("#productInfos").initDatas()
     }
     r.failBlock = (req) => {
       let callBack =()=>{}

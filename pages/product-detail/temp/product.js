@@ -1,5 +1,4 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
-import WxParse from '../../../libs/wxParse/wxParse.js';
 
 export default class ProductFactorys  {
   constructor(page) {
@@ -68,8 +67,7 @@ export default class ProductFactorys  {
       this.page.setData({
         nodes: tbody
       })
-      let html = datas.product.content
-      WxParse.wxParse('article', 'html', html, this.page, 5);
+      this.page.selectComponent("#productInfos").initDatas()
       // 执行额外需要做的操作
       callBack()
     }

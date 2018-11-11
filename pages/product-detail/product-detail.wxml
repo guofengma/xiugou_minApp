@@ -33,7 +33,7 @@
     </view>
 
      <!--产品图文详情切换  -->
-    <product-infos article='{{article}}' nodes='{{nodes}}'/>
+    <product-infos  id='productInfos' nodes='{{nodes}}' datas='{{productInfo}}'/>
    
     <!-- 详情页 tabar  -->
     <view class="bottom-bar flexR boxSize {{isIPhoneX.className}}" wx:if='{{productInfoList.onSale}}'>

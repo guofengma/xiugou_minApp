@@ -29,7 +29,7 @@
       <template is="product-info-chooseBox" data="{{productInfo}}" />
     </view>
     <!--产品图文详情切换  -->
-    <product-infos article='{{article}}' nodes='{{nodes}}'/>
+    <product-infos  id='productInfos' nodes='{{nodes}}' datas='{{productInfo}}'/>
   
     <view class="bottom-bar gift-btn-view flexR {{isIPhoneX.className}}">
       <view class='buy-btn flexR redBg {{dismiss? "dismiss":""}}' bindtap='btnClicked' data-key='1'>
