@@ -178,6 +178,10 @@ Page({
         Tool.navigateTo(this.data.redirectTo[options.type] + options.id + query)
       }
     },
+    onPullDownRefresh: function () {
+      this.onLoad()
+      wx.stopPullDownRefresh();
+    },
     onUnload(){
       Storage.setUpUserId(null)
     },

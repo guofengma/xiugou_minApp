@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "秀场",
-  "onReachBottomDistance": true
+  "onReachBottomDistance": true,
+  "enablePullDownRefresh": true
 }

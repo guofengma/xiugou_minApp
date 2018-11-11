@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "秀购",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "image-sub": "/components/image-sub/image-sub",
     "notice": "/components/notice/notice",

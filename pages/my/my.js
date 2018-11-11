@@ -35,8 +35,11 @@ Page({
       this.didLogin()
       this.refreshMemberInfoNotice()
       Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
-      Event.on('didLogin', this.didLogin, this);
-      
+      Event.on('didLogin', this.didLogin, this);  
+    },
+    onPullDownRefresh: function () {
+      this.onLoad()
+      wx.stopPullDownRefresh();
     },
     onShow: function () {
       this.setData({
