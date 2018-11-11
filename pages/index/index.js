@@ -22,7 +22,8 @@ Page({
         5:'/pages/topic/topic?code=',
         99:'/pages/product-detail/product-detail?productId=',
         100:'/pages/web-view/web-view?id=',
-        101:'/pages/register/register?inviteId='
+        101:'/pages/register/register?inviteId=',
+        102:'/pages/discover/discover-detail/discover-detail?articleId='
       },// 1.秒杀 2.降价拍 3.礼包 4.助力免费领 5.专题 99.普通产品 100:嵌入H5的页面地址 101注册
       iconArr:[ // icon 图标
         { name: '分享', img: 'home_icon__fenxing_nor@3x.png', page:'/pages/topic/topic?code=ZT2018000019'},

@@ -133,7 +133,7 @@ Page({
     if(checkedList.length == 0){
       // 提醒
       wx.showToast({
-        title: '请至少选择一个要删除的店铺',
+        title: '提示确定删除？',
         icon: 'none',
         duration: 3000
       })

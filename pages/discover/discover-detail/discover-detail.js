@@ -18,8 +18,14 @@ Page({
   onReady() {
 
   },
-  onShow() {
-
+  onShareAppMessage: function (res) {
+    let name = this.data.details.title || '秀购秀场'
+    let url = ''
+    return {
+      title: name,
+      path: `/pages/index/index?type=102&id=${this.data.articleId}`,
+      imageUrl: this.data.details.img || ''
+    }
   },
   onHide() {
 
@@ -81,5 +87,6 @@ Page({
   showItemDetail(e) {
     let productId = e.currentTarget.dataset.id;
     Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + productId);
-  }
+  },
+
 })
