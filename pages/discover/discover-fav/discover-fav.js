@@ -133,7 +133,7 @@ Page({
     if(checkedList.length == 0){
       // 提醒
       wx.showToast({
-        title: '提示确定删除？',
+        title: '请至少选择一个要删除的文章？',
         icon: 'none',
         duration: 3000
       })
@@ -142,7 +142,7 @@ Page({
     let _ = this;
     wx.showModal({
       title: '提示',
-      content: '确定要删除改店铺吗？',
+      content: '确定要删除该文章吗？',
       success(res) {
         if(res.cancel) return;
         let params = {
