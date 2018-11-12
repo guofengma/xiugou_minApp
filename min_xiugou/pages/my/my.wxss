@@ -1,5 +1,12 @@
 .my{
   font-size: 24rpx;
+  color: #424242;
+}
+.width-690{
+  margin-top:20rpx;
+  width: 690rpx;
+  margin: 20rpx  auto 0 auto;
+  border-radius: 18rpx;
 }
 .top-view image{
   width: 40rpx;
@@ -21,7 +28,7 @@
   background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/bg_img_user@2x.png) no-repeat left bottom;
   background-size: 100% 100%;
   border-top: 1prx solid #eee;
-  
+  color: #fff
 }
 .my-info-item{
   padding-top: 12rpx;
@@ -32,12 +39,10 @@
   align-items: center;
 }
 .my-name{
-  color: #666;
+  color: #fff;
   margin-right: 13rpx;
-  height:34px;
   font-size:36rpx;
   font-weight:500;
-  line-height:38rpx;
 }
 .my-info-arrow{
   width: 14rpx;
@@ -55,7 +60,7 @@
 }
 .my-rank{
    position: relative;
-  width:88rpx;
+  /* width:88rpx; */
   margin-top: 22rpx;
 }
 .my-rank image{
@@ -64,7 +69,7 @@
   height:48rpx;
   
 }
-.my-rank-no{
+/* .my-rank-no{
   position: absolute;
   top: 0;
   left:37rpx;
@@ -84,25 +89,23 @@
   text-align: center;
   color: #ffffff;
 
-}
+} */
 .my-account{
-  background: #ffffff;
-  margin-top: 21rpx;
-  padding:0 30rpx 10rpx 30rpx;
-  
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-user-data-bg.png) no-repeat left bottom;
+  background-size: 100% 100%;
+  color: #fff;
 }
 .my-account-item{
    height: 88rpx;
    line-height: 88rpx;
-   color: #666;
    font-size: 32rpx;
-   font-weight:400;
-   border-bottom: 1rpx solid #ddd;
+   padding: 0 60rpx;
+   border-bottom: 1rpx solid #f6f6f6;
 }
 .my-account-list{
   display: flex;
   height: 206rpx;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   color: #ffffff;
 }
@@ -111,7 +114,6 @@
   height: 123rpx;
   border-radius: 10rpx;
   text-align: center;
-  
 }
 .account-num{
   font-size:37rpx; 
@@ -119,7 +121,7 @@
   font-weight:600;
   height: 76rpx;
 }
-.my-account-coin{
+/* .my-account-coin{
   background:rgba(255,79,110,1);
   border-radius:10rpx;
   box-shadow:5rpx 0px 10rpx rgba(255,79,110,0.54);
@@ -133,20 +135,18 @@
   background:rgba(142,199,255,1);
   border-radius:10rpx;
   box-shadow:5rpx 0px 10rpx rgba(142,199,255,0.54);
-}
+} */
 .my-order{
-  width: 100%;
-  margin-top:20rpx;
   background: #ffffff; 
 }
 .my-order-item{
-   margin:0 30rpx; 
+   padding: 0 20rpx;
    display: flex;
    justify-content: space-between;
    height: 88rpx;
-   color: #666;
+   /* color: #666; */
    line-height: 88rpx;
-   border-bottom: 1rpx solid #ddd;
+   border-bottom: 1rpx solid #f6f6f6;
 }
 .my-order-list{
   padding: 0 30rpx;
@@ -161,33 +161,27 @@
   text-align: center;
 }
 
-.forsale{
-  width: 48rpx;
-  height: 45rpx;
-}
+
 .my-tools{
-  margin-top: 20rpx;
-  background: #ffffff;
+  margin: 20rpx auto;
 }
+
 .my-tools-item{
-  margin: 0 30rpx;
   height: 88rpx;
-  line-height: 88rpx;
-  border-bottom: 1rpx solid #ddd;
-  
+  padding: 0 20rpx;
+  border-bottom: 1rpx solid #f6f6f6;
 }
 .my-tools-list{
-  padding: 30rpx;
+  padding:30rpx  0;
   display: flex;
-  /* justify-content:space-between; */
   flex-wrap: wrap;
-  height: 366rpx;
+  height: 390rpx;
   align-items: center;
-  color: #666;
+ 
   
 }
 .my-tools-list image{
-  margin-bottom: 26rpx;
+  margin-bottom: 20rpx;
 }
 
 .my-wait-pay{
@@ -201,6 +195,9 @@
   background: red;
   text-align: center;
   color: white;
-  right: 0;
-  top: -10rpx;
+  right: -5rpx;
+  top: -14rpx;
+}
+.see-all{
+  color: #A9A9A9
 }

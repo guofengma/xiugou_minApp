@@ -177,9 +177,12 @@ Page({
       if (options.type) { // 页面跳转
         Tool.navigateTo(this.data.redirectTo[options.type] + options.id + query)
       }
+      this.setData({
+        options: options
+      })
     },
     onPullDownRefresh: function () {
-      this.onLoad()
+      this.onLoad(this.data.options)
       wx.stopPullDownRefresh();
     },
     onUnload(){
