@@ -15,7 +15,7 @@ Page({
         { name: "店主分红", icon: "yhsy-icon.png" },
         { name: "店员分红", icon: "yhsy-icon.png" },
         { name: "销售提成", icon: "tixian-icon-2.png" },
-        { name: "推广提成", icon: "tg_03-04@2x.png" },
+        { name: "现金红包", icon: "tg_03-04@2x.png" },
       ],
       totalPage: '', // 页面总页数
       currentPage: 1, // 当前的页数

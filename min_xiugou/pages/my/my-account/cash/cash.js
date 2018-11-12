@@ -16,7 +16,7 @@ Page({
         { name: "店主分红", icon: "dzfh-icon.png" },
         { name: "店员分红", icon: "dpfh-icon.png" },
         { name: "销售提成", icon: "xstc-icon.png" },
-        { name: "推广提成", icon: "tg_03-04@2x.png" },
+        { name: "现金红包", icon: "tg_03-04@2x.png" },
         { name: "任务奖励", icon: "xwjl-icon.png" },
       ]
     },
