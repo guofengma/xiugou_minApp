@@ -1,0 +1,48 @@
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+<import src='/components/pay-result-tips/pay-result-tips.wxml'/>
+
+<view class="pay">
+    <view class="wrap gray " >
+        <view class="left">
+            <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'list_icon_yuezhifu@2x.png'}}"/>
+            <view>余额支付</view>
+        </view>
+        <view class="right useBalance">
+            <text>可用金额：{{availableBalance || 0}}</text>
+            <!-- <view wx:if="{{useBalance>0}}" class='nowUse gray'>本次使用：{{useBalance}}</view>  -->
+            <image bindtap="changePrice" data-index='1' src="{{useAmount[1]?'/img/choose-icon-c.png':'/img/choose-icon.png'}}"></image>
+        </view>
+        <view class="clearfix"></view>
+    </view>
+    <view class="inf">平台支付仅限APP使用</view>
+    <!-- <view class="wrap" bindtap="payWay" data-index='0' data-val='16'>
+        <view class="left">
+            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon_03-05@2x.png"></image>
+            <view>银行卡支付</view>
+        </view>
+        <view class="right">
+            <image src="{{payWayActive[0]?'/img/choose-icon-c.png':'/img/choose-icon.png'}}" ></image>
+        </view>
+        <view class="clearfix"></view>
+    </view> -->
+    <view class="wrap" bindtap="payWay"  data-index='1' data-val='16'>
+        <view class="left">
+            <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'icon_03-08@2x.png'}}"/>
+            <view>微信支付</view>
+        </view>
+        <view class="right">
+            <image src="{{payWayActive[1]?'/img/choose-icon-c.png':'/img/choose-icon.png'}}"></image>
+        </view>
+        <view class="clearfix"></view>
+    </view>
+    <view class="footer {{isIPhoneX.className}} whiteBg">
+        <!--{{payList.scorePrice? '积分抵扣'+payList.scorePrice+'元,':""}}  -->
+        <view>{{!isContinuePay ? '合计':'还需支付'}}：<text class='red'>￥{{totalAmounts}}</text></view>
+        <view bindtap='payBtnCliked'>立即支付</view>
+    </view>
+    <!--适配iPhone X  -->
+    <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
+</view>
+
+
+<template  is="pay-result-tips" data='{{isShow,tipsBtn,result,tipsContent,isContinue:true}}'/>

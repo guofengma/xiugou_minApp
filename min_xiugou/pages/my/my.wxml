@@ -1,0 +1,141 @@
+<!--pages/my/account.wxml发话人它还具有的分红若干-->
+<view class="my sub-page">
+  <view class='content-top'>
+    <view class='top-view'>
+      <view class='fr'>
+        <image-sub imgStyle='{{"width:42rpx"}}' imgSrc="{{'tongyong_icon_shezhi_nor@2x.png'}}" catchtap='itemClicked' data-page='0'/>
+        <image-sub imgStyle='{{"width:42rpx"}}' imgSrc="{{'tongyong_icon_xiaoxi_nor@2x.png'}}" catchtap='itemClicked' data-page='1'/>
+      </view>
+    </view>
+    <view class='my-avatar' catchtap='itemClicked' data-page='2'>
+      <cover-image  src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></cover-image>
+      <!-- <image src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></image> -->
+      <view>
+        <view class='my-info-item' catchtap='itemClicked' data-page='2' >
+          <text class='my-name'> {{userInfos.nickname || ''}}</text>
+          <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+        </view>
+
+        <view class='my-rank'>
+          <image-sub imgStyle='{{"width:88rpx"}}' imgSrc="{{'iconRank.png'}}"/>
+          <text class='my-rank-no'>{{userInfos.levelName || ''}}</text>
+        </view>
+      </view>
+    </view>
+    <!--  -->
+    <!-- <view class='my-save'>
+      <view>0.00元</view>
+      <view>已帮你省</view>
+    </view> -->
+  </view>
+  <!-- 我的资产 -->
+  <view class='my-account'>
+    <view class='my-account-item'>我的资产</view>
+    <view class='my-account-list'>
+      <view class='my-account-coin' catchtap='itemClicked' data-page='3' data-query='{{userInfos.availableBalance}}'>
+        <view class='account-num' >{{userInfos.availableBalance0}}</view>
+        <view>现金账户</view>
+      </view>
+      <view class='my-account-xiudou' catchtap='itemClicked' data-page='4' data-query='{{userInfos.userScore}}'>
+        <view class='account-num'>{{userInfos.userScore0}}</view>
+        <view>秀豆账户</view>
+      </view>
+      <view class='my-account-leave' catchtap='itemClicked' data-page='5' data-query='{{userInfos.blockedBalance}}'>
+        <view class='account-num'>{{userInfos.blockedBalance0}}</view>
+        <view>待提取账户</view>
+      </view>
+    </view>
+  </view>
+  <!-- 我的订单 -->
+  <view class='my-order'>
+    <view class='my-order-item' catchtap='itemClicked' data-page='6' data-query=''>
+      <view>我的订单</view>
+      <view>
+        <text>查看全部</text>
+        <!-- 右边的见头 -->
+        <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'xjt_10@2x.png'}}" class='my-info-arrow'/>
+      </view>
+    </view>
+    <!-- 订单列表 -->
+    <view class='my-order-list'>
+      <view class='list-cont my-wait-pay' catchtap='itemClicked' data-page='6' data-query='1'>
+        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsale.png'}}"/>
+        <view>待付款</view>
+        <view class='reddot'  wx:if='{{countUserOrderNum.waitPayNum}}'>{{countUserOrderNum.waitPayNum}}</view>
+      </view>
+      <!-- 代发货 -->
+      <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='2'>
+        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsend.png'}}"/>
+        <view>待发货</view>
+        <view class='reddot' wx:if='{{countUserOrderNum.waitSendNum}}'>{{countUserOrderNum.waitSendNum}}</view>
+      </view>
+      <!-- 待收货 -->
+      <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='3'>
+        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForobtain.png'}}"/>
+        <view>待收货</view>
+        <view class='reddot' wx:if='{{countUserOrderNum.waitReceiveNum}}'>{{countUserOrderNum.waitReceiveNum}}</view>
+      </view>
+      <!-- 售后 -->
+      <view class='list-cont' catchtap='itemClicked' data-page='7'>
+        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconAftersale.png'}}"/>
+        <view>售后/退款</view>
+        <view class='reddot' wx:if='{{countUserOrderNum.afterSaleServiceNum}}'>{{countUserOrderNum.afterSaleServiceNum}}</view>
+      </view>
+    </view>
+  </view>
+  <!-- 常用工具 -->
+
+  <view class='my-tools'>
+    <view class='my-tools-item'>
+      常用工具
+    </view>
+    <!-- 工具列表 -->
+    <view class='my-tools-list'>
+      <view class='my-tools-cont' catchtap='itemClicked' data-page='8'>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconInvite.png'}}"/>
+        <view>邀请好友</view>
+      </view>
+      <!-- <view class='my-tools-cont' catchtap='itemClicked' data-page='9'>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconCalendar.png'}}"/>
+        <view>活动日历</view>
+      </view> -->
+      <view class='my-tools-cont' catchtap='itemClicked' data-page='10'>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconVoucher.png'}}"/>
+        <view>优惠券</view>
+      </view>
+      <view class='my-tools-cont' catchtap='itemClicked' data-page='11'>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconData.png'}}"/>
+        <view>我的数据</view>
+      </view>
+      <view class='my-tools-cont' catchtap='itemClicked' data-page='12'>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconCollect.png'}}"/>
+        <view>收藏店铺</view>
+      </view>
+      <view class='my-tools-cont' catchtap='itemClicked' data-page='13'>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconService.png'}}"/>
+        <view>帮助与客服</view>
+      </view>
+      <view class='my-tools-cont' catchtap='itemClicked' data-page='14'>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconAddress.png'}}"/>
+        <view>地址</view>
+      </view>
+      <!-- <view class='my-tools-cont' catchtap='itemClicked' data-page='15'>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconTrack.png'}}"/>
+        <view>足迹</view>
+      </view> -->
+      <view class='my-tools-cont' catchtap='itemClicked' data-page='16'>
+        <image style='width:40rpx;height:40rpx' src="/img/iconTask.png"/>
+        <view>我的任务</view>
+      </view>
+      <view class='my-tools-cont' catchtap='itemClicked' data-page='17'>
+        <image style='width:40rpx;height:40rpx' src="/img/iconPromote.png"/>
+        <view>我的推广</view>
+      </view>
+      <view class='my-tools-cont' catchtap='itemClicked' data-page='18'>
+        <image style='width:40rpx;height:40rpx' src="/img/iconFav.png"/>
+        <view>秀场收藏</view>
+      </view>
+    </view>
+
+  </view>
+</view>

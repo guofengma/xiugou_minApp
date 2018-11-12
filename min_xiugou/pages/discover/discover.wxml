@@ -1,0 +1,74 @@
+<import src='/pages/discover/discover-item/discover-item.wxml'/>
+<import src='/pages/discover/discover-article/discover-article.wxml'/>
+<import src= "/components/goT-top-btn/goT-top-btn.wxml"/>
+
+<view class='discover-container'>
+  <!-- 导航 S -->
+  <view class='discover-tab'>
+    <view class='discover-tab_item {{tabIndex==0?"active":""}}' catchtap='changeTabIndex' data-index="0">精选热门</view>
+    <view class='discover-tab_item {{tabIndex==1?"active":""}}' catchtap='changeTabIndex' data-index="1">最新秀场</view>
+  </view>
+  <view class='discover-tab-hot-assist' wx:if="{{tabIndex == 0}}">
+    <!-- 导航 E -->  
+    <!-- 轮播 S -->
+    <view class='discover-top-swiper' wx:if="{{swipers.length}}">
+      <swiper indicator-dots="true" previous-margin="62rpx" next-margin="62rpx" circular autoplay>
+        <block wx:for="{{swipers}}" wx:key="unique">
+          <swiper-item>
+            <image src="{{item.imgUrl}}" class="slide-image" width="355" height="150" bindtap='handleSwiperClick' data-code='{{item.linkTypeCode}}' data-link="{{item.linkType}}" />
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <!-- 轮播 E -->
+    <!-- 精选 S -->
+    <view class='discover-handpick' wx:if="{{assist.length}}">
+      <view class='discover-topic-title'>精选</view>
+      <block wx:for="{{assist}}" wx:key="unique">
+        <template is="discover-article" data="{{...item}}" />
+      </block>
+    </view>
+    <!-- 精选 E -->
+    <!-- 热门 S -->
+    <view class='discover-hot-swiper' wx:if="{{hot.length}}">
+      <view class='discover-topic-title'>热门</view>
+      <swiper previous-margin="30rpx" next-margin="130rpx" circular>    
+        <block wx:for="{{hot}}" wx:key="unique">
+          <swiper-item>
+            <view style="position:relative;">
+            <image src="{{item.coverImg}}" bindtap='handleItemClicked' data-id="{{item.id}}" class="slide-image" width="355" height="150"/>
+            <view class='discover-hot-desc'>
+              <text class='ellipsis'>{{item.pureContent}}</text>
+              <view class='discover_view'>
+                <image src='/img/icon_view_white@3x.png'></image>
+                <text>{{item.click || 0}}</text>
+              </view>
+            </view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <!-- 热门 E -->
+    <!-- 推荐列表 S -->
+    <view class='discover-list' wx:if="{{topic.length}}">
+      <view class='discover-topic-title'>推荐</view>
+      <view class='discover-item-container'>
+        <template is="discover-item" data="{{showEdit,items:topic,generalize: 3}}" />
+      </view>
+    </view>
+    <view class='no-more' wx:if="{{currentTopicPage == totalTopicPage}}">已经到底啦~</view>
+    <!-- 推荐列表 E -->
+  </view>
+  <view class='discover-tab-new' wx:else>
+    <view class='discover-list' wx:if="{{discover.length}}">
+      <view class='discover-item-container'>
+        <template is="discover-item" data="{{showEdit,items:discover,generalize: 4}}" />
+      </view>
+    </view>
+    <view class='no-more' wx:if="{{currentDiscoverPage == totalDiscoverPage}}">已经到底啦~</view>
+  </view>
+
+  <template is="goT-top-btn" data='{{floorstatus:showBackTop}}'/>
+
+</view>

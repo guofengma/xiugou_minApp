@@ -1,0 +1,98 @@
+@import "/pages/my/coupon/temp/coupon-temp";
+
+.tab-h{
+  height: 80rpx;
+  width: 100%; 
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 80rpx;
+  font-size: 30rpx; 
+  white-space: nowrap;
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  z-index: 99;
+  background:#fff; 
+}
+.tab-item{
+  width: 33.3%;
+  display: inline-block;
+  text-align: center;
+  position: relative;
+}
+.tab-item.red:after{ 
+  content: "";
+  display: block;
+  height: 6rpx;
+  width: 90rpx;
+  background: #f00006;
+  position: absolute; 
+  bottom: 0;
+  left: 50%;
+  margin-left: -44rpx;
+  border-radius: 16rpx;
+}
+.scoll-h{
+  height: 100%;
+}
+.tab-content{
+  margin-top: 80rpx;
+  height: calc(100% - 80rpx);
+}
+.tab-content.tab-active{
+  height: calc(100% - 190rpx)
+}
+.pagesize{
+  height: 100%;
+}
+
+.btn-view{
+  height: 100rpx;
+  width: 100%;
+  border-top: 1rpx solid #ddd;
+}
+.coupon-img image{
+  width: 230rpx;
+  margin-top: 200rpx;
+  margin-bottom: 20rpx;
+}
+/* <!-- 选择现金优惠卷弹框 --> */
+
+.use-container{
+  width: 540rpx;
+  height: 330rpx;
+  border-radius: 24rpx;
+  background: #FCFCFC;
+  font-size: 34rpx;
+  position: relative;
+  padding: 0 72rpx;
+}
+
+.use-input{
+  width: 270rpx;
+  border:1rpx solid #ddd;
+  margin: 0 10rpx;
+  min-height: 52rpx;
+  height: 52rpx;
+  font-size: 26rpx;
+  text-align: center;
+}
+.use-footer{
+  color: #0076FF;
+  border-top: 1rpx solid #ddd;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.use-header{
+  margin-top: 40rpx;
+  margin-bottom: 46rpx;
+}
+.use-footer>view{
+  height: 84rpx;
+  width: 50%;
+}
+.use-footer>view:first-child{
+  border-right: 1rpx solid #ddd;
+}

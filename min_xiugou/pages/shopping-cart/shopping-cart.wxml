@@ -1,0 +1,47 @@
+<import src='/components/cart-product-info/cart-product-info.wxml' />
+
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
+
+<!-- <scroll-view class="search-result" scroll-y > -->
+  <view class='shopping-cart' wx-if='{{!tipVal}}'>
+    <view wx:for='{{items}}'  data-index='{{index}}'  wx:key='unique' class='shopping-cart-line '>
+      <view class='flexR-sb whiteBg' >
+        <view class='chooseImg'  bindtap='chooseClicked' data-index='{{index}}' >
+        <image src='{{ item.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
+        </view>
+        <!-- <view wx:else class='statusLabel flexR'>
+        失效
+        </view> -->
+        <!--侧滑删除代码  -->
+        <view class='move-box'>
+          <delete-bar  bind:deleteClicked="deleteClicked" item='{{items}}' index="{{index}}">
+            <template is="cart-product-info" data='{{innerCount:item.showCount,imgSize:160,countSize:50,index,...item,inCart:true}}'/>
+          </delete-bar>
+        </view>
+      </view>
+      <view class='flexR font-22 {{item.isBegin? "redBg":"redBg-2"}}' wx:if='{{!item.isEnd && item.activityType}}'>
+        <text wx:if='{{item.isBegin}}'>该商品正在进行{{item.activityType==1? "秒杀":"降价拍"}}活动，快去看看~</text>
+        <text wx:else>{{item.activityType==1? "秒杀":"降价拍"}}活动未开始,暂不可购买</text>
+      </view>
+    </view>
+  </view>
+  <!--搜索结果异常显示 tipVal  -->
+  <template is="result-tips" wx-if='{{tipVal}}' data="{{tipVal,showBtn:true}}" />
+<!-- </scroll-view> -->
+
+<!--底部的bar  -->
+<view class='cart-bar flexR-sb fixed-bottom' wx:if='{{items.length>0}}'>
+  <view class='leftBar flexR-sb boxSize'>
+    <view class='flexR' bindtap='selectAllClicked'>
+      <image src='{{ selectAll? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
+      <text class='gray'>全选</text>
+    </view>
+    <view>
+      <text class='gray font-22'>不含运费</text>
+      合计:
+      <text class='red'>¥ {{totalPrice}}</text>
+    </view>
+  </view>
+  <view class='cart-btn redBg' bindtap='makeOrder'>结算</view>
+</view>

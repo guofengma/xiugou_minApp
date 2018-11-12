@@ -1,0 +1,66 @@
+<!--pages/my/account.wxml-->
+<view class="order">
+    <view class="wrap whiteBg">
+        <view class="item line" bindtap="account">
+            <view>
+                <text>账号与安全</text>
+            </view>
+            <view>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+            </view>
+        </view>
+        <view class="item line" bindtap="address">
+            <view>
+                <text>收货地址管理</text>
+            </view>
+            <view>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+            </view>
+        </view>
+        <!-- <view class="item line">
+            <view bindtap="myCollection">
+                <text>消息推送</text>
+            </view>
+            <view>
+                <switch  bindchange="switchChange"/>
+            </view>
+        </view> -->
+        <!-- <view class="item line">
+            <view>
+                <text>清除缓存</text>
+            </view> -->
+            <!-- <view>
+                <text>123456</text>
+            </view> -->
+        <!-- </view> -->
+        <view class="item line" bindtap="aboutUs">
+            <view>
+                <text>关于我们</text>
+            </view>
+            <view>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+            </view>
+        </view>
+    </view>
+    <view class="btn redBg" bindtap="loginOut">退出登录</view>
+    <!--退出登录弹窗-->
+    <view class="tips-delete-order model-view-bg " wx:if='{{isLoginOut}}'>
+        <view>
+            <view class='tips-box '>
+                <view class='tips-icon flexR'>
+                    <view>
+                        <image src="/img/tktx_03@2x.png"></image>
+                    </view>
+                </view>
+                <view class='content'>
+                    <view class='big'>是否确认退出登录</view>
+                </view>
+                <view class='flexR-sb btn-content'>
+                    <view class='redBg deleteBtn flexR' bindtap='outSure'>确定</view>
+                    <view class='deleteBtn leftBtn gray flexR' bindtap='cancel'>取消</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+

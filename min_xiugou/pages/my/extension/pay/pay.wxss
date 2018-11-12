@@ -1,0 +1,21 @@
+@import "/components/pay-result-tips/pay-result-tips";
+.selectImg{
+  width: 40rpx;
+}
+.pay-tips{
+  padding: 30rpx 0 20rpx 30rpx;
+}
+.pay-content{
+  border-top: 1rpx solid #ddd;
+  border-bottom: 1rpx solid #ddd;
+  padding: 0 30rpx;
+  height: 96rpx;
+}
+.btn-view{
+  width: 100%;
+  height: 96rpx;
+}
+.disabled{
+  background: #CCCCCC;
+  color: #fff;
+}

@@ -1,0 +1,65 @@
+<view class='container'>
+  <view class='task-share-info'>
+    <view class='task-share-card' wx:if="{{!scratchCard.id}}">
+      <!-- 未刮奖 -->
+      <view class='task-card ready' bindtap='getScratchCard'>刮刮卡</view>
+      <view class='lottery_btn inactive'>立即领取</view>
+    </view>
+    <view class='task-share-card' wx:else>
+      <!-- typeStatus：是否抽中优惠券 couponType：优惠券类型 status：是否领取-->
+      <view class='task-card coupon flexR' wx:if="{{scratchCard.typeStatus == 1}}">
+        <view class='coupon-money'>{{scratchCard.value}}<text class='symbol'>元</text></view>
+        <view class='coupon-info'>
+          <view class='coupon-title'>{{scratchCard.name || ''}}</view>
+          <view class='coupon-detail' wx:if="{{scratchCard.couponName}}">{{scratchCard.couponName}}</view>
+          <view class='coupon-detail' wx:else>
+          满{{scratchCard.useConditions||'0'}}减{{scratchCard.value}}{{scratchCard.couponType == 3? '折': '元'}}
+          </view>
+          <view class='coupon-time' wx:if="{{scratchCard.status == 1}}">使用期限：
+            <view>{{deadline}}</view>
+          </view>
+          <view class='coupon-time' wx:elif="{{scratchCard.status == 2}}">自领取起{{scratchCard.effectiveDays || 0}}天有效
+          </view>
+        </view>
+      </view>
+      <!-- 秀豆 -->
+      <view class='task-card bean' wx:elif="{{scratchCard.typeStatus == 2}}">
+        <view class='bean-wrap flexR'>
+          <image src='{{imgUrl}}xiu_bean.png' class='bean-icon'></image>
+          <view class='bean-count'>{{scratchCard.giftValue}}<text>秀豆</text></view>
+        </view>
+        <view class='bean-desc'>{{scratchCard.sysConfig}}</view>
+      </view>
+      <!-- 啥都没有 -->
+      <view class='task-card noting' wx:else>
+        <view class='noting-msg'>{{scratchCard.priceInfo}}</view>
+      </view>
+      <view 
+        class='lottery_btn active' 
+        catchtap='toggleModalShow'
+        wx:if="{{scratchCard.status == 2}}"
+      >立即领取</view>
+      <view 
+        class='lottery_btn active' 
+        catchtap='seesese'
+        wx:elif="{{scratchCard.typeStatus === 0}}"
+      >再逛逛~</view>
+      <view 
+        class='lottery_btn active' 
+        catchtap='toIndex'
+        wx:elif="{{scratchCard.status == 1}}"
+      >去使用</view>
+    </view>
+    <view class='task-detail-desc'>
+      <image mode='widthFix' src='{{imgUrl}}task_detail_bg.png' class='task-thumb'></image>
+    </view>
+  </view>
+  <!-- 填写领取手机 -->
+  <view class='modal' wx:if="{{showPhoneModal}}">
+    <view class='modal-body'>
+      <view class='modal-title'>领取手机号</view>
+      <input class='modal-input' bindinput='phoneInput' placeholder='输入手机号' focus='{{inputFocus}}'></input>
+      <button class='modal-btn' catchtap='checkAwardPhone'>确定</button>
+    </view>
+  </view>
+</view>

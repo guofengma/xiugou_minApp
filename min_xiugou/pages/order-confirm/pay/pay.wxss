@@ -1,0 +1,82 @@
+@import "/components/pay-result-tips/pay-result-tips";
+.pay{
+  border-top:1rpx solid #eee;
+}
+.wrap {
+    display: flex;
+    justify-content: space-around;
+    padding:30rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    background: #fff;
+    margin-bottom: 20rpx
+}
+
+.wrap image {
+    width: 70rpx;
+    height: 70rpx;
+    margin-top: -5rpx;
+}
+
+.left {
+    float: left;
+    width: 30%;
+    display: flex;
+    justify-content: left
+}
+.left view{
+  margin-left: 10rpx
+}
+
+.right {
+    float: right;
+    width: 70%;
+    text-align: right;
+}
+.right image{
+  width: 44rpx;
+	height: 44rpx;
+  vertical-align: middle;
+  margin-left: 20rpx;
+  margin-top: -5rpx;
+}
+.clearfix {
+    clear: both;
+}
+.inf{
+    height: 80rpx;
+    line-height: 80rpx;
+    padding: 0 30rpx;
+    color:  #999999;
+    font-size: 26rpx;
+    margin-top: -20rpx;
+}
+.footer{
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 30rpx;
+    display: flex;
+    justify-content: space-between;
+    border-top: solid 1rpx #dddddd;
+}
+.footer view:first-child{
+    margin-left: 30rpx;
+}
+.footer view:nth-child(2){
+    width: 220rpx;
+    color: #fff;
+    font-size: 32rpx;
+    background: #f00006;
+    text-align: center;
+}
+
+.useBalance{
+  position: relative
+}
+.nowUse{
+  position: absolute;
+  right: 50rpx;
+  bottom: 0;
+  font-size: 20rpx;
+}

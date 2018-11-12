@@ -1,0 +1,28 @@
+<template name="cart-product-info">
+  <view class="cart-product-info flexR" catchtap='cartProductClicked' data-id = '{{productId}}' data-state='{{status}}'>
+    <view class='leftbar'>
+      <image src='{{showImg}}' class='search-img' style='width:{{imgSize}}rpx;height:{{imgSize}}rpx'></image>
+      <view class='statusImg' wx:if='{{status!==1 || stock===0}}'>
+        <image src='{{status!==1?  "https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/shixiao-icon.png":"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/qiangguang-icon.png"}}'></image>
+      </view>
+    </view>
+    <view class='right-bar' style='width:{{480}}rpx'>
+      <view class='right-top-bar'>
+        <view class='ellipsis-2 prdName'>
+          <text class='red font-22 labelName' wx:if='{{labelName}}'>{{labelName}}</text>
+          {{showName}}
+        </view>
+        <view class='gray ellipsis'>{{showType}} </view>
+      </view>
+      <view class='red font-22' wx:if='{{status==1&&stock<innerCount&&inCart}}'>库存不足</view>
+      <view class='prd-count-box flexR' wx:if='{{status==1}}' >
+        <view class='red'>¥ {{showPrice}}</view>
+        <view wx:if="{{showQnt}}" class='gray' >×{{showQnt}}</view>
+        <view wx:else catchtap='test' >
+           <adder-subtractor  count="{{innerCount}}" index="{{index}}" countSize='{{countSize}}' bind:countChange="counterInputOnChange"/>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+</template>

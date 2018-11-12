@@ -1,0 +1,42 @@
+.tips-box{
+  width: 490rpx;
+  height: 470rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  font-size: 26rpx;
+}
+.tips-box  image{
+  width: 142rpx;
+}
+.tips-title{
+  font-size: 30rpx;
+  margin: 20rpx 0;
+}
+.pay-tips .flexC{
+  justify-content: flex-end
+}
+/* .btn{
+  width: 100%;
+  height: 80rpx;
+  background-color: #eeeeee;
+  margin-top: 50rpx;
+} */
+.btn-sm-veiw{
+  margin: 50rpx 0 35rpx 0;
+  width: 74%
+}
+.btn-sm,.button-sm{
+  width: 186rpx;
+	height: 60rpx;
+	border-radius: 10rpx;
+	border:  1rpx solid #f00006;
+  background: transparent;
+}
+
+.button-sm{
+ height: 64rpx;
+  padding: 0
+}
+.btn-sm-veiw>view:last-child{
+  margin-left: 30rpx;
+}

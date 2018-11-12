@@ -1,3 +1,0 @@
-<view>
-  <my-order-list id='orderList' num="{{num}}" condition="{{condition}}"/>
-</view>

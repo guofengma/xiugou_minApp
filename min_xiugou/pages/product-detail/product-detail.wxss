@@ -1,0 +1,79 @@
+@import "/components/msg-tips/msg-tips.wxss";
+@import "/components/goT-top-btn/goT-top-btn.wxss";
+@import "/libs/wxParse/wxParse.wxss";
+@import "/pages/product-detail/temp/product-price-infos/product-price-infos.wxss";
+
+.prduct-detail-view{
+  padding-bottom: 150rpx;
+}
+.prduct-detail-view>view{
+  background: #fff;
+}
+.chooseBox{
+  margin: 24rpx 0;
+  font-size: 26rpx;
+}
+.chooseBox>view{
+  height: 90rpx;
+  line-height: 90rpx;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+}
+
+/*底部的bar   */
+.bottom-bar{
+  justify-content: flex-start;
+  padding-right: 0;
+  border-top: 1rpx solid #eee;
+  height: 98rpx;
+}
+.bottom-bar image{
+  width: 44rpx;
+}
+.bottom-bar>view{
+  width: 20%;
+  border-right: 1rpx solid #ddd;
+  text-align: center;
+  height: 100%;
+}
+.bottom-bar .add-cart, .bottom-bar .buy-btn{
+  flex: 2;
+}
+.buy-btn{
+  border-right: 0;
+}
+
+.cell-name{
+  color: #999;
+  margin-right: 64rpx;
+}
+.cell-content,.tips{
+  width:500rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cart{
+  position: relative
+}
+
+.num-label{
+  position: absolute;
+  font-size: 22rpx;
+  width: 36rpx;
+  height: 36rpx;
+  top:-15rpx;
+  right:28rpx;
+  /* padding: 5rpx 6rpx; */
+  border-radius: 50rpx;
+}
+.price2{
+  text-decoration: line-through;
+  margin-right: 10rpx;
+}
+
+.no-sale{
+  justify-content: center;
+  background: #ddd !important;
+  color: #fff;
+}

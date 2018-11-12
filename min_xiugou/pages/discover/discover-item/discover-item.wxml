@@ -1,0 +1,53 @@
+<template name="discover-item">
+  <!-- discover item S -->
+  <view class='discover-list-item-aside'>
+    <view class='discover-list-item' wx:for="{{items}}" wx:key="unique" wx:if="{{(index+1)%2 != 0}}" bindtap='handleItemClicked' data-id="{{item.id}}">
+      <view class='discover-list-item_thumb'>
+        <image src='{{( (item.generalize == 1 || item.generalize == 2) && generalize == 4 ) ? item.img : (item.coverImg || item.img)}}' mode="widthFix"></image>
+        <view class='discover_view'>
+            <image src='/img/icon_view_white@3x.png'></image>
+            <text>{{item.click || 0}}</text>
+          </view>
+      </view>
+      <view class='discover-list-item-body'>
+        <view class='discover-list-item_title ellipsis-2'>
+          {{item.pureContent}}
+        </view>
+        <view class='discover_author'>
+          <image class='discover_avatar' src='{{item.userHeadImg}}'></image>
+          <view class='discover_author_name'>{{item.userName}}</view>
+          <view class='discover_time'>{{item.time}}</view>  
+        </view>
+      </view>
+      <image class='discover-list-item-edit' wx:if="{{showEdit}}" src="{{item.checked?'/img/choose-icon-c.png':'/img/choose-icon.png'}}" catchtap='manageItem' data-index="{{index}}"></image>
+    </view>
+  </view>
+    <!-- discover item E -->
+  
+  
+  <view class='discover-list-item-aside'>
+    <view class='discover-list-item' wx:for="{{items}}" wx:key="unique" wx:if="{{(index+1)%2 == 0}}"  bindtap='handleItemClicked' data-id="{{item.id}}">
+      <view class='discover-list-item_thumb' > 
+      <!-- && generalize == 4  -->
+        <image src='{{( (item.generalize == 1 || item.generalize == 2) ) ? item.img : (item.coverImg || item.img)}}' mode="widthFix"></image>
+        <view class='discover_view'>
+            <image src='/img/icon_view_white@3x.png'></image>
+            <text>{{item.click || 0}}</text>
+          </view>
+      </view>
+      <view class='discover-list-item-body'>
+        <view class='discover-list-item_title ellipsis-2'>
+          {{item.pureContent}}
+        </view>
+        <view class='discover_author'>
+          <image class='discover_avatar' src='{{item.userHeadImg}}'></image>
+          <view class='discover_author_name'>{{item.userName}}</view>
+          <view class='discover_time'>{{item.time}}</view>  
+        </view>
+      </view>
+      <image class='discover-list-item-edit' wx:if="{{showEdit}}" src="{{item.checked?'/img/choose-icon-c.png':'/img/choose-icon.png'}}"  catchtap='manageItem' data-index="{{index}}"></image>
+    </view>
+    
+  </view>
+
+</template>

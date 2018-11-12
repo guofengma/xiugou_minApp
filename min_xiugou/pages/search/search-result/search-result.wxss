@@ -1,0 +1,55 @@
+/*商品展示竖向  */
+@import "/components/product-info-column/product-info-column";
+
+/*商品展示横向  */
+@import "/components/product-info-row/product-info-row";
+
+/*搜索产品异常显示  */
+
+@import  "/components/result-tips/result-tips";
+
+@import "/components/goT-top-btn/goT-top-btn.wxss";
+
+.search-result-container{
+  display:flex;
+  width:100%;
+  height:100%;
+  flex-direction:column;
+}
+.search-result {
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  height:100%;
+  box-sizing: border-box;
+}
+
+.search-result>.product-row:last-child{
+  padding-bottom: 20rpx;
+}
+.content{
+  padding-top: 20rpx;
+}
+.product-row .view-prd-img{
+  background: #ddd;
+}
+.go-cart,.goTop{
+  position: absolute;
+  right: 30rpx;
+  bottom: 220rpx;
+}
+.go-cart image,.goTop image{
+  width: 70rpx;
+}
+.cart-label{
+  position:absolute;
+  font-size:22rpx;
+  width:36rpx;
+  height:36rpx;
+  top:0rpx;
+  left:3px;
+  border-radius:50rpx;
+}
+.goTop{
+  bottom: 120rpx;
+}

@@ -1,0 +1,74 @@
+<!--pages/my/account.wxml-->
+<view class="order">
+    <view>
+        <view class="item line" bindtap='modifyImageTap'>
+            <view>
+                <text>头像</text>
+            </view>
+            <view>
+              <cover-image  class="user-img" src="{{ userInfos.headImg ||'/img/default-userImg.png'}}"></cover-image>
+              <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+            </view>
+        </view>
+        <view class="item">
+            <view>
+                <text>昵称</text>
+            </view>
+            <view bindtap="nickname">
+                <text>{{userInfos.nickname}}</text>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+            </view>
+        </view>
+    </view>
+    <view class="wrap">
+        <view class="item line">
+            <view>
+                <text>授权ID</text>
+            </view>
+            <view>
+                <text>{{userInfos.code||''}}</text>
+            </view>
+        </view>
+        <view class="item line">
+            <view>
+                <text>会员等级</text>
+            </view>
+            <view wx:if='{{userInfos.levelName}}'>
+                <text class="level">{{userInfos.levelName||''}}</text>
+            </view>
+        </view>
+        <view class="item">
+            <view>
+                <text>手机号</text>
+            </view>
+            <view>
+                <text>{{userInfos.phone}}</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="wrap">
+      <city-picker bind:pickerClicked="pickerClicked" id='picker' region='{{region}}'>
+          <view class="item">
+              <view>
+                <text>所在区域</text>
+              </view>
+              <view class='region flexR-sb'>
+                  <text class='ellipsis'>{{ userInfos.showRegion ||''}}</text>
+                  <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+              </view>
+          </view>
+        </city-picker>
+    </view>
+    <view class="wrap" bindtap='realName'>
+        <view class="item">
+            <view>
+                <text>实名认证</text>
+            </view>
+            <view >
+                <text class="identify">{{userInfos.isRealName}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+

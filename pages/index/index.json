@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "秀购",
-  "usingComponents": {
-    "image-sub": "/components/image-sub/image-sub",
-    "notice": "/components/notice/notice",
-    "task-card": "/components/task-card/task-card"
-  }
-}

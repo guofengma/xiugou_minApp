@@ -1,0 +1,73 @@
+<import src="/libs/wxParse/wxParse.wxml"/>
+<view class="discover-detail-container">
+  <!-- swiper S -->
+  <view class='discover-detail-swiper'>
+    <swiper circular autoplay  bindchange='sliderChange'>
+      <block wx:for="{{details.imgs}}" wx:key="unique">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view wx:if='{{details.imgs.length>0}}' class="activeIndex">
+        {{activeIndex+"/"+ details.imgs.length}}
+      </view>
+  </view>
+  <!-- swiper E -->
+  <!-- content S -->
+  <view class='discover-detail-content'>
+    <view class='discover_author'>
+      <image class='discover_avatar' src='{{details.userHeadImg}}'></image>
+      <view class='discover_author_name'>{{details.userName}}</view>
+      <view class='discover_view'>
+        <image src='/img/icon_view@3x.png'></image>
+        <text>{{details.click || 0}}</text>
+      </view>  
+    </view>
+    <view class="content">
+      <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+    </view>
+  </view>
+  <!-- content E -->
+  <!-- recommend list S -->
+  <view class='discover-detail-recommend'>
+    <view class='item' wx:for="{{details.products}}" wx:key="unique" bindtap='showItemDetail' data-id="{{item.code}}">
+      <view class='item-thumb'>
+        <image src='{{item.headImg}}'></image>
+      </view>
+      <view class='item-body'>
+        <view class='item-title ellipsis-2'>{{item.name}}</view>
+        <view class='item-info flexR-sb'>
+          <view class='item-price'>￥{{item.price}} 起</view>
+          <!-- <image class='addCart-icon' src='/img/icon_gouwuche@3x.png'></image> -->
+        </view>
+      </view>
+    </view>
+    
+  </view>
+  <!-- recommend list E -->
+  <view class='fixed-height'></view>
+  <!-- footer operate S -->
+  <view class='discover-detail-operate flexR'>
+    <!-- 1.收藏 2.点赞 -->
+    <view class='operate assist' 
+      bindtap='toggleDiscoverLikeCollect'
+      data-type="2" 
+      data-status="{{details.hadLike}}"
+      data-id="{{details.id}}"
+    >
+      <image class='icon' src="{{details.hadLike ? '/img/home_icon_zactive@3x.png' : '/img/home_icon_dianzan@3x.png'}}"></image>
+      <text>{{details.hadLike ? '已': ''}}赞·{{details.likeCount}}</text>
+    </view>
+    <view class='operate fav'
+     bindtap='toggleDiscoverLikeCollect' 
+     data-type="1" 
+     data-status="{{details.hadCollect}}"
+     data-id="{{details.id}}"
+    >
+      <image class='icon' src="{{details.hadCollect ? '/img/home_icon_yishoucan@3x.png' : '/img/home_icon_shoucan@3.png'}}"></image>
+      <text>{{details.hadCollect ? '已': ''}}收藏·{{details.collectCount}}</text>
+    </view>
+  </view>
+  <!-- footer operate E -->
+</view>

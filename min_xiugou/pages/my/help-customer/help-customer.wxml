@@ -1,0 +1,45 @@
+<view class="help-customer">
+  <view class="header">
+    <!-- <view class="people"></view>
+    <button  class='go-cart-view contact-btn'
+            session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"
+            open-type="contact">
+       <view class="content"> <text class='tips'>您好，我是小朵，下面帮助没有解决您的需求,<text class="red">可以点击我</text>进行反馈哦</text>
+    </view>
+    </button> -->
+    <image-sub imgStyle='{{"width:400rpx"}}' imgSrc="{{'kefu-img@2x.png'}}"/>
+  </view>
+  <!-- <view class="hot-question">热门问题</view> -->
+  <view class="question-area">
+      <view class="question-item" wx:for='{{list}}' wx:key='unique' >
+          <view class="left" catchtap="questionList" data-typeid='{{item.name}}'>
+              <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_order.png" class="icon"></image>
+              <view>{{item.name}}</view>
+          </view>
+          <view class="right">
+            <view class="item"  wx:for='{{item.list}}' wx:key='unique' 
+                  wx:for-item="detail" wx:for-index="key"  catchtap='toDetail'  data-id='{{detail.id}}' wx:if="{{key<2}}">
+              {{detail.title}}
+            </view>
+          </view>
+      </view>
+  </view>
+
+ 
+<view class="wrap">
+  <view class='flexC'>
+    <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_refund.png'}}"/>
+    <view>退款进度</view>
+  </view>
+  <view bindtap="questionFeedback" class='flexC'>
+    <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_feedback.png'}}"/>
+    <view>问题反馈</view>
+  </view>
+  <view class='flexC'>
+    <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_autorefund.png'}}"/>
+    <view>自动退款</view>
+  </view>
+  </view>
+</view>
+<contact-seller ></contact-seller> 
+

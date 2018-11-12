@@ -1,0 +1,221 @@
+<view class='sub-page'>
+  <!--轮播  -->
+  <view class='ad'>
+    <view class='search-bar boxSize flexR-sb fixed-top {{changeBg? "search-bar-scroll":""}}'>
+      <image-sub imgStyle='{{"width:64rpx"}}' imgSrc="{{'logo@2x.png'}}"/>
+      <view class='bar flexR-sb gray font-28' catchtap='searchClicked'>
+        <image-sub  imgStyle='{{"width:32rpx"}}' imgSrc="{{'home_icon_search_nor@2x.png'}}"/>
+        <text>请输入关键字搜索</text>
+      </view>
+      <view catchtap='msgClicked'>
+       <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{changeBg? 'tongyong_icon_xiaoxi_nor@2x.png':'home_icon_xiaoxi@2x.png'}}"/>
+      </view>
+    </view>
+    <!-- height:{{imgheights[0]}}rpx;min-height:400rpx -->
+    <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:460rpx' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff' circular="true">
+    <block wx:for="{{imgUrls}}" wx:key='unique'>
+      <swiper-item>
+        <image src="{{item.imgUrl}}" class="slide-image" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' bindload="imageLoad" />
+      </swiper-item>
+    </block>
+    </swiper>
+  </view>
+  
+  <!-- icon图标 -->
+ 
+  <view  class='index-items-view boxSize whiteBg flexR'>
+    <block wx:for='{{iconArr}}' wx:key='unique'>
+      <view class='flexC items-sub boxSize' catchtap='goPages' data-index='{{index}}'>
+        <image-sub imgStyle='{{"width:96rpx"}}' imgSrc="{{item.img}}" wx:if='{{index<5}}'/>
+        <image wx:else src='{{item.img}}' mode='widthFix' style='width:96rpx'></image>
+        <view class='font-24 gray item-name ellipsis'>{{item.name}}</view>
+      </view>
+    </block>
+  </view>
+  
+  <!-- 我的等级 -->
+  
+  <!-- <view class='index-level-view whiteBg' wx:if='{{didLogin}}'>
+    <view class='boxSize flexR-sb'>
+      <view class='font-28'>
+        <text class='font-28 levalName'>尊敬的{{userInfos.levelName}}会员您好</text>
+        <view class='levelLineContent boxSize'>
+          <view class='levelLine'>
+            <view class='myLevelLine' style='width:{{width}}%' >
+              <view class='my-level-val font-22 whiteBg' >
+                <text class='triangle_border_up'></text>
+                {{userInfos.experience}}
+              </view>
+            </view>
+            <view class='levelVal font-22 flexC' wx:for='{{levelList}}' wx:key='{{index}}' style='left:{{(442/(levelList.length-1))*index-16}}rpx'>
+              <view>{{item.name}}</view>
+              <view class='circle'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='font-22 flexR level-btn whiteBg' catchtap='levelBtnClicked'>
+        <view class=' flexC  whiteBg levelBtnName'>
+         <text>特权</text>
+         <text>查看</text>
+        </view>
+        <view>></view>
+      </view>  
+    </view>
+  </view> -->
+
+  <!-- 广告位 -->
+
+  <view class='index-ad-banner-view flexC whiteBg' wx:if='{{adArr.length>0}}'>
+    <block wx:for='{{adArr}}' wx:key='unique'>
+      <view class='overflow' wx:if='{{index<3}}' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' >
+        <image src='{{item.imgUrl}}'></image>
+      </view>
+    </block>
+  </view>
+  
+  <!-- 头条 -->
+
+  <view class='index-notice-view whiteBg flexR-sb' wx:if='{{noticeArr.length>0}}'>
+    <view class='notice-leftBar font-32'>
+      <view>秀场</view>
+      <view>头条</view>
+    </view>
+    <view class='notice-rightBar boxSize flexR-sb'>
+      <swiper autoplay="true" interval='3000' vertical='true'  style='height:80rpx;'  bindchange='noticeChange' circular="true" class='swiper'>
+        <block wx:for="{{noticeArr}}" wx:for-item="list" wx:for-index='key' wx:key='{{key}}' >
+          <swiper-item class='swiper-item-notice' >
+            <block wx:for="{{list}}" wx:key='{{index}}'>
+              <view class='ellipsis font-22 gray notice-line' catchtap='noticeClicked' data-id='{{item.id}}'>
+                <text class='notice-label red font-22'>{{noticeLabel[item.generalize]}}</text>
+                {{item.title}}
+              </view>
+            </block> 
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class='notice-img'>
+                <image src='{{noticeArr[0][0].img}}' mode='widthFix' catchtap='noticeClicked' data-id='{{noticeArr[0][0].id}}'></image>
+              </view>
+    </view>
+  </view>
+
+  <!-- 明星店铺 -->
+  <!-- <view class='star-shop-view' wx:if='{{starShop.length>0}}'>
+    <view class='index-item-title flexR font-38'>明星店铺</view>
+    <view class='star-shop-item whiteBg' wx:for='{{starShop}}' wx:key='{{index}}'>
+     <image src='{{item.imgUrl}}' mode='widthFix'></image>
+     <view class='flexR'>
+       <view class='star-shop-logo flexR-sb'>
+         <image src='{{item.storeDTO.headUrl || "/img/default-userImg.png"}}' mode='widthFix'></image>
+         <view>
+          <view class='font-24'>
+            {{item.storeDTO.name}} 
+            <text class='start-shop-label flexR'>{{item.storeDTO.starName}}</text>
+          </view>
+          <view class='font-20 gray'>成员：{{item.storeDTO.storeUserNum}}</view>
+         </view>
+       </view>
+       <view class='flexC monthIncome'>
+         <text class='font-20 gray'>店铺本月收入</text>
+         <view class='font-22'>{{item.storeDTO.tradeBalance}}</view>
+       </view>
+       <view class='flexC totalIncome'>
+        <text class='font-20 gray'>店铺累计收入</text>
+        <view class='font-22'>{{item.storeDTO.totalTradeBalance}}</view>
+       </view>
+     </view>
+    </view>    
+  </view> -->
+
+  <!-- 今日榜单 -->
+  <view class='today-list-view whiteBg' wx:if='{{todayList.length>0}}'>
+    <view class='index-item-title flexR font-38'>今日榜单</view>
+    <swiper class="today-list-imageContainer" previous-margin="62rpx" next-margin="62rpx" circular autoplay>
+      <block wx:for="{{todayList}}" wx:key="{{index}}">
+        <swiper-item class="today-list-item boxSize">
+          <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item.imgUrl}}" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 精品推荐 -->
+  <view class='today-list-view fine-quality-view whiteBg' wx:if='{{fineQuality.length>0}}'>
+    <view class='index-item-title flexR font-38'>精品推荐</view>
+    <swiper class="today-list-imageContainer"   next-margin="150rpx" circular>
+      <block wx:for="{{fineQuality}}" wx:key="{{index}}">
+        <swiper-item class="today-list-item boxSize">
+          <image class="today-list-itemImg {{currentIndex == index ? 'active': ''}}" src="{{item.imgUrl}}" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'></image>
+          <!-- <view class='ellipsis font-26 fine-quality-tips'>华盛顿哈空间是的哈卡收到货卡仕达卡仕达卡收到货卡的很时代大厦多</view> -->
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!-- 超值热卖 -->
+
+  <view class='hot-sale-view whiteBg' wx:if='{{hotSale.length>0}}'>
+    <view class='index-item-title flexR font-38'>超值热卖</view>
+    <view class='hot-sale-item' wx:for="{{hotSale}}"  wx:for-index="key" wx:for-item='list' wx:key="{{key}}" >
+      <view class='hot-sale-img'>
+        <image src='{{list.imgUrl}}'catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'></image>
+      </view>
+      <scroll-view scroll-x="true"   class='hot-sale-scroll' wx:if='{{list.topicBannerProductDTOList.length>0}}'>
+        <view class='hot-sale-content  boxSize'>
+          <block wx:for='{{list.topicBannerProductDTOList}}' wx:key='{{index}}' wx:if='{{index<8}}'>
+            <view class='hot-sale-prd flexC'  catchtap='adListClicked' data-prodtype='{{item.productType}}' data-val='{{item.prodCode}}'>
+              <image src='{{item.specImg}}'></image>
+              <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName || ''}}</view>
+            <view class='red font-28'>¥{{item.showPrice || 0}}起</view>
+          </view>     
+          </block>
+           <!-- 查看更多  -->
+           <view class='hot-sale-more' wx:if='{{list.topicBannerProductDTOList.length>8}}' catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'>
+             <view class='font-22 flexC gray'>
+              <view >查看更多</view>
+              <view class='font-20'>View more</view>
+             </view>
+           </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!-- 为你推荐 -->
+  <view class='recommend-view whiteBg' wx:if='{{recommendArr.length>0}}' >
+    <view class='index-item-title flexR font-38'>为你推荐</view>
+    <view class='recommend-prd-content flexR'>
+      <view class='recommend-prd-item boxSize' wx:for='{{recommendArr}}' wx:key='{{index}}' style='margin-right:{{index%2==1? "0":"10"}}rpx' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'>
+        <view class='recommend-prd-img' >
+         <image src='{{item.imgUrl}}'></image>
+         <view class='ellipsis font-24 gray'>{{item.title}}</view>
+        </view>
+        <view class='recommend-prd-info'>
+          <!-- <view class='font-20 gold'>自营 | 满减</view> -->
+          <view class='ellipsis-2 font-24 prd-name'>{{item.name}}</view>
+          <view class='red font-28'>¥{{item.price || 0}}起</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 任务 -->
+  <view class='duty' wx:if="{{hasTask}}" style="right: {{isScroll?-80:0}}rpx" catchtap='toggleCardShow'>
+   <image style='width:164rpx;height:112rpx;' src="/img/task@3.png" > </image>
+  </view>
+  <task-card 
+    bind:close="close" 
+    bind:get="getJob" 
+    type="loading"
+    desc="{{taskDetail.desc}}"
+    name="{{taskDetail.name || ''}}"
+    wx:if="{{showCard}}"  
+  ></task-card> 
+</view>
+
+<!-- 公告 -->
+
+<notice visiable="{{isShowNotice}}"
+  bind:isShowNotice='isShowNotice'
+/>

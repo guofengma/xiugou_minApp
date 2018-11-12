@@ -1,0 +1,11 @@
+/*置顶  */
+.goTop{
+  position: fixed;
+  right: 30rpx;
+  bottom: 120rpx;
+  background-color:transparent !important;
+}
+.goTop image{
+  width: 90rpx;
+  /* background: #fff; */
+}
