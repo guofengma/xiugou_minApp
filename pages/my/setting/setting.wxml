@@ -6,7 +6,7 @@
                 <text>账号与安全</text>
             </view>
             <view>
-                <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/xjt_10@2x.png' mode='widthFix'></image>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
             </view>
         </view>
         <view class="item line" bindtap="address">
@@ -14,7 +14,7 @@
                 <text>收货地址管理</text>
             </view>
             <view>
-                <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/xjt_10@2x.png' mode='widthFix'></image>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
             </view>
         </view>
         <!-- <view class="item line">
@@ -38,7 +38,7 @@
                 <text>关于我们</text>
             </view>
             <view>
-                <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/xjt_10@2x.png' mode='widthFix'></image>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
             </view>
         </view>
     </view>

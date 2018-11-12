@@ -11,19 +11,11 @@
 
 .item view:nth-child(2){width: 25%;text-align: right;margin-right: 20rpx}
 .line{border-bottom: 1px solid #eee}
-.item image{
-    width:70rpx;
-    height:70rpx;
-    vertical-align:middle;
-    margin-right: 14px;
+
+.item text{
+  margin-left: 15rpx;
 }
 
-.jt-img{
-    width:15rpx !important;
-    height: 20rpx !important;
-    vertical-align: middle;
-    margin-left: 10rpx;
-}
 .num{
     border-radius: 20rpx;
     height: 40rpx;

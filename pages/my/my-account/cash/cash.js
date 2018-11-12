@@ -2,6 +2,7 @@ let { Tool, RequestFactory, Operation, Config, Storage} = global;
 Page({
     data: {
       account:'',
+      imgBaseUrl: Config.imgBaseUrl,
       params: {},
       totalPage: '', // 页面总页数
       currentPage: 1, // 当前的页数
@@ -73,7 +74,6 @@ Page({
       account = Tool.formatNum(account)
       this.setData({
         account: account,
-        imgBaseUrl: Config.imgBaseUrl
       })
     },
     onShow: function () {

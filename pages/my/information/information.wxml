@@ -3,43 +3,43 @@
     <view class="">
         <view class="item" bindtap="notice">
             <view class="left">
-                <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/information-notice.png" alt="" mode='widthFix'></image>
-                <text>通知</text>
+              <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'information-notice.png'}}"/>
+              <text>通知</text>
             </view>
             <view>
                 <view class="num redBg" wx:if="{{noticeNum!=0}}">{{noticeNum}}</view>
-                <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/packup-btn.png' mode='widthFix'></image>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'packup-btn.png'}}"/>
             </view>
         </view>
     </view>
     <view class="wrap">
         <view class="item" bindtap="information">
             <view class="left">
-                <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/infomation.png" alt="" mode='widthFix'></image>
-                <text>消息</text>
+              <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'infomation.png'}}"/>
+              <text>消息</text>
             </view>
             <view>
                 <view class="num redBg" wx:if="{{messageNum!=0}}">{{messageNum}}</view>
-                <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/packup-btn.png' mode='widthFix'></image>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'packup-btn.png'}}"/>
             </view>
         </view>
     </view>
     <view class="wrap">
         <view class="item" bindtap="groupInformation">
             <view class="left">
-                <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/group-information.png" alt="" mode='widthFix'></image>
-                <text>拼店消息</text>
+              <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'group-information.png'}}"/>
+              <text>拼店消息</text>
             </view>
             <view>
                 <view class="num redBg" wx:if="{{storeMessageNum!=0}}">{{storeMessageNum}}</view>
-                <image class="jt-img" src='https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/packup-btn.png' mode='widthFix'></image>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'packup-btn.png'}}"/>
             </view>
         </view>
     </view>
     <view class="tips-delete-order model-view-bg " wx:if='{{isNew}}'>
         <view>
             <view class='tips-box '>
-                <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/close-icon.png" bindtap='dismissCancel'></image>
+              <image-sub imgStyle='{{"width:64rpx"}}' imgSrc="{{'close-icon.png'}}"/>
                 <view class='tips-icon flexR'>
                     <view></view>
                 </view>

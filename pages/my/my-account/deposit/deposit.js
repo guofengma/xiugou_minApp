@@ -3,6 +3,7 @@ let { Tool, RequestFactory, Event, Operation, Config, Storage} = global;
 Page({
     data: {
       account:'',
+      imgBaseUrl: Config.imgBaseUrl,
       add:false,
       isExplain:false,
       isLevel:false,
@@ -92,8 +93,7 @@ Page({
       let account = Storage.getUserAccountInfo().blockedBalance || 0
       account = Tool.formatNum(account)
       this.setData({
-        account: account,
-        imgBaseUrl: Config.imgBaseUrl
+        account: account
       })
       this.getData()
     },
