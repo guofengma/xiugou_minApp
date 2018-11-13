@@ -8,7 +8,7 @@
         <text>请输入关键字搜索</text>
       </view>
       <view catchtap='msgClicked'>
-       <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{changeBg? 'tongyong_icon_xiaoxi_nor@2x.png':'home_icon_xiaoxi@2x.png'}}"/>
+       <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{changeBg? 'tongyong_icon_xiaoxi_nor@2x.png':'home_icon_xiaoxi@2x.png'}}" id='topBarImg'/>
       </view>
     </view>
     <!-- height:{{imgheights[0]}}rpx;min-height:400rpx -->
@@ -21,9 +21,21 @@
     </swiper>
   </view>
   
+  <!-- 会员权益跳转 -->
+  <view class='user-level-view flexR-sb' catchtap='levelBtnClicked'>
+    <view class='font-28 flexR'>
+      尊敬的
+      <view class='leveleName'>{{levelName[userInfos.levelId]}}</view>
+      品鉴管，您好!
+    </view>
+    <view class='font-22 see-level flexR'>
+     查看收益
+     <image-sub imgStyle='{{"width:10rpx;margin-left:8rpx;margin-top:-2px"}}' imgSrc="{{'jiantou-white.png'}}"/>
+    </view>
+  </view>
   <!-- icon图标 -->
  
-  <view  class='index-items-view boxSize whiteBg flexR'>
+  <view  class='index-items-view boxSize whiteBg flexR' >
     <block wx:for='{{iconArr}}' wx:key='unique'>
       <view class='flexC items-sub boxSize' catchtap='goPages' data-index='{{index}}'>
         <image-sub imgStyle='{{"width:96rpx"}}' imgSrc="{{item.img}}" wx:if='{{index<5}}'/>
@@ -33,7 +45,7 @@
     </block>
   </view>
   
-  <!-- 我的等级 -->
+  <!-- 我的等级 取消不要了 -->
   
   <!-- <view class='index-level-view whiteBg' wx:if='{{didLogin}}'>
     <view class='boxSize flexR-sb'>
@@ -78,8 +90,8 @@
 
   <view class='index-notice-view whiteBg flexR-sb' wx:if='{{noticeArr.length>0}}'>
     <view class='notice-leftBar font-32'>
+      <view>实时</view>
       <view>秀场</view>
-      <view>头条</view>
     </view>
     <view class='notice-rightBar boxSize flexR-sb'>
       <swiper autoplay="true" interval='3000' vertical='true'  style='height:80rpx;'  bindchange='noticeChange' circular="true" class='swiper'>

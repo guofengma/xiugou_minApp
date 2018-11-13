@@ -25,7 +25,7 @@
 }
 .content-top{
   position: relative;
-  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/bg_img_user@2x.png) no-repeat left bottom;
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/bg_img_user@2x.png?_=1) no-repeat left bottom;
   background-size: 100% 100%;
   border-top: 1prx solid #eee;
   color: #fff

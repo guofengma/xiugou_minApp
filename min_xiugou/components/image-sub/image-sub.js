@@ -11,7 +11,7 @@ Component({
   methods: {
     getBaseUrl(){
       this.setData({
-        baseImgUrl: Config.imgBaseUrl
+        baseImgUrl: Config.imgBaseUrl + this.data.imgSrc+'?_='+new Date().getTime()
       })
     }
   },

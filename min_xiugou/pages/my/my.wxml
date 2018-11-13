@@ -3,8 +3,8 @@
   <view class='content-top'>
     <view class='top-view'>
       <view class='fr'>
-        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'setting@3x.png'}}" catchtap='itemClicked' data-page='0'/>
-        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'message@3x.png'}}" catchtap='itemClicked' data-page='1'/>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'setting@3x.png.png'}}" catchtap='itemClicked' data-page='0'/>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'message@3x.png.png'}}" catchtap='itemClicked' data-page='1'/>
       </view>
     </view>
     <view class='my-avatar' catchtap='itemClicked' data-page='2'>

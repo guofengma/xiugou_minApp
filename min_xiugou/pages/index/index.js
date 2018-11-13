@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+import { levelName} from '../../tools/common.js'
 let { Tool, RequestFactory, Event, Storage, Operation} = global;
 
 Page({
@@ -32,6 +32,7 @@ Page({
         { name: '必看', img: 'home_icon_bikan_nor@3x.png', page: '/pages/discover/discover-detail/discover-detail?articleId=10'},
         { name: '秒杀', img: 'home_icon_miaoshao_nor@3x.png', page: '/pages/topic/topic?code=ZT2018000012'},
       ],
+      levelName: levelName,
       imgUrls: [],// 轮播
       adArr:[],// 广告位
       starShop:[], // 明星店铺
@@ -107,6 +108,7 @@ Page({
     onPageScroll(e){
       // 这里加个判断 如果没任务的话也return
       let changeBg = this.data.changeBg
+      let change = this.data.changeBg
       if (e.scrollTop>160){
         changeBg=true
       }else{
@@ -115,13 +117,16 @@ Page({
       this.setData({
         changeBg:changeBg
       })
+      if (change != this.data.changeBg){
+        this.selectComponent('#topBarImg').getBaseUrl();
+      }
       if (this.data.isScroll) return;  
       this.setData({
         isScroll: true,
       })
     },
     onLoad: function (options) {
-      //Event.on('getLevel', this.getLevel,this)
+      Event.on('getLevel', this.getLevel,this)
       this.queryAdList(1,'轮播图片',(datas)=>{
         this.setData({
           imgUrls:datas
@@ -219,7 +224,7 @@ Page({
       Tool.didLogin(this)
       if (this.data.didLogin){
         this.findUserJobsByUserId();
-        //this.getLevel()
+        this.getLevel()
       }
     },
     indexQueryCategoryList(){
@@ -282,7 +287,7 @@ Page({
         this.setData({
           userInfos: req.responseObject.data
         })
-        this.getLevelInfos()
+        // this.getLevelInfos()
       };
       Tool.showErrMsg(r)
       r.addToQueue();
