@@ -74,6 +74,9 @@ Page({
     //提交成功
     addFeedback() {
       if (this.data.active) {
+        this.setData({
+          active:false
+        })
         if (this.data.content.length < 10) {
           Tool.showAlert('问题反馈详情说明字数不能少于10个字')
           return
@@ -99,6 +102,11 @@ Page({
           })
         };
         Tool.showErrMsg(r)
+        r.completeBlock = (req) => { 
+          this.setData({
+            active: true
+          })
+        };
         r.addToQueue();
       }
     },
