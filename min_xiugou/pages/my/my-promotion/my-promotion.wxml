@@ -7,7 +7,7 @@
     <image class="avatar-img" src="{{userLevelInfo.headImg||'/img/default-userImg.png'}}" alt=""></image>
   </view>
   <view class='levelName boxSize flexR'>
-    <text>{{userLevelInfo.levelName}}</text>
+    <text>{{levelName[userLevelInfo.levelId]}}</text>
   </view>
 </view>
 

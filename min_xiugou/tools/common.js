@@ -1,3 +1,4 @@
+// 1.秒杀 2.降价拍 3.礼包 4.助力免费领 5.专题 99.普通产品 100:嵌入H5的页面地址 101注册
 const pages = {
   1: '/pages/product-detail/seckill-detail/seckill-detail?code=',
   2: '/pages/product-detail/discount-detail/discount-detail?code=',
@@ -17,4 +18,4 @@ const levelName = {
   4: '达人',
   5: '名人',
 }
-export { levelName}
+export { levelName, pages}

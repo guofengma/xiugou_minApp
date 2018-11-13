@@ -2,6 +2,5 @@
     src="{{baseImgUrl}}" 
     mode='{{mode||"widthFix"}}' 
     style='{{imgStyle}}'
-    bindload='changeImgUrl'    
 >
 </image>

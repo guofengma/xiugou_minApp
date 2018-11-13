@@ -1,5 +1,5 @@
 .bg{
-    background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/invite_bg.png") no-repeat top center;
+    background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/invite_bg-1.png") no-repeat top center;
     background-size: cover;
     width: 100%;
     height:100%;
@@ -16,7 +16,7 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  top: 52rpx;
+  top: -50rpx;
   margin: 0 auto;
 }
 .title1,.title2 {
@@ -34,16 +34,16 @@
   text-align: center
 }
 .title1 {
-  margin-top: 100rpx;
+  margin-top: 20rpx;
 }
 .title2 {
-  margin-top: 40rpx;
+  margin-top: 32rpx;
 }
 .title3 {
-  margin-top: 160rpx;
+  margin-top: 150rpx;
 }
 .title4 {
-  margin-top: 35rpx;
+  margin-top: 30rpx;
 }
 .share-button {
   color: #fff;
@@ -53,5 +53,14 @@
   line-height: 88rpx;
   background:rgba(247,104,42,1);
   border-radius:44px;
-  margin-top: 66rpx;
+  margin-top: 60rpx;
+}
+.container{
+  width: 585rpx;
+  height: 760rpx;
+  margin: 120rpx auto 0 auto;
+  background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/invite_bg-2.png") no-repeat top center;
+  background-size: 100% 100%;
+  position: relative;
+  border-radius: 10rpx;
 }
