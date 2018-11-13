@@ -25,8 +25,8 @@
                 <view>
                     <text>收货地址</text>
                 </view>
-                <view class="right">
-                    <text wx:if='{{region.length==0}}'>选择区域</text>
+                <view class="right flexR-sb">
+                    <text wx:if='{{region.length==0}}' style='margin:0'>选择区域</text>
                     <view wx:if='{{region.length>0}}' class='region boxSize' style='width:96%;display:inline-block'>
                       {{region[0].name + " - "+ region[1].name+ " - "+ region[2].name}}
                     </view>

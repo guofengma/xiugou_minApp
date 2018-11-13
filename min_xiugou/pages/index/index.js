@@ -427,7 +427,7 @@ Page({
       this.setData({
         isChange:true
       })
-      this.discoverNotice()
+      // this.discoverNotice()
     },
     onHide: function () {
       this.setData({

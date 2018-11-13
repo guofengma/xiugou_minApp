@@ -3,10 +3,9 @@
   color: #424242;
 }
 .width-690{
-  margin-top:20rpx;
-  width: 690rpx;
+  /* width: 690rpx; */
   margin: 20rpx  auto 0 auto;
-  border-radius: 18rpx;
+  /* border-radius: 18rpx; */
 }
 .top-view image{
   width: 40rpx;
@@ -91,9 +90,11 @@
 
 } */
 .my-account{
-  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-user-data-bg.png) no-repeat left bottom;
-  background-size: 100% 100%;
-  color: #fff;
+  /* background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-user-data-bg.png) no-repeat left bottom;
+  background-size: 100% 100%; 
+  color: #fff;*/
+  background: #fff;
+  
 }
 .my-account-item{
    height: 88rpx;
@@ -121,7 +122,7 @@
   font-weight:600;
   height: 76rpx;
 }
-/* .my-account-coin{
+.my-account-coin{
   background:rgba(255,79,110,1);
   border-radius:10rpx;
   box-shadow:5rpx 0px 10rpx rgba(255,79,110,0.54);
@@ -135,7 +136,7 @@
   background:rgba(142,199,255,1);
   border-radius:10rpx;
   box-shadow:5rpx 0px 10rpx rgba(142,199,255,0.54);
-} */
+}
 .my-order{
   background: #ffffff; 
 }

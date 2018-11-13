@@ -72,7 +72,7 @@
       </view>
       <!-- 待收货 -->
       <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='3'>
-        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForobtain.png'}}"/>
+        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'conForobtain.png'}}"/>
         <view>待收货</view>
         <view class='reddot' wx:if='{{countUserOrderNum.waitReceiveNum}}'>{{countUserOrderNum.waitReceiveNum}}</view>
       </view>

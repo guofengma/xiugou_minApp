@@ -88,7 +88,7 @@
   
   <!-- 头条 -->
 
-  <view class='index-notice-view whiteBg flexR-sb' wx:if='{{noticeArr.length>0}}'>
+  <!-- <view class='index-notice-view whiteBg flexR-sb' wx:if='{{noticeArr.length>0}}'>
     <view class='notice-leftBar font-32'>
       <view>实时</view>
       <view>秀场</view>
@@ -110,7 +110,7 @@
                 <image src='{{noticeArr[0][0].img}}' mode='widthFix' catchtap='noticeClicked' data-id='{{noticeArr[0][0].id}}'></image>
               </view>
     </view>
-  </view>
+  </view> -->
 
   <!-- 明星店铺 -->
   <!-- <view class='star-shop-view' wx:if='{{starShop.length>0}}'>
