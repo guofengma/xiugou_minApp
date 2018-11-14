@@ -6,7 +6,10 @@ Page({
       token:'',
     },
     onLoad: function (options) {
-      Tool.isIPhoneX(this)
+      Tool.isIPhoneX(this);
+      this.setData({
+        isIphoneXR_XS: Tool.isIphoneXR_XS()
+      })
       this.refreshMemberInfoNotice()
       Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
     },

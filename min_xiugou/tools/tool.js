@@ -990,6 +990,15 @@ export default class Tool {
       return { isIPhoneX, showBottom, className }
     }
 
+    static isIphoneXR_XS() {
+      const sysInfo = global.Storage.sysInfo();
+      let flag = false;
+      ['iPhone11,8', 'iPhone11,2', 'iPhone11,4', 'iPhone11,6', 'iPhone XS', 'iPhone XR', 'iPhone XS Max'].forEach((item) => {
+        if (sysInfo.model.search(item) != -1) flag = true;
+      })
+      return flag;
+    }
+
     // 退换货数据变换
 
     static findReturnProductById(req){
