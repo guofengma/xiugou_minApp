@@ -110,8 +110,18 @@ Page({
       })
     }
   },
+  addView(type, index) {
+    let targetType = this.data[type];
+    let click = targetType[index].click;
+    targetType[index].click = click + 1;
+    this.setData({
+      [type] :  targetType
+    })
+  },
   handleItemClicked(e){
-    let articleId = e.currentTarget.dataset.id;
+    const dataset = e.currentTarget.dataset;
+    let articleId = dataset.id;
+    this.addView(dataset.type, dataset.index);
     Tool.navigateTo('/pages/discover/discover-detail/discover-detail?articleId=' + articleId)
   },
   // 获取发现轮播广告
