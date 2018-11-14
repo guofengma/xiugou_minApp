@@ -1,7 +1,7 @@
 <template name="discover-item">
   <!-- discover item S -->
   <view class='discover-list-item-aside'>
-    <view class='discover-list-item' wx:for="{{items}}" wx:key="unique" wx:if="{{(index+1)%2 != 0}}" bindtap='handleItemClicked' data-id="{{item.id}}">
+    <view class='discover-list-item' wx:for="{{items}}" wx:key="unique" wx:if="{{(index+1)%2 != 0}}" bindtap='handleItemClicked' data-id="{{item.id}}" data-type="{{type}}" data-index="{{index}}">
       <view class='discover-list-item_thumb'>
         <image src='{{( (item.generalize == 1 || item.generalize == 2) && generalize == 4 ) ? item.img : (item.coverImg || item.img)}}' mode="widthFix"></image>
         <view class='discover_view'>
@@ -26,7 +26,7 @@
   
   
   <view class='discover-list-item-aside'>
-    <view class='discover-list-item' wx:for="{{items}}" wx:key="unique" wx:if="{{(index+1)%2 == 0}}"  bindtap='handleItemClicked' data-id="{{item.id}}">
+    <view class='discover-list-item' wx:for="{{items}}" wx:key="unique" wx:if="{{(index+1)%2 == 0}}"  bindtap='handleItemClicked' data-id="{{item.id}}" data-type="{{type}}" data-index="{{index}}">
       <view class='discover-list-item_thumb' > 
       <!-- && generalize == 4  -->
         <image src='{{( (item.generalize == 1 || item.generalize == 2) ) ? item.img : (item.coverImg || item.img)}}' mode="widthFix"></image>

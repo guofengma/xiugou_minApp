@@ -1,6 +1,6 @@
 <template name="discover-article">
   <view class="discover-article-container">
-    <view class='discover-article_thumb' bindtap='handleItemClicked' data-id="{{id}}">
+    <view class='discover-article_thumb' bindtap='handleItemClicked' data-id="{{id}}" data-type="{{type}}" data-index="{{index}}">
       <image src="{{coverImg}}"></image>
       <view class='discover-article_desc ellipsis-2' wx:if="{{pureContent}}">{{pureContent}}</view>
     </view>
