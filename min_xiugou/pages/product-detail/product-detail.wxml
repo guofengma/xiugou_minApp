@@ -37,16 +37,28 @@
    
     <!-- 详情页 tabar  -->
     <view class="bottom-bar flexR boxSize {{isIPhoneX.className}}" wx:if='{{productInfoList.onSale}}'>
-      <view class='cart font-22 flexC' bindtap='cartClicked'>
+      <!-- <view class='cart font-22 flexC' bindtap='cartClicked'>
         <image src='/img/shoppingcart.png' mode='widthFix'></image>
         <view class='gray'>购物车</view>
         <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
+      </view> -->
+      <view class='cart font-22 flexC' bindtap='btnClicked' data-key='1'>
+        <image src='/img/shoppingcart.png' mode='widthFix'></image>
+        <view class='gray'>购物车</view>
+        <!-- <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view> -->
       </view>
-      <view class='buy-btn font-28 flexR' bindtap='btnClicked'data-key='2'>
-        立即购买
+      <view class='buy-btn font-28 flexR redBg' bindtap='btnClicked'data-key='2'>
+        <text wx:if='{{productInfo.canUserBuy}}'>立即购买</text>
+        <text wx:else>您已购买过该商品</text>
       </view>
-      <view class='add-cart font-28 flexR redBg' bindtap='btnClicked' data-key='1'>
-        加入购物车
+      <view class='add-cart font-28 flexR yellowBg shareBtn-view' >
+        <button class='shareBtn flexR '  open-type="share" >
+          <view class='font-50'>赚</view>
+          <view class='font-22' style='margin-left:6rpx'>
+            <view>品牌奖励金</view>
+            <view>{{productInfo.shareMoney || '?'}}</view>
+          </view>
+        </button>
       </view>
     </view>
     <view wx:if='{{!productInfoList.onSale}}' class="bottom-bar flexR boxSize {{isIPhoneX.className}} no-sale">此商品已下架</view>

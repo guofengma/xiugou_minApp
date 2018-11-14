@@ -22,7 +22,7 @@
   color: #fff;
 }
 .footbar-main{
-  background: #f00006;
+  background: #FF0050;
   color: #fff;
 }
 .footbar-disabled{

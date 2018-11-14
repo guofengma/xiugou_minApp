@@ -19,7 +19,12 @@ export default class ProductFactorys  {
     r.successBlock = (req) => {
       let datas = req.responseObject.data || {}
       this.page.data.userInfos = this.page.data.userInfos || {}
-      datas.userLevelTypeName = datas.priceType == 1 ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelName + "价"
+      datas.userLevelTypeName = datas.priceType == (1 || 0 || null) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelName + "价"
+      if (datas.product.buyLimit != -1 && !datas.product.leftBuyNum) {
+        datas.product.canUserBuy = false
+      } else {
+        datas.product.canUserBuy = true
+      }
       this.page.setData({
         imgUrls: datas.productImgList,
         productInfo: datas.product,
@@ -28,51 +33,58 @@ export default class ProductFactorys  {
         productSpec: datas.specMap, // 规格描述
         productId: datas.product.id ? datas.product.id : this.page.data.productId
       })
-      // 渲染表格
-      let tbody = [{
-        name: "table",
-        attrs: {
-          class: "table"
-        },
-        children: [],
-      }]
-      let tr = []
-      for (let i = 0; i < datas.paramList.length; i++) {
-        tr.push(
-          {
-            name: "tr",
-            attrs: { class: "tr" },
-            children: [ {
-              name: "td",
-              attrs: { class: 'td frist-td' },
-              children: [{
-                type: "text",
-                text: datas.paramList[i].paramName
-              }]
-            },
-            {
-              name: "td",
-              attrs: { class: 'td td2' },
-              children: [{
-                type: "text",
-                text: datas.paramList[i].paramValue
-              }]
-            }
-            ]
-          }
 
-        )
-      }
-      tbody[0].children = tr
-      this.page.setData({
-        nodes: tbody
-      })
+      // 渲染表格
+      this.renderTable(datas.paramList, 'paramName','paramValue')
+      
+      // 渲染详情图文
       this.page.selectComponent("#productInfos").initDatas()
       // 执行额外需要做的操作
       callBack()
     }
     Tool.showErrMsg(r)
     r.addToQueue();
+  }
+  renderTable(paramList, paramName, paramValue){
+    // 渲染表格
+    let tbody = [{
+      name: "table",
+      attrs: {
+        class: "table"
+      },
+      children: [],
+    }]
+    let tr = []
+    for (let i = 0; i < paramList.length; i++) {
+      tr.push(
+        {
+          name: "tr",
+          attrs: { class: "tr" },
+          children: [ {
+            name: "td",
+            attrs: { class: 'td frist-td' },
+            children: [{
+              type: "text",
+              text: paramList[i][paramName]
+            }]
+          },
+          {
+            name: "td",
+            attrs: { class: 'td td2' },
+            children: [{
+              type: "text",
+              text: paramList[i][paramValue]
+            }]
+          }
+          ]
+        }
+
+      )
+    }
+    tbody[0].children = tr
+    this.page.setData({
+      nodes: tbody
+    })
   }
   msgTipsClicked(e, didLogin) { // 轮播右上角分享点击事件
     let n = parseInt(e.currentTarget.dataset.index)

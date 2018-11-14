@@ -15,13 +15,6 @@ Page({
     productTypeList: [],
     productBuyCount: 1, //商品购买数量
     priceList: [],
-    nodes: [{
-            name: "table",
-            attrs: {
-        class: "table"
-            },
-            children: [],
-    }],
     isShowGiftTips:false, //是否显示礼包升级提示
     dismiss:false, // 能否可以购买礼包
   },
@@ -116,39 +109,10 @@ Page({
         productId: datas.id,
         productTypeList: specPriceList
       })
-      // 渲染表格
-      let tr = []
-      let tbody = this.data.nodes
-      for (let i = 0; i < datas.paramValueList.length; i++) {
-        tr.push(
-          {
-            name: "tr",
-            attrs: { class: "tr" },
-            children: [ {
-              name: "td",
-              attrs: { class: 'td frist-td' },
-              children: [{
-                type: "text",
-                text: datas.paramValueList[i].param
-              }]
-            },
-            {
-              name: "td",
-              attrs: { class: 'td td2' },
-              children: [{
-                type: "text",
-                text: datas.paramValueList[i].paramValue
-              }]
-            }
-            ]
-          }
 
-        )
-      }
-      tbody[0].children = tr
-      this.setData({
-        nodes: tbody
-      })
+      // 渲染表格
+      this.ProductFactory.renderTable(datas.paramValueList, 'param','paramValue')
+
       this.selectComponent("#productInfos").initDatas()
     }
     r.failBlock = (req) => {

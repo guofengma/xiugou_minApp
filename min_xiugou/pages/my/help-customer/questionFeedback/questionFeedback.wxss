@@ -56,7 +56,7 @@
   font-size: 32rpx;
 }
 .active{
-  background-color: #f00006;
+  background-color: #FF0050;
 }
 .mask{
     z-index: 2;

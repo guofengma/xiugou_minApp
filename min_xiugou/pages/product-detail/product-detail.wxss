@@ -24,7 +24,7 @@
 .bottom-bar{
   justify-content: flex-start;
   padding-right: 0;
-  border-top: 1rpx solid #eee;
+  /* border-top: 1rpx solid #eee; */
   height: 98rpx;
 }
 .bottom-bar image{
@@ -32,7 +32,7 @@
 }
 .bottom-bar>view{
   width: 20%;
-  border-right: 1rpx solid #ddd;
+  /* border-right: 1rpx solid #ddd; */
   text-align: center;
   height: 100%;
 }
@@ -76,4 +76,17 @@
   justify-content: center;
   background: #ddd !important;
   color: #fff;
+}
+.shareBtn{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: transparent;
+  color: #fff;
+  padding-right: 50rpx;
+  line-height: 28rpx;
+}
+
+.shareBtn-view{
+  /* font-size:  */
 }

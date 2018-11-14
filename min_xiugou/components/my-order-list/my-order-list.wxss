@@ -139,7 +139,7 @@
     box-sizing: border-box;
 }
 .model-view-bg .cancel-btn{
-    background-color: #f00006;
+    background-color: #FF0050;
     color: #fff;
     width:276rpx;
     height:80rpx;

@@ -398,7 +398,7 @@ Page({
       callBack()
     },
     levelBtnClicked(){
-      Tool.navigateTo('/pages/my/my-promotion/my-promotion')
+      Tool.navigateTo('/pages/my/my-account/cash/cash')
     },
     topicClicked(e){
       let id = e.currentTarget.dataset.id
