@@ -2,5 +2,6 @@
     src="{{baseImgUrl}}" 
     mode='{{mode||"widthFix"}}' 
     style='{{imgStyle}}'
+    lazy-load='true'
 >
 </image>
