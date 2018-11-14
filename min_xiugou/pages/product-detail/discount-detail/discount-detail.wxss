@@ -1,2 +1,10 @@
 @import "/pages/product-detail/product-detail.wxss";
-@import "/components/cell-line/cell-line.wxss"
+@import "/components/cell-line/cell-line.wxss";
+
+.regular-list{
+  padding: 20rpx 10rpx;
+}
+.regular-list-item {
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
