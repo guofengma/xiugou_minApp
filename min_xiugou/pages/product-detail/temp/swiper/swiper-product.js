@@ -6,6 +6,8 @@ Component({
     imgUrls:Array,
     msgShow:Boolean,
     didLogin: Boolean,
+    size:Number,
+    fromPage:String,
   },
   data: {
     activeIndex: 1, // 轮播图片的index 

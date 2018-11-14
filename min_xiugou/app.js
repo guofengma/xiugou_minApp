@@ -73,7 +73,7 @@ App({
       try {
         //调用微信接口，获取设备信息接口
         let res = wx.getSystemInfoSync()
-        if (res.model.search('iPhone') != -1 && res.windowWidth == 375 && res.screenHeight >= 812 || res.model.search('iPhone X') != -1) {
+        if (res.model.search('iPhone') != -1 && res.windowWidth >= 375 && res.screenHeight >= 812 || res.model.search('iPhone X') != -1) {
           res.isIphoneX = true
         } else {
           res.isIphoneX = false

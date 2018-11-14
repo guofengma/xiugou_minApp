@@ -12,7 +12,7 @@
     <!--topbar  -->
     <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'/>
     <!-- 轮播 -->
-    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'/>
+    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' fromPage='normal'/>
     <!-- 活动产品倒计时提示 -->
     <view wx:if='{{proNavData}}' catchtap='goPage'>
       <product-promotion-info 
@@ -43,7 +43,7 @@
         <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
       </view> -->
       <view class='cart font-22 flexC' bindtap='btnClicked' data-key='1'>
-        <image src='/img/shoppingcart.png' mode='widthFix'></image>
+        <image-sub imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor@3x.png'}}"/>
         <view class='gray'>购物车</view>
         <!-- <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view> -->
       </view>

@@ -4,8 +4,13 @@
 <view class='slider' style='height:{{imgheights[0]}}rpx;min-height:400rpx;'>
   <!--广告轮播  -->
   <view class='slider-nav boxSize'>
-    <!-- <image src='/img/back-icon.png' mode='widthFix' class='fl'></image> -->
-    <image src='/img/msg-icon.png' mode='widthFix' class='fr' bindtap='msgClicked'></image>
+    <view class='fr flexR-sb'>
+      <view class='cart-view' wx:if='{{fromPage}}'>
+        <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'xiangqing_icon_gouwuche_nor@3x.png'}}"/>
+        <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
+      </view>
+      <image src='/img/msg-icon.png' mode='widthFix' bindtap='msgClicked'></image>
+    </view>
     <template is="msg-tips" data="{{msgShow}}" /> 
   </view>
   <!-- <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
