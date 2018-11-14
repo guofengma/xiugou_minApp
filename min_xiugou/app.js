@@ -24,8 +24,9 @@ App({
         let uuid = Tool.getUUID()
         Storage.setPlatform(uuid)
       }
+      this.wxLogin()
       let systemInfo = wx.getSystemInfoSync()
-     
+      this.deleteInviteId()
     },
     onShow: function () {
       // 比如记录小程序启动时长
@@ -34,6 +35,15 @@ App({
         userInfo: null,
         openid: null,
         code: null,
+    },
+    deleteInviteId(){
+      let upUserId = Storage.getUpUserId() || {}
+      if (upUserId.date != new Date().toLocaleDateString()) {
+        Storage.setUpUserId({
+          date: null,
+          id: null
+        })
+      }
     },
     wxLogin(callBack=()=>{}){
       // 小程序登录
@@ -79,16 +89,6 @@ App({
           res.isIphoneX = false
         }
         res.rate = 750 * res.windowWidth
-        // res.screenHeight = res.screenHeight * res.pixelRatio;
-        // res.screenWidth = res.screenWidth * res.pixelRatio;
-        // res.windowHeight = res.windowHeight * res.pixelRatio;
-        // res.windowWidth = res.windowWidth * res.pixelRatio;
-        // let rate = 750.0 / res.screenWidth;
-        // res.rate = rate;
-        // res.screenHeight = res.screenHeight * res.rate;
-        // res.screenWidth = res.screenWidth * res.rate;
-        // res.windowHeight = res.windowHeight * res.rate;
-        // res.windowWidth = res.windowWidth * res.rate;
         Storage.setSysInfo(res);
         that.globalData.systemInfo = res
         typeof cb == "function" && cb(that.globalData.systemInfo)

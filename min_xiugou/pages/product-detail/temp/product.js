@@ -40,13 +40,12 @@ export default class ProductFactorys  {
       // 渲染详情图文
       this.page.selectComponent("#productInfos").initDatas()
       // 执行额外需要做的操作
-      callBack()
+      callBack(datas)
     }
     Tool.showErrMsg(r)
     r.addToQueue();
   }
-  renderTable(paramList, paramName, paramValue){
-    // 渲染表格
+  renderTable(paramList, paramName, paramValue) {  // 渲染表格
     let tbody = [{
       name: "table",
       attrs: {
@@ -86,6 +85,43 @@ export default class ProductFactorys  {
       nodes: tbody
     })
   }
+  didLogin(){ // 是否登录 
+    Tool.didLogin(this.page)
+    Tool.getUserInfos(this.page)
+    this.getShoppingCartList()
+  }
+  getShoppingCartList() { // 获取线上购物车
+    if (!this.page.data.didLogin) {
+      this.getStorageCartList()
+      return
+    }
+    let params = {
+      reqName: '获取购物车',
+      url: Operation.getShoppingCartList,
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let data = req.responseObject.data
+      data = data === null ? [] : data
+      let size = data.length > 99 ? 99 : data.length
+      this.page.setData({
+        size: size
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  }
+  cartClicked() { // 跳转购物车
+    Tool.switchTab('/pages/shopping-cart/shopping-cart')
+  }
+  getStorageCartList() { // 获取本地购物车
+    let data = Storage.getShoppingCart() || []
+    let size = data.length
+    this.page.setData({
+      size: size
+    })
+    return
+  }
   msgTipsClicked(e, didLogin) { // 轮播右上角分享点击事件
     let n = parseInt(e.currentTarget.dataset.index)
     switch (n) {
@@ -104,7 +140,10 @@ export default class ProductFactorys  {
         break;
     }
   }
-  goTop() {
+  productDefect(){ // 跳转到产品缺失页面
+    Tool.redirectTo('/pages/product-detail/temp/defect/defect')
+  }
+  goTop() { // 置顶
     if (wx.pageScrollTo) {
       wx.pageScrollTo({
         scrollTop: 0
@@ -113,7 +152,7 @@ export default class ProductFactorys  {
       Tool.showAlert('当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。')
     }
   }
-  onPageScroll(e) {
+  onPageScroll(e) { // 滚动事件
     this.page.setData({
       msgShow: false
     })
@@ -132,8 +171,9 @@ export default class ProductFactorys  {
       msgShow: false
     })
   }
-  onShareAppMessage(typeId,id){
-    let inviteCode = this.page.data.userInfos.id || this.page.data.inviteId || ''
+  onShareAppMessage(typeId,id){ // 分享
+    let upUserId = Storage.getUpUserId() || {}
+    let inviteCode = this.page.data.userInfos.id || upUserId.id || ''
     let imgUrl = this.page.data.productInfo.imgUrl? this.page.data.productInfo.imgUrl : ''
     let name = this.page.data.productInfo.name.length > 10 ? this.page.data.productInfo.name.slice(0, 10) + "..." : this.page.data.productInfo.name
     return {

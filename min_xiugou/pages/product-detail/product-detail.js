@@ -26,18 +26,9 @@ Page({
       door: options.door || '',
       inviteId: options.inviteId || ''
     })
-    this.didLogin()
-    let callBack = ()=>{
-      this.getShoppingCartList()
-    }
-    if (!this.data.didLogin && this.data.inviteCode){
-      app.getSystemInfo()
-      app.wxLogin(callBack)
-    } else {
-      this.getShoppingCartList()
-    }
     
     this.ProductFactory = new ProductFactorys(this)
+    this.didLogin()
     this.initRequest()
     
     Tool.isIPhoneX(this)
@@ -47,19 +38,24 @@ Page({
     
   },
   initRequest(){
-    let callBack2 = () => {
-      this.activityByProductId(this.data.productId)
+    let callBack2 = (datas) => {
+      if (datas.product.status!=0){
+        this.activityByProductId(this.data.productId)
+      }else{
+        this.ProductFactory.productDefect()
+      }
     }
     this.ProductFactory.requestFindProductByIdApp(callBack2)
   },
-  refreshMemberInfoNotice() {
-    Tool.getUserInfos(this)
-  },
   didLogin() {
-    Tool.didLogin(this)
-    this.refreshMemberInfoNotice()
+    this.ProductFactory.didLogin()
     if (!this.data.userInfos.upUserid){
-      this.selectComponent('#redEnvelopes').btnClick();
+      let date = Storage.getRedEnvelopesDate() || ''
+      let now = new Date().toLocaleDateString()
+      if (now != date){
+        Storage.setRedEnvelopesDate(now)
+        this.selectComponent('#redEnvelopes').btnClick();
+      }
     }
   },
   setStoragePrd(params,index){
@@ -131,6 +127,7 @@ Page({
       Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true+'&inviteId=' + this.data.inviteCode)
       return
     }
+    if (!this.data.productInfo.canUserBuy || productInfo.status == 2) return
     let params = {
       orderProducts:[{
         num: this.data.productBuyCount,
@@ -174,9 +171,6 @@ Page({
       this.makeSureOrder()
     }
   },
-  cartClicked(){
-    Tool.switchTab('/pages/shopping-cart/shopping-cart')
-  },
   btnClicked(e){
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
@@ -197,6 +191,15 @@ Page({
     wx.stopPullDownRefresh();
   },
   onShareAppMessage: function (res) {
+    // let isGoLogin = true
+
+    // let okCB = ()=>{
+    //   Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
+    // }
+    // let errCB = ()=>{}
+    // if(!this.data.login){
+    //   Tool.showComfirm('登录以后才能获取赏金', okCB, errCB,'取消', '去登录')
+    // }
     return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.id)
   },
   getStorageCartList() {
@@ -208,25 +211,7 @@ Page({
     return
   },
   getShoppingCartList() {
-    if (!this.data.didLogin){
-      this.getStorageCartList()
-      return
-    }
-    let params = {
-      reqName: '获取购物车',
-      url: Operation.getShoppingCartList,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      data = data === null ? [] : data
-      let size = data.length > 99 ?  99: data.length
-      this.setData({
-        size: size
-      })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    this.ProductFactory.getShoppingCartList()
   },
   hiddenTips(){
     this.ProductFactory.hiddenTips()

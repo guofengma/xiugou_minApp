@@ -38,7 +38,7 @@
         <view>现金账户</view>
       </view>
       <view class='my-account-xiudou' catchtap='itemClicked' data-page='4' data-query='{{userInfos.userScore}}'>
-        <view class='account-num'>{{userInfos.userScore}}</view>
+        <view class='account-num'>{{userInfos.userScore || 0}}</view>
         <view>秀豆账户</view>
       </view>
       <view class='my-account-leave' catchtap='itemClicked' data-page='5' data-query='{{userInfos.blockedBalance}}'>

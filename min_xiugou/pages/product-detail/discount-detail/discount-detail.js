@@ -34,13 +34,13 @@ Page({
   onLoad: function (options) {
     this.setData({
       prodCode: options.code,
-      inviteId: options.inviteId || ''
     })
+    this.ProductFactory = new ProductFactorys(this)
     this.didLogin()
     this.getTopicActivityData(this.data.prodCode);
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
-    this.ProductFactory = new ProductFactorys(this)
+    
   },
   onShow: function () {
     if (!this.data.screenShow) return;
@@ -160,7 +160,7 @@ Page({
     }
   },
   didLogin() {
-    Tool.didLogin(this)
+    this.ProductFactory.didLogin()
   },
   makeSureOrder() {
     // 立即购买

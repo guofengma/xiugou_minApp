@@ -1,8 +1,18 @@
 <!-- 消息显示模板 -->
 <import src= "/components/msg-tips/msg-tips.wxml"/>
 
-<view class='topbar flexR whiteBg' wx:if='{{floorstatus}}' >
+<view class='topbar flexR whiteBg boxSize fixed-top' wx:if='{{floorstatus}}' >
   <image src='{{imgUrl}}' ></image>
-  <view class='msg-view fr' bindtap='msgClicked'></view>
+  <view class='right-bar flexR'>
+    <view class='cart-view' catchtap='goCart'>
+      <image-sub imgStyle='{{"width:40rpx;"}}' imgSrc="{{'xiangqianh_gwuche@3x.png'}}"/>
+      <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
+    </view>
+    <view class='msg-view flexR' bindtap='msgClicked'>
+      <image-sub imgStyle='{{"width:8rpx;"}}' imgSrc="{{'xiangqing_yuan@3x.png'}}"/>
+    </view>
+  </view>
+  
+  
   <template is="msg-tips" data="{{msgShow}}" /> 
 </view>

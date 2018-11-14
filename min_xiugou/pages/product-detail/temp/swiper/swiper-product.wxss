@@ -29,7 +29,7 @@
   width: 100%;
   padding: 0 30rpx;
   left: 0;
-  top: 12rpx;
+  top: 20rpx;
   z-index: 100;
   min-height: 50rpx;
 }

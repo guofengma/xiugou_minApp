@@ -6,15 +6,20 @@ Component({
     imgUrls:Array,
     msgShow:Boolean,
     didLogin: Boolean,
-    size:Number,
-    fromPage:String,
+    size:Number
   },
   data: {
     activeIndex: 1, // 轮播图片的index 
   },
+  ready(){
+    this.ProductFactory= new ProductFactorys()
+  },
   methods: {
     imageLoad(e) { //图片加载事件
       Tool.getAdaptHeight(e, this)
+    },
+    goCart(){
+      this.ProductFactory.cartClicked()
     },
     swiperImgCliked(e) { //点击放大图片
       let index = e.currentTarget.dataset.index
@@ -36,7 +41,7 @@ Component({
       })
     },
     msgTipsClicked(e) { // 轮播右上角分享点击事件
-      new ProductFactorys().msgTipsClicked(e, this.data.didLogin)
+      this.ProductFactory.msgTipsClicked(e, this.data.didLogin)
     },
     sliderChange(e) { // 轮播切换事件
       this.setData({

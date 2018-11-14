@@ -332,12 +332,12 @@ export default class Tool {
         });
     }
     //弹窗自定义
-    static showComfirm(msg, okCB = () => { }, errCB = () => { }) {
+    static showComfirm(msg, okCB = () => { }, errCB = () => { }, cancelText = '取消', confirmText = '确认') {
       wx.showModal({
         content: msg,
         showCancel: true,
-        cancelText: '取消',
-        confirmText: '确认',
+        cancelText: cancelText,
+        confirmText: confirmText,
         success: function (res) {
           if (res.confirm) {
             okCB();
@@ -756,7 +756,7 @@ export default class Tool {
         if (!userInfo.area) userInfo.showRegion = userInfo.province + userInfo.city
       }
       that.setData({
-        userInfos: userInfo || ''
+        userInfos: userInfo || {}
       })
       return userInfo
     }

@@ -265,15 +265,17 @@ export default class Storage {
     static getPlatform() {
       return this.getterFor('platform');
     } 
-
+  
+  // 订单支付信息
   static setPayInfoList(info) {
     this.setterFor('payInfoList', info)
   }
-
+  
   static getPayInfoList(info) {
       return this.getterFor('payInfoList');
   }
-
+  
+  // 用户上级用户id
   static setUpUserId(info) {
     this.setterFor('upUserId', info)
   }
@@ -281,4 +283,14 @@ export default class Storage {
   static getUpUserId(info) {
     return this.getterFor('upUserId');
   }
+
+  // 点击红包日期存储
+  static setRedEnvelopesDate(info) {
+    this.setterFor('redEnvelopesDate', info)
+  }
+
+  static getRedEnvelopesDate(info) {
+    return this.getterFor('redEnvelopesDate');
+  }
+
 }

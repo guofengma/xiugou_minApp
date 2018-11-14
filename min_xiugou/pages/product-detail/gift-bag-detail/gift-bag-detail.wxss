@@ -21,11 +21,9 @@
 }
 .buy-btn{
   width:  100% !important;
+  justify-content: center;
 }
 
-.dismiss{
-  background: #ddd;
-}
 .gift-btn-view{
   justify-content: center;
 }

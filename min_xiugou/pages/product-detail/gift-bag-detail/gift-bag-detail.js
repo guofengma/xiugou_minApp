@@ -20,13 +20,13 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      giftBagId: options.giftBagId || '',
-      inviteId: options.inviteId || ''
+      giftBagId: options.giftBagId || ''
     })
+    this.ProductFactory = new ProductFactorys(this)
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
     this.refreshMemberInfoNotice()
-    this.ProductFactory = new ProductFactorys(this)
+   
   },
   refreshMemberInfoNotice() {
     Tool.getUserInfos(this)
@@ -35,7 +35,7 @@ Page({
     this.getGiftBagDetail()
   },
   didLogin() {
-    Tool.didLogin(this)
+    this.ProductFactory.didLogin()
     Tool.isIPhoneX(this)
   },
   giftBagClicked() {
@@ -133,7 +133,7 @@ Page({
     this.giftBagClicked()
   },
   btnClicked(e) {
-    if (this.data.dismiss) return
+    if (this.data.dismiss || this.productInfo.status == 2) return
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },
