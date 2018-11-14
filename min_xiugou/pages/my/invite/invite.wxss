@@ -19,6 +19,10 @@
   top: -50rpx;
   margin: 0 auto;
 }
+.top {
+  margin-top: 40rpx;
+  height: 244rpx;
+}
 .title1,.title2 {
   color: #F7682A;
   font-size: 36rpx;
