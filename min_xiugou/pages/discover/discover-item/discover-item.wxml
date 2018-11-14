@@ -6,7 +6,7 @@
         <image src='{{( (item.generalize == 1 || item.generalize == 2) && generalize == 4 ) ? item.img : (item.coverImg || item.img)}}' mode="widthFix"></image>
         <view class='discover_view'>
             <image src='/img/icon_view_white@3x.png'></image>
-            <text>{{item.click || 0}}</text>
+            <text>{{(item.click > 999999 ? '999999+' : item.click) || 0}}</text>
           </view>
       </view>
       <view class='discover-list-item-body'>
@@ -32,7 +32,7 @@
         <image src='{{( (item.generalize == 1 || item.generalize == 2) ) ? item.img : (item.coverImg || item.img)}}' mode="widthFix"></image>
         <view class='discover_view'>
             <image src='/img/icon_view_white@3x.png'></image>
-            <text>{{item.click || 0}}</text>
+            <text>{{(item.click > 999999 ? '999999+' : item.click) || 0}}</text>
           </view>
       </view>
       <view class='discover-list-item-body'>

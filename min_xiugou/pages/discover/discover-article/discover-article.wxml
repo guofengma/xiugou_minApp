@@ -11,7 +11,7 @@
           <view class='discover_author_name'>{{userName}}</view>
           <view class='discover_view'>
             <image src='/img/icon_view@3x.png'></image>
-            <text>{{click || 0}}</text>
+            <text>{{(click > 999999 ? '999999+' : click) || 0}}</text>
           </view>  
         </view>
       </view>

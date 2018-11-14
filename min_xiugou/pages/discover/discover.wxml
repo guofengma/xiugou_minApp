@@ -41,7 +41,7 @@
               <text class='ellipsis'>{{item.pureContent}}</text>
               <view class='discover_view'>
                 <image src='/img/icon_view_white@3x.png'></image>
-                <text>{{item.click || 0}}</text>
+                <text>{{(item.click > 999999 ? '999999+' : item.click) || 0}}</text>
               </view>
             </view>
             </view>
