@@ -1,7 +1,7 @@
 .wave,.container {
       position: relative;
-      width: 200rpx;
-      height: 200rpx;
+      width: 80rpx;
+      height: 80rpx;
       background-color:#FF0050;
       border-radius: 50%;
 }
@@ -13,26 +13,26 @@
 .after{
     content: "";
     position: absolute;
-    width: 400rpx;
-    height: 400rpx;
+    width: 160rpx;
+    height: 160rpx;
     top:0;
     left: 50%;
     background-color: rgba(255, 255, 255, .4);
     border-radius: 45%;
     transform: translate(-50%, -70%) rotate(0);
-    animation: rotate 3s linear infinite;
+    animation: rotate 2s linear infinite;
     z-index: 10;
 }
 .after {
     border-radius: 47%;
     background-color: rgba(255, 255, 255, .9);
     transform: translate(-50%, -70%) rotate(0);
-    animation: rotate 6s linear -3s infinite;
+    animation: rotate 4s linear -2s infinite;
     z-index: 20;
 }
 @keyframes rotate {
     50% {
-        transform: translate(-50%, -73%) rotate(180deg);
+        transform: translate(-50%, -75%) rotate(180deg);
     } 100% {
         transform: translate(-50%, -70%) rotate(360deg);
     }
