@@ -27,21 +27,20 @@
   background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/bg_img_user@2x.png?_=1) no-repeat left bottom;
   background-size: 100% 100%;
   border-top: 1prx solid #eee;
-  color: #fff
-}
-.my-info-item{
-  padding-top: 12rpx;
+  color: #fff;
+  height: 297rpx;
 }
 .my-avatar{
-  padding-bottom: 85rpx;
   display: flex;
   align-items: center;
+  padding-top: 86rpx;
 }
 .my-name{
   color: #fff;
   margin-right: 13rpx;
   font-size:36rpx;
   font-weight:500;
+  width: 260rpx;
 }
 .my-info-arrow{
   width: 14rpx;
@@ -50,17 +49,17 @@
   
 }
 .avatar-img{
-    width: 130rpx;
-    height: 130rpx;
-    border: solid 4rpx #ffffff;
-    border-radius: 50%;
-    margin: 38rpx;
+  width: 106rpx;
+  height:106rpx;
+  border: solid 4rpx #ffffff;
+  border-radius: 50%;
+  margin: 0 20rpx 0 38rpx;
     
 }
 .my-rank{
    position: relative;
   /* width:88rpx; */
-  margin-top: 22rpx;
+  margin-top: 4rpx;
 }
 .my-rank image{
   position: relative;
@@ -76,19 +75,20 @@
   margin: auto;
   color: #ffffff;
 }
-.my-save{
+ */
+ .my-save{
   position: absolute;
   right: 0;
-  width: 199rpx;
-  height: 67rpx;
+  width: 260rpx;
+  height: 100rpx;
   background: #FFC079;
-  border-top-left-radius:34rpx;
-  border-bottom-left-radius:34rpx;
-  bottom: 76rpx;
+  border-top-left-radius:109rpx;
+  border-bottom-left-radius:109rpx;
+  bottom: 80rpx;
   text-align: center;
-  color: #ffffff;
+  color: #fff;
 
-} */
+}
 .my-account{
   /* background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-user-data-bg.png) no-repeat left bottom;
   background-size: 100% 100%; 

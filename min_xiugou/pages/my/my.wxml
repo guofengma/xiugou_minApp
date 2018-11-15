@@ -12,7 +12,7 @@
       <!-- <image src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></image> -->
       <view>
         <view class='my-info-item flexR' catchtap='itemClicked' data-page='2' >
-          <view class='my-name'> {{userInfos.nickname || '请登录'}}</view>
+          <view class='my-name ellipsis'> {{userInfos.nickname || '请登录'}}</view>
           <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'jiantou-white.png'}}"/>
         </view>
 
@@ -24,10 +24,10 @@
       </view>
     </view>
     <!--  -->
-    <!-- <view class='my-save'>
+    <view class='my-save'>
       <view>0.00元</view>
       <view>已帮你省</view>
-    </view> -->
+    </view>
   </view>
   <!-- 我的资产 -->
   <view class='my-account width-690'>
