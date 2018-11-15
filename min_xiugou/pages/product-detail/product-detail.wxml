@@ -62,7 +62,7 @@
             <view class='font-50'>赚</view>
             <view class='font-22 shareMoney' style='margin-left:8rpx'>
               <view>品牌奖励金</view>
-              <view class='ellipsis '>¥ {{productInfoList.shareMoney || '?'}}</view>
+              <view class='ellipsis' wx:if='{{productInfoList.shareMoney}}'>¥ {{productInfoList.shareMoney}}</view>
             </view>
           </button>
         </view>

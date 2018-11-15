@@ -55,8 +55,8 @@ Page({
           datas.data.forEach((item)=>{
             item.createTime = Tool.formatTime(item.createTime);
             item.add = item.biType == 1 ? true : false
-            item.balance = Tool.formatNum(item.balance || '')
-            item.realBalance = Tool.formatNum(item.realBalance || '')
+            item.balance = Tool.formatNum(item.balance || 0)
+            item.realBalance = Tool.formatNum(item.realBalance || 0)
             // item.add = item.type ==1?  true:false
             // item.showName = item.add ? "" : "退款"
             // item.showName = item.status == 2? "已冻结":item.showName

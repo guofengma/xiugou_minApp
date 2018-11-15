@@ -179,9 +179,10 @@ Page({
     }
   },
   btnClicked(e){
-    if (this.data.productInfo.status == 2 || !this.data.productInfo.canUserBuy) return
-    let n = parseInt(e.currentTarget.dataset.key)
-    this.selectComponent("#prd-info-type").isVisiableClicked(n)
+    if (this.data.productInfoList.status == 1 && this.data.productInfo.canUserBuy) {
+      let n = parseInt(e.currentTarget.dataset.key)
+      this.selectComponent("#prd-info-type").isVisiableClicked(n)
+    }
   },
   goTop (e) {
     this.ProductFactory.goTop(e)
