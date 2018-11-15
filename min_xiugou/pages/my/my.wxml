@@ -25,9 +25,9 @@
     </view>
     <!--  -->
     <view class='my-save'>
-      <view>0.00元</view>
-      <view>已帮你省</view>
+
     </view>
+  
   </view>
   <!-- 我的资产 -->
   <view class='my-account width-690'>
