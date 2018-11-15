@@ -168,7 +168,9 @@ Page({
       //   this.getTokenCoin()
       // }
     };
-    Tool.showErrMsg(r)
+    r.failBlock = (req) => {
+      this.failBlock(req)
+    }
     r.addToQueue();
   },
   addressClicked(){
@@ -285,26 +287,29 @@ Page({
       this.setData({
         btnDisabled:false
       })
-      let callBack = ()=>{}
-      if (req.responseObject.code == 10009) { // 超时登录
-        callBack = () => {
-          Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
-        }
-      } else if (req.responseObject.code ==54001){
-        if (this.data.formCart){
-          callBack = () => {
-            Event.emit('updateShoppingCart')
-            Tool.switchTab('/pages/shopping-cart/shopping-cart')
-          }
-        } else {
-          callBack = () => {
-            Tool.navigationPop()
-          }
-        }
-      }
-      Tool.showAlert(req.responseObject.msg, callBack)
+      this.failBlock(req)
     }
     r.addToQueue();
+  },
+  failBlock(req){
+    let callBack = () => { }
+    if(req.responseObject.code == 10009) { // 超时登录
+      callBack = () => {
+        Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
+      }
+    } else if (req.responseObject.code == 54001) {
+      if (this.data.formCart) {
+        callBack = () => {
+          Event.emit('updateShoppingCart')
+          Tool.switchTab('/pages/shopping-cart/shopping-cart')
+        }
+      } else {
+        callBack = () => {
+          Tool.navigationPop()
+        }
+      }
+    }
+    Tool.showAlert(req.responseObject.msg, callBack)
   },
   iconClicked(){ // 点击使用1元劵跳转
     let useOneCoinNum = this.data.useOneCoinNum ? this.data.useOneCoinNum : Math.floor(this.data.orderInfos.totalAmounts)
