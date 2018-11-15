@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 49,
 			"list": [
 				{
 					"id": 0,
@@ -330,6 +330,12 @@
 					"name": "首页",
 					"pathName": "pages/index/index",
 					"query": "inviteId=251"
+				},
+				{
+					"id": -1,
+					"name": "产品缺失页面",
+					"pathName": "pages/product-detail/temp/defect/defect",
+					"query": "productId=77"
 				}
 			]
 		}

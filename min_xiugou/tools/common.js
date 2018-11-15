@@ -10,12 +10,5 @@ const pages = {
   101: '/pages/register/register?inviteId=',
   102: '/pages/discover/discover-detail/discover-detail?articleId='
 }
-const levelName = {
-  0:'黄金',
-  1: '铂金',
-  2: '黑金',
-  3: '钻石',
-  4: '达人',
-  5: '名人',
-}
-export { levelName, pages}
+
+export { pages}

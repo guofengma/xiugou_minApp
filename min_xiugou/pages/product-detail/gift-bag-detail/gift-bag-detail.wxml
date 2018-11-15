@@ -6,12 +6,13 @@
 <import src= "/pages/product-detail/temp/product-price-infos/product-price-infos.wxml"/>
 
 <import src= "/components/goT-top-btn/goT-top-btn.wxml"/>
+<import src= "/pages/product-detail/temp/errTips/errTips.wxml"/>
 
 <!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
   <view class='prduct-detail-view' wx:if='{{productInfo}}'>
     <!--topbar  -->
-    <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}'/>
-    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}'/>
+    <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
+    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
     <!-- 产品信息 -->
     <view class='prd-info boxSize'>
       <view class='prd-name ellipsis-2'>{{productInfo.name}}</view>
@@ -32,8 +33,8 @@
     <product-infos  id='productInfos' nodes='{{nodes}}' datas='{{productInfo}}' />
   
     <view class=" {{isIPhoneX.className}}">
-      <view class='no-sale flexR font-26' wx:if='{{productInfo.status==2}}'>商品已经下架啦~</view>
-      <view class='no-sale flexR font-26' wx:if='{{productInfo.status==1&&dismiss}}'>无法购买此商品~</view>
+      <template is="errTips"  wx:if='{{productInfo.status==2}}'/>
+      <template is="errTips"  wx:if='{{productInfo.status==1&&dismiss}}' data='{{tipsContent:"无法购买此商品~"}}'/>
       <view class='buy-btn bottom-bar flexR {{productInfo.status==1&&!dismiss ? "redBg":"darkBg"}}' bindtap='btnClicked' data-key='1'>
         立即购买
       </view>

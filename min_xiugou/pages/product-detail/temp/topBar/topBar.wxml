@@ -5,14 +5,14 @@
   <image src='{{imgUrl}}' ></image>
   <view class='right-bar flexR'>
     <view class='cart-view' catchtap='goCart'>
-      <image-sub imgStyle='{{"width:40rpx;"}}' imgSrc="{{'xiangqianh_gwuche@3x.png'}}"/>
+      <image src='/img/xiangqianh_gwuche@3x.png' class='top-img' mode='widthFix'></image>
       <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
     </view>
     <view class='msg-view flexR' bindtap='msgClicked'>
-      <image-sub imgStyle='{{"width:8rpx;"}}' imgSrc="{{'xiangqing_yuan@3x.png'}}"/>
+      <image src='/img/xiangqing_yuan@3x.png' class='top-img-2'  mode='widthFix'></image>
     </view>
   </view>
   
   
-  <template is="msg-tips" data="{{msgShow}}" /> 
+  <template is="msg-tips" data="{{msgShow,openType}}" /> 
 </view>

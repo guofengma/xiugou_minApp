@@ -1,2 +1,3 @@
-<!--pages/product-detail/temp/defect/defect.wxml-->
-<text>产品缺失页面 还在开发中 提bug 我打死你</text>
+<import src='/components/result-tips/result-tips.wxml' />
+
+<template is="result-tips" data="{{tipVal:9,showBtn:true,showTips:'去看看别的商品吧',btnName:'去首页'}}" />

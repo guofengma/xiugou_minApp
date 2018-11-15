@@ -6,7 +6,8 @@ Component({
     imgUrls:Array,
     msgShow:Boolean,
     didLogin: Boolean,
-    size:Number
+    size:Number,
+    openType:String
   },
   data: {
     activeIndex: 1, // 轮播图片的index 
@@ -15,6 +16,9 @@ Component({
     this.ProductFactory= new ProductFactorys()
   },
   methods: {
+    btnClicked(){
+      this.ProductFactory.shareBtnClicked(this.data.openType)
+    },
     imageLoad(e) { //图片加载事件
       Tool.getAdaptHeight(e, this)
     },

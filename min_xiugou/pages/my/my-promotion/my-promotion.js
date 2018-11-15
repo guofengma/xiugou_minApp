@@ -1,10 +1,8 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
 import WxParse from '../../../libs/wxParse/wxParse.js';
-import { levelName } from '../../../tools/common.js'
 Page({
   data: {
-    userLevelInfo:{},
-    levelName: levelName
+    userLevelInfo:{}
   },
   onLoad: function (options) {
     Tool.isIPhoneX(this)

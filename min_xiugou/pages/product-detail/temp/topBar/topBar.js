@@ -6,6 +6,7 @@ Component({
     floorstatus: Boolean,
     didLogin: Boolean,
     size:Number,
+    openType: String
   },
   data: {
 
@@ -14,6 +15,9 @@ Component({
     this.ProductFactory = new ProductFactorys()
   },
   methods: {
+    btnClicked() {
+      this.ProductFactory.shareBtnClicked(this.data.openType)
+    },
     msgClicked() {
       this.setData({
         msgShow: !this.data.msgShow

@@ -13,8 +13,8 @@
 <!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
   <view class='prduct-detail-view' wx:if='{{productInfoList}}'>
     <!--topbar  -->
-    <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}'/>
-    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}'/>
+    <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
+    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
      <product-promotion-info 
      id="promotion"
      bind:countdown="timeout" 
@@ -41,6 +41,7 @@
       promotionType="2"
       bindtap="footbarReady"
       data-key="2"
+      props = '{{proNavData}}'
       isIphoneX='{{isIPhoneX.isIPhoneX}}'
     ></product-promotion-footbar>
     <!--置顶的按钮-->

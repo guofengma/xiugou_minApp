@@ -48,6 +48,10 @@ Page({
       if (this.data.didLogin){
         this.getLevel()
         this.countUserOrderNum()
+      }else{
+        this.setData({
+          countUserOrderNum:{}
+        })
       }
       if (this.data.tabClicked!=1) return
       if (!this.data.didLogin) {

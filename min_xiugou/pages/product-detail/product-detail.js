@@ -18,6 +18,7 @@ Page({
     priceList:[],
     size:0,
     userInfos:{},
+    openType:'share'
   },
   onLoad: function (options) {
     this.setData({
@@ -29,7 +30,7 @@ Page({
     
     this.ProductFactory = new ProductFactorys(this)
     this.didLogin()
-    this.initRequest()
+    // this.initRequest()
     
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
@@ -49,6 +50,12 @@ Page({
   },
   didLogin() {
     this.ProductFactory.didLogin()
+    this.initRequest()
+    if(!this.data.didLogin){
+      this.setData({
+        openType:''
+      })
+    }
     if (!this.data.userInfos.upUserid){
       let date = Storage.getRedEnvelopesDate() || ''
       let now = new Date().toLocaleDateString()
@@ -127,7 +134,7 @@ Page({
       Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true+'&inviteId=' + this.data.inviteCode)
       return
     }
-    if (!this.data.productInfo.canUserBuy || productInfo.status == 2) return
+    // if (!this.data.productInfo.canUserBuy) return
     let params = {
       orderProducts:[{
         num: this.data.productBuyCount,
@@ -172,6 +179,7 @@ Page({
     }
   },
   btnClicked(e){
+    if (this.data.productInfo.status == 2 || !this.data.productInfo.canUserBuy) return
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },
@@ -190,25 +198,11 @@ Page({
     this.initRequest()
     wx.stopPullDownRefresh();
   },
-  onShareAppMessage: function (res) {
-    // let isGoLogin = true
-
-    // let okCB = ()=>{
-    //   Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
-    // }
-    // let errCB = ()=>{}
-    // if(!this.data.login){
-    //   Tool.showComfirm('登录以后才能获取赏金', okCB, errCB,'取消', '去登录')
-    // }
-    return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.id)
+  shareBtnClicked() {
+    this.ProductFactory.shareBtnClicked(this.data.openType)
   },
-  getStorageCartList() {
-    let data = Storage.getShoppingCart() || []
-    let size = data.length
-    this.setData({
-      size: size
-    })
-    return
+  onShareAppMessage: function (res) {
+    return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.id)
   },
   getShoppingCartList() {
     this.ProductFactory.getShoppingCartList()

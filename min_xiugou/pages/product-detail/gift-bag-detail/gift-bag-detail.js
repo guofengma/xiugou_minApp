@@ -133,7 +133,7 @@ Page({
     this.giftBagClicked()
   },
   btnClicked(e) {
-    if (this.data.dismiss || this.productInfo.status == 2) return
+    if (this.data.dismiss || this.data.productInfo.status == 2) return
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },

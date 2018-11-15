@@ -1,3 +1,6 @@
+@import "/css/app";
+@import "/pages/product-detail/temp/errTips/errTips.wxss";
+
 .footbar{
   border-top:1rpx solid #eee;
   border-radius: 0;

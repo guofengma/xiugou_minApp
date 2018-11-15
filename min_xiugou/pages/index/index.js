@@ -22,7 +22,6 @@ Page({
         { name: '必看', img: 'home_icon_bikan_nor@3x.png', page: '/pages/discover/discover-detail/discover-detail?articleId=10'},
         { name: '秒杀', img: 'home_icon_miaoshao_nor@3x.png', page: '/pages/topic/topic?code=ZT2018000012'},
       ],
-      levelName: levelName,
       imgUrls: [],// 轮播
       adArr:[],// 广告位
       starShop:[], // 明星店铺
@@ -98,7 +97,6 @@ Page({
     onPageScroll(e){
       // 这里加个判断 如果没任务的话也return
       let changeBg = this.data.changeBg
-      let change = this.data.changeBg
       if (e.scrollTop>160){
         changeBg=true
       }else{
@@ -107,9 +105,6 @@ Page({
       this.setData({
         changeBg:changeBg
       })
-      if (change != this.data.changeBg){
-        this.selectComponent('#topBarImg').getBaseUrl();
-      }
       if (this.data.isScroll) return;  
       this.setData({
         isScroll: true,
@@ -280,9 +275,12 @@ Page({
         Storage.setUserAccountInfo(req.responseObject.data)
         let userInfos = req.responseObject.data 
         userInfos.experience = userInfos.experience ? userInfos.experience:0
+        let levelRemark = userInfos.levelRemark || ''
+        userInfos.levelRemark0 = levelRemark.length > 4 ? levelRemark.slice(0, 4) + '...' : levelRemark
         this.setData({
           userInfos: req.responseObject.data
         })
+        
         // this.getLevelInfos()
       };
       Tool.showErrMsg(r)
@@ -397,7 +395,7 @@ Page({
     },
     getIsLogin(callBack=()=>{}){
       let cookie = Storage.getToken() || ''
-      if (!this.data.didLogin && !cookie) {
+      if (!this.data.didLogin) {
         Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
         return
       }

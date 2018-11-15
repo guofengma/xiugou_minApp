@@ -171,6 +171,15 @@ export default class ProductFactorys  {
       msgShow: false
     })
   }
+  shareBtnClicked(openType){
+    if (!openType){
+      let okCB = ()=>{
+        Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
+      }
+      let errCB = ()=>{}
+      Tool.showComfirm('登录以后才能获取赏金', okCB, errCB, '取消', '去登录')
+    }
+  }
   onShareAppMessage(typeId,id){ // 分享
     let upUserId = Storage.getUpUserId() || {}
     let inviteCode = this.page.data.userInfos.id || upUserId.id || ''

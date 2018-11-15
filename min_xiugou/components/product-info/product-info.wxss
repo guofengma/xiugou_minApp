@@ -1,12 +1,12 @@
 .info{
-  height:80rpx;
+  /* height:80rpx; */
   font-size: 30rpx;
   overflow:hidden;
   text-overflow:ellipsis;
   display:-webkit-box;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:2;
-  line-height:38rpx;
+  /* line-height:38rpx; */
 }
 .price{
   margin-top: 10rpx;
