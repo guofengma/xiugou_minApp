@@ -27,7 +27,7 @@
     <view class='font-28 flexR'>
       尊敬的
       <view class='leveleName'>{{userInfos.levelRemark0}}</view>
-      品鉴管，您好!
+      品鉴官，您好!
     </view>
     <view class='font-22 see-level flexR'>
      查看收益
