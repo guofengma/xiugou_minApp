@@ -30,7 +30,7 @@
     </view>
     <!-- 精选 E -->
     <!-- 热门 S -->
-    <view class='discover-hot-swiper' wx:if="{{hot.length}}">
+    <!-- <view class='discover-hot-swiper' wx:if="{{hot.length}}">
       <view class='discover-topic-title'>热门</view>
       <swiper previous-margin="30rpx" next-margin="130rpx" circular>    
         <block wx:for="{{hot}}" wx:key="unique">
@@ -48,7 +48,7 @@
           </swiper-item>
         </block>
       </swiper>
-    </view>
+    </view> -->
     <!-- 热门 E -->
     <!-- 推荐列表 S -->
     <view class='discover-list' wx:if="{{topic.length}}">

@@ -22,7 +22,6 @@ Page({
         { name: '必看', img: 'home_icon_bikan_nor@3x.png', page: '/pages/discover/discover-detail/discover-detail?articleId=10'},
         { name: '秒杀', img: 'home_icon_miaoshao_nor@3x.png', page: '/pages/topic/topic?code=ZT2018000012'},
       ],
-      levelName: levelName,
       imgUrls: [],// 轮播
       adArr:[],// 广告位
       starShop:[], // 明星店铺
@@ -98,7 +97,6 @@ Page({
     onPageScroll(e){
       // 这里加个判断 如果没任务的话也return
       let changeBg = this.data.changeBg
-      let change = this.data.changeBg
       if (e.scrollTop>160){
         changeBg=true
       }else{
@@ -107,9 +105,6 @@ Page({
       this.setData({
         changeBg:changeBg
       })
-      if (change != this.data.changeBg){
-        this.selectComponent('#topBarImg').getBaseUrl();
-      }
       if (this.data.isScroll) return;  
       this.setData({
         isScroll: true,
@@ -117,9 +112,36 @@ Page({
     },
     onLoad: function (options) {
       Event.on('getLevel', this.getLevel,this)
-      this.queryAdList(1,'轮播图片',(datas)=>{
+      Event.on('didLogin', this.didLogin, this); 
+      // 初始化请求
+      this.initRequset(options)
+      // 初始化传参
+      this.initOptions(options)
+      this.setData({
+        options: options
+      })
+    },
+    onPullDownRefresh: function () {
+      this.onLoad(this.data.options)
+      wx.stopPullDownRefresh();
+    },
+    initOptions(options){
+      // 分享过来有邀请者id的那么存储在本地 当天有效 次日失效
+      if (options.inviteId != 'null' && options.inviteId != 'undefined' && options.inviteId) {
+        Storage.setUpUserId({
+          date: new Date().toLocaleDateString(),
+          id: options.inviteId
+        })
+      }
+      if (options.type) { // 页面跳转
+        Tool.navigateTo(this.data.redirectTo[options.type] + options.id)
+      }
+      
+    },
+    initRequset(){
+      this.queryAdList(1, '轮播图片', (datas) => {
         this.setData({
-          imgUrls:datas
+          imgUrls: datas
         })
       });
       this.queryAdList(2, '推荐位', (datas) => {
@@ -129,7 +151,7 @@ Page({
       });
       this.queryAdList(4, '今日榜单', (datas) => {
         this.setData({
-          todayList:datas
+          todayList: datas
         })
       });
       this.queryAdList(5, '精品推荐', (datas) => {
@@ -138,10 +160,10 @@ Page({
         })
       });
       this.queryAdList(6, '超值热卖', (datas) => {
-        datas.forEach((item,index)=>{
-          let  topicBannerProductDTOList = item.topicBannerProductDTOList || []
-          topicBannerProductDTOList.forEach((item0,index0)=>{
-            if (item0.productType === 2){
+        datas.forEach((item, index) => {
+          let topicBannerProductDTOList = item.topicBannerProductDTOList || []
+          topicBannerProductDTOList.forEach((item0, index0) => {
+            if (item0.productType === 2) {
               item0.showPrice = item0[this.data.downPriceParam[item0.status]]
             }
             else if (item0.productType === 1) {
@@ -153,32 +175,11 @@ Page({
           })
         })
         this.setData({
-          hotSale:datas
+          hotSale: datas
         })
       });
       this.queryFeaturedList()
       // this.indexQueryCategoryList()
-      if (!app.globalData.systemInfo){
-        app.getSystemInfo()
-      }
-      app.wxLogin()
-      Event.on('didLogin', this.didLogin, this);
-      // 分享过来有邀请者id的那么存储在本地
-      let inviteId = options.inviteId
-      let query =''
-      if (options.inviteId != 'null' && options.inviteId != 'undefined' && options.inviteId) {
-        query = '&inviteId='+options.inviteId
-      }
-      if (options.type) { // 页面跳转
-        Tool.navigateTo(this.data.redirectTo[options.type] + options.id + query)
-      }
-      this.setData({
-        options: options
-      })
-    },
-    onPullDownRefresh: function () {
-      this.onLoad(this.data.options)
-      wx.stopPullDownRefresh();
     },
     onUnload(){
       Storage.setUpUserId(null)
@@ -274,9 +275,12 @@ Page({
         Storage.setUserAccountInfo(req.responseObject.data)
         let userInfos = req.responseObject.data 
         userInfos.experience = userInfos.experience ? userInfos.experience:0
+        let levelRemark = userInfos.levelRemark || ''
+        userInfos.levelRemark0 = levelRemark.length > 4 ? levelRemark.slice(0, 4) + '...' : levelRemark
         this.setData({
           userInfos: req.responseObject.data
         })
+        
         // this.getLevelInfos()
       };
       Tool.showErrMsg(r)
@@ -391,14 +395,14 @@ Page({
     },
     getIsLogin(callBack=()=>{}){
       let cookie = Storage.getToken() || ''
-      if (!this.data.didLogin && !cookie) {
+      if (!this.data.didLogin) {
         Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
         return
       }
       callBack()
     },
     levelBtnClicked(){
-      Tool.navigateTo('/pages/my/my-account/cash/cash')
+      Tool.navigateTo('/pages/my/my-account/deposit/deposit')
     },
     topicClicked(e){
       let id = e.currentTarget.dataset.id

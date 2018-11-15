@@ -12,11 +12,11 @@
       <!-- <image src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></image> -->
       <view>
         <view class='my-info-item flexR' catchtap='itemClicked' data-page='2' >
-          <view class='my-name'> {{userInfos.nickname || ''}}</view>
+          <view class='my-name'> {{userInfos.nickname || '请登录'}}</view>
           <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'jiantou-white.png'}}"/>
         </view>
 
-        <view class='my-rank'>
+        <view class='my-rank' wx:if='{{didLogin}}'>
           <!-- <image-sub imgStyle='{{"width:88rpx"}}' imgSrc="{{'iconRank.png'}}"/>
           <text class='my-rank-no'>{{userInfos.levelName || ''}}</text> -->
           授权ID {{userInfos.code || ''}}
@@ -34,15 +34,15 @@
     <view class='my-account-item'>我的资产</view>
     <view class='my-account-list'>
       <view class='my-account-coin' catchtap='itemClicked' data-page='3' data-query='{{userInfos.availableBalance}}'>
-        <view class='account-num' >{{userInfos.availableBalance0}}</view>
+        <view class='account-num' >{{userInfos.availableBalance0 || '0.00'}}</view>
         <view>现金账户</view>
       </view>
       <view class='my-account-xiudou' catchtap='itemClicked' data-page='4' data-query='{{userInfos.userScore}}'>
-        <view class='account-num'>{{userInfos.userScore0}}</view>
+        <view class='account-num'>{{userInfos.userScore || 0}}</view>
         <view>秀豆账户</view>
       </view>
       <view class='my-account-leave' catchtap='itemClicked' data-page='5' data-query='{{userInfos.blockedBalance}}'>
-        <view class='account-num'>{{userInfos.blockedBalance0}}</view>
+        <view class='account-num'>{{userInfos.blockedBalance0 || '0.00'}}</view>
         <view>待提取账户</view>
       </view>
     </view>

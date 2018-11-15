@@ -35,14 +35,14 @@ Page({
   onLoad: function (options) {
     this.setData({
       productId: options.productId ||1,
-      prodCode: options.code,
-      inviteId: options.inviteId || ''
+      prodCode: options.code
     })
+    this.ProductFactory = new ProductFactorys(this)
     this.didLogin()
     this.getTopicActivityData(this.data.prodCode);    
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
-    this.ProductFactory = new ProductFactorys(this)
+    
   },
   onShow: function () {
     if (!this.data.screenShow) return;
@@ -86,16 +86,18 @@ Page({
         jumpCommonProductTimer: jumpTimer,
         productId: data.productId
       })
+      if (data.productStatus == 0) { // 商品走丢了 删除了
+        this.ProductFactory.productDefect()
+      }
       let callBack = () => {
         this.setData({
           productSpec: productSpec, // 规格描述
         })
+        this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
+        data.id && this.selectComponent('#promotion').init();
       }
       this.ProductFactory.requestFindProductByIdApp(callBack)
-      //this.requestFindProductByIdApp(data.productId, productSpec)
-      this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
-
-      data.id && this.selectComponent('#promotion').init();
+     
     };
     Tool.showErrMsg(r)
     r.addToQueue();
@@ -159,7 +161,7 @@ Page({
     }
   },
   didLogin() {
-    Tool.didLogin(this)
+    this.ProductFactory.didLogin()
   },
   makeSureOrder() {
     // 立即购买

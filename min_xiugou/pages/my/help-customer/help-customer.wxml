@@ -27,7 +27,7 @@
 
  
 <view class="wrap">
-  <view class='flexC'>
+  <view class='flexC' catchtap='afterSaleClicked'>
     <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_refund.png'}}"/>
     <view>退款进度</view>
   </view>

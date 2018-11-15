@@ -4,7 +4,7 @@
 
 <block wx:if="{{list.length>0}}">
     <view class="notice-item" wx:for="{{list}}" wx:key="unique">
-        <view class="time">{{item.createTime}}</view>
+        <view class="time">{{item.displayTime0}}</view>
         <view class="content">
             <view class="item">{{item.title}}</view>
             <view class="info gray-9">{{item.content}}</view>

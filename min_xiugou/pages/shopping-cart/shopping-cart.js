@@ -194,7 +194,7 @@ Page({
         if (this.data.items.length > 0) {
           let arr = this.data.items
           for (let i = 0; i < arr.length; i++) {
-            if (arr[i].priceId== item.priceId) {
+            if (arr[i].priceId == item.priceId && item.status == 1) {
               item.isSelect = arr[i].isSelect
             }
           }

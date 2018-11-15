@@ -26,9 +26,11 @@ Page({
     if (options.inviteId == 'null' || options.inviteId == 'undefined' || !options.inviteId) {
       inviteId = ''
     }
+    app.deleteInviteId()
+    let upUserId = Storage.getUpUserId() || {}
     this.setData({
       inviteCode: options.inviteCode || '',
-      inviteId: inviteId || Storage.getUpUserId(),
+      inviteId: inviteId || upUserId.id || '',
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
       urlFrom: options.from || null,

@@ -6,7 +6,7 @@
               秀豆账户（分）
             </view>
             <view class="num">
-              {{account}}
+              {{account || 0}}
             </view>
           </view>
           <view class='coinBtn font-28 flexR' catchtap='goPage'>

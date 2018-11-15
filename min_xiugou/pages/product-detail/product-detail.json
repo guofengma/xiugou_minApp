@@ -8,6 +8,7 @@
     "red-envelopes": "/components/red-envelopes/red-envelopes",
     "swiper-product": "/pages/product-detail/temp/swiper/swiper-product",
     "topBar": "/pages/product-detail/temp/topBar/topBar",
-    "product-infos": "/pages/product-detail/temp/product-infos/product-infos"
+    "product-infos": "/pages/product-detail/temp/product-infos/product-infos",
+    "image-sub": "/components/image-sub/image-sub"
   }
 }

@@ -83,17 +83,20 @@ Component({
       // 渲染提示语
       this.getTipsSpec()
       // 如果是降价拍和秒杀 默认都选中
-      if (this.data.commodityType == 2 || this.data.commodityType == 3){
-        this.initTypeSelected()
+      if (this.data.commodityType == 1 && this.data.productSpec.length == 1){
+        this.initTypeSelected(false)
+      }
+      if (this.data.commodityType == 2 || this.data.commodityType == 3 ){
+        this.initTypeSelected(true)
       }
     },
-    initTypeSelected(){ // 默认选中
+    initTypeSelected(setActive){ // 默认选中
       let productSpecArr = [...this.data.productSpec]
       productSpecArr.forEach((item,index)=>{
         let productSpec= item.list
         let specValue = productSpec[0].specValue
         let id = productSpec[0].id
-        this.renderSpecVeiw(index, 0, specValue, id)
+        this.renderSpecVeiw(index, 0, specValue, id, setActive)
       })
     },
     typeListClicked(e) { // 规格点击事件
@@ -107,10 +110,10 @@ Component({
       let specValue = e.currentTarget.dataset.specvalue // 中文描述
       let id = e.currentTarget.dataset.id
 
-      this.renderSpecVeiw(key, index, specValue, id)
+      this.renderSpecVeiw(key, index, specValue, id,true)
       
     },
-    renderSpecVeiw(key, index, specValue, id){ // 开始渲染
+    renderSpecVeiw(key, index, specValue, id, setActive){ // 开始渲染
       // 深复制数组
       let obj = [...this.data.isActive]
       obj[key] = { specValue, id, key, index, name: this.data.productSpec[key].name }
@@ -143,7 +146,9 @@ Component({
         }       
       } 
       // 多规格 或者 单规格选择的那个规格库存大于0的情况下active
-      if(this.data.productSpec.length > 1 || arr0.length>0){
+      
+      if ((this.data.productSpec.length > 1 || arr0.length > 0) && setActive){
+        console.log(setActive,11111111111111111111111111111)
         this.setData({
           isActive: obj,
         })

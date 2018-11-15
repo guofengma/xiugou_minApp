@@ -38,6 +38,9 @@ Page({
       let id = e.currentTarget.dataset.id
       Tool.navigateTo('/pages/my/help-customer/questionDetail/questionDetail?id='+id)
     },
+    afterSaleClicked(){
+      Tool.navigateTo('/pages/after-sale/my-after-sale/my-after-sale')
+    },
     //跳到问题反馈页面
     questionFeedback(){
         Tool.navigateTo('questionFeedback/questionFeedback')

@@ -1,5 +1,5 @@
 {
-  "component": true,
+  "navigationBarTitleText": "暂无商品",
   "usingComponents": {
     "image-sub": "/components/image-sub/image-sub"
   }

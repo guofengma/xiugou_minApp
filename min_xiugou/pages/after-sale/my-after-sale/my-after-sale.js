@@ -44,7 +44,7 @@ Page({
   searchKeyword() {
     let { params } = this.data
     if (Tool.isEmptyStr(this.data.keyword)){
-      Tool.showAlert('请输入搜索内容')
+      Tool.showAlert('搜索内容不能为空')
       return
     }
     params.page = 1

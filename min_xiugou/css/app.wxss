@@ -84,7 +84,8 @@ button::after{
   display:-webkit-box;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:2;
-  /* line-height:38rpx; */
+  height: 64rpx;
+  line-height:32rpx;
 }
 .pwdImg{
   width: 40rpx;
@@ -114,7 +115,11 @@ button::after{
 }
 .grayBg{
   background-color:#F8F8F8;
-  color: #FFF;
+  color: #fff;
+}
+.darkBg{
+  background: #ddd;
+  color: #fff;  
 }
 .yellowBg{
   background-color:#FBBB50;
@@ -211,16 +216,19 @@ button::after{
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 999;
 }
 .fixed-bottom-iPhoneX{
   position: fixed;
   bottom: 34rpx;
-  width: 100%; 
+  width: 100%;
+  z-index: 999; 
 }
 .fixed-top{
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 999;
 }
 .label-red-border{
   border:1rpx solid #FF0050;

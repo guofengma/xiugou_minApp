@@ -6,7 +6,8 @@
                 <text>{{typeArr[activeIndex].value}}</text>
             </view>
             <view>
-                <image class="jt-img" src="{{mask?'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/expand-btn.png':'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/packup-btn.png'}}" mode='widthFix'></image>
+              <image-sub wx:if='{{mask}}' imgStyle='{{"width:30rpx;margin-left:10rpx;"}}' imgSrc="{{'expand-btn.png'}}"/>
+              <image-sub wx:else imgStyle='{{"width:30rpx;margin-left:10rpx;"}}' imgSrc="{{'packup-btn.png'}}"/>
             </view>
         </view>
     </view>
@@ -21,7 +22,6 @@
     <view class="wrap">
         <view class="item">上传图片</view>
         <view class="phone-area">
-          <!-- <template is="update-img" data="{{smallImg}}"/> -->
           <update-img bind:uploadImage='uploadImage'/>
         </view>
         
@@ -37,7 +37,8 @@
                   <text class="{{activeIndex==index?'red':''}}">{{item.value}}</text>
               </view>
               <view>
-                  <image class="jt-img" src="{{activeIndex==index?  bgImgUrl:''}}" mode='widthFix'></image>
+                <image-sub  imgStyle='{{"width:30rpx"}}' imgSrc="{{activeIndex==index?  'checked.png':''}}"/>
+                  <!-- <image class="jt-img" src="{{activeIndex==index?  bgImgUrl:''}}" mode='widthFix'></image> -->
               </view>
             </view>
           </block>
@@ -47,9 +48,9 @@
     <view wx:if="{{success}}" class="success-mask">
         <view class="success-area">
             <view class="success-content">
-                <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/success.png"></image>
-                <view class="success">提交成功!</view>
-                <view class="tip">已提交给相关客服人员 并催促尽快处理！</view>
+              <image-sub  imgStyle='{{"width:142rpx"}}' imgSrc="{{'success.png'}}"/>
+              <view class="success">提交成功!</view>
+              <view class="tip">已提交给相关客服人员 并催促尽快处理！</view>
             </view>
             <view class="success-btn" bindtap="sure">确定</view>
         </view>

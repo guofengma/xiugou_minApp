@@ -16,7 +16,8 @@ Page({
     useOneCoinNum:0, // 1元劵张数
     couponArr:[1,2], // 不支持优惠卷 不支持1元劵
     canUseTokenCoin: true,//支持使用支持1元劵
-    canUseCoupon: true//支持使用优惠卷
+    canUseCoupon: true,//支持使用优惠卷
+    btnDisabled:false, //提交订单按钮是否可以点击
   },
   onLoad: function (options) {
     Tool.getUserInfos(this)
@@ -230,6 +231,10 @@ Page({
       Tool.showAlert('买家留言不能多于140字')
       return
     }
+    if (this.data.btnDisabled) return
+    this.setData({
+      btnDisabled:true
+    })
     let storehouseId = this.data.addressType == 2? orderAddress.id : ''
     let params = {
       "address": orderAddress.address,
@@ -277,6 +282,9 @@ Page({
       Tool.redirectTo('/pages/order-confirm/pay/pay?door=1')
     };
     r.failBlock = (req) => {
+      this.setData({
+        btnDisabled:false
+      })
       let callBack = ()=>{}
       if (req.responseObject.code == 10009) { // 超时登录
         callBack = () => {

@@ -53,7 +53,7 @@ Page({
             let datas = [];
             for (let i in req.responseObject.data.data) {
                 let item = req.responseObject.data.data[i];
-                item.createTime = Tool.formatTime(item.createdTime);
+                item.displayTime0 = Tool.formatTime(item.displayTime ||item.createdTime);
                 // item.pushTime = Tool.formatTime(item.pushTime);
                 // item.title=this.data.title[item.type-1];
               item.param = item.param || '{}'
@@ -95,7 +95,7 @@ Page({
 
     // 上拉加载更多
     onReachBottom() {
-      this.getData(this.data.list[this.data.list.length - 1].createdTime);
+      this.getData(this.data.list[this.data.list.length - 1].displayTime || this.data.list[this.data.list.length - 1].createdTime);
     },
     //支付方式
     payStyle(num){

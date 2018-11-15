@@ -26,7 +26,7 @@ Page({
     // 1：精选 2：热门 3：推荐 4：最新
     this.getDiscoverSwiper();
     this.getDiscoveryByType(1,1);
-    this.getDiscoveryByType(2,1);
+    // this.getDiscoveryByType(2,1);
     this.getDiscoveryByType(3,1, (data) => {
       let topic = this.data.topic;
       this.setData({

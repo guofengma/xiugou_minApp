@@ -68,7 +68,8 @@
     "pages/my/task/task-detail/task-detail",
     "pages/my/task/task-share/task-share",
     "pages/register/red-envelopes/red-envelopes",
-    "pages/web-view/web-view"
+    "pages/web-view/web-view",
+    "pages/product-detail/temp/defect/defect"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

@@ -4,17 +4,22 @@
 <view class='slider' style='height:{{imgheights[0]}}rpx;min-height:400rpx;'>
   <!--广告轮播  -->
   <view class='slider-nav boxSize'>
-    <!-- <image src='/img/back-icon.png' mode='widthFix' class='fl'></image> -->
-    <image src='/img/msg-icon.png' mode='widthFix' class='fr' bindtap='msgClicked'></image>
-    <template is="msg-tips" data="{{msgShow}}" /> 
+    <view class='fr flexR-sb'>
+      <view class='cart-view' catchtap='goCart'>
+        <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'xiangqing_icon_gouwuche_nor@3x.png'}}"/>
+        <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
+      </view>
+      <image src='/img/msg-icon.png' mode='widthFix' bindtap='msgClicked'></image>
+    </view>
+    <template is="msg-tips" data="{{msgShow,openType}}" /> 
   </view>
   <!-- <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
     <video  src="{{productInfo.videoUrl}}"   bindplay='videoClicked' bindpause='videoPause' bindended='videoPause' show-fullscreen-btn='{{false}}' custom-cache="{{false}}" enable-progress-gesture='{{false}}'></video> 
   </view> -->
-  <swiper autoplay="true" interval='3000' bindchange='sliderChange'>
+  <swiper autoplay="true" interval='3000' bindchange='sliderChange' circular="true">
     <block wx:for="{{imgUrls}}" wx:key="unique">
       <swiper-item> 
-        <image src="{{item.smallImg}}" class="slide-image" bindload="imageLoad" bindtap='swiperImgCliked' data-index='{{index}}'/>
+        <image src="{{item.smallImg}}" class="slide-image" bindtap='swiperImgCliked' data-index='{{index}}'/>
       </swiper-item>
     </block>
   </swiper>
