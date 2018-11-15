@@ -1,3 +1,5 @@
-      <div class="container">
-        <div class="wave"></div>
-      </div>
+      <view class="container">
+        <view class='before'></view>
+        <view class='after'></view>
+        <view class="wave"></view>
+      </view>
