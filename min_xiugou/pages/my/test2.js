@@ -1,66 +1,128 @@
-// pages/my/test2.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    code:50,
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  canvasIdErrorCallback: function (e) {
+    console.error(e.detail.errMsg)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  bindinput(e){
+    this.setData({
+      code:e.detail.value
+    })
   },
+  onReady: function (e) {
+    var that = this
+    // 使用 wx.createContext 获取绘图上下文 context
+    var ctx = wx.createContext();
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+    //range控件信息
+    var rangeValue = this.data.code;
 
-  },
+    var nowRange = 40;   //用于做一个临时的range
+    let systemInfo = wx.getSystemInfoSync()
+    //画布属性
+    var mW = 80 / 750 * systemInfo.windowWidth;
+    var mH = 80 / 750 * systemInfo.windowWidth;
+    console.log(mH,mW)
+    var lineWidth = 1 / 750 * systemInfo.windowWidth;
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+    //圆属性
+    var r = mH / 2; //圆心
+    var cR = r - 2 * lineWidth; //圆半径
 
-  },
+    //Sin 曲线属性
+    var sX = 0;
+    var axisLength = mW; //轴长
+    var waveWidth = 0.08;   //波浪宽度,数越小越宽
+    var waveHeight = 0.008; //波浪高度,数越大越高
+    var speed = 0.04; //波浪速度，数越大速度越快
+    var xOffset = 1; //波浪x偏移量
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
+    ctx.setLineWidth(lineWidth)
 
-  },
+    //画圈函数
+    var IsdrawCircled = false;
+    var drawCircle = function () {
+      ctx.beginPath();
+      ctx.strokeStyle = '#ffa500';
+      ctx.arc(r, r, cR + 1, 0, 2 * Math.PI);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(r, r, cR, 0, 2 * Math.PI);
+      ctx.clip();
+      IsdrawCircled = true;
+    }
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+    // 画sin 曲线函数
+    var drawSin = function (xOffset, color, waveHeight) {
+      ctx.save();
 
-  },
+      var points = [];  //用于存放绘制Sin曲线的点
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
+      ctx.beginPath();
+      //在整个轴长上取点
+      for (var x = sX; x < sX + axisLength; x += 20 / axisLength) {
+        //此处坐标(x,y)的取点，依靠公式 “振幅高*sin(x*振幅宽 + 振幅偏移量)”
+        var y = Math.sin((-sX - x) * waveWidth + xOffset) * 0.2 + 0.1;
 
-  },
+        var dY = mH * (1 - nowRange / 100);
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+        points.push([x, dY + y * waveHeight]);
+        ctx.lineTo(x, dY + y * waveHeight);
+      }
 
+      //封闭路径
+      ctx.lineTo(axisLength, mH);
+      ctx.lineTo(sX, mH);
+      ctx.lineTo(points[0][0], points[0][1]);
+      ctx.setFillStyle(color)
+      ctx.fill();
+
+      ctx.restore();
+    };
+
+    var render = function () {
+      ctx.clearRect(0, 0, mW, mH);
+
+      rangeValue = that.data.code;
+
+      if (IsdrawCircled == false) {
+        drawCircle();
+      }
+
+      if (nowRange <= rangeValue) {
+        var tmp = 1;
+        nowRange += tmp;
+      }
+
+      if (nowRange > rangeValue) {
+        var tmp = 1;
+        nowRange -= tmp;
+      }
+
+      drawSin(xOffset + Math.PI * 0.7, 'rgba(28, 134, 209, 0.5)', 18);
+      drawSin(xOffset, '#1c86d1', 18);
+      drawText();
+      xOffset += speed;
+      wx.drawCanvas({
+        canvasId: 'firstCanvas',
+        actions: ctx.getActions()
+      })
+      requestAnimationFrame(render);
+    }
+    //写百分比文本函数
+    var drawText = function () {
+      ctx.save();
+
+      var size = 0.4 * cR;
+      ctx.setFontSize(size);
+      ctx.textAlign = 'center';
+      // ctx.setFillStyle('red')
+      ctx.fillText(~~nowRange + '%', r, r + size / 2); 
+
+      ctx.restore();
+    };
+
+    render();
   }
 })

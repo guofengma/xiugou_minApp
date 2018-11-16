@@ -1,9 +1,8 @@
-.wave,.container {
+/* .wave,.container {
       position: relative;
       width: 80rpx;
       height: 80rpx;
       background-color: rgba(0, 0, 0, .3);
-      /* background-color:#FF0050; */
       border-radius: 50%;
 }
 .container{
@@ -17,7 +16,7 @@
     position: absolute;
     width: 160rpx;
     height: 160rpx;
-    top:0;
+    top:0rpx;
     left: 50%;
     background-color:RGBA(240, 0, 6, .4);
     border-radius: 45%;
@@ -38,4 +37,7 @@
     } 100% {
         transform: translate(-50%, -70%) rotate(360deg);
     }
+} */
+.input{
+  background: #fff;
 }
