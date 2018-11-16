@@ -88,9 +88,9 @@ Page({
           item.typeName = this.data.typeArr[item.type].name
           item.typeState = this.data.typeState[item.status]
           console.log(item.type)
-          if (item.status == 4 || item.status ==5){
-            item.typeState = item.typeName + item.typeState
-          }
+          // if (item.status == 4 || item.status ==5){
+          //   item.typeState = item.typeName + item.typeState
+          // }
         })
         // if (!Tool.isEmptyStr(this.data.keyword)){
         //   lists=[]

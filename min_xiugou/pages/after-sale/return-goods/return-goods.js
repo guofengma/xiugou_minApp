@@ -48,8 +48,13 @@ Page({
       let status = datas.status
       let expressNo = this.data.expressNo
       let resultIndex=0
-      let index = orderReturnAmounts.actualTokenCoin.indexOf('.')
-      orderReturnAmounts.actualTokenCoin = orderReturnAmounts.actualTokenCoin.slice(0, index)
+      let orderReturnAmounts = datas.orderReturnAmounts || {}
+      if (orderReturnAmounts.actualTokenCoin) {
+        let index = orderReturnAmounts.actualTokenCoin.indexOf('.')
+        if (index != -1) {
+          orderReturnAmounts.actualTokenCoin = orderReturnAmounts.actualTokenCoin.slice(0, index)
+        }
+      }
       if (status == 2) {
         let self = this
         if (!datas.expressNo) {

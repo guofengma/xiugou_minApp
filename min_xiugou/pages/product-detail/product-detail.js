@@ -212,6 +212,7 @@ Page({
       })
     }
     this.ProductFactory.hiddenTips()
+    // this.ProductFactory.shareBtnClicked(this.data.openType)
   },
   shareSubClicked(e){
     this.ProductFactory.shareSubClicked(e)

@@ -29,7 +29,7 @@
               </view>
               <view class="time">{{item.createTime}}</view>
               <view class='gray-text font-24'>
-                <text wx:if='{{item.realBalance}}' >已入账：{{item.realBalance}}</text>
+                <text wx:if='{{item.realBalance}}' >已入账：{{item.realBalance0}}</text>
                 <text wx:else>待入账：？</text>
               </view>
                 <!-- <view class="number" bindtap="limit" wx:if='{{item.status==2}}'>

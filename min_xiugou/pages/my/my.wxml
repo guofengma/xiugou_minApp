@@ -43,7 +43,7 @@
       </view>
       <view class='my-account-leave' catchtap='itemClicked' data-page='5' data-query='{{userInfos.blockedBalance}}'>
         <view class='account-num'>{{userInfos.blockedBalance0 || '0.00'}}</view>
-        <view>待提取账户</view>
+        <view>待提现账户</view>
       </view>
     </view>
   </view>
