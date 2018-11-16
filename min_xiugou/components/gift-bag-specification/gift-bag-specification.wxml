@@ -14,7 +14,7 @@
         <!--产品信息  -->
         <view class='header-content font-30'>
           <view class='price red'>¥ {{ productInfo.levelPrice}}</view>
-          <view>库存{{productInfo.showStock}}件</view>
+          <view>库存{{minStock || productInfo.showStock}}件</view>
           <view class='tips ellipsis'>{{tips}}</view>
         </view>
       </view>

@@ -75,8 +75,17 @@ Component({
       })
       this.getTipsSpec(obj)
       if (this.isSelectAll()){
-        this.makeSureType(true)
+        this.getGiftStock()
       }
+    },
+    getGiftStock(){
+      let stock  = []
+      this.data.isActive.forEach((item)=>{
+        stock.push(item.surplusNumber)
+      })
+      this.setData({
+        minStock: Math.min(...stock)
+      })
     },
     getTipsSpec(chooseTypes = []) {
       // 规格提示

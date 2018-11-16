@@ -171,16 +171,17 @@ export default class ProductFactorys  {
       msgShow: false
     })
   }
-  shareBtnClicked(openType){
-    if (!openType){
-      let okCB = ()=>{
-        Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
-      }
-      let errCB = ()=>{}
-      Tool.showComfirm('登录以后才能获取赏金', okCB, errCB, '取消', '去登录')
+  shareSubClicked(e){
+    let index = e.detail.index
+    if (index == 2 || !index){
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
     }
+    this.page.setData({
+      alertShow:false
+    })
   }
   onShareAppMessage(typeId,id){ // 分享
+    let that = this
     let upUserId = Storage.getUpUserId() || {}
     let inviteCode = this.page.data.userInfos.id || upUserId.id || ''
     let imgUrl = this.page.data.productInfo.imgUrl? this.page.data.productInfo.imgUrl : ''

@@ -14,8 +14,8 @@
 .top-view {
   padding:  20rpx 30rpx 0 30rpx;
 }
-.list-cont{
-  position: relative
+.list-cont>view{
+  position: relative;
 }
 .my-info{
   display: flex;
@@ -100,7 +100,8 @@
    height: 88rpx;
    line-height: 88rpx;
    font-size: 32rpx;
-   padding: 0 60rpx;
+   /* padding: 0 60rpx; */
+   padding: 0 20rpx;
    border-bottom: 1rpx solid #f6f6f6;
 }
 .my-account-list{
@@ -196,8 +197,8 @@
   background: red;
   text-align: center;
   color: white;
-  right: -5rpx;
-  top: -14rpx;
+  right: -14rpx;
+  top: -18rpx;
 }
 .see-all{
   color: #A9A9A9

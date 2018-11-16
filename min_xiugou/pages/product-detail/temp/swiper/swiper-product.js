@@ -17,7 +17,7 @@ Component({
   },
   methods: {
     btnClicked(){
-      this.ProductFactory.shareBtnClicked(this.data.openType)
+      this.triggerEvent('subClicked', { index:this.data.openType});
     },
     imageLoad(e) { //图片加载事件
       Tool.getAdaptHeight(e, this)

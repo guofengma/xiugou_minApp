@@ -73,6 +73,10 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let datas = req.responseObject.data
+      if (datas.status == 0) { // 商品走丢了 删除了
+        this.ProductFactory.productDefect()
+        return
+      }
       if (this.data.didLogin){
         if (datas.userBuy && datas.type==2){
           this.data.isShowGiftTips =true
@@ -93,11 +97,9 @@ Page({
         let total = 0
         datas.specPriceList[key].forEach((items, index) => {
           total += items.surplusNumber
-          giftStock.push(total)
         })
+        giftStock.push(total)
       }
-      
-
       // 显示各礼包总库存里面的最小库存
 
       datas.showStock = Math.min(...giftStock)
