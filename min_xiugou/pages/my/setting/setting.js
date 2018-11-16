@@ -34,7 +34,7 @@ Page({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
           let data=req.responseObject;
-          Tool.showSuccessToast(data.data);
+          Tool.showSuccessToast('成功退出');
           app.globalData.flag=true;
           Storage.setUserCookie(null)
           Storage.setUserAccountInfo(null)
