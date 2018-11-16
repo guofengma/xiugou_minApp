@@ -26,7 +26,7 @@
     height: 80rpx;
     line-height: 80rpx;
     text-align: center;
-    color: #f00006;
+    color: #FF0050;
 }
 .queren{
     right: 0;

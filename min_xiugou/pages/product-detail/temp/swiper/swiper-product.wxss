@@ -29,10 +29,24 @@
   width: 100%;
   padding: 0 30rpx;
   left: 0;
-  top: 12rpx;
+  top: 20rpx;
   z-index: 100;
   min-height: 50rpx;
 }
-.slider-nav>image{
+.slider-nav image{
   width: 70rpx;
+}
+/* 购物车 */
+.cart-view{
+  position: relative;
+  margin-right: 20rpx;
+}
+.num-label{
+  position: absolute;
+  font-size: 22rpx;
+  width: 36rpx;
+  height: 36rpx;
+  top:-8rpx;
+  right:-2rpx;
+  border-radius: 50rpx;
 }

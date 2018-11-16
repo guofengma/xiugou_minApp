@@ -38,10 +38,17 @@
       <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-collect.png'}}"/>
       <view>去收藏点什么吧</view>
     </view>
+
+    <!-- 商品走丢了 -->
+    <view wx:if="{{tipVal == 9}}">
+      <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'kongbeiye_shangp@3x.png'}}"/>
+      <view>该商品走丢了</view>
+    </view>
+
     <!-- 是否展示去逛逛的提示 -->
     <view wx:if='{{showBtn}}'>
-      <view class='font-24'>快去商城逛逛吧</view>
-      <view class='result-tips-btn flexC red' catchtap='lookAround'>去逛逛</view>
+      <view class='font-24'>{{showTips ||  "快去商城逛逛吧"}}</view>
+      <view class='result-tips-btn flexC red' catchtap='lookAround'>{{ btnName|| "去逛逛"}}</view>
     </view>
   </view>
   

@@ -1,4 +1,7 @@
+<import src= "/pages/product-detail/temp/errTips/errTips.wxml"/>
+
 <view class="footbar {{promotionFootbar.className}} {{isIphoneX? 'isIphoneX':''}}" disabled='{{promotionFootbar.disabled}}'>
+  <template is="errTips" wx:if='{{props.productStatus==2}}'/>
   <view>{{promotionFootbar.text}}</view>
   <view class="text-small">{{promotionFootbar.textSmall}}</view>
 </view>

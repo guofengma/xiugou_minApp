@@ -332,12 +332,12 @@ export default class Tool {
         });
     }
     //弹窗自定义
-    static showComfirm(msg, okCB = () => { }, errCB = () => { }) {
+    static showComfirm(msg, okCB = () => { }, errCB = () => { }, cancelText = '取消', confirmText = '确认') {
       wx.showModal({
         content: msg,
         showCancel: true,
-        cancelText: '取消',
-        confirmText: '确认',
+        cancelText: cancelText,
+        confirmText: confirmText,
         success: function (res) {
           if (res.confirm) {
             okCB();
@@ -756,7 +756,7 @@ export default class Tool {
         if (!userInfo.area) userInfo.showRegion = userInfo.province + userInfo.city
       }
       that.setData({
-        userInfos: userInfo || ''
+        userInfos: userInfo || {}
       })
       return userInfo
     }
@@ -988,6 +988,15 @@ export default class Tool {
         isIPhoneX: { isIPhoneX, showBottom, className }
       })
       return { isIPhoneX, showBottom, className }
+    }
+
+    static isIphoneXR_XS() {
+      const sysInfo = global.Storage.sysInfo();
+      let flag = false;
+      ['iPhone11,8', 'iPhone11,2', 'iPhone11,4', 'iPhone11,6', 'iPhone XS', 'iPhone XR', 'iPhone XS Max'].forEach((item) => {
+        if (sysInfo.model.search(item) != -1) flag = true;
+      })
+      return flag;
     }
 
     // 退换货数据变换

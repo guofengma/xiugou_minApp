@@ -8,8 +8,8 @@
 
 @import "/components/search-bar/search-bar.wxss";
 .label-line{
-  height: 38rpx;
-  line-break: 38rpx;
+  /* height: 38rpx; */
+  /* line-break: 38rpx; */
 }
 .order-list{
     margin-top: 20rpx;
@@ -139,7 +139,7 @@
     box-sizing: border-box;
 }
 .model-view-bg .cancel-btn{
-    background-color: #f00006;
+    background-color: #FF0050;
     color: #fff;
     width:276rpx;
     height:80rpx;

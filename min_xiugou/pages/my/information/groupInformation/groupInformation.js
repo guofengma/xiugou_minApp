@@ -29,6 +29,9 @@ Page({
         Tool.showErrMsg(r)
         r.addToQueue();
     },
+    goPage(){
+      Tool.navigateTo('/pages/web-view/web-view?webType=3')
+    },
     onLoad: function (options) {
       this.getData()
     },

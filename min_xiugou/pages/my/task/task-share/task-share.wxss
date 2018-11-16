@@ -17,7 +17,7 @@
   line-height: 182rpx;
   background: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/card_ready.png)no-repeat center;
   background-size: 100%;
-  color: #f00006;
+  color: #FF0050;
   font-size: 60rpx;
   text-align: center;
   font-family:PingFangSC-Medium;
@@ -27,7 +27,7 @@
   font-size: 24rpx;
 }
 .task-card.coupon .coupon-money {
-  color: #f00006;
+  color: #FF0050;
   width: 220rpx;  
   font-size: 72rpx;
   text-align: center;  
@@ -61,7 +61,7 @@
   display: inline-block;
   margin-left: 20rpx;
   font-size: 72rpx; 
-  color: #F00006; 
+  color: #FF0050;
 }
 .bean-count text {
   font-size: 24rpx;
@@ -86,7 +86,7 @@
   transform: translateX(-50%);
 }
 .lottery_btn.active {
-  background: #f00006;
+  background: #FF0050;
 }
 .lottery_btn.inactive {
   background: #ccc;
@@ -143,6 +143,6 @@
   box-sizing:border-box;
   text-align: center;
   margin: 30rpx auto 0;
-  background: #F00006;
+  background: #FF0050;
   color: #fff;
 }

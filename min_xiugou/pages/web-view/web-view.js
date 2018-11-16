@@ -17,6 +17,11 @@ Page({
     this.setData({
       webUrl: Config.h5webUrl
     })
+    if (options.webUrl){
+      this.setData({
+        url: this.data.webUrl + options.webUrl + '?_=' + new Date().getTime()
+      })
+    }
     if (options.webType){
       this.setData({
         url: this.data.webUrl + this.data.arr[options.webType]+ '?_=' + new Date().getTime()

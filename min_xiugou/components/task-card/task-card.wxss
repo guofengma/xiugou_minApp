@@ -76,7 +76,7 @@
   text-align: center;
   font-size: 28rpx;
   color: #fff;
-  background: #f00006;
+  background: #FF0050;
   border-radius: 40rpx;
   margin: 30rpx auto 0;
 }
@@ -85,7 +85,7 @@
   height: 80rpx;
   line-height: 80rpx;
   border-radius: 10rpx;
-  background: #f00006;
+  background: #FF0050;
   font-size: 28rpx;
   color: #fff;
   text-align: center;
@@ -106,7 +106,7 @@
 }
 .card-task-award {
   font-size: 28rpx;
-  color: #F00006;
+  color: #FF0050;
   position:absolute;
   left:140rpx;
   top:90rpx;

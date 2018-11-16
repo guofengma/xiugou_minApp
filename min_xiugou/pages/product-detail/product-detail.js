@@ -18,6 +18,13 @@ Page({
     priceList:[],
     size:0,
     userInfos:{},
+    openType:'share',
+    alertProps:{
+      btn:[
+        {name:'取消',type:'share'},
+        {name:'去登录',type:''}
+      ]
+    }
   },
   onLoad: function (options) {
     this.setData({
@@ -26,19 +33,10 @@ Page({
       door: options.door || '',
       inviteId: options.inviteId || ''
     })
-    this.didLogin()
-    let callBack = ()=>{
-      this.getShoppingCartList()
-    }
-    if (!this.data.didLogin && this.data.inviteCode){
-      app.getSystemInfo()
-      app.wxLogin(callBack)
-    } else {
-      this.getShoppingCartList()
-    }
-    
+   
     this.ProductFactory = new ProductFactorys(this)
-    this.initRequest()
+    this.didLogin()
+    // this.initRequest()
     
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
@@ -47,19 +45,30 @@ Page({
     
   },
   initRequest(){
-    let callBack2 = () => {
-      this.activityByProductId(this.data.productId)
+    let callBack2 = (datas) => {
+      if (datas.product.status!=0){
+        this.activityByProductId(this.data.productId)
+      }else{
+        this.ProductFactory.productDefect()
+      }
     }
     this.ProductFactory.requestFindProductByIdApp(callBack2)
   },
-  refreshMemberInfoNotice() {
-    Tool.getUserInfos(this)
-  },
   didLogin() {
-    Tool.didLogin(this)
-    this.refreshMemberInfoNotice()
+    this.ProductFactory.didLogin()
+    this.initRequest()
+    if(!this.data.didLogin){
+      this.setData({
+        openType:''
+      })
+    }
     if (!this.data.userInfos.upUserid){
-      this.selectComponent('#redEnvelopes').btnClick();
+      let date = Storage.getRedEnvelopesDate() || ''
+      let now = new Date().toLocaleDateString()
+      if (now != date){
+        Storage.setRedEnvelopesDate(now)
+        this.selectComponent('#redEnvelopes').btnClick();
+      }
     }
   },
   setStoragePrd(params,index){
@@ -131,6 +140,7 @@ Page({
       Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true+'&inviteId=' + this.data.inviteCode)
       return
     }
+    // if (!this.data.productInfo.canUserBuy) return
     let params = {
       orderProducts:[{
         num: this.data.productBuyCount,
@@ -174,12 +184,11 @@ Page({
       this.makeSureOrder()
     }
   },
-  cartClicked(){
-    Tool.switchTab('/pages/shopping-cart/shopping-cart')
-  },
   btnClicked(e){
-    let n = parseInt(e.currentTarget.dataset.key)
-    this.selectComponent("#prd-info-type").isVisiableClicked(n)
+    if (this.data.productInfoList.status == 1 && this.data.productInfo.canUserBuy) {
+      let n = parseInt(e.currentTarget.dataset.key)
+      this.selectComponent("#prd-info-type").isVisiableClicked(n)
+    }
   },
   goTop (e) {
     this.ProductFactory.goTop(e)
@@ -196,37 +205,23 @@ Page({
     this.initRequest()
     wx.stopPullDownRefresh();
   },
+  shareBtnClicked() {
+    if (!this.data.didLogin) {
+      this.setData({
+        alertShow: true
+      })
+    }
+    this.ProductFactory.hiddenTips()
+    // this.ProductFactory.shareBtnClicked(this.data.openType)
+  },
+  shareSubClicked(e){
+    this.ProductFactory.shareSubClicked(e)
+  },
   onShareAppMessage: function (res) {
     return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.id)
   },
-  getStorageCartList() {
-    let data = Storage.getShoppingCart() || []
-    let size = data.length
-    this.setData({
-      size: size
-    })
-    return
-  },
   getShoppingCartList() {
-    if (!this.data.didLogin){
-      this.getStorageCartList()
-      return
-    }
-    let params = {
-      reqName: '获取购物车',
-      url: Operation.getShoppingCartList,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      data = data === null ? [] : data
-      let size = data.length > 99 ?  99: data.length
-      this.setData({
-        size: size
-      })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    this.ProductFactory.getShoppingCartList()
   },
   hiddenTips(){
     this.ProductFactory.hiddenTips()

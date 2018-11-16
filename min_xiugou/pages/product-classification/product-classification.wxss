@@ -23,7 +23,7 @@
 }
 .leftItem.active{
   background: #fff;
-  border-left:4rpx solid #f00006
+  border-left:4rpx solid #FF0050
 }
 .rightBar{
   width: calc(100% - 180rpx);

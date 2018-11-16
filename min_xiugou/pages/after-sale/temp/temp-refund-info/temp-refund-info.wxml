@@ -18,7 +18,7 @@
       </view>
       <view class='after-sale-line whiteBg flexR-sb'>
         返回1元劵优惠
-        <text>¥{{ orderReturnAmounts.actualTokenCoin }}</text>
+        <text>{{ orderReturnAmounts.actualTokenCoin || 0}} 张</text>
       </view>
       <!-- <view class='after-sale-line whiteBg flexR-sb'>
         退回积分账户

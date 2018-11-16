@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+import { levelName, pages} from '../../tools/common.js'
 let { Tool, RequestFactory, Event, Storage, Operation} = global;
 
 Page({
@@ -14,17 +14,7 @@ Page({
         '/pages/product-detail/seckill-detail/seckill-detail?code=',
         '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
       ],
-      redirectTo:{
-        1:'/pages/product-detail/seckill-detail/seckill-detail?code=',
-        2:'/pages/product-detail/discount-detail/discount-detail?code=',
-        3:'/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=',
-        4:'/pages/index/index?page=""',
-        5:'/pages/topic/topic?code=',
-        99:'/pages/product-detail/product-detail?productId=',
-        100:'/pages/web-view/web-view?id=',
-        101:'/pages/register/register?inviteId=',
-        102:'/pages/discover/discover-detail/discover-detail?articleId='
-      },// 1.秒杀 2.降价拍 3.礼包 4.助力免费领 5.专题 99.普通产品 100:嵌入H5的页面地址 101注册
+      redirectTo:pages,
       iconArr:[ // icon 图标
         { name: '分享', img: 'home_icon__fenxing_nor@3x.png', page:'/pages/topic/topic?code=ZT2018000019'},
         { name: '秀场', img: 'home_icon_xiuchang_nor@3x.png', page: '/pages/discover/discover',tabbar:true},
@@ -121,10 +111,37 @@ Page({
       })
     },
     onLoad: function (options) {
-      //Event.on('getLevel', this.getLevel,this)
-      this.queryAdList(1,'轮播图片',(datas)=>{
+      Event.on('getLevel', this.getLevel,this)
+      Event.on('didLogin', this.didLogin, this); 
+      // 初始化请求
+      this.initRequset(options)
+      // 初始化传参
+      this.initOptions(options)
+      this.setData({
+        options: options
+      })
+    },
+    onPullDownRefresh: function () {
+      this.onLoad(this.data.options)
+      wx.stopPullDownRefresh();
+    },
+    initOptions(options){
+      // 分享过来有邀请者id的那么存储在本地 当天有效 次日失效
+      if (options.inviteId != 'null' && options.inviteId != 'undefined' && options.inviteId) {
+        Storage.setUpUserId({
+          date: new Date().toLocaleDateString(),
+          id: options.inviteId
+        })
+      }
+      if (options.type) { // 页面跳转
+        Tool.navigateTo(this.data.redirectTo[options.type] + options.id)
+      }
+      
+    },
+    initRequset(){
+      this.queryAdList(1, '轮播图片', (datas) => {
         this.setData({
-          imgUrls:datas
+          imgUrls: datas
         })
       });
       this.queryAdList(2, '推荐位', (datas) => {
@@ -134,7 +151,7 @@ Page({
       });
       this.queryAdList(4, '今日榜单', (datas) => {
         this.setData({
-          todayList:datas
+          todayList: datas
         })
       });
       this.queryAdList(5, '精品推荐', (datas) => {
@@ -143,10 +160,10 @@ Page({
         })
       });
       this.queryAdList(6, '超值热卖', (datas) => {
-        datas.forEach((item,index)=>{
-          let  topicBannerProductDTOList = item.topicBannerProductDTOList || []
-          topicBannerProductDTOList.forEach((item0,index0)=>{
-            if (item0.productType === 2){
+        datas.forEach((item, index) => {
+          let topicBannerProductDTOList = item.topicBannerProductDTOList || []
+          topicBannerProductDTOList.forEach((item0, index0) => {
+            if (item0.productType === 2) {
               item0.showPrice = item0[this.data.downPriceParam[item0.status]]
             }
             else if (item0.productType === 1) {
@@ -158,29 +175,11 @@ Page({
           })
         })
         this.setData({
-          hotSale:datas
+          hotSale: datas
         })
       });
       this.queryFeaturedList()
       // this.indexQueryCategoryList()
-      if (!app.globalData.systemInfo){
-        app.getSystemInfo()
-      }
-      app.wxLogin()
-      Event.on('didLogin', this.didLogin, this);
-      // 分享过来有邀请者id的那么存储在本地
-      let inviteId = options.inviteId
-      let query =''
-      if (options.inviteId != 'null' && options.inviteId != 'undefined' && options.inviteId) {
-        query = '&inviteId='+options.inviteId
-      }
-      if (options.type) { // 页面跳转
-        Tool.navigateTo(this.data.redirectTo[options.type] + options.id + query)
-      }
-    },
-    onPullDownRefresh: function () {
-      this.onLoad()
-      wx.stopPullDownRefresh();
     },
     onUnload(){
       Storage.setUpUserId(null)
@@ -216,7 +215,7 @@ Page({
       Tool.didLogin(this)
       if (this.data.didLogin){
         this.findUserJobsByUserId();
-        //this.getLevel()
+        this.getLevel()
       }
     },
     indexQueryCategoryList(){
@@ -276,10 +275,13 @@ Page({
         Storage.setUserAccountInfo(req.responseObject.data)
         let userInfos = req.responseObject.data 
         userInfos.experience = userInfos.experience ? userInfos.experience:0
+        let levelRemark = userInfos.levelRemark || ''
+        userInfos.levelRemark0 = levelRemark.length > 4 ? levelRemark.slice(0, 4) + '...' : levelRemark
         this.setData({
           userInfos: req.responseObject.data
         })
-        this.getLevelInfos()
+        
+        // this.getLevelInfos()
       };
       Tool.showErrMsg(r)
       r.addToQueue();
@@ -393,14 +395,14 @@ Page({
     },
     getIsLogin(callBack=()=>{}){
       let cookie = Storage.getToken() || ''
-      if (!this.data.didLogin && !cookie) {
+      if (!this.data.didLogin) {
         Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
         return
       }
       callBack()
     },
     levelBtnClicked(){
-      Tool.navigateTo('/pages/my/my-promotion/my-promotion')
+      Tool.navigateTo('/pages/my/my-account/deposit/deposit')
     },
     topicClicked(e){
       let id = e.currentTarget.dataset.id
@@ -429,7 +431,7 @@ Page({
       this.setData({
         isChange:true
       })
-      this.discoverNotice()
+      // this.discoverNotice()
     },
     onHide: function () {
       this.setData({

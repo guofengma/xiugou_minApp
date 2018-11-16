@@ -111,7 +111,7 @@
   background-color:#eeeeee;
 }
 .type-list .active{
-  background-color: #f00006 !important;
+  background-color: #FF0050 !important;
   color: #fff;
 }
 .header.active{

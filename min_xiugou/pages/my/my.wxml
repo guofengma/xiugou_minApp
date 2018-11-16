@@ -3,22 +3,23 @@
   <view class='content-top'>
     <view class='top-view'>
       <view class='fr'>
-        <image-sub imgStyle='{{"width:42rpx"}}' imgSrc="{{'tongyong_icon_shezhi_nor@2x.png'}}" catchtap='itemClicked' data-page='0'/>
-        <image-sub imgStyle='{{"width:42rpx"}}' imgSrc="{{'tongyong_icon_xiaoxi_nor@2x.png'}}" catchtap='itemClicked' data-page='1'/>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'setting@3x.png.png'}}" catchtap='itemClicked' data-page='0'/>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'message@3x.png.png'}}" catchtap='itemClicked' data-page='1'/>
       </view>
     </view>
     <view class='my-avatar' catchtap='itemClicked' data-page='2'>
       <cover-image  src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></cover-image>
       <!-- <image src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></image> -->
       <view>
-        <view class='my-info-item' catchtap='itemClicked' data-page='2' >
-          <text class='my-name'> {{userInfos.nickname || ''}}</text>
-          <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+        <view class='my-info-item flexR-sb' catchtap='itemClicked' data-page='2' >
+          <view class='my-name'> {{userInfos.nickname || '请登录'}}</view>
+          <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'jiantou-white.png'}}"/>
         </view>
 
-        <view class='my-rank'>
-          <image-sub imgStyle='{{"width:88rpx"}}' imgSrc="{{'iconRank.png'}}"/>
-          <text class='my-rank-no'>{{userInfos.levelName || ''}}</text>
+        <view class='my-rank' wx:if='{{didLogin}}'>
+          <!-- <image-sub imgStyle='{{"width:88rpx"}}' imgSrc="{{'iconRank.png'}}"/>
+          <text class='my-rank-no'>{{userInfos.levelName || ''}}</text> -->
+          授权ID {{userInfos.code || ''}}
         </view>
       </view>
     </view>
@@ -29,28 +30,28 @@
     </view> -->
   </view>
   <!-- 我的资产 -->
-  <view class='my-account'>
+  <view class='my-account width-690'>
     <view class='my-account-item'>我的资产</view>
     <view class='my-account-list'>
       <view class='my-account-coin' catchtap='itemClicked' data-page='3' data-query='{{userInfos.availableBalance}}'>
-        <view class='account-num' >{{userInfos.availableBalance0}}</view>
+        <view class='account-num' >{{userInfos.availableBalance0 || '0.00'}}</view>
         <view>现金账户</view>
       </view>
       <view class='my-account-xiudou' catchtap='itemClicked' data-page='4' data-query='{{userInfos.userScore}}'>
-        <view class='account-num'>{{userInfos.userScore0}}</view>
+        <view class='account-num'>{{userInfos.userScore || 0}}</view>
         <view>秀豆账户</view>
       </view>
       <view class='my-account-leave' catchtap='itemClicked' data-page='5' data-query='{{userInfos.blockedBalance}}'>
-        <view class='account-num'>{{userInfos.blockedBalance0}}</view>
-        <view>待提取账户</view>
+        <view class='account-num'>{{userInfos.blockedBalance0 || '0.00'}}</view>
+        <view>待提现账户</view>
       </view>
     </view>
   </view>
   <!-- 我的订单 -->
-  <view class='my-order'>
+  <view class='my-order width-690'>
     <view class='my-order-item' catchtap='itemClicked' data-page='6' data-query=''>
-      <view>我的订单</view>
-      <view>
+      <view class='font-30'>我的订单</view>
+      <view class='see-all'>
         <text>查看全部</text>
         <!-- 右边的见头 -->
         <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'xjt_10@2x.png'}}" class='my-info-arrow'/>
@@ -58,35 +59,46 @@
     </view>
     <!-- 订单列表 -->
     <view class='my-order-list'>
-      <view class='list-cont my-wait-pay' catchtap='itemClicked' data-page='6' data-query='1'>
-        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsale.png'}}"/>
+      <view class='list-cont my-wait-pay flexC' catchtap='itemClicked' data-page='6' data-query='1'>
+        <view>
+          <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsale.png'}}"/>
+          <view class='reddot'  wx:if='{{countUserOrderNum.waitPayNum}}'>{{countUserOrderNum.waitPayNum}}</view>
+        </view>
         <view>待付款</view>
-        <view class='reddot'  wx:if='{{countUserOrderNum.waitPayNum}}'>{{countUserOrderNum.waitPayNum}}</view>
+        
       </view>
       <!-- 代发货 -->
-      <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='2'>
-        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsend.png'}}"/>
+      <view class='list-cont flexC' catchtap='itemClicked' data-page='6' data-query='2'>
+        <view>
+          <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsend.png'}}"/>
+          <view class='reddot' wx:if='{{countUserOrderNum.waitSendNum}}'>{{countUserOrderNum.waitSendNum}}</view>
+        </view>
         <view>待发货</view>
-        <view class='reddot' wx:if='{{countUserOrderNum.waitSendNum}}'>{{countUserOrderNum.waitSendNum}}</view>
       </view>
       <!-- 待收货 -->
-      <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='3'>
-        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForobtain.png'}}"/>
+      <view class='list-cont flexC' catchtap='itemClicked' data-page='6' data-query='3'>
+        <view>
+          <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'conForobtain.png'}}"/>
+          <view class='reddot' wx:if='{{countUserOrderNum.waitReceiveNum}}'>{{countUserOrderNum.waitReceiveNum}}</view>
+        </view>
         <view>待收货</view>
-        <view class='reddot' wx:if='{{countUserOrderNum.waitReceiveNum}}'>{{countUserOrderNum.waitReceiveNum}}</view>
+      
       </view>
       <!-- 售后 -->
-      <view class='list-cont' catchtap='itemClicked' data-page='7'>
-        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconAftersale.png'}}"/>
+      <view class='list-cont flexC' catchtap='itemClicked' data-page='7'>
+        <view>
+          <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconAftersale.png'}}"/>
+          <view class='reddot' wx:if='{{countUserOrderNum.afterSaleServiceNum}}'>{{countUserOrderNum.afterSaleServiceNum}}</view>
+        </view>
         <view>售后/退款</view>
-        <view class='reddot' wx:if='{{countUserOrderNum.afterSaleServiceNum}}'>{{countUserOrderNum.afterSaleServiceNum}}</view>
+        
       </view>
     </view>
   </view>
   <!-- 常用工具 -->
 
-  <view class='my-tools'>
-    <view class='my-tools-item'>
+  <view class='my-tools width-690 whiteBg'>
+    <view class='my-tools-item flexR-sb font-30'>
       常用工具
     </view>
     <!-- 工具列表 -->
@@ -105,15 +117,15 @@
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='11'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconData.png'}}"/>
-        <view>我的数据</view>
+        <view>我的晋升</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='12'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconCollect.png'}}"/>
-        <view>收藏店铺</view>
+        <view>店铺收藏</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='13'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconService.png'}}"/>
-        <view>帮助与客服</view>
+        <view>我的客服</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='14'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconAddress.png'}}"/>
@@ -124,14 +136,15 @@
         <view>足迹</view>
       </view> -->
       <view class='my-tools-cont' catchtap='itemClicked' data-page='16'>
-        <image style='width:40rpx;height:40rpx' src="/img/iconTask.png"/>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconTask.png'}}"/>
         <view>我的任务</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='17'>
-        <image style='width:40rpx;height:40rpx' src="/img/iconPromote.png"/>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconPromote.png'}}"/>
         <view>我的推广</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='18'>
+       <!-- <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconFav.png'}}"/> -->
         <image style='width:40rpx;height:40rpx' src="/img/iconFav.png"/>
         <view>秀场收藏</view>
       </view>

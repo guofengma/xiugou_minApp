@@ -15,25 +15,18 @@ Page({
     productTypeList: [],
     productBuyCount: 1, //商品购买数量
     priceList: [],
-    nodes: [{
-            name: "table",
-            attrs: {
-        class: "table"
-            },
-            children: [],
-    }],
     isShowGiftTips:false, //是否显示礼包升级提示
     dismiss:false, // 能否可以购买礼包
   },
   onLoad: function (options) {
     this.setData({
-      giftBagId: options.giftBagId || '',
-      inviteId: options.inviteId || ''
+      giftBagId: options.giftBagId || ''
     })
+    this.ProductFactory = new ProductFactorys(this)
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
     this.refreshMemberInfoNotice()
-    this.ProductFactory = new ProductFactorys(this)
+   
   },
   refreshMemberInfoNotice() {
     Tool.getUserInfos(this)
@@ -42,7 +35,7 @@ Page({
     this.getGiftBagDetail()
   },
   didLogin() {
-    Tool.didLogin(this)
+    this.ProductFactory.didLogin()
     Tool.isIPhoneX(this)
   },
   giftBagClicked() {
@@ -80,6 +73,10 @@ Page({
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
       let datas = req.responseObject.data
+      if (datas.status == 0) { // 商品走丢了 删除了
+        this.ProductFactory.productDefect()
+        return
+      }
       if (this.data.didLogin){
         if (datas.userBuy && datas.type==2){
           this.data.isShowGiftTips =true
@@ -100,11 +97,9 @@ Page({
         let total = 0
         datas.specPriceList[key].forEach((items, index) => {
           total += items.surplusNumber
-          giftStock.push(total)
         })
+        giftStock.push(total)
       }
-      
-
       // 显示各礼包总库存里面的最小库存
 
       datas.showStock = Math.min(...giftStock)
@@ -116,39 +111,10 @@ Page({
         productId: datas.id,
         productTypeList: specPriceList
       })
-      // 渲染表格
-      let tr = []
-      let tbody = this.data.nodes
-      for (let i = 0; i < datas.paramValueList.length; i++) {
-        tr.push(
-          {
-            name: "tr",
-            attrs: { class: "tr" },
-            children: [ {
-              name: "td",
-              attrs: { class: 'td frist-td' },
-              children: [{
-                type: "text",
-                text: datas.paramValueList[i].param
-              }]
-            },
-            {
-              name: "td",
-              attrs: { class: 'td td2' },
-              children: [{
-                type: "text",
-                text: datas.paramValueList[i].paramValue
-              }]
-            }
-            ]
-          }
 
-        )
-      }
-      tbody[0].children = tr
-      this.setData({
-        nodes: tbody
-      })
+      // 渲染表格
+      this.ProductFactory.renderTable(datas.paramValueList, 'param','paramValue')
+
       this.selectComponent("#productInfos").initDatas()
     }
     r.failBlock = (req) => {
@@ -169,7 +135,7 @@ Page({
     this.giftBagClicked()
   },
   btnClicked(e) {
-    if (this.data.dismiss) return
+    if (this.data.dismiss || this.data.productInfo.status == 2) return
     let n = parseInt(e.currentTarget.dataset.key)
     this.selectComponent("#prd-info-type").isVisiableClicked(n)
   },

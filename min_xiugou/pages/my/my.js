@@ -48,6 +48,10 @@ Page({
       if (this.data.didLogin){
         this.getLevel()
         this.countUserOrderNum()
+      }else{
+        this.setData({
+          countUserOrderNum:{}
+        })
       }
       if (this.data.tabClicked!=1) return
       if (!this.data.didLogin) {
@@ -85,7 +89,7 @@ Page({
       if (!this.data.didLogin) return
       let callBack =(datas)=>{
         datas.availableBalance0 = Tool.formatNum(datas.availableBalance || 0)
-        datas.userScore0 = Tool.formatNum(datas.userScore || 0)
+        // datas.userScore0 = Tool.formatNum(datas.userScore || 0)
         datas.blockedBalance0 = Tool.formatNum(datas.blockedBalance || 0)
         Storage.setUserAccountInfo(datas)
         this.setData({

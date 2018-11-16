@@ -6,7 +6,7 @@
     <view class="content">
         <view class="info">有拼店消息，请下载APP进行处理和查看。</view>
     </view>
-    <view class="opr">
+    <view class="opr" catchtap='goPage'>
         <view class="btn red">去下载APP</view>
     </view>
 </view>

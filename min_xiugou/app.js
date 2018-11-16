@@ -24,6 +24,9 @@ App({
         let uuid = Tool.getUUID()
         Storage.setPlatform(uuid)
       }
+      this.wxLogin()
+      let systemInfo = wx.getSystemInfoSync()
+      this.deleteInviteId()
     },
     onShow: function () {
       // 比如记录小程序启动时长
@@ -32,6 +35,15 @@ App({
         userInfo: null,
         openid: null,
         code: null,
+    },
+    deleteInviteId(){
+      let upUserId = Storage.getUpUserId() || {}
+      if (upUserId.date != new Date().toLocaleDateString()) {
+        Storage.setUpUserId({
+          date: null,
+          id: null
+        })
+      }
     },
     wxLogin(callBack=()=>{}){
       // 小程序登录
@@ -71,21 +83,12 @@ App({
       try {
         //调用微信接口，获取设备信息接口
         let res = wx.getSystemInfoSync()
-        if (res.model.search('iPhone X') != -1) {
+        if (res.model.search('iPhone') != -1 && res.windowWidth >= 375 && res.screenHeight >= 812 || res.model.search('iPhone X') != -1) {
           res.isIphoneX = true
         } else {
           res.isIphoneX = false
         }
-        res.screenHeight = res.screenHeight * res.pixelRatio;
-        res.screenWidth = res.screenWidth * res.pixelRatio;
-        res.windowHeight = res.windowHeight * res.pixelRatio;
-        res.windowWidth = res.windowWidth * res.pixelRatio;
-        let rate = 750.0 / res.screenWidth;
-        res.rate = rate;
-        res.screenHeight = res.screenHeight * res.rate;
-        res.screenWidth = res.screenWidth * res.rate;
-        res.windowHeight = res.windowHeight * res.rate;
-        res.windowWidth = res.windowWidth * res.rate;
+        res.rate = 750 * res.windowWidth
         Storage.setSysInfo(res);
         that.globalData.systemInfo = res
         typeof cb == "function" && cb(that.globalData.systemInfo)

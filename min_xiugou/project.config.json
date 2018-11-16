@@ -14,8 +14,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.2.5",
-	"appid": "wxa059b818226f8679",
-	"projectname": "%E7%A7%80%E8%B4%AD%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%90%8D%E8%9E%8D",
+	"appid": "wxc9bc82344767cb2a",
+	"projectname": "%E7%A7%80%E8%B4%AD%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%B8%82%E5%9C%BA%E9%83%A8%E5%86%85%E6%B5%8B",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -35,19 +35,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 48,
 			"list": [
 				{
 					"id": 0,
 					"name": "注册",
 					"pathName": "pages/register/register",
-					"query": "inviteId=null"
+					"query": "inviteId=200"
 				},
 				{
 					"id": 1,
 					"name": "产品详情页",
 					"pathName": "pages/product-detail/product-detail",
-					"query": "productId=71"
+					"query": "productId=77"
 				},
 				{
 					"id": 2,
@@ -326,10 +326,16 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 48,
 					"name": "首页",
 					"pathName": "pages/index/index",
-					"query": "inviteId=250"
+					"query": "inviteId=251"
+				},
+				{
+					"id": -1,
+					"name": "产品缺失页面",
+					"pathName": "pages/product-detail/temp/defect/defect",
+					"query": "productId=77"
 				}
 			]
 		}

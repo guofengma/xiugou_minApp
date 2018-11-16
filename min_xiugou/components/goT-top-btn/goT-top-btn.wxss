@@ -2,7 +2,7 @@
 .goTop{
   position: fixed;
   right: 30rpx;
-  bottom: 120rpx;
+  bottom: 150rpx;
   background-color:transparent !important;
 }
 .goTop image{

@@ -7,8 +7,8 @@
   background: #fff;
   font-size: 26rpx;
   position: absolute;
-  top:70rpx;
-  right:50rpx;
+  top:90rpx;
+  right:32rpx;
 }
 .msg-tips .flexR image{
   width: 50rpx;

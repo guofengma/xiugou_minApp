@@ -29,7 +29,7 @@
 .default view:nth-child(2){width: 25%;text-align: right}
 .default image{ width: 32rpx;}
 .item image{ width: 15rpx;height: 19rpx;}
-.right{text-align: right;}
+/* .right{text-align: right;} */
 .right text{color: #c8c8c8 ;}
 .region{
   padding-right: 20rpx;

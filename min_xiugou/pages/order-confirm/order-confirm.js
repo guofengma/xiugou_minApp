@@ -16,7 +16,8 @@ Page({
     useOneCoinNum:0, // 1元劵张数
     couponArr:[1,2], // 不支持优惠卷 不支持1元劵
     canUseTokenCoin: true,//支持使用支持1元劵
-    canUseCoupon: true//支持使用优惠卷
+    canUseCoupon: true,//支持使用优惠卷
+    btnDisabled:false, //提交订单按钮是否可以点击
   },
   onLoad: function (options) {
     Tool.getUserInfos(this)
@@ -167,7 +168,9 @@ Page({
       //   this.getTokenCoin()
       // }
     };
-    Tool.showErrMsg(r)
+    r.failBlock = (req) => {
+      this.failBlock(req)
+    }
     r.addToQueue();
   },
   addressClicked(){
@@ -230,6 +233,10 @@ Page({
       Tool.showAlert('买家留言不能多于140字')
       return
     }
+    if (this.data.btnDisabled) return
+    this.setData({
+      btnDisabled:true
+    })
     let storehouseId = this.data.addressType == 2? orderAddress.id : ''
     let params = {
       "address": orderAddress.address,
@@ -277,26 +284,32 @@ Page({
       Tool.redirectTo('/pages/order-confirm/pay/pay?door=1')
     };
     r.failBlock = (req) => {
-      let callBack = ()=>{}
-      if (req.responseObject.code == 10009) { // 超时登录
-        callBack = () => {
-          Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
-        }
-      } else if (req.responseObject.code ==54001){
-        if (this.data.formCart){
-          callBack = () => {
-            Event.emit('updateShoppingCart')
-            Tool.switchTab('/pages/shopping-cart/shopping-cart')
-          }
-        } else {
-          callBack = () => {
-            Tool.navigationPop()
-          }
-        }
-      }
-      Tool.showAlert(req.responseObject.msg, callBack)
+      this.setData({
+        btnDisabled:false
+      })
+      this.failBlock(req)
     }
     r.addToQueue();
+  },
+  failBlock(req){
+    let callBack = () => { }
+    if(req.responseObject.code == 10009) { // 超时登录
+      callBack = () => {
+        Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
+      }
+    } else if (req.responseObject.code == 54001) {
+      if (this.data.formCart) {
+        callBack = () => {
+          Event.emit('updateShoppingCart')
+          Tool.switchTab('/pages/shopping-cart/shopping-cart')
+        }
+      } else {
+        callBack = () => {
+          Tool.navigationPop()
+        }
+      }
+    }
+    Tool.showAlert(req.responseObject.msg, callBack)
   },
   iconClicked(){ // 点击使用1元劵跳转
     let useOneCoinNum = this.data.useOneCoinNum ? this.data.useOneCoinNum : Math.floor(this.data.orderInfos.totalAmounts)
