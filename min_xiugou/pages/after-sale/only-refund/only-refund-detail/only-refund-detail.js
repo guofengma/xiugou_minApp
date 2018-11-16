@@ -28,6 +28,9 @@ Page({
     r.successBlock = (req) => {
       Tool.findReturnProductById(req)
       let datas = req.responseObject.data
+      let orderReturnAmounts = datas.orderReturnAmounts || {}
+      let index = orderReturnAmounts.actualTokenCoin.indexOf('.')
+      orderReturnAmounts.actualTokenCoin = orderReturnAmounts.actualTokenCoin.slice(0,index)
       datas.statusName = this.data.stateInfo[datas.status]
       if (datas.status ==6){
         datas.showRefundTime = Tool.formatTime(datas.orderReturnAmounts.refundTime)

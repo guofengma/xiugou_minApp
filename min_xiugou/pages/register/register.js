@@ -28,9 +28,10 @@ Page({
     }
     app.deleteInviteId()
     let upUserId = Storage.getUpUserId() || {}
+    // Tool.showAlert(upUserId.id)
     this.setData({
       inviteCode: options.inviteCode || '',
-      inviteId: inviteId || upUserId.id || '',
+      inviteId: Number(inviteId) || upUserId.id || '',
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
       urlFrom: options.from || null,
@@ -97,13 +98,14 @@ Page({
       headImg: this.data.userInfo.avatarUrl,
       nickname: this.data.userInfo.nickName,
       openid: this.data.openid || Storage.getWxOpenid() || '',
-      upUserId: this.data.inviteId, // 邀请者id 非必填
-      inviteCode: this.data.inviteCode,//邀请码 非必填
+      upUserId: this.data.inviteId || "", // 邀请者id 非必填
+      inviteCode: this.data.inviteCode || "",//邀请码 非必填
     }
     // this.verifyPhone(e.detail.value)  // 改动了 
     this.verifyPhone(params)
   },
   verifyPhone(params){
+    console.log(params)
     params = {
       ...params,
       reqName: '判断手机号是否已经注册',
@@ -127,7 +129,7 @@ Page({
       }
     }
     Tool.showErrMsg(r)
-    r.addToQueue();
+    // r.addToQueue();
   },
   changeInput(e){
     let n = parseInt(e.currentTarget.dataset.index)

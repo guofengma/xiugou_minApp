@@ -35,13 +35,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 49,
+			"current": 48,
 			"list": [
 				{
 					"id": 0,
 					"name": "注册",
 					"pathName": "pages/register/register",
-					"query": "inviteId=null"
+					"query": "inviteId=200"
 				},
 				{
 					"id": 1,
