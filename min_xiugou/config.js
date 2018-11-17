@@ -1,8 +1,8 @@
 const config = {
-  h5webUrl: 'https://testh5.sharegoodsmall.com',
-  // h5webUrl: 'https://uath5.sharegoodsmall.com',// 市场部内测环境
-  // baseUrl: 'https://uatapi.sharegoodsmall.com/gateway',// 市场部内测环境
-  baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
+  // h5webUrl: 'https://testh5.sharegoodsmall.com',
+  h5webUrl: 'https://uath5.sharegoodsmall.com',// 市场部内测环境
+  baseUrl: 'https://uatapi.sharegoodsmall.com/gateway',// 市场部内测环境
+  // baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
   // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
   // baseUrl: 'http://172.16.10.42:8180/gateway',  // 蒋
   // baseUrl: 'http://172.16.10.29:8180/gateway',  // 周
