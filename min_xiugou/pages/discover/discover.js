@@ -45,6 +45,18 @@ Page({
     });
   },
   onPullDownRefresh: function () {
+    this.setData({
+      swipers: [],// 广告轮播
+      assist: [],//精选
+      hot: [], //热门
+      topic: [],//推荐
+      discover: [],//最新发现
+      currentTopicPage: 1,
+      totalTopicPage: null,
+      currentDiscoverPage: 1,
+      totalDiscoverPage: null,
+      showBackTop: false,
+    })
     this.onLoad()
     wx.stopPullDownRefresh();
   },
