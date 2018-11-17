@@ -3,9 +3,9 @@
   color: #424242;
 }
 .width-690{
-  /* width: 690rpx; */
+  width: 690rpx;
   margin: 20rpx  auto 0 auto;
-  /* border-radius: 18rpx; */
+  border-radius: 18rpx;
 }
 .top-view image{
   width: 40rpx;
@@ -67,40 +67,40 @@
   height:48rpx;
   
 }
-/* .my-rank-no{
-  position: absolute;
-  top: 0;
-  left:37rpx;
-  bottom: 0;
-  margin: auto;
-  color: #ffffff;
-}
- */
+ .level-content{
+   width: 180rpx;
+ }
+ .level-circle{
+   border-radius: 50%;
+   background: linear-gradient( #FE2A65, #FE2746);
+   display: inline-block;
+   margin: 0 9rpx;
+ }
  .my-save{
   position: absolute;
   right: 0;
   width: 260rpx;
   height: 100rpx;
-  background: #FFC079;
+  background: #F1D3A1;
   border-top-left-radius:109rpx;
   border-bottom-left-radius:109rpx;
   bottom: 80rpx;
-  text-align: center;
-  color: #fff;
-
+}
+.levelName{
+  color: #333
 }
 .my-account{
-  /* background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-user-data-bg.png) no-repeat left bottom;
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-user-data-bg.png) no-repeat left bottom;
   background-size: 100% 100%; 
-  color: #fff;*/
-  background: #fff;
+  color: #fff;
+  /* background: #fff; */
   
 }
 .my-account-item{
    height: 88rpx;
    line-height: 88rpx;
    font-size: 32rpx;
-   padding: 0 60rpx;
+   padding: 0 30rpx;
    border-bottom: 1rpx solid #f6f6f6;
 }
 .my-account-list{
@@ -122,26 +122,11 @@
   font-weight:600;
   height: 76rpx;
 }
-.my-account-coin{
-  background:rgba(255,79,110,1);
-  border-radius:10rpx;
-  box-shadow:5rpx 0px 10rpx rgba(255,79,110,0.54);
-}
-.my-account-xiudou{
-  background:#F2D4A2;
-  border-radius:10rpx;
-  box-shadow:5rpx 0px 10rpx rgba(242, 212, 162, 0.54);
-}
-.my-account-leave{
-  background:rgba(142,199,255,1);
-  border-radius:10rpx;
-  box-shadow:5rpx 0px 10rpx rgba(142,199,255,0.54);
-}
 .my-order{
   background: #ffffff; 
 }
 .my-order-item{
-   padding: 0 20rpx;
+   padding: 0 30rpx;
    display: flex;
    justify-content: space-between;
    height: 88rpx;
@@ -161,15 +146,13 @@
   width: 25%;
   text-align: center;
 }
-
-
 .my-tools{
   margin: 20rpx auto;
 }
 
 .my-tools-item{
   height: 88rpx;
-  padding: 0 20rpx;
+  padding: 0 30rpx;
   border-bottom: 1rpx solid #f6f6f6;
 }
 .my-tools-list{
@@ -178,8 +161,6 @@
   flex-wrap: wrap;
   height: 390rpx;
   align-items: center;
- 
-  
 }
 .my-tools-list image{
   margin-bottom: 20rpx;
@@ -203,39 +184,4 @@
   color: #A9A9A9
 }
 
-.wave {
-      position: relative;
-      width: 50px;
-      height: 50px;
-      background-color: rgb(118, 218, 255);
-      border-radius: 50%;
-}
-		.wave:before,
-		.wave:after{
-	        	content: "";
-	        	position: absolute;
-	        	width: 100px;
-	        	height: 100px;
-	        	top: 0;
-	        	left: 50%;
-	        	background-color: rgba(255, 255, 255, .4);
-	        	border-radius: 45%;
-	        	transform: translate(-50%, -70%) rotate(0);
-	        	animation: rotate 6s linear infinite;
-	        	z-index: 10;
-	   	 }
-	   	 .wave:after {
-	       		border-radius: 47%;
-	        	background-color: rgba(255, 255, 255, .9);
-	        	transform: translate(-50%, -70%) rotate(0);
-	        	animation: rotate 10s linear -5s infinite;
-	        	z-index: 20;
-	    	}
-		@keyframes rotate {
-		    50% {
-		        transform: translate(-50%, -73%) rotate(180deg);
-		    } 100% {
-		        transform: translate(-50%, -70%) rotate(360deg);
-		    }
-		}
 
