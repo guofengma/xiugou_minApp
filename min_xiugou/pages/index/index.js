@@ -122,6 +122,9 @@ Page({
       })
     },
     onPullDownRefresh: function () {
+      this.setData({
+        recommendArr:[]
+      })
       this.onLoad(this.data.options)
       wx.stopPullDownRefresh();
     },
