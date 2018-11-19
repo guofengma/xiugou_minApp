@@ -23,6 +23,9 @@ Page({
   onUnload () {
 
   },
+  lookAround(){
+    Tool.switchTab('/pages/discover/discover')
+  },
   onReachBottom () {
     let data = this.data;
     if(data.totalPage == data.currentPage) {
