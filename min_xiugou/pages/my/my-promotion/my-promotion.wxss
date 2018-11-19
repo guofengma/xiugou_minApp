@@ -80,7 +80,7 @@
   height: 100%;
   left: 0;
   top: 0;
-  background-image: linear-gradient(90deg, #FFAC00 0%, #FF6B84 100%), 
+  background-image: linear-gradient(90deg, #FF567F 0%, #FC6D55 100%), 
 	linear-gradient(#ffffff, #ffffff);
 }
 .growing-question{
