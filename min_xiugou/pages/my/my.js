@@ -114,8 +114,7 @@ Page({
           return item.id == levelId
         })
         this.setData({
-          // range: userExp / levelObj[0].upgradeExp *100
-          range:40
+          range: userExp / levelObj[0].upgradeExp *100
         })
         this.initDatas()
         this.render()
@@ -186,7 +185,7 @@ Page({
     //Sin 曲线属性
     this.setData({
       rate: 750 * systemInfo.windowWidth,
-      nowRange: 40,//用于做一个临时的range
+      nowRange: 1,//用于做一个临时的range
       sX: 0,
       axisLength: this.data.mW,//轴长
       waveWidth: 0.12,//波浪宽度,数越小越宽
@@ -208,9 +207,9 @@ Page({
     ctx.strokeStyle = '#FFC079';
     ctx.arc(r, r, cR + 1, 0, 2 * Math.PI);
     ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(r, r, cR, 0, 2 * Math.PI);
-    ctx.clip();
+    // ctx.beginPath();
+    // ctx.arc(r, r, cR, 0, 2 * Math.PI);
+    // ctx.clip();
     this.data.IsdrawCircled = true;
   },
   drawText() { // 写百分比文本函数
