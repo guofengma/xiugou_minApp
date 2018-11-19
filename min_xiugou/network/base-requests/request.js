@@ -192,7 +192,7 @@ export default class Request {
         }
       },
       complete: function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         that.requestStatus = RequestStatus.finish;
         that.completeBlock(that);
         if(res.statusCode != 200) {

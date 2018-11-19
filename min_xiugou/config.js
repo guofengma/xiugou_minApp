@@ -10,7 +10,7 @@ const config = {
   // baseUrl:'http://172.16.10.56:8180/gateway',  // 沈
   // baseUrl: 'http://172.16.10.41:8180/gateway',  // 张
   // baseUrl: 'http://172.16.10.12:8180/gateway',  // 杨
-  // baseUrl: 'http://172.16.10.19:8180/gateway',  // 吴
+  // baseUrl: 'http://172.16.10.19:8903/gateway',  // 吴
   // baseUrl: 'http://172.16.10.88:8180/gateway',  // 陈
   // baseUrl: 'http://172.16.10.111:8180/gateway',  // 王
   // baseUrl: 'http://zhifu.dnvhot.tech', // 吴
