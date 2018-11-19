@@ -21,7 +21,7 @@ Page({
       },// 按钮
       redirectTo:{
         1:{ page:'/pages/index/index',tab:true},
-        2:{ page:'/pages/my/my-order/my-order?query=""'},
+        2:{ page:'/pages/my/my-order/my-order?query='},
         3:{ page:'/pages/my/extension/extension'}
       }, // 根据按钮的index跳转
       errPage:{

@@ -9,12 +9,12 @@ Page({
       isLevel:false,
       types: [
         { name: "其他" },
-        { name: "用户收益", icon: "yhsy-icon.png" },
+        { name: "用户收益", icon: "xjhb-icon.png" },
         { name: "提现支出", icon: "txzc-icon.png" },
         { name: "消费支出", icon: "xdxf-icon.png" },
-        { name: "店主分红", icon: "yhsy-icon.png" },
-        { name: "店员分红", icon: "yhsy-icon.png" },
-        { name: "销售提成", icon: "tixian-icon-2.png" },
+        { name: "店主分红", icon: "dzfh-icon.png" },
+        { name: "店员分红", icon: "dpfh-icon.png" },
+        { name: "销售提成", icon: "xstc-icon.png" },
         { name: "现金红包", icon: "tg_03-04@2x.png" },
       ],
       totalPage: '', // 页面总页数
@@ -56,7 +56,7 @@ Page({
             item.createTime = Tool.formatTime(item.createTime);
             item.add = item.biType == 1 ? true : false
             item.balance = Tool.formatNum(item.balance || 0)
-            item.realBalance = Tool.formatNum(item.realBalance || 0)
+            item.realBalance0 = Tool.formatNum(item.realBalance || 0)
             // item.add = item.type ==1?  true:false
             // item.showName = item.add ? "" : "退款"
             // item.showName = item.status == 2? "已冻结":item.showName

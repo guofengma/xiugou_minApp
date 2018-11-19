@@ -16,7 +16,8 @@ Component({
   },
   methods: {
     btnClicked() {
-      this.ProductFactory.shareBtnClicked(this.data.openType)
+      // this.ProductFactory.hiddenTips()
+      this.triggerEvent('subClicked', { index: this.data.openType });
     },
     msgClicked() {
       this.setData({

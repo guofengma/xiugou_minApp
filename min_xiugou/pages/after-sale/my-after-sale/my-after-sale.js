@@ -44,7 +44,7 @@ Page({
   searchKeyword() {
     let { params } = this.data
     if (Tool.isEmptyStr(this.data.keyword)){
-      Tool.showAlert('请输入搜索内容')
+      Tool.showAlert('搜索内容不能为空')
       return
     }
     params.page = 1
@@ -88,9 +88,9 @@ Page({
           item.typeName = this.data.typeArr[item.type].name
           item.typeState = this.data.typeState[item.status]
           console.log(item.type)
-          if (item.status == 4 || item.status ==5){
-            item.typeState = item.typeName + item.typeState
-          }
+          // if (item.status == 4 || item.status ==5){
+          //   item.typeState = item.typeName + item.typeState
+          // }
         })
         // if (!Tool.isEmptyStr(this.data.keyword)){
         //   lists=[]

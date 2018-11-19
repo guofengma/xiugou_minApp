@@ -82,7 +82,7 @@ Page({
       history = [...setArr]
       Storage.setHistorySearch(history)
     } else {
-      Tool.showAlert('请输入搜索内容')
+      Tool.showAlert('搜索内容不能为空')
       return
     }
     this.data.params.keyword = this.data.keyword

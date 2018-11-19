@@ -140,7 +140,7 @@ Page({
       }
       this.getRequest()
     } else {
-      Tool.showAlert('请输入搜索内容')
+      Tool.showAlert('搜索内容不能为空')
     }
   },
   requestKeyword(){

@@ -56,7 +56,7 @@ Component({
           let item = req.responseObject.data.data[i];
           item.createTime = Tool.formatTime(item.createTime);
           item.finishTime = Tool.formatTime(item.finishTime);
-          item.showFinishTime = item.deliverTime ? Tool.formatTime(item.deliverTime) : Tool.formatTime(item.finishTime);
+          item.showFinishTime = item.deliverTime ? Tool.formatTime(item.deliverTime) : item.finishTime;
           item.sendTime = Tool.formatTime(item.sendTime);
           item.payTime = Tool.formatTime(item.payTime);
           item.cancelTime = Tool.formatTime(item.cancelTime);

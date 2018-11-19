@@ -51,7 +51,7 @@
       </view>
       <view class='my-account-leave' catchtap='itemClicked' data-page='5' data-query='{{userInfos.blockedBalance}}'>
         <view class='account-num'>{{userInfos.blockedBalance0 || '0.00'}}</view>
-        <view>待提取账户</view>
+        <view>待提现账户</view>
       </view>
     </view>
   </view>
@@ -67,28 +67,39 @@
     </view>
     <!-- 订单列表 -->
     <view class='my-order-list'>
-      <view class='list-cont my-wait-pay' catchtap='itemClicked' data-page='6' data-query='1'>
-        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsale.png'}}"/>
+      <view class='list-cont my-wait-pay flexC' catchtap='itemClicked' data-page='6' data-query='1'>
+        <view>
+          <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsale.png'}}"/>
+          <view class='reddot'  wx:if='{{countUserOrderNum.waitPayNum}}'>{{countUserOrderNum.waitPayNum}}</view>
+        </view>
         <view>待付款</view>
-        <view class='reddot'  wx:if='{{countUserOrderNum.waitPayNum}}'>{{countUserOrderNum.waitPayNum}}</view>
+        
       </view>
       <!-- 代发货 -->
-      <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='2'>
-        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsend.png'}}"/>
+      <view class='list-cont flexC' catchtap='itemClicked' data-page='6' data-query='2'>
+        <view>
+          <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsend.png'}}"/>
+          <view class='reddot' wx:if='{{countUserOrderNum.waitSendNum}}'>{{countUserOrderNum.waitSendNum}}</view>
+        </view>
         <view>待发货</view>
-        <view class='reddot' wx:if='{{countUserOrderNum.waitSendNum}}'>{{countUserOrderNum.waitSendNum}}</view>
       </view>
       <!-- 待收货 -->
-      <view class='list-cont' catchtap='itemClicked' data-page='6' data-query='3'>
-        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'conForobtain.png'}}"/>
+      <view class='list-cont flexC' catchtap='itemClicked' data-page='6' data-query='3'>
+        <view>
+          <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'conForobtain.png'}}"/>
+          <view class='reddot' wx:if='{{countUserOrderNum.waitReceiveNum}}'>{{countUserOrderNum.waitReceiveNum}}</view>
+        </view>
         <view>待收货</view>
-        <view class='reddot' wx:if='{{countUserOrderNum.waitReceiveNum}}'>{{countUserOrderNum.waitReceiveNum}}</view>
+      
       </view>
       <!-- 售后 -->
-      <view class='list-cont' catchtap='itemClicked' data-page='7'>
-        <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconAftersale.png'}}"/>
+      <view class='list-cont flexC' catchtap='itemClicked' data-page='7'>
+        <view>
+          <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconAftersale.png'}}"/>
+          <view class='reddot' wx:if='{{countUserOrderNum.afterSaleServiceNum}}'>{{countUserOrderNum.afterSaleServiceNum}}</view>
+        </view>
         <view>售后/退款</view>
-        <view class='reddot' wx:if='{{countUserOrderNum.afterSaleServiceNum}}'>{{countUserOrderNum.afterSaleServiceNum}}</view>
+        
       </view>
     </view>
   </view>
@@ -114,7 +125,7 @@
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='11'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconData.png'}}"/>
-        <view>我的数据</view>
+        <view>我的晋升</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='12'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconCollect.png'}}"/>

@@ -8,13 +8,10 @@
     <view class='task-share-card' wx:else>
       <!-- typeStatus：是否抽中优惠券 couponType：优惠券类型 status：是否领取-->
       <view class='task-card coupon flexR' wx:if="{{scratchCard.typeStatus == 1}}">
-        <view class='coupon-money'>{{scratchCard.value}}<text class='symbol'>元</text></view>
+        <view class='coupon-money'>{{scratchCard.couponType == 3 ? scratchCard.value / 10 : scratchCard.value}}<text class='symbol'>{{scratchCard.couponType == 3? '折': '元'}}</text></view>
         <view class='coupon-info'>
           <view class='coupon-title'>{{scratchCard.name || ''}}</view>
-          <view class='coupon-detail' wx:if="{{scratchCard.couponName}}">{{scratchCard.couponName}}</view>
-          <view class='coupon-detail' wx:else>
-          满{{scratchCard.useConditions||'0'}}减{{scratchCard.value}}{{scratchCard.couponType == 3? '折': '元'}}
-          </view>
+          <view class='coupon-detail'>{{scratchCard.couponName}}</view>
           <view class='coupon-time' wx:if="{{scratchCard.status == 1}}">使用期限：
             <view>{{deadline}}</view>
           </view>

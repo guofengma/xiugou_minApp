@@ -9,6 +9,7 @@
     "swiper-product": "/pages/product-detail/temp/swiper/swiper-product",
     "topBar": "/pages/product-detail/temp/topBar/topBar",
     "product-infos": "/pages/product-detail/temp/product-infos/product-infos",
-    "image-sub": "/components/image-sub/image-sub"
+    "image-sub": "/components/image-sub/image-sub",
+    "alert": "/components/alert/alert"
   }
 }

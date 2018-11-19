@@ -18,7 +18,13 @@ Page({
     priceList:[],
     size:0,
     userInfos:{},
-    openType:'share'
+    openType:'share',
+    alertProps:{
+      btn:[
+        {name:'取消',type:'share'},
+        {name:'去登录',type:''}
+      ]
+    }
   },
   onLoad: function (options) {
     this.setData({
@@ -27,7 +33,7 @@ Page({
       door: options.door || '',
       inviteId: options.inviteId || ''
     })
-    
+   
     this.ProductFactory = new ProductFactorys(this)
     this.didLogin()
     // this.initRequest()
@@ -200,7 +206,16 @@ Page({
     wx.stopPullDownRefresh();
   },
   shareBtnClicked() {
-    this.ProductFactory.shareBtnClicked(this.data.openType)
+    if (!this.data.didLogin) {
+      this.setData({
+        alertShow: true
+      })
+    }
+    this.ProductFactory.hiddenTips()
+    // this.ProductFactory.shareBtnClicked(this.data.openType)
+  },
+  shareSubClicked(e){
+    this.ProductFactory.shareSubClicked(e)
   },
   onShareAppMessage: function (res) {
     return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.id)

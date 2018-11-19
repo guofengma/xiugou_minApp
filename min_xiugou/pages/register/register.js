@@ -28,15 +28,16 @@ Page({
     }
     app.deleteInviteId()
     let upUserId = Storage.getUpUserId() || {}
+    // Tool.showAlert(upUserId.id)
     this.setData({
       inviteCode: options.inviteCode || '',
-      inviteId: inviteId || upUserId.id || '',
+      inviteId: Number(inviteId) || upUserId.id || '',
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
       urlFrom: options.from || null,
       phone: options.phone || ''
     })
-    
+
     if (options.inviteCode){
       let callBack = () => {
         this.sweepCode(options.inviteCode)
@@ -48,7 +49,7 @@ Page({
     }
   },
   onShow: function () {
-    
+
   },
   sweepCode(id){ // 判断邀请码是否过期等
     let params = {
@@ -59,7 +60,7 @@ Page({
     }
     let r = RequestFactory.wxRequest(params);
     r.successBlock = (req) => {
-      
+
     }
     r.failBlock = (req) => {
       let msg = req.responseObject.msg
@@ -97,13 +98,14 @@ Page({
       headImg: this.data.userInfo.avatarUrl,
       nickname: this.data.userInfo.nickName,
       openid: this.data.openid || Storage.getWxOpenid() || '',
-      upUserId: this.data.inviteId, // 邀请者id 非必填
-      inviteCode: this.data.inviteCode,//邀请码 非必填
+      upUserId: this.data.inviteId || "", // 邀请者id 非必填
+      inviteCode: this.data.inviteCode || "",//邀请码 非必填
     }
-    // this.verifyPhone(e.detail.value)  // 改动了 
+    // this.verifyPhone(e.detail.value)  // 改动了
     this.verifyPhone(params)
   },
   verifyPhone(params){
+    console.log(params)
     params = {
       ...params,
       reqName: '判断手机号是否已经注册',
@@ -223,7 +225,7 @@ Page({
       })
       Storage.setWxUserInfo(e.detail.userInfo)
       this.formSubmit()
-    } 
+    }
   },
   getUserInfo() {
     wx.getUserInfo({
@@ -235,7 +237,7 @@ Page({
         this.formSubmit()
       },
       fail: function () {
-       
+
       }
     })
   },

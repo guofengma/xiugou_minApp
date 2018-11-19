@@ -16,7 +16,6 @@ Page({
         originalImg: [],
         smallImg: [],
         content:'',
-        bgImgUrl:"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/checked.png",
         typeArr:[
           // "请选择问题类型","账户问题", "营销问题", "购买流程","推广机制"
         ]
