@@ -1,8 +1,0 @@
-      <!-- <view class="container">
-        <view class='before'></view>
-        <view class='after'></view>
-        <view class="wave"></view>
-      </view> -->
-
-      <canvas style="width: 80rpx; height: 80rpx;" canvas-id="firstCanvas"></canvas>
-      <input value='{{code}}' class='input' bindinput='bindinput'/>
