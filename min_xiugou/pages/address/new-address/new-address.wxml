@@ -39,13 +39,13 @@
                 <view wx:else class='textarea'></view>
             </view>
         </view>
-       <view class="wrap" wx:if='{{!id}}'>
+       <view class="wrap" wx:if='{{!id}}' bindtap="setDefault">
             <view class="default mar-top2">
                 <view>
                     <text>是否设为默认地址</text>
                 </view>
                 <view>
-                    <image bindtap="setDefault" src='{{ isDefault? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
+                    <image  src='{{ isDefault? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
                 </view>
             </view>
         </view>

@@ -127,7 +127,7 @@ export default class Request {
       header: {
         'content-type': 'application/json',
         'device': global.Storage.getPlatform() || '',
-          'platform': 'mini',
+        'platform': 'mini',
         'version': this.bodyParam.systemVersion,
         'sg-token': global.Storage.getToken() || '',
         ...rsa_headers
