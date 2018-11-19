@@ -127,7 +127,8 @@ export default class Request {
       header: {
         'content-type': 'application/json',
         'device': global.Storage.getPlatform() || '',
-        'platform': this.bodyParam.systemVersion,
+        'platform': 'mini',
+        'version': this.bodyParam.systemVersion,
         'sg-token': global.Storage.getToken() || '',
         ...rsa_headers
       },
@@ -191,7 +192,7 @@ export default class Request {
         }
       },
       complete: function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         that.requestStatus = RequestStatus.finish;
         that.completeBlock(that);
         if(res.statusCode != 200) {

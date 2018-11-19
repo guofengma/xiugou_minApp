@@ -111,7 +111,7 @@ App({
         Storage.setUserAccountInfo(datas)
         callBack(datas)
       };
-      Tool.showErrMsg(r)
+      // Tool.showErrMsg(r)
       r.addToQueue();
     },
 })

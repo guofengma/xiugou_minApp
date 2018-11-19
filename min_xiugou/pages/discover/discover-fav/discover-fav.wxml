@@ -1,7 +1,9 @@
 <import src='/pages/discover/discover-item/discover-item.wxml'/>
 <import src= "/components/goT-top-btn/goT-top-btn.wxml"/>
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
 
-<view class="discover-fav-container" style="margin-bottom: {{showEdit ? '100' : '0'}}rpx">
+<view class="discover-fav-container" style="margin-bottom: {{showEdit ? '100' : '0'}}rpx" wx:if='{{items.length>0}}'>
   <view class='discover-fav-top flexR-sb'>
     <view class='discover-fav-info'>您收藏了<text>{{items.length}}</text>篇文章</view>
     <view class='discover-fav-manage' bindtap='toggleShowEdit'>{{showEdit ? '完成' : '管理'}}</view>
@@ -28,3 +30,4 @@
   <!-- operate E -->
   <template is="goT-top-btn" data='{{floorstatus:showBackTop}}'/>
 </view>
+<template is="result-tips" wx-if='{{items.length==0}}' data="{{tipVal:8,showBtn:true}}" />
