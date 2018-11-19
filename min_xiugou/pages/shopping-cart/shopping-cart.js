@@ -28,6 +28,9 @@ Page({
     })
   },
   onPullDownRefresh: function () {
+    this.setData({
+      items:[]
+    })
     this.initDatas()
     wx.stopPullDownRefresh();
   },

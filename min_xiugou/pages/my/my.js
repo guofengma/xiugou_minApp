@@ -36,7 +36,6 @@ Page({
       this.refreshMemberInfoNotice()
       Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
       Event.on('didLogin', this.didLogin, this);  
-      
     },
     onPullDownRefresh: function () {
       this.onLoad()
@@ -115,7 +114,8 @@ Page({
           return item.id == levelId
         })
         this.setData({
-          range: userExp / levelObj[0].upgradeExp *100
+          // range: userExp / levelObj[0].upgradeExp *100
+          range:40
         })
         this.initDatas()
         this.render()
@@ -171,7 +171,7 @@ Page({
   initDatas() {
     // 使用 wx.createContext 获取绘图上下文 context
     this.data.ctx = wx.createContext();
-
+    // this.data.ctx = wx.createCanvasContext('firstCanvas')
     // this.data.nowRange = 40;   //用于做一个临时的range
     let systemInfo = wx.getSystemInfoSync()
     //画布属性
@@ -189,11 +189,12 @@ Page({
       nowRange: 40,//用于做一个临时的range
       sX: 0,
       axisLength: this.data.mW,//轴长
-      waveWidth: 0.08,//波浪宽度,数越小越宽
+      waveWidth: 0.12,//波浪宽度,数越小越宽
       waveHeight: 0.008,//波浪高度,数越大越高
       speed: 0.04,//波浪速度，数越大速度越快
-      xOffset: 1,//波浪x偏移量
+      xOffset: 10,//波浪x偏移量
       IsdrawCircled: false, // 画圈函数
+      lastTime:0,
     })
 
     this.data.ctx.setLineWidth(this.data.lineWidth)
@@ -219,7 +220,7 @@ Page({
     ctx.setTextAlign('center');
     ctx.setFontSize(size)
     ctx.setFillStyle('#ffffff')
-    ctx.fillText(this.data.userInfos.levelName, this.data.r, this.data.r + size / 2);
+    ctx.fillText(this.data.userInfos.levelName || '', this.data.r, this.data.r + size / 2);
     ctx.restore();
   },
   render() {
@@ -248,10 +249,25 @@ Page({
       canvasId: 'firstCanvas',
       actions: ctx.getActions()
     })
-    requestAnimationFrame(this.render);
+    let timer = this.requestAnimationFrame(this.render);
+    this.setData({
+      timer:timer
+    })
+  },
+  requestAnimationFrame(callback){
+    var currTime = new Date().getTime();
+    var timeToCall = Math.max(0, 16 - (currTime - this.data.lastTime));
+    var id = setTimeout(function () { callback(currTime + timeToCall); },
+      timeToCall);
+    this.data.lastTime = currTime + timeToCall;
+    return id;
   },
   drawSin(xOffset, color, waveHeight) {
     let ctx = this.data.ctx
+    ctx.beginPath();
+    ctx.arc(this.data.r, this.data.r, this.data.cR, 0, 2 * Math.PI);
+    ctx.clip();
+    
     ctx.save();
 
     let points = [];  //用于存放绘制Sin曲线的点
@@ -275,9 +291,16 @@ Page({
     ctx.lineTo(axisLength, mH);
     ctx.lineTo(sX, mH);
     ctx.lineTo(points[0][0], points[0][1]);
+    
     ctx.setFillStyle(color)
     ctx.fill();
 
     ctx.restore();
-  }
+  },
+  joinUsClicked(){
+    Tool.switchTab('/pages/discover/discover')
+  },
+  onHide: function () {
+    clearTimeout(this.data.timer)
+  },
 })

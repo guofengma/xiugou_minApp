@@ -28,7 +28,7 @@
   background-size: 100% 100%;
   border-top: 1prx solid #eee;
   color: #fff;
-  height: 297rpx;
+  height: 360rpx;
 }
 .my-avatar{
   display: flex;
@@ -75,6 +75,11 @@
    background: linear-gradient( #FE2A65, #FE2746);
    display: inline-block;
    margin: 0 9rpx;
+   
+ }
+ canvas{
+  /* overflow:hidden;
+  border-radius: 50%; */
  }
  .my-save{
   position: absolute;
@@ -84,7 +89,7 @@
   background: #F1D3A1;
   border-top-left-radius:109rpx;
   border-bottom-left-radius:109rpx;
-  bottom: 80rpx;
+  bottom: 140rpx;
 }
 .levelName{
   color: #333
@@ -93,8 +98,7 @@
   background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-user-data-bg.png) no-repeat left bottom;
   background-size: 100% 100%; 
   color: #fff;
-  /* background: #fff; */
-  
+  margin-top: 75rpx;
 }
 .my-account-item{
    height: 88rpx;
@@ -185,4 +189,13 @@
   color: #A9A9A9
 }
 
-
+.joinUs{
+  position: absolute;
+  top:272rpx;
+  width: 100%;
+}
+.joinUs>view{
+  height:124rpx;
+  background:url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-joinus-bg.png) no-repeat left bottom;
+  background-size: cover; 
+}

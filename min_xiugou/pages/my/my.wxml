@@ -9,7 +9,6 @@
     </view>
     <view class='my-avatar' catchtap='itemClicked' data-page='2'>
       <cover-image  src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></cover-image>
-      <!-- <image src='{{userInfos.headImg || "/img/default-userImg.png"}}' class='avatar-img'></image> -->
       <view>
         <view class='my-info-item flexR' catchtap='itemClicked' data-page='2' >
           <view class='my-name ellipsis'> {{userInfos.nickname || '请登录'}}</view>
@@ -17,13 +16,12 @@
         </view>
 
         <view class='my-rank' wx:if='{{didLogin}}'>
-          <!-- <image-sub imgStyle='{{"width:88rpx"}}' imgSrc="{{'iconRank.png'}}"/>
-          <text class='my-rank-no'>{{userInfos.levelName || ''}}</text> -->
           授权ID {{userInfos.code || ''}}
         </view>
       </view>
     </view>
     <!--  -->
+     <!-- <canvas  canvas-id="firstCanvas"></canvas> -->
     <view class='my-save flexR-sb'>
      <view class='level-circle'>
       <canvas style="width: 80rpx; height: 80rpx;" canvas-id="firstCanvas"></canvas>
@@ -38,8 +36,8 @@
   
   </view>
   <!-- 加入秀购 -->
-  <view>
-    
+  <view class='joinUs'>
+    <view class='width-690' catchtap='joinUsClicked'></view>
   </view>
   <!-- 我的资产 -->
   <view class='my-account width-690'>
