@@ -1,7 +1,7 @@
 @import "/libs/wxParse/wxParse.wxss";
 .bg-area{
-  background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-promotion-bg.png") no-repeat top center;
-  background-size: cover;
+  background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/home_jingshenqingk_bg@3x.png") no-repeat top center;
+  background-size:100% 100%;
   color: #fff;
   height: 364rpx;
   padding: 30rpx;
@@ -24,10 +24,10 @@
   align-items: flex-start;
 }
 .level-label{
-  background: rgba(255,255,255,0.4)  url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/promotion-bg.png") no-repeat 1rpx 1rpx;
+  background: rgba(255,255,255,0.4)  url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/dianyuanxiangqiing_icon@3x.png") no-repeat 2rpx 2rpx;
   margin-top: 10rpx;
-  height: 30rpx;
-  line-height: 30rpx;
+  height: 34rpx;
+  line-height: 34rpx;
   background-size: 28rpx 28rpx;
   border-radius: 20rpx;
   border:1rpx solid #ff8f20;
@@ -44,7 +44,7 @@
 }
 .growing-view-bg{
   position: absolute;
-  top:266rpx;
+  top:230rpx;
   width: 100%;
 }
 .growing-view{
