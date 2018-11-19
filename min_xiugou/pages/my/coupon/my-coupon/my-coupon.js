@@ -18,7 +18,8 @@ Page({
       coinData:{
         nickname:'全品类：无金额门槛',
         'type':0,
-        name:'可叠加使用',
+        name:'1元现金券',
+        tips:'可叠加使用',
         isCoinCoupon:true,
         value:1,
         num:0,

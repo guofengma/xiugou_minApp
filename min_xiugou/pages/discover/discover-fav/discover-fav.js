@@ -23,6 +23,9 @@ Page({
   onUnload () {
 
   },
+  lookAround(){
+    Tool.switchTab('/pages/discover/discover')
+  },
   onReachBottom () {
     let data = this.data;
     if(data.totalPage == data.currentPage) {
@@ -34,7 +37,6 @@ Page({
   },
   // 获取收藏列表数据
   getCollectList(page = 1, size = 10) {
-    console.log(page);
     let params = {
       page: page,
       size: size,

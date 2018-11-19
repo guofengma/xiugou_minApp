@@ -14,7 +14,7 @@
       </view>
       <view class='animated flexC {{animate1? "zoomIn2":""}}' wx:if='{{animate1&&animate0 || todaySgin}}'>
         <image-sub imgStyle='{{"width:66rpx"}}' imgSrc="{{'icon.png'}}"/>
-        <view class='font-38 white flexR'>{{userInfos.userScore || 0}}</view>
+        <view class='white flexR {{userInfos.userScore0.length>4? "font-30":"font-38"}}'>{{userInfos.userScore || 0}}</view>
       </view>
     </view>
    

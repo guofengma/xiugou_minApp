@@ -34,6 +34,7 @@ Page({
   },
   getLevel() {
     let callBack = (datas)=>{
+      datas.userScore0 = String(datas.userScore)
       this.setData({
         userInfos: datas
       })

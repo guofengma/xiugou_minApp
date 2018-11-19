@@ -1,4 +1,5 @@
-@import "/pages/discover/discover-item/discover-item.wxss";
+@import "/pages/discover/discover-item/discover-item.wxss"
+@import  "/components/result-tips/result-tips";
 .discover-fav-top,.discover-list {
   padding: 0 30rpx;
 }
