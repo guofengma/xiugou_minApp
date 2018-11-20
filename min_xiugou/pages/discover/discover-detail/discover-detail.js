@@ -1,4 +1,5 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
+
 Page({
   data: {
     assist: false,
@@ -11,9 +12,8 @@ Page({
     this.setData({
       articleId: articleId
     })
-    console.log(this.data)
+    Tool.isIPhoneX(this);
     this.getArticleDetail();
-    
   },
   onReady() {
 

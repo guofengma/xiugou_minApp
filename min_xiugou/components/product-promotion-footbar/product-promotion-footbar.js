@@ -36,6 +36,7 @@ Component({
         p.text = '立即拍';
         p.className = 'footbar-main';
         p.textSmall = '';
+        p.disabled = false;
       }
 
       if ([3, 4, 5].includes(props.status)) {
