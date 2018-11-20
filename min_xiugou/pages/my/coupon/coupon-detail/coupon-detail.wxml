@@ -8,7 +8,7 @@
     <view wx:if='{{!detail.isCoinCoupon}}'>{{detail.remarks || '无'}}</view>
     <view wx:else>
       <view>1.全场均可使用此优惠券</view>
-      <view>2.礼包优惠券在激活有效期内可以购买指导商品</view>
+      <view>2.礼包优惠券在激活有效期内可以购买指定商品</view>
     </view>
   </view>
 </view>
