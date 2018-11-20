@@ -48,7 +48,7 @@
       >去使用</view>
     </view>
     <view class='task-detail-desc'>
-      <image mode='widthFix' src='{{imgUrl}}task_detail_bg.png' class='task-thumb'></image>
+      <image-sub imgStyle='{{"width:100%"}}' imgSrc="{{'renwu-bg-2.png'}}"/>
     </view>
   </view>
   <!-- 填写领取手机 -->

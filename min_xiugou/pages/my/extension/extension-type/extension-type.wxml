@@ -1,4 +1,4 @@
-<view class='sub-page'>
+<view class='extension-page'>
  <view class='extension-banner font-26'>
   <image-sub imgStyle='{{"width:100%"}}' imgSrc="{{'banner-extension@2x.png'}}"/>
   </view>
