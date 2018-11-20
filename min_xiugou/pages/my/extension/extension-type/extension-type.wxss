@@ -16,3 +16,7 @@
 .disabledBg{
   background:rgba(255,219,178,0.5) !important;
 }
+.sub-page{
+  background: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/extension-bg@2x.png) no-repeat;
+  background-size:100% 100%;
+}
