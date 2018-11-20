@@ -1,4 +1,5 @@
 <import src="/libs/wxParse/wxParse.wxml"/>
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
 <view class="discover-detail-container">
   <!-- swiper S -->
   <view class='discover-detail-swiper'>
@@ -30,7 +31,7 @@
   </view>
   <!-- content E -->
   <!-- recommend list S -->
-  <view class='discover-detail-recommend'>
+  <view class='discover-detail-recommend {{isIPhoneX.isIPhoneX ? "iphoneX": ""}}'>
     <view class='item' wx:for="{{details.products}}" wx:key="unique" bindtap='showItemDetail' data-id="{{item.code}}">
       <view class='item-thumb'>
         <image src='{{item.headImg}}'></image>
@@ -45,12 +46,13 @@
     </view>
     
   </view>
+  <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
   <!-- recommend list E -->
-  <view class='fixed-height'></view>
+  <view class='fixed-height {{isIPhoneX.isIPhoneX ? "iphoneX": ""}}'></view>
   <!-- footer operate S -->
-  <view class='discover-detail-operate flexR'>
+  <view class='discover-detail-operate flexR {{isIPhoneX.isIPhoneX ? "iphoneX": ""}}'>
     <!-- 1.收藏 2.点赞 -->
-    <view class='operate assist' 
+    <!-- <view class='operate assist' 
       bindtap='toggleDiscoverLikeCollect'
       data-type="2" 
       data-status="{{details.hadLike}}"
@@ -58,16 +60,19 @@
     >
       <image class='icon' src="{{details.hadLike ? '/img/home_icon_zactive@3x.png' : '/img/home_icon_dianzan@3x.png'}}"></image>
       <text>{{details.hadLike ? '已': ''}}赞·{{details.likeCount}}</text>
+    </view> -->
+    <view class='operate'>
+      <view class="fav"
+        bindtap='toggleDiscoverLikeCollect' 
+        data-type="1" 
+        data-status="{{details.hadCollect}}"
+        data-id="{{details.id}}"
+      >
+        <image class='icon' src="{{details.hadCollect ? '/img/home_icon_yishoucan@3x.png' : '/img/home_icon_shoucan@3.png'}}"></image>
+        <text> 人气值·{{details.collectCount || 0}}</text>
+      </view>
     </view>
-    <view class='operate fav'
-     bindtap='toggleDiscoverLikeCollect' 
-     data-type="1" 
-     data-status="{{details.hadCollect}}"
-     data-id="{{details.id}}"
-    >
-      <image class='icon' src="{{details.hadCollect ? '/img/home_icon_yishoucan@3x.png' : '/img/home_icon_shoucan@3.png'}}"></image>
-      <text>{{details.hadCollect ? '已': ''}}收藏·{{details.collectCount}}</text>
-    </view>
+    <button open-type='share' class="operate_share"><image class='icon' src='/img/share.png'></image> 秀一秀</button>
   </view>
   <!-- footer operate E -->
 </view>

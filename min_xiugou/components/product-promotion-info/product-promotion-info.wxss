@@ -64,6 +64,7 @@
 .promotion-info-right .bottom {
   width: 200rpx;
   margin: 0 auto;
+  height: 32rpx;
 }
 .promotion-info-container.ing .top {
   color: #FFFC00;
