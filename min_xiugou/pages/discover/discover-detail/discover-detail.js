@@ -11,7 +11,7 @@ Page({
     this.setData({
       articleId: articleId
     })
-    console.log(this.data)
+    Tool.isIPhoneX(this);
     this.getArticleDetail();
     
   },
