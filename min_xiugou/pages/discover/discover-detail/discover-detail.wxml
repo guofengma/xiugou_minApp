@@ -69,7 +69,7 @@
         data-id="{{details.id}}"
       >
         <image class='icon' src="{{details.hadCollect ? '/img/home_icon_yishoucan@3x.png' : '/img/home_icon_shoucan@3.png'}}"></image>
-        <text> 人气值·{{details.collectCount}}</text>
+        <text> 人气值·{{details.collectCount || 0}}</text>
       </view>
     </view>
     <button open-type='share' class="operate_share"><image class='icon' src='/img/share.png'></image> 秀一秀</button>
