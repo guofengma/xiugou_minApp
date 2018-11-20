@@ -18,7 +18,7 @@
           {{item.name}}
           <text class='gray font-22' wx:if='{{item.tips}}'>({{item.tips}})</text>
           </view>
-          <view class='gray' wx:if='{{!item.isCoinCoupon&&item.type!=4}}'>满{{item.useConditions || 0}}可用</view>
+          <!-- <view class='gray' wx:if='{{!item.isCoinCoupon&&item.type!=4}}'>满{{item.useConditions || 0}}可用</view> -->
           <view class='gray time' wx:if='{{item.isCoinCoupon}}' >有效期：无时间限制</view>
           <view class='gray time' wx:else>有效期：{{item.start_time}}-{{item.outTime}}</view>
         </view>
