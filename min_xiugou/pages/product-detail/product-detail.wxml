@@ -13,9 +13,9 @@
 <!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
 <view class='prduct-detail-view' wx:if='{{productInfoList}}'>
     <!--topbar  -->
-    <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'  size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked'/>
+    <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'  size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}'/>
     <!-- 轮播 -->
-    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked'/>
+    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}'/>
     <!-- 活动产品倒计时提示 -->
     <view wx:if='{{proNavData}}' catchtap='goPage'>
       <product-promotion-info 
@@ -59,11 +59,14 @@
         </view>
         <view class='add-cart font-28 flexR yellowBg shareBtn-view' >
           <button class='shareBtn flexR '  open-type="{{openType}}" catchtap='shareBtnClicked' >
-            <view class='font-50'>赚</view>
-            <view class='font-22 shareMoney' style='margin-left:8rpx'>
-              <view>品牌奖励金</view>
-              <view class='ellipsis' wx:if='{{productInfoList.shareMoney}}'>¥ {{productInfoList.shareMoney}}</view>
-            </view>
+           <view wx:if='{{productInfoList.shareMoney=="0.00" || productInfoList.shareMoney=="0.00 - 0.00"}}'>分享赚</view>
+           <view wx:else class='flexR'>
+             <view class='font-50'>赚</view>
+              <view class='font-22 shareMoney' style='margin-left:8rpx'>
+                <view>品牌奖励金</view>
+                <view class='ellipsis'>¥ {{productInfoList.shareMoney}}</view>
+              </view>
+           </view>
           </button>
         </view>
       </view>
@@ -73,7 +76,7 @@
   </view>
 <!-- </scroll-view> -->
 
-
+ 
 <!--适配iPhone X  -->
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
 

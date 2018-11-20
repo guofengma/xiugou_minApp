@@ -114,7 +114,8 @@ Page({
           return item.id == levelId
         })
         this.setData({
-          range: userExp / levelObj[0].upgradeExp *100
+          range: userExp / levelObj[0].upgradeExp *100,
+          // range:40
         })
         this.initDatas()
         this.render()
@@ -169,8 +170,8 @@ Page({
     },
   initDatas() {
     // 使用 wx.createContext 获取绘图上下文 context
-    this.data.ctx = wx.createContext();
-    // this.data.ctx = wx.createCanvasContext('firstCanvas')
+    // this.data.ctx = wx.createContext();
+    this.data.ctx = wx.createCanvasContext('firstCanvas')
     // this.data.nowRange = 40;   //用于做一个临时的range
     let systemInfo = wx.getSystemInfoSync()
     //画布属性
@@ -239,15 +240,15 @@ Page({
     if (this.data.nowRange > rangeValue) {
       this.data.nowRange -= 1;
     }
-
+    ctx.beginPath();
+    ctx.arc(this.data.r, this.data.r, this.data.cR, 0, 2 * Math.PI);
+    ctx.clip();
     this.drawSin(this.data.xOffset + Math.PI * 0.7, '#D01433', 18);
     this.drawSin(this.data.xOffset, '#B1021B', 18);
     this.drawText();
     this.data.xOffset += this.data.speed;
-    wx.drawCanvas({
-      canvasId: 'firstCanvas',
-      actions: ctx.getActions()
-    })
+    let that = this
+    ctx.draw()
     let timer = this.requestAnimationFrame(this.render);
     this.setData({
       timer:timer
@@ -263,9 +264,7 @@ Page({
   },
   drawSin(xOffset, color, waveHeight) {
     let ctx = this.data.ctx
-    ctx.beginPath();
-    ctx.arc(this.data.r, this.data.r, this.data.cR, 0, 2 * Math.PI);
-    ctx.clip();
+   
     
     ctx.save();
 

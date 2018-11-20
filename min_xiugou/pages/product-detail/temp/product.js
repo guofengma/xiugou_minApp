@@ -88,7 +88,26 @@ export default class ProductFactorys  {
   didLogin(){ // 是否登录 
     Tool.didLogin(this.page)
     Tool.getUserInfos(this.page)
+    if (this.page.data.didLogin){
+      this.queryPushNum()
+    }
     this.getShoppingCartList()
+  }
+  queryPushNum() {
+    let params = {
+      reqName: '消息未读详情',
+      url: Operation.queryPushNum,
+      requestMethod: 'GET'
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let detail = req.responseObject.data;
+      this.page.setData({
+        messageNum: detail.messageCount + detail.noticeCount + detail.shopMessageCount
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   }
   getShoppingCartList() { // 获取线上购物车
     if (!this.page.data.didLogin) {

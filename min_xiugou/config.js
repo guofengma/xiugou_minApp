@@ -19,8 +19,8 @@ const config = {
   AppId: 'wxa059b818226f8679',//小程序AppID
   Secret: '9fa19f4d1f7e37d318dba14f951f1b4c',//小程序Secret
   imgSizeParams:{
-    m_fixed:'?x-oss-process=im age/resize,m_fixed,h_100,w_100', // 正方形
-    m_fill:'?x-oss-process=image/resize,m_fill,h_100,w_100', // 固定宽度 自裁剪
+    m_fixed:'?x-oss-process=image/resize,m_fixed,h_300,w_300', // 正方形
+    m_fill:'?x-oss-process=image/resize,m_fill,h_300,w_300', // 固定宽度 自裁剪
   },
   imgBaseUrl:"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/",// 图片的地址
 }

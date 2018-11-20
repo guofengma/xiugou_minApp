@@ -78,14 +78,14 @@
   margin: 0;
   padding: 0 10rpx;
   width: 100%;
+  height: 100%;
   background: transparent;
   color: #fff;
-  /* justify-content: flex-start; */
   line-height: 28rpx;
 }
 .shareMoney{
   max-width: 80%;
 }
-.shareBtn-view{
-  /* font-size:  */
+.shareBtn>view{
+  width: 100%;
 }
