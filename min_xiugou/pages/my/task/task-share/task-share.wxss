@@ -13,15 +13,9 @@
   height: 182rpx;
 }
 .task-card.ready {
-  
   line-height: 182rpx;
-  /* background: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/card_ready.png?_=2)no-repeat center; */
-  /* background-size: 100%; */
-  /* color: #FF0050; */
   font-size: 60rpx;
   text-align: center;
-  font-family:PingFangSC-Medium;
-  /* font-weight:500; */
 }
 .task-card.coupon,.coupon-money .symbol {
   font-size: 24rpx;

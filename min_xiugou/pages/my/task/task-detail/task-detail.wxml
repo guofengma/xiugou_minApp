@@ -4,7 +4,6 @@
     <view class='task-detail-desc'>
       {{detail.remarks || ''}}
       <image-sub imgStyle='{{"width:100%"}}' imgSrc="{{'renwu-bg-1@3x.png'}}"/>
-      <!-- <image mode='widthFix' src='https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png' class='task-thumb'></image> -->
     </view>
   </view>
   <view class='fixed-height'></view>
