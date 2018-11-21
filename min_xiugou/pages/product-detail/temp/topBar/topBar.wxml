@@ -10,6 +10,7 @@
     </view>
     <view class='msg-view flexR' bindtap='msgClicked'>
       <image src='/img/xiangqing_yuan@3x.png' class='top-img-2'  mode='widthFix'></image>
+      <view class='num-label redBg flexR' wx:if='{{messageNum>0}}'>{{messageNum}}</view>
     </view>
   </view>
   

@@ -56,8 +56,7 @@
   font-size: 22rpx;
   width: 36rpx;
   height: 36rpx;
-  border-radius: 50rpx;
-  display: inline-block;
+  border-radius: 10rpx;
 }
 .msg-tips>.flexR .num-label{
   top: 8rpx;

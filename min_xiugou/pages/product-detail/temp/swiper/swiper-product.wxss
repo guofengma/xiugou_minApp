@@ -33,15 +33,14 @@
   z-index: 100;
   min-height: 50rpx;
 }
-.slider-nav image{
-  width: 70rpx;
-}
 /* 购物车 */
-.cart-view{
+.cart-view,.msg-view{
   position: relative;
-  margin-right: 20rpx;
 }
 .num-label{
   top:-8rpx;
   right:-2rpx;
+}
+.cart-view{
+ margin-right: 20rpx;
 }

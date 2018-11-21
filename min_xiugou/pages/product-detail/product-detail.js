@@ -127,6 +127,9 @@ Page({
     Tool.showErrMsg(r)
     r.addToQueue();
   },
+  groupClicked(){
+    Tool.navigateTo('/pages/web-view/web-view?webType=3')
+  },
   goPage(){
     if(this.data.activityType==1){
       Tool.redirectTo('/pages/product-detail/seckill-detail/seckill-detail?code=' + this.data.proNavData.activityCode)

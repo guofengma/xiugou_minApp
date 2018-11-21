@@ -29,7 +29,7 @@
       />
     </view>
     <!-- 产品信息 -->
-    <template is="product-info" data="{{productInfo,productInfoList,showPrice:true}}" />
+    <template is="product-info" data="{{productInfo,productInfoList,showPrice:true,groupPrice:true}}" />
     <!--产品规格选择  -->
     <view class='chooseBox'>
       <template is="product-info-chooseBox" data="{{productInfo}}" />

@@ -13,10 +13,11 @@
 }
 .right-bar{
   position: absolute;
-  right: 10rpx;
+  right: 20rpx;
 }
 .msg-view{
   width: 70rpx;
+  position: relative;
 }
 
 /* 购物车 */
@@ -36,4 +37,8 @@
 }
 .top-img-2{
  width: 70rpx;
+}
+.msg-view .num-label{
+  top: -1rpx;
+  left: 30rpx;
 }

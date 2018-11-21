@@ -153,10 +153,10 @@ export default class ProductFactorys  {
         }
         break;
       case 2:
-        Tool.switchTab('/pages/index/index')
+        // Tool.switchTab('/pages/index/index')
+        Tool.navigateTo('/pages/search/search?door=0')
         break;
       case 3:
-
         break;
     }
   }

@@ -1,14 +1,22 @@
 <template name="product-info">
   <view class='prd-info boxSize'>
     <view class='prd-name ellipsis-2'>{{productInfo.name}}</view>
-    <view class='price' wx:if='{{showPrice}}'>
-      <text class='price1 red'>¥ {{productInfoList.price}}<text class='font-24'>起</text></text>
-      <text class='price2 gray'>¥ {{productInfoList.originalPrice}}</text>
-      <text class='label-pd redBg'>{{productInfoList.userLevelTypeName}}</text>
-    </view>
-    <view class='shippingInfo gray'>
-      <text style='margin-right:158rpx'>快递：{{productInfoList.freight || '包邮'}} {{productInfoList.freight? "元":""}}</text> 
-      <text>月销售{{productInfoList.monthSaleTotal}}笔</text>
+    <view class='flexR-sb'>
+      <view>
+        <view class='price' wx:if='{{showPrice}}'>
+          <text class='label-pd red'>{{productInfoList.userLevelTypeName}}</text>
+          <text class='price1 red'>¥ {{productInfoList.price}}<text class='font-24'>起</text></text>
+          <text class='price2 gray-9'>¥ {{productInfoList.originalPrice}}</text>
+        </view>
+        <view class='shippingInfo gray-9'>
+          <text style='margin-right:158rpx'>快递：{{productInfoList.freight || '包邮'}} {{productInfoList.freight? "元":""}}</text> 
+          <text>月销: {{productInfoList.monthSaleTotal}}笔</text>
+        </view>
+      </view>
+      <view class='group-price flexC'  wx:if='{{groupPrice}}' catchtap='groupClicked'>
+        拼店价
+        <view class='red'>¥ {{productInfoList.originalPrice}}</view>
+      </view>
     </view>
   </view>
 </template>
