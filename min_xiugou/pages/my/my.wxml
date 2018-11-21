@@ -22,12 +22,12 @@
     </view>
     <!--  -->
      <!-- <canvas  canvas-id="firstCanvas"></canvas> -->
-    <view class='my-save flexR-sb'>
+    <view class='my-save flexR-sb' catchtap='levelClicked'>
      <view class='level-circle'>
       <canvas style="width: 80rpx; height: 80rpx;" canvas-id="firstCanvas"></canvas>
      </view>
      <view class='level-content'>
-        <view class='levelName'>黑金品鉴官</view>
+        <view class='levelName'>{{userInfos.levelRemark}}品鉴官</view>
         <view>查看权益
           <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'jiantou-white.png'}}"/>
         </view>
@@ -68,8 +68,8 @@
       </view>
     </view>
     <!-- 订单列表 -->
-    <view class='my-order-list'>
-      <view class='list-cont my-wait-pay flexC' catchtap='itemClicked' data-page='6' data-query='1'>
+    <view class='my-order-list flexR'>
+      <view class='list-cont flexC' catchtap='itemClicked' data-page='6' data-query='1'>
         <view>
           <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsale.png'}}"/>
           <view class='reddot'  wx:if='{{countUserOrderNum.waitPayNum}}'>{{countUserOrderNum.waitPayNum}}</view>

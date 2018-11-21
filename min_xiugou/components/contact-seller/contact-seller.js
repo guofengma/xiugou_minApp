@@ -25,6 +25,7 @@ Component({
     },
     refreshMemberInfoNotice() {
       Tool.getUserInfos(this)
+      console.log(this.data.userInfos)
     },
   },
   ready: function () {

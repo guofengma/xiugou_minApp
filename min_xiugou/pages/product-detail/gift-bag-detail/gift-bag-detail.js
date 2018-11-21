@@ -100,6 +100,11 @@ Page({
         })
         giftStock.push(total)
       }
+      if (datas.buyLimit != -1 && !datas.leftBuyNum) {
+        datas.canUserBuy = false
+      } else {
+        datas.canUserBuy = true
+      }
       // 显示各礼包总库存里面的最小库存
 
       datas.showStock = Math.min(...giftStock)

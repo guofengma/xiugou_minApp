@@ -102,6 +102,7 @@ Page({
     getLevelInfos() {
       let params = {
         requestMethod: 'GET',
+        isShowLoading: false,
         url: Operation.getLevelInfos,
       }
       let r = RequestFactory.wxRequest(params);
@@ -208,9 +209,6 @@ Page({
     ctx.strokeStyle = '#FFC079';
     ctx.arc(r, r, cR + 1, 0, 2 * Math.PI);
     ctx.stroke();
-    // ctx.beginPath();
-    // ctx.arc(r, r, cR, 0, 2 * Math.PI);
-    // ctx.clip();
     this.data.IsdrawCircled = true;
   },
   drawText() { // 写百分比文本函数
@@ -297,6 +295,9 @@ Page({
   },
   joinUsClicked(){
     Tool.switchTab('/pages/discover/discover')
+  },
+  levelClicked(){
+    Tool.navigateTo('/pages/my/my-promotion/my-promotion')
   },
   onHide: function () {
     clearTimeout(this.data.timer)
