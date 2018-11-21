@@ -14,6 +14,7 @@ const config = {
   // baseUrl: 'http://172.16.10.88:8180/gateway',  // 陈
   // baseUrl: 'http://172.16.10.111:8180/gateway',  // 王
   // baseUrl: 'http://zhifu.dnvhot.tech', // 吴
+  baseUrl: 'http://172.16.10.21:8080/gateway', // 申
   wxVersion: 'V2.2.5', // 微信小程序版本
   BaiduMapKey: 'BazNALkeiEEMMvZjWmPeXlRqOyd0BlnL',
   AppId: 'wxa059b818226f8679',//小程序AppID

@@ -26,6 +26,7 @@ export default class ProductFactorys  {
         datas.product.canUserBuy = true
       }
       this.page.setData({
+        isInit:false,
         imgUrls: datas.productImgList,
         productInfo: datas.product,
         productInfoList: datas,
