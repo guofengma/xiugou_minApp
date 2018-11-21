@@ -19,7 +19,7 @@ export default class ProductFactorys  {
     r.successBlock = (req) => {
       let datas = req.responseObject.data || {}
       this.page.data.userInfos = this.page.data.userInfos || {}
-      datas.userLevelTypeName = datas.priceType == (1 || 0 || null) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelName + "价"
+      datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelName + "价"
       if (datas.product.buyLimit != -1 && !datas.product.leftBuyNum) {
         datas.product.canUserBuy = false
       } else {
@@ -89,7 +89,26 @@ export default class ProductFactorys  {
   didLogin(){ // 是否登录 
     Tool.didLogin(this.page)
     Tool.getUserInfos(this.page)
+    if (this.page.data.didLogin){
+      this.queryPushNum()
+    }
     this.getShoppingCartList()
+  }
+  queryPushNum() {
+    let params = {
+      reqName: '消息未读详情',
+      url: Operation.queryPushNum,
+      requestMethod: 'GET'
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      let detail = req.responseObject.data;
+      this.page.setData({
+        messageNum: detail.messageCount + detail.noticeCount + detail.shopMessageCount
+      })
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
   }
   getShoppingCartList() { // 获取线上购物车
     if (!this.page.data.didLogin) {
@@ -134,10 +153,10 @@ export default class ProductFactorys  {
         }
         break;
       case 2:
-        Tool.switchTab('/pages/index/index')
+        // Tool.switchTab('/pages/index/index')
+        Tool.navigateTo('/pages/search/search?door=0')
         break;
       case 3:
-
         break;
     }
   }

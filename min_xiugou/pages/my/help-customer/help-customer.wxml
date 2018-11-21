@@ -1,5 +1,5 @@
 <view class="help-customer">
-  <view class="header">
+  <view class="header whiteBg">
     <!-- <view class="people"></view>
     <button  class='go-cart-view contact-btn'
             session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"
@@ -13,7 +13,8 @@
   <view class="question-area">
       <view class="question-item" wx:for='{{list}}' wx:key='unique' >
           <view class="left" catchtap="questionList" data-typeid='{{item.name}}'>
-              <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_order.png" class="icon"></image>
+            <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_order.png'}}"/>
+              <!-- <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_order.png" class="icon"></image> -->
               <view>{{item.name}}</view>
           </view>
           <view class="right">
@@ -29,15 +30,15 @@
 <view class="wrap">
   <view class='flexC' catchtap='afterSaleClicked'>
     <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_refund.png'}}"/>
-    <view>退款进度</view>
+    <view>查看售后</view>
   </view>
   <view bindtap="questionFeedback" class='flexC'>
     <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_feedback.png'}}"/>
     <view>问题反馈</view>
   </view>
-  <view class='flexC'>
+  <view class='flexC' catchtap='orderClicked'>
     <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_autorefund.png'}}"/>
-    <view>自动退款</view>
+    <view>查看订单</view>
   </view>
   </view>
 </view>

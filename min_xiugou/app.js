@@ -102,6 +102,7 @@ App({
         isShowLoading: false,
         reqName: '获取用户等级',
         requestMethod: 'GET',
+        isShowLoading: false,
         url: Operation.getLevel
       }
       let r = RequestFactory.wxRequest(params);

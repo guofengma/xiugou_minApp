@@ -7,7 +7,8 @@ Component({
     msgShow:Boolean,
     didLogin: Boolean,
     size:Number,
-    openType:String
+    openType:String,
+    messageNum: Number
   },
   data: {
     activeIndex: 1, // 轮播图片的index 

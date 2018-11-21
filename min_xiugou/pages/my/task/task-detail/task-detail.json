@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "任务说明"
+  "navigationBarTitleText": "任务说明",
+    "usingComponents": {
+      "image-sub": "/components/image-sub/image-sub"
+    }
 }

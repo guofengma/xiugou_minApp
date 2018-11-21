@@ -9,13 +9,13 @@
         <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'xiangqing_icon_gouwuche_nor@3x.png'}}"/>
         <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
       </view>
-      <image src='/img/msg-icon.png' mode='widthFix' bindtap='msgClicked'></image>
+      <view class='msg-view' catchtap='msgClicked'>
+        <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'xiangqing_icon_more_nor@3x.png'}}"/>
+        <view class='num-label redBg flexR' wx:if='{{messageNum>0}}'>{{messageNum}}</view>
+      </view>
     </view>
-    <template is="msg-tips" data="{{msgShow,openType}}" /> 
+    <template is="msg-tips" data="{{msgShow,openType,messageNum}}" /> 
   </view>
-  <!-- <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
-    <video  src="{{productInfo.videoUrl}}"   bindplay='videoClicked' bindpause='videoPause' bindended='videoPause' show-fullscreen-btn='{{false}}' custom-cache="{{false}}" enable-progress-gesture='{{false}}'></video> 
-  </view> -->
   <swiper autoplay="true" interval='3000' bindchange='sliderChange' circular="true">
     <block wx:for="{{imgUrls}}" wx:key="unique">
       <swiper-item> 

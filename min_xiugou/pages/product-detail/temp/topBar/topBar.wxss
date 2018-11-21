@@ -13,10 +13,11 @@
 }
 .right-bar{
   position: absolute;
-  right: 10rpx;
+  right: 20rpx;
 }
 .msg-view{
   width: 70rpx;
+  position: relative;
 }
 
 /* 购物车 */
@@ -25,20 +26,19 @@
   margin-right: 20rpx;
 }
 .num-label{
-  position: absolute;
-  font-size: 22rpx;
-  width: 36rpx;
-  height: 36rpx;
-  top:-8rpx;
-  right:-20rpx;
-  border-radius: 50rpx;
+  top:-10rpx;
+  left:24rpx;
 }
 .msg-tips{
   right: 12rpx;
 }
 .top-img{
-  width: 40rpx;
+  width: 42rpx;
 }
 .top-img-2{
- width: 10rpx;
+ width: 70rpx;
+}
+.msg-view .num-label{
+  top: -1rpx;
+  left: 30rpx;
 }

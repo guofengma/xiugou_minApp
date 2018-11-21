@@ -1,28 +1,26 @@
 /*消息  */
 .msg-tips{
   width: 286rpx;
-	height: 279rpx;
-	background-color: #ffffff;
+	background: rgba(255,255,255,0.8);
 	box-shadow: 0px 2rpx 14rpx 0rpx rgba(0,0,0,0.2);
-  background: #fff;
   font-size: 26rpx;
   position: absolute;
   top:90rpx;
   right:32rpx;
 }
 .msg-tips .flexR image{
-  width: 50rpx;
+  width: 40rpx;
   margin: 0 30rpx;
   vertical-align: middle;
 }
 .msg-tips>.flexR{
   justify-content: flex-start;
+  border-bottom: 1rpx solid #eee;
 }
-.msg-tips>.flexR view{
+.tips-line-view{
  width: 186rpx;
  height: 90rpx;
  line-height: 90rpx;
- border-bottom: 1rpx solid #eee;
 }
 .msg-tips>.flexR:last-child view{
   border-bottom: 0;
@@ -52,4 +50,18 @@
 }
 .msg-tips .share image{
   margin-right: 22rpx;
+}
+.num-label{
+  position: absolute;
+  font-size: 22rpx;
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 10rpx;
+}
+.msg-tips>.flexR .num-label{
+  top: 8rpx;
+  left:50rpx;
+}
+.msg-tips>view{
+  position: relative;
 }

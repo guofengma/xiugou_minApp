@@ -42,9 +42,12 @@
   font-size: 26rpx;
   color: #666666;
 }
-.icon{
+/* .icon{
     width: 74rpx;
     height: 74rpx;
+} */
+.wrap>view view{
+  margin-top: 8rpx;
 }
 .question-area{
     font-size: 26rpx;

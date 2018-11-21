@@ -6,7 +6,8 @@ Component({
     floorstatus: Boolean,
     didLogin: Boolean,
     size:Number,
-    openType: String
+    openType: String,
+    messageNum:Number
   },
   data: {
 

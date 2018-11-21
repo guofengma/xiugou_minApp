@@ -21,7 +21,7 @@
   position: absolute;
   right: 30rpx;
   bottom: 30rpx;
-  border-radius: 20rpx;
+  border-radius: 30rpx;
   z-index: 100;
 }
 .slider-nav{
@@ -33,20 +33,14 @@
   z-index: 100;
   min-height: 50rpx;
 }
-.slider-nav image{
-  width: 70rpx;
-}
 /* 购物车 */
-.cart-view{
+.cart-view,.msg-view{
   position: relative;
-  margin-right: 20rpx;
 }
 .num-label{
-  position: absolute;
-  font-size: 22rpx;
-  width: 36rpx;
-  height: 36rpx;
   top:-8rpx;
   right:-2rpx;
-  border-radius: 50rpx;
+}
+.cart-view{
+ margin-right: 20rpx;
 }

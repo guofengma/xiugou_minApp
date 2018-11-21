@@ -3,7 +3,7 @@ Page({
   data: {
     detail: {},
     jobId: '',
-    statsus: '',
+    status: '',
     id: ''
   },
   onLoad (options) {

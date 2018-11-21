@@ -6,8 +6,9 @@
   <view class="img-area flexR">
     <image class="avatar-img" src="{{userLevelInfo.headImg||'/img/default-userImg.png'}}" alt=""></image>
   </view>
-  <view class='levelName boxSize flexR'>
-    <text>{{userLevelInfo.levelName}}</text>
+  <view class='levelName boxSize flexC'>
+    <text class='font-30'>{{userLevelInfo.levelRemark}}品鉴官</text>
+    <view class='level-label font-22'>{{userLevelInfo.levelName}}</view>
   </view>
 </view>
 
@@ -26,7 +27,8 @@
     </view>
     <view>
       距离晋升还差
-      <text class='font-30'>{{userLevelInfo.surpluslExperience}}分</text>
+      <text>{{userLevelInfo.surpluslExperience}}分</text>
+      <text class='red' wx:if='{{!userLevelInfo.surpluslExperience}}'>(经验值已满)</text>
     </view>
   </view>
 </view>
