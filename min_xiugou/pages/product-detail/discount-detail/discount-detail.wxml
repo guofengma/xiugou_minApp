@@ -58,7 +58,7 @@
   priceList='{{priceList}}' 
   imgUrl="{{productInfo.imgUrl}}" 
   showImgs='{{true}}'
-  isInit="{{false}}" 
+  isInit="{{isInit}}" 
   commodityType='3'
   bind:hiddenTips='hiddenTips'
   specIds='{{specIds}}'

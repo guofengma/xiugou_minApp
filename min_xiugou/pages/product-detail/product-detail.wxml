@@ -22,7 +22,7 @@
         id="promotion"
         bind:countdown="timeout" 
         prop="{{proNavData}}"
-        promotionBg="{{'comming'}}" 
+        promotionBg="{{'comming'}}"
         promotionDesc="{{promotionDesc}}"
         from="normal"
         promotionType="{{activityType}}" 
@@ -89,7 +89,7 @@
     bind:counterInputOnChange='counterInputOnChange' 
     imgUrl="{{productInfo.imgUrl}}" 
     showImgs='{{true}}'
-    isInit="{{false}}" 
+    isInit="{{isInit}}" 
     bind:hiddenTips='hiddenTips'
     isIphoneX='{{isIPhoneX.isIPhoneX}}'
     commodityType = '{{1}}'

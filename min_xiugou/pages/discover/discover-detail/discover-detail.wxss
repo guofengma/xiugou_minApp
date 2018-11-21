@@ -31,7 +31,10 @@ page{
   padding: 32rpx;
 }
 .fixed-height{
-  height: 80rpx;
+  height: 94rpx;
+}
+.fixed-height.iphoneX{
+  height: 128rpx;
 }
 .discover-detail-content .content {
   font-size: 26rpx;
@@ -86,15 +89,32 @@ page{
   bottom: 0;
   background: #fff;
 }
+.discover-detail-operate.iphoneX {
+  bottom: 34rpx;
+}
 .discover-detail-operate .operate {
   flex: 1;
-  padding: 32rpx 0;
-  border-top: 1rpx solid #ddd;
+  border-top: 1rpx solid #ddd; 
+  box-sizing: border-box; 
+  /* justify-content:center; */
+}
+.discover-detail-operate .fav {
   position: relative;
   font-size: 22rpx;
   display:flex;
   align-items:center;
-  justify-content:center;
+  height: 97rpx;
+  margin-left: 32rpx;
+  max-width: 300rpx;
+}
+.discover-detail-operate .operate_share {
+  width: 250rpx;
+  background:#FF1A54;
+  font-size: 28rpx;
+  color: #fff;
+  height:98rpx;
+  line-height:98rpx;
+  border-radius:0;
 }
 .discover-detail-operate .assist::after {
   display: block;
@@ -108,7 +128,11 @@ page{
   transform: translateY(-50%);
 }
 .discover-detail-operate .icon{
-  width: 34rpx;
-  height: 32rpx;
-  margin-right: 22rpx;
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 20rpx;
+}
+.operate_share .icon {
+  width: 40rpx;
+  height: 40rpx;
 }
