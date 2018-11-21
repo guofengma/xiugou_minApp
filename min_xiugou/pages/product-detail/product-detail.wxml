@@ -92,7 +92,7 @@
     bind:counterInputOnChange='counterInputOnChange' 
     imgUrl="{{productInfo.imgUrl}}" 
     showImgs='{{true}}'
-    isInit="{{false}}" 
+    isInit="{{isInit}}" 
     bind:hiddenTips='hiddenTips'
     isIphoneX='{{isIPhoneX.isIPhoneX}}'
     commodityType = '{{1}}'
