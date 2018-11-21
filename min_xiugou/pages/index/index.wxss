@@ -268,7 +268,8 @@
 /* 任务 */
 .duty{
   position: fixed;
-  bottom: 40rpx;
+  /* bottom: 40rpx; */
+  top: 360rpx;
   right: 0;
 }
 /* 会员等级 */
