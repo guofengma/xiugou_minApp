@@ -7,6 +7,8 @@ let bmap = require('../libs/baidu-map/bmap-wx.min');
 
 import config from '../config.js'
 
+import RSA from './rsa.js'
+
 //工具类
 
 
@@ -426,12 +428,18 @@ export default class Tool {
 
           if (tempFilesSize <= 3145728){
             // console.log(tempFilePaths[0])
+            const headers = RSA.sign();
             wx.uploadFile({
               url: global.RequestFactory.aliyunOSSUploadImage(),
               filePath: tempFilePaths[0],
               name: 'file',
+              header: headers,
+              formData: {
+                ...headers
+              },
               success: function (res) {
                 let fileInfo = JSON.parse(res.data);
+                console.log(fileInfo)
                 successCallback(fileInfo)
               }
             })
