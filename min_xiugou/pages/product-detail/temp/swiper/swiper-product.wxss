@@ -21,7 +21,7 @@
   position: absolute;
   right: 30rpx;
   bottom: 30rpx;
-  border-radius: 20rpx;
+  border-radius: 30rpx;
   z-index: 100;
 }
 .slider-nav{

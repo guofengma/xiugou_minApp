@@ -37,8 +37,8 @@
   right: 12rpx;
 }
 .top-img{
-  width: 40rpx;
+  width: 46rpx;
 }
 .top-img-2{
- width: 10rpx;
+ width: 70rpx;
 }
