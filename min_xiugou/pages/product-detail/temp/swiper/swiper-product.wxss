@@ -42,11 +42,6 @@
   margin-right: 20rpx;
 }
 .num-label{
-  position: absolute;
-  font-size: 22rpx;
-  width: 36rpx;
-  height: 36rpx;
   top:-8rpx;
   right:-2rpx;
-  border-radius: 50rpx;
 }

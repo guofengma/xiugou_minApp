@@ -25,19 +25,14 @@
   margin-right: 20rpx;
 }
 .num-label{
-  position: absolute;
-  font-size: 22rpx;
-  width: 36rpx;
-  height: 36rpx;
-  top:-8rpx;
-  right:-20rpx;
-  border-radius: 50rpx;
+  top:-10rpx;
+  left:24rpx;
 }
 .msg-tips{
   right: 12rpx;
 }
 .top-img{
-  width: 46rpx;
+  width: 42rpx;
 }
 .top-img-2{
  width: 70rpx;

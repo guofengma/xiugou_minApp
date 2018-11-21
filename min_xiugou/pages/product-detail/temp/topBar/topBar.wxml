@@ -14,5 +14,5 @@
   </view>
   
   
-  <template is="msg-tips" data="{{msgShow,openType}}" /> 
+  <template is="msg-tips" data="{{msgShow,openType,messageNum}}" /> 
 </view>

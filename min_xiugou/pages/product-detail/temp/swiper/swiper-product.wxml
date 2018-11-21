@@ -11,7 +11,7 @@
       </view>
       <image src='/img/msg-icon.png' mode='widthFix' bindtap='msgClicked'></image>
     </view>
-    <template is="msg-tips" data="{{msgShow,openType}}" /> 
+    <template is="msg-tips" data="{{msgShow,openType,messageNum}}" /> 
   </view>
   <!-- <view class='video' wx:if='{{productInfo.videoUrl&&activeIndex==1}}' >
     <video  src="{{productInfo.videoUrl}}"   bindplay='videoClicked' bindpause='videoPause' bindended='videoPause' show-fullscreen-btn='{{false}}' custom-cache="{{false}}" enable-progress-gesture='{{false}}'></video> 
