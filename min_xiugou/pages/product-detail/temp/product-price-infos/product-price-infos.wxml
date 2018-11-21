@@ -13,10 +13,10 @@
           <text>月销: {{productInfoList.monthSaleTotal}}笔</text>
         </view>
       </view>
-      <view class='group-price flexC'  wx:if='{{groupPrice}}' catchtap='groupClicked'>
+      <!-- <view class='group-price flexC'  wx:if='{{groupPrice}}' catchtap='groupClicked'>
         拼店价
         <view class='red'>¥ {{productInfoList.originalPrice}}</view>
-      </view>
+      </view> -->
     </view>
   </view>
 </template>
@@ -24,7 +24,7 @@
 <template name="product-info-chooseBox">
   <view class='gray'>
     <text class='label red' >服务</text>
-    正品保障·急速发货 <text wx:if='{{productInfo.afterSaleServiceDays>0}}'>{{productInfo.afterSaleServiceDays>30? 30:productInfo.afterSaleServiceDays}}天无理由退换货</text>
+    正品保障·极速发货·<text wx:if='{{productInfo.afterSaleServiceDays>0}}'>{{productInfo.afterSaleServiceDays>30? 30:productInfo.afterSaleServiceDays}}天无理由退换货</text>
     <text wx:else>无售后服务</text>
   </view>
 </template>
