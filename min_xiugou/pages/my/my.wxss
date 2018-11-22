@@ -198,3 +198,14 @@
   background:url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-joinus-bg.png) no-repeat left bottom;
   background-size: cover; 
 }
+.msg-view{
+  position: relative
+}
+.msg-tips-icon{
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  position: absolute;
+  right: -5rpx;
+  top:-5rpx;
+}

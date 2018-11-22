@@ -48,6 +48,7 @@ Page({
       if (this.data.didLogin){
         this.getLevel()
         this.countUserOrderNum()
+        this.queryPushMsg()
       }else{
         this.setData({
           countUserOrderNum:{}
@@ -67,6 +68,14 @@ Page({
     },
     refreshMemberInfoNotice() {
       Tool.getUserInfos(this)
+    },
+    queryPushMsg(){
+      let callBack = (datas)=>{
+        this.setData({
+          pushMsg:datas
+        })
+      }
+      app.queryPushMsg(callBack)
     },
     countUserOrderNum(){ // 获取订单数量
       let params = {
@@ -247,10 +256,10 @@ Page({
     this.data.xOffset += this.data.speed;
     let that = this
     ctx.draw()
-    let timer = this.requestAnimationFrame(this.render);
-    this.setData({
-      timer:timer
-    })
+    // let timer = this.requestAnimationFrame(this.render);
+    // this.setData({
+    //   timer:timer
+    // })
   },
   requestAnimationFrame(callback){
     var currTime = new Date().getTime();

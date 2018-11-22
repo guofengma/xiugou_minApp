@@ -47,6 +47,7 @@ Page({
   initRequest(){
     let callBack2 = (datas) => {
       if (datas.product.status!=0){
+        
         this.activityByProductId(this.data.productId)
       }else{
         this.ProductFactory.productDefect()

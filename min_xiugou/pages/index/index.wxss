@@ -293,6 +293,17 @@
   background: transparent url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/index-user-bg-1.png) no-repeat left bottom;
   background-size: 100% 100%;
 }
+.msg-view{
+  position: relative;
+}
+.msg-tips-view{
+  position: absolute;
+  right: -5rpx;
+  top:2rpx;
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 50%;
+}
 /* 会员等级 */
 /* .index-level-view{
   padding:20rpx 30rpx; 

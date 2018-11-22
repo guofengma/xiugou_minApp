@@ -44,3 +44,7 @@
 .cart-view{
  margin-right: 20rpx;
 }
+.messageNum{
+ top:-1rpx;
+ right:0;
+}

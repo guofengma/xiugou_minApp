@@ -113,6 +113,9 @@ Page({
     onLoad: function (options) {
       Event.on('getLevel', this.getLevel,this)
       Event.on('didLogin', this.didLogin, this); 
+      // if (app.globalData.openid){
+      //   app.wxLogin()
+      // }
       // 初始化请求
       this.initRequset(options)
       // 初始化传参
@@ -223,7 +226,16 @@ Page({
       if (this.data.didLogin){
         this.findUserJobsByUserId();
         this.getLevel()
+        this.queryPushMsg()
       }
+    },
+    queryPushMsg() {
+      let callBack = (datas) => {
+        this.setData({
+          pushMsg: datas
+        })
+      }
+      app.queryPushMsg(callBack)
     },
     indexQueryCategoryList(){
       let params = {

@@ -65,3 +65,8 @@
 .msg-tips>view{
   position: relative;
 }
+.messageNum{
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+}

@@ -7,7 +7,7 @@
               <text>通知</text>
             </view>
             <view>
-                <view class="num redBg" wx:if="{{noticeNum!=0}}">{{noticeNum}}</view>
+                <view class="num redBg" wx:if="{{datas.noticeCount>0}}">{{datas.noticeCount}}</view>
                 <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'packup-btn.png'}}"/>
             </view>
         </view>
@@ -19,7 +19,7 @@
               <text>消息</text>
             </view>
             <view>
-                <view class="num redBg" wx:if="{{messageNum!=0}}">{{messageNum}}</view>
+                <view class="num redBg" wx:if="{{datas.messageCount>0}}">{{datas.messageCount}}</view>
                 <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'packup-btn.png'}}"/>
             </view>
         </view>
@@ -31,7 +31,7 @@
               <text>拼店消息</text>
             </view>
             <view>
-                <view class="num redBg" wx:if="{{storeMessageNum!=0}}">{{storeMessageNum}}</view>
+                <view class="num redBg" wx:if="{{datas.shopMessageCount>0}}">{{datas.shopMessageCount}}</view>
                 <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'packup-btn.png'}}"/>
             </view>
         </view>

@@ -2,9 +2,12 @@
 <view class="my sub-page">
   <view class='content-top'>
     <view class='top-view'>
-      <view class='fr'>
+      <view class='fr flexR'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'setting@3x.png.png'}}" catchtap='itemClicked' data-page='0'/>
-        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'message@3x.png.png'}}" catchtap='itemClicked' data-page='1'/>
+        <view class='msg-view'>
+          <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'message@3x.png.png'}}" catchtap='itemClicked' data-page='1'/>
+          <view class='msg-tips-icon whiteBg' wx:if='{{pushMsg.hasMsg}}'></view>
+        </view>
       </view>
     </view>
     <view class='my-avatar' catchtap='itemClicked' data-page='2'>
