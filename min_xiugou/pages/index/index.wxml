@@ -27,7 +27,7 @@
   <view class='user-level-view flexR-sb' catchtap='levelBtnClicked' wx:if='{{didLogin}}'>
     <view class='font-28 flexR'>
       尊敬的
-      <view class='leveleName'>{{userInfos.levelRemark0}}</view>
+      <view class='leveleName'>{{userInfos.levelName0}}</view>
       品鉴官，您好!
     </view>
     <view class='font-22 see-level flexR'>

@@ -19,7 +19,7 @@ export default class ProductFactorys  {
     r.successBlock = (req) => {
       let datas = req.responseObject.data || {}
       this.page.data.userInfos = this.page.data.userInfos || {}
-      datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelName + "价"
+      datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelRemark + "价"
       if (datas.product.buyLimit != -1 && !datas.product.leftBuyNum) {
         datas.product.canUserBuy = false
       } else {

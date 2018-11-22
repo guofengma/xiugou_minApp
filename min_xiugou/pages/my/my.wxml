@@ -27,7 +27,7 @@
       <canvas style="width: 80rpx; height: 80rpx;" canvas-id="firstCanvas"></canvas>
      </view>
      <view class='level-content'>
-        <view class='levelName'>{{userInfos.levelRemark}}品鉴官</view>
+        <view class='levelName'>{{userInfos.levelName}}品鉴官</view>
         <view>查看权益
           <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'jiantou-white.png'}}"/>
         </view>

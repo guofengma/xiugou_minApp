@@ -282,8 +282,8 @@ Page({
         Storage.setUserAccountInfo(req.responseObject.data)
         let userInfos = req.responseObject.data 
         userInfos.experience = userInfos.experience ? userInfos.experience:0
-        let levelRemark = userInfos.levelRemark || ''
-        userInfos.levelRemark0 = levelRemark.length > 4 ? levelRemark.slice(0, 4) + '...' : levelRemark
+        let levelName = userInfos.levelName || ''
+        userInfos.levelName0 = levelName.length > 4 ? levelName.slice(0, 4) + '...' : levelName
         this.setData({
           userInfos: req.responseObject.data
         })

@@ -218,7 +218,7 @@ Page({
     ctx.setTextAlign('center');
     ctx.setFontSize(size)
     ctx.setFillStyle('#ffffff')
-    ctx.fillText(this.data.userInfos.levelName || '', this.data.r, this.data.r + size / 2);
+    ctx.fillText(this.data.userInfos.levelRemark || '', this.data.r, this.data.r + size / 2);
     ctx.restore();
   },
   render() {
