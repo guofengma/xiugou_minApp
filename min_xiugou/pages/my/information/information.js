@@ -1,5 +1,6 @@
 // pages/my/account.js
 let { Tool, RequestFactory, Storage, Event, Operation } = global;
+const app = getApp()
 Page({
     data: {
       isNew:false,
@@ -14,22 +15,28 @@ Page({
     onShow: function () {
     },
     queryPushNum(){
-      let params = {
-        reqName: '消息未读详情',
-        url: Operation.queryPushNum,
-        requestMethod: 'GET'
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let detail=req.responseObject.data;
+      let callBack = (datas) => {
         this.setData({
-          noticeNum: detail.noticeCount,
-          messageNum: detail.messageCount,
-          storeMessageNum: detail.shopMessageCount,
+          datas: datas
         })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }
+      app.queryPushMsg(callBack)
+      // let params = {
+      //   reqName: '消息未读详情',
+      //   url: Operation.queryPushNum,
+      //   requestMethod: 'GET'
+      // }
+      // let r = RequestFactory.wxRequest(params);
+      // r.successBlock = (req) => {
+      //   let detail=req.responseObject.data;
+      //   this.setData({
+      //     noticeNum: detail.noticeCount,
+      //     messageNum: detail.messageCount,
+      //     storeMessageNum: detail.shopMessageCount,
+      //   })
+      // };
+      // Tool.showErrMsg(r)
+      // r.addToQueue();
     },
     didLogin(){
       if (!Tool.didLogin(this)){

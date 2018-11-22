@@ -1,5 +1,5 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
-
+const app = getApp()
 export default class ProductFactorys  {
   constructor(page) {
     this.page = page
@@ -19,8 +19,10 @@ export default class ProductFactorys  {
     r.successBlock = (req) => {
       let datas = req.responseObject.data || {}
       this.page.data.userInfos = this.page.data.userInfos || {}
-      datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelName + "价"
-      if (datas.product.buyLimit != -1 && !datas.product.leftBuyNum) {
+      datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelRemark + "价"
+      datas.showPrice = (datas.minPrice == datas.maxPrice)? '¥' + datas.maxPrice:'¥'+minPrice+' - '+maxPrice
+      // 用户不能购买 限购但属于数量小于等于0且状态不是1
+      if (datas.product.buyLimit != -1 && !datas.product.leftBuyNum && datas.status!=1) {
         datas.product.canUserBuy = false
       } else {
         datas.product.canUserBuy = true
@@ -94,21 +96,13 @@ export default class ProductFactorys  {
     }
     this.getShoppingCartList()
   }
-  queryPushNum() {
-    let params = {
-      reqName: '消息未读详情',
-      url: Operation.queryPushNum,
-      requestMethod: 'GET'
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let detail = req.responseObject.data;
+  queryPushNum() { // 获取消息
+    let callBack = (datas)=>{
       this.page.setData({
-        messageNum: detail.messageCount + detail.noticeCount + detail.shopMessageCount
+        messageNum: datas.totalMessageNum
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }
+    app.queryPushMsg(callBack)
   }
   getShoppingCartList() { // 获取线上购物车
     if (!this.page.data.didLogin) {

@@ -140,12 +140,11 @@
    border-bottom: 1rpx solid #f6f6f6;
 }
 .my-order-list{
-  padding: 0 30rpx;
   display: flex;
-  justify-content: space-between;
   height: 206rpx;
-  align-items: center;
-  text-align: center;
+}
+.my-order-list>view{
+  width: 25%;
 }
 .my-tools-cont{
   width: 25%;
@@ -167,8 +166,8 @@
   height: 390rpx;
   align-items: center;
 }
-.my-tools-list image{
-  margin-bottom: 20rpx;
+.my-tools-list image,.list-cont>view{
+  margin-bottom: 18rpx;
 }
 
 .my-wait-pay{
@@ -198,4 +197,15 @@
   height:124rpx;
   background:url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-joinus-bg.png) no-repeat left bottom;
   background-size: cover; 
+}
+.msg-view{
+  position: relative
+}
+.msg-tips-icon{
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  position: absolute;
+  right: -5rpx;
+  top:-5rpx;
 }

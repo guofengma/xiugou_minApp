@@ -11,7 +11,7 @@
       </view>
       <view class='msg-view' catchtap='msgClicked'>
         <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'xiangqing_icon_more_nor@3x.png'}}"/>
-        <view class='num-label redBg flexR' wx:if='{{messageNum>0}}'>{{messageNum}}</view>
+        <view class='num-label messageNum redBg flexR' wx:if='{{messageNum>0}}'></view>
       </view>
     </view>
     <template is="msg-tips" data="{{msgShow,openType,messageNum}}" /> 

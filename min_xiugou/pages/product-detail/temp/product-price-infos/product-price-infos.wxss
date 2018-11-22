@@ -37,7 +37,7 @@
   margin-right: 23rpx;
 }
 .shippingInfo{
-  margin-top: 25rpx;
+  margin-top: 20rpx;
 }
 .group-price{
   height: 84rpx;

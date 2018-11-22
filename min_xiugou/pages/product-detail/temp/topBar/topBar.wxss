@@ -39,6 +39,6 @@
  width: 70rpx;
 }
 .msg-view .num-label{
-  top: -1rpx;
-  left: 30rpx;
+  top: 0rpx;
+  left: 42rpx;
 }

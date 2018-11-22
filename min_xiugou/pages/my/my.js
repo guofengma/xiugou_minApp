@@ -48,6 +48,7 @@ Page({
       if (this.data.didLogin){
         this.getLevel()
         this.countUserOrderNum()
+        this.queryPushMsg()
       }else{
         this.setData({
           countUserOrderNum:{}
@@ -67,6 +68,14 @@ Page({
     },
     refreshMemberInfoNotice() {
       Tool.getUserInfos(this)
+    },
+    queryPushMsg(){
+      let callBack = (datas)=>{
+        this.setData({
+          pushMsg:datas
+        })
+      }
+      app.queryPushMsg(callBack)
     },
     countUserOrderNum(){ // 获取订单数量
       let params = {
@@ -102,6 +111,7 @@ Page({
     getLevelInfos() {
       let params = {
         requestMethod: 'GET',
+        isShowLoading: false,
         url: Operation.getLevelInfos,
       }
       let r = RequestFactory.wxRequest(params);
@@ -208,9 +218,6 @@ Page({
     ctx.strokeStyle = '#FFC079';
     ctx.arc(r, r, cR + 1, 0, 2 * Math.PI);
     ctx.stroke();
-    // ctx.beginPath();
-    // ctx.arc(r, r, cR, 0, 2 * Math.PI);
-    // ctx.clip();
     this.data.IsdrawCircled = true;
   },
   drawText() { // 写百分比文本函数
@@ -220,7 +227,7 @@ Page({
     ctx.setTextAlign('center');
     ctx.setFontSize(size)
     ctx.setFillStyle('#ffffff')
-    ctx.fillText(this.data.userInfos.levelName || '', this.data.r, this.data.r + size / 2);
+    ctx.fillText(this.data.userInfos.levelRemark || '', this.data.r, this.data.r + size / 2);
     ctx.restore();
   },
   render() {
@@ -249,10 +256,10 @@ Page({
     this.data.xOffset += this.data.speed;
     let that = this
     ctx.draw()
-    let timer = this.requestAnimationFrame(this.render);
-    this.setData({
-      timer:timer
-    })
+    // let timer = this.requestAnimationFrame(this.render);
+    // this.setData({
+    //   timer:timer
+    // })
   },
   requestAnimationFrame(callback){
     var currTime = new Date().getTime();
@@ -297,6 +304,9 @@ Page({
   },
   joinUsClicked(){
     Tool.switchTab('/pages/discover/discover')
+  },
+  levelClicked(){
+    Tool.navigateTo('/pages/my/my-promotion/my-promotion')
   },
   onHide: function () {
     clearTimeout(this.data.timer)

@@ -113,6 +113,9 @@ Page({
     onLoad: function (options) {
       Event.on('getLevel', this.getLevel,this)
       Event.on('didLogin', this.didLogin, this); 
+      // if (app.globalData.openid){
+      //   app.wxLogin()
+      // }
       // 初始化请求
       this.initRequset(options)
       // 初始化传参
@@ -223,7 +226,16 @@ Page({
       if (this.data.didLogin){
         this.findUserJobsByUserId();
         this.getLevel()
+        this.queryPushMsg()
       }
+    },
+    queryPushMsg() {
+      let callBack = (datas) => {
+        this.setData({
+          pushMsg: datas
+        })
+      }
+      app.queryPushMsg(callBack)
     },
     indexQueryCategoryList(){
       let params = {
@@ -282,8 +294,8 @@ Page({
         Storage.setUserAccountInfo(req.responseObject.data)
         let userInfos = req.responseObject.data 
         userInfos.experience = userInfos.experience ? userInfos.experience:0
-        let levelRemark = userInfos.levelRemark || ''
-        userInfos.levelRemark0 = levelRemark.length > 4 ? levelRemark.slice(0, 4) + '...' : levelRemark
+        let levelName = userInfos.levelName || ''
+        userInfos.levelName0 = levelName.length > 4 ? levelName.slice(0, 4) + '...' : levelName
         this.setData({
           userInfos: req.responseObject.data
         })
