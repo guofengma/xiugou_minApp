@@ -256,10 +256,10 @@ Page({
     this.data.xOffset += this.data.speed;
     let that = this
     ctx.draw()
-    // let timer = this.requestAnimationFrame(this.render);
-    // this.setData({
-    //   timer:timer
-    // })
+    let timer = this.requestAnimationFrame(this.render);
+    this.setData({
+      timer:timer
+    })
   },
   requestAnimationFrame(callback){
     var currTime = new Date().getTime();
