@@ -7,7 +7,7 @@
     <view class='fr flexR-sb'>
       <view class='cart-view' catchtap='goCart'>
         <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'xiangqing_icon_gouwuche_nor@3x.png'}}"/>
-        <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
+        <view class='num-label redBg flexR cart-label' wx:if='{{size>0}}'>{{size}}</view>
       </view>
       <view class='msg-view' catchtap='msgClicked'>
         <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'xiangqing_icon_more_nor@3x.png'}}"/>
