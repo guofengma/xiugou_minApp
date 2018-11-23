@@ -54,8 +54,8 @@
           <!-- <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view> -->
         </view>
         <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy? "redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
-          <!-- <text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>您已购买过该商品</text> -->
-          <text>立即购买</text>
+          <text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>您已购买过该商品</text>
+          <text wx:else>立即购买</text>
         </view>
         <view class='add-cart font-28 flexR yellowBg shareBtn-view' >
           <button class='shareBtn flexR '  open-type="{{openType}}" catchtap='shareBtnClicked' >
