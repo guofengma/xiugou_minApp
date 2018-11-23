@@ -38,7 +38,7 @@
 .top-img-2{
  width: 70rpx;
 }
-.msg-view .num-label{
+.msg-view .messageNum{
   top: 0rpx;
   left: 42rpx;
 }
