@@ -118,7 +118,8 @@ Page({
     })
   },
   searchKeyword(){
-    if (!Tool.isEmptyStr(String(this.data.keyWord))) {
+    this.data.keyWord = String(this.data.keyWord).replace(/(^\s*)|(\s*$)/g, "")
+    if (!Tool.isEmptyStr(this.data.keyWord)) {
       let keywords = this.data.history
       if (keywords.length > 0) {
         keywords.length == 10 ? keywords.splice(9, 1) : keywords

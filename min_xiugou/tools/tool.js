@@ -266,7 +266,8 @@ export default class Tool {
     }
 
     //String 空值判断
-    static isEmptyStr(str) {
+    static isEmptyStr(str='') {
+        str = str.replace(/(^\s*)|(\s*$)/g, "")
         if (Tool.isEmpty(str)) {
             return true;
         }
