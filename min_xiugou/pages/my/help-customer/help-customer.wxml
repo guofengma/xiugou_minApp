@@ -1,5 +1,5 @@
 <view class="help-customer">
-  <view class="header whiteBg">
+  <view class="header whiteBg boxSize">
     <!-- <view class="people"></view>
     <button  class='go-cart-view contact-btn'
             session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"

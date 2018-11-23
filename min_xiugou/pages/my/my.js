@@ -35,7 +35,7 @@ Page({
       this.didLogin()
       this.refreshMemberInfoNotice()
       Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
-      Event.on('didLogin', this.didLogin, this);  
+      Event.on('didLogin', this.didLogin, this); 
     },
     onPullDownRefresh: function () {
       this.onLoad()
@@ -102,39 +102,13 @@ Page({
         datas.blockedBalance0 = Tool.formatNum(datas.blockedBalance || 0)
         Storage.setUserAccountInfo(datas)
         this.setData({
-          userInfos: datas
-        })
-        this.getLevelInfos()
-      }
-      app.getLevel(callBack)
-    },
-    getLevelInfos() {
-      let params = {
-        requestMethod: 'GET',
-        isShowLoading: false,
-        url: Operation.getLevelInfos,
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data || []
-        let userInfos = this.data.userInfos
-        let levelId = userInfos.levelId
-        let userExp = userInfos.experience || 0
-        let levelObj = datas.filter((item) => {
-          return item.id == levelId
-        })
-        this.setData({
-          range: userExp / levelObj[0].upgradeExp *100,
-          // range:40
+          userInfos: datas,
+          range: (Number(datas.experience) - Number(datas.levelFloor)) / (Number(datas.levelCeil) - Number(datas.levelFloor)) * 100,
         })
         this.initDatas()
         this.render()
-        this.setData({
-          levelList: datas,
-        })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }
+      app.getLevel(callBack)
     },
     onTabItemTap(item) {
       let tabClicked = this.data.tabClicked
