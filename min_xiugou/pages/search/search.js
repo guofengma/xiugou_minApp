@@ -21,7 +21,6 @@ Page({
         placeholder:"搜索商品"
       })
       this.requestGetHotWordsListActive()
-      //this.getLocation()
     } else {
       this.setData({
         history: Storage.getSearchOrderHistory() || [],
@@ -42,17 +41,6 @@ Page({
   },
   onShow: function () {
 
-  },
-  getLocation(){
-    let callBack = (res) =>{
-      if(res){
-        this.setData({
-          province: res.originalData.result.addressComponent.province
-        })
-        this.getProvinceList(this.data.province)
-      }
-    }
-    Tool.queryLocation(callBack)
   },
   requestGetHotWordsListActive(){
     let params = {
