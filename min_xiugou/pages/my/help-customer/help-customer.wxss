@@ -42,10 +42,9 @@
   font-size: 26rpx;
   color: #666666;
 }
-/* .icon{
-    width: 74rpx;
-    height: 74rpx;
-} */
+.icon{
+  width: 74rpx;
+}
 .wrap>view view{
   margin-top: 8rpx;
 }

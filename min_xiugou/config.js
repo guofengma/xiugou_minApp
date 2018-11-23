@@ -4,15 +4,15 @@ const config = {
   h5webUrl: 'https://testh5.sharegoodsmall.com',
   baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
   // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
-  // baseUrl: 'http://172.16.10.42:8180/gateway',  // 蒋
-  // baseUrl: 'http://172.16.10.29:8180/gateway',  // 周
-  // baseUrl:'http://172.16.10.238:8180/gateway',  // 高
-  // baseUrl:'http://172.16.10.56:8180/gateway',  // 沈
+  // baseUrl: 'http://172.16.10.42:8903/gateway',  // 蒋
+  // baseUrl: 'http://172.16.10.29:8903/gateway',  // 周
+  // baseUrl:'http://172.16.10.238:8903/gateway',  // 高
+  // baseUrl:'http://172.16.10.56:8903/gateway',  // 沈
   // baseUrl: 'http://172.16.10.41:8903/gateway',  // 张
   // baseUrl: 'http://172.16.10.12:8180/gateway',  // 杨
   // baseUrl: 'http://172.16.10.19:8903/gateway',  // 吴
-  // baseUrl: 'http://172.16.10.88:8180/gateway',  // 陈
-  // baseUrl: 'http://172.16.10.111:8180/gateway',  // 王
+  // baseUrl: 'http://172.16.10.88:8903/gateway',  // 陈
+  // baseUrl: 'http://172.16.10.111:8903/gateway',  // 王
   // baseUrl: 'http://zhifu.dnvhot.tech', // 吴
   // baseUrl: 'http://172.16.10.21:8080/gateway', // 申
   wxVersion: 'V2.2.5', // 微信小程序版本

@@ -18,7 +18,7 @@
     <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:460rpx' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff' circular="true">
     <block wx:for="{{imgUrls}}" wx:key='unique'>
       <swiper-item>
-        <image src="{{item.imgUrl}}" class="slide-image" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' bindload="imageLoad"  lazy-load='true'/>
+        <image src="{{item.imgUrl}}" class="slide-image" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' bindload="imageLoad"  lazy-load='true' mode='aspectFill'/>
       </swiper-item>
     </block>
     </swiper>
@@ -203,7 +203,7 @@
     <view class='recommend-prd-content flexR'>
       <view class='recommend-prd-item boxSize' wx:for='{{recommendArr}}' wx:key='{{index}}' style='margin-right:{{index%2==1? "0":"10"}}rpx' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'>
         <view class='recommend-prd-img' >
-         <image src='{{item.imgUrl}}' lazy-load='true'></image>
+         <image src='{{item.imgUrl}}' lazy-load="{{ true }}"></image>
          <view class='ellipsis font-24 gray'>{{item.title}}</view>
         </view>
         <view class='recommend-prd-info'>

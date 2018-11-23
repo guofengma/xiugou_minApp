@@ -5,7 +5,6 @@ Page({
       list:''
     },
     onLoad: function (options) {
-      // Tool.getUserInfos(this)
       this.queryHelpQuestionList()
     },
     queryHelpQuestionList(){
@@ -16,17 +15,9 @@ Page({
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
-        let data = req.responseObject.data? req.responseObject.data : {}
-        let listArr = []
-        for (let key in data) {
-          listArr.push({ 
-            name: key, 
-            list:data[key], 
-            typeid: data[key][0].typeId
-          })
-        }
+        let data = req.responseObject.data? req.responseObject.data : []
         this.setData({
-          list: listArr
+          list: data
         })
       }
       Tool.showErrMsg(r)

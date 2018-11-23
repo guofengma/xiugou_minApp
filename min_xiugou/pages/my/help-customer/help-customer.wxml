@@ -12,13 +12,13 @@
   <!-- <view class="hot-question">热门问题</view> -->
   <view class="question-area">
       <view class="question-item" wx:for='{{list}}' wx:key='unique' >
-          <view class="left" catchtap="questionList" data-typeid='{{item.name}}'>
-            <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_order.png'}}"/>
-              <!-- <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_order.png" class="icon"></image> -->
-              <view>{{item.name}}</view>
+          <view class="left" catchtap="questionList" data-typeid='{{item.title}}'>
+            <!-- <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_order.png'}}"/> -->
+            <image src="{{item.imgUrl}}" class="icon" mode='widthFix'></image>
+            <view>{{item.name}}</view>
           </view>
           <view class="right">
-            <view class="item"  wx:for='{{item.list}}' wx:key='unique' 
+            <view class="item"  wx:for='{{item.helpQuestionExtList}}' wx:key='unique' 
                   wx:for-item="detail" wx:for-index="key"  catchtap='toDetail'  data-id='{{detail.id}}' wx:if="{{key<2}}">
               {{detail.title}}
             </view>
