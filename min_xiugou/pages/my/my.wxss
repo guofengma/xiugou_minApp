@@ -3,9 +3,9 @@
   color: #424242;
 }
 .width-690{
-  /* width: 690rpx; */
+  width: 690rpx;
   margin: 20rpx  auto 0 auto;
-  /* border-radius: 18rpx; */
+  border-radius: 18rpx;
 }
 .top-view image{
   width: 40rpx;
@@ -27,21 +27,20 @@
   background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/bg_img_user@2x.png?_=1) no-repeat left bottom;
   background-size: 100% 100%;
   border-top: 1prx solid #eee;
-  color: #fff
-}
-.my-info-item{
-  padding-top: 12rpx;
+  color: #fff;
+  height: 360rpx;
 }
 .my-avatar{
-  padding-bottom: 85rpx;
   display: flex;
   align-items: center;
+  padding-top: 86rpx;
 }
 .my-name{
   color: #fff;
   margin-right: 13rpx;
   font-size:36rpx;
   font-weight:500;
+  width: 260rpx;
 }
 .my-info-arrow{
   width: 14rpx;
@@ -50,17 +49,17 @@
   
 }
 .avatar-img{
-    width: 130rpx;
-    height: 130rpx;
-    border: solid 4rpx #ffffff;
-    border-radius: 50%;
-    margin: 38rpx;
+  width: 106rpx;
+  height:106rpx;
+  border: solid 4rpx #ffffff;
+  border-radius: 50%;
+  margin: 0 20rpx 0 38rpx;
     
 }
 .my-rank{
    position: relative;
   /* width:88rpx; */
-  margin-top: 22rpx;
+  margin-top: 4rpx;
 }
 .my-rank image{
   position: relative;
@@ -68,40 +67,41 @@
   height:48rpx;
   
 }
-/* .my-rank-no{
-  position: absolute;
-  top: 0;
-  left:37rpx;
-  bottom: 0;
-  margin: auto;
-  color: #ffffff;
-}
-.my-save{
+ .level-content{
+   width: 180rpx;
+ }
+ .level-circle{
+   border-radius: 50%;
+   background: linear-gradient( #FE2A65, #FE2746);
+   display: inline-block;
+   margin: 0 12rpx;
+ }
+ .my-save{
   position: absolute;
   right: 0;
-  width: 199rpx;
-  height: 67rpx;
-  background: #FFC079;
-  border-top-left-radius:34rpx;
-  border-bottom-left-radius:34rpx;
-  bottom: 76rpx;
-  text-align: center;
-  color: #ffffff;
-
-} */
+  width: 260rpx;
+  height: 100rpx;
+  background: #F1D3A1 url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/porfile_icon@3x.png) no-repeat 5.5rpx 7.5rpx;
+  background-size:103rpx;
+  border-top-left-radius:109rpx;
+  border-bottom-left-radius:109rpx;
+  bottom: 140rpx;
+}
+.levelName{
+  color: #333
+}
 .my-account{
-  /* background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-user-data-bg.png) no-repeat left bottom;
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-user-data-bg.png) no-repeat left bottom;
   background-size: 100% 100%; 
-  color: #fff;*/
-  background: #fff;
-  
+  color: #fff;
+  margin-top: 75rpx;
 }
 .my-account-item{
    height: 88rpx;
    line-height: 88rpx;
    font-size: 32rpx;
+   padding: 0 30rpx;
    /* padding: 0 60rpx; */
-   padding: 0 20rpx;
    border-bottom: 1rpx solid #f6f6f6;
 }
 .my-account-list{
@@ -123,26 +123,11 @@
   font-weight:600;
   height: 76rpx;
 }
-.my-account-coin{
-  background:rgba(255,79,110,1);
-  border-radius:10rpx;
-  box-shadow:5rpx 0px 10rpx rgba(255,79,110,0.54);
-}
-.my-account-xiudou{
-  background:#F2D4A2;
-  border-radius:10rpx;
-  box-shadow:5rpx 0px 10rpx rgba(242, 212, 162, 0.54);
-}
-.my-account-leave{
-  background:rgba(142,199,255,1);
-  border-radius:10rpx;
-  box-shadow:5rpx 0px 10rpx rgba(142,199,255,0.54);
-}
 .my-order{
   background: #ffffff; 
 }
 .my-order-item{
-   padding: 0 20rpx;
+   padding: 0 30rpx;
    display: flex;
    justify-content: space-between;
    height: 88rpx;
@@ -151,26 +136,23 @@
    border-bottom: 1rpx solid #f6f6f6;
 }
 .my-order-list{
-  padding: 0 30rpx;
   display: flex;
-  justify-content: space-between;
   height: 206rpx;
-  align-items: center;
-  text-align: center;
+}
+.my-order-list>view{
+  width: 25%;
 }
 .my-tools-cont{
   width: 25%;
   text-align: center;
 }
-
-
 .my-tools{
   margin: 20rpx auto;
 }
 
 .my-tools-item{
   height: 88rpx;
-  padding: 0 20rpx;
+  padding: 0 30rpx;
   border-bottom: 1rpx solid #f6f6f6;
 }
 .my-tools-list{
@@ -179,11 +161,9 @@
   flex-wrap: wrap;
   height: 390rpx;
   align-items: center;
- 
-  
 }
-.my-tools-list image{
-  margin-bottom: 20rpx;
+.my-tools-list image,.list-cont>view{
+  margin-bottom: 18rpx;
 }
 
 .my-wait-pay{
@@ -202,4 +182,26 @@
 }
 .see-all{
   color: #A9A9A9
+}
+
+.joinUs{
+  position: absolute;
+  top:272rpx;
+  width: 100%;
+}
+.joinUs>view{
+  height:124rpx;
+  background:url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-joinus-bg.png) no-repeat left bottom;
+  background-size: cover; 
+}
+.msg-view{
+  position: relative
+}
+.msg-tips-icon{
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  position: absolute;
+  right: -5rpx;
+  top:-5rpx;
 }

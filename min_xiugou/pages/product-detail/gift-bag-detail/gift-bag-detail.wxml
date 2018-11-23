@@ -34,8 +34,8 @@
   
     <view class=" {{isIPhoneX.className}}">
       <template is="errTips"  wx:if='{{productInfo.status==2}}'/>
-      <template is="errTips"  wx:if='{{productInfo.status==1&&dismiss}}' data='{{tipsContent:"无法购买此商品~"}}'/>
-      <view class='buy-btn bottom-bar flexR {{productInfo.status==1&&!dismiss ? "redBg":"darkBg"}}' bindtap='btnClicked' data-key='1'>
+      <template is="errTips"  wx:if='{{!productInfo.canUserBuy}}' data='{{tipsContent:"无法购买此商品~"}}'/>
+      <view class='buy-btn bottom-bar flexR {{productInfo.status==1&&productInfo.canUserBuy? "redBg":"darkBg"}}' bindtap='btnClicked' data-key='1'>
         立即购买
       </view>
     </view>

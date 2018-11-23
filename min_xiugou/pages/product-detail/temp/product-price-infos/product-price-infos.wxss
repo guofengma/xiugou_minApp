@@ -9,17 +9,19 @@
   max-height: 80rpx;
   margin-bottom: 25rpx;
 }
+.price text{
+  margin-right: 14rpx;
+}
 .price1{
   font-size: 36rpx;
 }
 .price2,.label-pd{
   font-size: 20rpx;
-  margin-left: 7rpx;
 }
 .label-pd{
   border-radius: 6rpx;
   padding: 4rpx 10rpx;
-  margin-right: 30rpx;
+  border: 1rpx solid
 }
 .label,.price3{
   border:1rpx solid;
@@ -35,5 +37,12 @@
   margin-right: 23rpx;
 }
 .shippingInfo{
-  margin-top: 25rpx;
+  margin-top: 20rpx;
+}
+.group-price{
+  height: 84rpx;
+  padding: 0 40rpx 0 20rpx;
+  border-left: 1rpx solid #ddd;
+  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/xjt_10@2x.png) no-repeat right center;
+  background-size:  18rpx 28rpx;
 }

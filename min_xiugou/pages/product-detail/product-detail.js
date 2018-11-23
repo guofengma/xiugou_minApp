@@ -47,6 +47,7 @@ Page({
   initRequest(){
     let callBack2 = (datas) => {
       if (datas.product.status!=0){
+        
         this.activityByProductId(this.data.productId)
       }else{
         this.ProductFactory.productDefect()
@@ -126,6 +127,9 @@ Page({
     };
     Tool.showErrMsg(r)
     r.addToQueue();
+  },
+  groupClicked(){
+    Tool.navigateTo('/pages/web-view/web-view?webType=3')
   },
   goPage(){
     if(this.data.activityType==1){

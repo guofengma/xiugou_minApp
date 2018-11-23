@@ -1,5 +1,5 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
-
+const app = getApp()
 export default class ProductFactorys  {
   constructor(page) {
     this.page = page
@@ -19,8 +19,10 @@ export default class ProductFactorys  {
     r.successBlock = (req) => {
       let datas = req.responseObject.data || {}
       this.page.data.userInfos = this.page.data.userInfos || {}
-      datas.userLevelTypeName = datas.priceType == (1 || 0 || null) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelName + "价"
-      if (datas.product.buyLimit != -1 && !datas.product.leftBuyNum) {
+      datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelRemark + "价"
+      datas.showPrice = (datas.minPrice == datas.maxPrice)? '¥' + datas.maxPrice:'¥'+minPrice+' - '+maxPrice
+      // 用户不能购买 限购但属于数量小于等于0且状态不是1
+      if (datas.product.buyLimit != -1 && !datas.product.leftBuyNum && datas.status!=1) {
         datas.product.canUserBuy = false
       } else {
         datas.product.canUserBuy = true
@@ -89,7 +91,18 @@ export default class ProductFactorys  {
   didLogin(){ // 是否登录 
     Tool.didLogin(this.page)
     Tool.getUserInfos(this.page)
+    if (this.page.data.didLogin){
+      this.queryPushNum()
+    }
     this.getShoppingCartList()
+  }
+  queryPushNum() { // 获取消息
+    let callBack = (datas)=>{
+      this.page.setData({
+        messageNum: datas.totalMessageNum
+      })
+    }
+    app.queryPushMsg(callBack)
   }
   getShoppingCartList() { // 获取线上购物车
     if (!this.page.data.didLogin) {
@@ -134,10 +147,10 @@ export default class ProductFactorys  {
         }
         break;
       case 2:
-        Tool.switchTab('/pages/index/index')
+        // Tool.switchTab('/pages/index/index')
+        Tool.navigateTo('/pages/search/search?door=0')
         break;
       case 3:
-
         break;
     }
   }

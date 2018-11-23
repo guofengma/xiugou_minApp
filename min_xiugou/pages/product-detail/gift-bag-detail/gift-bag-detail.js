@@ -16,7 +16,6 @@ Page({
     productBuyCount: 1, //商品购买数量
     priceList: [],
     isShowGiftTips:false, //是否显示礼包升级提示
-    dismiss:false, // 能否可以购买礼包
   },
   onLoad: function (options) {
     this.setData({
@@ -82,7 +81,6 @@ Page({
           this.data.isShowGiftTips =true
         }
         this.setData({
-          dismiss: !datas.userBuy,
           isShowGiftTips: this.data.isShowGiftTips
         })
       }
@@ -99,6 +97,12 @@ Page({
           total += items.surplusNumber
         })
         giftStock.push(total)
+      }
+      // 不限购剩余测试小于0  不在购买时间  状态为1的情况下没有资格购买礼包
+      if ((datas.buyLimit != -1 && !datas.leftBuyNum) || !datas.buyTime || (datas.status == 1 && !datas.userBuy)) {
+        datas.canUserBuy = false
+      } else {
+        datas.canUserBuy = true
       }
       // 显示各礼包总库存里面的最小库存
 
@@ -135,9 +139,10 @@ Page({
     this.giftBagClicked()
   },
   btnClicked(e) {
-    if (this.data.dismiss || this.data.productInfo.status == 2) return
-    let n = parseInt(e.currentTarget.dataset.key)
-    this.selectComponent("#prd-info-type").isVisiableClicked(n)
+    if (this.data.productInfo.canUserBuy&& this.data.productInfo.status ==1 ){
+      let n = parseInt(e.currentTarget.dataset.key)
+      this.selectComponent("#prd-info-type").isVisiableClicked(n)
+    } 
   },
   goTop() {
     this.ProductFactory.goTop()

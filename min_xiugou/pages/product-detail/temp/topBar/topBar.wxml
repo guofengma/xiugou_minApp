@@ -10,9 +10,10 @@
     </view>
     <view class='msg-view flexR' bindtap='msgClicked'>
       <image src='/img/xiangqing_yuan@3x.png' class='top-img-2'  mode='widthFix'></image>
+      <view class=' redBg flexR messageNum'  wx:if='{{messageNum>0}}' ></view>
     </view>
   </view>
   
   
-  <template is="msg-tips" data="{{msgShow,openType}}" /> 
+  <template is="msg-tips" data="{{msgShow,openType,messageNum}}" /> 
 </view>

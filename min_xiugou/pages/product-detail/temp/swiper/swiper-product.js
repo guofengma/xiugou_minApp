@@ -7,7 +7,8 @@ Component({
     msgShow:Boolean,
     didLogin: Boolean,
     size:Number,
-    openType:String
+    openType:String,
+    messageNum: Number
   },
   data: {
     activeIndex: 1, // 轮播图片的index 
@@ -17,8 +18,6 @@ Component({
   },
   methods: {
     btnClicked(){
-      // this.ProductFactory.shareBtnClicked(this.data.openType)
-      // this.ProductFactory.hiddenTips()
       this.triggerEvent('subClicked', { index:this.data.openType});
     },
     imageLoad(e) { //图片加载事件

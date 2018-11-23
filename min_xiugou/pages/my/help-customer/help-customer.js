@@ -45,6 +45,9 @@ Page({
     questionFeedback(){
         Tool.navigateTo('questionFeedback/questionFeedback')
     },
+    orderClicked(){
+      Tool.navigateTo('/pages/my/my-order/my-order')
+    },
     //跳到问题列表页面
     questionList(e){
       let id = e.currentTarget.dataset.typeid

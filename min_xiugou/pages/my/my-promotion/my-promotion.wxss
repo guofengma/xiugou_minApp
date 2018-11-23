@@ -1,33 +1,38 @@
 @import "/libs/wxParse/wxParse.wxss";
 .bg-area{
-  background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/my-promotion-bg.png") no-repeat top center;
-  background-size: cover;
+  background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/home_jingshenqingk_bg@3x.png") no-repeat top center;
+  background-size:100% 100%;
   color: #fff;
   height: 364rpx;
   padding: 30rpx;
   display: flex;
 }
 .img-area{
-  background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/tx_03@2x.png") no-repeat top center;
-  background-size: cover;
-  width: 210rpx;
-  height: 210rpx;
+   margin-left: 72rpx;
+   height: 210rpx;
 }
 .img-area image{
-  width: 140rpx;
-  height: 140rpx;
+  width: 120rpx;
+  height: 120rpx;
   border-radius: 50%;
 }
 .levelName{
-  font-size: 26rpx;
+  font-size: 30rpx;
   color: #fff;
   height: 210rpx;
   margin-left: 30rpx;
+  align-items: flex-start;
 }
-.levelName text{
-  padding: 0rpx 30rpx;
-  border:1rpx solid #fff;
-  border-radius: 30rpx;
+.level-label{
+  background: rgba(255,255,255,0.4)  url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/dianyuanxiangqiing_icon@3x.png") no-repeat 2rpx 2rpx;
+  margin-top: 10rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  background-size: 28rpx 28rpx;
+  border-radius: 20rpx;
+  border:1rpx solid #ff8f20;
+  padding-left: 32rpx;
+  padding-right: 14rpx;
 }
 .base-bar>view {
   height: 100%;
@@ -39,16 +44,17 @@
 }
 .growing-view-bg{
   position: absolute;
-  top:266rpx;
+  top:230rpx;
   width: 100%;
 }
 .growing-view{
   width:690rpx;
   height:259rpx;
   margin: 0 auto;
-  background: transparent url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/promotion-bg.png") no-repeat;
-  background-size: 100%;
-  border-radius:20px;
+  /* background: transparent url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/promotion-bg.png") no-repeat; */
+  background: #fff;
+  /* background-size: 100%; */
+  border-radius:14px;
   box-shadow:0px 0px 20px 0px rgba(0,0,0,0.1);
   padding: 0 30rpx;
 }
@@ -80,7 +86,7 @@
   height: 100%;
   left: 0;
   top: 0;
-  background-image: linear-gradient(90deg, #FFAC00 0%, #FF6B84 100%), 
+  background-image: linear-gradient(90deg, #FF567F 0%, #FC6D55 100%), 
 	linear-gradient(#ffffff, #ffffff);
 }
 .growing-question{

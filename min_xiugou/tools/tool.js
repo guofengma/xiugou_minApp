@@ -1040,6 +1040,7 @@ export default class Tool {
     }
 
   static formatNum(num) { // 保留两位小数不四舍五入
+    num = Number(num)
     num = num < 0 ? 0 : num
     let index = String(num).lastIndexOf('.')
     if (index != -1) {
