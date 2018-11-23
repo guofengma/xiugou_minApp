@@ -11,7 +11,8 @@ const ald = require('./libs/ald-stat/ald-stat.js')
 import config from './config.js'
 
 App({
-    onLaunch: function () {
+    onLaunch: function (o) {
+      console.log(o)
       //设置全局变量
       global.Storage = Storage;
       global.Tool = Tool;
@@ -119,6 +120,7 @@ App({
     queryPushMsg(callBack = () => { }) {
       let params = {
         reqName: '消息未读详情',
+        isShowLoading: false,
         url: Operation.queryPushNum,
         requestMethod: 'GET'
       }

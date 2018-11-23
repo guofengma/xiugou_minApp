@@ -54,7 +54,8 @@
 .num-label{
   position: absolute;
   font-size: 22rpx;
-  width: 36rpx;
+  min-width: 28rpx;
+  padding: 0 4rpx;
   height: 36rpx;
   border-radius: 10rpx;
 }
@@ -69,4 +70,5 @@
   width: 20rpx;
   height: 20rpx;
   border-radius: 50%;
+  position: absolute;
 }

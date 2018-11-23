@@ -1,5 +1,6 @@
-@import "/components/msg-tips/msg-tips.wxss";
+
 @import "/css/app";
+@import "/components/msg-tips/msg-tips.wxss";
 /*轮播部分  */
 .slider{
   height: 710rpx;
@@ -39,7 +40,7 @@
 }
 .num-label{
   top:-8rpx;
-  right:-2rpx;
+  right:auto;
 }
 .cart-view{
  margin-right: 20rpx;
