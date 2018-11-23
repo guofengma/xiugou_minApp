@@ -116,6 +116,7 @@ Page({
       // if (app.globalData.openid){
       //   app.wxLogin()
       // }
+      // this.didLogin()
       // 初始化请求
       this.initRequset(options)
       // 初始化传参
@@ -132,6 +133,7 @@ Page({
           pageSize: 10
         }
       })
+      this.didLogin()
       this.onLoad(this.data.options)
       wx.stopPullDownRefresh();
     },

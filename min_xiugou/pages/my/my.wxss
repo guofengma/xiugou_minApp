@@ -74,19 +74,15 @@
    border-radius: 50%;
    background: linear-gradient( #FE2A65, #FE2746);
    display: inline-block;
-   margin: 0 9rpx;
-   
- }
- canvas{
-  /* overflow:hidden;
-  border-radius: 50%; */
+   margin: 0 12rpx;
  }
  .my-save{
   position: absolute;
   right: 0;
   width: 260rpx;
   height: 100rpx;
-  background: #F1D3A1;
+  background: #F1D3A1 url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/porfile_icon@3x.png) no-repeat 5.5rpx 7.5rpx;
+  background-size:103rpx;
   border-top-left-radius:109rpx;
   border-bottom-left-radius:109rpx;
   bottom: 140rpx;
