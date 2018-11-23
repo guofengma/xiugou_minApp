@@ -14,7 +14,7 @@
       <view class="question-item" wx:for='{{list}}' wx:key='unique' >
           <view class="left" catchtap="questionList" data-typeid='{{item.title}}'>
             <!-- <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_order.png'}}"/> -->
-            <image src="{{item.imgUrl}}" class="icon" mode='widthFix'></image>
+            <image src="{{item.imgUrl || 'help_order.png'}}" class="icon" mode='widthFix'></image>
             <view>{{item.name}}</view>
           </view>
           <view class="right">
