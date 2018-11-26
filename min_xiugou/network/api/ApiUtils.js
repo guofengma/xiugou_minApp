@@ -51,9 +51,9 @@ export default class ApiUtils {
     this.list = []
     // 基本请求地址
     this.baseUrl = config.baseUrl
-    this.start()
+    this.init()
   }
-  start(){
+  init(){
     let that = this
     let Urls = this.Urls
     let result = {}, list = [];
