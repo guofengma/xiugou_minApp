@@ -20,9 +20,9 @@ export default class ProductFactorys  {
       let datas = req.responseObject.data || {}
       this.page.data.userInfos = this.page.data.userInfos || {}
       datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelRemark + "价"
-      datas.showPrice = (datas.minPrice == datas.maxPrice)? '¥' + datas.maxPrice:'¥'+minPrice+' - '+maxPrice
+      datas.showPrice = (datas.minPrice == datas.maxPrice) ? '¥' + datas.maxPrice : '¥' + datas.minPrice +' - ¥'+datas.maxPrice
       // 用户不能购买 限购但属于数量小于等于0且状态不是1
-      if (datas.product.buyLimit != -1 && !datas.product.leftBuyNum && datas.status!=1) {
+      if ((datas.product.buyLimit != -1 && !datas.product.leftBuyNum) || datas.status!=1) {
         datas.product.canUserBuy = false
       } else {
         datas.product.canUserBuy = true

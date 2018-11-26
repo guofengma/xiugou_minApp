@@ -49,3 +49,6 @@
  top:-1rpx;
  right:0;
 }
+.cart-label{
+  right: 0;
+}
