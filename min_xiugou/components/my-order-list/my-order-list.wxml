@@ -41,18 +41,18 @@
     </view>
 
     <view class="amount">
-      <text>共{{item.orderProductList.length}}件商品 合计：</text>
+      <text>共{{item.orderProductList.length}}件商品 {{ item.status==1 || item.status==7 || item.status==8? "需付款":"实付款"}}：</text>
       <text class="red font-30">￥{{item.needPrice}}</text>
-      <text class="freight">(含运费￥{{item.freightPrice}})</text>
+      <!-- <text class="freight">(含运费￥{{item.freightPrice}})</text> -->
     </view>
-    <view class="time">
+    <!-- <view class="time">
       <text wx:if="{{ item.status==4 || item.status==5}}">完成时间：{{item.showFinishTime}}</text>
       <text wx:elif="{{ item.status==3 }}">发货时间：{{item.sendTime}}</text>
       <text wx:elif="{{ item.status==2 }}">付款时间：{{item.payTime}}</text>
       <text wx:elif="{{ item.status==7 }}">取消时间：{{item.cancelTime}}</text>
       <text wx:elif="{{ item.status==8 }}">关闭时间：{{item.payEndTime}}</text>
       <text wx:else>创建时间：{{item.createTime}}</text>
-    </view>
+    </view> -->
     <view>
       <view class="footer" wx:if='{{item.status!=2}}'>
         <!-- 倒计时  -->
