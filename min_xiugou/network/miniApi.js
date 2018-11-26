@@ -9,13 +9,28 @@ const api =
       "method": "get",
       "encrypt": false
     }
+  ],
+  'queryAdList':[
+    '/config/advertisement/queryAdvertisementList',
+    {
+      "action": "获取文章详情",
+      "method": "post",
+      "encrypt": false
+    }
   ]
 }
 
-const API = ApiUtils(api);
+// const API = ApiUtils(api);
+const API = new ApiUtils(api).result;
 /*
 * 使用说明
-* API.getProductDetail({id:1},{ headers: {'sg-token': token }).then(res=>{}).catch(err=>{})
+      API.queryAdList({
+        'type': 1,
+      }).then((res) => {
+        
+      }).catch((res) => {
+        
+      });
 * */
 
 export default API;

@@ -7,6 +7,7 @@ import RequestFactory from '../network/factory/requestFactory';
 import Operation from '../network/operation';
 import Storage from './storage';
 import Event from './event';
+import API from '../network/miniApi';
 
 require('./DateFormat');
 
@@ -16,6 +17,7 @@ let TCGlobal = {
   Event: Event,
   RequestFactory: RequestFactory,
   Operation: Operation.sharedInstance(),
+  API: API
 };
 
 module.exports = TCGlobal;

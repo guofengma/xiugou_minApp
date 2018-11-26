@@ -4,21 +4,22 @@ import {
   Storage
 } from '../../tools/tcglobal';
 
-const Headers = {
-  'content-type': 'application/json',
-  'device': Storage.getPlatform() || '',
-  'platform': 'mini',
-  'version': wx.getSystemInfoSync(),
-  'sg-token': Storage.getToken() || '',
-};
-
 export default class HttpUtils {
+  constructor(Urls) {
+    this.Headers = {
+      'content-type': 'application/json',
+      'device': global.Storage.getPlatform() || '',
+      'platform': 'mini',
+      'version': wx.getSystemInfoSync(),
+      'sg-token': global.Storage.getToken() || '',
+    }
+  }
   static get(url, params, config = {}) {
     
     const rsa_headers = config.encrypt ? this.getRsaHeaders(url, params, 'get') : {};
-    Tool.showLoading();
+    global.Tool.showLoading();
     const headers = {
-      ...Headers,
+      ...this.Headers,
       ...rsa_headers
     };
     return new Promise((resolve, reject)=> {
@@ -51,7 +52,7 @@ export default class HttpUtils {
   static post(url, params, config = {}) {
     const rsa_headers = config.encrypt ? this.getRsaHeaders(url, params, 'post') : {};
     const headers = {
-      ...Headers,
+      ...this.Headers,
       ...rsa_headers
     }
     return new Promise((resolve, reject) => {
@@ -62,7 +63,7 @@ export default class HttpUtils {
         method: 'post',
         header: headers,
         success: function (res) {
-          Tool.hideLoading();
+          global.Tool.hideLoading();
           if (res.data.code == '10000' || res.data.code === 0) {
             resolve(res.data);
           }
