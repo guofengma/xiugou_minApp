@@ -34,7 +34,7 @@ Page({
     return ({
       title: data.remark,
       path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id}&jobId=${data.id}`,
-      imageUrl: 'https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_detail_bg.png'
+      imageUrl: 'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/xcx/fexian_img@3x.png'
     });
   }
 })
