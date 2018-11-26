@@ -15,7 +15,8 @@ const api =
     {
       "action": "获取文章详情",
       "method": "post",
-      "encrypt": false
+      "encrypt": false,// 是否加签
+      'isShowLoading':true, //是否展示 loading
     }
   ]
 }
