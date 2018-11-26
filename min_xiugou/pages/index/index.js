@@ -2,7 +2,7 @@
 //获取应用实例
 const app = getApp()
 import { levelName, pages} from '../../tools/common.js'
-let { Tool, RequestFactory, Event, Storage, Operation} = global;
+let { Tool, RequestFactory, Event, Storage, Operation, API} = global;
 
 Page({
     data: {
@@ -350,6 +350,13 @@ Page({
       r.addToQueue();
     },
     queryAdList(types = 1, reqName='',callBack=()=>{}) {
+      // API.queryAdList({
+      //   'type': types,
+      // }).then((res) => {
+      //   callBack(res.data)
+      // }).catch((res) => {
+      //   Tool.showErrMsg(res)
+      // });
       let params = {
         'type': types,
         reqName: reqName,

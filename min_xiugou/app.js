@@ -3,7 +3,8 @@ import {
   Tool,
   Event,
   RequestFactory,
-  Operation
+  Operation,
+  API
 } from './tools/tcglobal';
 
 const ald = require('./libs/ald-stat/ald-stat.js')
@@ -12,7 +13,10 @@ import config from './config.js'
 
 App({
     onLaunch: function (o) {
-      console.log(o)
+      if (!Storage.getPlatform()) {
+        let uuid = Tool.getUUID()
+        Storage.setPlatform(uuid)
+      }
       //设置全局变量
       global.Storage = Storage;
       global.Tool = Tool;
@@ -20,11 +24,12 @@ App({
       global.RequestFactory = RequestFactory;
       global.Operation = Operation
       global.Config = config
+      global.API = API
       this.getSystemInfo();
-      if (!Storage.getPlatform()){
-        let uuid = Tool.getUUID()
-        Storage.setPlatform(uuid)
-      }
+      // if (!Storage.getPlatform()){
+      //   let uuid = Tool.getUUID()
+      //   Storage.setPlatform(uuid)
+      // }
       this.wxLogin()
       let systemInfo = wx.getSystemInfoSync()
       this.deleteInviteId()
