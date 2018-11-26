@@ -350,24 +350,25 @@ Page({
       r.addToQueue();
     },
     queryAdList(types = 1, reqName='',callBack=()=>{}) {
-      // API.queryAdList({
-      //   'type': types,
-      // }).then((res) => {
-      //   callBack(res.data)
-      // }).catch((res) => {
-      //   Tool.showErrMsg(res)
-      // });
-      let params = {
+      API.queryAdList({
         'type': types,
-        reqName: reqName,
-        url: Operation.queryAdList,
-      }
-      let r = RequestFactory.wxRequest(params);
-        r.successBlock = (req) => {
-          callBack(req.responseObject.data)
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
+      }).then((res) => {
+        callBack(res.data)
+      }).catch((res) => {
+        console.log(res)
+        // Tool.showErrMsg(res)
+      });
+      // let params = {
+      //   'type': types,
+      //   reqName: reqName,
+      //   url: Operation.queryAdList,
+      // }
+      // let r = RequestFactory.wxRequest(params);
+      //   r.successBlock = (req) => {
+      //     callBack(req.responseObject.data)
+      //   };
+      //   Tool.showErrMsg(r)
+      //   r.addToQueue();
     },
     adListClicked(e) {
       let adType = e.currentTarget.dataset.type;

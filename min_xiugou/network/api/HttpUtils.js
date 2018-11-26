@@ -5,7 +5,7 @@ import {
 } from '../../tools/tcglobal';
 
 export default class HttpUtils {
-  constructor(Urls) {
+  constructor() {
     this.Headers = {
       'content-type': 'application/json',
       'device': global.Storage.getPlatform() || '',
@@ -13,11 +13,15 @@ export default class HttpUtils {
       'version': wx.getSystemInfoSync(),
       'sg-token': global.Storage.getToken() || '',
     }
+    
   }
   static get(url, params, config = {}) {
     
     const rsa_headers = config.encrypt ? this.getRsaHeaders(url, params, 'get') : {};
-    global.Tool.showLoading();
+    const isShowLoading = this.showLoading(config)
+    if (isShowLoading){
+      Tool.showLoading();
+    }
     const headers = {
       ...this.Headers,
       ...rsa_headers
@@ -30,7 +34,9 @@ export default class HttpUtils {
         method: 'get',
         header: headers,
         success: function (res) {
-          Tool.hideLoading();
+          if (isShowLoading) {
+            Tool.hideLoading();
+          }
           if (res.data.code == '10000' || res.data.code === 0) {
             resolve(res.data);
           }
@@ -51,6 +57,10 @@ export default class HttpUtils {
 
   static post(url, params, config = {}) {
     const rsa_headers = config.encrypt ? this.getRsaHeaders(url, params, 'post') : {};
+    const isShowLoading = this.showLoading(config)
+    if (isShowLoading) {
+      global.Tool.showLoading();
+    }
     const headers = {
       ...this.Headers,
       ...rsa_headers
@@ -63,7 +73,9 @@ export default class HttpUtils {
         method: 'post',
         header: headers,
         success: function (res) {
-          global.Tool.hideLoading();
+          if (isShowLoading) {
+            global.Tool.hideLoading();
+          }
           if (res.data.code == '10000' || res.data.code === 0) {
             resolve(res.data);
           }
@@ -82,7 +94,7 @@ export default class HttpUtils {
   }
 
   // 获取验签header
-  getRsaHeaders(url, params, method) {
+  static getRsaHeaders(url, params, method) {
     let rsa_headers = {};
     console.log(`对${url}进行加签处理`);
     rsa_headers = RSA.sign(params);
@@ -92,7 +104,7 @@ export default class HttpUtils {
     return rsa_headers;
   }
 
-  query2Object(str) {
+  static query2Object(str) {
     let url = str || document.URL;
     // removeURLAnchor
     url.indexOf('#') > 0 && (url = url.substring(0, url.indexOf('#')))
@@ -111,5 +123,12 @@ export default class HttpUtils {
     }
     return e;
   }
-
+  
+  static showLoading(config){
+    if (config.isShowLoading || config.isShowLoading === undefined) {
+      return true
+    } else {
+      return false
+    }
+  }
 }
