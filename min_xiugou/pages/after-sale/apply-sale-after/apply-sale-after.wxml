@@ -24,13 +24,16 @@
     <view class='cell-line refund-num whiteBg' wx:if='{{refundType!=2}}'>
       退款金额： <text class='red'>¥{{orderInfos.refundPrice}}</text>
     </view>
-    <view  bindtap='chooseType' wx:if='{{refundType==2}}'>
+    <!-- <view  bindtap='chooseType' wx:if='{{refundType==2}}'>
       <template is="cell-line" data="{{name:'更换型号',placeholder:selectType.spec}}"/> 
-    </view>
-    <view class='address active whiteBg' wx:if='{{refundType==2}}'>
+    </view> -->
+    <!-- <view class='address active whiteBg' wx:if='{{refundType==2}}'>
       <template is="address-info" data="{{addressType:1,...list.address,hasData:true}}"/>
+    </view> -->
+    <view class='font-24 cell-line-tips gray-9' wx:if='{{refundType==2}}'>
+      <text class='red'>*</text>请确保退换商品不影响二次销售
     </view>
-    <view class='cell-line'>{{reason[refundType].info}}</view>
+    <view class='cell-line gray-9'>{{reason[refundType].info}}</view>
     <textarea wx:if='{{textarea}}'   class='textarea' placeholder="{{placeholder.placeholder}}" disabled='{{placeholder.disabled}}' placeholder-class='textarea gray' bindinput='inputChange' value='{{remark}}'/>
     <view class='textarea' wx:else></view>
   </view>
@@ -52,7 +55,7 @@
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
 
 <choose-after-sale-reason hidden='{{hidden}}'  bind:makeSureReason="makeSureReason" reason="{{reason[refundType]}}" id='chooseReason'/>
-
+<!-- 
 <product-specification id='prd-info-type' 
   bind:subClicked="changeProdctType" 
   productSpec='{{productSpec}}' 
@@ -66,4 +69,4 @@
   commodityType = '5'
   bind:hiddenTips ='hiddenTips'
   productPriceId = '{{productPriceId.productPriceId}}'
-/>
+/> -->

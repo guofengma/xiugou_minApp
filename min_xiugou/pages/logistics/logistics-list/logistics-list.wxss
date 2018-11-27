@@ -1,0 +1,20 @@
+@import "/components/cell-line/cell-line";
+
+@import "/components/after-sale-prd-info/after-sale-prd-info";
+.cell-line-view-right{
+  width: 30rpx;
+}
+.tips-num{
+  height: 80rpx;
+}
+.line{
+  width: 85rpx;
+  height: 1rpx;
+  border:1rpx solid #D9D9D9;
+}
+.tips-num>text{
+  margin: 0 30rpx;
+}
+.tips{
+  padding: 4rpx 0;
+}

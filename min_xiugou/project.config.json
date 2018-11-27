@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 48,
+			"current": 51,
 			"list": [
 				{
 					"id": 0,
@@ -342,6 +342,11 @@
 					"name": "css3玻璃球",
 					"pathName": "pages/my/test2",
 					"query": "productId=77"
+				},
+				{
+					"id": -1,
+					"name": "查看物流",
+					"pathName": "pages/logistics/logistics-list/logistics-list"
 				}
 			]
 		}
