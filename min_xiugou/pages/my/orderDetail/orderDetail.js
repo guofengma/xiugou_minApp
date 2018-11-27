@@ -249,14 +249,14 @@ Page({
             bottomBtn: ['查看物流', '确认收货'], 
             bottomId: [5, 4],
             orderIcon: "order-state-3.png",
-            info: '仓库正在扫描出仓...',
+            info: '订单正在处理中...',
             time: ''
           },
           { status: '交易已完成',
             bottomBtn: ['删除订单', '再次购买'], 
             bottomId: [6,5],
             orderIcon: "order-state-5.png",
-            info: '仓库正在扫描出仓...',
+            info: '订单正在处理中...',
             time: ''
           },
           {
@@ -264,14 +264,14 @@ Page({
             bottomBtn: ['删除订单', '再次购买'],
             bottomId: [6, 5],
             orderIcon: "order-state-5.png",
-            info: '仓库正在扫描出仓...',
+            info: '订单正在处理中...',
             time: ''
           },
           { status: '订单已完成',
             bottomBtn: ['删除订单', '再次购买'],
             bottomId: ['', 5], 
             orderIcon: "order-state-5.png", 
-            info: '仓库正在扫描出仓...',
+            info: '订单正在处理中...',
             time: '' 
           },
           { status: '交易关闭',
