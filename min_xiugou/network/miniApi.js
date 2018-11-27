@@ -16,7 +16,16 @@ const api =
       "action": "获取文章详情",
       "method": "post",
       "encrypt": false,// 是否加签
-      'isShowLoading':true, //是否展示 loading
+      'isShowLoading':true, //是否展示 loading 默认打印
+      'isShowErrMsg':false, // 是否弹出接口的报错信息  默认打印
+    }
+  ],
+  'indexQueryCategoryList':[
+    '/config/advertisement/queryCategoryList',
+    {
+      "action": "获取首页4个分类",
+      "method": "get",
+      "encrypt": false
     }
   ]
 }

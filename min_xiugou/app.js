@@ -116,7 +116,9 @@ App({
       }
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
-        let datas = req.responseObject.data
+        let datas = req.responseObject.data || {}
+        let levelName = datas.levelName || ''
+        datas.levelName0 = levelName.length > 4 ? levelName.slice(0, 4) + '...' : levelName
         Storage.setUserAccountInfo(datas)
         callBack(datas)
       };

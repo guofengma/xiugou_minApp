@@ -1,6 +1,7 @@
 const regeneratorRuntime = require('../../libs/asyncRuntime/runtime.js');
 import HttpUtils from './HttpUtils';
 import config from '../../config.js'
+import { Tool } from '../../tools/tcglobal';
 
 export default class ApiUtils {
   constructor(Urls) {
@@ -9,6 +10,10 @@ export default class ApiUtils {
     this.maxLimit = 5;
     // 请求队列,若当前请求并发量已经超过maxLimit,则将该请求加入到请求队列中
     this.requestQueue = [];
+    //当前尝试的次数
+    this.tryCount = 0;
+    //最多尝试重发请求的次数
+    this.maxTryCount = 2;
     // 当前并发量数目
     this.currentConcurrent = 0;
     this.result = {}
@@ -20,7 +25,6 @@ export default class ApiUtils {
   init(){
     let that = this
     let Urls = this.Urls
-    let result = {}, list = [];
     let baseUrl = this.baseUrl
     Object.keys(Urls).forEach(function (name) {
       let value = Urls[name];
@@ -57,9 +61,26 @@ export default class ApiUtils {
           if (response.code === 0 || response.code === 10000) {
             return Promise.resolve(response);
           } else {
+            // 假如返回未登陆并且当前页面不是登陆页面则进行跳转
+            if (response.code === 10001 || response.code === 10009) {
+              let callBack = () => {
+                Tool.navigateTo('/pages/login-wx/login-wx?isBack=true')
+              }
+              Tool.showAlert(response.msg, callBack)
+            } else {
+              // 是否给出错误提示
+              if (config.isShowErrMsg!==false){
+                Tool.showAlert(response.msg)
+              }
+            }
             return Promise.reject(response);
           }
         } catch (err) {
+          console.log('<============================== 请求结束：' + action + '第' + that.tryCount + '次请求');
+          that.tryCount++;
+          if (that.tryCount < that.maxTryCount) {
+            that.result[name]()
+          }
           return Promise.reject(err);
         } finally {
           console.log('当前并发数:', that.currentConcurrent);

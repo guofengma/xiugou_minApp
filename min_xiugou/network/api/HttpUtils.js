@@ -8,12 +8,15 @@ export default class HttpUtils {
   constructor() {
     this.Headers = {
       'content-type': 'application/json',
-      'device': global.Storage.getPlatform() || '',
+      'device': Storage.getPlatform() || '',
       'platform': 'mini',
       'version': wx.getSystemInfoSync(),
-      'sg-token': global.Storage.getToken() || '',
+      'sg-token': Storage.getToken() || '',
     }
-    
+    //当前尝试的次数
+    this.tryCount = 0;
+    //最多尝试重发请求的次数
+    this.maxTryCount = 2;
   }
   static get(url, params, config = {}) {
     
@@ -125,7 +128,7 @@ export default class HttpUtils {
   }
   
   static showLoading(config){
-    if (config.isShowLoading || config.isShowLoading === undefined) {
+    if (config.isShowLoading !== false) {
       return true
     } else {
       return false
