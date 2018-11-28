@@ -119,9 +119,12 @@ Page({
       Storage.setUpUserId(null)
       if (this.data.urlFrom){
         Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
-      } else if (!datas.upUserid){
-        Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
-      } else{
+      } 
+      // else if (!datas.upUserid){ 
+      //   领取红包功能 取消了
+      //   Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
+      // } 
+      else{
         let callBack = ()=>{
           Tool.switchTab('/pages/index/index')
         }

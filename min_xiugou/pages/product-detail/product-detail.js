@@ -63,14 +63,15 @@ Page({
         openType:''
       })
     }
-    if (!this.data.userInfos.upUserid){
-      let date = Storage.getRedEnvelopesDate() || ''
-      let now = new Date().toLocaleDateString()
-      if (now != date){
-        Storage.setRedEnvelopesDate(now)
-        this.selectComponent('#redEnvelopes').btnClick();
-      }
-    }
+    // 领取红包的功能 取消
+    // if (!this.data.userInfos.upUserid){
+    //   let date = Storage.getRedEnvelopesDate() || ''
+    //   let now = new Date().toLocaleDateString()
+    //   if (now != date){
+    //     Storage.setRedEnvelopesDate(now)
+    //     this.selectComponent('#redEnvelopes').btnClick();
+    //   }
+    // }
   },
   setStoragePrd(params,index){
     let list = Storage.getShoppingCart()

@@ -205,7 +205,7 @@
   <view class='recommend-view whiteBg' wx:if='{{recommendArr.length>0}}' >
     <view class='index-item-title flexR font-38'>为你推荐</view>
     <view class='recommend-prd-content flexR'>
-      <view class='recommend-prd-item boxSize' wx:for='{{recommendArr}}' wx:key='{{index}}' style='margin-right:{{index%2==1? "0":"10"}}rpx' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'>
+      <view class='recommend-prd-item boxSize overflow' wx:for='{{recommendArr}}' wx:key='{{index}}' style='margin-right:{{index%2==1? "0":"10"}}rpx' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'>
         <view class='recommend-prd-img' >
          <!-- <image src='{{item.imgUrl}}' lazy-load="{{ true }}"></image> -->
          <image-sub  imgSrc="{{item.imgUrl}}" imgStyle='height:340rpx;width:340rpx'  mode='aspectFill'/>
