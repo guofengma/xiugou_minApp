@@ -2,7 +2,7 @@ let { Tool, RequestFactory, Storage, Operation } = global;
 Page({
   data: {
     ysf: { title: '授权码录入' },
-    invite:[],
+    invite:[1,2,3,4,5],
     inviteId:'',
     code:'',
     userInfo:'',
@@ -15,13 +15,19 @@ Page({
       accoutInfo: options,
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
+      urlFrom: options.from || null
     })
     if (!options.id){
       this.queryInviterList() // 请求邀请者
     } else {
       this.initInputValue() // 初始化input的值
     }
-    
+    let middleIndex = Math.floor(this.data.invite.length/2)
+    if(middleIndex.toFixed.indexOf('.')!=-1){
+      this.setData({
+        middleIndex: middleIndex
+      })
+    }
   },
   onShow: function () {
 

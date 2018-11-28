@@ -1,14 +1,14 @@
 <view class='code-view'>
   <view class='inviterInfo '>
     <view wx:if='{{!accoutInfo.id}}'>
-      <view class='tips font-30'>
-        请选择以下用户作为您的邀请者
+      <view class='tips font-26'>
+        请选择一个导师
       </view>
       <view class='inviter flexR'>
        <view class='flexC'wx:for='{{invite}}' wx:key="unique" bindtap='inviterClicked' data-key='{{item.code}}'>
-         <image src='{{ item.head_img? item.head_img:"../../../img/default-userImg.png"}}'></image>
-         <text class='inviter-name ellipsis'>{{item.nickname}}</text>
-         <text class='inviter-level ellipsis'>{{item.name}}</text>
+         <image src='{{ item.head_img? item.head_img:"/img/default-userImg.png"}}' class='{{index===middleIndex? "middleImg":""}}'></image>
+         <text class='inviter-name ellipsis'>{{item.nickname}}11111</text>
+         <!-- <text class='inviter-level ellipsis'>{{item.name}}</text> -->
        </view>
       </view>
       <!-- <view>
@@ -17,9 +17,9 @@
     </view>
   </view>
   <button class='loginBtn' disabled='{{disabled}}' >下一步</button>
-  <view class='gray font-26 flexR dismiss' bindtap='dismiss'>跳过</view>
+  <view class='gray-9 font-26 flexR dismiss' bindtap='dismiss'>跳过</view>
 
-  <view class='gray font-26 fixed-bottom flexR write-code' bindtap='goPage'>
+  <view class='gray-9 font-26 fixed-bottom flexR write-code' bindtap='goPage'>
     填写邀请码
   </view>
 </view>

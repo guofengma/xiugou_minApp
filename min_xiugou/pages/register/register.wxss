@@ -54,4 +54,5 @@
 }
 .loginBtn{
   font-size: 34rpx;
+  border-radius: 50rpx;
 }

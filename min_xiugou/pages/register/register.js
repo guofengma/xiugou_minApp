@@ -26,6 +26,7 @@ Page({
     if (options.inviteId == 'null' || options.inviteId == 'undefined' || !options.inviteId) {
       inviteId = ''
     }
+    Tool.navigateTo('/pages/register/register-code/register-code?form=' + this.data.urlFrom)
     app.deleteInviteId()
     let upUserId = Storage.getUpUserId() || {}
     // Tool.showAlert(upUserId.id)
@@ -117,19 +118,22 @@ Page({
       Storage.setMemberId(req.responseObject.data.id)
       Tool.loginOpt(req)
       Storage.setUpUserId(null)
-      if (this.data.urlFrom){
-        Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
-      } 
+      Tool.navigateTo('/pages/register/register-code/register-code?form=' + this.data.urlFrom)
+      // if (this.data.urlFrom){
+      //   Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
+      // } else{
+      //   Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
+      // }
       // else if (!datas.upUserid){ 
       //   领取红包功能 取消了
       //   Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
       // } 
-      else{
-        let callBack = ()=>{
-          Tool.switchTab('/pages/index/index')
-        }
-        Tool.showSuccessToast('注册成功', callBack)
-      }
+      // else{
+      //   let callBack = ()=>{
+      //     Tool.switchTab('/pages/index/index')
+      //   }
+      //   Tool.showSuccessToast('注册成功', callBack)
+      // }
     }
     Tool.showErrMsg(r)
     r.addToQueue();
