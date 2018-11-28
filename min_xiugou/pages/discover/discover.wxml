@@ -15,7 +15,8 @@
       <swiper indicator-dots="true" previous-margin="62rpx" next-margin="62rpx" circular autoplay>
         <block wx:for="{{swipers}}" wx:key="unique">
           <swiper-item>
-            <image src="{{item.imgUrl}}" class="slide-image" width="355" height="150" bindtap='handleSwiperClick' data-code='{{item.linkTypeCode}}' data-link="{{item.linkType}}" />
+            <image-sub  imgSrc="{{item.imgUrl}}" imgStyle='border-radius:15rpx' bindtap='handleSwiperClick' data-code='{{item.linkTypeCode}}' data-link="{{item.linkType}}" mode='aspectFill'/>
+            <!-- <image src="{{item.imgUrl}}" class="slide-image" width="355" height="150" bindtap='handleSwiperClick' data-code='{{item.linkTypeCode}}' data-link="{{item.linkType}}" /> -->
           </swiper-item>
         </block>
       </swiper>

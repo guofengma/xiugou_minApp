@@ -13,10 +13,6 @@ export default class HttpUtils {
       'version': wx.getSystemInfoSync(),
       'sg-token': Storage.getToken() || '',
     }
-    //当前尝试的次数
-    this.tryCount = 0;
-    //最多尝试重发请求的次数
-    this.maxTryCount = 2;
   }
   static get(url, params, config = {}) {
     
