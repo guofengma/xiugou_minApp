@@ -4,7 +4,9 @@ Page({
     disabled:true
   },
   onLoad: function (options) {
-  
+    this.setData({
+      urlFrom: options.from || null
+    })
   },
   updateUserCodeById(){
     let params = {
@@ -30,7 +32,11 @@ Page({
   },
   next(){
     let callBack = () => {
-      Tool.switchTab('/pages/index/index')
+      if (this.data.urlFrom) {
+        Tool.redirectTo(decodeURIComponent(this.data.urlFrom))
+      } else {
+        Tool.switchTab('/pages/index/index')
+      }
     }
     Tool.showSuccessToast('注册成功', callBack)
   },

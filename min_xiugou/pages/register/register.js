@@ -26,7 +26,7 @@ Page({
     if (options.inviteId == 'null' || options.inviteId == 'undefined' || !options.inviteId) {
       inviteId = ''
     }
-    Tool.navigateTo('/pages/register/register-code/register-code?form=' + this.data.urlFrom)
+    Tool.navigateTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
     app.deleteInviteId()
     let upUserId = Storage.getUpUserId() || {}
     // Tool.showAlert(upUserId.id)
@@ -118,7 +118,7 @@ Page({
       Storage.setMemberId(req.responseObject.data.id)
       Tool.loginOpt(req)
       Storage.setUpUserId(null)
-      Tool.navigateTo('/pages/register/register-code/register-code?form=' + this.data.urlFrom)
+      Storage.setFirstRegistration(true)
       // if (this.data.urlFrom){
       //   Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
       // } else{

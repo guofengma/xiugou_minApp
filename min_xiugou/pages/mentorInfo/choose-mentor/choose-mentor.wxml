@@ -1,0 +1,9 @@
+<view class='flexC mentor-img'>
+  <image-sub  imgStyle='{{"width:160rpx;height:160rpx;border-radius:50%"}}' imgSrc="{{'home_icon_search_nor@2x.png'}}" mode='scaleToFill'/>
+  <view class='mentor-name font-26'>样子</view>
+</view>
+<view class='info gray-9 font-24'>
+  <view> 彦宏，百度公司创始人、董事长兼首席执行官，全面负责百度公司的战略规划和运营管理。 1991年，李彦宏毕业于北京大学信息管理专业，随后前往美国布法罗纽约州立大学完成计算机科学硕士学位，先后担任道·琼斯公司高级顾问...</view>
+  <view class='flexR'>这位导师很懒，什么也没留下~</view>
+</view>
+<view class='loginBtn font-34 flexR'>选择该导师</view>

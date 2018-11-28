@@ -1,25 +1,30 @@
 <view class='code-view'>
   <view class='inviterInfo '>
     <view wx:if='{{!accoutInfo.id}}'>
-      <view class='tips font-26'>
-        请选择一个导师
+      <view class='tips font-26 flexR-sb'>
+        <view>请选择一个导师</view>
+        <view class='flexR gray-9' catchtap='changeClicked'>
+          <image-sub imgStyle='{{"width:32rpx;margin-right:10rpx"}}' imgSrc="{{'shuaxin-icon.png'}}"/>
+          换一换
+        </view>
       </view>
-      <view class='inviter flexR'>
-       <view class='flexC'wx:for='{{invite}}' wx:key="unique" bindtap='inviterClicked' data-key='{{item.code}}'>
-         <image src='{{ item.head_img? item.head_img:"/img/default-userImg.png"}}' class='{{index===middleIndex? "middleImg":""}}'></image>
-         <text class='inviter-name ellipsis'>{{item.nickname}}11111</text>
-         <!-- <text class='inviter-level ellipsis'>{{item.name}}</text> -->
-       </view>
-      </view>
-      <!-- <view>
-        <button class='changeBtn' bindtap='queryInviterList'>换一换</button>
-      </view> -->
+      <swiper duration="300" bindchange="bindchange" display-multiple-items='3'  previous-margin="120rpx" next-margin="120rpx" current='{{current}}' circular='true'>
+        <swiper-item wx:for="{{invite}}"   wx:key="{{index}}" >
+          <view class='inviter flexC'>
+            <view class='flexC' bindtap='inviterClicked' data-index='{{index}}' catchtap='itemClicked'>
+              <image src='{{ item.head_img? item.head_img:"/img/default-userImg.png"}}' class='{{index===activeIndex? "middleImg":""}}'></image>
+              <text class='inviter-name ellipsis'>{{item}}</text>
+            </view>
+          </view>
+        </swiper-item>
+     </swiper>
+    <view class='gray-9 flexR'>暂无导师，请填写授权码或跳过该步骤~</view>
     </view>
   </view>
-  <button class='loginBtn' disabled='{{disabled}}' >下一步</button>
+  <button class='loginBtn' disabled='{{disabled}}' >确认</button>
   <view class='gray-9 font-26 flexR dismiss' bindtap='dismiss'>跳过</view>
 
   <view class='gray-9 font-26 fixed-bottom flexR write-code' bindtap='goPage'>
-    填写邀请码
+    <view class='flexR'> 填写授权码</view>
   </view>
 </view>

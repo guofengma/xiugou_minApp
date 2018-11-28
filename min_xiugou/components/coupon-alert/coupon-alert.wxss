@@ -1,0 +1,4 @@
+@import "/css/app";
+.close{
+  margin-top: 60rpx;
+}

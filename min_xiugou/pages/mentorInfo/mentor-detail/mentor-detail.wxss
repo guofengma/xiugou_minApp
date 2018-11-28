@@ -1,0 +1,16 @@
+.header{
+  height: 274rpx;
+  background: RED;
+}
+.line{
+  padding: 0 30rpx;
+  height: 84rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.content{
+  padding: 30rpx 20rpx;
+  margin-top: 14rpx;
+}
+.content>view{
+  margin-bottom: 20rpx;
+}

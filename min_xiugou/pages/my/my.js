@@ -29,6 +29,7 @@ Page({
         '/pages/my/task/task',//我的任务
         '/pages/my/extension/extension',//我的推广
         '/pages/discover/discover-fav/discover-fav',//发现收藏
+        '/pages/mentorInfo/mentor-detail/mentor-detail',//导师详情
       ]
     },
     onLoad: function (options) {

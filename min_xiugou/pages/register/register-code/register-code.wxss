@@ -12,7 +12,11 @@
 }
 .loginBtn{
   margin-bottom: 30rpx;
-  margin-top: 200rpx;
+  margin-top: 120rpx;
+  border-radius: 50rpx;
+}
+.inviter{
+  height: 216rpx;
 }
 .inviter image{
   border-radius: 50%;
@@ -21,7 +25,7 @@
 }
 .tips{
   margin-bottom: 160rpx;
-  /* margin-left: 50rpx; */
+  padding: 0 30rpx;
   position: relative;
 }
 /* .tips:before{
@@ -71,7 +75,9 @@
   margin-bottom: 100rpx;
 }
 .write-code{
-  bottom:63rpx;
+ bottom:63rpx;
+}
+.write-code>view{
   border: 1rpx solid #D9D9D9;
   border-radius: 34rpx;
   height: 42rox;

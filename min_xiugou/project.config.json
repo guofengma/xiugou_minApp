@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 51,
+			"current": 54,
 			"list": [
 				{
 					"id": 0,
@@ -346,7 +346,26 @@
 				{
 					"id": -1,
 					"name": "查看物流",
-					"pathName": "pages/logistics/logistics-list/logistics-list"
+					"pathName": "pages/logistics/logistics-list/logistics-list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "选择导师",
+					"pathName": "pages/mentorInfo/choose-mentor/choose-mentor",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "填写导师信息",
+					"pathName": "pages/mentorInfo/write-info/write-info",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "导师详情",
+					"pathName": "pages/mentorInfo/mentor-detail/mentor-detail",
+					"query": ""
 				}
 			]
 		}

@@ -47,7 +47,8 @@ Page({
         5: 'markdownPrice'
       },
       taskDetail:{},
-      width:0
+      width:0,
+      isShowCoupon:false,// 优惠卷弹窗
     },
     close() {
       this.toggleCardShow();
@@ -111,12 +112,13 @@ Page({
       })
     },
     onLoad: function (options) {
-      Event.on('getLevel', this.getLevel,this)
+      // Event.on('getLevel', this.getLevel,this)
       Event.on('didLogin', this.didLogin, this); 
-      // if (app.globalData.openid){
-      //   app.wxLogin()
-      // }
-      // this.didLogin()
+      if (Storage.getFirstRegistration()){
+        this.isShowCoupon()
+      }else{
+        this.selectComponent("#notice").getNotice()
+      }
       // 初始化请求
       this.initRequset(options)
       // 初始化传参
@@ -393,6 +395,15 @@ Page({
       this.setData({
         isShowNotice: !this.data.isShowNotice
       })
+    },
+    isShowCoupon() { // 展示优惠卷
+      this.setData({
+        isShowCoupon: !this.data.isShowCoupon
+      })
+      if (!this.data.isShowCoupon) {
+        Storage.setFirstRegistration(false)
+        this.selectComponent("#notice").getNotice()
+      }
     },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);

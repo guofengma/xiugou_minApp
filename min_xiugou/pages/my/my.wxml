@@ -157,9 +157,12 @@
         <view>我的推广</view>
       </view> -->
       <view class='my-tools-cont' catchtap='itemClicked' data-page='18'>
-       <!-- <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconFav.png'}}"/> -->
         <image style='width:40rpx;height:40rpx' src="/img/iconFav.png"/>
         <view>秀场收藏</view>
+      </view>
+       <view class='my-tools-cont' catchtap='itemClicked' data-page='19'>
+        <image style='width:40rpx;height:40rpx' src="/img/iconFav.png"/>
+        <view>导师</view>
       </view>
     </view>
 

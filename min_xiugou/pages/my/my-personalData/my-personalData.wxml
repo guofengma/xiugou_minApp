@@ -70,5 +70,14 @@
             </view>
         </view>
     </view>
+    <view class="wrap flexR-sb whiteBg introduction item" catchtap='introductionaClicked'>
+      <view class='item-left'>
+        <text>简介</text>
+      </view>
+      <view class='flexR-sb'>
+        <text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </text>
+        <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+      </view>
+    </view>
 </view>
 
