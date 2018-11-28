@@ -9,7 +9,7 @@
         <text>请输入关键字搜索</text>
       </view>
       <view catchtap='msgClicked' class='msg-view'>
-       <image-sub imgStyle='{{"width:48rpx"}}' wx:if='{{changeBg}}' imgSrc="{{'/img/default-userImg.png'}}"/>
+       <image-sub imgStyle='{{"width:48rpx"}}' wx:if='{{changeBg}}' imgSrc="{{'tongyong_icon_xiaoxi_nor@2x.png'}}"/>
        <image-sub imgStyle='{{"width:48rpx"}}' wx:else imgSrc="{{'home_icon_xiaoxi@2x.png'}}"/>
        <view class='msg-tips-view redBg' wx:if='{{pushMsg.hasMsg}}'></view>
       </view>
