@@ -158,7 +158,7 @@
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'/img/iconFav.png'}}"/>
         <view>秀场收藏</view>
       </view>
-       <view class='my-tools-cont' catchtap='itemClicked' data-page='19'>
+       <view class='my-tools-cont' catchtap='itemClicked' data-page='19' wx:if='{{userInfos.upUserid}}'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'me_icon_daoshi_nor@3x.png'}}"/>
         <view>导师</view>
       </view>
