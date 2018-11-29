@@ -1,6 +1,7 @@
 .header{
-  height: 274rpx;
-  background: RED;
+  height: 280rpx;
+  background:url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/me_bg_nor@3x.png) no-repeat left bottom;
+  background-size: 100% 100%;
 }
 .line{
   padding: 0 30rpx;

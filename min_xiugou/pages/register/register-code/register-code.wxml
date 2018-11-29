@@ -1,6 +1,6 @@
 <view class='code-view'>
   <view class='inviterInfo '>
-    <view wx:if='{{!accoutInfo.id}}'>
+    <view>
       <view class='tips font-26 flexR-sb'>
         <view>请选择一个导师</view>
         <view class='flexR gray-9' catchtap='changeClicked'>
@@ -8,20 +8,22 @@
           换一换
         </view>
       </view>
-      <swiper duration="300" bindchange="bindchange" display-multiple-items='3'  previous-margin="120rpx" next-margin="120rpx" current='{{current}}' circular='true'>
-        <swiper-item wx:for="{{invite}}"   wx:key="{{index}}" >
-          <view class='inviter flexC'>
-            <view class='flexC' data-index='{{index}}' catchtap='itemClicked'>
-              <image src='{{ item.head_img? item.head_img:"/img/default-userImg.png"}}' class='{{index===activeIndex? "middleImg":""}}'></image>
-              <text class='inviter-name ellipsis'>{{item}}</text>
+      <view wx:if='{{invite.length>0}}'>
+        <swiper duration="300" bindchange="bindchange" display-multiple-items='3'  previous-margin="120rpx" next-margin="120rpx" current='{{current}}' circular='true'>
+          <swiper-item wx:for="{{invite}}"   wx:key="{{index}}" >
+            <view class='inviter flexC'>
+              <view class='flexC' data-index='{{index}}' catchtap='itemClicked'>
+                <image-sub imgStyle='{{ index===activeIndex? "width:160rpx;height:160rpx":"width:120rpx;height:120rpx"}}' imgSrc="{{item.headImg || '/img/default-userImg.png'}}"  mode='scaleToFill'/>
+                <text class='inviter-name ellipsis'>{{item.nickname}}</text>
+              </view>
             </view>
-          </view>
-        </swiper-item>
-     </swiper>
-    <view class='gray-9 flexR'>暂无导师，请填写授权码或跳过该步骤~</view>
+          </swiper-item>
+        </swiper>
+      </view>
+      <view wx:else class='gray-9 flexR'>暂无导师，请填写授权码或跳过该步骤~</view>
     </view>
   </view>
-  <button class='loginBtn' disabled='{{disabled}}' >确认</button>
+  <button class='loginBtn' disabled='{{disabled}}' catchtap='mentorBind' >确认</button>
   <view class='gray-9 font-26 flexR dismiss' bindtap='dismiss'>跳过</view>
 
   <view class='gray-9 font-26 fixed-bottom flexR write-code' bindtap='goPage'>

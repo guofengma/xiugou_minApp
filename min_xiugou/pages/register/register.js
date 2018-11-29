@@ -26,7 +26,6 @@ Page({
     if (options.inviteId == 'null' || options.inviteId == 'undefined' || !options.inviteId) {
       inviteId = ''
     }
-    Tool.navigateTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
     app.deleteInviteId()
     let upUserId = Storage.getUpUserId() || {}
     // Tool.showAlert(upUserId.id)

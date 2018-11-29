@@ -67,7 +67,7 @@ export default class ApiUtils {
               errMsg: response.msg
             })
             // 假如返回未登陆并且当前页面不是登陆页面则进行跳转
-            if (response.code === 10001 || response.code === 10009) {
+            if (response.code === 10009) {
               let callBack = () => {
                 global.Tool.navigateTo('/pages/login-wx/login-wx?isBack=true')
               }
@@ -89,6 +89,8 @@ export default class ApiUtils {
           that.tryCount++;
           if (that.tryCount < that.maxTryCount) {
             that.result[name]()
+          } else {
+            global.Tool.showAlert('请求失败，请稍后重试')
           }
           return Promise.reject(err);
         } finally {

@@ -13,6 +13,7 @@ import config from './config.js'
 
 App({
     onLaunch: function (o) {
+      console.log(o)
       if (!Storage.getPlatform()) {
         let uuid = Tool.getUUID()
         Storage.setPlatform(uuid)
@@ -26,10 +27,6 @@ App({
       global.Config = config
       global.API = API
       this.getSystemInfo();
-      // if (!Storage.getPlatform()){
-      //   let uuid = Tool.getUUID()
-      //   Storage.setPlatform(uuid)
-      // }
       this.wxLogin()
       let systemInfo = wx.getSystemInfoSync()
       this.deleteInviteId()

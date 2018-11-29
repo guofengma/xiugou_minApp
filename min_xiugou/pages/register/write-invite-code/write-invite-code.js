@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation } = global;
+let { Tool, API, Storage } = global;
 Page({
   data: {
     disabled:true
@@ -8,22 +8,22 @@ Page({
       urlFrom: options.from || null
     })
   },
-  updateUserCodeById(){
-    let params = {
-      upCode: this.data.code,
-      reqName: 'code绑定',
-      url: Operation.updateUserCodeById,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
-      this.next()
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+  mentorBind() { // 绑定导师
+    this.setData({
+      disabled: true
+    })
+    API.mentorBind({
+      code: this.data.code
+    }).then((res) => {
+      this.dismiss()
+    }).catch((res) => {
+      this.setData({
+        disabled: false
+      })
+    })
   },
   changeInput(e){
-    if (e.detail.value.length>=3){
+    if (e.detail.value.length>=1){
       this.setData({
         code: e.detail.value,
         disabled:false
@@ -32,11 +32,7 @@ Page({
   },
   next(){
     let callBack = () => {
-      if (this.data.urlFrom) {
-        Tool.redirectTo(decodeURIComponent(this.data.urlFrom))
-      } else {
-        Tool.switchTab('/pages/index/index')
-      }
+      Tool.switchTab('/pages/index/index')
     }
     Tool.showSuccessToast('注册成功', callBack)
   },

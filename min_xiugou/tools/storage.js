@@ -300,5 +300,13 @@ export default class Storage {
   static getFirstRegistration(info) {
     return this.getterFor('FirstRegistration');
   }
+  
+  // 导师简介
+  static setMentorProfile(info) {
+    this.setterFor('mentorProfile', info)
+  }
 
+  static getMentorProfile(info) {
+    return this.getterFor('mentorProfile');
+  }
 }

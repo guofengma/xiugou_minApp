@@ -60,6 +60,14 @@ const api =
       "encrypt": false
     }
   ],
+  'findMemberByPhone': [
+    '/user/userSign/findMemberByPhone',
+    {
+      "action": "手机号注册",
+      "method": "post",
+      "encrypt": true
+    }
+  ],
 }
 
 // const API = ApiUtils(api);
@@ -68,7 +76,7 @@ const API = new ApiUtils(api).result;
 * 使用说明
       API.queryAdList({
         'type': 1,
-      }).then((res) => {
+      },{xxx:xxxx}).then((res) => {
         
       }).catch((res) => {
         
