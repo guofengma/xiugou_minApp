@@ -27,7 +27,39 @@ const api =
       "method": "get",
       "encrypt": false
     }
-  ]
+  ],
+  'updateUserById': [ // type:1:修改头像 2:修改名字 3:修改省市区 6:修改导师简介
+    '/user/updateUserById',
+    {
+      "action": "修改用户信息",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  'findLeader': [
+    '/user/findLeader',
+    {
+      "action": "查看导师详情",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
+  'queryInviterList': [
+    '/user/userSign/queryInviterList',
+    {
+      "action": "注册时随机显示的八个V4层级邀请人",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  'mentorBind': [
+    '/user/userSign/mentorBind',
+    {
+      "action": "导师绑定<为你转身!>",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
 }
 
 // const API = ApiUtils(api);

@@ -54,6 +54,7 @@ export default class ApiUtils {
         if (that.currentConcurrent >= that.maxLimit) {
           await that.startBlocking();
         }
+        const app = getApp();
         try {
           that.currentConcurrent++;
           const response = await HttpUtils[method](url, params, config);
@@ -61,22 +62,30 @@ export default class ApiUtils {
           if (response.code === 0 || response.code === 10000) {
             return Promise.resolve(response);
           } else {
+            app.aldstat.sendEvent(url, {
+              url: url,
+              errMsg: response.msg
+            })
             // 假如返回未登陆并且当前页面不是登陆页面则进行跳转
             if (response.code === 10001 || response.code === 10009) {
               let callBack = () => {
-                Tool.navigateTo('/pages/login-wx/login-wx?isBack=true')
+                global.Tool.navigateTo('/pages/login-wx/login-wx?isBack=true')
               }
-              Tool.showAlert(response.msg, callBack)
+              global.Tool.showAlert(response.msg, callBack)
             } else {
               // 是否给出错误提示
               if (config.isShowErrMsg!==false){
-                Tool.showAlert(response.msg)
+                global.Tool.showAlert(response.msg)
               }
             }
             return Promise.reject(response);
           }
         } catch (err) {
           console.log('<============================== 请求结束：' + action + '第' + that.tryCount + '次请求');
+          app.aldstat.sendEvent(url + ':interface error try again', {
+            url: url,
+            count: that.tryCount,
+          })
           that.tryCount++;
           if (that.tryCount < that.maxTryCount) {
             that.result[name]()

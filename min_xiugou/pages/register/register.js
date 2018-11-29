@@ -106,7 +106,6 @@ Page({
     this.verifyPhone(params)
   },
   verifyPhone(params){
-    console.log(params)
     params = {
       ...params,
       reqName: '判断手机号是否已经注册',
@@ -119,6 +118,17 @@ Page({
       Tool.loginOpt(req)
       Storage.setUpUserId(null)
       Storage.setFirstRegistration(true)
+      // 被邀请的人不走选择导师的页面
+      if (this.data.urlFrom && this.data.inviteId){
+        Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
+      } else if (this.data.inviteCode || this.data.inviteId){
+        let callBack = ()=>{
+          Tool.switchTab('/pages/index/index')
+        }
+        Tool.showSuccessToast('注册成功', callBack)
+      } else {
+        Tool.navigateTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
+      }
       // if (this.data.urlFrom){
       //   Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
       // } else{

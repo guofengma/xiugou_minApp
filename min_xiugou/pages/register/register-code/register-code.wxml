@@ -11,7 +11,7 @@
       <swiper duration="300" bindchange="bindchange" display-multiple-items='3'  previous-margin="120rpx" next-margin="120rpx" current='{{current}}' circular='true'>
         <swiper-item wx:for="{{invite}}"   wx:key="{{index}}" >
           <view class='inviter flexC'>
-            <view class='flexC' bindtap='inviterClicked' data-index='{{index}}' catchtap='itemClicked'>
+            <view class='flexC' data-index='{{index}}' catchtap='itemClicked'>
               <image src='{{ item.head_img? item.head_img:"/img/default-userImg.png"}}' class='{{index===activeIndex? "middleImg":""}}'></image>
               <text class='inviter-name ellipsis'>{{item}}</text>
             </view>

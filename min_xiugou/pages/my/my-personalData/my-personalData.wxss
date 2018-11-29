@@ -22,7 +22,7 @@
 }
 
 .item view:nth-child(2) {
-    width: 83%;
+    max-width: 83%;
     text-align: right;
     color: #999;
     /* margin-right: 20rpx */

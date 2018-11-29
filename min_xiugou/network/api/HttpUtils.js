@@ -5,63 +5,30 @@ import {
 } from '../../tools/tcglobal';
 
 export default class HttpUtils {
-  constructor() {
-    this.Headers = {
+  static getHeaders() {
+    return  {
       'content-type': 'application/json',
-      'device': Storage.getPlatform() || '',
+      'device': global.Storage.getPlatform() || '',
       'platform': 'mini',
       'version': wx.getSystemInfoSync(),
-      'sg-token': Storage.getToken() || '',
+      'sg-token': global.Storage.getToken() || '',
     }
   }
   static get(url, params, config = {}) {
-    
-    const rsa_headers = config.encrypt ? this.getRsaHeaders(url, params, 'get') : {};
-    const isShowLoading = this.showLoading(config)
-    if (isShowLoading){
-      Tool.showLoading();
-    }
-    const headers = {
-      ...this.Headers,
-      ...rsa_headers
-    };
-    return new Promise((resolve, reject)=> {
-      wx.request({
-        url: url,
-        data: params,
-        dataType: 'json',
-        method: 'get',
-        header: headers,
-        success: function (res) {
-          if (isShowLoading) {
-            Tool.hideLoading();
-          }
-          if (res.data.code == '10000' || res.data.code === 0) {
-            resolve(res.data);
-          }
-          else {
-            reject(res.data);
-          }
-        },
-        fail: function () {
-          reject(res.data);
-        },
-        complete: function (res) {
-
-        }
-      });
-    }) 
-    
+    return this.request(url, params, config = {}, 'get')
   }
 
   static post(url, params, config = {}) {
-    const rsa_headers = config.encrypt ? this.getRsaHeaders(url, params, 'post') : {};
+    return this.request(url, params, config = {},'post')
+  }
+  static request(url, params, config = {}, method) {
+    const rsa_headers = config.encrypt ? this.getRsaHeaders(url, params, method) : {};
     const isShowLoading = this.showLoading(config)
     if (isShowLoading) {
       global.Tool.showLoading();
     }
     const headers = {
-      ...this.Headers,
+      ...this.getHeaders(),
       ...rsa_headers
     }
     return new Promise((resolve, reject) => {
@@ -69,20 +36,15 @@ export default class HttpUtils {
         url: url,
         data: params,
         dataType: 'json',
-        method: 'post',
+        method: method,
         header: headers,
         success: function (res) {
           if (isShowLoading) {
             global.Tool.hideLoading();
           }
-          if (res.data.code == '10000' || res.data.code === 0) {
-            resolve(res.data);
-          }
-          else {
-            reject(res.data);
-          }
+          resolve(res.data);
         },
-        fail: function () {
+        fail: function (res) {
           reject(res.data);
         },
         complete: function (res) {
@@ -91,7 +53,6 @@ export default class HttpUtils {
       });
     }) 
   }
-
   // 获取验签header
   static getRsaHeaders(url, params, method) {
     let rsa_headers = {};

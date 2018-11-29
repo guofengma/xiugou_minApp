@@ -1,19 +1,20 @@
 <view class='header flexR'>
-  <image-sub  imgStyle='{{"width:160rpx;height:160rpx;border-radius:50%"}}' imgSrc="{{'home_icon_search_nor@2x.png'}}" mode='scaleToFill'/>
+  <image-sub wx:if='{{datas.headImg}}' imgStyle='{{"width:160rpx;height:160rpx;border-radius:50%"}}' imgSrc="{{datas.headImg}}" mode='scaleToFill'/>
+  <image-sub wx:else imgStyle='{{"width:160rpx;height:160rpx;border-radius:50%"}}' imgSrc="{{'/img/default-userImg.png'}}" mode='scaleToFill'/>
 </view>
 <view class='font-26 line flexR-sb whiteBg'>
-  名称：山东快书大胜靠德
+  名称：{{datas.nickname}}
 </view>
 <view class='font-26 line flexR-sb whiteBg'>
-  职称：铂金品鉴官
+  职称：{{datas.levelName}}品鉴官
 </view>
 <view class='font-26 line flexR-sb whiteBg'>
-  授权号：1234655
+  授权号：{{datas.code || ''}}
 </view>
 <view class='font-26 line flexR-sb whiteBg'>
-  手机号：15840534058
+  手机号：{{datas.phone || ''}}
 </view>
 <view class='font-26 content whiteBg'>
   <view>简介</view>
-  <view class='gray font-24'> 彦宏，百度公司创始人、董事长兼首席执行官，全面负责百度公司的战略规划和运营管理。 1991年，李彦宏毕业于北京大学信息管理专业，随后前往美国布法罗纽约州立大学完成计算机科学硕士学位，先后担任道·琼斯公司高级顾问...</view>
+  <view class='gray font-24'> {{datas.profile}}</view>
 </view>

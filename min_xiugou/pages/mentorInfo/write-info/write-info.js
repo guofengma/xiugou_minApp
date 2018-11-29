@@ -1,66 +1,39 @@
-// pages/mentorInfo/write-info/write-info.js
+let { Tool, RequestFactory, Event, Storage, API } = global;
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    count:0
+    count:0,
+    disabled:true,
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-
+    this.refreshMemberInfoNotice()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  detailRemark(e){
+    let code = e.detail.value
+    this.setData({
+      count:code.length,
+      profile:code,
+      disabled: code.length? false:true
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  refreshMemberInfoNotice() { // 显示之前的简介
+    Tool.getUserInfos(this)
+    this.setData({
+      profile: this.data.userInfos.profile || '',
+      disabled: this.data.userInfos.profile? false : true
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  formSubmit(){
+    API.updateUserById({
+      'type': 6,
+      profile: this.data.profile
+    }).then((res) => {
+      let infos = Storage.getUserAccountInfo()
+      infos.profile = this.data.profile
+      Storage.setUserAccountInfo(infos)
+      Event.emit('refreshMemberInfoNotice');//发出通知
+      Tool.navigationPop()
+    }).catch((res) => {
+      console.log(res)
+    });
   }
 })

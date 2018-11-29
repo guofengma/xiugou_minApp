@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation } = global;
+let { Tool, Storage, API } = global;
 Page({
   data: {
     ysf: { title: '授权码录入' },
@@ -21,14 +21,12 @@ Page({
       urlFrom: options.from || null
     })
     this.queryInviterList() // 请求邀请者
-    // if (!options.id){
-    //   this.queryInviterList() // 请求邀请者
-    // } else {
-    //   this.initInputValue() // 初始化input的值
-    // }
   },
   onShow: function () {
 
+  },
+  changeClicked(){ // 换一换
+    this.queryInviterList()
   },
   bindchange(e){ // 设置中间那项active
     let activeIndex = e.detail.current +1
@@ -39,86 +37,33 @@ Page({
       activeIndex: activeIndex
     })
   },
-  initInputValue(){
-    this.setData({
-      code: this.data.accoutInfo.id,
-      disabled:true,
-      inviteId: this.data.accoutInfo.id
-    })
-  },
-  inputChange(e){
-    this.setData({
-      code:e.detail.value
-    })
-  },
-  requetSignMember() {
-    let params = {
-      "phone": this.data.accoutInfo.phone,
-      'password': this.data.accoutInfo.password,
-      'inviteId': this.data.accoutInfo.id || '', // 邀请者id 
-      'headImg': this.data.userInfo.avatarUrl,
-      'nickname': this.data.userInfo.nickName,
-      'openid': this.data.openid,
-      reqName: '注册',
-      url: Operation.signMember,
-    }
-    // 如果不是被邀请的 那么就取授权码
-    if (!this.data.accoutInfo.id) {
-      params.code = this.data.code
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.finishBlock = (req) => {
-      Storage.setMemberId(req.responseObject.data.id)
-      Tool.loginOpt(req)
-      Tool.redirectTo('/pages/real-name/real-name')
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
-  itemClicked(e){ // 点击的头像的效果
+  itemClicked(e) { // 点击的头像的效果
     let index = e.currentTarget.dataset.index
-    let current = index -1>=0? index-1:this.data.invite.length-1
+    let current = index - 1 >= 0 ? index - 1 : this.data.invite.length - 1
     this.setData({
-      activeIndex:index,
+      activeIndex: index,
       current: current
     })
+    Tool.navigateTo("/pages/mentorInfo/mentor-detail/mentor-detail?id=" + this.data.inviteId)
   },
-  formSubmit(e){
-    if(Tool.isEmptyStr(e.detail.value.id)){
-      Tool.showAlert('请输入会员ID或选择一个邀请者')
-      return
-    }
-    // if (!this.data.isAgree){
-    //   Tool.showAlert('请勾选用户协议')
-    //   return
-    // }
-    this.requetSignMember()
+  mentorBind() { // 绑定导师
+    API.mentorBind({
+
+    }).then((res) => {
+      this.dismiss()
+    }).catch((res) => {
+      
+    })
   },
-  // agreeCilcked(){
-  //   this.setData({
-  //     isAgree:!this.data.isAgree
-  //   })
-  // },
-  queryInviterList(){
-    let params = {
-      amount: this.data.num,
-      reqName: '获取邀请者列表',
-      url: Operation.queryInviterList,
-    }
-    let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.queryInviterList({ });
-    r.finishBlock = (req) => {
+  queryInviterList(){ // 获取导师的列表
+    API.queryInviterList({
+      
+    }).then((res) => {
       this.setData({
-        invite: req.responseObject.data
+        invite: res.data
       })
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
-  inviterClicked(e){
-    let id = e.currentTarget.dataset.key
-    this.setData({
-      code: id || ''
+    }).catch((res) => {
+      
     })
   },
   dismiss(){

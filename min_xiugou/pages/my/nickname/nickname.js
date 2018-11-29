@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global;
+let { Tool, Storage, Event, API } = global;
 Page({
     data: {
       nickname:''
@@ -26,21 +26,17 @@ Page({
         Tool.showAlert('昵称不能少2个字')
         return
       }
-      let params = {
-        nickname: this.data.nickname,
-        reqName: '修改用户信息',
+      API.updateUserById({
         'type': 2,
-        url: Operation.updateUserById
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
+        nickname: this.data.nickname,
+      }).then((res) => {
         let infos = Storage.getUserAccountInfo()
         infos.nickname = this.data.nickname
         Storage.setUserAccountInfo(infos)
         Event.emit('refreshMemberInfoNotice');//发出通知
         Tool.navigationPop()
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+
+      })
     }
 })
