@@ -228,7 +228,7 @@ Page({
     didLogin() {
       Tool.didLogin(this)
       if (this.data.didLogin){
-        this.findUserJobsByUserId();
+        // this.findUserJobsByUserId();
         this.getLevel()
         this.queryPushMsg()
       }

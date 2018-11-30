@@ -146,10 +146,10 @@
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconTrack.png'}}"/>
         <view>足迹</view>
       </view> -->
-      <view class='my-tools-cont' catchtap='itemClicked' data-page='16'>
+      <!-- <view class='my-tools-cont' catchtap='itemClicked' data-page='16'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconTask.png'}}"/>
         <view>我的任务</view>
-      </view>
+      </view> -->
       <!-- <view class='my-tools-cont' catchtap='itemClicked' data-page='17'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconPromote.png'}}"/>
         <view>我的推广</view>
