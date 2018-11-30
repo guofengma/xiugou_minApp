@@ -14,7 +14,7 @@
       <template is="discover-item" data="{{showEdit,items}}" />
     </view>
   </view>
-  <view class='no-more' wx:if="{{currentPage == totalPage}}">已经到底啦~</view>
+  <view class='no-more' wx:if="{{currentPage == totalPage}}">我也是有底线的~</view>
   <view class='no-more' wx:if="{{!items || items.length == 0}}">您暂未收藏文章~</view>
   <!-- fav list E -->
   <!-- operate S -->
