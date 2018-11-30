@@ -1,0 +1,11 @@
+<view class='flexC mentor-img'>
+  <image-sub  imgStyle='{{"width:160rpx;height:160rpx;border-radius:50%"}}' imgSrc="{{datas.headImg || '/img/default-userImg.png'}}" mode='scaleToFill'/>
+  <view class='mentor-name font-26'>{{datas.nickname}}</view>
+</view>
+<view class='info gray-9 font-24'>
+  <view wx:if='{{datas.profile}}'>{{datas.profile}}</view>
+  <view wx:else class='flexR'>这位导师很懒，什么也没留下~</view>
+</view>
+<view class='loginBtn font-34 flexR' catchtap='choose'>选择该导师</view>
+
+<view class='gray-9 font-26 flexR' catchtap='dismiss'>跳过</view>

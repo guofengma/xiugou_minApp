@@ -148,7 +148,6 @@ Component({
       // 多规格 或者 单规格选择的那个规格库存大于0的情况下active
       
       if ((this.data.productSpec.length > 1 || arr0.length > 0) && setActive){
-        console.log(setActive,11111111111111111111111111111)
         this.setData({
           isActive: obj,
         })

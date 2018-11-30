@@ -47,7 +47,8 @@ Page({
         5: 'markdownPrice'
       },
       taskDetail:{},
-      width:0
+      width:0,
+      isShowCoupon:false,// 优惠卷弹窗
     },
     close() {
       this.toggleCardShow();
@@ -111,12 +112,13 @@ Page({
       })
     },
     onLoad: function (options) {
-      Event.on('getLevel', this.getLevel,this)
+      // Event.on('getLevel', this.getLevel,this)
       Event.on('didLogin', this.didLogin, this); 
-      // if (app.globalData.openid){
-      //   app.wxLogin()
-      // }
-      // this.didLogin()
+      if (Storage.getFirstRegistration()){
+        this.isShowCoupon()
+      }else{
+        this.selectComponent("#notice").getNotice()
+      }
       // 初始化请求
       this.initRequset(options)
       // 初始化传参
@@ -240,22 +242,22 @@ Page({
       app.queryPushMsg(callBack)
     },
     indexQueryCategoryList(){
-      let params = {
-        isShowLoading: false,
-        reqName: '获取首页4个分类',
-        requestMethod: 'GET',
-        url: Operation.indexQueryCategoryList
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data || []
-        this.data.iconArr.splice(5, 0, ...datas)
-        this.setData({
-          iconArr: this.data.iconArr
-        })
-      };
-      //Tool.showErrMsg(r)
-      r.addToQueue();
+      // let params = {
+      //   isShowLoading: false,
+      //   reqName: '获取首页4个分类',
+      //   requestMethod: 'GET',
+      //   url: Operation.indexQueryCategoryList
+      // }
+      // let r = RequestFactory.wxRequest(params);
+      // r.successBlock = (req) => {
+      //   let datas = req.responseObject.data || []
+      //   this.data.iconArr.splice(5, 0, ...datas)
+      //   this.setData({
+      //     iconArr: this.data.iconArr
+      //   })
+      // };
+      // //Tool.showErrMsg(r)
+      // r.addToQueue();
     },
     discoverNotice() {
       if (!this.data.isChange) return
@@ -285,69 +287,12 @@ Page({
       Tool.navigateTo('/pages/discover/discover-detail/discover-detail?articleId='+id)
     },
     getLevel() {
-      let params = {
-        isShowLoading: false,
-        reqName: '获取用户等级',
-        requestMethod: 'GET',
-        url: Operation.getLevel
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        Storage.setUserAccountInfo(req.responseObject.data)
-        let userInfos = req.responseObject.data 
-        userInfos.experience = userInfos.experience ? userInfos.experience:0
-        let levelName = userInfos.levelName || ''
-        userInfos.levelName0 = levelName.length > 4 ? levelName.slice(0, 4) + '...' : levelName
+      let callBack = (datas)=>{
         this.setData({
-          userInfos: req.responseObject.data
+          userInfos: datas
         })
-        
-        // this.getLevelInfos()
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
-    },
-    getLevelInfos(){
-      let params = {
-        requestMethod: 'GET',
-        url: Operation.getLevelInfos,
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data || []
-        let userInfos = this.data.userInfos
-        let levelId = userInfos.levelId
-        // let levelId = 1
-        let userExp = userInfos.experience
-        // let userExp = 1300
-        let levelObj = datas.filter((item) =>{
-          return item.id == levelId
-        }) 
-        let index = datas.indexOf(levelObj[0])
-        // 下一等级
-        let nextLevel = datas[index+1]
-        // 当前等级
-        let preLevel = datas[index]
-        let width = 0
-        // 是否升级
-        let isUpdateLevel = !(userExp > nextLevel.upgradeExp)
-        userExp = userExp > nextLevel.upgradeExp? nextLevel.upgradeExp : userExp
-        if(index==0){
-          let Denominator = isUpdateLevel ? userExp / nextLevel.upgradeExp : userExp / nextLevel.upgradeExp - 0.01
-          width = Denominator  * (1 / (datas.length - 2))
-        } else if (index==datas.length-1){
-          width =1 
-        } else {
-          let Denominator = isUpdateLevel ? (userExp - preLevel.upgradeExp) / (nextLevel.upgradeExp - preLevel.upgradeExp) : (userExp - preLevel.upgradeExp) / (nextLevel.upgradeExp - preLevel.upgradeExp) - 0.01
-          width = index / (datas.length - 2) + Denominator * (1 / (datas.length - 2))
-        }
-        this.setData({
-          levelList:datas,
-          width: width*100
-        })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      app.getLevel(callBack)
     },
     queryAdList(types = 1, reqName='',callBack=()=>{}) {
       // API.queryAdList({
@@ -355,7 +300,7 @@ Page({
       // }).then((res) => {
       //   callBack(res.data)
       // }).catch((res) => {
-      //   Tool.showErrMsg(res)
+      //   console.log(res)
       // });
       let params = {
         'type': types,
@@ -363,11 +308,11 @@ Page({
         url: Operation.queryAdList,
       }
       let r = RequestFactory.wxRequest(params);
-        r.successBlock = (req) => {
-          callBack(req.responseObject.data)
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
+      r.successBlock = (req) => {
+        callBack(req.responseObject.data)
+      };
+      Tool.showErrMsg(r)
+      r.addToQueue();
     },
     adListClicked(e) {
       let adType = e.currentTarget.dataset.type;
@@ -450,6 +395,15 @@ Page({
       this.setData({
         isShowNotice: !this.data.isShowNotice
       })
+    },
+    isShowCoupon() { // 展示优惠卷
+      this.setData({
+        isShowCoupon: !this.data.isShowCoupon
+      })
+      if (!this.data.isShowCoupon) {
+        Storage.setFirstRegistration(false)
+        this.selectComponent("#notice").getNotice()
+      }
     },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);

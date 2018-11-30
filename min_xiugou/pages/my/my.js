@@ -29,6 +29,7 @@ Page({
         '/pages/my/task/task',//我的任务
         '/pages/my/extension/extension',//我的推广
         '/pages/discover/discover-fav/discover-fav',//发现收藏
+        '/pages/mentorInfo/mentor-detail/mentor-detail',//导师详情
       ]
     },
     onLoad: function (options) {
@@ -104,6 +105,7 @@ Page({
         this.setData({
           userInfos: datas,
           range: (Number(datas.experience) - Number(datas.levelFloor)) / (Number(datas.levelCeil) - Number(datas.levelFloor)) * 100,
+          // range:40
         })
         this.initDatas()
         this.render()
@@ -175,7 +177,7 @@ Page({
       axisLength: this.data.mW,//轴长
       waveWidth: 0.12,//波浪宽度,数越小越宽
       waveHeight: 0.008,//波浪高度,数越大越高
-      speed: 0.04,//波浪速度，数越大速度越快
+      speed: 0.4,//波浪速度，数越大速度越快
       xOffset: 10,//波浪x偏移量
       IsdrawCircled: false, // 画圈函数
       lastTime:0,
@@ -236,11 +238,13 @@ Page({
     })
   },
   requestAnimationFrame(callback){
-    var currTime = new Date().getTime();
-    var timeToCall = Math.max(0, 16 - (currTime - this.data.lastTime));
-    var id = setTimeout(function () { callback(currTime + timeToCall); },
-      timeToCall);
-    this.data.lastTime = currTime + timeToCall;
+    // let currTime = new Date().getTime();
+    // let timeToCall = Math.max(0, 16 - (currTime - this.data.lastTime));
+    // let id = setTimeout(function () { callback(currTime + timeToCall); },
+    //   timeToCall);
+    // this.data.lastTime = currTime + timeToCall;
+    let id = setTimeout(function () { callback(); },
+      200);
     return id;
   },
   drawSin(xOffset, color, waveHeight) {

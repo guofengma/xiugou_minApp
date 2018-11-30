@@ -69,7 +69,11 @@
     "pages/my/task/task-share/task-share",
     "pages/register/red-envelopes/red-envelopes",
     "pages/web-view/web-view",
-    "pages/product-detail/temp/defect/defect"
+    "pages/product-detail/temp/defect/defect",
+    "pages/logistics/logistics-list/logistics-list",
+    "pages/mentorInfo/choose-mentor/choose-mentor",
+    "pages/mentorInfo/write-info/write-info",
+    "pages/mentorInfo/mentor-detail/mentor-detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

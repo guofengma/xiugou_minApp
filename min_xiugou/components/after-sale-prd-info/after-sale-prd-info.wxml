@@ -2,9 +2,12 @@
   <view class='after-sale-prd-info flexR-sb font-26 whiteBg'>
    <image src='{{imgUrl || specImg}}' class='after-sale-prd-info-img'></image>
    <view class='after-sale-prd-info-right'>
-     <view class='ellipsis-2 after-sale-name'>{{productName}}</view>
-     <view class='gray flexR-sb '>
-       <view class='ellipsis-2 prd-types'>分类：{{spec}}</view>
+     <view class='flexR-sb'>
+      <view class='ellipsis-2 after-sale-name'>{{productName}}</view>
+      <view class='gray-9'>¥150.00</view>
+     </view>
+     <view class='gray-9 flexR-sb '>
+       <view class='ellipsis prd-types'>规格：{{spec}}</view>
        <view>x{{num}}</view>
      </view>
    </view>

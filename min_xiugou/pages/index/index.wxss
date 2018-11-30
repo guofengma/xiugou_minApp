@@ -23,10 +23,6 @@
 .search-bar image{
   width: 46rpx;
 }
-.slide-image{
-  width: 100%;
-  height:100%;
-}
 .search-bar-scroll{
   background:#fff;
   border-top:1rpx solid #ddd;
@@ -92,9 +88,6 @@
 }
 .notice-img{
   width:93rpx;
-  /* position:absolute;
-  right:0;
-  top:0; */
   height:80rpx;
 }
 .notice-img image{
@@ -172,22 +165,9 @@
  height: 280rpx;
 }
 .today-list-item{
- height: 500rpx;
- padding: 0 10rpx;
+  height: 500rpx;
+  padding: 0 10rpx;
 }
-.today-list-itemImg{
- /* position: absolute; */
- width:100%;
- height: 100%;
- border-radius: 15rpx;
-}
-/* 精品推荐 */
-.fine-quality-view .today-list-itemImg{
-  height: 280rpx;
-}
-/* .fine-quality-tips{
-  margin-top: 20rpx;
-} */
 .fine-quality-view{
   padding-bottom:50rpx;
 }
@@ -206,11 +186,6 @@
 }
 .hot-sale-prd image,.hot-sale-prd,.hot-sale-prd>view{
   width: 190rpx;
-  /* height: 190rpx; */
-}
-.hot-sale-content image{
-  height: 190rpx !important;
-  width: 100%;
 }
 .prd-name{
   margin: 10rpx 0;
@@ -238,10 +213,10 @@
 .recommend-prd-img{
   position: relative;
 }
-.recommend-prd-img>image{
+/* .recommend-prd-img>image{
   width: 100%;
   height: 340rpx;
-}
+} */
 .recommend-prd-img>view{
   position: absolute;
   bottom: 0;

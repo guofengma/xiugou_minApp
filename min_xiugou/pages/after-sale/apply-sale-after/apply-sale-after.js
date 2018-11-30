@@ -32,7 +32,7 @@ Page({
         info: "换货说明",
         placeholder: "请填写退货说明",
         list: [],
-        tips: '仅可更换同规格或者同价格的商品'
+        tips: '仅可更换同规格的商品'
       }
     ],
     activeIndex:'',
@@ -239,29 +239,29 @@ Page({
       remark: e.detail.value
     })
   },
-  chooseType(){
-    let params = {
-      id: this.data.list.productId,
-      isShowLoading: false,
-      requestMethod: 'GET',
-      url: Operation.findProductStockBySpec,
-      reqName: "规格搜索"
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
-      this.setData({
-        productSpec: datas.specMap,
-        priceList: datas.priceList,
-        selectPrice: this.data.list.price,
-        isInit: false,
-        imgUrl: this.data.list.specImg
-      })
-      this.selectComponent("#prd-info-type").isVisiableClicked()
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
+  // chooseType(){
+  //   let params = {
+  //     id: this.data.list.productId,
+  //     isShowLoading: false,
+  //     requestMethod: 'GET',
+  //     url: Operation.findProductStockBySpec,
+  //     reqName: "规格搜索"
+  //   }
+  //   let r = RequestFactory.wxRequest(params);
+  //   r.successBlock = (req) => {
+  //     let datas = req.responseObject.data
+  //     this.setData({
+  //       productSpec: datas.specMap,
+  //       priceList: datas.priceList,
+  //       selectPrice: this.data.list.price,
+  //       isInit: false,
+  //       imgUrl: this.data.list.specImg
+  //     })
+  //     this.selectComponent("#prd-info-type").isVisiableClicked()
+  //   }
+  //   Tool.showErrMsg(r)
+  //   r.addToQueue();
+  // },
   changeProdctType(e){
     this.setData({
       selectType: e.detail

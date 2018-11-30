@@ -8,6 +8,9 @@ Page({
     nickname(){
       Tool.navigateTo('/pages/my/nickname/nickname?nickname=' + this.data.userInfos.nickname)
     },
+    introductionaClicked(){
+      Tool.navigateTo('/pages/mentorInfo/write-info/write-info')
+    },
     onLoad: function (options) {
       Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
       this.refreshMemberInfoNotice()

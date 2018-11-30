@@ -292,5 +292,21 @@ export default class Storage {
   static getRedEnvelopesDate(info) {
     return this.getterFor('redEnvelopesDate');
   }
+  // 是否是首次注册
+  static setFirstRegistration(info) {
+    this.setterFor('FirstRegistration', info)
+  }
 
+  static getFirstRegistration(info) {
+    return this.getterFor('FirstRegistration');
+  }
+  
+  // 导师简介
+  static setMentorProfile(info) {
+    this.setterFor('mentorProfile', info)
+  }
+
+  static getMentorProfile(info) {
+    return this.getterFor('mentorProfile');
+  }
 }

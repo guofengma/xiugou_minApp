@@ -1,0 +1,10 @@
+<view class='model-view-bg ' wx:if="{{visiable}}">
+  <view class='container' >
+    <view class='notice-view boxSize' catchtap='close'>
+      <image-sub imgStyle='{{"width:458rpx"}}' imgSrc="{{'bg_img_user@2x.png'}}" />
+      <view class='close flexR' >
+        <image-sub imgStyle='{{"width:47rpx"}}' imgSrc="{{'red-envelopes.png'}}" />
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "授权码录入"
+  "navigationBarTitleText": "授权码录入",
+  "usingComponents": {
+    "image-sub": "/components/image-sub/image-sub"
+  }
 }

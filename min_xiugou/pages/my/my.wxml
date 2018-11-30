@@ -23,8 +23,6 @@
         </view>
       </view>
     </view>
-    <!--  -->
-     <!-- <canvas  canvas-id="firstCanvas"></canvas> -->
     <view class='my-save flexR-sb' catchtap='levelClicked'>
      <view class='level-circle'>
       <canvas style="width: 80rpx; height: 80rpx;" canvas-id="firstCanvas"></canvas>
@@ -152,14 +150,17 @@
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconTask.png'}}"/>
         <view>我的任务</view>
       </view>
-      <view class='my-tools-cont' catchtap='itemClicked' data-page='17'>
+      <!-- <view class='my-tools-cont' catchtap='itemClicked' data-page='17'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconPromote.png'}}"/>
         <view>我的推广</view>
-      </view>
+      </view> -->
       <view class='my-tools-cont' catchtap='itemClicked' data-page='18'>
-       <!-- <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconFav.png'}}"/> -->
-        <image style='width:40rpx;height:40rpx' src="/img/iconFav.png"/>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'/img/iconFav.png'}}"/>
         <view>秀场收藏</view>
+      </view>
+       <view class='my-tools-cont' catchtap='itemClicked' data-page='19' wx:if='{{userInfos.upUserid}}'>
+        <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'me_icon_daoshi_nor@3x.png'}}"/>
+        <view>导师</view>
       </view>
     </view>
 

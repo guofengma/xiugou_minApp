@@ -1,7 +1,6 @@
 /* pages/my/account.wxss */
 .order {
     font-size: 26rpx;
-    color: #222222;
     padding-top: 30rpx;
 }
 
@@ -15,16 +14,18 @@
     line-height: 96rpx;
     padding: 0 30rpx;
     display: flex;
+    justify-content: space-between;
 }
 
 .item view:first-child {
-    width: 40%
+    width:16%
 }
 
 .item view:nth-child(2) {
-    width: 74%;
+    max-width: 83%;
     text-align: right;
-    margin-right: 20rpx
+    color: #999;
+    /* margin-right: 20rpx */
 }
 .region text{
   display: inline-block;
@@ -41,9 +42,6 @@
     margin-right: 5rpx;
     display:inline-block;
 }
-
-
-
 .clearfix {
     clear: both;
 }
@@ -54,13 +52,10 @@
     vertical-align: middle;
     margin-left: 10rpx;
 }
-
-
 .item .user-img {
     width: 60rpx;
     height: 60rpx;
     border-radius: 50%;
-    border: solid 1rpx #ff7e00;
 }
 .level{
     width: 137rpx;
@@ -81,4 +76,16 @@
     border-radius: 20rpx;
     color: #fff;
     display: inline-block;
+}
+.introduction view:first-child{
+  width:15%;
+}
+.introduction{
+  height: auto;
+  line-height: 36rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.introduction view:nth-child(2){
+  text-align: justify;
 }

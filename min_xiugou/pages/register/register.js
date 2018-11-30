@@ -105,7 +105,6 @@ Page({
     this.verifyPhone(params)
   },
   verifyPhone(params){
-    console.log(params)
     params = {
       ...params,
       reqName: '判断手机号是否已经注册',
@@ -117,16 +116,33 @@ Page({
       Storage.setMemberId(req.responseObject.data.id)
       Tool.loginOpt(req)
       Storage.setUpUserId(null)
-      if (this.data.urlFrom){
+      Storage.setFirstRegistration(true)
+      // 被邀请的人不走选择导师的页面
+      if (this.data.urlFrom && this.data.inviteId){
         Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
-      } else if (!datas.upUserid){
-        Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
-      } else{
+      } else if (this.data.inviteCode || this.data.inviteId){
         let callBack = ()=>{
           Tool.switchTab('/pages/index/index')
         }
         Tool.showSuccessToast('注册成功', callBack)
+      } else {
+        Tool.navigateTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
       }
+      // if (this.data.urlFrom){
+      //   Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
+      // } else{
+      //   Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
+      // }
+      // else if (!datas.upUserid){ 
+      //   领取红包功能 取消了
+      //   Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
+      // } 
+      // else{
+      //   let callBack = ()=>{
+      //     Tool.switchTab('/pages/index/index')
+      //   }
+      //   Tool.showSuccessToast('注册成功', callBack)
+      // }
     }
     Tool.showErrMsg(r)
     r.addToQueue();

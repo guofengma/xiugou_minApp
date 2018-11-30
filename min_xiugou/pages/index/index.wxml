@@ -18,7 +18,7 @@
     <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:460rpx' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff' circular="true">
     <block wx:for="{{imgUrls}}" wx:key='unique'>
       <swiper-item>
-        <image src="{{item.imgUrl}}" class="slide-image" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' bindload="imageLoad"  lazy-load='true' mode='aspectFill'/>
+        <image-sub  imgSrc="{{item.imgUrl}}" catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' mode='aspectFill'/>
       </swiper-item>
     </block>
     </swiper>
@@ -84,7 +84,8 @@
   <view class='index-ad-banner-view flexC whiteBg' wx:if='{{adArr.length>0}}'>
     <block wx:for='{{adArr}}' wx:key='unique'>
       <view class='overflow' wx:if='{{index<3}}' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' >
-        <image src='{{item.imgUrl}}' lazy-load></image>
+        <!-- <image src='{{item.imgUrl}}' lazy-load></image> -->
+        <image-sub  imgSrc="{{item.imgUrl}}" mode='aspectFill'/>
       </view>
     </block>
   </view>
@@ -149,7 +150,8 @@
     <swiper class="today-list-imageContainer" previous-margin="62rpx" next-margin="62rpx" circular autoplay>
       <block wx:for="{{todayList}}" wx:key="{{index}}">
         <swiper-item class="today-list-item boxSize">
-          <image class="today-list-itemImg " src="{{item.imgUrl}}" catchtap='adListClicked' lazy-load='true' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'></image>
+          <image-sub  imgSrc="{{item.imgUrl}}" imgStyle='border-radius:15rpx' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' mode='aspectFill'/>
+          <!-- <image class="today-list-itemImg " src="{{item.imgUrl}}" catchtap='adListClicked' lazy-load='true' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'></image> -->
         </swiper-item>
       </block>
     </swiper>
@@ -161,7 +163,8 @@
     <swiper class="today-list-imageContainer"   next-margin="150rpx" circular>
       <block wx:for="{{fineQuality}}" wx:key="{{index}}">
         <swiper-item class="today-list-item boxSize">
-          <image class="today-list-itemImg " src="{{item.imgUrl}}" lazy-load='true' catchtap='adListClicked' lazy-load='true' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'></image>
+          <image-sub  imgSrc="{{item.imgUrl}}" imgStyle='border-radius:15rpx' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' mode='aspectFill'/>
+          <!-- <image class="today-list-itemImg " src="{{item.imgUrl}}" lazy-load='true' catchtap='adListClicked' lazy-load='true' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'></image> -->
           <!-- <view class='ellipsis font-26 fine-quality-tips'>华盛顿哈空间是的哈卡收到货卡仕达卡仕达卡收到货卡的很时代大厦多</view> -->
         </swiper-item>
       </block>
@@ -174,13 +177,15 @@
     <view class='index-item-title flexR font-38'>超值热卖</view>
     <view class='hot-sale-item' wx:for="{{hotSale}}"  wx:for-index="key" wx:for-item='list' wx:key="{{key}}" >
       <view class='hot-sale-img'>
-        <image src='{{list.imgUrl}}'catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'></image>
+        <image-sub  imgSrc="{{list.imgUrl}}" imgStyle='width:100%;height:360rpx;border-radius:10rpx'  catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}' mode='aspectFill'/>
+        <!-- <image src='{{list.imgUrl}}'catchtap='adListClicked' data-type='{{list.linkType}}' data-val='{{list.linkTypeCode}}'></image> -->
       </view>
       <scroll-view scroll-x="true"   class='hot-sale-scroll' wx:if='{{list.topicBannerProductDTOList.length>0}}'>
-        <view class='hot-sale-content  boxSize'>
+        <view class='hot-sale-content boxSize'>
           <block wx:for='{{list.topicBannerProductDTOList}}' wx:key='{{index}}' wx:if='{{index<8}}'>
             <view class='hot-sale-prd flexC'  catchtap='adListClicked' data-prodtype='{{item.productType}}' data-val='{{item.prodCode}}'>
-              <image src='{{item.specImg}}' lazy-load='true'></image>
+              <!-- <image src='{{item.specImg}}' lazy-load='true'></image> -->
+              <image-sub  imgSrc="{{item.specImg}}" imgStyle='height:190rpx;width:190rpx'  mode='aspectFill'/>
               <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName || ''}}</view>
             <view class='red font-28'>¥{{item.showPrice || 0}}起</view>
           </view>     
@@ -201,9 +206,10 @@
   <view class='recommend-view whiteBg' wx:if='{{recommendArr.length>0}}' >
     <view class='index-item-title flexR font-38'>为你推荐</view>
     <view class='recommend-prd-content flexR'>
-      <view class='recommend-prd-item boxSize' wx:for='{{recommendArr}}' wx:key='{{index}}' style='margin-right:{{index%2==1? "0":"10"}}rpx' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'>
+      <view class='recommend-prd-item boxSize overflow' wx:for='{{recommendArr}}' wx:key='{{index}}' style='margin-right:{{index%2==1? "0":"10"}}rpx' catchtap='adListClicked' data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}'>
         <view class='recommend-prd-img' >
-         <image src='{{item.imgUrl}}' lazy-load="{{ true }}"></image>
+         <!-- <image src='{{item.imgUrl}}' lazy-load="{{ true }}"></image> -->
+         <image-sub  imgSrc="{{item.imgUrl}}" imgStyle='height:340rpx;width:340rpx'  mode='aspectFill'/>
          <view class='ellipsis font-24 gray'>{{item.title}}</view>
         </view>
         <view class='recommend-prd-info'>
@@ -231,6 +237,9 @@
 
 <!-- 公告 -->
 
-<notice visiable="{{isShowNotice}}"
+<notice visiable="{{isShowNotice}}" id='notice'
   bind:isShowNotice='isShowNotice'
 />
+
+<!-- 优惠卷 -->
+<coupon-alert visiable="{{isShowCoupon}}" bind:isShowCoupon='isShowCoupon'/>

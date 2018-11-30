@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation} = global;
+let { Tool, RequestFactory, Storage, Event, Operation, Config} = global;
 
 Page({
     data: {
@@ -15,7 +15,7 @@ Page({
       types:['退款','换货','退货','退换'],
       returnTypeArr: ['', '退款', '退货', '换货'],
       hasData:true,
-      imgSrcUrl: 'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/',
+      imgSrcUrl: Config.imgBaseUrl,
       logIcon: 'order-state-3-dark.png',
       isCancel: false,//是否取消订单
       isDelete: false, //是否删除订单
@@ -249,14 +249,14 @@ Page({
             bottomBtn: ['查看物流', '确认收货'], 
             bottomId: [5, 4],
             orderIcon: "order-state-3.png",
-            info: '仓库正在扫描出仓...',
+            info: '订单正在处理中...',
             time: ''
           },
           { status: '交易已完成',
             bottomBtn: ['删除订单', '再次购买'], 
             bottomId: [6,5],
             orderIcon: "order-state-5.png",
-            info: '仓库正在扫描出仓...',
+            info: '订单正在处理中...',
             time: ''
           },
           {
@@ -264,14 +264,14 @@ Page({
             bottomBtn: ['删除订单', '再次购买'],
             bottomId: [6, 5],
             orderIcon: "order-state-5.png",
-            info: '仓库正在扫描出仓...',
+            info: '订单正在处理中...',
             time: ''
           },
           { status: '订单已完成',
             bottomBtn: ['删除订单', '再次购买'],
             bottomId: ['', 5], 
             orderIcon: "order-state-5.png", 
-            info: '仓库正在扫描出仓...',
+            info: '订单正在处理中...',
             time: '' 
           },
           { status: '交易关闭',

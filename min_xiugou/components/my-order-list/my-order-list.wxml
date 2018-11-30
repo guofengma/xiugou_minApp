@@ -41,7 +41,7 @@
     </view>
 
     <view class="amount">
-      <text>共{{item.orderProductList.length}}件商品 合计：</text>
+      <text>共{{item.orderProductList.length}}件商品 {{ item.status==1 || item.status==7 || item.status==8? "需付款":"实付款"}}：</text>
       <text class="red font-30">￥{{item.needPrice}}</text>
       <text class="freight">(含运费￥{{item.freightPrice}})</text>
     </view>

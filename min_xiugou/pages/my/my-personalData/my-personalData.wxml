@@ -70,5 +70,14 @@
             </view>
         </view>
     </view>
+    <view class="wrap flexR-sb whiteBg introduction item" catchtap='introductionaClicked'>
+      <view class='item-left'>
+        <text>简介</text>
+      </view>
+      <view class='flexR-sb'>
+        <text>{{userInfos.profile || '未填写'}}</text>
+        <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+      </view>
+    </view>
 </view>
 

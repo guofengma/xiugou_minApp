@@ -12,7 +12,8 @@
   width: 350rpx;
 }
 .after-sale-name{
-  margin-bottom: 10rpx;
+  margin-bottom: 30rpx;
+  margin-right: 50rpx;
 }
 .after-sale-prd-info-right{
   height: 160rpx;
