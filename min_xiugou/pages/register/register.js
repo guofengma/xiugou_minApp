@@ -22,6 +22,7 @@ Page({
     urlFrom: null,
   },
   onLoad: function (options) {
+    // Tool.navigateTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
     let inviteId = options.inviteId
     if (options.inviteId == 'null' || options.inviteId == 'undefined' || !options.inviteId) {
       inviteId = ''
@@ -126,7 +127,7 @@ Page({
         }
         Tool.showSuccessToast('注册成功', callBack)
       } else {
-        Tool.navigateTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
+        Tool.redirectTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
       }
       // if (this.data.urlFrom){
       //   Tool.navigateTo(decodeURIComponent(this.data.urlFrom))

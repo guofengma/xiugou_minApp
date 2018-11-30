@@ -37,9 +37,9 @@ Page({
     Tool.showSuccessToast('注册成功', callBack)
   },
   dismiss(){
-    this.next()
+    Tool.navigationPop()
   },
   onUnload(){
-    Tool.showSuccessToast('注册成功')
+    // Tool.showSuccessToast('注册成功')
   }
 })

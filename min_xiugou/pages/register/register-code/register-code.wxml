@@ -9,7 +9,7 @@
         </view>
       </view>
       <view wx:if='{{invite.length>0}}'>
-        <swiper duration="300" bindchange="bindchange" display-multiple-items='3'  previous-margin="120rpx" next-margin="120rpx" current='{{current}}' circular='true'>
+        <swiper duration="300" bindchange="bindchange" display-multiple-items='{{multiple}}'  previous-margin="120rpx" next-margin="120rpx" current='{{current}}' circular='true'>
           <swiper-item wx:for="{{invite}}"   wx:key="{{index}}" >
             <view class='inviter flexC'>
               <view class='flexC' data-index='{{index}}' catchtap='itemClicked'>

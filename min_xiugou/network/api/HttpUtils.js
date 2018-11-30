@@ -31,6 +31,7 @@ export default class HttpUtils {
       ...this.getHeaders(),
       ...rsa_headers
     }
+    console.log(headers)
     return new Promise((resolve, reject) => {
       wx.request({
         url: url,
@@ -48,7 +49,7 @@ export default class HttpUtils {
           reject(res.data);
         },
         complete: function (res) {
-
+          console.log(res.data)
         }
       });
     }) 
