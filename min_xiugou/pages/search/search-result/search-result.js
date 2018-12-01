@@ -1,11 +1,121 @@
-let { Tool, RequestFactory, Storage, Operation, Event} = global
+let { Tool, RequestFactory, Storage, Operation, Event,API} = global
 
 Page({
   data: {
     show:false, //展示形式  false：网状 
     keyword:'', 
     tipVal:'', // 默认是无 取值 1 2 3 
-    productInfo: [], // 商品信息
+    productInfo: [
+      // {
+      //   "afterSaleServiceDays": 1,
+      //   "brandId": 1,
+      //   "brandName": "string",
+      //   "buyLimit": 1,
+      //   "content": "string",
+      //   "firstCategoryId": 1,
+      //   "firstCategoryName": "string",
+      //   "freight": 0,
+      //   "groupPrice": 0,
+      //   "imgUrl": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/28ae8c7a07bb4784a0b36b1125365101.png",
+      //   "leftBuyNum": 1,
+      //   "maxPrice": 0,
+      //   "minPrice": 0,
+      //   "monthSaleTotal": 0,
+      //   "name": "111111111",
+      //   "originalPrice": 0,
+      //   "paramList": [
+      //     {
+      //       "paramName": "尺寸",
+      //       "paramValue": "杯子大小"
+      //     }
+      //   ],
+      //   "priceType": 1,
+      //   "prodCode": "P001",
+      //   "productImgList": [
+      //     {
+      //       "height": 0,
+      //       "originalImg": "string",
+      //       "smallImg": "string",
+      //       "sort": 0,
+      //       "width": 0
+      //     }
+      //   ],
+      //   "productStatus": 1,
+      //   "secCategoryId": 1,
+      //   "secCategoryName": "string",
+      //   "sendMode": 1,
+      //   "shareMoney": "100.01-200.01",
+      //   "skuList": [
+      //     {
+      //       "barCode": "2018102sdjhku2",
+      //       "originalPrice": 100,
+      //       "price": 10,
+      //       "prodCode": "P001",
+      //       "propertyValues": "金色,64G,全网通",
+      //       "sellStock": 10,
+      //       "skuCode": "Sku001",
+      //       "specImg": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/8a08ab77b6a34222bf27e3d6fae49db1.jpg",
+      //       "stockUnit": "件",
+      //       "weight": 1.25
+      //     }
+      //   ],
+      //   "specifyList": [
+      //     {
+      //       "specName": "颜色",
+      //       "specValues": [
+      //         {
+      //           "id": 1,
+      //           "oldSpecImg": "string",
+      //           "oldSpecValue": "string",
+      //           "specImg": "string",
+      //           "specName": "颜色",
+      //           "specValue": "金色"
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       "specName": "规格",
+      //       "specValues": [
+      //         {
+      //           "id": 1,
+      //           "oldSpecImg": "string",
+      //           "oldSpecValue": "string",
+      //           "specImg": "string",
+      //           "specName": "颜色",
+      //           "specValue": "64G"
+      //         }
+      //       ]
+      //     },
+      //     {
+      //       "specName": "LEI",
+      //       "specValues": [
+      //         {
+      //           "id": 1,
+      //           "oldSpecImg": "string",
+      //           "oldSpecValue": "string",
+      //           "specImg": "string",
+      //           "specName": "颜色",
+      //           "specValue": "全网通"
+      //         },
+      //         {
+      //           "id": 1,
+      //           "oldSpecImg": "string",
+      //           "oldSpecValue": "string",
+      //           "specImg": "string",
+      //           "specName": "颜色",
+      //           "specValue": "全网通2"
+      //         }
+      //       ]
+      //     }
+      //   ],
+      //   "supplierCode": 1,
+      //   "supplierName": "string",
+      //   "thirdCategoryId": 1,
+      //   "thirdCategoryName": "string",
+      //   "upTime": "2018-12-01T03:24:28.537Z",
+      //   "videoUrl": "string"
+      // }
+    ], // 商品信息
     totalPage:'', // 页面总页数
     currentPage:1, // 当前的页数
     pageSize: 10, // 每次加载请求的条数 默认10 
@@ -186,49 +296,47 @@ Page({
   },
   addShoppingCartClicked(e) {
     //加入购物车
-    let id = e.currentTarget.dataset.id
+    let index = e.currentTarget.dataset.index
     let imgurl = e.currentTarget.dataset.imgurl
     let price = e.currentTarget.dataset.price
-    this.findProductStockBySpec(id, imgurl, price)
+    this.setData({
+      productSpec: this.data.productInfo[index].specifyList,
+      priceList: this.data.productInfo[index].skuList,
+      selectPrice: price,
+      isInit:false,
+      imgUrl: imgurl
+    })
+    this.selectComponent("#prd-info-type").isVisiableClicked()
+    // this.findProductStockBySpec(id, imgurl, price)
   },
   findProductStockBySpec(id, imgurl, price) {
-    let params = {
-      id:id,
-      isShowLoading: false,
-      requestMethod: 'GET',
-      url: Operation.findProductStockBySpec,
-      reqName: "规格搜索"
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
-      this.setData({
-        productSpec: datas.specMap,
-        priceList: datas.priceList,
-        selectPrice: price,
-        isInit:false,
-        imgUrl: imgurl
-      })
-      this.selectComponent("#prd-info-type").isVisiableClicked()
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    // let params = {
+    //   id:id,
+    //   isShowLoading: false,
+    //   requestMethod: 'GET',
+    //   url: Operation.findProductStockBySpec,
+    //   reqName: "规格搜索"
+    // }
+    // let r = RequestFactory.wxRequest(params);
+    // r.successBlock = (req) => {
+    //   let datas = req.responseObject.data
+    //   this.setData({
+    //     productSpec: datas.specMap,
+    //     priceList: datas.priceList,
+    //     selectPrice: price,
+    //     isInit:false,
+    //     imgUrl: imgurl
+    //   })
+    //   this.selectComponent("#prd-info-type").isVisiableClicked()
+    // }
+    // Tool.showErrMsg(r)
+    // r.addToQueue();
   },
   requestQueryProductList(params){
-    params = {
-      ...params,
-      url: Operation.searchProduct,
-      reqName: "关键字搜索"
-    } 
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    API.searchProduct(params).then((res) => {
       let productInfo = this.data.productInfo
-      let datas = req.responseObject.data
+      let datas = res.data || {}
       if (datas.totalNum > 0) {
-        datas.data.forEach((item) => {
-          item.product.price = Tool.formatNum(item.price)
-          item.product.originalPrice = Tool.formatNum(item.originalPrice)
-        })
         this.setData({
           productInfo: productInfo.concat(datas.data),
           totalPage: datas.totalPage,
@@ -239,12 +347,39 @@ Page({
           tipVal: 2
         })
       }
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+
+    })
+    // params = {
+    //   ...params,
+    //   url: Operation.searchProduct,
+    //   reqName: "关键字搜索"
+    // }
+    // let r = RequestFactory.wxRequest(params);
+    // r.successBlock = (req) => {
+    //   let productInfo = this.data.productInfo
+    //   let datas = req.responseObject.data
+    //   if (datas.totalNum > 0) {
+    //     datas.data.forEach((item) => {
+    //       item.product.price = Tool.formatNum(item.price)
+    //       item.product.originalPrice = Tool.formatNum(item.originalPrice)
+    //     })
+    //     this.setData({
+    //       productInfo: productInfo.concat(datas.data),
+    //       totalPage: datas.totalPage,
+    //       tipVal: ''
+    //     })
+    //   } else if (datas.totalNum == 0) {
+    //     this.setData({
+    //       tipVal: 2
+    //     })
+    //   }
+    // }
+    // Tool.showErrMsg(r)
+    // r.addToQueue();
   },
   productCliked(e){
-    Tool.navigateTo('/pages/product-detail/product-detail?productId='+ e.currentTarget.dataset.id+'&door=1')
+    Tool.navigateTo('/pages/product-detail/product-detail?prodCode='+ e.currentTarget.dataset.id+'&door=1')
   },
   goPage(){
     Tool.switchTab('/pages/shopping-cart/shopping-cart')

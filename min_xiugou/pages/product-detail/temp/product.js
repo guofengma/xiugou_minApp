@@ -1,52 +1,86 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, RequestFactory, Storage, Event, Operation,API } = global
 const app = getApp()
 export default class ProductFactorys  {
   constructor(page) {
     this.page = page
   }
   requestFindProductByIdApp(callBack = () => { }) { // 产品详情接口请求
-    let url = this.page.data.prodCode ? Operation.getProductDetailByCode : Operation.findProductByIdApp
-    url = this.page.data.proNavData ? Operation.findProductByIdApp : url
-    let params = {
-      id: this.page.data.productId,
-      code: this.page.data.prodCode,
-      requestMethod: 'GET',
-      reqName: '获取商品详情页',
-      url: url
-    }
-    let r = RequestFactory.wxRequest(params);
-    let productInfo = this.page.data.productInfo
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data || {}
+    // let url = this.page.data.prodCode ? Operation.getProductDetailByCode : Operation.findProductByIdApp
+    // url = this.page.data.proNavData ? Operation.findProductByIdApp : url
+    // let params = {
+    //   id: this.page.data.productId,
+    //   code: this.page.data.prodCode,
+    //   requestMethod: 'GET',
+    //   reqName: '获取商品详情页',
+    //   url: url
+    // }
+    API.getProductDetailByCode({
+      code: this.page.data.productCode
+    }).then((res) => {
+      let datas = res.data || {}
+      console.log(datas)
       this.page.data.userInfos = this.page.data.userInfos || {}
       datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelRemark + "价"
-      datas.showPrice = (datas.minPrice == datas.maxPrice) ? '¥' + datas.maxPrice : '¥' + datas.minPrice +' - ¥'+datas.maxPrice
+      datas.showPrice = (datas.minPrice == datas.maxPrice) ? '¥' + datas.maxPrice : '¥' + datas.minPrice + ' - ¥' + datas.maxPrice
       // 用户不能购买 限购但属于数量小于等于0且状态不是1
-      if ((datas.product.buyLimit != -1 && !datas.product.leftBuyNum) || datas.status!=1) {
-        datas.product.canUserBuy = false
+      if ((datas.buyLimit != -1 && !datas.leftBuyNum) || datas.productStatus != 1) {
+        datas.canUserBuy = false
       } else {
-        datas.product.canUserBuy = true
+        datas.canUserBuy = true
       }
+      datas.showContent = datas.content.split(',')
       this.page.setData({
-        isInit:false,
-        imgUrls: datas.productImgList,
-        productInfo: datas.product,
-        productInfoList: datas,
-        priceList: datas.priceList, // 价格表
-        productSpec: datas.specMap, // 规格描述
-        productId: datas.product.id ? datas.product.id : this.page.data.productId
+        isInit: false,
+        imgUrls: datas.imgFileList || [],
+        productInfo: datas,
+        // productInfoList: datas,
+        priceList: datas.skuList, // 价格表
+        productSpec: datas.specifyList, // 规格描述
+        productId: datas.prodCode ? datas.prodCode : this.page.data.productCode
       })
-
       // 渲染表格
-      this.renderTable(datas.paramList, 'paramName','paramValue')
-      
+      this.renderTable(datas.paramList || {}, 'paramName', 'paramValue')
+
       // 渲染详情图文
-      this.page.selectComponent("#productInfos").initDatas()
+      // this.page.selectComponent("#productInfos").initDatas()
       // 执行额外需要做的操作
       callBack(datas)
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+
+    })
+    // let r = RequestFactory.wxRequest(params);
+    // let productInfo = this.page.data.productInfo
+    // r.successBlock = (req) => {
+    //   let datas = req.responseObject.data || {}
+    //   this.page.data.userInfos = this.page.data.userInfos || {}
+    //   datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelRemark + "价"
+    //   datas.showPrice = (datas.minPrice == datas.maxPrice) ? '¥' + datas.maxPrice : '¥' + datas.minPrice +' - ¥'+datas.maxPrice
+    //   // 用户不能购买 限购但属于数量小于等于0且状态不是1
+    //   if ((datas.product.buyLimit != -1 && !datas.product.leftBuyNum) || datas.status!=1) {
+    //     datas.product.canUserBuy = false
+    //   } else {
+    //     datas.product.canUserBuy = true
+    //   }
+    //   this.page.setData({
+    //     isInit:false,
+    //     imgUrls: datas.productImgList,
+    //     productInfo: datas.product,
+    //     productInfoList: datas,
+    //     priceList: datas.priceList, // 价格表
+    //     productSpec: datas.specMap, // 规格描述
+    //     productId: datas.product.id ? datas.product.id : this.page.data.productId
+    //   })
+
+    //   // 渲染表格
+    //   this.renderTable(datas.paramList, 'paramName','paramValue')
+      
+    //   // 渲染详情图文
+    //   this.page.selectComponent("#productInfos").initDatas()
+    //   // 执行额外需要做的操作
+    //   callBack(datas)
+    // }
+    // Tool.showErrMsg(r)
+    // r.addToQueue();
   }
   renderTable(paramList, paramName, paramValue) {  // 渲染表格
     let tbody = [{

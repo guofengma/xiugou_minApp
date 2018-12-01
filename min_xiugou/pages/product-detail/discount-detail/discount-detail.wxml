@@ -11,7 +11,7 @@
 
 
 <!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
-  <view class='prduct-detail-view' wx:if='{{productInfoList}}'>
+  <view class='prduct-detail-view' wx:if='{{productInfo}}'>
     <!--topbar  -->
     <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
     <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
@@ -24,7 +24,7 @@
      promotionType="2"
      wx:if="{{proNavData.id}}"/>
     <!-- 产品信息 -->
-    <template is="product-info" data="{{productInfo,productInfoList,showPrice:false}}" />
+    <template is="product-info" data="{{productInfo,showPrice:false}}" />
     <!-- 规则 -->
     <view class='chooseBox'>
       <view bindtap='toggleShowRegular' style="padding: 0">

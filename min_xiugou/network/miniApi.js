@@ -68,6 +68,39 @@ const api =
       "encrypt": true
     }
   ],
+  'searchProduct': [
+    '/product/productList',
+    {
+      "action": "搜索产品",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  'getProductDetailByCode': [
+    '/product/getProductDetailByCode',
+    {
+      "action": "搜索产品",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
+  'getKeywords': [
+    '/product/getKeywords',
+    {
+      "action": "动态搜索框关键词匹配",
+      "method": "get",
+      "encrypt": false,
+      'isShowLoading': false,
+    }
+  ],
+  'activityByProductId': [
+    '/operator/activity/queryByProductId',
+    {
+      "action": "获取是否是活动产品",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
 }
 
 // const API = ApiUtils(api);

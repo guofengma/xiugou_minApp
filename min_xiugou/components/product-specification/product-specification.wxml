@@ -28,9 +28,9 @@
     <scroll-view scroll-y  class='scroll-y'>
       <!--类型  -->
       <view class='prd-type-info' wx:for='{{productSpec}}' wx:for-index="key" wx:for-item="list" wx:key='unique'>
-        <view class='type-name'>{{list.name}}</view>
+        <view class='type-name'>{{list.specName}}</view>
         <view class='type-list'>
-          <block  wx:for='{{list.list}}' wx:key='unique'> 
+          <block  wx:for='{{list.specValues}}' wx:key='unique'> 
             <view bindtap='typeListClicked' 
                   data-index='{{index}}' data-key='{{key}}' data-specvalue='{{item.specValue}}' data-id='{{item.id}}'
                   data-canclick = '{{item.hasStock}}'

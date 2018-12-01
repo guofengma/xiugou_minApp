@@ -117,7 +117,7 @@ Page({
       })
 
       // 渲染表格
-      this.ProductFactory.renderTable(datas.paramValueList, 'param','paramValue')
+      this.ProductFactory.renderTable(datas.paramValueList || {}, 'param','paramValue')
 
       this.selectComponent("#productInfos").initDatas()
     }

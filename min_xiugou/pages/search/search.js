@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation } = global
+let { Tool, RequestFactory, Storage, Operation,API } = global
 
 Page({
 
@@ -78,21 +78,30 @@ Page({
     }
   },
   requestKeywords(){
-    let params = {
-      requestMethod: 'GET',
-      keyword: this.data.keyWord,
-      isShowLoading: false,
-      reqName: '动态获得搜索词',
-      url: Operation.getKeywords,
-    }
-    let r = RequestFactory.wxRequest(params)
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
+    API.getKeywords({
+      keyword: this.data.keyWord
+    }).then((res) => {
       this.setData({
-        activeSearchLists: req.responseObject.data || []
+        activeSearchLists: res.data || []
       })
-    }
-    r.addToQueue();
+    }).catch((res) => {
+
+    })
+    // let params = {
+    //   requestMethod: 'GET',
+    //   keyword: this.data.keyWord,
+    //   isShowLoading: false,
+    //   reqName: '动态获得搜索词',
+    //   url: Operation.getKeywords,
+    // }
+    // let r = RequestFactory.wxRequest(params)
+    // r.successBlock = (req) => {
+    //   let data = req.responseObject.data
+    //   this.setData({
+    //     activeSearchLists: req.responseObject.data || []
+    //   })
+    // }
+    // r.addToQueue();
   },
   deleteKeyword(){
     if(this.data.door==1){

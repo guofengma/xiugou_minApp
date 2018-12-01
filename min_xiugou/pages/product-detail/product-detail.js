@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, RequestFactory, Storage, Event, Operation,API } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
 // import ProductFac from './temp/product.js'
@@ -28,16 +28,14 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      productId: options.productId || '',
-      prodCode: options.prodCode || '',
+      productCode: options.productId || options.prodCode || '',
+      // prodCode: options.prodCode || '',
       door: options.door || '',
       inviteId: options.inviteId || ''
     })
    
     this.ProductFactory = new ProductFactorys(this)
-    this.didLogin()
-    // this.initRequest()
-    
+    this.didLogin()    
     Tool.isIPhoneX(this)
     Event.on('didLogin', this.didLogin, this);
   },
@@ -46,8 +44,7 @@ Page({
   },
   initRequest(){
     let callBack2 = (datas) => {
-      if (datas.product.status!=0){
-        
+      if (datas.productStatus!=0){
         this.activityByProductId(this.data.productId)
       }else{
         this.ProductFactory.productDefect()
@@ -101,6 +98,7 @@ Page({
     Event.emit('updateStorageShoppingCart')
   },
   activityByProductId(productId) {
+
     let params = {
       productId: productId,
       reqName: '获取是否是活动产品',
@@ -113,7 +111,7 @@ Page({
       if(!datas) return
       if (datas.activityType == 1 || datas.activityType == 2 ){
         let proNavData =datas.activityType == 1 ? datas.seckill : datas.depreciate
-        proNavData.originalPrice = this.data.productInfoList.originalPrice
+        proNavData.originalPrice = this.data.productInfo.originalPrice
         this.setData({
           proNavData: datas.activityType == 1 ? datas.seckill : datas.depreciate,
           activityType: datas.activityType,
@@ -145,12 +143,11 @@ Page({
       Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true+'&inviteId=' + this.data.inviteCode)
       return
     }
-    // if (!this.data.productInfo.canUserBuy) return
     let params = {
       orderProducts:[{
         num: this.data.productBuyCount,
-        priceId: this.data.selectType.id,
-        productId: this.data.productInfo.id
+        priceId: this.data.selectType.skuCode,
+        productId: this.data.selectType.prodCode
       }],
       orderType:99
     }
@@ -190,7 +187,7 @@ Page({
     }
   },
   btnClicked(e){
-    if (this.data.productInfoList.status == 1 && this.data.productInfo.canUserBuy) {
+    if ( this.data.productInfo.canUserBuy) {
       let n = parseInt(e.currentTarget.dataset.key)
       this.selectComponent("#prd-info-type").isVisiableClicked(n)
     }

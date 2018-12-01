@@ -30,8 +30,13 @@
     <!-- <view class='address active whiteBg' wx:if='{{refundType==2}}'>
       <template is="address-info" data="{{addressType:1,...list.address,hasData:true}}"/>
     </view> -->
-    <view class='font-24 cell-line-tips gray-9' wx:if='{{refundType==2}}'>
-      <text class='red'>*</text>请确保退换商品不影响二次销售
+    <view class='font-24 cell-line-tips gray-9'>
+      <view  wx:if='{{refundType==2}}'>
+        <text class='red'>*</text>请确保退换商品不影响二次销售
+      </view>
+      <view wx:else >
+        最多¥23.80，含发货邮费¥0.00
+      </view>
     </view>
     <view class='cell-line gray-9'>{{reason[refundType].info}}</view>
     <textarea wx:if='{{textarea}}'   class='textarea' placeholder="{{placeholder.placeholder}}" disabled='{{placeholder.disabled}}' placeholder-class='textarea gray' bindinput='inputChange' value='{{remark}}'/>
