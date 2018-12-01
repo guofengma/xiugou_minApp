@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation,API } = global
+let { Tool, Storage,API } = global
 
 Page({
 
@@ -43,24 +43,19 @@ Page({
 
   },
   requestGetHotWordsListActive(){
-    let params = {
-      reqName: '获取热搜词',
-      requestMethod: 'GET',
-      url: Operation.getHotWordsListActive,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
-      if(datas.length>0){
-        datas.forEach((item)=>{
-          item.wordShowName = item.wordName.length > 10 ? item.wordName.slice(0, 10) + "..." : item.wordName
-        })
-      }
-      this.setData({
-        hotWords: req.responseObject.data
+    API.getHotWordsListActive({
+      keyword: this.data.keyWord
+    }).then((res) => {
+      let datas = res.data || []
+      datas.forEach((item) => {
+        item.wordShowName = item.wordName.length > 10 ? item.wordName.slice(0, 10) + "..." : item.wordName
       })
-    }
-    r.addToQueue();
+      this.setData({
+        hotWords: datas
+      })
+    }).catch((res) => {
+
+    })
   },
   getHotkeyword(e) {
     this.setData({
@@ -87,21 +82,6 @@ Page({
     }).catch((res) => {
 
     })
-    // let params = {
-    //   requestMethod: 'GET',
-    //   keyword: this.data.keyWord,
-    //   isShowLoading: false,
-    //   reqName: '动态获得搜索词',
-    //   url: Operation.getKeywords,
-    // }
-    // let r = RequestFactory.wxRequest(params)
-    // r.successBlock = (req) => {
-    //   let data = req.responseObject.data
-    //   this.setData({
-    //     activeSearchLists: req.responseObject.data || []
-    //   })
-    // }
-    // r.addToQueue();
   },
   deleteKeyword(){
     if(this.data.door==1){
@@ -153,26 +133,5 @@ Page({
     } else {
       this.requestKeyword()
     }
-  },
-  getProvinceList() {
-    let params = {
-      reqName: '获取省份',
-      url: Operation.getProvinceList,
-    }
-    let r = RequestFactory.wxRequest(params)
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      let showProvince = ''
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].name == this.data.province) {
-          showProvince = data[i]
-          break
-        }
-      }
-      this.setData({
-        provinceCode: showProvince.zipcode || -1
-      })
-    }
-    r.addToQueue();
-  },
+  }
 })

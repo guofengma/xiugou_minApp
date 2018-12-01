@@ -101,6 +101,14 @@ const api =
       "encrypt": false,
     }
   ],
+  'getHotWordsListActive': [
+    '/config/sysHotWord/queryHotName',
+    {
+      "action": "获取是否是活动产品",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
 }
 
 // const API = ApiUtils(api);

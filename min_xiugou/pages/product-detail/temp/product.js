@@ -5,20 +5,10 @@ export default class ProductFactorys  {
     this.page = page
   }
   requestFindProductByIdApp(callBack = () => { }) { // 产品详情接口请求
-    // let url = this.page.data.prodCode ? Operation.getProductDetailByCode : Operation.findProductByIdApp
-    // url = this.page.data.proNavData ? Operation.findProductByIdApp : url
-    // let params = {
-    //   id: this.page.data.productId,
-    //   code: this.page.data.prodCode,
-    //   requestMethod: 'GET',
-    //   reqName: '获取商品详情页',
-    //   url: url
-    // }
     API.getProductDetailByCode({
       code: this.page.data.productCode
     }).then((res) => {
       let datas = res.data || {}
-      console.log(datas)
       this.page.data.userInfos = this.page.data.userInfos || {}
       datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelRemark + "价"
       datas.showPrice = (datas.minPrice == datas.maxPrice) ? '¥' + datas.maxPrice : '¥' + datas.minPrice + ' - ¥' + datas.maxPrice
@@ -48,39 +38,6 @@ export default class ProductFactorys  {
     }).catch((res) => {
 
     })
-    // let r = RequestFactory.wxRequest(params);
-    // let productInfo = this.page.data.productInfo
-    // r.successBlock = (req) => {
-    //   let datas = req.responseObject.data || {}
-    //   this.page.data.userInfos = this.page.data.userInfos || {}
-    //   datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelRemark + "价"
-    //   datas.showPrice = (datas.minPrice == datas.maxPrice) ? '¥' + datas.maxPrice : '¥' + datas.minPrice +' - ¥'+datas.maxPrice
-    //   // 用户不能购买 限购但属于数量小于等于0且状态不是1
-    //   if ((datas.product.buyLimit != -1 && !datas.product.leftBuyNum) || datas.status!=1) {
-    //     datas.product.canUserBuy = false
-    //   } else {
-    //     datas.product.canUserBuy = true
-    //   }
-    //   this.page.setData({
-    //     isInit:false,
-    //     imgUrls: datas.productImgList,
-    //     productInfo: datas.product,
-    //     productInfoList: datas,
-    //     priceList: datas.priceList, // 价格表
-    //     productSpec: datas.specMap, // 规格描述
-    //     productId: datas.product.id ? datas.product.id : this.page.data.productId
-    //   })
-
-    //   // 渲染表格
-    //   this.renderTable(datas.paramList, 'paramName','paramValue')
-      
-    //   // 渲染详情图文
-    //   this.page.selectComponent("#productInfos").initDatas()
-    //   // 执行额外需要做的操作
-    //   callBack(datas)
-    // }
-    // Tool.showErrMsg(r)
-    // r.addToQueue();
   }
   renderTable(paramList, paramName, paramValue) {  // 渲染表格
     let tbody = [{
@@ -137,6 +94,48 @@ export default class ProductFactorys  {
       })
     }
     app.queryPushMsg(callBack)
+  }
+  addToShoppingCart() { // 加入购物车
+    let params = {
+      productId: this.page.data.selectType.prodCode,
+      amount: this.page.data.selectType.buyCount,
+      priceId: this.page.data.selectType.skuCode,
+      timestamp: new Date().getTime(),
+      reqName: '加入购物车',
+      url: Operation.addToShoppingCart
+    }
+    // 加入购物车
+    if (!this.page.data.didLogin) {
+      this.setStoragePrd(params)
+      return
+    }
+    let r = RequestFactory.wxRequest(params);
+    r.successBlock = (req) => {
+      this.getShoppingCartList()
+      Event.emit('updateShoppingCart')
+      Tool.showSuccessToast('添加成功')
+    };
+    Tool.showErrMsg(r)
+    r.addToQueue();
+  }
+  setStoragePrd(params, index) { // 加入本地购物车
+    let list = Storage.getShoppingCart() || []
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].priceId === params.priceId) {
+        list[i].showCount += this.page.data.selectType.buyCount
+        this.updateStorageShoppingCart(list)
+        return
+      }
+    }
+    params.showCount = this.page.data.selectType.buyCount
+    list.push(params)
+    this.updateStorageShoppingCart(list)
+  }
+  updateStorageShoppingCart(list) { // 存储在本地
+    Storage.setShoppingCart(list)
+    this.getShoppingCartList()
+    Tool.showSuccessToast('添加成功')
+    Event.emit('updateStorageShoppingCart')
   }
   getShoppingCartList() { // 获取线上购物车
     if (!this.page.data.didLogin) {

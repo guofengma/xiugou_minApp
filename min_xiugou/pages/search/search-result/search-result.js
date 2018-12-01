@@ -5,117 +5,7 @@ Page({
     show:false, //展示形式  false：网状 
     keyword:'', 
     tipVal:'', // 默认是无 取值 1 2 3 
-    productInfo: [
-      // {
-      //   "afterSaleServiceDays": 1,
-      //   "brandId": 1,
-      //   "brandName": "string",
-      //   "buyLimit": 1,
-      //   "content": "string",
-      //   "firstCategoryId": 1,
-      //   "firstCategoryName": "string",
-      //   "freight": 0,
-      //   "groupPrice": 0,
-      //   "imgUrl": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/28ae8c7a07bb4784a0b36b1125365101.png",
-      //   "leftBuyNum": 1,
-      //   "maxPrice": 0,
-      //   "minPrice": 0,
-      //   "monthSaleTotal": 0,
-      //   "name": "111111111",
-      //   "originalPrice": 0,
-      //   "paramList": [
-      //     {
-      //       "paramName": "尺寸",
-      //       "paramValue": "杯子大小"
-      //     }
-      //   ],
-      //   "priceType": 1,
-      //   "prodCode": "P001",
-      //   "productImgList": [
-      //     {
-      //       "height": 0,
-      //       "originalImg": "string",
-      //       "smallImg": "string",
-      //       "sort": 0,
-      //       "width": 0
-      //     }
-      //   ],
-      //   "productStatus": 1,
-      //   "secCategoryId": 1,
-      //   "secCategoryName": "string",
-      //   "sendMode": 1,
-      //   "shareMoney": "100.01-200.01",
-      //   "skuList": [
-      //     {
-      //       "barCode": "2018102sdjhku2",
-      //       "originalPrice": 100,
-      //       "price": 10,
-      //       "prodCode": "P001",
-      //       "propertyValues": "金色,64G,全网通",
-      //       "sellStock": 10,
-      //       "skuCode": "Sku001",
-      //       "specImg": "https://mr-test-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/8a08ab77b6a34222bf27e3d6fae49db1.jpg",
-      //       "stockUnit": "件",
-      //       "weight": 1.25
-      //     }
-      //   ],
-      //   "specifyList": [
-      //     {
-      //       "specName": "颜色",
-      //       "specValues": [
-      //         {
-      //           "id": 1,
-      //           "oldSpecImg": "string",
-      //           "oldSpecValue": "string",
-      //           "specImg": "string",
-      //           "specName": "颜色",
-      //           "specValue": "金色"
-      //         }
-      //       ]
-      //     },
-      //     {
-      //       "specName": "规格",
-      //       "specValues": [
-      //         {
-      //           "id": 1,
-      //           "oldSpecImg": "string",
-      //           "oldSpecValue": "string",
-      //           "specImg": "string",
-      //           "specName": "颜色",
-      //           "specValue": "64G"
-      //         }
-      //       ]
-      //     },
-      //     {
-      //       "specName": "LEI",
-      //       "specValues": [
-      //         {
-      //           "id": 1,
-      //           "oldSpecImg": "string",
-      //           "oldSpecValue": "string",
-      //           "specImg": "string",
-      //           "specName": "颜色",
-      //           "specValue": "全网通"
-      //         },
-      //         {
-      //           "id": 1,
-      //           "oldSpecImg": "string",
-      //           "oldSpecValue": "string",
-      //           "specImg": "string",
-      //           "specName": "颜色",
-      //           "specValue": "全网通2"
-      //         }
-      //       ]
-      //     }
-      //   ],
-      //   "supplierCode": 1,
-      //   "supplierName": "string",
-      //   "thirdCategoryId": 1,
-      //   "thirdCategoryName": "string",
-      //   "upTime": "2018-12-01T03:24:28.537Z",
-      //   "videoUrl": "string"
-      // }
-    ], // 商品信息
+    productInfo: [], // 商品信息
     totalPage:'', // 页面总页数
     currentPage:1, // 当前的页数
     pageSize: 10, // 每次加载请求的条数 默认10 
@@ -247,10 +137,11 @@ Page({
     this.setData({
       selectType: e.detail
     })
+    console.log(this.data.selectType)
     let params = {
-      productId: this.data.selectType.productId,
+      productId: this.data.selectType.prodCode,
       amount: this.data.selectType.buyCount,
-      priceId: this.data.selectType.id,
+      priceId: this.data.selectType.skuCode,
       timestamp: new Date().getTime(),
       reqName: '加入购物车',
       url: Operation.addToShoppingCart
@@ -269,21 +160,15 @@ Page({
     Tool.showErrMsg(r)
     r.addToQueue();
   },
-  setStoragePrd(params, index) {
-    let list = Storage.getShoppingCart()
-    if (!list) {
-      list = []
-    } else {
-      for (let i = 0; i < list.length; i++) {
-        if (list[i].priceId === params.priceId) {
-          list[i].showCount += this.data.selectType.buyCount
-          this.updateStorageShoppingCart(list)
-          return
-        }
+  setStoragePrd(params) {
+    let list = Storage.getShoppingCart() || []
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].priceId === params.priceId) {
+        list[i].showCount += this.data.selectType.buyCount
+        this.updateStorageShoppingCart(list)
+        return
       }
     }
-    params.productId = this.data.selectType.productId
-    params.priceId = this.data.selectType.id
     params.showCount = this.data.selectType.buyCount
     list.push(params)
     this.updateStorageShoppingCart(list)
