@@ -106,6 +106,7 @@ Page({
     this.verifyPhone(params)
   },
   verifyPhone(params){
+    
     params = {
       ...params,
       reqName: '判断手机号是否已经注册',
