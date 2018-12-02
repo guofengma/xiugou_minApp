@@ -42,21 +42,6 @@ Page({
   onShow: function () {
 
   },
-  requestGetHotWordsListActive(){
-    API.getHotWordsListActive({
-      keyword: this.data.keyWord
-    }).then((res) => {
-      let datas = res.data || []
-      datas.forEach((item) => {
-        item.wordShowName = item.wordName.length > 10 ? item.wordName.slice(0, 10) + "..." : item.wordName
-      })
-      this.setData({
-        hotWords: datas
-      })
-    }).catch((res) => {
-
-    })
-  },
   getHotkeyword(e) {
     this.setData({
       keyWord: e.currentTarget.dataset.keyword,
@@ -72,7 +57,22 @@ Page({
       this.requestKeywords()
     }
   },
-  requestKeywords(){
+  requestGetHotWordsListActive() { // 获取热词
+    API.getHotWordsListActive({
+      // keyword: this.data.keyWord
+    }).then((res) => {
+      let datas = res.data || []
+      datas.forEach((item) => {
+        item.wordShowName = item.wordName.length > 10 ? item.wordName.slice(0, 10) + "..." : item.wordName
+      })
+      this.setData({
+        hotWords: datas
+      })
+    }).catch((res) => {
+
+    })
+  },
+  requestKeywords(){ // 动态获取搜索词
     API.getKeywords({
       keyword: this.data.keyWord
     }).then((res) => {
@@ -83,7 +83,7 @@ Page({
 
     })
   },
-  deleteKeyword(){
+  deleteKeyword() { // 删除搜索词
     if(this.data.door==1){
       Storage.setSearchOrderHistory(null)
     } else {
@@ -94,7 +94,7 @@ Page({
       historyArr:[]
     })
   },
-  searchKeyword(){
+  searchKeyword(){ // 查询关键字
     this.data.keyWord = String(this.data.keyWord).replace(/(^\s*)|(\s*$)/g, "")
     if (!Tool.isEmptyStr(this.data.keyWord)) {
       let keywords = this.data.history

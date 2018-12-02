@@ -247,6 +247,14 @@ export default class Storage {
     static getPayOrderList() {
       return this.getterFor('payOrderList');
     } 
+    // 提交订单的参数
+    static setSubmitOrderList(info) {
+      this.setterFor('submitOrderList', info)
+    }
+
+    static getSubmitOrderList() {
+      return this.getterFor('submitOrderList');
+    } 
     
     // getToken()
 

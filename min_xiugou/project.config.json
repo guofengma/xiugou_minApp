@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 25,
 			"list": [
 				{
 					"id": 0,
@@ -191,7 +191,7 @@
 					"id": 25,
 					"name": "礼包",
 					"pathName": "pages/product-detail/gift-bag-detail/gift-bag-detail",
-					"query": "giftBagId=TC201810130007"
+					"query": "giftBagId=TC201811290008"
 				},
 				{
 					"id": -1,

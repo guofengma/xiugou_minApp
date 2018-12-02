@@ -97,31 +97,28 @@ export default class ProductFactorys  {
   }
   addToShoppingCart() { // 加入购物车
     let params = {
-      productId: this.page.data.selectType.prodCode,
+      productCode: this.page.data.selectType.prodCode,
       amount: this.page.data.selectType.buyCount,
-      priceId: this.page.data.selectType.skuCode,
+      skuCode: this.page.data.selectType.skuCode,
       timestamp: new Date().getTime(),
-      reqName: '加入购物车',
-      url: Operation.addToShoppingCart
     }
     // 加入购物车
     if (!this.page.data.didLogin) {
       this.setStoragePrd(params)
       return
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    API.addToShoppingCart(params).then((res) => {
       this.getShoppingCartList()
       Event.emit('updateShoppingCart')
       Tool.showSuccessToast('添加成功')
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+
+    })
   }
   setStoragePrd(params, index) { // 加入本地购物车
     let list = Storage.getShoppingCart() || []
     for (let i = 0; i < list.length; i++) {
-      if (list[i].priceId === params.priceId) {
+      if (list[i].skuCode === params.skuCode) {
         list[i].showCount += this.page.data.selectType.buyCount
         this.updateStorageShoppingCart(list)
         return
@@ -142,21 +139,15 @@ export default class ProductFactorys  {
       this.getStorageCartList()
       return
     }
-    let params = {
-      reqName: '获取购物车',
-      url: Operation.getShoppingCartList,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      data = data === null ? [] : data
+    API.getShoppingCartList({}).then((res) => {
+      let data = res.data || []
       let size = data.length > 99 ? 99 : data.length
       this.page.setData({
         size: size
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+
+    })
   }
   cartClicked() { // 跳转购物车
     Tool.switchTab('/pages/shopping-cart/shopping-cart')

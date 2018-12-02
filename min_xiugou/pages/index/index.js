@@ -334,6 +334,7 @@ Page({
         adType =1
       }
       let page = this.data.pageArr[adType]+val;
+      console.log(adType, val,prodtype)
       Tool.navigateTo(page)
     },
     queryFeaturedList() {

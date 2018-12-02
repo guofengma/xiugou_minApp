@@ -1,7 +1,6 @@
 let { Tool, RequestFactory, Storage, Event, Operation,API } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
-// import ProductFac from './temp/product.js'
 import ProductFactorys from './temp/product.js'
 const app = getApp()
 Page({
@@ -29,7 +28,6 @@ Page({
   onLoad: function (options) {
     this.setData({
       productCode: options.productId || options.prodCode || '',
-      // prodCode: options.prodCode || '',
       door: options.door || '',
       inviteId: options.inviteId || ''
     })
@@ -45,7 +43,7 @@ Page({
   initRequest(){
     let callBack2 = (datas) => {
       if (datas.productStatus!=0){
-        this.activityByProductId(this.data.productId)
+        this.activityByProductId(this.data.productCode)
       }else{
         this.ProductFactory.productDefect()
       }
@@ -70,39 +68,14 @@ Page({
     //   }
     // }
   },
-  setStoragePrd(params,index){
-    let list = Storage.getShoppingCart() || []
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].priceId === params.priceId) {
-        list[i].showCount += this.data.productBuyCount
-        this.updateStorageShoppingCart(list)
-        return
-      }
-    }
-    params.showCount = this.data.productBuyCount
-    list.push(params)
-    this.updateStorageShoppingCart(list)
-  },
-  updateStorageShoppingCart(list){
-    Storage.setShoppingCart(list)
-    this.getShoppingCartList()
-    Tool.showSuccessToast('添加成功')
-    Event.emit('updateStorageShoppingCart')
-  },
-  activityByProductId(productId) {
-
-    let params = {
-      productId: productId,
-      reqName: '获取是否是活动产品',
-      url: Operation.activityByProductId,
-      requestMethod: 'GET',
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
-      if(!datas) return
-      if (datas.activityType == 1 || datas.activityType == 2 ){
-        let proNavData =datas.activityType == 1 ? datas.seckill : datas.depreciate
+  activityByProductId(productCode) {
+    API.activityByProductId({
+      productCode: productCode
+    }).then((res) => {
+      let datas = res.data
+      if (!datas) return
+      if (datas.activityType == 1 || datas.activityType == 2) {
+        let proNavData = datas.activityType == 1 ? datas.seckill : datas.depreciate
         proNavData.originalPrice = this.data.productInfo.originalPrice
         this.setData({
           proNavData: datas.activityType == 1 ? datas.seckill : datas.depreciate,
@@ -110,14 +83,41 @@ Page({
           promotionDesc: {
             commingDesc: '',
             countdownDesc: '',
-            typeDesc: datas.activityType == 1 ? '秒杀价':"起拍价"
+            typeDesc: datas.activityType == 1 ? '秒杀价' : "起拍价"
           },
         })
-       this.selectComponent('#promotion').init();
+        this.selectComponent('#promotion').init();
       }
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+
+    })
+    // let params = {
+    //   productId: productId,
+    //   reqName: '获取是否是活动产品',
+    //   url: Operation.activityByProductId,
+    //   requestMethod: 'GET',
+    // }
+    // let r = RequestFactory.wxRequest(params);
+    // r.successBlock = (req) => {
+    //   let datas = req.responseObject.data
+    //   if(!datas) return
+    //   if (datas.activityType == 1 || datas.activityType == 2 ){
+    //     let proNavData =datas.activityType == 1 ? datas.seckill : datas.depreciate
+    //     proNavData.originalPrice = this.data.productInfo.originalPrice
+    //     this.setData({
+    //       proNavData: datas.activityType == 1 ? datas.seckill : datas.depreciate,
+    //       activityType: datas.activityType,
+    //       promotionDesc: {
+    //         commingDesc: '',
+    //         countdownDesc: '',
+    //         typeDesc: datas.activityType == 1 ? '秒杀价':"起拍价"
+    //       },
+    //     })
+    //    this.selectComponent('#promotion').init();
+    //   }
+    // };
+    // Tool.showErrMsg(r)
+    // r.addToQueue();
   },
   groupClicked(){
     Tool.navigateTo('/pages/web-view/web-view?webType=3')
@@ -143,31 +143,11 @@ Page({
       }],
       orderType:99
     }
+    Storage.setSubmitOrderList(params)
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params)+'&type=99' )
   },
   addToShoppingCart(){
     this.ProductFactory.addToShoppingCart()
-    // let params = {
-    //   productId: this.data.selectType.prodCode,
-    //   amount: this.data.productBuyCount,
-    //   priceId: this.data.selectType.skuCode,
-    //   timestamp: new Date().getTime(),
-    //   reqName: '加入购物车',
-    //   url: Operation.addToShoppingCart
-    // }
-    // // 加入购物车
-    // if (!this.data.didLogin) {
-    //   this.setStoragePrd(params)
-    //   return
-    // }
-    // let r = RequestFactory.wxRequest(params);
-    // r.successBlock = (req) => {
-    //   this.getShoppingCartList()
-    //   Event.emit('updateShoppingCart')
-    //   Tool.showSuccessToast('添加成功')
-    // };
-    // Tool.showErrMsg(r)
-    // r.addToQueue();
   },
   typeSubClicked(e){
     this.setData({

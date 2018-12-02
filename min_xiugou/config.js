@@ -4,19 +4,18 @@ const config = {
   h5webUrl: 'https://testh5.sharegoodsmall.com',
   // baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
   // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
-  baseUrl: 'http://172.16.10.42:4090/gateway',  // 蒋
+  // baseUrl: 'http://172.16.10.42:4090/gateway',  // 蒋
   // baseUrl: 'http://172.16.10.29:8903/gateway',  // 周
   // baseUrl:'http://172.16.10.238:8903/gateway',  // 高
   // baseUrl:'http://172.16.10.56:8903/gateway',  // 沈
   // baseUrl: 'http://172.16.10.41:8903/gateway',  // 张
-  // baseUrl: 'http://172.16.10.12:8180/gateway',  // 杨
+  baseUrl: 'http://172.16.10.12:8180/gateway',  // 杨
   // baseUrl: 'http://172.16.10.19:8903/gateway',  // 吴
   // baseUrl: 'http://172.16.10.88:8903/gateway',  // 陈
   // baseUrl: 'http://172.16.10.111:8903/gateway',  // 王
   // baseUrl: 'http://zhifu.dnvhot.tech', // 吴
   // baseUrl: 'http://172.16.10.21:8080/gateway', // 申
   wxVersion: 'V2.2.5', // 微信小程序版本
-  BaiduMapKey: 'BazNALkeiEEMMvZjWmPeXlRqOyd0BlnL',
   AppId: 'wxa059b818226f8679',//小程序AppID
   Secret: '9fa19f4d1f7e37d318dba14f951f1b4c',//小程序Secret
   imgSizeParams:{
