@@ -9,7 +9,7 @@ Component({
     isInit:Boolean,
     commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包 5 换货
     exchangeNum:Number, // 换货的数量
-    specIds: Array,
+    specIds: String,
     productPriceId:Number, // 换货的价格id
   },
   data: {
@@ -60,7 +60,7 @@ Component({
         //   priceList.push(item)
         // }
         // 降价拍和秒杀
-        if ((this.data.commodityType == 2 || this.data.commodityType == 3) && item.propertyValues == this.data.specIds.join('@')){
+        if ((this.data.commodityType == 2 || this.data.commodityType == 3) && item.skuCode == this.data.specIds){
           priceList.push(item)
         }
       })

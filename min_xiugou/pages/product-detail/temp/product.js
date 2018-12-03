@@ -18,6 +18,7 @@ export default class ProductFactorys  {
       } else {
         datas.canUserBuy = true
       }
+      datas.content = datas.content || ''
       datas.showContent = datas.content.split(',')
       this.page.setData({
         isInit: false,
@@ -180,6 +181,45 @@ export default class ProductFactorys  {
   }
   productDefect(){ // 跳转到产品缺失页面
     Tool.redirectTo('/pages/product-detail/temp/defect/defect')
+  }
+  setTip(activityType) {
+    let userInfo = Storage.getUserAccountInfo();
+    let prop = this.page.data.proNavData;
+    let params = {
+      activityId: prop.id,
+      activityType: activityType, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
+      type: 1, // 1订阅 0 取消订阅
+      userId: userInfo.id
+    }
+    API.addActivitySubscribe(params).then((res) => {
+      let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
+      wx.showToast({
+        title: title,
+        icon: 'none',
+        duration: 3000
+      })
+      this.page.setData({
+        promotionFootbar: {
+          className: 'footbar-disabled',
+          text: '活动开始前3分钟提醒',
+          textSmall: '',
+          disabled: true
+        },
+        "proNavData.notifyFlag": 1
+      })
+    }).catch((res) => {
+
+    })
+  }
+  refactorProductsData(originData = []) {
+    let newData = [];
+    originData.forEach(function (item) {
+      newData.push({
+        specName: item.specName,
+        specValues:[item],
+      })
+    })
+    return newData;
   }
   goTop() { // 置顶
     if (wx.pageScrollTo) {

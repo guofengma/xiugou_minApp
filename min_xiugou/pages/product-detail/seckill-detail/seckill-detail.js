@@ -33,7 +33,6 @@ Page({
     screenShow: false, // 用于判断是否锁屏
   },
   onLoad: function (options) {
-    console.log(options)
     this.setData({
       prodCode: options.code
     })
@@ -62,7 +61,8 @@ Page({
       code: this.data.prodCode,
     }).then((res) => {
       let data = res.data || {};
-      let productSpec = this.refactorProductsData(data.productSpecValue);
+      // 根据降价拍返回的sku数据生成sku选择组件所需数据
+      let productSpec = this.ProductFactory.refactorProductsData(data.productSpecValue || []);
       let jumpTimer = null;
       if (data.status >= 4 && data.type == 1) {//type是否为隐藏类目，非隐藏要跳转  1：显示 2：隐藏
         jumpTimer = setTimeout(() => {
@@ -70,11 +70,6 @@ Page({
           Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + data.prodCode)
         }, 5000)
       }
-      // let specIds = []
-      // data.productSpecValue.forEach((item) => {
-      //   specIds.push(item.id)
-      // })
-      // specIds = Tool.bubbleSort(specIds)
       this.setData({
         proNavData: data,
         specIds: data.skuCode,
@@ -93,123 +88,11 @@ Page({
       }
       this.ProductFactory.requestFindProductByIdApp(callBack)
     }).catch((res) => {
-
+      console.log(res)
     })
-    // let params = {
-    //   code: code,
-    //   reqName: '获取秒杀详情',
-    //   url: Operation.getActivitySeckillById,
-    //   requestMethod: 'GET'
-    // }
-    // let r = RequestFactory.wxRequest(params);
-    // r.successBlock = (req) => {
-    //   let data = req.responseObject.data || {};
-    //   let productSpec = this.refactorProductsData(data.productSpecValue);
-    //   let jumpTimer = null; 
-    //   if (data.status >= 4 && data.type == 1) {//type是否为隐藏类目，非隐藏要跳转  1：显示 2：隐藏
-    //     jumpTimer = setTimeout(() => {
-    //       //跳转到普通详情页
-    //       Tool.navigateTo('/pages/product-detail/product-detail?productId=' + data.productId)
-    //     }, 5000)
-    //   }
-    //   let specIds= []
-    //   data.productSpecValue.forEach((item)=>{
-    //     specIds.push(item.id)
-    //   })
-    //   specIds = Tool.bubbleSort(specIds)
-    //   this.setData({
-    //     proNavData: data,
-    //     specIds: specIds,
-    //     jumpCommonProductTimer: jumpTimer,
-    //     productId: data.productId
-    //   })
-    //   if (data.productStatus == 0) { // 商品走丢了 删除了
-    //     this.ProductFactory.productDefect()
-    //   }
-    //   let callBack = () => {
-    //     this.setData({
-    //       productSpec: productSpec, // 规格描述
-    //     })
-    //     this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
-    //     data.id && this.selectComponent('#promotion').init();
-    //   }
-    //   this.ProductFactory.requestFindProductByIdApp(callBack)
-     
-    // };
-    // Tool.showErrMsg(r)
-    // r.addToQueue();
-  },
-  // 根据降价拍返回的sku数据生成sku选择组件所需数据
-  refactorProductsData(originData = []) {
-    let newData = {};
-    originData.forEach(function (item) {
-      newData[item.specName] = [];
-      newData[item.specName].push({
-        id: item.id,
-        specName: item.specName,
-        specValue: item.specValue,
-      })
-    })
-    return newData;
   },
   setTip: function () {
-    let userInfo = Storage.getUserAccountInfo();
-    let prop = this.data.proNavData;
-    let params = {
-      activityId: prop.id,
-      activityType: 1, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
-      type: 1, // 1订阅 0 取消订阅
-      userId: userInfo.id
-    }
-    API.getRichItemList(params).then((res) => {
-      let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
-      wx.showToast({
-        title: title,
-        icon: 'none',
-        duration: 3000
-      })
-      this.setData({
-        promotionFootbar: {
-          className: 'footbar-disabled',
-          text: '活动开始前3分钟提醒',
-          textSmall: '',
-          disabled: true
-        },
-        "proNavData.notifyFlag": 1
-      })
-    }).catch((res) => {
-
-    })
-    // let params = {
-    //   reqName: '订阅提醒',
-    //   url: Operation.addActivitySubscribe,
-    //   activityId: prop.id,
-    //   activityType: 1, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
-    //   type: 1, // 1订阅 0 取消订阅
-    //   userId: userInfo.id
-    // }
-    // let r = RequestFactory.wxRequest(params);
-    // r.successBlock = (req) => {
-      
-    //   let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
-    //   wx.showToast({
-    //     title: title,
-    //     icon: 'none',
-    //     duration: 3000
-    //   })
-    //   this.setData({
-    //     promotionFootbar: {
-    //       className: 'footbar-disabled',
-    //       text: '活动开始前3分钟提醒',
-    //       textSmall: '',
-    //       disabled: true
-    //     },
-    //     "proNavData.notifyFlag": 1
-    //   })
-    // };
-    // Tool.showErrMsg(r)
-    // r.addToQueue();
-    
+    this.ProductFactory.setTip(1)
   },
   //根据不同状态有不同的事情处理
   footbarReady(e) {

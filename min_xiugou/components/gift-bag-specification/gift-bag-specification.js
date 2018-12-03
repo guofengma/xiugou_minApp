@@ -28,10 +28,9 @@ Component({
       let priceList = []
       isActive.forEach((item, index) => {
         productType.push(item.specValues)  
-        // item.num=1
         priceList.push({
-          productId: item.productId,
-          priceId: item.productPriceId,
+          prodCode: item.prodCode,
+          skuCode: item.skuCode,
           num:1,
           sourceId: item.id,
           specImg: item.specImg,

@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation,API } = global
+let { Tool, Storage, Event,API } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
 import ProductFactorys from '../temp/product.js'
@@ -71,12 +71,8 @@ Page({
           Tool.navigateTo('/pages/product-detail/product-detail?prodCode==' + data.prodCode)
         }, 5000)
       }
-      // let specIds = []
-      // data.productSpecValue.forEach((item) => {
-      //   specIds.push(item.id)
-      // })
-      // specIds = Tool.bubbleSort(specIds)
-      let productSpec = this.refactorProductsData(data.productSpecValue);
+      // 根据降价拍返回的sku数据生成sku选择组件所需数据
+      let productSpec = this.ProductFactory.refactorProductsData(data.productSpecValue || []);
       this.setData({
         proNavData: data,
         specIds: data.skuCode,
@@ -143,47 +139,8 @@ Page({
     // Tool.showErrMsg(r)
     // r.addToQueue();
   },
-  // 根据降价拍返回的sku数据生成sku选择组件所需数据
-  refactorProductsData(originData = []) {
-    let newData = {};
-    originData.forEach(function (item) {
-      newData[item.specName] = [];
-      newData[item.specName].push({
-        id: item.id,
-        specName :item.specName,
-        specValue : item.specValue,
-      })
-    })
-    return newData;
-  },
   setTip: function () {
-    let userInfo = Storage.getUserAccountInfo();
-    let prop = this.data.proNavData;
-    let params = {
-      activityId: prop.id,
-      activityType: 2, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
-      type: 1, // 1订阅 0 取消订阅
-      userId: userInfo.id
-    }
-    API.getRichItemList(params).then((res) => {
-      let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
-      wx.showToast({
-        title: title,
-        icon: 'none',
-        duration: 3000
-      })
-      this.setData({
-        promotionFootbar: {
-          className: 'footbar-disabled',
-          text: '活动开始前3分钟提醒',
-          textSmall: '',
-          disabled: true
-        },
-        "proNavData.notifyFlag": 1
-      })
-    }).catch((res) => {
-
-    })
+    this.ProductFactory.setTip(2)
     // let params = {
     //   reqName: '订阅提醒',
     //   url: Operation.addActivitySubscribe,

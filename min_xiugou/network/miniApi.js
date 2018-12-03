@@ -107,7 +107,7 @@ const api =
     }
   ],
   'activityByProductId': [
-    '/operator/activity/queryByProductId',
+    '/operator/activity/queryByProductCode',
     {
       "action": "获取是否是活动产品",
       "method": "get",
