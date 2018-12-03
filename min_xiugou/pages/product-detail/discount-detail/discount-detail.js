@@ -141,34 +141,6 @@ Page({
   },
   setTip: function () {
     this.ProductFactory.setTip(2)
-    // let params = {
-    //   reqName: '订阅提醒',
-    //   url: Operation.addActivitySubscribe,
-    //   activityId: prop.id,
-    //   activityType: 2, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
-    //   type: 1, // 1订阅 0 取消订阅
-    //   userId: userInfo.id
-    // }
-    // let r = RequestFactory.wxRequest(params);
-    // r.successBlock = (req) => {
-    //   let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
-    //   wx.showToast({
-    //     title: title,
-    //     icon: 'none',
-    //     duration: 3000
-    //   })
-    //   this.setData({
-    //     promotionFootbar: {
-    //       className: 'footbar-disabled',
-    //       text: '活动开始前3分钟提醒',
-    //       textSmall: '',
-    //       disabled: true
-    //     },
-    //     "proNavData.notifyFlag": 1
-    //   })
-    // };
-    // Tool.showErrMsg(r)
-    // r.addToQueue();
   },
   //根据不同状态有不同的事情处理
   footbarReady(e) {
@@ -177,7 +149,6 @@ Page({
     if (data.proNavData.status === 1) {
       this.setTip();
     } else {
-      // console.log(this.data.productSpec)
       this.btnClicked(e);
     }
   },

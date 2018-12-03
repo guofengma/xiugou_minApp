@@ -11,7 +11,7 @@ export default class ApiUtils {
     // 请求队列,若当前请求并发量已经超过maxLimit,则将该请求加入到请求队列中
     this.requestQueue = [];
     //当前尝试的次数
-    this.tryCount = 0;
+    this.tryCount = 1;
     //最多尝试重发请求的次数
     this.maxTryCount = 2;
     // 当前并发量数目
@@ -87,7 +87,7 @@ export default class ApiUtils {
             count: that.tryCount,
           })
           that.tryCount++;
-          if (that.tryCount < that.maxTryCount) {
+          if (that.tryCount <= that.maxTryCount) {
             that.result[name]()
           } else {
             global.Tool.showAlert('请求失败，请稍后重试')

@@ -91,33 +91,6 @@ Page({
     }).catch((res) => {
 
     })
-    // let params = {
-    //   productId: productId,
-    //   reqName: '获取是否是活动产品',
-    //   url: Operation.activityByProductId,
-    //   requestMethod: 'GET',
-    // }
-    // let r = RequestFactory.wxRequest(params);
-    // r.successBlock = (req) => {
-    //   let datas = req.responseObject.data
-    //   if(!datas) return
-    //   if (datas.activityType == 1 || datas.activityType == 2 ){
-    //     let proNavData =datas.activityType == 1 ? datas.seckill : datas.depreciate
-    //     proNavData.originalPrice = this.data.productInfo.originalPrice
-    //     this.setData({
-    //       proNavData: datas.activityType == 1 ? datas.seckill : datas.depreciate,
-    //       activityType: datas.activityType,
-    //       promotionDesc: {
-    //         commingDesc: '',
-    //         countdownDesc: '',
-    //         typeDesc: datas.activityType == 1 ? '秒杀价':"起拍价"
-    //       },
-    //     })
-    //    this.selectComponent('#promotion').init();
-    //   }
-    // };
-    // Tool.showErrMsg(r)
-    // r.addToQueue();
   },
   groupClicked(){
     Tool.navigateTo('/pages/web-view/web-view?webType=3')
