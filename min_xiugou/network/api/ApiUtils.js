@@ -59,6 +59,7 @@ export default class ApiUtils {
           that.currentConcurrent++;
           const response = await HttpUtils[method](url, params, config);
           console.log(`------------------ 请求结束:${action}`)
+          console.log(response.code)
           if (response.code === 0 || response.code === 10000) {
             return Promise.resolve(response);
           } else {

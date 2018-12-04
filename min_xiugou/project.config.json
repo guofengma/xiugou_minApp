@@ -59,7 +59,7 @@
 					"id": 3,
 					"name": "降价拍详情页",
 					"pathName": "pages/product-detail/discount-detail/discount-detail",
-					"query": "code=JJP1812030002"
+					"query": "code=JJP1812030003"
 				},
 				{
 					"id": -1,

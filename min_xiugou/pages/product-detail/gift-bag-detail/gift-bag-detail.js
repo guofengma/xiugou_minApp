@@ -116,6 +116,7 @@ Page({
 
       // this.selectComponent("#productInfos").initDatas()
     }).catch((res) => {
+      console.log(res)
       let callBack =()=>{}
       if (res.code == 604) { // 超时登录
         callBack = () => {

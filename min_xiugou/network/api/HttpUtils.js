@@ -49,7 +49,7 @@ export default class HttpUtils {
           reject(res.data);
         },
         complete: function (res) {
-          console.log(res.data)
+          // console.log(res.data)
         }
       });
     }) 

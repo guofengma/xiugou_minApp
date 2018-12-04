@@ -116,7 +116,7 @@ const api =
   ],
   /***************** 营销模块********************** */
   'getActivityDepreciateById': [
-    '/operator/activityDepreciate/findById',
+    '/operator/activityDepreciate/findByCode',
     {
       "action": "获取降价拍详情",
       "method": "get",
@@ -136,9 +136,10 @@ const api =
   'getGiftBagDetail': [
     '/operator/activitypackage/findActivityPackageDetail',
     {
-      "action": "礼包详情",
+      "action": "获取秒杀详情",
       "method": "get",
       "encrypt": false,
+      'isShowLoading': false,
     }
   ],
   'addActivitySubscribe': [ //  type: 1,  1订阅 0 取消订阅

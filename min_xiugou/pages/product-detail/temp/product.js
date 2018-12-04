@@ -214,6 +214,8 @@ export default class ProductFactorys  {
   refactorProductsData(originData = []) {
     let newData = [];
     originData.forEach(function (item) {
+      item.specName = item.paramName
+      item.specValue = item.paramValue,
       newData.push({
         specName: item.specName,
         specValues:[item],

@@ -19,12 +19,12 @@ Page({
     })
     if (options.webUrl){
       this.setData({
-        url: this.data.webUrl + options.webUrl + '?_=' + new Date().getTime()
+        url: this.data.webUrl + options.webUrl + '?time=' + new Date().getTime() + '&token=' + Storage.getToken()
       })
     }
     if (options.webType){
       this.setData({
-        url: this.data.webUrl + this.data.arr[options.webType]+ '?_=' + new Date().getTime()
+        url: this.data.webUrl + this.data.arr[options.webType] + '?time=' + new Date().getTime() + '&token=' + Storage.getToken()
       })
     }else{
       let callBack = () => {
