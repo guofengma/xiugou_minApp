@@ -45,8 +45,8 @@ export default class ApiUtils {
     });
     that.list.forEach(function (item) {
       let name = item.name, url = item.uri, method = item.method || 'post', action = item.action, myConfig = item.config || {}
-      that.result[name] = async function (params,config={}) {
-        Object.assign(config, config, myConfig)
+      that.result[name] = async function (params,reqConfig={}) {
+        Object.assign(reqConfig, reqConfig, myConfig)
         // 若当前请求数并发量超过最大并发量限制，则将其阻断在这里。
         // startBlocking会返回一个promise，并将该promise的resolve函数放在this.requestQueue队列里。这样的话，除非这个promise被resolve,否则不会继续向下执行。
         // 当之前发出的请求结果回来/请求失败的时候，则将当前并发量-1,并且调用this.next函数执行队列中的请求
@@ -57,9 +57,9 @@ export default class ApiUtils {
         const app = getApp();
         try {
           that.currentConcurrent++;
-          const response = await HttpUtils[method](url, params, config);
+          const response = await HttpUtils[method](url, params, reqConfig);
           console.log(`------------------ 请求结束:${action}`)
-          console.log(response.code)
+          // console.log( typeof response)
           if (response.code === 0 || response.code === 10000) {
             return Promise.resolve(response);
           } else {

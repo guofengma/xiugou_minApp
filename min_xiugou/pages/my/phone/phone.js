@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event, Storage, Operation} = global;
+let { Tool, API, Event, Storage} = global;
 Page({
   data: {
     ysf: { title: '修改手机号' },
@@ -41,22 +41,33 @@ Page({
       verificationCode: this.data.code,
       oldVerificationCode: this.data.oldCode,
       phone: this.data.phone,
-      reqName: '修改手机账号',
-      url: Operation.updateDealerNewPhone
+      // reqName: '修改手机账号',
+      // url: Operation.updateDealerNewPhone
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    API.updateDealerNewPhone(params).then((res) => {
+      this.cancel();
       let infos = Storage.getUserAccountInfo()
       infos.phone = this.data.phone
       Storage.setUserAccountInfo(infos)
       Event.emit('refreshMemberInfoNotice');
       Tool.redirectTo('../account/account')
-    };
-    r.completeBlock = (req) => {
+    }).catch((res) => {
       this.cancel();
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+      console.log(res)
+    })
+    // let r = RequestFactory.wxRequest(params);
+    // r.successBlock = (req) => {
+    //   let infos = Storage.getUserAccountInfo()
+    //   infos.phone = this.data.phone
+    //   Storage.setUserAccountInfo(infos)
+    //   Event.emit('refreshMemberInfoNotice');
+    //   Tool.redirectTo('../account/account')
+    // };
+    // r.completeBlock = (req) => {
+    //   this.cancel();
+    // }
+    // Tool.showErrMsg(r)
+    // r.addToQueue();
   },
   // 取消
   cancel() {
@@ -79,22 +90,30 @@ Page({
         Tool.showAlert("请输入正确的手机号");
         return
     }
+    
     let params = {
       code: 'MOBILE_VERIFYNEWPHONE_CODE',
       phone: this.data.phone,
-      reqName: '发送短信',
-      url: Operation.sendMessage
+      // reqName: '发送短信',
+      // url: Operation.sendMessage
     }
     
     let callBack = () => {
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
+      API.sendMessage(params).then((res) => {
         wx.showToast({
-            title: '验证码已发送',
+          title: '验证码已发送',
         })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      });
+      // let r = RequestFactory.wxRequest(params);
+      // r.successBlock = (req) => {
+      //   wx.showToast({
+      //       title: '验证码已发送',
+      //   })
+      // };
+      // Tool.showErrMsg(r)
+      // r.addToQueue();
     }
     Tool.codeEnable(this, callBack)
   },

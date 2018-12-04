@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation,Event } = global;
+let { Tool, RequestFactory, Storage, Operation, Event, API } = global;
 const app = getApp()
 Page({
   data: {
@@ -195,20 +195,15 @@ Page({
       showSecond: true
     });
     this.countdown(this);
-    let params = {
+    API.sendMessage({
       phone: this.data.phone,
-      reqName: '发送短信',
-      url: Operation.sendMessage,
-      requestMethod: 'GET',
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock= (req) => {
+    }).then((res) => {
       wx.showToast({
         title: '验证码已发送',
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   countdown: function (that) { // 倒计时
     let second = that.data.second;

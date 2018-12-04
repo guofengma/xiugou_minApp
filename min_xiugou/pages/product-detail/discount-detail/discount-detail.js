@@ -58,7 +58,7 @@ Page({
       screenShow: !this.data.screenShow
     })
   },
-  //获取专题活动数据  JJP201810100001
+  //获取专题活动数据 
   getTopicActivityData(code) {
     API.getActivityDepreciateById({
       code: code,
@@ -93,51 +93,6 @@ Page({
     }).catch((res) => {
 
     })
-    // let params = {
-    //   code: code,
-    //   reqName: '获取降价拍详情',
-    //   url: Operation.getActivityDepreciateById,
-    //   requestMethod: 'GET'
-    // }
-
-    // let r = RequestFactory.wxRequest(params);
-    // r.successBlock = (req) => {
-    //   let data = req.responseObject.data || {}; 
-    //   let jumpTimer = null; 
-    //   if (data.status >= 4 && data.type == 1) {//type是否为隐藏类目，非隐藏要跳转  1：显示 2：隐藏
-    //     jumpTimer = setTimeout(() => {
-    //       //跳转到普通详情页
-    //       Tool.navigateTo('/pages/product-detail/product-detail?productId=' + data.productId)
-    //     }, 5000)
-    //   }
-    //   let specIds = []
-    //   data.productSpecValue.forEach((item) => {
-    //     specIds.push(item.id)
-    //   })
-    //   specIds = Tool.bubbleSort(specIds)
-    //   let productSpec = this.refactorProductsData(data.productSpecValue);
-    //   this.setData({
-    //     proNavData: data,
-    //     specIds: specIds,
-    //     jumpCommonProductTimer: jumpTimer,
-    //     productId: data.productId
-    //   })
-    //   if (data.productStatus == 0){ // 商品走丢了 删除了
-    //     this.ProductFactory.productDefect()
-    //   }
-    //   let callBack = ()=>{
-    //     this.setData({
-    //       productSpec: productSpec, // 规格描述
-    //     })
-    //     this.selectComponent('#promotionFootbar').checkPromotionFootbarInfo(this.data.promotionFootbar, this.data.proNavData);
-    //     data.id && this.selectComponent('#promotion').init();
-    //   }
-    //   this.ProductFactory.requestFindProductByIdApp(callBack)
-      
-      
-    // };
-    // Tool.showErrMsg(r)
-    // r.addToQueue();
   },
   setTip: function () {
     this.ProductFactory.setTip(2)

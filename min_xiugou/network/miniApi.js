@@ -11,6 +11,51 @@ const api =
       "encrypt": false
     }
   ],
+  /***************************** 短信 ************************ */
+  /* 统一的短信接口
+        1. code对应传递值-------> 用户注册：MOBILE_REGISTRATION_CODE 
+        手机验证码登录：MOBILE_CODELOGIN_CODE 
+        设置交易密码：MOBILE_SETDEALPASSWORD_CODE 
+        忘记交易密码：MOBILE_FORGETDEALPASSWORD_CODE 
+        手机号修改验证旧手机：MOBILE_VERIFYAULDPHONE_CODE 
+        手机号修改绑定新手机：MOBILE_VERIFYNEWPHONE_CODE
+        登录时忘记密码：MOBILE_FORGETPASSWORD_CODE
+        2. phone:string
+        2018年10月18日接口修改 短信接口只需传phone即可  @ydg
+  */
+  'sendMessage': [
+    '/sms/sendRegMessage',
+    {
+      "action": "获取验证码",
+      "method": "get",
+      "encrypt": true,// 是否加签
+    }
+  ],
+  /***************************** 设置 ************************ */
+  'updateDealerPhoneById': [
+    '/user/judgePhoneCode',
+    {
+      "action": "验证旧手机短信是否正确",
+      "method": "post",
+      "encrypt": false,// 是否加签
+    }
+  ],
+  'updateDealerNewPhone': [
+    '/user/updatePhone',
+    {
+      "action": "修改手机号",
+      "method": "post",
+      "encrypt": false,// 是否加签
+    }
+  ],
+  'exitLogin': [
+    '/user/userLogin/signOut',
+    {
+      "action": "退出登录",
+      "method": "get",
+      "encrypt": false,// 是否加签
+    }
+  ],
   /***************************** 注册 ************************ */
   'queryAdList':[
     '/config/advertisement/queryAdvertisementList',
