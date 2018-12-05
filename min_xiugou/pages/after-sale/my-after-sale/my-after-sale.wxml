@@ -20,7 +20,7 @@
           </view>
           <view>{{item.typeName+item.typeState}}</view>
         </view>
-        <view class='after-sale-btn flexR font-26' catchtap='goPage' data-prdid='{{item.returnProductId}}' data-id='{{item.type}}'>查看详情</view> 
+        <view class='after-sale-btn flexR font-26' catchtap='goPage' data-prdid='{{item.serviceNo}}' data-id='{{item.type}}'>查看详情</view> 
       </view>
     </block>
   </scroll-view>

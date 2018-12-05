@@ -1,5 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation} = global;
-//this.selectComponent("#prd-info-type").isVisiableClicked()
+let { Tool, API, Storage} = global;
 Page({
   data: {
     ysf: { title: '申请售后' },
@@ -59,7 +58,7 @@ Page({
     this.setData({
       refundType: options.refundType,
       list: Storage.getInnerOrderList() || '',
-      returnProductId: options.returnProductId || '',
+      serviceNo: options.serviceNo || '',
       placeholder: { placeholder: placeholder, disabled: false }
     })
     Tool.isIPhoneX(this) 
@@ -67,22 +66,22 @@ Page({
   },
   initData(){
     let list = this.data.list
-    if (this.data.returnProductId) {
+    if (this.data.serviceNo) {
       let imgList = list.imgList || []
       imgList.forEach((item) => {
         this.data.originalImg.push(item.originalImg)
         this.data.smallImg.push(item.smallImg)
       })
       this.setData({
-        selectType:{
-          id: list.exchangePriceId || '',
-          spec: list.exchangeSpec || '',
-          specImg: list.exchangeSpecImg || '',
-        },
+        // selectType:{
+        //   id: list.exchangePriceId || '',
+        //   spec: list.exchangeSpec || '',
+        //   specImg: list.exchangeSpecImg || '',
+        // },
         originalImg: this.data.originalImg,
         smallImg: this.data.smallImg,
-        remark: list.remark,
-        returnReason:list.returnReason
+        remark: list.remark || '',
+        returnReason:list.returnReason || ''
       })
       this.selectComponent("#update-img").initData()
     }
@@ -93,45 +92,45 @@ Page({
     this.queryDictionaryDetailsType(this.data.refundType)
   },
   queryDictionaryDetailsType(refundType){
-    let params = {
+    API.queryDictionaryDetailsType({
       code: this.data.queryReasonParams[refundType],
-      reqName: '获取数字字典',
-      requestMethod: 'GET',
-      url: Operation.queryDictionaryDetailsType
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock= (req) => {
-      let datas = req.responseObject.data || []
-     
-      if (this.data.returnReason){
-        datas.forEach((item,index)=>{
-          if(item.value==this.data.returnReason){
+    }).then((res) => {
+      let datas = res.data || []
+      if (this.data.returnReason) {
+        datas.forEach((item, index) => {
+          if (item.value == this.data.returnReason) {
             this.setData({
-              activeIndex:index
+              activeIndex: index
             })
             this.selectComponent('#chooseReason').setIndex(index);
           }
         })
       }
-      this.data.reason[refundType].list = req.responseObject.data
+      this.data.reason[refundType].list = datas
       this.setData({
         reason: this.data.reason
       })
+    }).catch((res) => {
+      console.log(res)
+    });
+  },
+  changeApplyAmoun(e){
+    let applyRefundAmount = e.detail.value
+    let totalAmount = this.data.orderInfos.totalAmount
+    if (applyRefundAmount > totalAmount){
+      Tool.showAlert(`最多只能申请${totalAmount}元`)
+      applyRefundAmount = totalAmount
     }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    this.setData({
+      applyRefundAmount: applyRefundAmount
+    })
   },
   findOrderProductInfo(){
-    let params = {
-      orderProductId: this.data.list.id,
-      reqName: '查看申请退款子订单详情',
-      url: Operation.findOrderProductInfo,
-      requestMethod: 'GET'
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      if (data.status != 1 && data.returnProductId) {
+    API.afterSaleOrderDetail({
+      orderProductNo: this.data.list.orderProductNo
+    }).then((res) => {
+      let data = res.data || {}
+      if (data.status != 1 && data.serviceNo) {
         let callBack = ()=>{
           Tool.redirectTo('/pages/my/my-order/my-order')
         }
@@ -144,10 +143,12 @@ Page({
           orderInfos: data
         })
       }
-      
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+      this.setData({
+        orderInfos: data
+      })
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   chooseReason(){
     this.setData({
@@ -179,51 +180,31 @@ Page({
     //   return
     // }
     let list = this.data.list
-    let url = ''
-    let reqName = ''
-    if (this.data.refundType==0){
-      url = Operation.orderRefund
-      reqName = '申请仅退款'
-    } else if (this.data.refundType == 1) {
-      url = Operation.applyReturnGoods
-      reqName = '申请退货'
-    } else {
-      url = Operation.applyExchangeProduct
-      reqName = '申请换货'
-    }
-    if (this.data.returnProductId) {
-      url = Operation.updateApply
-      reqName = '修改退换货申请'
-    }
     let imgList = []
-    
     this.data.originalImg.forEach((item,index)=>{
       imgList.push({
-        // height:item.height,
-        // width:
         originalImg:item,
         smallImg: this.data.smallImg[index]
       })
     })
     let params = {
-      exchangePriceId: this.data.selectType.id || '',
-      exchangeSpec: this.data.selectType.spec || '',
-      exchangeSpecImg: this.data.selectType.specImg || '',
+      // exchangePriceId: this.data.selectType.id || '',
+      // exchangeSpec: this.data.selectType.spec || '',
+      // exchangeSpecImg: this.data.selectType.specImg || '',
+      applyRefundAmount: this.data.applyRefundAmount || '',
       imgList: imgList,
-      orderProductId: list.id,
-      remark: this.data.remark,
-      returnProductId: Number(this.data.returnProductId) || '',
-      // returnReason:'无',
-      returnReason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
-      reqName: reqName,
-      url: url
+      orderProductNo: list.orderProductNo,
+      reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
+      description: this.data.remark,
+      'type': this.data.refundType+1
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      Tool.redirectTo(this.data.page[this.data.refundType] + '?returnProductId=' + req.responseObject.data.id)
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    let reqName = this.data.serviceNo? 'modifyAfterSale':'applyAfterSale'
+    API[reqName](params).then((res) => {
+      let datas = res.data || {}
+      Tool.redirectTo(this.data.page[this.data.refundType] + '?serviceNo=' + datas.serviceNo)
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   updateApply(){
     

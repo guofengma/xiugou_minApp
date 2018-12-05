@@ -8,15 +8,15 @@
   <view class='flexR'>
     <image-sub wx:if='{{datas.status==3}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
     <view>
-     <view class='tips-title'>{{datas.statusName}}</view>
-     <view wx:if='{{datas.showRefundTime}}'>{{datas.showRefundTime}}</view>
+     <view class='tips-title'>{{datas.headerTitle}}</view>
+     <!-- <view wx:if='{{datas.showRefundTime}}'>{{datas.showRefundTime}}</view> -->
     </view>
   </view>
   <!--退款中不需要要显示时间  -->
 </view>
-<view wx:if='{{datas.status==3}}' class='refusalReason whiteBg font-26 flexR-sb'>拒绝原因：{{datas.refusalReason}}</view>
+<view wx:if='{{datas.status==6}}' class='refusalReason whiteBg font-26 flexR-sb'>{{datas.reject}}</view>
 <view wx:if='{{datas.status==1}}'>
-   <amend-application applyType='{{"退款"}}' list='{{datas}}' returnProductId='{{returnProductId}}' bind:reloadPage='findReturnProductById'/>
+   <amend-application applyType='{{"退款"}}' list='{{datas}}' serviceNo='{{serviceNo}}' bind:reloadPage='findReturnProductById'/>
 </view>
 <!--退款成功以后才显示以下内容  -->
 

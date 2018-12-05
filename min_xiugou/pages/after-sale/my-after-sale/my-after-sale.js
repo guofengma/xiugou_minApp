@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation } = global
+let { Tool, API, Storage, Operation } = global
 Page({
   data: {
     ysf: { title: '我的售后' },
@@ -27,9 +27,9 @@ Page({
   },
   onLoad: function (options) {
     let params = {
-      page: this.data.currentPage,
-      size: this.data.pageSize,
-      productName: this.data.keyword
+      currentPage: this.data.currentPage,
+      pageSize: this.data.pageSize,
+      productName: this.data.keyword || ''
     }
     this.setData({
       params: params
@@ -47,8 +47,8 @@ Page({
       Tool.showAlert('搜索内容不能为空')
       return
     }
-    params.page = 1
-    params.condition = this.data.keyword
+    params.currentPage = 1
+    params.searchKey = this.data.keyword
     this.setData({
       params: params,
       lists:[]
@@ -61,7 +61,7 @@ Page({
     let page = this.data.currentPage
     page += 1
     let { params } = this.data
-    params.page = page
+    params.currentPage = page
     this.setData({
       currentPage: page,
       params: params
@@ -72,47 +72,41 @@ Page({
     // returnProductStatus  1申请中 2已同意 3拒绝 4完成 5关闭 6超时
 
     // getReturnProductType 1退款 2退货 3退货 
-    params = {
-      ...params,
-      reqName: '我的售后',
-      url: Operation.queryAftermarketOrderPageList,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+
+    API.afterSaleList(params).then((res) => {
       let lists = this.data.lists
-      let datas = req.responseObject.data
-      if (datas.totalPage>0){
+      let datas = res.data || []
+      if (datas.totalPage > 0 || datas.data.length>0){
         datas.data.forEach((item)=>{
           item.imgUrl = item.specImg
           item.icon = this.data.typeArr[item.type].icon
           item.typeName = this.data.typeArr[item.type].name
           item.typeState = this.data.typeState[item.status]
-          console.log(item.type)
-          // if (item.status == 4 || item.status ==5){
-          //   item.typeState = item.typeName + item.typeState
-          // }
+          item.price = item.unitPrice
+          item.num = item.refundNum
         })
-        // if (!Tool.isEmptyStr(this.data.keyword)){
-        //   lists=[]
-        // }
+        if (!Tool.isEmptyStr(this.data.keyword)){
+          lists=[]
+        }
         this.setData({
           lists: lists.concat(datas.data),
-          totalPage: req.responseObject.data.totalPage,
-        })
-      }else{
-        this.setData({
-          tipVal:2
+          totalPage: datas.totalPage || 0,
         })
       }
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+      // else{
+      //   this.setData({
+      //     tipVal:2
+      //   })
+      // }
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   goPage(e){
-    let returnProductId = e.currentTarget.dataset.prdid
+    let serviceNo = e.currentTarget.dataset.prdid
     let returnProductType = e.currentTarget.dataset.id
-    console.log(returnProductId)
-    let page = this.data.typeArr[returnProductType].page + "?returnProductId="+returnProductId
+    // console.log(returnProductId)
+    let page = this.data.typeArr[returnProductType].page + "?serviceNo=" + serviceNo
     Tool.navigateTo(page)
   }
 })

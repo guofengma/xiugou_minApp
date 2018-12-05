@@ -200,11 +200,11 @@ export default class Tool {
 
     // 日期倒计时 
 
-    static getDistanceTime(time, self,n) {
+    static getDistanceTime(time, self, showDay) {
       /*replace将时间字符串中所有的'-'替换成'/',parse将时间格式的字符串转换成毫秒*/
       let endTime = new Date(Date.parse(time.replace(/-/g, "/")));
       let nowTime = new Date();
-      /*getTime把一个date对象转换成毫秒*/
+      // /*getTime把一个date对象转换成毫秒*/
       let distance = endTime.getTime() - nowTime.getTime();
       let day = 0;
       let hour = 0;
@@ -219,7 +219,7 @@ export default class Tool {
         }
         minute = Math.floor(distance / 1000 / 60 % 60);
         second = Math.floor(distance / 1000 % 60);
-        if(n){
+        if (showDay){
           distanceTime =  hour + "时" + minute + "分" + second + "秒";
           if (hour==0){
             distanceTime = minute + "分" + second + "秒";
@@ -235,7 +235,17 @@ export default class Tool {
       })
       return distanceTime
     }
-
+    static showDistanceTime(time){
+      let day = Math.floor( time / 60 / 60 / 24 );
+      let hour = Math.floor(time / 60 / 60 % 24);
+      let minute = Math.floor(time / 60 % 60);
+      let second = Math.floor(time % 60);
+      
+      // self.setData({
+      //   distanceTime: distanceTime
+      // })
+      return  day + "天" + hour + "时" + minute + "分" + second + "秒";
+    }
     //Object 空值判断
     static isEmpty(object) {
         if (object === null || object === undefined) {
@@ -1008,14 +1018,13 @@ export default class Tool {
 
     // 退换货数据变换
 
-    static findReturnProductById(req){
-      // let data = req.responseObject.data
-      let returnProduct = req.responseObject.data
-      returnProduct.applyTime = global.Tool.formatTime(returnProduct.applyTime)
-      returnProduct.imgUrl = returnProduct.specImg
-      returnProduct.productName = returnProduct.productName
-      if (returnProduct.returnAddress) {
-        returnProduct.returnAddress.addressInfo = returnProduct.returnAddress.provinceName + returnProduct.returnAddress.cityName + returnProduct.returnAddress.areaName
+    static findReturnProductById(res){
+      let datas = res.data
+      datas.applyTime = global.Tool.formatTime(datas.applyTime)
+      datas.imgUrl = datas.specImg
+      datas.productName = datas.productName
+      if (datas.returnAddress) {
+        datas.returnAddress.addressInfo = datas.returnAddress.provinceName + datas.returnAddress.cityName + datas.returnAddress.areaName
       }
     }
 

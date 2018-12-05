@@ -19,14 +19,14 @@
   <view class='flexR'>
     <image-sub wx:if='{{datas.status==3}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
     <view>
-      <view class='tips-title'>{{result[resultIndex].state}}</view>
+      <view class='tips-title'>{{datas.reject}}</view>
       <!-- <view wx:if='{{datas.status!=3}}'>{{result[resultIndex].info}}</view> -->
       <view>{{distanceTime}}</view>
-      <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view>
+      <!-- <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view> -->
     </view>
   </view>
 </view>
-<view wx:if='{{datas.status==3}}' class='refusalReason whiteBg font-26 flexR-sb'>拒绝原因：{{result[resultIndex].info}}</view>
+<view wx:if='{{datas.status==6}}' class='refusalReason whiteBg font-26 flexR-sb'>{{datas.reject}}</view>
 <!--退款成功以后才显示以下内容  -->
 <template is="temp-refund-info" data="{{...datas}}"/>
 <view wx:if='{{datas.status>1}}'>
@@ -41,12 +41,12 @@
   </view>
 
   <!--物流  -->
-  <view catchtap='logClicked' data-express='{{expressNo}}' wx:if='{{datas.status!=3&&!expressNo.id || expressNo.id}}'>
+  <view catchtap='logClicked' data-express='{{expressNo}}' wx:if='{{datas.status!=6&&!expressNo.id || expressNo.id}}'>
     <template is="cell-line" data="{{name:'退货物流',placeholder:expressNo.content}}"/>
   </view>
 </view>
 <view  wx:if='{{datas.status==1}}'>
-   <amend-application applyType='{{"退货"}}' list='{{datas}}' returnProductId='{{returnProductId}}' bind:reloadPage='findReturnProductById'/>
+   <amend-application applyType='{{"退货"}}' list='{{datas}}' serviceNo='{{serviceNo}}' bind:reloadPage='findReturnProductById'/>
 </view>
 <!--换货信息  --> 
 

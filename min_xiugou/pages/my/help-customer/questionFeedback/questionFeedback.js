@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event, Storage, Operation} = global;
+let { Tool, RequestFactory, Event, Storage, Operation, API} = global;
 
 Page({
 
@@ -24,21 +24,32 @@ Page({
       this.queryDictionaryDetailsType()
     },
     queryDictionaryDetailsType() {
-      let params = {
-        code:'WTLX',
-        reqName: '获取数字字典',
-        requestMethod: 'GET',
-        url: Operation.queryDictionaryDetailsType
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        req.responseObject.data.unshift({ "value": "请选择问题类型", "code": "" })
+      API.queryDictionaryDetailsType({
+        code: 'WTLX',
+      }).then((res) => {
+        let datas = res.data || []
+        datas.unshift({ "value": "请选择问题类型", "code": "" })
         this.setData({
-          typeArr: req.responseObject.data
+          typeArr: datas
         })
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      });
+      // let params = {
+      //   code:'WTLX',
+      //   reqName: '获取数字字典',
+      //   requestMethod: 'GET',
+      //   url: Operation.queryDictionaryDetailsType
+      // }
+      // let r = RequestFactory.wxRequest(params);
+      // r.successBlock = (req) => {
+      //   req.responseObject.data.unshift({ "value": "请选择问题类型", "code": "" })
+      //   this.setData({
+      //     typeArr: req.responseObject.data
+      //   })
+      // }
+      // Tool.showErrMsg(r)
+      // r.addToQueue();
     },
     //选择问题类型弹窗
     questionType() {

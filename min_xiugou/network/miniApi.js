@@ -56,6 +56,14 @@ const api =
       "encrypt": false,// 是否加签
     }
   ],
+  'queryDictionaryDetailsType': [
+    '/config/sysDictionary/queryDictionaryTypeList',
+    {
+      "action": "获取数据字典",
+      "method": "get",
+      "encrypt": false,// 是否加签
+    }
+  ],
   /***************************** 注册 ************************ */
   'queryAdList':[
     '/config/advertisement/queryAdvertisementList',
@@ -253,6 +261,152 @@ const api =
       'isShowLoading': false,
     }
   ],
+  /**********************订单售后**************************/
+  'afterSaleList': [
+    '/after-sale/list',
+    {
+      "action": "售后列表查询",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'applyAfterSale': [  //type 1.仅退款 2.退货退款 3.换货
+    '/after-sale/apply',
+    {
+      "action": "申请售后",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'afterSaleDetail': [
+    '/after-sale/detail',
+    {
+      "action": "售后详情",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'afterSaleOrderDetail': [
+    '/after-sale/order-detail',
+    {
+      "action": "售后子订单详情",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'cancelAfterSale': [
+    '/after-sale/cancel',
+    {
+      "action": "撤销售后",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'modifyAfterSale': [
+    '/after-sale/modify',
+    {
+      "action": "修改售后申请",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'afterSaleExpress': [
+    '/after-sale/express',
+    {
+      "action": "填写寄回物流单号接口",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  /**********************订单**************************/
+  'makeSureOrder': [
+    '/order/confirm',
+    {
+      "action": "确认订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'submitOrder': [
+    '/order/submit',
+    {
+      "action": "确认订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'queryOrderPageList': [
+    '/order/list',
+    {
+      "action": "用户订单列表",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'searchOrder': [
+    '/order/search',
+    {
+      "action": "订单搜索",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'getOrderDetail': [
+    '/order/detail',
+    {
+      "action": "订单详情",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'getOrderDeliverInfo': [
+    '/order/deliverInfo',
+    {
+      "action": "订单物流信息",
+      "method": "post",
+      "encrypt": false,
+    }
+    ], 
+  'getOrderDeliverInfoDetail': [
+    '/order/deliverInfoDetail',
+    {
+      "action": "订单物流信息",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'confirmReceipt': [
+    '/order/confirmReceipt',
+    {
+      "action": "订单确认收货",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'cancelOrder': [
+    '/order/cancel',
+    {
+      "action": "取消订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'deleteOrder': [
+    '/order/delete',
+    {
+      "action": "删除订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'orderOneMore': [
+    '/order/another',
+    {
+      "action": "再次购买",
+      "method": "post",
+      "encrypt": false,
+    }
+    ],
 }
 
 const API = new ApiUtils(api).result;
