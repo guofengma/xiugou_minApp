@@ -27,7 +27,7 @@
       </view>
       <view>
         <input type='digit' bindinput='changeApplyAmount' value='{{applyRefundAmount}}' class='red' wx:if='{{refundType!=2&&orderInfos.status>3}}'></input>
-        <text class='red' wx:else>{{orderInfos.refundPrice}}</text> 
+        <text class='red' wx:else>{{orderInfos.payAmount}}</text> 
       </view>
       
     </view>
@@ -42,7 +42,7 @@
         <text class='red'>*</text>请确保退换商品不影响二次销售
       </view>
       <view wx:if='{{refundType!=2&&orderInfos.status>3}}' >
-        最多¥{{}}，含发货邮费¥0.00
+        最多¥{{orderInfos.payAmount}}，含发货邮费¥{{orderInfos.freightAmount}}
       </view>
     </view>
     <view class='cell-line gray-9'>{{reason[refundType].info}}</view>

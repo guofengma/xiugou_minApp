@@ -67,10 +67,10 @@ Page({
   initData(){
     let list = this.data.list
     if (this.data.serviceNo) {
-      let imgList = list.imgList || []
+      let imgList = list.afterSaleInfo.showImgList|| []
       imgList.forEach((item) => {
-        this.data.originalImg.push(item.originalImg)
-        this.data.smallImg.push(item.smallImg)
+        this.data.originalImg.push(item)
+        this.data.smallImg.push(item)
       })
       this.setData({
         // selectType:{
@@ -80,8 +80,8 @@ Page({
         // },
         originalImg: this.data.originalImg,
         smallImg: this.data.smallImg,
-        remark: list.remark || '',
-        returnReason:list.returnReason || ''
+        remark: list.afterSaleInfo.description || '',
+        returnReason: list.afterSaleInfo.reason || ''
       })
       this.selectComponent("#update-img").initData()
     }
@@ -138,7 +138,7 @@ Page({
         Tool.showAlert(content,callBack)
       } else {
         data.imgUrl = data.specImg ? data.specImg : this.data.list.imgUrl
-        data.createTime = Tool.formatTime(data.orderCreateTime)
+        // data.createTime = Tool.formatTime(data.orderCreateTime)
         this.setData({
           orderInfos: data
         })
@@ -180,19 +180,19 @@ Page({
     //   return
     // }
     let list = this.data.list
-    let imgList = []
-    this.data.originalImg.forEach((item,index)=>{
-      imgList.push({
-        originalImg:item,
-        smallImg: this.data.smallImg[index]
-      })
-    })
+    // let imgList = []
+    // this.data.originalImg.forEach((item,index)=>{
+    //   imgList.push({
+    //     originalImg:item,
+    //     smallImg: this.data.smallImg[index]
+    //   })
+    // })
     let params = {
       // exchangePriceId: this.data.selectType.id || '',
       // exchangeSpec: this.data.selectType.spec || '',
       // exchangeSpecImg: this.data.selectType.specImg || '',
       applyRefundAmount: this.data.applyRefundAmount || '',
-      imgList: imgList,
+      imgList: this.data.originalImg.join(","),
       orderProductNo: list.orderProductNo,
       reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
       description: this.data.remark,
@@ -220,29 +220,6 @@ Page({
       remark: e.detail.value
     })
   },
-  // chooseType(){
-  //   let params = {
-  //     id: this.data.list.productId,
-  //     isShowLoading: false,
-  //     requestMethod: 'GET',
-  //     url: Operation.findProductStockBySpec,
-  //     reqName: "规格搜索"
-  //   }
-  //   let r = RequestFactory.wxRequest(params);
-  //   r.successBlock = (req) => {
-  //     let datas = req.responseObject.data
-  //     this.setData({
-  //       productSpec: datas.specMap,
-  //       priceList: datas.priceList,
-  //       selectPrice: this.data.list.price,
-  //       isInit: false,
-  //       imgUrl: this.data.list.specImg
-  //     })
-  //     this.selectComponent("#prd-info-type").isVisiableClicked()
-  //   }
-  //   Tool.showErrMsg(r)
-  //   r.addToQueue();
-  // },
   changeProdctType(e){
     this.setData({
       selectType: e.detail
