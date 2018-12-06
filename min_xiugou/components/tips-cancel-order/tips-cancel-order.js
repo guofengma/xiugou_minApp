@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation } = global
+let { Tool, API } = global
 Component({
   properties: {
     isCancel: Boolean,
@@ -12,20 +12,29 @@ Component({
   },
   methods: {
     queryDictionaryDetailsType() { //获取取消订单的理由
-      let params = {
+      API.queryDictionaryDetailsType({
         code: 'QXDD',
-        reqName: '获取数字字典',
-        requestMethod: 'GET',
-        url: Operation.queryDictionaryDetailsType,
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
+      }).then((res) => {
         this.setData({
-          reasonArr: req.responseObject.data
+          reasonArr: res.data || []
         })
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      });
+      // let params = {
+      //   code: 'QXDD',
+      //   reqName: '获取数字字典',
+      //   requestMethod: 'GET',
+      //   url: Operation.queryDictionaryDetailsType,
+      // }
+      // let r = RequestFactory.wxRequest(params);
+      // r.successBlock = (req) => {
+      //   this.setData({
+      //     reasonArr: req.responseObject.data
+      //   })
+      // }
+      // Tool.showErrMsg(r)
+      // r.addToQueue();
     },
     reasonClicked(e) { // 选择取消订单的理由
       //取消订单的理由
@@ -44,22 +53,21 @@ Component({
         Tool.showAlert('请选择取消理由！');
         return
       }
-      let params = {
-        buyerRemark: this.data.content || '无',
-        orderNum: this.data.orderNum,
-        reqName: '取消订单',
-        url: Operation.cancelOrder,
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
+      API.cancelOrder({
+        platformOrderNo: this.data.orderNum,
+        cancelType:'',
+        cancelReason: this.data.content || '无',
+        platformRemarks:''
+      }).then((res) => {
         if (this.data.door == 1) {
           this.triggerEvent('cancelOrder', { ...this.data });
         } else {
           Tool.navigateTo('/pages/my/my-order/my-order?query='+this.data.num)
         }
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+        Tool.navigateTo('/pages/my/my-order/my-order')
+      }).catch((res) => {
+        console.log(res)
+      })
     },
   },
   ready: function () {

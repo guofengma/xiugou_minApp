@@ -20,495 +20,6 @@ Component({
     key: 0,
     time:"",
     returnTypeArr:['','退款','退货','换货'],
-    datas: {
-      "code": 10000,
-      "data": {
-        "currentPage": 1,
-        "data": [
-          {
-            "activityCode": "",
-            "address": "10087号",
-            "area": "滨江区",
-            "channel": 1,
-            "city": "杭州市",
-            "couponAmount": 0.00,
-            "freightAmount": 0.00,
-            "id": 18,
-            "orderAmount": 112.00,
-            "orderTime": 1543822497000,
-            "orderType": 1,
-            "payAmount": 112.00,
-            "payTime": 1543822507000,
-            "platformOrderNo": "P666667",
-            "productPrice": 112.00,
-            "province": "浙江省",
-            "provinceCode": 330000,
-            "quantity": 2,
-            "receiver": "帅的不行",
-            "receiverPhone": "17682313257",
-            "source": 1,
-            "storeCode": "",
-            "storeOwnerCode": "",
-            "street": "江南大道",
-            "superiorUserCode": "",
-            "tokenCoinAmount": 0.00,
-            "userCode": "W181031000006",
-            "userCouponCode": "",
-            "userLevel": 0,
-            "userPhone": "17682313257",
-            "warehouseOrderDTOList": [
-              {
-                "autoReceiveTime": 1543823255000,
-                "cancelReason": "",
-                "cancelTime": 1543823247000,
-                "couponAmount": 0.00,
-                "createTime": 1543823302000,
-                "deliverTime": 1543823250000,
-                "finishTime": 1545292061000,
-                "freightAmount": 0.00,
-                "id": 17,
-                "lockStatus": 2,
-                "message": "",
-                "orderAmount": 28.00,
-                "payAmount": 28.00,
-                "platformOrderNo": "P666667",
-                "platformRemarks": "",
-                "productPrice": 28.00,
-                "products": [
-                  {
-                    "accountPayAmount": 28.00,
-                    "cashPayAmount": 0.00,
-                    "couponAmount": 0.00,
-                    "createTime": 1543656004000,
-                    "freightAmount": 0.00,
-                    "freightTemplateId": 1,
-                    "groupPrice": 28.00,
-                    "id": 18,
-                    "invoiceAmount": 0.00,
-                    "orderProductNo": "G116615",
-                    "originalPrice": 30.00,
-                    "payAmount": 28.00,
-                    "platformOrderNo": "P666667",
-                    "prodCode": "SPU00000039",
-                    "productName": "Macbook Pro 蒋大为专用1",
-                    "promotionAmount": 0.00,
-                    "quantity": 1,
-                    "settlementPrice": 20.00,
-                    "skuCode": "SKU000000390001",
-                    "specImg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543665802906&di=4fa56583ca281aa03d22fffacdaff345&imgtype=0&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D907609500%2C3862542478%26fm%3D214%26gp%3D0.jpg",
-                    "specTitle": "颜色",
-                    "specValues": "尺寸",
-                    "status": 2,
-                    "supplierSkuCode": "SSKU2",
-                    "taxAmount": 0.00,
-                    "tokenCoinAmount": 0.00,
-                    "totalAmount": 28.00,
-                    "unitPrice": 28.00,
-                    "updateTime": 1544073968000,
-                    "userCode": "W181031000006",
-                    "userPhone": "15606533097",
-                    "userRemarks": "",
-                    "warehouseOrderNo": "C888891"
-                  }
-                ],
-                "receiver": "帅的不行",
-                "status": 2,
-                "subStatus": 0,
-                "supplierCode": "GYS00016",
-                "supplierName": "测试1",
-                "tokenCoinAmount": 0.00,
-                "updateTime": 1543975315000,
-                "userCode": "W181031000006",
-                "userPhone": "15606533097",
-                "warehouseCode": "QIMEN",
-                "warehouseOrderNo": "C888891",
-                "warehouseType": 2
-              },
-              {
-                "autoReceiveTime": 1543823255000,
-                "cancelReason": "",
-                "cancelTime": 1543823247000,
-                "couponAmount": 0.00,
-                "createTime": 1543823302000,
-                "deliverTime": 1543823250000,
-                "finishTime": 1545292061000,
-                "freightAmount": 0.00,
-                "id": 18,
-                "lockStatus": 2,
-                "message": "",
-                "orderAmount": 84.00,
-                "payAmount": 84.00,
-                "platformOrderNo": "P666667",
-                "platformRemarks": "",
-                "productPrice": 84.00,
-                "products": [
-                  {
-                    "accountPayAmount": 28.00,
-                    "cashPayAmount": 0.00,
-                    "couponAmount": 0.00,
-                    "createTime": 1543656004000,
-                    "freightAmount": 0.00,
-                    "freightTemplateId": 1,
-                    "groupPrice": 28.00,
-                    "id": 19,
-                    "invoiceAmount": 0.00,
-                    "orderProductNo": "O116616",
-                    "originalPrice": 30.00,
-                    "payAmount": 28.00,
-                    "platformOrderNo": "P666667",
-                    "prodCode": "SPU00000039",
-                    "productName": "Macbook Pro 蒋大为专用2",
-                    "promotionAmount": 0.00,
-                    "quantity": 1,
-                    "settlementPrice": 20.00,
-                    "skuCode": "SKU000000390001",
-                    "specImg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543665802906&di=4fa56583ca281aa03d22fffacdaff345&imgtype=0&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D907609500%2C3862542478%26fm%3D214%26gp%3D0.jpg",
-                    "specTitle": "颜色",
-                    "specValues": "尺寸",
-                    "status": 1,
-                    "supplierSkuCode": "SSKU2",
-                    "taxAmount": 0.00,
-                    "tokenCoinAmount": 0.00,
-                    "totalAmount": 28.00,
-                    "unitPrice": 28.00,
-                    "updateTime": 1543975929000,
-                    "userCode": "W181031000006",
-                    "userPhone": "15606533097",
-                    "userRemarks": "",
-                    "warehouseOrderNo": "C888892"
-                  },
-                  {
-                    "accountPayAmount": 28.00,
-                    "cashPayAmount": 0.00,
-                    "couponAmount": 0.00,
-                    "createTime": 1543656004000,
-                    "freightAmount": 0.00,
-                    "freightTemplateId": 1,
-                    "groupPrice": 28.00,
-                    "id": 38,
-                    "invoiceAmount": 0.00,
-                    "orderProductNo": "O116619",
-                    "originalPrice": 30.00,
-                    "payAmount": 28.00,
-                    "platformOrderNo": "P666667",
-                    "prodCode": "SPU00000039",
-                    "productName": "Macbook Pro 蒋大为专用3",
-                    "promotionAmount": 0.00,
-                    "quantity": 1,
-                    "settlementPrice": 20.00,
-                    "skuCode": "SKU000000390001",
-                    "specImg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543665802906&di=4fa56583ca281aa03d22fffacdaff345&imgtype=0&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D907609500%2C3862542478%26fm%3D214%26gp%3D0.jpg",
-                    "specTitle": "颜色",
-                    "specValues": "尺寸",
-                    "status": 1,
-                    "supplierSkuCode": "SSKU2",
-                    "taxAmount": 0.00,
-                    "tokenCoinAmount": 0.00,
-                    "totalAmount": 28.00,
-                    "unitPrice": 28.00,
-                    "updateTime": 1543975929000,
-                    "userCode": "W181031000006",
-                    "userPhone": "15606533097",
-                    "userRemarks": "",
-                    "warehouseOrderNo": "C888892"
-                  },
-                  {
-                    "accountPayAmount": 28.00,
-                    "cashPayAmount": 0.00,
-                    "couponAmount": 0.00,
-                    "createTime": 1543656004000,
-                    "freightAmount": 0.00,
-                    "freightTemplateId": 1,
-                    "groupPrice": 28.00,
-                    "id": 39,
-                    "invoiceAmount": 0.00,
-                    "orderProductNo": "O116620",
-                    "originalPrice": 30.00,
-                    "payAmount": 28.00,
-                    "platformOrderNo": "P666667",
-                    "prodCode": "SPU00000039",
-                    "productName": "Macbook Pro 蒋大为专用4",
-                    "promotionAmount": 0.00,
-                    "quantity": 1,
-                    "settlementPrice": 20.00,
-                    "skuCode": "SKU000000390001",
-                    "specImg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543665802906&di=4fa56583ca281aa03d22fffacdaff345&imgtype=0&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D907609500%2C3862542478%26fm%3D214%26gp%3D0.jpg",
-                    "specTitle": "颜色",
-                    "specValues": "尺寸",
-                    "status": 1,
-                    "supplierSkuCode": "SSKU2",
-                    "taxAmount": 0.00,
-                    "tokenCoinAmount": 0.00,
-                    "totalAmount": 28.00,
-                    "unitPrice": 28.00,
-                    "updateTime": 1543975929000,
-                    "userCode": "W181031000006",
-                    "userPhone": "15606533097",
-                    "userRemarks": "",
-                    "warehouseOrderNo": "C888892"
-                  }
-                ],
-                "receiver": "帅的不行",
-                "status": 2,
-                "subStatus": 0,
-                "supplierCode": "GYS00016",
-                "supplierName": "测试1",
-                "tokenCoinAmount": 0.00,
-                "updateTime": 1543975317000,
-                "userCode": "W181031000006",
-                "userPhone": "15606533097",
-                "warehouseCode": "QIMEN",
-                "warehouseOrderNo": "C888892",
-                "warehouseType": 2
-              }
-            ]
-          }, {
-            "activityCode": "",
-            "address": "10087号",
-            "area": "滨江区",
-            "channel": 1,
-            "city": "杭州市",
-            "couponAmount": 0.00,
-            "freightAmount": 0.00,
-            "id": 18,
-            "orderAmount": 112.00,
-            "orderTime": 1543822497000,
-            "orderType": 1,
-            "payAmount": 112.00,
-            "payTime": 1543822507000,
-            "platformOrderNo": "P666667",
-            "productPrice": 112.00,
-            "province": "浙江省",
-            "provinceCode": 330000,
-            "quantity": 2,
-            "receiver": "帅的不行",
-            "receiverPhone": "17682313257",
-            "source": 1,
-            "storeCode": "",
-            "storeOwnerCode": "",
-            "street": "江南大道",
-            "superiorUserCode": "",
-            "tokenCoinAmount": 0.00,
-            "userCode": "W181031000006",
-            "userCouponCode": "",
-            "userLevel": 0,
-            "userPhone": "17682313257",
-            "warehouseOrderDTOList": [
-              {
-                "autoReceiveTime": 1543823255000,
-                "cancelReason": "",
-                "cancelTime": 1543823247000,
-                "couponAmount": 0.00,
-                "createTime": 1543823302000,
-                "deliverTime": 1543823250000,
-                "finishTime": 1545292061000,
-                "freightAmount": 0.00,
-                "id": 17,
-                "lockStatus": 2,
-                "message": "",
-                "orderAmount": 28.00,
-                "payAmount": 28.00,
-                "platformOrderNo": "P666667",
-                "platformRemarks": "",
-                "productPrice": 28.00,
-                "products": [
-                  {
-                    "accountPayAmount": 28.00,
-                    "cashPayAmount": 0.00,
-                    "couponAmount": 0.00,
-                    "createTime": 1543656004000,
-                    "freightAmount": 0.00,
-                    "freightTemplateId": 1,
-                    "groupPrice": 28.00,
-                    "id": 18,
-                    "invoiceAmount": 0.00,
-                    "orderProductNo": "G116615",
-                    "originalPrice": 30.00,
-                    "payAmount": 28.00,
-                    "platformOrderNo": "P666667",
-                    "prodCode": "SPU00000039",
-                    "productName": "Macbook Pro 蒋大为专用5",
-                    "promotionAmount": 0.00,
-                    "quantity": 1,
-                    "settlementPrice": 20.00,
-                    "skuCode": "SKU000000390001",
-                    "specImg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543665802906&di=4fa56583ca281aa03d22fffacdaff345&imgtype=0&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D907609500%2C3862542478%26fm%3D214%26gp%3D0.jpg",
-                    "specTitle": "颜色",
-                    "specValues": "尺寸",
-                    "status": 2,
-                    "supplierSkuCode": "SSKU2",
-                    "taxAmount": 0.00,
-                    "tokenCoinAmount": 0.00,
-                    "totalAmount": 28.00,
-                    "unitPrice": 28.00,
-                    "updateTime": 1544073968000,
-                    "userCode": "W181031000006",
-                    "userPhone": "15606533097",
-                    "userRemarks": "",
-                    "warehouseOrderNo": "C888891"
-                  }
-                ],
-                "receiver": "帅的不行",
-                "status": 1,
-                "subStatus": 0,
-                "supplierCode": "GYS00016",
-                "supplierName": "测试1",
-                "tokenCoinAmount": 0.00,
-                "updateTime": 1543975315000,
-                "userCode": "W181031000006",
-                "userPhone": "15606533097",
-                "warehouseCode": "QIMEN",
-                "warehouseOrderNo": "C888891",
-                "warehouseType": 2
-              },
-              {
-                "autoReceiveTime": 1543823255000,
-                "cancelReason": "",
-                "cancelTime": 1543823247000,
-                "couponAmount": 0.00,
-                "createTime": 1543823302000,
-                "deliverTime": 1543823250000,
-                "finishTime": 1545292061000,
-                "freightAmount": 0.00,
-                "id": 18,
-                "lockStatus": 2,
-                "message": "",
-                "orderAmount": 84.00,
-                "payAmount": 84.00,
-                "platformOrderNo": "P666667",
-                "platformRemarks": "",
-                "productPrice": 84.00,
-                "products": [
-                  {
-                    "accountPayAmount": 28.00,
-                    "cashPayAmount": 0.00,
-                    "couponAmount": 0.00,
-                    "createTime": 1543656004000,
-                    "freightAmount": 0.00,
-                    "freightTemplateId": 1,
-                    "groupPrice": 28.00,
-                    "id": 19,
-                    "invoiceAmount": 0.00,
-                    "orderProductNo": "O116616",
-                    "originalPrice": 30.00,
-                    "payAmount": 28.00,
-                    "platformOrderNo": "P666667",
-                    "prodCode": "SPU00000039",
-                    "productName": "Macbook Pro 蒋大为专用6",
-                    "promotionAmount": 0.00,
-                    "quantity": 1,
-                    "settlementPrice": 20.00,
-                    "skuCode": "SKU000000390001",
-                    "specImg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543665802906&di=4fa56583ca281aa03d22fffacdaff345&imgtype=0&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D907609500%2C3862542478%26fm%3D214%26gp%3D0.jpg",
-                    "specTitle": "颜色",
-                    "specValues": "尺寸",
-                    "status": 1,
-                    "supplierSkuCode": "SSKU2",
-                    "taxAmount": 0.00,
-                    "tokenCoinAmount": 0.00,
-                    "totalAmount": 28.00,
-                    "unitPrice": 28.00,
-                    "updateTime": 1543975929000,
-                    "userCode": "W181031000006",
-                    "userPhone": "15606533097",
-                    "userRemarks": "",
-                    "warehouseOrderNo": "C888892"
-                  },
-                  {
-                    "accountPayAmount": 28.00,
-                    "cashPayAmount": 0.00,
-                    "couponAmount": 0.00,
-                    "createTime": 1543656004000,
-                    "freightAmount": 0.00,
-                    "freightTemplateId": 1,
-                    "groupPrice": 28.00,
-                    "id": 38,
-                    "invoiceAmount": 0.00,
-                    "orderProductNo": "O116619",
-                    "originalPrice": 30.00,
-                    "payAmount": 28.00,
-                    "platformOrderNo": "P666667",
-                    "prodCode": "SPU00000039",
-                    "productName": "Macbook Pro 蒋大为专用7",
-                    "promotionAmount": 0.00,
-                    "quantity": 1,
-                    "settlementPrice": 20.00,
-                    "skuCode": "SKU000000390001",
-                    "specImg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543665802906&di=4fa56583ca281aa03d22fffacdaff345&imgtype=0&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D907609500%2C3862542478%26fm%3D214%26gp%3D0.jpg",
-                    "specTitle": "颜色",
-                    "specValues": "尺寸",
-                    "status": 1,
-                    "supplierSkuCode": "SSKU2",
-                    "taxAmount": 0.00,
-                    "tokenCoinAmount": 0.00,
-                    "totalAmount": 28.00,
-                    "unitPrice": 28.00,
-                    "updateTime": 1543975929000,
-                    "userCode": "W181031000006",
-                    "userPhone": "15606533097",
-                    "userRemarks": "",
-                    "warehouseOrderNo": "C888892"
-                  },
-                  {
-                    "accountPayAmount": 28.00,
-                    "cashPayAmount": 0.00,
-                    "couponAmount": 0.00,
-                    "createTime": 1543656004000,
-                    "freightAmount": 0.00,
-                    "freightTemplateId": 1,
-                    "groupPrice": 28.00,
-                    "id": 39,
-                    "invoiceAmount": 0.00,
-                    "orderProductNo": "O116620",
-                    "originalPrice": 30.00,
-                    "payAmount": 28.00,
-                    "platformOrderNo": "P666667",
-                    "prodCode": "SPU00000039",
-                    "productName": "Macbook Pro 蒋大为专用8",
-                    "promotionAmount": 0.00,
-                    "quantity": 1,
-                    "settlementPrice": 20.00,
-                    "skuCode": "SKU000000390001",
-                    "specImg": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543665802906&di=4fa56583ca281aa03d22fffacdaff345&imgtype=0&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D907609500%2C3862542478%26fm%3D214%26gp%3D0.jpg",
-                    "specTitle": "颜色",
-                    "specValues": "尺寸",
-                    "status": 1,
-                    "supplierSkuCode": "SSKU2",
-                    "taxAmount": 0.00,
-                    "tokenCoinAmount": 0.00,
-                    "totalAmount": 28.00,
-                    "unitPrice": 28.00,
-                    "updateTime": 1543975929000,
-                    "userCode": "W181031000006",
-                    "userPhone": "15606533097",
-                    "userRemarks": "",
-                    "warehouseOrderNo": "C888892"
-                  }
-                ],
-                "receiver": "帅的不行",
-                "status": 1,
-                "subStatus": 0,
-                "supplierCode": "GYS00016",
-                "supplierName": "测试1",
-                "tokenCoinAmount": 0.00,
-                "updateTime": 1543975317000,
-                "userCode": "W181031000006",
-                "userPhone": "15606533097",
-                "warehouseCode": "QIMEN",
-                "warehouseOrderNo": "C888892",
-                "warehouseType": 2
-              }
-            ]
-          }
-        ],
-        "isMore": 0,
-        "pageSize": 10,
-        "startIndex": 0,
-        "totalNum": 1,
-        "totalPage": 1
-      },
-      "msg": "业务处理成功"
-    }
   },
   methods: {
     //获取列表数据
@@ -682,7 +193,6 @@ Component({
     },
     //跳到订单详情
     toOrderDetail(e) {
-      console.log(e.currentTarget.dataset.id, e.currentTarget.dataset.status,)
       Tool.navigateTo('/pages/my/orderDetail/orderDetail?orderId=' + e.currentTarget.dataset.id + '&status=' + e.currentTarget.dataset.status+'&num='+this.data.num)
     },
     //跳到物流页面
@@ -692,13 +202,10 @@ Component({
     //删除订单
     deleteItem(e) {
       let id = e.currentTarget.dataset.id;
-      let status = e.currentTarget.dataset.status;
       this.setData({
         isDelete: true,
         orderId: id,
-        status: status,
       });
-      // this.deleteOrder()
     },
     dismissCancel() {
       //取消取消订单
@@ -708,34 +215,20 @@ Component({
       })
     },
     deleteOrder() {
-      let url = ''
-      let reqName = ''
-      if (this.data.status == 4 || this.data.status == 5 ) {//已完成订单/待确认
-        url = Operation.deleteOrder
-        reqName = '删除订单'
-      } else {
-        url = Operation.deleteClosedOrder
-        reqName = '删除订单'
-      }
-      let params = {
-        orderNum: this.data.orderId,
-        url: url,
-        reqName: reqName
-      };
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
+      API.deleteOrder({
+        orderNo: this.data.orderId,
+      }).then((res) => {
         this.setData({
-          list: []
-        });
-        this.getData(this.data.num);
-      };
-      r.completeBlock = (req) => {
-        this.setData({
+          list: [],
           isDelete: false,
         });
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+        this.getData(this.data.num);
+      }).catch((res) => {
+        this.setData({
+          isDelete: false,
+        })
+        console.log(res)
+      })
     },
     cancelOrder() {
       this.setData({
@@ -767,20 +260,16 @@ Component({
       })
       let that = this;
       Tool.showComfirm(content, function () {
-        let params = {
-          orderNum: id,
-          reqName: '确认收货',
-          url: Operation.confirmReceipt,
-        }
-        let r = RequestFactory.wxRequest(params);
-        r.successBlock = (req) => {
+        API.confirmReceipt({
+          orderNo:id,
+        }).then((res) => {
           that.setData({
             list: []
-          });
+          })
           that.getData(that.data.num);
-        };
-        Tool.showErrMsg(r);
-        r.addToQueue();
+        }).catch((res) => {
+          console.log(res)
+        })
       })
     },
     //立即支付
@@ -796,33 +285,43 @@ Component({
     },
     //再次购买
     continueBuy(e) {
-      let params = {
-        id: e.currentTarget.dataset.id,
-        reqName: '再次购买获取规格',
-        url: Operation.orderOneMore,
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data;
-        let orderProducts = datas.orderProducts || []
-        let list =[]
-        orderProducts.forEach((item) => {
-          list.push({
-            productId:item.productId,
-            priceId:item.priceId,
-            amount:item.num,
-            showCount:item.num,
-            isSelect:true
-          })
-        });
-        if(list.length>0){
-          Storage.setShoppingCart(list);
-          Event.emit('continueBuy');
-          Tool.switchTab('/pages/shopping-cart/shopping-cart')
-        }
-      };
-      Tool.showErrMsg(r);
-      r.addToQueue();
+      API.orderOneMore({
+        orderNo: e.currentTarget.dataset.id,
+      }).then((res) => {
+        let datas = res.data || {}
+      }).catch((res) => {
+        this.setData({
+          isDelete: false,
+        })
+        console.log(res)
+      })
+      // let params = {
+      //   id: e.currentTarget.dataset.id,
+      //   reqName: '再次购买获取规格',
+      //   url: Operation.orderOneMore,
+      // }
+      // let r = RequestFactory.wxRequest(params);
+      // r.successBlock = (req) => {
+      //   let datas = req.responseObject.data;
+      //   let orderProducts = datas.orderProducts || []
+      //   let list =[]
+      //   orderProducts.forEach((item) => {
+      //     list.push({
+      //       productId:item.productId,
+      //       priceId:item.priceId,
+      //       amount:item.num,
+      //       showCount:item.num,
+      //       isSelect:true
+      //     })
+      //   });
+      //   if(list.length>0){
+      //     Storage.setShoppingCart(list);
+      //     Event.emit('continueBuy');
+      //     Tool.switchTab('/pages/shopping-cart/shopping-cart')
+      //   }
+      // };
+      // Tool.showErrMsg(r);
+      // r.addToQueue();
     },
     /**
   * 倒计时
@@ -862,97 +361,13 @@ Component({
       time: time
     })
   },
-    initData0() {
-      let datas = this.data.datas.data
-      let secondMap = new Map()
-      let key = this.data.key
-      let orderInfoArr = []
-      let warehouseOrderDTOList = datas.data.warehouseOrderDTOList || []
-      datas.data.forEach((item, index) => {
-        let warehouseOrderDTOList = item.warehouseOrderDTOList || []
-        let outStatus = item.warehouseOrderDTOList[0].status
-        if (outStatus == 1) {
-          let showOrderList = []
-          warehouseOrderDTOList.forEach((item1, index1) => {
-            item1.products.forEach((item2) => {
-              showOrderList.push(item2)
-            })
-          })
-          orderInfoArr.push({
-            ...item,
-            showStatus: 1,
-            showOrderNo: item.platformOrderNo,
-            showProducts: showOrderList,
-            showName: '平台级订单'
-          })
-        } else {
-          warehouseOrderDTOList.forEach((item1, index1) => {
-            orderInfoArr.push({
-              ...item,
-              showWarehouseInfo: {
-                ...item1,
-              },
-              showStatus: item1.status,
-              showOrderNo: item1.warehouseOrderNo,
-              showProducts: item1.products,
-              showName: '仓库级订单'
-            })
-          })
-          delete orderInfoArr[index].showWarehouseInfo.products
-        }
-      })
-      console.log(orderInfoArr)
-    },
-    // countdown: function (that) {
-    //   clearTimeout(this.data.time);
-    //   let mapArry = that.data.secondArry;
-    //   let orderArry = that.data.list;
-    //   for (let i = 0; i < orderArry.length; i++) {
-    //     let order = orderArry[i];
-    //     if (order.status == 1) {
-    //       let second = mapArry.get(i);
-    //       if (second) {//秒数>0
-    //         // let countDownTime = Tool.timeStringForTimeCount(second);
-    //         // let endTime = Tool.formatTime(order.shutOffTime)
-    //         // let countdown = Tool.getDistanceTime(endTime, this,1)
-    //         // let countdown = Tool.timeCountdown('time', 'distanceTime', 'countDownSeconds', callBack, this) 
-    //         order.countDownTime = countdown + '后自动取消订单';
-    //         mapArry.set(i, countdown);
-    //       } else {
-    //         //order.countDownTime = '交易关闭';
-    //         clearTimeout(this.data.time);
-    //         order.status = 8
-    //         if(this.data.num==1){
-    //           orderArry.splice(i,1)
-    //         }
-    //         if (orderArry.length==0){
-    //           this.setData({
-    //             tipVal:7
-    //           })
-    //         }
-    //         // this.setData({
-    //         //   list: orderArry
-    //         // })
-    //       }
-    //     }
-    //   }
-
-    //   let time = setTimeout(function () {
-    //     that.countdown(that);
-    //   }, 1000)
-
-    //   that.setData({
-    //     list: orderArry,
-    //     time: time
-    //   });
-    // },
+    
     onUnload(){
       clearTimeout(this.data.time);
     },
   },
   ready: function () {
     //this.getData(this.properties.num);
-    // this.initData0()
   },
   
 })

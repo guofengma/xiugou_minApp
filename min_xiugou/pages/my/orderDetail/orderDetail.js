@@ -60,7 +60,7 @@ Page({
     //获取详情
     getDetail() {
       API.getOrderDetail({
-        orderProductNo:this.data.orderId
+        orderNo:this.data.orderId
       }).then((res) => {
         let datas = res.data || {}
         datas.data.forEach((item, index) => {
@@ -166,29 +166,19 @@ Page({
       })
     },
     deleteOrder(){
-      let url = ''
-      let reqName = ''
-      if (this.data.status == 4 || this.data.status == 5 ){//已完成订单     
-        url = Operation.deleteOrder
-        reqName = '删除订单'
-      } else if (this.data.status == 7 || this.data.status == 8 || this.data.status == 6){
-        url = Operation.deleteClosedOrder
-        reqName = '删除订单'
-      }
-      let params = {
-        orderNum: this.data.detail.orderNum,
-        reqName: reqName,
-        url: url
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
+      API.deleteOrder({
+        orderNo: this.data.orderId,
+      }).then((res) => {
         this.setData({
           isDelete: false,
-        });
+        })
         Tool.navigateTo('../my-order/my-order')
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        this.setData({
+          isDelete: false,
+        })
+        console.log(res)
+      })
     },
     cancelItem() {
         this.setData({
@@ -205,20 +195,15 @@ Page({
             content = '确认收货将关闭' + this.data.returnTypeArr[item.returnType] + "申请，确认收货吗？"
           }
         })
-        let id = this.data.orderId;
         let that=this;
-      Tool.showComfirm(content, function () {
-          let params = {
-            orderNum: that.data.detail.orderNum,
-            reqName: '确认收货',
-            url: Operation.confirmReceipt
-          }
-          let r = RequestFactory.wxRequest(params);
-          r.successBlock = (req) => {
+        Tool.showComfirm(content, function () {
+          API.confirmReceipt({
+            orderNo: this.data.orderId,
+          }).then((res) => {
             Tool.navigateTo('../my-order/my-order')
-          };
-          Tool.showErrMsg(r)
-          r.addToQueue();
+          }).catch((res) => {
+            console.log(res)
+          })
         })
     },
     //复制
