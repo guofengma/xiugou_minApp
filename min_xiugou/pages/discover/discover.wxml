@@ -58,7 +58,7 @@
         <template is="discover-item" data="{{showEdit,items:topic,generalize: 3,type:'topic'}}" />
       </view>
     </view>
-    <view class='no-more' wx:if="{{currentTopicPage == totalTopicPage}}">我也是有底线的~</view>
+    <view class='no-more' wx:if="{{currentTopicPage == totalTopicPage || topic.length == 0}}">我也是有底线的~</view>
     <!-- 推荐列表 E -->
   </view>
   <view class='discover-tab-new' wx:else>
@@ -67,7 +67,7 @@
         <template is="discover-item" data="{{showEdit,items:discover,generalize: 4,type: 'discover'}}" />
       </view>
     </view>
-    <view class='no-more' wx:if="{{currentDiscoverPage == totalDiscoverPage}}">我也是有底线的~</view>
+    <view class='no-more' wx:if="{{currentDiscoverPage == totalDiscoverPage || discover.length == 0}}">我也是有底线的~</view>
   </view>
 
   <template is="goT-top-btn" data='{{floorstatus:showBackTop}}'/>
