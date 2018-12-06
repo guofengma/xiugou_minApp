@@ -43,11 +43,11 @@ Page({
       let status = datas.status
       let expressNo = this.data.expressNo
       // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
-      if (datas.countDownSeconds && status == 2 && !datas.address.expressCode) {
+      if (datas.countDownSeconds && status == 2 && !datas.refundAddress.expressCode) {
         this.countdown(this)
       }
-      if (datas.address.expressCode ) {
-        expressNo = { id: 2, content: datas.address.expressCode }
+      if (datas.refundAddress.expressCode ) {
+        expressNo = { id: 2, content: datas.refundAddress.expressCode }
       }
       this.setData({
         expressNo: expressNo,
@@ -58,7 +58,7 @@ Page({
       console.log(res)
     })
   },
-  countdown: function (that) { // 倒计时
+  countdown (that) { // 倒计时
     clearTimeout(that.data.time);
     let distanceTime = Tool.showDistanceTime(this.data.datas.countDownSeconds || 0)
     if (this.data.datas.countDownSeconds == 0) {

@@ -240,11 +240,30 @@ export default class Tool {
       let hour = Math.floor(time / 60 / 60 % 24);
       let minute = Math.floor(time / 60 % 60);
       let second = Math.floor(time % 60);
-      
-      // self.setData({
-      //   distanceTime: distanceTime
-      // })
-      return  day + "天" + hour + "时" + minute + "分" + second + "秒";
+      if (day || hour|| minute|| second){
+        return day + "天" + hour + "时" + minute + "分" + second + "秒";
+      } else {
+        return 0
+      }
+      // return  day + "天" + hour + "时" + minute + "分" + second + "秒";
+    }
+    // 时间倒计时
+    static timeCountdown(that,timerName, distanceTimeName, countDownSeconds,finishCB = () => { }, startCB = () => { }) { 
+      let self = this
+      clearTimeout(that.data[timerName]);
+      let distanceTime = Tool.showDistanceTime(countDownSeconds || 0)
+      if (that.data[countDownSeconds] < 0) {
+        finishCb()
+        return -1
+      }
+      let time = setTimeout(function () {
+        startCB()
+        self.timeCountdown(that, timerName, distanceTimeName, countDownSeconds, finishCB,startCB)
+      }, 1000)
+      // that.setData({
+      //   [distanceTimeName]: distanceTime,
+      //   [timerName]: time
+      // });
     }
     //Object 空值判断
     static isEmpty(object) {

@@ -125,7 +125,7 @@ Page({
       })
     },
     itemClicked(e){
-      if (!this.didLogin(true)) return;
+      // if (!this.didLogin(true)) return;
       let pageIndex = e.currentTarget.dataset.page
       let query = e.currentTarget.dataset.query
       let page = this.data.pageArr[pageIndex]

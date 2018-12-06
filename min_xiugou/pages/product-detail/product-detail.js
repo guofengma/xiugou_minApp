@@ -53,11 +53,11 @@ Page({
   didLogin() {
     this.ProductFactory.didLogin()
     this.initRequest()
-    if(!this.data.didLogin){
-      this.setData({
-        openType:''
-      })
-    }
+    // if(!this.data.didLogin){
+    //   this.setData({
+    //     openType:''
+    //   })
+    // }
     // 领取红包的功能 取消
     // if (!this.data.userInfos.upUserid){
     //   let date = Storage.getRedEnvelopesDate() || ''

@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation, Config} = global;
+let { Tool, API, Storage, Event, Operation, Config} = global;
 
 Page({
     data: {
@@ -59,67 +59,88 @@ Page({
     cancelOrder(){},
     //获取详情
     getDetail() {
-      let params = {
-        id: this.data.orderId,
-        reqName: '订单详情',
-        url: Operation.getOrderDetail
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-            let detail=req.responseObject.data;
-            detail.createTime=detail.createTime?Tool.formatTime(detail.createTime):'';
-            detail.sysPayTime=detail.sysPayTime?Tool.formatTime(detail.sysPayTime):'';
-            detail.payTime=detail.payTime?Tool.formatTime(detail.payTime):'';
-            detail.cancelTime = detail.cancelTime ? Tool.formatTime(detail.cancelTime) : '';
-            detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
-            detail.showFinishTime = detail.deliverTime? Tool.formatTime(detail.deliverTime) : Tool.formatTime(detail.finishTime)
-            detail.deliverTime = Tool.formatTime(detail.deliverTime)
-            detail.showShutOffTime = Tool.formatTime(detail.shutOffTime)
-            let address = {}
-            address.receiver = detail.receiver;
-            address.recevicePhone = detail.recevicePhone;
-            address.addressInfo = detail.province + detail.city + detail.area + detail.address;
-            if(detail.sendTime!=''&&detail.sendTime!=null){
-                detail.sendTime=Tool.formatTime(detail.sendTime);
-                this.data.state.time= detail.sendTime?detail.sendTime:'';
-            }else{
-                detail.sendTime=''
-            }
-        detail.orderPayRecord = detail.orderPayRecord || {}
-        detail.payWay = Tool.bitOperation(this.data.payTypeArr,detail.orderPayRecord.type)
-        if (detail.payWay.includes(this.data.payTypeArr[0])){
-          detail.showPlatformTime = Tool.formatTime(detail.platformPayTime)
-        }
-        if (detail.payWay.length > 1 || (detail.payWay.length == 1 && !detail.payWay.includes(this.data.payTypeArr[0]))){
-          detail.isUsedThirdPay = true
-        }
-            if (detail.status == 1 || detail.status == 3) { // 开始倒计时
-              let that = this
-              let time = setInterval(function () { that.time() }, 1000)
-              this.setData({
-                time: time
-              })
-            } 
-        detail.showProductList = (detail.orderType == 5 || detail.orderType == 98) ? detail.orderProductList[0].orderProductPriceList : detail.orderProductList
-            if (detail.orderType == 5 || detail.orderType == 98){
-              detail.orderProductList[0].orderProductPriceList.forEach((item)=>{
-                item.num = item.productNum
-                item.price = item.originalPrice
-              })
-            }
-            this.setData({
-                detail: detail,
-                address: address,
-              status:detail.status,
-                state: this.orderState(detail.status)//订单状态相关信息this.data.state
+      API.getOrderDetail({
+        orderProductNo:this.data.orderId
+      }).then((res) => {
+        let datas = res.data || {}
+        datas.data.forEach((item, index) => {
+          let warehouseOrderDTOList = item.warehouseOrderDTOList || []
+          let outStatus = item.warehouseOrderDTOList[0].status
+          let showOrderList = []
+          warehouseOrderDTOList.forEach((item1, index1) => {
+            item1.products.forEach((item2) => {
+              showOrderList.push(item2)
             })
-            if (detail.expressNo) {
-              this.getDelivery(detail)
-            }
-            this.middleBtn()
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
+          })
+        })
+        datas.showProduct = showOrderList
+        this.setData({
+          detail:datas
+        })
+      }).catch((res) => {
+        console.log(res)
+      })
+      // let params = {
+      //   id: this.data.orderId,
+      //   reqName: '订单详情',
+      //   url: Operation.getOrderDetail
+      // }
+      // let r = RequestFactory.wxRequest(params);
+      // r.successBlock = (req) => {
+      //       let detail=req.responseObject.data;
+      //       detail.createTime=detail.createTime?Tool.formatTime(detail.createTime):'';
+      //       detail.sysPayTime=detail.sysPayTime?Tool.formatTime(detail.sysPayTime):'';
+      //       detail.payTime=detail.payTime?Tool.formatTime(detail.payTime):'';
+      //       detail.cancelTime = detail.cancelTime ? Tool.formatTime(detail.cancelTime) : '';
+      //       detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
+      //       detail.showFinishTime = detail.deliverTime? Tool.formatTime(detail.deliverTime) : Tool.formatTime(detail.finishTime)
+      //       detail.deliverTime = Tool.formatTime(detail.deliverTime)
+      //       detail.showShutOffTime = Tool.formatTime(detail.shutOffTime)
+      //       let address = {}
+      //       address.receiver = detail.receiver;
+      //       address.recevicePhone = detail.recevicePhone;
+      //       address.addressInfo = detail.province + detail.city + detail.area + detail.address;
+      //       if(detail.sendTime!=''&&detail.sendTime!=null){
+      //           detail.sendTime=Tool.formatTime(detail.sendTime);
+      //           this.data.state.time= detail.sendTime?detail.sendTime:'';
+      //       }else{
+      //           detail.sendTime=''
+      //       }
+      //   detail.orderPayRecord = detail.orderPayRecord || {}
+      //   detail.payWay = Tool.bitOperation(this.data.payTypeArr,detail.orderPayRecord.type)
+      //   if (detail.payWay.includes(this.data.payTypeArr[0])){
+      //     detail.showPlatformTime = Tool.formatTime(detail.platformPayTime)
+      //   }
+      //   if (detail.payWay.length > 1 || (detail.payWay.length == 1 && !detail.payWay.includes(this.data.payTypeArr[0]))){
+      //     detail.isUsedThirdPay = true
+      //   }
+      //       if (detail.status == 1 || detail.status == 3) { // 开始倒计时
+      //         let that = this
+      //         let time = setInterval(function () { that.time() }, 1000)
+      //         this.setData({
+      //           time: time
+      //         })
+      //       } 
+      //   detail.showProductList = (detail.orderType == 5 || detail.orderType == 98) ? detail.orderProductList[0].orderProductPriceList : detail.orderProductList
+      //       if (detail.orderType == 5 || detail.orderType == 98){
+      //         detail.orderProductList[0].orderProductPriceList.forEach((item)=>{
+      //           item.num = item.productNum
+      //           item.price = item.originalPrice
+      //         })
+      //       }
+      //       this.setData({
+      //           detail: detail,
+      //           address: address,
+      //         status:detail.status,
+      //           state: this.orderState(detail.status)//订单状态相关信息this.data.state
+      //       })
+      //       if (detail.expressNo) {
+      //         this.getDelivery(detail)
+      //       }
+      //       this.middleBtn()
+      //   };
+      //   Tool.showErrMsg(r)
+      // r.addToQueue();
     },
     onShow: function () {
 

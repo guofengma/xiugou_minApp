@@ -44,18 +44,21 @@ Page({
         Tool.redirectTo('/pages/after-sale/return-goods/return-goods?serviceNo=' + serviceNo)
         return
       }
+      datas.refundAddress.address = datas.refundAddress.refundAddress
+      datas.refundAddress.receiver = datas.refundAddress.refundReceiver
+      datas.refundAddress.receiverPhone = datas.refundAddress.refundReceiverPhone
       let status = datas.status
       let expressNo = this.data.expressNo
       let SaleExpressNo = this.data.SaleExpressNo
       // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
-      if (datas.countDownSeconds && status == 2 && !datas.address.expressCode) {
+      if (datas.countDownSeconds && status == 2 && !datas.refundAddress.expressCode) {
         this.countdown(this)
       }
-      if (datas.address.expressCode){
-        expressNo = { id: 2, content: datas.address.expressCode}
+      if (datas.refundAddress.expressCode){
+        expressNo = { id: 2, content: datas.refundAddress.expressCode}
       }
-      if (datas.refundAddress.expressCode) {
-        SaleExpressNo = { id: 2, content: datas.refundAddress.expressCode }
+      if (datas.address.expressCode) {
+        SaleExpressNo = { id: 2, content: datas.address.expressCode }
       }
       this.setData({
         datas: datas,

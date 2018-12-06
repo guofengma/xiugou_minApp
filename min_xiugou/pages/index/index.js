@@ -112,6 +112,10 @@ Page({
       })
     },
     onLoad: function (options) {
+      let callBack = ()=>{
+        console.log('结束啦')
+      }
+      // Tool.timeCountdown('time', 'distanceTime', 'countDownSeconds', callBack, this) 
       // Event.on('getLevel', this.getLevel,this)
       Event.on('didLogin', this.didLogin, this); 
       if (Storage.getFirstRegistration()){

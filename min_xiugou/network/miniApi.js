@@ -339,7 +339,7 @@ const api =
     '/order/list',
     {
       "action": "用户订单列表",
-      "method": "post",
+      "method": "get",
       "encrypt": false,
     }
   ],

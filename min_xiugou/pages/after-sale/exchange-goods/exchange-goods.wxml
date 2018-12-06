@@ -24,7 +24,7 @@
 <view wx:if='{{datas.status>1&&datas.status!=3}}'>
   <!--地址信息  -->
   <view class='address active whiteBg' >
-    <template is="address-info" data="{{addressType,...datas,hasData:true,door:1}}"/>
+    <template is="address-info" data="{{addressType,...datas.refundAddress,hasData:true,door:1}}"/>
   </view>
 
   <!--商家地址  -->

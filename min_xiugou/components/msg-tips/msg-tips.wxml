@@ -11,7 +11,7 @@
     </view>
     <view class='flexR' data-index='3' bindtap='msgTipsClicked'>
       <view>
-        <button class='share'  open-type="{{openType}}" catchtap='btnClicked'>
+        <button class='share'  open-type="{{openType}}" >
         <image src='/img/share-icon.png' mode='widthFix'></image>
         分享
         </button>
