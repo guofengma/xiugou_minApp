@@ -67,7 +67,9 @@ Page({
           let warehouseOrderDTOList = item.warehouseOrderDTOList || []
           let outStatus = item.warehouseOrderDTOList[0].status
           let showOrderList = []
+          let showStatus = []
           warehouseOrderDTOList.forEach((item1, index1) => {
+            showStatus.push(item1.status)
             item1.products.forEach((item2) => {
               showOrderList.push(item2)
             })
