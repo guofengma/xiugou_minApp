@@ -74,15 +74,12 @@ Page({
   },
   onReachBottom() {
     let type = this.data.tabIndex == 0 ? 3 : 4;
-    console.log(type);
     let localData = this.data;
-    console.log(type == 4 && localData.currentDiscoverPage == localData.totalDiscoverPage || localData.discover.length == 0);
 
     if(
-      (type == 3 && localData.currentTopicPage == localData.totalTopicPage || type == 3 && localData.topic.length == 0) || 
-      (type == 4 && localData.currentDiscoverPage == localData.totalDiscoverPage || type == 4 &&localData.discover.length == 0)
+      (type == 3 && (localData.currentTopicPage == localData.totalTopicPage || localData.topic.length == 0) ) || 
+      (type == 4 && (localData.currentDiscoverPage == localData.totalDiscoverPage || localData.discover.length == 0) )
     ){
-      console.log(22);
         return;
     }
     type == 3 &&
