@@ -26,16 +26,15 @@
       <view class='growing-bar-value' style='width:{{userLevelInfo.width}};'></view>
     </view>
     <view>
-      距离晋升还差
-      <text>{{userLevelInfo.surpluslExperience}}分</text>
-      <text class='red' wx:if='{{!userLevelInfo.surpluslExperience}}'>(经验值已满)</text>
+      距离晋升还差<text>{{userLevelInfo.surpluslExperience}}点Exp</text>
+      <text class='red' wx:if='{{!userLevelInfo.surpluslExperience}}'>(Exp已满)</text>
     </view>
   </view>
 </view>
 </view>
 
 <view class='growing-question'>
-  <view class='title ellipsis font-28 whiteBg'>预计晋升后可获得哪些福利？</view>
+  <!-- <view class='title ellipsis font-28 whiteBg'>预计晋升后可获得哪些福利？</view> -->
   <!-- <view class='ellipsis gray font-26'>去问产品这块是干啥的</view> -->
   <view>
    <template is="wxParse" data="{{wxParseData:article.nodes}}" />

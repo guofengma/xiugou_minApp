@@ -22,7 +22,8 @@ Page({
   onLoad: function (options) {
     Tool.getUserInfos(this)
     this.setData({
-      params: JSON.parse(options.params),
+      // params: JSON.parse(options.params),
+      params:Storage.getSubmitOrderList() || {},
       door: options.type,
       formCart: options.formCart || false
     })

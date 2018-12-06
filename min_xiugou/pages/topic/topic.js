@@ -14,7 +14,7 @@ Page({
   },
   onLoad: function (options) {
 
-    this.getTopicByCode(options.code || 'ZT20180002');
+    this.getTopicByCode(options.code || '');
   },
   // 点击标题切换当前页时改变样式
   swichNav: function (e) {

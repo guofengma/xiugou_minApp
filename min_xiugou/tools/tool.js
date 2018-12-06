@@ -857,16 +857,14 @@ export default class Tool {
     // 登录以后的操作
 
     static loginOpt(req){
-      // let cookies = req.header['Set-Cookie'] || req.header['set-cookie'] 
-      // if (cookies) this.formatCookie(cookies)
-      if (req.responseObject.data.token){
-        global.Storage.setToken(req.responseObject.data.token)
+      let datas = req.responseObject.data || {}
+      if (datas.token){
+        global.Storage.setToken(datas.token)
       }
-      
-      global.Storage.setUserAccountInfo(req.responseObject.data)
+      global.Storage.setUserAccountInfo(datas)
       global.Event.emit('didLogin');
-      global.Storage.setWxOpenid(req.responseObject.data.openid)
-      global.Storage.setMemberId(req.responseObject.data.id)
+      global.Storage.setWxOpenid(datas.openid)
+      global.Storage.setMemberId(datas.id)
       global.Event.emit('refreshMemberInfoNotice');
     }
 

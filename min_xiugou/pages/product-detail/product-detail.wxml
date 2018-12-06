@@ -11,7 +11,7 @@
 
 
 <!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
-<view class='prduct-detail-view' wx:if='{{productInfoList}}'>
+<view class='prduct-detail-view' wx:if='{{productInfo}}'>
     <!--topbar  -->
     <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'  size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}'/>
     <!-- 轮播 -->
@@ -29,7 +29,7 @@
       />
     </view>
     <!-- 产品信息 -->
-    <template is="product-info" data="{{productInfo,productInfoList,showPrice:true,groupPrice:true}}" />
+    <template is="product-info" data="{{productInfo,showPrice:true,groupPrice:true}}" />
     <!--产品规格选择  -->
     <view class='chooseBox'>
       <template is="product-info-chooseBox" data="{{productInfo}}" />
@@ -40,7 +40,7 @@
    
     <!-- 详情页 tabar  -->
     <view class=" boxSize {{isIPhoneX.className}}">
-      <template is="errTips"  wx:if='{{productInfoList.status==2}}'/>
+      <template is="errTips"  wx:if='{{productInfo.productStatus==2}}'/>
       <!-- <view class='cart font-22 flexC' bindtap='cartClicked'>
         <image src='/img/shoppingcart.png' mode='widthFix'></image>
         <view class='gray'>购物车</view>
@@ -59,12 +59,12 @@
         </view>
         <view class='add-cart font-28 flexR yellowBg shareBtn-view' >
           <button class='shareBtn flexR '  open-type="{{openType}}" catchtap='shareBtnClicked' >
-           <view wx:if='{{productInfoList.shareMoney=="0.00" || productInfoList.shareMoney=="0.00 - 0.00"}}'>分享赚</view>
+           <view wx:if='{{productInfo.shareMoney=="0.00" || productInfo.shareMoney=="0.00 - 0.00"}}'>分享赚</view>
            <view wx:else class='flexR'>
              <view class='font-50'>赚</view>
               <view class='font-22 shareMoney' style='margin-left:8rpx'>
                 <view>品牌奖励金</view>
-                <view class='ellipsis'>¥ {{productInfoList.shareMoney}}</view>
+                <view class='ellipsis'>¥ {{productInfo.shareMoney}}</view>
               </view>
            </view>
           </button>
@@ -87,7 +87,7 @@
 <product-specification id='prd-info-type' 
     bind:subClicked="typeSubClicked"  
     productSpec='{{productSpec}}' 
-    price = '{{productInfoList.price}}'
+    price = '{{productInfo.price}}'
     priceList='{{priceList}}' 
     bind:counterInputOnChange='counterInputOnChange' 
     imgUrl="{{productInfo.imgUrl}}" 

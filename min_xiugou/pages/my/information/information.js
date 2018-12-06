@@ -21,22 +21,6 @@ Page({
         })
       }
       app.queryPushMsg(callBack)
-      // let params = {
-      //   reqName: '消息未读详情',
-      //   url: Operation.queryPushNum,
-      //   requestMethod: 'GET'
-      // }
-      // let r = RequestFactory.wxRequest(params);
-      // r.successBlock = (req) => {
-      //   let detail=req.responseObject.data;
-      //   this.setData({
-      //     noticeNum: detail.noticeCount,
-      //     messageNum: detail.messageCount,
-      //     storeMessageNum: detail.shopMessageCount,
-      //   })
-      // };
-      // Tool.showErrMsg(r)
-      // r.addToQueue();
     },
     didLogin(){
       if (!Tool.didLogin(this)){

@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation,Event } = global;
+let { Tool, RequestFactory, Storage, Operation, Event, API } = global;
 const app = getApp()
 Page({
   data: {
@@ -22,6 +22,7 @@ Page({
     urlFrom: null,
   },
   onLoad: function (options) {
+    // Tool.navigateTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
     let inviteId = options.inviteId
     if (options.inviteId == 'null' || options.inviteId == 'undefined' || !options.inviteId) {
       inviteId = ''
@@ -105,6 +106,7 @@ Page({
     this.verifyPhone(params)
   },
   verifyPhone(params){
+    
     params = {
       ...params,
       reqName: '判断手机号是否已经注册',
@@ -126,7 +128,7 @@ Page({
         }
         Tool.showSuccessToast('注册成功', callBack)
       } else {
-        Tool.navigateTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
+        Tool.redirectTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
       }
       // if (this.data.urlFrom){
       //   Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
@@ -193,20 +195,15 @@ Page({
       showSecond: true
     });
     this.countdown(this);
-    let params = {
+    API.sendMessage({
       phone: this.data.phone,
-      reqName: '发送短信',
-      url: Operation.sendMessage,
-      requestMethod: 'GET',
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock= (req) => {
+    }).then((res) => {
       wx.showToast({
         title: '验证码已发送',
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   countdown: function (that) { // 倒计时
     let second = that.data.second;

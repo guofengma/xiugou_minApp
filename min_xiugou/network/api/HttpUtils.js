@@ -5,32 +5,31 @@ import {
 } from '../../tools/tcglobal';
 
 export default class HttpUtils {
-  static getHeaders() {
+  static getHeaders(url, params, config={}, method) {
+    // 是否需要加签
+    const rsa_headers = config.encrypt ? this.getRsaHeaders(url, params, method) : {};
     return  {
       'content-type': 'application/json',
-      'device': global.Storage.getPlatform() || '',
-      'platform': 'mini',
-      'version': wx.getSystemInfoSync(),
-      'sg-token': global.Storage.getToken() || '',
+      'device': global.Storage.getPlatform() || '', // 设备唯一标识
+      'platform': 'mini', // 小程序标识
+      'deviceVersion': wx.getSystemInfoSync().system || '', // 系统版本号
+      'sg-token': global.Storage.getToken() || '', // 用户token
+      ...rsa_headers
     }
   }
   static get(url, params, config = {}) {
-    return this.request(url, params, config = {}, 'get')
+    return this.request(url, params, config, 'get')
   }
 
   static post(url, params, config = {}) {
-    return this.request(url, params, config = {},'post')
+    return this.request(url, params, config,'post')
   }
-  static request(url, params, config = {}, method) {
-    const rsa_headers = config.encrypt ? this.getRsaHeaders(url, params, method) : {};
+  static request(url, params, config, method) {
     const isShowLoading = this.showLoading(config)
     if (isShowLoading) {
       global.Tool.showLoading();
     }
-    const headers = {
-      ...this.getHeaders(),
-      ...rsa_headers
-    }
+    const headers = this.getHeaders(url, params, config, method)
     return new Promise((resolve, reject) => {
       wx.request({
         url: url,
@@ -48,7 +47,7 @@ export default class HttpUtils {
           reject(res.data);
         },
         complete: function (res) {
-
+          console.log(res.data)
         }
       });
     }) 

@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, Storage, Event,API } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
 import ProductFactorys from '../temp/product.js'
@@ -58,40 +58,31 @@ Page({
       screenShow: !this.data.screenShow
     })
   },
-  //获取专题活动数据  JJP201810100001
+  //获取专题活动数据 
   getTopicActivityData(code) {
-    let params = {
+    API.getActivityDepreciateById({
       code: code,
-      reqName: '获取降价拍详情',
-      url: Operation.getActivityDepreciateById,
-      requestMethod: 'GET'
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data || {}; 
-      let jumpTimer = null; 
+    }).then((res) => {
+      let data = res.data || {};
+      let jumpTimer = null;
       if (data.status >= 4 && data.type == 1) {//type是否为隐藏类目，非隐藏要跳转  1：显示 2：隐藏
         jumpTimer = setTimeout(() => {
           //跳转到普通详情页
-          Tool.navigateTo('/pages/product-detail/product-detail?productId=' + data.productId)
+          Tool.navigateTo('/pages/product-detail/product-detail?prodCode==' + data.prodCode)
         }, 5000)
       }
-      let specIds = []
-      data.productSpecValue.forEach((item) => {
-        specIds.push(item.id)
-      })
-      specIds = Tool.bubbleSort(specIds)
-      let productSpec = this.refactorProductsData(data.productSpecValue);
+      // 根据降价拍返回的sku数据生成sku选择组件所需数据
+      let productSpec = this.ProductFactory.refactorProductsData(data.productSpecValue || []);
       this.setData({
         proNavData: data,
-        specIds: specIds,
+        specIds: data.skuCode,
         jumpCommonProductTimer: jumpTimer,
-        productId: data.productId
+        productCode: data.prodCode
       })
-      if (data.productStatus == 0){ // 商品走丢了 删除了
+      if (data.productStatus == 0) { // 商品走丢了 删除了
         this.ProductFactory.productDefect()
       }
-      let callBack = ()=>{
+      let callBack = () => {
         this.setData({
           productSpec: productSpec, // 规格描述
         })
@@ -99,58 +90,12 @@ Page({
         data.id && this.selectComponent('#promotion').init();
       }
       this.ProductFactory.requestFindProductByIdApp(callBack)
-      
-      
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
-  // 根据降价拍返回的sku数据生成sku选择组件所需数据
-  refactorProductsData(originData = []) {
-    let newData = {};
-    originData.forEach(function (item) {
-      newData[item.specName] = [];
-      newData[item.specName].push({
-        id: item.id,
-        specName :item.specName,
-        specValue : item.specValue,
-      })
+    }).catch((res) => {
+
     })
-    return newData;
   },
   setTip: function () {
-    let userInfo = Storage.getUserAccountInfo();
-    // console.log(userInfo);
-    // return;
-    let prop = this.data.proNavData;
-    let params = {
-      reqName: '订阅提醒',
-      url: Operation.addActivitySubscribe,
-      activityId: prop.id,
-      activityType: 2, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
-      type: 1, // 1订阅 0 取消订阅
-      userId: userInfo.id
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
-      wx.showToast({
-        title: title,
-        icon: 'none',
-        duration: 3000
-      })
-      this.setData({
-        promotionFootbar: {
-          className: 'footbar-disabled',
-          text: '活动开始前3分钟提醒',
-          textSmall: '',
-          disabled: true
-        },
-        "proNavData.notifyFlag": 1
-      })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    this.ProductFactory.setTip(2)
   },
   //根据不同状态有不同的事情处理
   footbarReady(e) {
@@ -159,7 +104,6 @@ Page({
     if (data.proNavData.status === 1) {
       this.setTip();
     } else {
-      // console.log(this.data.productSpec)
       this.btnClicked(e);
     }
   },
@@ -177,6 +121,7 @@ Page({
       num:this.data.productBuyCount,
       orderType: 2
     }
+    Storage.setSubmitOrderList(params)
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + '&type=' + this.data.door)
   },
   typeSubClicked(e) {

@@ -1,52 +1,44 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, RequestFactory, Storage, Event, Operation,API } = global
 const app = getApp()
 export default class ProductFactorys  {
   constructor(page) {
     this.page = page
   }
   requestFindProductByIdApp(callBack = () => { }) { // 产品详情接口请求
-    let url = this.page.data.prodCode ? Operation.getProductDetailByCode : Operation.findProductByIdApp
-    url = this.page.data.proNavData ? Operation.findProductByIdApp : url
-    let params = {
-      id: this.page.data.productId,
-      code: this.page.data.prodCode,
-      requestMethod: 'GET',
-      reqName: '获取商品详情页',
-      url: url
-    }
-    let r = RequestFactory.wxRequest(params);
-    let productInfo = this.page.data.productInfo
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data || {}
+    API.getProductDetailByCode({
+      code: this.page.data.productCode
+    }).then((res) => {
+      let datas = res.data || {}
       this.page.data.userInfos = this.page.data.userInfos || {}
       datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelRemark + "价"
-      datas.showPrice = (datas.minPrice == datas.maxPrice) ? '¥' + datas.maxPrice : '¥' + datas.minPrice +' - ¥'+datas.maxPrice
+      datas.showPrice = (datas.minPrice == datas.maxPrice) ? '¥' + datas.maxPrice : '¥' + datas.minPrice + ' - ¥' + datas.maxPrice
       // 用户不能购买 限购但属于数量小于等于0且状态不是1
-      if ((datas.product.buyLimit != -1 && !datas.product.leftBuyNum) || datas.status!=1) {
-        datas.product.canUserBuy = false
+      if ((datas.buyLimit != -1 && !datas.leftBuyNum) || datas.productStatus != 1) {
+        datas.canUserBuy = false
       } else {
-        datas.product.canUserBuy = true
+        datas.canUserBuy = true
       }
+      datas.content = datas.content || ''
+      datas.showContent = datas.content.split(',')
       this.page.setData({
-        isInit:false,
-        imgUrls: datas.productImgList,
-        productInfo: datas.product,
-        productInfoList: datas,
-        priceList: datas.priceList, // 价格表
-        productSpec: datas.specMap, // 规格描述
-        productId: datas.product.id ? datas.product.id : this.page.data.productId
+        isInit: false,
+        imgUrls: datas.imgFileList || [],
+        productInfo: datas,
+        // productInfoList: datas,
+        priceList: datas.skuList, // 价格表
+        productSpec: datas.specifyList, // 规格描述
+        productId: datas.prodCode ? datas.prodCode : this.page.data.productCode
       })
-
       // 渲染表格
-      this.renderTable(datas.paramList, 'paramName','paramValue')
-      
+      this.renderTable(datas.paramList || {}, 'paramName', 'paramValue')
+
       // 渲染详情图文
-      this.page.selectComponent("#productInfos").initDatas()
+      // this.page.selectComponent("#productInfos").initDatas()
       // 执行额外需要做的操作
       callBack(datas)
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+
+    })
   }
   renderTable(paramList, paramName, paramValue) {  // 渲染表格
     let tbody = [{
@@ -104,26 +96,59 @@ export default class ProductFactorys  {
     }
     app.queryPushMsg(callBack)
   }
+  addToShoppingCart() { // 加入购物车
+    let params = {
+      productCode: this.page.data.selectType.prodCode,
+      amount: this.page.data.selectType.buyCount,
+      skuCode: this.page.data.selectType.skuCode,
+      timestamp: new Date().getTime(),
+    }
+    // 加入购物车
+    if (!this.page.data.didLogin) {
+      this.setStoragePrd(params)
+      return
+    }
+    API.addToShoppingCart(params).then((res) => {
+      this.getShoppingCartList()
+      Event.emit('updateShoppingCart')
+      Tool.showSuccessToast('添加成功')
+    }).catch((res) => {
+
+    })
+  }
+  setStoragePrd(params, index) { // 加入本地购物车
+    let list = Storage.getShoppingCart() || []
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].skuCode === params.skuCode) {
+        list[i].showCount += this.page.data.selectType.buyCount
+        this.updateStorageShoppingCart(list)
+        return
+      }
+    }
+    params.showCount = this.page.data.selectType.buyCount
+    list.push(params)
+    this.updateStorageShoppingCart(list)
+  }
+  updateStorageShoppingCart(list) { // 存储在本地
+    Storage.setShoppingCart(list)
+    this.getShoppingCartList()
+    Tool.showSuccessToast('添加成功')
+    Event.emit('updateStorageShoppingCart')
+  }
   getShoppingCartList() { // 获取线上购物车
     if (!this.page.data.didLogin) {
       this.getStorageCartList()
       return
     }
-    let params = {
-      reqName: '获取购物车',
-      url: Operation.getShoppingCartList,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      data = data === null ? [] : data
+    API.getShoppingCartList({}).then((res) => {
+      let data = res.data || []
       let size = data.length > 99 ? 99 : data.length
       this.page.setData({
         size: size
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+
+    })
   }
   cartClicked() { // 跳转购物车
     Tool.switchTab('/pages/shopping-cart/shopping-cart')
@@ -156,6 +181,47 @@ export default class ProductFactorys  {
   }
   productDefect(){ // 跳转到产品缺失页面
     Tool.redirectTo('/pages/product-detail/temp/defect/defect')
+  }
+  setTip(activityType) { // 设置消息提醒
+    let userInfo = Storage.getUserAccountInfo();
+    let prop = this.page.data.proNavData;
+    let params = {
+      activityId: prop.id,
+      activityType: activityType, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
+      type: 1, // 1订阅 0 取消订阅
+      userId: userInfo.id
+    }
+    API.addActivitySubscribe(params).then((res) => {
+      let title = `已关注本商品,\r\n活动开始前3分钟会有消息通知您`;
+      wx.showToast({
+        title: title,
+        icon: 'none',
+        duration: 3000
+      })
+      this.page.setData({
+        promotionFootbar: {
+          className: 'footbar-disabled',
+          text: '活动开始前3分钟提醒',
+          textSmall: '',
+          disabled: true
+        },
+        "proNavData.notifyFlag": 1
+      })
+    }).catch((res) => {
+
+    })
+  }
+  refactorProductsData(originData = []) {
+    let newData = [];
+    originData.forEach(function (item) {
+      item.specName = item.paramName
+      item.specValue = item.paramValue,
+      newData.push({
+        specName: item.specName,
+        specValues:[item],
+      })
+    })
+    return newData;
   }
   goTop() { // 置顶
     if (wx.pageScrollTo) {

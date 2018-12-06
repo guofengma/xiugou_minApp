@@ -2,6 +2,10 @@
   <view class='container' >
     <view class='notice-view boxSize' catchtap='close'>
       <image-sub imgStyle='{{"width:458rpx"}}' imgSrc="{{'bg_img_user@2x.png'}}" />
+      <view class='font-24 flexC red'>
+        图片地址还没有确认,
+        <view>催寿哥去，催他催他,打个bug给他</view>
+      </view>
       <view class='close flexR' >
         <image-sub imgStyle='{{"width:47rpx"}}' imgSrc="{{'red-envelopes.png'}}" />
       </view>

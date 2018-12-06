@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, Storage, Event, API } = global
 
 import ProductFactorys from '../temp/product.js'
 
@@ -58,27 +58,21 @@ Page({
       orderType: 5,
       packageCode: this.data.productInfo.packageCode
     }
-
+    Storage.setSubmitOrderList(params)
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&type=5")
   },
   getGiftBagDetail() { //获取礼包详情
-    let params = {
-      code:this.data.giftBagId,
-      isShowLoading:false,
-      reqName: '礼包详情',
-      requestMethod: 'GET',
-      url: Operation.getGiftBagDetail
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
+    API.getGiftBagDetail({
+      code: this.data.giftBagId
+    }).then((res) => {
+      let datas = res.data || {}
       if (datas.status == 0) { // 商品走丢了 删除了
         this.ProductFactory.productDefect()
         return
       }
-      if (this.data.didLogin){
-        if (datas.userBuy && datas.type==2){
-          this.data.isShowGiftTips =true
+      if (this.data.didLogin) {
+        if (datas.userBuy && datas.type == 2) {
+          this.data.isShowGiftTips = true
         }
         this.setData({
           isShowGiftTips: this.data.isShowGiftTips
@@ -107,7 +101,8 @@ Page({
       // 显示各礼包总库存里面的最小库存
 
       datas.showStock = Math.min(...giftStock)
-
+      datas.content = datas.content || ''
+      datas.showContent = datas.content.split(',')
       this.setData({
         imgUrls: datas.imgFileList,
         productInfo: datas,
@@ -117,20 +112,19 @@ Page({
       })
 
       // 渲染表格
-      this.ProductFactory.renderTable(datas.paramValueList, 'param','paramValue')
+      this.ProductFactory.renderTable(datas.paramValueList || {}, 'param', 'paramValue')
 
-      this.selectComponent("#productInfos").initDatas()
-    }
-    r.failBlock = (req) => {
+      // this.selectComponent("#productInfos").initDatas()
+    }).catch((res) => {
+      console.log(res)
       let callBack =()=>{}
-      if (req.responseObject.code == 604) { // 超时登录
+      if (res.code == 604) { // 超时登录
         callBack = () => {
           Tool.navigationPop()
         }
       }
-      Tool.showAlert(req.responseObject.msg, callBack)
-    }
-    r.addToQueue();
+      Tool.showAlert(res.msg, callBack)
+    })
   },
   typeSubClicked(e) {
     this.setData({
