@@ -27,7 +27,7 @@ Page({
     this.getDiscoverSwiper();
     this.getDiscoveryByType(1,1);
     // this.getDiscoveryByType(2,1);
-    this.getDiscoveryByType(3,1, (data) => {
+    this.getDiscoveryByType(3,1, 20, (data) => {
       let topic = this.data.topic;
       this.setData({
         topic: topic.concat(data.data),
@@ -35,7 +35,7 @@ Page({
         totalTopicPage: data.totalPage,
       })
     });
-    this.getDiscoveryByType(4, 1, (data) => {
+    this.getDiscoveryByType(4, 1, 20, (data) => {
       let discover = this.data.discover;
       this.setData({
         discover: discover.concat(data.data),
@@ -75,14 +75,15 @@ Page({
   onReachBottom() {
     let type = this.data.tabIndex == 0 ? 3 : 4;
     let localData = this.data;
+
     if(
-      (type == 3 && localData.currentTopicPage == localData.totalTopicPage || localData.topic.length == 0) || 
-      (type == 4 && localData.currentDiscoverPage == localData.totalDiscoverPage || localData.discover.length == 0)
+      (type == 3 && (localData.currentTopicPage == localData.totalTopicPage || localData.topic.length == 0) ) || 
+      (type == 4 && (localData.currentDiscoverPage == localData.totalDiscoverPage || localData.discover.length == 0) )
     ){
         return;
     }
     type == 3 &&
-      this.getDiscoveryByType(3, localData.currentTopicPage + 1, (data) => {
+      this.getDiscoveryByType(3, localData.currentTopicPage + 1, 10, (data) => {
       let topic = this.data.topic;
       this.setData({
         topic: topic.concat(data.data),
@@ -91,7 +92,8 @@ Page({
       })
     });
     type == 4 && 
-      this.getDiscoveryByType(4, localData.currentDiscoverPage + 1 , (data) => {
+      this.getDiscoveryByType(4, localData.currentDiscoverPage + 1, 10, (data) => {
+        console.log(data);
       let discover = this.data.discover;
       this.setData({
         discover: discover.concat(data.data),
@@ -156,10 +158,10 @@ Page({
     r.addToQueue();
   },
   // 获取发现相关数据
-  getDiscoveryByType(type, page = 1, callback) {
+  getDiscoveryByType(type, page = 1, size = 20, callback) {
     let params = {
       page: page,
-      size: 20, //默认20
+      size: size, //默认20
       url: Operation.queryDiscoverListByType,
       requestMethod: 'GET',
       reqName: '获取发现'
