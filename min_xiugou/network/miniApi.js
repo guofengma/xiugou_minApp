@@ -253,6 +253,14 @@ const api =
       'isShowLoading': false,
     }
   ],
+  "shareClick": [
+    "/user/shareClick",
+    {
+      "method": "get",
+      "action": "分享点击",
+      "isShowErrMsg": false,
+    }
+  ]
 }
 
 const API = new ApiUtils(api).result;

@@ -2,7 +2,7 @@ let { Tool, RequestFactory, Storage, Event, Operation,API } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
 import ProductFactorys from '../temp/product.js'
-
+const app = getApp();
 Page({
   data: {
     door:1,
@@ -36,6 +36,7 @@ Page({
     this.setData({
       prodCode: options.code
     })
+    app.shareClick(options.inviteId);
     this.ProductFactory = new ProductFactorys(this)
     this.didLogin()
     this.getTopicActivityData();    

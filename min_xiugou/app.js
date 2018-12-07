@@ -64,6 +64,11 @@ App({
         }
       })
     },
+    shareClick(userId) {
+      if (userId !== 'null' && userId !== 'undefined' && userId) {
+        API.shareClick({ userId: userId }).then(res => { });
+      }
+    },
     toLogin(callBack = () => { }) {
       if (!this.globalData.code) return
       let params = {
