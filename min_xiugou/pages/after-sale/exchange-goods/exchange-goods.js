@@ -43,6 +43,8 @@ Page({
       datas.createTime = Tool.formatTime(datas.createTime)
       let refundAddress = datas.refundAddress || {}
       refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
+      let address = datas.refundAddress || {}
+      address.addressInfo = address.province + address.city + address.area + address.address
       this.setData({
         datas: datas,
         resultIndex: status

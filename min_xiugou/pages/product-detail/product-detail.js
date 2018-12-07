@@ -109,12 +109,12 @@ Page({
       return
     }
     let params = {
-      orderProducts:[{
-        num: this.data.productBuyCount,
-        priceId: this.data.selectType.skuCode,
-        productId: this.data.selectType.prodCode
+      orderProductList:[{
+        quantity: this.data.productBuyCount,
+        skuCode: this.data.selectType.skuCode,
+        prodCode: this.data.selectType.prodCode
       }],
-      orderType:99
+      orderType:1
     }
     Storage.setSubmitOrderList(params)
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params)+'&type=99' )

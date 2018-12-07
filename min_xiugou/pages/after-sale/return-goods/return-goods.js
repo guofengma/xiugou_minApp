@@ -41,6 +41,13 @@ Page({
       datas.showImgList = imgList.split(',')
       let status = datas.status
       datas.createTime = Tool.formatTime(datas.createTime)
+      // if (status == 2) {
+      //   let self = this
+      //   if (!datas.expressNo) {
+      //     datas.endTime = Tool.formatTime(datas.cancelTime)
+      //     time = setInterval(function () { Tool.getDistanceTime(datas.endTime, self); }, 1000);
+      //   }
+      // }
       this.setData({
         datas:datas
       })

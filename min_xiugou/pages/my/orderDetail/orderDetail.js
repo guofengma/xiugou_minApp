@@ -63,14 +63,12 @@ Page({
         orderNo:this.data.orderId
       }).then((res) => {
         let datas = res.data || {}
+        datas.createTime = datas.createTime ? Tool.formatTime(datas.createTime) : '';
+        datas.payTime = datas.payTime ? Tool.formatTime(datasl.payTime) : '';// 付款时间
+        datas.cancelTime = datas.cancelTime? Tool.formatTime(datas.cancelTime) : ''; //取消时间
+        datas.showFinishTime = datas.deliverTime ? Tool.formatTime(datas.deliverTime) : Tool.formatTime(datas.finishTime) // 成交时间
+        datas.showShutOffTime = Tool.formatTime(datas.shutOffTime)
         datas.data.forEach((item, index) => {
-          detail.createTime=detail.createTime?Tool.formatTime(detail.createTime):'';
-          detail.payTime=detail.payTime?Tool.formatTime(detail.payTime):'';// 付款时间
-          detail.cancelTime = detail.cancelTime ? Tool.formatTime(detail.cancelTime) : ''; //取消时间
-          detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
-          detail.showFinishTime = detail.deliverTime? Tool.formatTime(detail.deliverTime) : Tool.formatTime(detail.finishTime) // 成交时间
-          // detail.deliverTime = Tool.formatTime(detail.deliverTime)
-          detail.showShutOffTime = Tool.formatTime(detail.shutOffTime)
           let warehouseOrderDTOList = item.warehouseOrderDTOList || []
           let outStatus = item.warehouseOrderDTOList[0].status
           let showOrderList = []
