@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 30,
 			"list": [
 				{
 					"id": 0,
@@ -101,13 +101,13 @@
 					"id": 10,
 					"name": "申请售后",
 					"pathName": "pages/after-sale/apply-sale-after/apply-sale-after",
-					"query": "refundType=1&returnProductId=1"
+					"query": "refundType=2&returnProductId=1"
 				},
 				{
-					"id": -1,
+					"id": 11,
 					"name": "退货详情",
 					"pathName": "pages/after-sale/return-goods/return-goods",
-					"query": ""
+					"query": "serviceNo=2018996912071015365894992"
 				},
 				{
 					"id": -1,
@@ -218,10 +218,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 30,
 					"name": "换货",
 					"pathName": "pages/after-sale/exchange-goods/exchange-goods",
-					"query": ""
+					"query": "serviceNo=2018345012071039582265788"
 				},
 				{
 					"id": 31,

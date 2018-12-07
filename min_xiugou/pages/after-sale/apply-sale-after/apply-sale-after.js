@@ -67,7 +67,7 @@ Page({
   initData(){
     let list = this.data.list
     if (this.data.serviceNo) {
-      let imgList = list.afterSaleInfo.showImgList|| []
+      let imgList = list.showImgList|| []
       imgList.forEach((item) => {
         this.data.originalImg.push(item)
         this.data.smallImg.push(item)
@@ -80,8 +80,9 @@ Page({
         // },
         originalImg: this.data.originalImg,
         smallImg: this.data.smallImg,
-        remark: list.afterSaleInfo.description || '',
-        returnReason: list.afterSaleInfo.reason || ''
+        remark: list.description || '',
+        returnReason: list.reason || '',
+        serviceNo: list.serviceNo
       })
       this.selectComponent("#update-img").initData()
     }
@@ -171,10 +172,10 @@ Page({
     
   },
   orderRefund(){
-    if (this.data.activeIndex===''){
-      Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
-      return
-    }
+    // if (this.data.activeIndex===''){
+    //   Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
+    //   return
+    // }
     // if (this.data.refundType == 2 && Tool.isEmptyStr(this.data.remark)){
     //   Tool.showAlert(this.data.reason[this.data.refundType].placeholder)
     //   return
@@ -193,15 +194,17 @@ Page({
       // exchangeSpecImg: this.data.selectType.specImg || '',
       applyRefundAmount: this.data.applyRefundAmount || '',
       imgList: this.data.originalImg.join(","),
-      orderProductNo: list.orderProductNo,
-      reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
+      orderProductNo: 'O1166141',
+      reason:'无',
+      // reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
       description: this.data.remark,
-      'type': this.data.refundType+1
+      'type': Number(this.data.refundType)+1,
+      serviceNo: this.data.serviceNo || '',
     }
     let reqName = this.data.serviceNo? 'modifyAfterSale':'applyAfterSale'
     API[reqName](params).then((res) => {
       let datas = res.data || {}
-      Tool.redirectTo(this.data.page[this.data.refundType] + '?serviceNo=' + datas.serviceNo)
+      Tool.redirectTo(this.data.page[this.data.refundType] + '?serviceNo=' + this.data.serviceNo)
     }).catch((res) => {
       console.log(res)
     });

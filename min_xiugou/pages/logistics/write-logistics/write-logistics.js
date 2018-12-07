@@ -23,6 +23,7 @@ Page({
     let params = {
       serviceNo: this.data.list.serviceNo,
       expressName: this.data.company.name || '无',
+      expressCode: this.data.company.id,
       expressNo:this.data.code || '0000000000000',
     }
     API.afterSaleExpress(params).then((res) => {

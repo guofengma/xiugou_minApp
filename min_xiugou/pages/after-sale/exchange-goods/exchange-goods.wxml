@@ -42,7 +42,7 @@
 </view>
 
 <view wx:if='{{datas.status==1}}'>
-   <amend-application applyType='{{"换货"}}' list='{{datas}}' serviceNo='{{serviceNo}}' bind:reloadPage='findReturnProductById'/>
+  <amend-application applyType='{{"换货"}}' list='{{datas}}' serviceNo='{{serviceNo}}' bind:reloadPage='findReturnProductById'/>
 </view>
 <!--换货信息  -->
 
@@ -51,19 +51,19 @@
   <template is="after-sale-prd-info" data="{{...datas}}"/>
   <view class='exchange-content whiteBg gray'>
     <view>更换型号： {{datas.exchangeSpec}}</view>
-    <view>换货原因：{{datas.afterSaleInfo.reason}}</view>
+    <view>换货原因：{{datas.reason}}</view>
     <!-- <view>换货金额：¥{{list.showRefund}}</view> -->
-    <view>换货说明：{{datas.afterSaleInfo.description}}</view>
+    <view>换货说明：{{datas.description}}</view>
     <view>
       <view>凭证图片</view>
       <view class='userImg'>
-         <block wx:for='{{afterSaleInfo.showImgList}}' wx:key='unique'>
+         <block wx:for='{{showImgList}}' wx:key='unique'>
           <image src='{{item}}'></image>
         </block>
       </view>
     </view>
-    <view>申请时间：{{datas.afterSaleInfo.createTime}}</view>
-    <view>订单编号：{{datas.afterSaleInfo.orderProductNo}}</view>
+    <view>申请时间：{{datas.createTime}}</view>
+    <view>订单编号：{{datas.platformOrderNo || datas.warehouseOrderNo}}</view>
     <view>换货编号：{{datas.serviceNo}}</view>
     <!-- <view>数量：x {{datas.num}}</view> -->
   </view>

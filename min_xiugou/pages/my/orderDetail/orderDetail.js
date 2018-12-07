@@ -64,14 +64,24 @@ Page({
       }).then((res) => {
         let datas = res.data || {}
         datas.data.forEach((item, index) => {
+          detail.createTime=detail.createTime?Tool.formatTime(detail.createTime):'';
+          detail.payTime=detail.payTime?Tool.formatTime(detail.payTime):'';// 付款时间
+          detail.cancelTime = detail.cancelTime ? Tool.formatTime(detail.cancelTime) : ''; //取消时间
+          detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
+          detail.showFinishTime = detail.deliverTime? Tool.formatTime(detail.deliverTime) : Tool.formatTime(detail.finishTime) // 成交时间
+          // detail.deliverTime = Tool.formatTime(detail.deliverTime)
+          detail.showShutOffTime = Tool.formatTime(detail.shutOffTime)
           let warehouseOrderDTOList = item.warehouseOrderDTOList || []
           let outStatus = item.warehouseOrderDTOList[0].status
           let showOrderList = []
-          let showStatus = []
+          let showInnerStatus = []
           warehouseOrderDTOList.forEach((item1, index1) => {
-            showStatus.push(item1.status)
+            showOutStatus.push(item1.status)
             item1.products.forEach((item2) => {
               showOrderList.push(item2)
+              showInnerStatus.push({
+                [index]: item2.status
+              })
             })
           })
         })

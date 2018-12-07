@@ -37,22 +37,29 @@ Page({
       serviceNo: this.data.serviceNo || this.data.list.serviceNo,
     }).then((res) => {
       let datas = res.data || {}
-      let afterSaleInfo = datas.afterSaleInfo || {}
-      let imgList = afterSaleInfo.imgList || ''
-      afterSaleInfo.showImgList = imgList.split(',')
+      let imgList = datas.imgList || ''
+      datas.showImgList = imgList.split(',')
       let status = datas.status
-      let expressNo = this.data.expressNo
-      // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
-      if (datas.countDownSeconds && status == 2 && !datas.refundAddress.expressCode) {
-        this.countdown(this)
-      }
-      if (datas.refundAddress.expressCode ) {
-        expressNo = { id: 2, content: datas.refundAddress.expressCode }
-      }
+      datas.createTime = Tool.formatTime(datas.createTime)
       this.setData({
-        expressNo: expressNo,
-        datas: datas
+        datas:datas
       })
+      // let afterSaleInfo = datas.afterSaleInfo || {}
+      // let imgList = afterSaleInfo.imgList || ''
+      // afterSaleInfo.showImgList = imgList.split(',')
+      // let status = datas.status
+      // let expressNo = this.data.expressNo
+      // // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
+      // if (datas.countDownSeconds && status == 2 && !datas.refundAddress.expressCode) {
+      //   this.countdown(this)
+      // }
+      // if (datas.refundAddress.expressCode ) {
+      //   expressNo = { id: 2, content: datas.refundAddress.expressCode }
+      // }
+      // this.setData({
+      //   expressNo: expressNo,
+      //   datas: datas
+      // })
       Event.emit('getDetail')
     }).catch((res) => {
       console.log(res)

@@ -3,18 +3,18 @@ Page({
   data: {
     addressType:1,
     src:'/img/address-icon-gray.png',
-    // result:[ // 换货
-    //   { state:"其他"},
-    //   { state: "等待商家处理", info: "", time: '' },
-    //   { state: "商家已同意", info: "请在规定时间内退货给卖家", time: ''},
-    //   { state: "商家拒绝换货申请", info: "请联系客服" },
-    //   { state: "请退货请商家", info: "等待商家确认" },
-    //   { state: "等待商家确认", info: "",time:'' },
-    //   { state: "换货完成", info: "" },
-    //   { state: "换货申请已撤销", info: "" },
-    //   { state: "订单异常", info: "请联系客服" }
-    // ],
-    // resultIndex:0,
+    result:[ // 换货
+      { state:"其他"},
+      { state: "等待商家处理", info: "", time: '' },
+      { state: "商家已同意", info: "请在规定时间内退货给卖家", time: ''},
+      // { state: "商家拒绝换货申请", info: "请联系客服" },
+      { state: "等待商家确认", info: "" },
+      { state: "待平台处理 ", info: "",time:'' },
+      { state: "换货完成", info: "" },
+      { state: "换货申请已撤销或换货关闭", info: "" },
+      // { state: "订单异常", info: "请联系客服" }
+    ],
+    resultIndex:0,
     expressNo: { id: 0, content:"填写寄回的物流信息"},
     SaleExpressNo: { id:1, content: "暂无商家物流信息"}
   },
@@ -37,35 +37,45 @@ Page({
       serviceNo: this.data.serviceNo || this.data.list.serviceNo,
     }).then((res) => {
       let datas = res.data || {}
-      let afterSaleInfo = datas.afterSaleInfo || {}
-      let imgList = afterSaleInfo.imgList || ''
-      afterSaleInfo.showImgList = imgList.split(',')
-      if (datas.type==2){
-        Tool.redirectTo('/pages/after-sale/return-goods/return-goods?serviceNo=' + serviceNo)
-        return
-      }
-      datas.refundAddress.address = datas.refundAddress.refundAddress
-      datas.refundAddress.receiver = datas.refundAddress.refundReceiver
-      datas.refundAddress.receiverPhone = datas.refundAddress.refundReceiverPhone
+      let imgList = datas.imgList || ''
+      datas.showImgList = imgList.split(',')
       let status = datas.status
-      let expressNo = this.data.expressNo
-      let SaleExpressNo = this.data.SaleExpressNo
-      // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
-      if (datas.countDownSeconds && status == 2 && !datas.refundAddress.expressCode) {
-        this.countdown(this)
-      }
-      if (datas.refundAddress.expressCode){
-        expressNo = { id: 2, content: datas.refundAddress.expressCode}
-      }
-      if (datas.address.expressCode) {
-        SaleExpressNo = { id: 2, content: datas.address.expressCode }
-      }
+      datas.createTime = Tool.formatTime(datas.createTime)
+      let refundAddress = datas.refundAddress || {}
+      refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
       this.setData({
         datas: datas,
-        SaleExpressNo: SaleExpressNo,
-        expressNo: expressNo,
+        resultIndex: status
       })
-      Event.emit('getDetail')
+      // let afterSaleInfo = datas.afterSaleInfo || {}
+      // let imgList = afterSaleInfo.imgList || ''
+      // afterSaleInfo.showImgList = imgList.split(',')
+      // if (datas.type==2){
+      //   Tool.redirectTo('/pages/after-sale/return-goods/return-goods?serviceNo=' + serviceNo)
+      //   return
+      // }
+      // datas.refundAddress.address = datas.refundAddress.refundAddress
+      // datas.refundAddress.receiver = datas.refundAddress.refundReceiver
+      // datas.refundAddress.receiverPhone = datas.refundAddress.refundReceiverPhone
+      // let status = datas.status
+      // let expressNo = this.data.expressNo
+      // let SaleExpressNo = this.data.SaleExpressNo
+      // // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
+      // if (datas.countDownSeconds && status == 2 && !datas.refundAddress.expressCode) {
+      //   this.countdown(this)
+      // }
+      // if (datas.refundAddress.expressCode){
+      //   expressNo = { id: 2, content: datas.refundAddress.expressCode}
+      // }
+      // if (datas.address.expressCode) {
+      //   SaleExpressNo = { id: 2, content: datas.address.expressCode }
+      // }
+      // this.setData({
+      //   datas: datas,
+      //   SaleExpressNo: SaleExpressNo,
+      //   expressNo: expressNo,
+      // })
+      // Event.emit('getDetail')
     }).catch((res) => {
       console.log(res)
     })

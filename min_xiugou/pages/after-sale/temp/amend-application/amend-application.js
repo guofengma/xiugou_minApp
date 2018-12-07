@@ -14,7 +14,7 @@ Component({
       let callBack = ()=>{
         this.findReturnProductById(1)
       }
-      Tool.showComfirm('您讲撤销本次申请，如果有问题未解决，你还可以再次发起，确定继续吗？', callBack)
+      Tool.showComfirm('您将撤销本次申请，如果有问题未解决，你还可以再次发起，确定继续吗？', callBack)
     },
     revokeApplyReq(){ // 撤销申请
       API.cancelAfterSale({

@@ -1,18 +1,18 @@
 <template name="refund-explain">
   <view class='exchange-content whiteBg gray'>
-    <view>退款原因：{{afterSaleInfo.reason}}</view>
+    <view>退款原因：{{reason}}</view>
     <!-- <view>退款金额：¥{{totalRefundPrice}}</view> -->
-    <view>退款说明：{{afterSaleInfo.description}}</view>
+    <view>退款说明：{{description}}</view>
     <view>
       <view>凭证图片</view>
       <view class='userImg'>
-        <block wx:for='{{afterSaleInfo.showImgList}}' wx:key='unique'>
+        <block wx:for='{{showImgList}}' wx:key='unique'>
           <image src='{{item}}'></image>
         </block>
       </view>
     </view>
-    <view>申请时间：{{afterSaleInfo.createTime}}</view>
+    <view>申请时间：{{createTime}}</view>
     <view>退款编号：{{serviceNo}}</view>
-    <view>订单编号：{{afterSaleInfo.orderProductNo}}</view>
+    <view>订单编号：{{platformOrderNo || warehouseOrderNo}}</view>
   </view>
 </template>
