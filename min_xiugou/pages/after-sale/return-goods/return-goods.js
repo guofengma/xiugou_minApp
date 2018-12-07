@@ -41,6 +41,10 @@ Page({
       datas.showImgList = imgList.split(',')
       let status = datas.status
       datas.createTime = Tool.formatTime(datas.createTime)
+      let refundAddress = datas.refundAddress || {}
+      refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
+      let address = datas.refundAddress || {}
+      address.addressInfo = address.province + address.city + address.area + address.address
       // if (status == 2) {
       //   let self = this
       //   if (!datas.expressNo) {
