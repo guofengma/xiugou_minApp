@@ -285,43 +285,20 @@ Component({
     },
     //再次购买
     continueBuy(e) {
-      API.orderOneMore({
-        orderNo: e.currentTarget.dataset.id,
-      }).then((res) => {
-        let datas = res.data || {}
-      }).catch((res) => {
-        this.setData({
-          isDelete: false,
+      let list = []
+      let products = this.data.list.showProducts
+      products.forEach((item,index)=>{
+        list.push({
+          productCode: item.prodCode,
+          amount: item.quantity,
+          skuCode: item.skuCode,
         })
-        console.log(res)
       })
-      // let params = {
-      //   id: e.currentTarget.dataset.id,
-      //   reqName: '再次购买获取规格',
-      //   url: Operation.orderOneMore,
-      // }
-      // let r = RequestFactory.wxRequest(params);
-      // r.successBlock = (req) => {
-      //   let datas = req.responseObject.data;
-      //   let orderProducts = datas.orderProducts || []
-      //   let list =[]
-      //   orderProducts.forEach((item) => {
-      //     list.push({
-      //       productId:item.productId,
-      //       priceId:item.priceId,
-      //       amount:item.num,
-      //       showCount:item.num,
-      //       isSelect:true
-      //     })
-      //   });
-      //   if(list.length>0){
-      //     Storage.setShoppingCart(list);
-      //     Event.emit('continueBuy');
-      //     Tool.switchTab('/pages/shopping-cart/shopping-cart')
-      //   }
-      // };
-      // Tool.showErrMsg(r);
-      // r.addToQueue();
+      if(list.length>0){
+        Storage.setShoppingCart(list);
+        Event.emit('continueBuy');
+        Tool.switchTab('/pages/shopping-cart/shopping-cart')
+      }
     },
     /**
   * 倒计时

@@ -43,17 +43,24 @@ Page({
       datas.createTime = Tool.formatTime(datas.createTime)
       let refundAddress = datas.refundAddress || {}
       refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
-      let address = datas.refundAddress || {}
-      address.addressInfo = address.province + address.city + address.area + address.address
-      // if (status == 2) {
-      //   let self = this
-      //   if (!datas.expressNo) {
-      //     datas.endTime = Tool.formatTime(datas.cancelTime)
-      //     time = setInterval(function () { Tool.getDistanceTime(datas.endTime, self); }, 1000);
-      //   }
-      // }
+      // let address = datas.refundAddress || {}
+      // address.addressInfo = address.province + address.city + address.area + address.address
+      if (status == 2 && !datas.sendExpressNo) {
+        // let self = this
+        datas.countDownSeconds = Math.floor((datas.cancelTime-datas.nowTime)/1000/60)
+        this.countdown(this)
+        // if (!datas.expressNo) {
+        //   datas.endTime = Tool.formatTime(datas.cancelTime)
+        //   time = setInterval(function () { Tool.getDistanceTime(datas.endTime, self); }, 1000);
+        // }
+      }
+      let expressNo = this.data.expressNo
+      if (orderRefundExpress.expressCode) {
+        expressNo = { id: 2, content: datas.sendExpressNo }
+      }
       this.setData({
-        datas:datas
+        expressNo: expressNo,
+        datas: datas
       })
       // let afterSaleInfo = datas.afterSaleInfo || {}
       // let imgList = afterSaleInfo.imgList || ''

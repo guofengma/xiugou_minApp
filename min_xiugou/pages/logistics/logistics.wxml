@@ -3,15 +3,15 @@
 
 <view class='logistics' wx:if="{{list.length>0}}">
   <view class="title flexR-sb font-30">
-    <text>{{expTextName}}：{{mailNo}}</text>
+    <text>{{expName}}：{{mailNo}}</text>
     <image src='/img/wuliu-icon.png' mode='widthFix'></image>
   </view>
   <view class='font-26'>
     <view class='company'>
       <view class='flexR'>
         <image src='/img/wuliu-icon-de.png' mode='widthFix' class='logo-w'></image>
-        <!--<view>本数据由 <text class='blue'>百世汇通</text> 提供</view>-->
-        <view>物流状态 <text class='blue'>{{statusText[status]}}</text></view>
+        <!-- <view>本数据由 <text class='blue'>{{expName}}</text> 提供</view> -->
+        <view>物流状态 <text class='blue'>{{status}}</text></view>
       </view>
     </view>
     <view class='infos'>
@@ -27,7 +27,7 @@
               <view class='dian'><view></view></view>
               <!--<view class='font-30 state-title'>{{item.title}}</view>-->
               <view>
-                {{item.context}}
+                {{item.status}}
                 <!--<text class='orange'>{{item.content2}}</text>-->
                 <!--{{item.content3}}-->
               </view>

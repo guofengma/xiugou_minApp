@@ -14,9 +14,9 @@
    <view class='flexR'>
     <image-sub wx:if='{{datas.status==3}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
     <view>
-      <view class='tips-title'>{{result[resultIndex].state}}</view>
+      <view class='tips-title'>{{datas.headerTitle}}</view>
       <view>{{distanceTime}}</view>
-      <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view>
+      <!-- <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view> -->
     </view>
   </view>
 </view>
@@ -24,7 +24,7 @@
 <view wx:if='{{datas.status>1&&datas.status!=3}}'>
   <!--地址信息  -->
   <view class='address active whiteBg' >
-    <template is="address-info" data="{{addressType,...datas.refundAddress,hasData:true,door:1}}"/>
+    <template is="address-info" data="{{addressType,...datas,hasData:true,door:1}}"/>
   </view>
 
   <!--商家地址  -->
@@ -63,7 +63,7 @@
       </view>
     </view>
     <view>申请时间：{{datas.createTime}}</view>
-    <view>订单编号：{{datas.platformOrderNo || datas.warehouseOrderNo}}</view>
+    <view>订单编号：{{ datas.warehouseOrderNo || datas.platformOrderNo}}</view>
     <view>换货编号：{{datas.serviceNo}}</view>
     <!-- <view>数量：x {{datas.num}}</view> -->
   </view>

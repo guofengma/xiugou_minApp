@@ -37,18 +37,41 @@ Page({
       serviceNo: this.data.serviceNo || this.data.list.serviceNo,
     }).then((res) => {
       let datas = res.data || {}
+      if (datas.type==2){
+        Tool.redirectTo('/pages/after-sale/return-goods/return-goods?serviceNo=' + this.data.serviceNo)
+        return
+      }
       let imgList = datas.imgList || ''
       datas.showImgList = imgList.split(',')
       let status = datas.status
       datas.createTime = Tool.formatTime(datas.createTime)
+      // 平台地址
       let refundAddress = datas.refundAddress || {}
       refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
-      let address = datas.refundAddress || {}
-      address.addressInfo = address.province + address.city + address.area + address.address
+      // let address = datas.refundAddress || {}
+      datas.addressInfo = datas.province + datas.city + datas.area + (datas.street || '')  + datas.address
       this.setData({
         datas: datas,
         resultIndex: status
       })
+      let orderRefundExpress = datas.orderRefundExpress || {}
+      // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
+      if (status > 1 && !orderRefundExpress.expressCode && !datas.sendExpressNo) {
+        datas.countDownSeconds = Math.floor((datas.cancelTime - datas.nowTime) / 1000 / 60)
+        this.countdown(this)
+      }
+      if (orderRefundExpress.expressCode){
+        expressNo = { id: 2, content: datas.sendExpressNo }
+      }
+      if (datas.sendExpressNo) {
+        SaleExpressNo = { id: 2, content: datas.sendExpressNo }
+      }
+      this.setData({
+        datas: datas,
+        SaleExpressNo: SaleExpressNo,
+        expressNo: expressNo,
+      })
+      Event.emit('getDetail')
       // let afterSaleInfo = datas.afterSaleInfo || {}
       // let imgList = afterSaleInfo.imgList || ''
       // afterSaleInfo.showImgList = imgList.split(',')

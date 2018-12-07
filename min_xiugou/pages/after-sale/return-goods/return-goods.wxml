@@ -19,7 +19,7 @@
   <view class='flexR'>
     <image-sub wx:if='{{datas.status==3}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
     <view>
-      <view class='tips-title'>{{datas.reject}}</view>
+      <view class='tips-title'>{{datas.headerTitle}}</view>
       <!-- <view wx:if='{{datas.status!=3}}'>{{result[resultIndex].info}}</view> -->
       <view>{{distanceTime}}</view>
       <!-- <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view> -->

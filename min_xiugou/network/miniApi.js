@@ -339,7 +339,7 @@ const api =
     '/order/list',
     {
       "action": "用户订单列表",
-      "method": "get",
+      "method": "post",
       "encrypt": false,
     }
   ],
@@ -370,7 +370,7 @@ const api =
   'getOrderDeliverInfoDetail': [
     '/order/deliverInfoDetail',
     {
-      "action": "订单物流信息",
+      "action": "单个物流详情",
       "method": "post",
       "encrypt": false,
     }

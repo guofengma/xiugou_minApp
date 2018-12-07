@@ -12,7 +12,7 @@
 <view class='apply-sale-after-page'>
   <view class='redBg flexR tips font-26' wx:if='{{reason[refundType].tips}}'>{{reason[refundType].tips}}</view>
   <view class='order-info'>
-    <view class='cell-line whiteBg'>订单编号：{{orderInfos.orderNum}}</view>
+    <view class='cell-line whiteBg'>订单编号：{{ orderInfos.warehouseOrderNo || orderInfos.platformOrderNo}}</view>
     <template is="after-sale-prd-info" data="{{...orderInfos}}"/>
     <view class='cell-line whiteBg'>下单时间：{{orderInfos.createTime}}</view>
   </view>

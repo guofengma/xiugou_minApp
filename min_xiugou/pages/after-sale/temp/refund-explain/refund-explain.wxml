@@ -13,6 +13,6 @@
     </view>
     <view>申请时间：{{createTime}}</view>
     <view>退款编号：{{serviceNo}}</view>
-    <view>订单编号：{{platformOrderNo || warehouseOrderNo}}</view>
+    <view>订单编号：{{ warehouseOrderNo || platformOrderNo}}</view>
   </view>
 </template>

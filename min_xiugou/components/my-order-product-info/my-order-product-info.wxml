@@ -7,13 +7,13 @@
       <view class='topbar'>
         <view class='ellipsis-2'>{{productName}}</view>
         <view class='gray-9 {{isSaleAfter? "ellipsis":"ellipsis-2"}}'>
-         {{spec}}
+         {{spec || specValues }}
         </view>
       </view>
       <view class='flexC right-price' >
-        <view>¥ {{price}}</view>
+        <view>¥ {{price || unitPrice}}</view>
         <view class='cost-price' wx:if="{{showOriginalPrice}}">¥ {{showOriginalPrice}}</view>
-        <view  class='gray-9'>x{{num}}</view>
+        <view  class='gray-9'>x{{num || quantity}}</view>
       </view>
       <!-- <view class='flexR-sb isSaleAfter' wx:if='{{isSaleAfter}}'>
         <text class='red'>{{typeName}}</text>

@@ -1,7 +1,6 @@
 let { Tool, RequestFactory, Operation} = global;
 Page({
     data: {
-      ysf: { title: '物流详情' },
       deliveryName: '',
       LogisticCode: '',
       status: '',
@@ -55,7 +54,7 @@ Page({
       ],
       tips:'物流信息查询中...',
       statusText:[
-        '查询异常', '暂无记录', '在途中', '派送中', '已签收', '用户拒签', '疑难件', '无效单', '超时单', '签收失败', '退回'
+        '暂无记录', '在途中', '正在派件', '已签收', '用户拒签', '派送失败'
       ]
     },
     onLoad: function (options) {
@@ -67,45 +66,27 @@ Page({
         this.getDelivery()
     },
     getDelivery() {
-        let params = {
-          expNum: this.data.id,
-          requestMethod: 'GET',
-          reqName: '物流查看',
-          url: Operation.findLogisticsDetail
-        }
-        let r = RequestFactory.wxRequest(params);
-        r.successBlock= (req) => {
-          let datas = req.responseObject.data;
-          if (datas) {
-            if (datas.showapi_res_body && datas.showapi_res_body.data) {
-              this.setData({
-                img: datas.img || '',
-                expTextName: datas.showapi_res_body.expTextName,
-                mailNo: datas.showapi_res_body.mailNo,
-                status: datas.showapi_res_body.status,
-                phone: datas.phone || ''
-              })
-              let list = datas.showapi_res_body.data;
-              let tempList = [];
-              if (list.length) {
-                list.forEach((item) => {
-                  item.showDate = item.time.slice(5, 10)  
-                  item.showTime = item.time.slice(11, 16)
-                  tempList.push(item)
-                });
-                this.setData({
-                    list: tempList
-                })
-              } else {
-                this.setData({
-                  tips: '暂无物流信息~'
-                })
-              }
-            }
-          }
-        };
-        Tool.showErrMsg(r);
-        r.addToQueue();
+      API.getOrderDeliverInfoDetail({
+        expressNo: this.data.orderId,
+        expressCode:'',
+        orderNo:'',
+      }).then((res) => {
+        let datas = res.data || {}
+        let result = datas.result || {}
+        let list = result.list || []
+        list.forEach((item) => {
+          item.showDate = item.time.slice(5, 10)  
+          item.showTime = item.time.slice(11, 16)
+        });
+        this.setData({
+          mailNo: datas.number,
+          expName: datas.expName,
+          list:list,
+          status: this.data.statusText[datas.deliverystatus]
+        })
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     onShow: function () {
 

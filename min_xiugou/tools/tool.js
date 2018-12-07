@@ -200,7 +200,7 @@ export default class Tool {
 
     // 日期倒计时 
 
-    static getDistanceTime(time, self, showDay) {
+    static getDistanceTime(time, self, noDay) {
       /*replace将时间字符串中所有的'-'替换成'/',parse将时间格式的字符串转换成毫秒*/
       let endTime = new Date(Date.parse(time.replace(/-/g, "/")));
       let nowTime = new Date();
@@ -219,7 +219,7 @@ export default class Tool {
         }
         minute = Math.floor(distance / 1000 / 60 % 60);
         second = Math.floor(distance / 1000 % 60);
-        if (showDay){
+        if (noDay){
           distanceTime =  hour + "时" + minute + "分" + second + "秒";
           if (hour==0){
             distanceTime = minute + "分" + second + "秒";

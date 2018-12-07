@@ -5,7 +5,7 @@ Page({
     keyword:'',
     totalPage: '', // 页面总页数
     currentPage: 1, // 当前的页数
-    pageSize: 5, // 每次加载请求的条数 默认10
+    pageSize: 10, // 每次加载请求的条数 默认10
     lists:[],
     typeState: ["其他",'申请中', '已同意', '拒绝', '中','中','完成','关闭','超时'],
     typeArr:[
@@ -27,9 +27,9 @@ Page({
   },
   onLoad: function (options) {
     let params = {
-      currentPage: this.data.currentPage,
-      pageSize: this.data.pageSize,
-      productName: this.data.keyword || ''
+      page: this.data.currentPage,
+      size: this.data.pageSize,
+      // productName: this.data.keyword || ''
     }
     this.setData({
       params: params
@@ -47,7 +47,7 @@ Page({
       Tool.showAlert('搜索内容不能为空')
       return
     }
-    params.currentPage = 1
+    params.page = 1
     params.searchKey = this.data.keyword
     this.setData({
       params: params,
@@ -61,7 +61,7 @@ Page({
     let page = this.data.currentPage
     page += 1
     let { params } = this.data
-    params.currentPage = page
+    params.page = page
     this.setData({
       currentPage: page,
       params: params
@@ -76,7 +76,7 @@ Page({
     API.afterSaleList(params).then((res) => {
       let lists = this.data.lists
       let datas = res.data || []
-      if (datas.totalPage > 0 || datas.data.length>0){
+      if (datas.totalPage > 0){
         datas.data.forEach((item)=>{
           item.imgUrl = item.specImg
           item.icon = this.data.typeArr[item.type].icon
@@ -93,11 +93,11 @@ Page({
           totalPage: datas.totalPage || 0,
         })
       }
-      // else{
-      //   this.setData({
-      //     tipVal:2
-      //   })
-      // }
+      else{
+        this.setData({
+          tipVal:2
+        })
+      }
     }).catch((res) => {
       console.log(res)
     });
@@ -105,7 +105,6 @@ Page({
   goPage(e){
     let serviceNo = e.currentTarget.dataset.prdid
     let returnProductType = e.currentTarget.dataset.id
-    // console.log(returnProductId)
     let page = this.data.typeArr[returnProductType].page + "?serviceNo=" + serviceNo
     Tool.navigateTo(page)
   }

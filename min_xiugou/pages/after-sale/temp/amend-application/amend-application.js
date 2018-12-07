@@ -14,7 +14,8 @@ Component({
       let callBack = ()=>{
         this.findReturnProductById(1)
       }
-      Tool.showComfirm('您将撤销本次申请，如果有问题未解决，你还可以再次发起，确定继续吗？', callBack)
+      let num = this.data.list.maxRevokeTimes - this.data.list.hadRevokeTimes || '';
+      Tool.showComfirm(`确定撤销本次申请吗?剩余申请${num}次`, callBack)
     },
     revokeApplyReq(){ // 撤销申请
       API.cancelAfterSale({
@@ -39,7 +40,7 @@ Component({
       this.data.list.id = this.data.list.orderProductId
       Storage.setInnerOrderList(this.data.list)
       let types = this.data.list.type -1
-      Tool.redirectTo('/pages/after-sale/apply-sale-after/apply-sale-after?serviceNo=' + this.data.list.serviceNo + '&&refundType=' + types)
+      Tool.redirectTo('/pages/after-sale/apply-sale-after/apply-sale-after?serviceNo=' + this.data.list.serviceNo + '&refundType=' + types+'&orderProductNo=' + list.orderProductNo)
     },
     findReturnProductById(num) {
       API.afterSaleDetail({

@@ -10,7 +10,7 @@ Page({
           recevicePhone:'',
           addressInfo:''
       },
-      afterSaleTypeArr:[4,8,16],// 不支持退款 不支持换货 不支持退货 
+      // afterSaleTypeArr:[4,8,16],// 不支持退款 不支持换货 不支持退货 
       afterSaleType:[], //支持售后的数组 
       types:['退款','换货','退货','退换'],
       returnTypeArr: ['', '退款', '退货', '换货'],
@@ -63,30 +63,45 @@ Page({
         orderNo:this.data.orderId
       }).then((res) => {
         let datas = res.data || {}
-        datas.createTime = datas.createTime ? Tool.formatTime(datas.createTime) : '';
-        datas.payTime = datas.payTime ? Tool.formatTime(datasl.payTime) : '';// 付款时间
-        datas.cancelTime = datas.cancelTime? Tool.formatTime(datas.cancelTime) : ''; //取消时间
-        datas.showFinishTime = datas.deliverTime ? Tool.formatTime(datas.deliverTime) : Tool.formatTime(datas.finishTime) // 成交时间
-        datas.showShutOffTime = Tool.formatTime(datas.shutOffTime)
-        datas.data.forEach((item, index) => {
-          let warehouseOrderDTOList = item.warehouseOrderDTOList || []
-          let outStatus = item.warehouseOrderDTOList[0].status
-          let showOrderList = []
-          let showInnerStatus = []
-          warehouseOrderDTOList.forEach((item1, index1) => {
-            showOutStatus.push(item1.status)
-            item1.products.forEach((item2) => {
-              showOrderList.push(item2)
-              showInnerStatus.push({
-                [index]: item2.status
-              })
-            })
+        datas.addressInfo = datas.province + datas.city + datas.area + datas.address
+        let warehouseOrderDTOList = datas.warehouseOrderDTOList ||[]
+        let showProducts =[]
+        let showOutStatus = warehouseOrderDTOList[0].status
+        warehouseOrderDTOList.forEach((item, index) => {
+          // showOutStatus.push(item.status)
+          item.products.forEach((item1) => {
+            showProducts.push(item1)
           })
         })
-        datas.showProduct = showOrderList
+        let expressList = datas.expressList || []
+        // showOutStatus.length>0
+        // datas.showProduct = showOrderList
+        let status = datas.warehouseOrderDTOList[0].status
+
+        let showPriceList = ''
+        if (status != 1 && status != 5 ){
+          showPriceList:datas
+        } else {
+          showPriceList: datas.warehouseOrderDTOList[0]
+        }
         this.setData({
-          detail:datas
+          detail:datas,
+          showProducts: showProducts,
+          showPriceList: showPriceList,
+          state: this.orderState(showOutStatus),
+          status: showOutStatus
         })
+        if (expressList.length == 1) {
+          this.getDelivery(detail, showOutStatus)
+        } else if (expressList.length > 1) {
+          let state = this.orderState(showOutStatus)
+          state.info = '该订单已拆成N个包裹发出，点击“查看物流”可查看详情'
+          this.setData({
+            state: state
+          })
+        }
+        // 渲染按钮状态
+        this.middleBtn()
       }).catch((res) => {
         console.log(res)
       })
@@ -247,6 +262,7 @@ Page({
     orderState(n) {
         //按钮状态 left right middle 分别是底部左边 右边 和订单详情中的按钮文案
         let stateArr = [
+          { status: '其他', },
           { status: '等待买家付款', 
             bottomBtn: ['取消订单','继续支付'],
             bottomId:[1,2],
@@ -275,38 +291,15 @@ Page({
             info: '订单正在处理中...',
             time: ''
           },
-          {
-            status: '交易已完成',
-            bottomBtn: ['删除订单', '再次购买'],
-            bottomId: [6, 5],
-            orderIcon: "order-state-5.png",
-            info: '订单正在处理中...',
-            time: ''
-          },
-          { status: '订单已完成',
-            bottomBtn: ['删除订单', '再次购买'],
-            bottomId: ['', 5], 
-            orderIcon: "order-state-5.png", 
-            info: '订单正在处理中...',
-            time: '' 
-          },
           { status: '交易关闭',
             bottomBtn: ['删除订单', '再次购买'], 
             bottomId: [6, 5], 
             orderIcon: "order-state-6.png",
             info: '',
             time: ''
-          },
-          {
-            status: '交易关闭',
-            bottomBtn: ['删除订单', '再次购买'],
-            bottomId: [6, 5],
-            orderIcon: "order-state-6.png",
-            info: '',
-            time: ''
           }
         ]
-        return stateArr[n-1]
+        return stateArr[n]
     },
     continuePay() {
       let params = {
@@ -319,70 +312,60 @@ Page({
     },
     //再次购买
     continueBuy(){
-      let params = {
-        id: Number(this.data.orderId),
-        reqName: '再次购买获取规格',
-        url: Operation.orderOneMore
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data;
-        let orderProducts = datas.orderProducts || []
-        let list = []
-        orderProducts.forEach((item) => {
+      let list = []
+      let warehouseOrderDTOList = this.data.detail.warehouseOrderDTOList
+      warehouseOrderDTOList.forEach((item, index) => {
+        item.products.forEach((item1) => {
           list.push({
-            productId: item.productId,
-            priceId: item.priceId,
-            amount: item.num,
-            showCount: item.num,
-            isSelect: true
+            productCode: item1.prodCode,
+            amount: item1.quantity,
+            skuCode: item1.skuCode,
           })
-        });
-        if (list.length > 0) {
-          Storage.setShoppingCart(list);
-          Event.emit('continueBuy');
-          Tool.switchTab('/pages/shopping-cart/shopping-cart')
-        }
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+        })
+      })
+      if (list.length > 0) {
+        Storage.setShoppingCart(list);
+        Event.emit('continueBuy');
+        Tool.switchTab('/pages/shopping-cart/shopping-cart')
+      }
     },
     middleBtn(){
       let detail = this.data.detail
-      let outOrderState = detail.status // 外订单状态
-      let childrenList = detail.orderProductList
+      let outOrderState = this.data.status // 外订单状态
+      // let childrenList = detail.orderProductList
       let state = this.data.state
       let btnArr = []
-      childrenList.forEach((item,index)=>{
+      this.data.showProducts.forEach((item,index)=>{
         let middle = ''
         let innerState = item.status // 子订单状态
         let returnType = item.returnType
         let finishTime = item.finishTime
         let now = new Date().getTime()
         // 不支持的售后种类
-        let arr = Tool.bitOperation(this.data.afterSaleTypeArr, item.restrictions)
+        // let arr = Tool.bitOperation(this.data.afterSaleTypeArr, item.restrictions)
         // 支持的售后种类
-        let afterSaleType = this.data.afterSaleTypeArr.filter(function (n) {
-          return arr.indexOf(n) == -1
-        });
-        item.afterSaleType = afterSaleType
+        // let afterSaleType = this.data.afterSaleTypeArr.filter(function (n) {
+        //   return arr.indexOf(n) == -1
+        // });
+        // item.afterSaleType = afterSaleType
         if (outOrderState == 2){
-          if (afterSaleType.includes(4)) middle = {  id: 1, content: '退款' }
+          // if (afterSaleType.includes(4)) middle = {  id: 1, content: '退款' }
+          middle = { id: 1, content: '退款' }
         }
         // 确认收货的状态的订单售后截止时间和当前时间比
         if (outOrderState == 3 || (outOrderState == 4 && finishTime - now > 0) ){
-          if (afterSaleType.length>1){
-            middle = { id: 4, content: '退换' }
-          } else{
-            let index = this.data.afterSaleTypeArr.indexOf(afterSaleType[0])
-            if (index != -1) {
-              let btnId = 0
-              // [4, 8, 16],// 退款 换货 退货 
-              btnId = afterSaleType[0] == 4 ? 1 : afterSaleType[0] == 16 ? 2:3
-              middle = { id: btnId, content: this.data.types[index] }
-            }
-          }
-          
+          middle = { id: 2, content: '退换' }
+          // if (afterSaleType.length>1){
+          //   middle = { id: 4, content: '退换' }
+          // } else{
+          //   let index = this.data.afterSaleTypeArr.indexOf(afterSaleType[0])
+          //   if (index != -1) {
+          //     let btnId = 0
+          //     // [4, 8, 16],// 退款 换货 退货 
+          //     btnId = afterSaleType[0] == 4 ? 1 : afterSaleType[0] == 16 ? 2:3
+          //     middle = { id: btnId, content: this.data.types[index] }
+          //   }
+          // }
         }
         if (innerState == 4) {
           let arr = ["退款中",'退货中','换货中']
@@ -390,7 +373,7 @@ Page({
           state.isHiddenComfirmBtn = true
         }
 
-        if (innerState==6 && returnType) {
+        if (innerState==5 && returnType) {
           let content = outOrderState == 2? "退款成功" :"售后完成"
           middle = { id: 0, inner: innerState, content: content, returnType: returnType}
         }
@@ -444,12 +427,12 @@ Page({
 
         page = '/pages/after-sale/exchange-goods/exchange-goods'
 
-      } else if (btnTypeId > 0 && btnTypeId <4) {
+      } else if (btnTypeId ==1) {
         params = ''
         // 0为仅退款 1为退货退款  2为换货
-        page = '/pages/after-sale/apply-sale-after/apply-sale-after?refundType=' + (btnTypeId-1)
+        page = '/pages/after-sale/apply-sale-after/apply-sale-after?refundType=' + (btnTypeId - 1) + '&orderProductNo='+list.orderProductNo
 
-      } else if (btnTypeId == 4) {   
+      } else if (btnTypeId == 2) {   
         page = '/pages/after-sale/choose-after-sale/choose-after-sale' 
       }
       Tool.navigateTo(page + params)
@@ -477,34 +460,23 @@ Page({
         this.seeLogistics()
       }
     },
-    getDelivery(detail) {
+    getDelivery(detail, showOutStatus) {
       // 查询物流信息最后一条数据
-      let params = {
-        expNum: this.data.detail.expressNo,
-        requestMethod: 'GET',
-        reqName: '物流查看',
-        url: Operation.findLogisticsDetail
-      }
-      let state = this.orderState(detail.status)
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data;
-        if (datas) {
-          if (datas.showapi_res_body && datas.showapi_res_body.data) {
-            let list = datas.showapi_res_body.data;
-            let tempList = [];
-            if (list.length) {
-              state.info = list[0].context
-              state.time = list[0].time
-            } 
-          }
-        }
+      API.getOrderDeliverInfoDetail({
+        orderNo: this.data.orderId
+      }).then((res) => {
+        let datas = res.data || {}
+        let result = datas.result || {}
+        let list = result.list || []
+        let state = this.orderState(this.data.status)
+        state.info = list[0].status
+        state.time = list[0].time
         this.setData({
           state: state
         })
-      };
-      Tool.showErrMsg(r);
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     onUnload: function () {
       clearTimeout(this.data.time)

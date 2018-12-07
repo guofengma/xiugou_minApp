@@ -16,8 +16,8 @@
             {{state.status}}
         </view>
         <view wx:if='{{detail.buyerRemark}}' class='font-26'>{{detail.buyerRemark}}</view>
-        <view class='timeDown' wx:if="{{detail.status==1 || detail.status==3}}">
-          {{distanceTime}} {{detail.status==1? "后自动取消订单":"后自动确认收货"}}
+        <view class='timeDown' wx:if="{{status==1 || status==3}}">
+          {{distanceTime}} {{status==1? "后自动取消订单":"后自动确认收货"}}
         </view>
     </view>
 </view>
@@ -26,10 +26,10 @@
 <view class='order-state-info' >
     <view class='boxSize'>
         <!--等待付款的时候显示和待发货  -->
-        <template is="address-info" wx:if='{{status==1||status==7 ||status==8 }}' data="{{addressType,src,...address,hasData,door:1}}"/>
+        <template is="address-info" wx:if='{{status==1||status==5 }}' data="{{addressType,src,...address,hasData,door:1}}"/>
 
         <!-- 待发货/已发货/已完成的时候显示 -->
-        <view class='logistics flexR-sb' wx:if="{{status==2||status==3||status==4||status==6 ||status==5 }}" bindtap='logisticsClicked'>
+        <view class='logistics flexR-sb' wx:if="{{status==2||status==3||status==4 }}" bindtap='logisticsClicked'>
             <view>
                 <view class='info ellipsis'>{{state.info}}</view>
                 <view class='gray'>{{state.time}}</view>
@@ -49,26 +49,26 @@
 
     <!--订单信息  -->
     <view class='order-prd-info'>
-      <view class='gift-view whiteBg' wx:if='{{detail.orderType==5 || detail.orderType==98}}'>
+      <view class='gift-view whiteBg' wx:if='{{detail.orderSubType==3 || detail.orderSubType==4}}'>
         <text class='label-red-border'>礼包</text>
-        <text class='gray font-24'>{{detail.orderProductList[0].productName}}</text>
+        <!-- <text class='gray font-24'>{{detail.orderProductList[0].productName}}</text> -->
       </view>
       <view class='product-ifo-list'>
-        <block wx:for="{{detail.showProductList}}" wx:key="unique">
-          <view catchtap='productClicked' data-productid='{{item.productId}}'>
+        <block wx:for="{{detail.showProducts}}" wx:key="unique">
+          <view catchtap='productClicked' data-productid='{{item.prodCode}}'>
             <template is="my-order-product-info" data="{{...item}}"/>
           </view>
-          <view class='sale-after flexR' wx:if="{{item.middleBtn&&detail.orderType!=5}}">
+          <view class='sale-after flexR' wx:if="{{item.middleBtn}}">
             <view class='order-btn btn-left flexR' catchtap='subBtnClicked' data-id='{{item.middleBtn.id}}' data-returntype='{{item.middleBtn.returnType}}' data-index='{{index}}'>{{item.middleBtn.content}}</view>
           </view>
         </block>
       </view>
       <!-- 判断礼包的按钮 -->
-      <view class='sale-after gift-sale-after flexR' wx:if="{{detail.orderProductList[0].middleBtn&&(detail.orderType==5 || detail.orderType==98)}}">
+      <!-- <view class='sale-after gift-sale-after flexR' wx:if="{{detail.orderProductList[0].middleBtn&&(detail.orderType==5 || detail.orderType==98)}}">
         <view class='order-btn btn-left flexR' catchtap='subBtnClicked' data-id='{{detail.orderProductList[0].middleBtn.id}}' data-returntype='{{detail.orderProductList[0].middleBtn.returnType}}' data-index='{{0}}'>{{detail.orderProductList[0].middleBtn.content}}</view>
-      </view>
-      <view wx:if='{{detail.orderType==5 || detail.orderType==98}}' class='gray font-24 whiteBg coupon-line'>
-        <view class='flexR-sb' wx:for='{{detail.orderProductList[0].giftBagCoupons}}'>
+      </view> -->
+      <view wx:if='{{ detail.orderSubType==3 || detail.orderSubType==4 }}' class='gray font-24 whiteBg coupon-line'>
+        <view class='flexR-sb' wx:for='{{detail.giftCouponDTOList}}'>
           <view>{{item.couponName}}</view>
           <view>x1</view>
         </view> 
@@ -79,30 +79,30 @@
     <view class='order-pay-info gray-9 boxSize'>
         <view class='flexR-sb'>
             <text>商品价格</text>
-            <text>¥{{detail.totalProductPrice}}</text>
+            <text>¥{{showPriceList.productPrice}}</text>
         </view>
         <view class='flexR-sb'>
             <text>优惠券优惠</text>
-            <text>-¥{{detail.couponPrice || 0}}</text>
+            <text>-¥{{showPriceList.couponAmount || 0}}</text>
         </view>
         <view class='flexR-sb'>
             <text>1元现金券</text>
-            <text>-¥{{detail.tokenCoin || 0}}</text>
+            <text>-¥{{showPriceList.tokenCoinAmount || 0}}</text>
         </view>
         <view class='flexR-sb'>
             <text>运费（快递）</text>
-            <text>¥{{detail.freightPrice}}</text>
+            <text>¥{{showPriceList.freightAmount}}</text>
         </view>
         <view class='flexR-sb total'>
             <text>订单总价</text>
-            <text>¥{{detail.totalOrderPrice}}</text>
+            <text>¥{{showPriceList.orderAmount}}</text>
         </view>
         <view class='flexR-sb total totalPay'>
             <view class='popup'>
                 <view></view>
             </view>
-            <text>{{detail.orderPayRecord? "实付款":"需付款"}}</text>
-            <text class='red'>¥{{detail.needPrice}}</text>
+            <text>{{status==1 || status==5? "需付款":"实付款"}}</text>
+            <text class='red'>¥{{showPriceList.payAmount}}</text>
         </view>
     </view>
 
@@ -112,18 +112,15 @@
         <view class='copy-btn gray-9 flexR' bindtap="copy">复制</view>
         <view class='content gray-9'>
           <view>订单编号：
-            <text selectable="true">{{detail.orderNum}}</text>
+            <text selectable="true">{{orderId}}</text>
           </view>
-          <view>创建时间：{{detail.createTime}}</view>
-          <view>支付交易号：{{detail.outTradeNo}}</view>
-          <view>付款时间：{{detail.showPlatformTime}}</view>
-          <!-- <view wx:if='{{detail.showPlatformTime}}'>平台付款时间：{{detail.showPlatformTime}}</view>
-          <view wx:if='{{detail.payTime&&status!=1&&status!=8&&detail.isUsedThirdPay}}'>三方付款时间：{{detail.payTime}}</view>
-          <view wx:if='{{detail.outTradeNo&&status!=1&&status!=8&&detail.isUsedThirdPay}}'>三方交易号：{{detail.outTradeNo}}</view> -->
-          <view wx:if='{{detail.sendTime}}'>发货时间：{{detail.sendTime}}</view>
-          <view wx:if='{{status==4 || status==5}}'>成交时间：{{detail.showFinishTime}}</view>
-          <view wx:if='{{status==6}}'>取消时间：{{detail.cancelTime}}</view>
-          <view wx:if='{{status==8}}'>关闭时间：{{detail.showShutOffTime}}</view>
+          <view>创建时间：{{datas.warehouseOrderDTOList[0].createTime}}</view>
+          <view>支付交易号：{{datas.warehouseOrderDTOList[0].outTradeNo}}</view>
+          <view>付款时间：{{datas.warehouseOrderDTOList[0].payTime}}</view>
+          <view wx:if='{{detail.sendTime}}'>发货时间：{{datas.warehouseOrderDTOList[0].deliverTime}}</view>
+          <view wx:if='{{status==4}}'>成交时间：{{datas.warehouseOrderDTOList[0].finishTime}}</view>
+          <view wx:if='{{status==5}}'>关闭时间：{{datas.warehouseOrderDTOList[0].cancelTime}}</view>
+          <!-- <view wx:if='{{status==8}}'>关闭时间：{{detail.showShutOffTime}}</view> -->
         </view>
     </view>
 

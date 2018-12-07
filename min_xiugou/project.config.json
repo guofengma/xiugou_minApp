@@ -101,7 +101,7 @@
 					"id": 10,
 					"name": "申请售后",
 					"pathName": "pages/after-sale/apply-sale-after/apply-sale-after",
-					"query": "refundType=2&returnProductId=1"
+					"query": "refundType=2&orderProductNo=1"
 				},
 				{
 					"id": 11,
@@ -221,7 +221,7 @@
 					"id": 30,
 					"name": "换货",
 					"pathName": "pages/after-sale/exchange-goods/exchange-goods",
-					"query": "serviceNo=2018345012071039582265788"
+					"query": "serviceNo=3181207202538897177200"
 				},
 				{
 					"id": 31,

@@ -57,7 +57,8 @@ Page({
     let placeholder = this.data.reason[options.refundType].placeholder
     this.setData({
       refundType: options.refundType,
-      list: Storage.getInnerOrderList() || '',
+      list: Storage.getInnerOrderList() || {},
+      orderProductNo: options.orderProductNo || '',
       serviceNo: options.serviceNo || '',
       placeholder: { placeholder: placeholder, disabled: false }
     })
@@ -128,7 +129,7 @@ Page({
   },
   findOrderProductInfo(){
     API.afterSaleOrderDetail({
-      orderProductNo: this.data.list.orderProductNo
+      orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || ''
     }).then((res) => {
       let data = res.data || {}
       if (data.status != 1 && data.serviceNo) {
@@ -138,11 +139,8 @@ Page({
         let content = "售后"+this.data.stateArr[data.status]+",不能修改申请"
         Tool.showAlert(content,callBack)
       } else {
-        data.imgUrl = data.specImg ? data.specImg : this.data.list.imgUrl
-        // data.createTime = Tool.formatTime(data.orderCreateTime)
-        this.setData({
-          orderInfos: data
-        })
+        data.imgUrl = data.specImg? data.specImg : this.data.list.imgUrl
+        data.createTime = Tool.formatTime(data.createTime)
       }
       this.setData({
         orderInfos: data
@@ -194,7 +192,7 @@ Page({
       // exchangeSpecImg: this.data.selectType.specImg || '',
       applyRefundAmount: this.data.applyRefundAmount || '',
       imgList: this.data.originalImg.join(","),
-      orderProductNo: 'O1166141',
+      orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || '',
       reason:'无',
       // reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
       description: this.data.remark,
