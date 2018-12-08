@@ -86,7 +86,7 @@ Page({
         }
         if (showOutStatus == 3 || showOutStatus ==1) {
           let name = showOutStatus == 1 ? "cancelTime" :"autoReceiveTime"
-          this.data.countDownSeconds = Math.floor((warehouseOrderDTOList[name] - warehouseOrderDTOList.nowTime) / 1000 / 60)
+          this.data.countDownSeconds = Math.floor((warehouseOrderDTOList[name] - warehouseOrderDTOList.nowTime) / 1000)
           this.countdown(this)
         }
         this.setData({
@@ -359,7 +359,7 @@ Page({
       // let childrenList = detail.orderProductList
       let state = this.data.state
       let btnArr = []
-      let now = datas.warehouseOrderDTOList[0].nowTime
+      let now = detail.warehouseOrderDTOList[0].nowTime
       this.data.showProducts.forEach((item,index)=>{
         let middle = ''
         let innerState = item.status // 子订单状态

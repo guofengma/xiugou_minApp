@@ -47,7 +47,7 @@ Page({
       // address.addressInfo = address.province + address.city + address.area + address.address
       if (status == 2 && !orderRefundExpress.expressNo && !datas.sendExpressNo) {
         // let self = this
-        datas.countDownSeconds = Math.floor((datas.cancelTime-datas.nowTime)/1000/60)
+        datas.countDownSeconds = Math.floor((datas.cancelTime-datas.nowTime)/1000)
         console.log(datas.cancelTime,datas.nowTime)
         this.countdown(this)
         // if (!datas.expressNo) {

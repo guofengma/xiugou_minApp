@@ -74,7 +74,7 @@ Page({
         expressNo: expressNo,
       })
       if (status > 1 && !orderRefundExpress.expressNo && !datas.sendExpressNo) {
-        datas.countDownSeconds = Math.floor((datas.cancelTime - datas.nowTime) / 1000 / 60)
+        datas.countDownSeconds = Math.floor((datas.cancelTime - datas.nowTime) / 1000 )
         if (datas.countDownSeconds>0) this.countdown(this)
       }
       console.log(datas.cancelTime - datas.nowTime)
@@ -112,7 +112,7 @@ Page({
       console.log(res)
     })
   },
-  countdown: function (that) { // 倒计时
+  countdown(that) { // 倒计时
     clearTimeout(that.data.time);
     let distanceTime = Tool.showDistanceTime(this.data.datas.countDownSeconds || 0)
     if (this.data.datas.countDownSeconds == 0) {
