@@ -27,7 +27,7 @@
       </view>
     </view>
     <view class='chooseBox'>
-      <template is="product-info-chooseBox" data="{{productInfo}}" />
+      <template is="product-info-chooseBox" data="{{productInfo,door:5}}" />
     </view>
     <!--产品图文详情切换  -->
     <product-infos  id='productInfos' nodes='{{nodes}}' datas='{{productInfo}}' />

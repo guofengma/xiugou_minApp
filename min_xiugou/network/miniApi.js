@@ -406,7 +406,16 @@ const api =
       "method": "post",
       "encrypt": false,
     }
-    ],
+  ],
+  /**********************分享**************************/
+  "shareClick": [
+    "/user/shareClick",
+    {
+      "method": "get",
+      "action": "分享点击",
+      "isShowErrMsg": false,
+    }
+  ]
 }
 
 const API = new ApiUtils(api).result;

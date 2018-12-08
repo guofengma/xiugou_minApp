@@ -75,7 +75,7 @@ export default class ApiUtils {
               global.Tool.showAlert(response.msg, callBack)
             } else {
               // 是否给出错误提示
-              if (config.isShowErrMsg!==false){
+              if (reqConfig.isShowErrMsg!==false){
                 global.Tool.showAlert(response.msg)
               }
             }

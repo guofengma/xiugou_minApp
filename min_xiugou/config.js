@@ -5,7 +5,7 @@ const config = {
   // h5webUrl: 'https://uath5.sharegoodsmall.com',// 市场部内测环境
   // baseUrl: 'https://uatapi.sharegoodsmall.com/gateway',// 市场部内测环境
   h5webUrl: 'https://testh5.sharegoodsmall.com',
-  // baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
+  baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
   // h5webUrl: 'http://devh5.sharegoodsmall.com',
   // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
   // baseUrl: 'http://172.16.10.42:4090/gateway',  // 蒋
@@ -20,7 +20,7 @@ const config = {
   // baseUrl: 'http://zhifu.dnvhot.tech', // 吴
   // baseUrl: 'http://172.16.10.21:8080/gateway', // 申
   // baseUrl: 'http://172.16.10.158:18080/gateway', // 杨飞
-  baseUrl: 'http://172.16.10.177:18080/gateway', // 龚日红
+  // baseUrl: 'http://172.16.10.177:18080/gateway', // 龚日红
   wxVersion: 'V2.2.5', // 微信小程序版本
   AppId: 'wxa059b818226f8679',//小程序AppID
   Secret: '9fa19f4d1f7e37d318dba14f951f1b4c',//小程序Secret
