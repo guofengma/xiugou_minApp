@@ -26,12 +26,14 @@ Page({
     })
     if (options.webUrl){
       this.setData({
-        url: this.data.webUrl + options.webUrl + '?time=' + new Date().getTime() + '&miniparams=' + miniparams
+        url: this.data.webUrl + options.webUrl + '?time=' + new Date().getTime() 
       })
     }
     if (options.webType){
+      let url = this.data.webUrl + this.data.arr[options.webType] + '?time=' + new Date().getTime()
+      if (options.webType == 5) url += ('&miniparams=' + miniparams)
       this.setData({
-        url: this.data.webUrl + this.data.arr[options.webType] + '?time=' + new Date().getTime() + '&miniparams=' + miniparams
+        url: url
       })
     }else{
       let callBack = () => {
