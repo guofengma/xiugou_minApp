@@ -44,7 +44,7 @@
 <view class='container'>
     <!--地址信息 如果发货了 显示地址 -->
     <view class='my-order-address' wx:if='{{status==2||status==3||status==4 ||status==5 ||status== 6 }}'>
-        <template is="address-info" data="{{addressType,src,...address,hasData,door:1}}"/>
+        <template is="address-info" data="{{addressType,src,...detail,hasData,door:1}}"/>
     </view>
 
     <!--订单信息  -->
@@ -54,7 +54,7 @@
         <!-- <text class='gray font-24'>{{detail.orderProductList[0].productName}}</text> -->
       </view>
       <view class='product-ifo-list'>
-        <block wx:for="{{detail.showProducts}}" wx:key="unique">
+        <block wx:for="{{showProducts}}" wx:key="unique">
           <view catchtap='productClicked' data-productid='{{item.prodCode}}'>
             <template is="my-order-product-info" data="{{...item}}"/>
           </view>

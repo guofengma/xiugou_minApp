@@ -12,7 +12,7 @@
 </view>
 <view class='flexC tips-exchange font-26'>
    <view class='flexR'>
-    <image-sub wx:if='{{datas.status==3}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
+    <image-sub wx:if='{{datas.status==6}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
     <view>
       <view class='tips-title'>{{datas.headerTitle}}</view>
       <view>{{distanceTime}}</view>
@@ -21,7 +21,7 @@
   </view>
 </view>
 <view wx:if='{{datas.status==6}}' class='refusalReason whiteBg font-26 flexR-sb'>{{datas.reject}}</view>
-<view wx:if='{{datas.status>1&&datas.status!=3}}'>
+<view wx:if='{{datas.status>1&&datas.status!=6}}'>
   <!--地址信息  -->
   <view class='address active whiteBg' >
     <template is="address-info" data="{{addressType,...datas,hasData:true,door:1}}"/>
@@ -35,7 +35,7 @@
    <view wx:if='{{expressNo.id!=0&&SaleExpressNo.id!=1}}' bindtap='logClicked' data-express='{{SaleExpressNo}}' data-type='2'>
       <template is="cell-line" data="{{name:'平台物流',placeholder:SaleExpressNo.content}}"/>
     </view>
-    <view bindtap='logClicked' data-express='{{expressNo}}' data-type='1' wx:if='{{datas.status!=6&&!expressNo.id  || expressNo.id}}'>
+    <view bindtap='logClicked' data-express='{{expressNo}}' data-type='1' >
       <template is="cell-line" data="{{name:'换货物流',placeholder:expressNo.content}}"/>
     </view>
   </view>
@@ -50,7 +50,7 @@
   <view class='flexR-sb after-sale-line gray'>换货订单</view>
   <template is="after-sale-prd-info" data="{{...datas}}"/>
   <view class='exchange-content whiteBg gray'>
-    <view>更换型号： {{datas.exchangeSpec}}</view>
+    <view>更换型号： {{datas.specValues}}</view>
     <view>换货原因：{{datas.reason}}</view>
     <!-- <view>换货金额：¥{{list.showRefund}}</view> -->
     <view>换货说明：{{datas.description}}</view>

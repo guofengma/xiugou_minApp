@@ -36,6 +36,7 @@ Page({
     API.afterSaleDetail({
       serviceNo: this.data.serviceNo || this.data.list.serviceNo,
     }).then((res) => {
+      let expressNo = this.data.expressNo
       let datas = res.data || {}
       if (datas.type==2){
         Tool.redirectTo('/pages/after-sale/return-goods/return-goods?serviceNo=' + this.data.serviceNo)
@@ -55,13 +56,14 @@ Page({
         resultIndex: status
       })
       let orderRefundExpress = datas.orderRefundExpress || {}
+      let SaleExpressNo = this.data.SaleExpressNo
       // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
-      if (status > 1 && !orderRefundExpress.expressCode && !datas.sendExpressNo) {
-        datas.countDownSeconds = Math.floor((datas.cancelTime - datas.nowTime) / 1000 / 60)
-        this.countdown(this)
-      }
-      if (orderRefundExpress.expressCode){
-        expressNo = { id: 2, content: datas.sendExpressNo }
+      
+      // let orderRefundExpress = datas.orderRefundExpress || {}
+      if (orderRefundExpress.expressCode) {
+        expressNo = {
+          id: 2, content: orderRefundExpress.expressNo
+        }
       }
       if (datas.sendExpressNo) {
         SaleExpressNo = { id: 2, content: datas.sendExpressNo }
@@ -71,6 +73,11 @@ Page({
         SaleExpressNo: SaleExpressNo,
         expressNo: expressNo,
       })
+      if (status > 1 && !orderRefundExpress.expressNo && !datas.sendExpressNo) {
+        datas.countDownSeconds = Math.floor((datas.cancelTime - datas.nowTime) / 1000 / 60)
+        if (datas.countDownSeconds>0) this.countdown(this)
+      }
+      console.log(datas.cancelTime - datas.nowTime)
       Event.emit('getDetail')
       // let afterSaleInfo = datas.afterSaleInfo || {}
       // let imgList = afterSaleInfo.imgList || ''

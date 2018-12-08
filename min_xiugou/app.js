@@ -13,7 +13,6 @@ import config from './config.js'
 
 App({
     onLaunch: function (o) {
-      console.log(o)
       if (!Storage.getPlatform()) {
         let uuid = Tool.getUUID()
         Storage.setPlatform(uuid)

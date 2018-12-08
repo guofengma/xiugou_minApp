@@ -202,7 +202,13 @@ Page({
     let reqName = this.data.serviceNo? 'modifyAfterSale':'applyAfterSale'
     API[reqName](params).then((res) => {
       let datas = res.data || {}
-      Tool.redirectTo(this.data.page[this.data.refundType] + '?serviceNo=' + this.data.serviceNo)
+      let serviceNo = ''
+      if (datas.serviceNo){
+        serviceNo = datas.serviceNo
+      } else{
+        serviceNo =this.data.serviceNo
+      }
+      Tool.redirectTo(this.data.page[this.data.refundType] + '?serviceNo=' + serviceNo)
     }).catch((res) => {
       console.log(res)
     });

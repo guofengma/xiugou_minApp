@@ -45,9 +45,10 @@ Page({
       refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
       // let address = datas.refundAddress || {}
       // address.addressInfo = address.province + address.city + address.area + address.address
-      if (status == 2 && !datas.sendExpressNo) {
+      if (status == 2 && !orderRefundExpress.expressNo && !datas.sendExpressNo) {
         // let self = this
         datas.countDownSeconds = Math.floor((datas.cancelTime-datas.nowTime)/1000/60)
+        console.log(datas.cancelTime,datas.nowTime)
         this.countdown(this)
         // if (!datas.expressNo) {
         //   datas.endTime = Tool.formatTime(datas.cancelTime)
@@ -55,8 +56,10 @@ Page({
         // }
       }
       let expressNo = this.data.expressNo
+      let orderRefundExpress = datas.orderRefundExpress || {}
       if (orderRefundExpress.expressCode) {
-        expressNo = { id: 2, content: datas.sendExpressNo }
+        expressNo = {
+          id: 2, content: orderRefundExpress.expressNo }
       }
       this.setData({
         expressNo: expressNo,
@@ -85,13 +88,13 @@ Page({
   },
   countdown (that) { // 倒计时
     clearTimeout(that.data.time);
-    let distanceTime = Tool.showDistanceTime(this.data.datas.countDownSeconds || 0)
-    if (this.data.datas.countDownSeconds == 0) {
-      that.findReturnProductById(this.data.serviceNo)
+    let distanceTime = Tool.showDistanceTime(that.data.datas.countDownSeconds || 0)
+    if (that.data.datas.countDownSeconds == 0) {
+      that.findReturnProductById(that.data.serviceNo)
       return
     }
     let time = setTimeout(function () {
-      this.data.datas.countDownSeconds--
+      that.data.datas.countDownSeconds--
       that.countdown(that);
     }, 1000)
     that.setData({

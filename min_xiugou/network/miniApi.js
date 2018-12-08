@@ -415,6 +415,38 @@ const api =
       "action": "分享点击",
       "isShowErrMsg": false,
     }
+  ],
+  /************************** 优惠券 *******************************/
+  "availableDiscountCouponForProduct": [
+    "/user/coupon/listAvailable",
+    {
+      "method": "post",
+      "action": "产品可用优惠劵列表",
+      "isShowErrMsg": false,
+    }
+  ],
+  "couponList": [ // status 优惠券状态 0-未使用 1-已使用 2-已失效 3-未激活
+    "/user/coupon/listAvailable",
+    {
+      "method": "post",
+      "action": "优惠劵列表",
+      "isShowErrMsg": false,
+    }
+  ],
+  /************************** 支付 *******************************/
+  "wxPay": [ // status 优惠券状态 0-未使用 1-已使用 2-已失效 3-未激活
+    "/pay/wxminipay",
+    {
+      "method": "post",
+      "action": "微信支付",
+    }
+  ],
+  'sgpay':[
+    "/pay/sgpay",
+    {
+      "method": "post",
+      "action": "平台支付",
+    }
   ]
 }
 

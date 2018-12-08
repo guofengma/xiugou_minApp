@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation,API } = global
+ let { Tool, RequestFactory, Storage, Event, Operation,API } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
 import ProductFactorys from './temp/product.js'
@@ -112,7 +112,7 @@ Page({
       orderProductList:[{
         quantity: this.data.productBuyCount,
         skuCode: this.data.selectType.skuCode,
-        prodCode: this.data.selectType.prodCode
+        productCode: this.data.selectType.prodCode
       }],
       orderType:1
     }

@@ -276,9 +276,8 @@ Component({
     continuePay(e) {
       let item = e.currentTarget.dataset.item;
       let params = {
-        totalAmounts: item.needPrice, //总价
-        orderNum: item.orderNum, // 订单号
-        outTradeNo: item.outTradeNo  // 流水号
+        payAmount: item.needPrice, //总价
+        orderNo: item.orderNo  // 流水号
       };
       Storage.setPayOrderList(params)
       Tool.navigateTo('/pages/order-confirm/pay/pay?door=1&isContinuePay=true')

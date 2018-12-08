@@ -277,7 +277,7 @@ Page({
         if (this.data.useType == 1){
           let coinNum = options.coin > this.data.coinData.num? this.data.coinData.num : options.coin
           this.setData({
-            coinNum: coinNum,
+            coinNum: coinNum ,
             maxNum: this.data.coinData.num > maxUseCoin ? maxUseCoin : this.data.coinData.num,
           })
         } else {

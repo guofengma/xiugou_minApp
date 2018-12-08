@@ -7,7 +7,7 @@ Page({
     currentPage: 1, // 当前的页数
     pageSize: 10, // 每次加载请求的条数 默认10
     lists:[],
-    typeState: ["其他",'申请中', '已同意', '拒绝', '中','中','完成','关闭','超时'],
+    typeState: ["其他", '待审核', '待寄回', '待仓库确认', '待平台处理', '售后完成','关闭',],
     typeArr:[
       { name: '其他'},
       { name: '仅退款', 
@@ -75,9 +75,10 @@ Page({
 
     API.afterSaleList(params).then((res) => {
       let lists = this.data.lists
-      let datas = res.data || []
+      let datas = res.data || {}
+      console.log(datas.totalPage)
       if (datas.totalPage > 0){
-        datas.data.forEach((item)=>{
+        datas.list.forEach((item)=>{
           item.imgUrl = item.specImg
           item.icon = this.data.typeArr[item.type].icon
           item.typeName = this.data.typeArr[item.type].name
@@ -89,7 +90,7 @@ Page({
           lists=[]
         }
         this.setData({
-          lists: lists.concat(datas.data),
+          lists: lists.concat(datas.list),
           totalPage: datas.totalPage || 0,
         })
       }

@@ -40,7 +40,7 @@ Component({
       this.data.list.id = this.data.list.orderProductId
       Storage.setInnerOrderList(this.data.list)
       let types = this.data.list.type -1
-      Tool.redirectTo('/pages/after-sale/apply-sale-after/apply-sale-after?serviceNo=' + this.data.list.serviceNo + '&refundType=' + types+'&orderProductNo=' + list.orderProductNo)
+      Tool.redirectTo('/pages/after-sale/apply-sale-after/apply-sale-after?serviceNo=' + this.data.list.serviceNo + '&refundType=' + types+'&orderProductNo=' + this.data.list.orderProductNo)
     },
     findReturnProductById(num) {
       API.afterSaleDetail({

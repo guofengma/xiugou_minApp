@@ -84,6 +84,11 @@ Page({
         } else {
           showPriceList: datas.warehouseOrderDTOList[0]
         }
+        if (showOutStatus == 3 || showOutStatus ==1) {
+          let name = showOutStatus == 1 ? "cancelTime" :"autoReceiveTime"
+          this.data.countDownSeconds = Math.floor((warehouseOrderDTOList[name] - warehouseOrderDTOList.nowTime) / 1000 / 60)
+          this.countdown(this)
+        }
         this.setData({
           detail:datas,
           showProducts: showProducts,
@@ -239,26 +244,46 @@ Page({
         });
 
     },
-    time() {
-      //待付款订单 倒计时处理
-      let detail = this.data.detail
-      let time = ''
-      if (detail.status==3){
-        time = detail.autoReceiveTime
-      } else {
-        time = detail.shutOffTime
-      }
-      let endTime = Tool.formatTime(time) 
-      let countdown = Tool.getDistanceTime(endTime, this)
-      if (countdown ==0){
-        detail.status = detail.status==1? 8:4
-        clearTimeout(this.data.time);
-        this.setData({
-          detail: detail,
-          state: this.orderState(detail.status)//订单状态相关信息
-        })
-      }
-    },
+  countdown: function (that) { // 倒计时
+    clearTimeout(that.data.time);
+    let distanceTime = Tool.showDistanceTime(that.data.countDownSeconds || 0)
+    if (that.data.countDownSeconds <0) {
+      let status = that.data.status==1? 6:5
+      that.setData({
+        status: status,
+        state: that.orderState(status)
+      })
+      return
+    }
+    let time = setTimeout(function () {
+      that.data.countDownSeconds--
+      that.countdown(that);
+    }, 1000)
+    that.setData({
+      distanceTime: distanceTime,
+      time: time
+    });
+  },
+    // time() {
+    //   //待付款订单 倒计时处理
+    //   let detail = this.data.detail
+    //   let time = ''
+    //   if (detail.status==3){
+    //     time = detail.autoReceiveTime
+    //   } else {
+    //     time = detail.shutOffTime
+    //   }
+    //   let endTime = Tool.formatTime(time) 
+    //   let countdown = Tool.getDistanceTime(endTime, this)
+    //   if (countdown ==0){
+    //     detail.status = detail.status==1? 8:4
+    //     clearTimeout(this.data.time);
+    //     this.setData({
+    //       detail: detail,
+    //       state: this.orderState(detail.status)//订单状态相关信息
+    //     })
+    //   }
+    // },
     orderState(n) {
         //按钮状态 left right middle 分别是底部左边 右边 和订单详情中的按钮文案
         let stateArr = [
@@ -303,9 +328,8 @@ Page({
     },
     continuePay() {
       let params = {
-        totalAmounts: this.data.detail.needPrice, //支付的钱
-        orderNum: this.data.detail.orderNum,// 订单号
-        outTradeNo: this.data.detail.outTradeNo||'', // 是否继续支付
+        payAmount: this.data.showPriceList.payAmount, //总价
+        orderNo: this.data.showPriceList.orderNo,  // 流水号
       }
       Storage.setPayOrderList(params)
       Tool.navigateTo('/pages/order-confirm/pay/pay?door=1&isContinuePay=' + true)
@@ -335,12 +359,12 @@ Page({
       // let childrenList = detail.orderProductList
       let state = this.data.state
       let btnArr = []
+      let now = datas.warehouseOrderDTOList[0].nowTime
       this.data.showProducts.forEach((item,index)=>{
         let middle = ''
         let innerState = item.status // 子订单状态
         let returnType = item.returnType
         let finishTime = item.finishTime
-        let now = new Date().getTime()
         // 不支持的售后种类
         // let arr = Tool.bitOperation(this.data.afterSaleTypeArr, item.restrictions)
         // 支持的售后种类
@@ -367,10 +391,10 @@ Page({
           //   }
           // }
         }
-        if (innerState == 4) {
+        if (innerState<=4) {
           let arr = ["退款中",'退货中','换货中']
           middle = { id: 3, inner: innerState, content: arr[returnType-1],returnType: returnType } 
-          state.isHiddenComfirmBtn = true
+          // state.isHiddenComfirmBtn = true
         }
 
         if (innerState==5 && returnType) {
@@ -394,17 +418,17 @@ Page({
 
       let index = e.currentTarget.dataset.index
 
-      let list = this.data.detail.orderProductList[index]
+      let list = this.data.showProducts[index]
 
-      list.orderNum = this.data.detail.orderNum
+      // list.orderNum = this.data.detail.orderNum
 
-      list.createTime = this.data.detail.createTime
+      // list.createTime = this.data.detail.createTime
 
-      list.showRefund = list.price * list.num
+      // list.showRefund = list.price * list.num
 
       list.address = this.data.address
 
-      Storage.setInnerOrderList(this.data.detail.orderProductList[index])
+      Storage.setInnerOrderList(list)
 
       // 跳转页面
 

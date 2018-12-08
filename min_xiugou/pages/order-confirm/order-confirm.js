@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event, Storage, Operation } = global
+let { Tool, API, Event, Storage, Operation } = global
 Page({
   data: {
     innerCount:1, //件数
@@ -33,14 +33,6 @@ Page({
     Event.on('updateOrderAddress', this.updateOrderAddress,this)
     Event.on('updateCoupon', this.couponClick,this)
     Event.on('getTokenCoin', this.tokenCoinClick,this)
-    this.data.params = {
-      orderProductList: [{
-        quantity: this.data.productBuyCount,
-        skuCode: this.data.selectType.skuCode,
-        prodCode: this.data.selectType.prodCode
-      }],
-      orderType: 1
-    }
   },
   onShow: function () {
     this.updateCoupon()
@@ -74,7 +66,7 @@ Page({
   updateCoupon(){ // 点击优惠卷价格联动
     if (!this.data.couponClick) return
     let coupon = Storage.getCoupon()
-    this.data.params.couponId = coupon.id
+    this.data.params.userCouponCode = coupon.code
     this.data.params.tokenCoin = 0
     this.setData({
       params: this.data.params,
@@ -84,8 +76,8 @@ Page({
         coupon: coupon,
         couponClick: false
       })
-      if (this.data.useOneCoinNum>item.totalAmounts){
-        Tool.showAlert("一元劵最多只能使用" + Math.floor(item.totalAmounts)+'张')
+      if (this.data.useOneCoinNum > item.payAmount){
+        Tool.showAlert("一元劵最多只能使用" + Math.floor(item.payAmount)+'张')
         this.setData({
           useOneCoinNum:0
         })
@@ -98,158 +90,75 @@ Page({
     let params = {
       ...this.data.params,
       channel:1,
+      source: this.data.formCart ? 1 : 2, // 订单来源
     }
     API.makeSureOrder(params).then((res) => {
+      wx.stopPullDownRefresh() //停止下拉刷新du
       let item = res.data || {}
-      let userAdress = item.address || {}
+      let userAdress = item.userAddressDTO || {}
       if (userAdress){
         item.address = { ...userAdress}
         item.address.addressInfo = userAdress.province + userAdress.city + userAdress.area + userAdress.address
         item.address.hasData = userAdress.receiver? true : false
       }
+      console.log(userAdress)
       //渲染产品信息列表
-      // let showProduct =[]
-      // let canUseTokenCoin = false, canUseCoupon = false
-      // item.orderProductList.forEach((item0,index)=>{
-      //   showProduct.push({
-      //     showImg: item0.specImg,
-      //     showName: item0.productName,
-      //     showType: item0.spec,
-      //     showPrice: item0.price,
-      //     showQnt: item0.num,
-      //     status: 1,
-      //     stock: item0.stock,
-      //   })
-      //   let arr = Tool.bitOperation(this.data.couponArr, item0.restrictions)
-      //   console.log(item0.restrictions)
-      //   let couponType = this.data.couponArr.filter(function (n) {
-      //     return arr.indexOf(n) == -1
-      //   });
-      //   couponType.forEach((item,index)=>{
-      //     if(item==this.data.couponArr[0]){
-      //       canUseCoupon = true
-      //     }
-      //     if (item == this.data.couponArr[1]) {
-      //       canUseTokenCoin = true
-      //     }
-      //   })
-      // })
+      let showProduct =[]
+      let canUseTokenCoin = false, canUseCoupon = false
+      item.orderProductList.forEach((item0,index)=>{
+        let specValues = item0.specValues || ''
+        let spec = specValues.split('@').join('-')
+        showProduct.push({
+          showImg: item0.specImg,
+          showName: item0.productName,
+          showType: spec,
+          showPrice: item0.unitPrice,
+          showQnt: item0.quantity,
+          status: 1,
+          stock: item0.stock || 1,
+        })
+        let arr = Tool.bitOperation(this.data.couponArr, item0.restrictions)
+        let couponType = this.data.couponArr.filter(function (n) {
+          return arr.indexOf(n) == -1
+        });
+        couponType.forEach((item,index)=>{
+          if(item==this.data.couponArr[0]){
+            canUseCoupon = true
+          }
+          if (item == this.data.couponArr[1]) {
+            canUseTokenCoin = true
+          }
+        })
+      })
 
-      // item.showProduct = showProduct
+      item.showProduct = showProduct
 
-      // item.orginTotalAmounts = item.totalAmounts
-      // item.showTotalScore = item.totalScore
+      item.orginTotalAmounts = item.payAmount
+      item.showTotalScore = item.totalScore || 0
 
-      // // this.userScore(item)
+      // this.userScore(item)
 
-      // let addressList = this.data.addressList
+      let addressList = this.data.addressList
 
-      // if (!this.data.isChangeAddress){
-      //   addressList[1] = item.address
+      if (!this.data.isChangeAddress){
+        addressList[1] = item.address
+      }
+      // item.showTotalAmounts = item.totalAmounts
+      // item.totalAmounts = Tool.add(item.totalAmounts, item.totalFreightFee)
+      callBack(item)
+
+      this.setData({
+        orderInfos: item,
+        addressList: addressList,
+        canUseCoupon: canUseCoupon,
+        canUseTokenCoin: canUseTokenCoin
+      })
+      // if (this.data.useOneCoinNum>0){
+      //   this.getTokenCoin()
       // }
-      // // item.showTotalAmounts = item.totalAmounts
-      // // item.totalAmounts = Tool.add(item.totalAmounts, item.totalFreightFee)
-      // callBack(item)
-
-      // this.setData({
-      //   orderInfos: item,
-      //   addressList: addressList,
-      //   canUseCoupon: canUseCoupon,
-      //   canUseTokenCoin: canUseTokenCoin
-      // })
-      // // if (this.data.useOneCoinNum>0){
-      // //   this.getTokenCoin()
-      // // }
     }).catch((res) => {
       console.log(res)
     })
-    // let url = ''
-
-    // if(this.data.door==1){
-    //   url = Operation.seckillMkeSureOrder
-    // } else if (this.data.door == 2){
-    //   url = Operation.discountMakeSureOrder
-    // } else if (this.data.door == 5) {
-    //   url = Operation.giftMkeSureOrder
-    // } else {
-    //   url = Operation.makeSureOrder
-    // }
-    // let params = {
-    //   ...this.data.params,
-    //   reqName: '提交订单',
-    //   url: url
-    // }
-    // let r = RequestFactory.wxRequest(params);
-    // r.successBlock = (req) => {
-    //   wx.stopPullDownRefresh() //停止下拉刷新du
-    //   let item = req.responseObject.data || {}
-    //   // 渲染地址列表
-    //   let userAdress = item.userAddress
-
-    //   if (userAdress){
-    //     item.address = { ...userAdress}
-    //     item.address.addressInfo = userAdress.province + userAdress.city + userAdress.area + userAdress.address
-    //     item.address.hasData = userAdress.receiver ? true : false
-    //   }
-     
-    //   //渲染产品信息列表
-    //   let showProduct =[]
-    //   let canUseTokenCoin = false, canUseCoupon = false
-    //   item.orderProductList.forEach((item0,index)=>{
-    //     showProduct.push({
-    //       showImg: item0.specImg,
-    //       showName: item0.productName,
-    //       showType: item0.spec,
-    //       showPrice: item0.price,
-    //       showQnt: item0.num,
-    //       status: 1,
-    //       stock: item0.stock,
-    //     })
-    //     let arr = Tool.bitOperation(this.data.couponArr, item0.restrictions)
-    //     console.log(item0.restrictions)
-    //     let couponType = this.data.couponArr.filter(function (n) {
-    //       return arr.indexOf(n) == -1
-    //     });
-    //     couponType.forEach((item,index)=>{
-    //       if(item==this.data.couponArr[0]){
-    //         canUseCoupon = true
-    //       }
-    //       if (item == this.data.couponArr[1]) {
-    //         canUseTokenCoin = true
-    //       }
-    //     })
-    //   })
-
-    //   item.showProduct = showProduct
-      
-    //   item.orginTotalAmounts = item.totalAmounts
-    //   item.showTotalScore = item.totalScore
-
-    //   // this.userScore(item)
-
-    //   let addressList = this.data.addressList
-
-    //   if (!this.data.isChangeAddress){
-    //     addressList[1] = item.address
-    //   }
-    //   // item.showTotalAmounts = item.totalAmounts
-    //   // item.totalAmounts = Tool.add(item.totalAmounts, item.totalFreightFee)
-    //   callBack(item)
-
-    //   this.setData({
-    //     orderInfos: item,
-    //     addressList: addressList,
-    //     canUseCoupon: canUseCoupon,
-    //     canUseTokenCoin: canUseTokenCoin
-    //   })
-    //   // if (this.data.useOneCoinNum>0){
-    //   //   this.getTokenCoin()
-    //   // }
-    // };
-    // r.failBlock = (req) => {
-    //   this.failBlock(req)
-    // }
-    // r.addToQueue();
   },
   addressClicked(){
     if (this.data.addressType!=1){
@@ -265,16 +174,16 @@ Page({
     this.setData({
       addressType: e.currentTarget.dataset.index
     })
-    if (this.data.coupon.id){ // 使用了优惠券更新
+    if (this.data.coupon.code){ // 使用了优惠券更新
       this.updateCoupon()
     } else {
       if(index==1){
-        orderInfos.totalAmounts = Tool.add(orderInfos.orginTotalAmounts, orderInfos.totalFreightFee)
+        orderInfos.payAmount = Tool.add(orderInfos.orginTotalAmounts, orderInfos.totalFreightFee)
       } else {
-        orderInfos.totalAmounts = orderInfos.totalPrice
+        orderInfos.payAmount = orderInfos.totalPrice
       }
       if (isUseIntegral) {
-        orderInfos.totalAmounts = Tool.sub(orderInfos.totalAmounts,orderInfos.reducePrice)
+        orderInfos.payAmount = Tool.sub(orderInfos.payAmount,orderInfos.reducePrice)
       }
     }
     this.setData({
@@ -321,7 +230,7 @@ Page({
       orderSubType: this.data.params.orderSubType || '', //订单子类型
       addressId: this.data.orderInfos.address.id,// 收件地址
       tokenCoin: this.data.params.tokenCoin,//一元劵
-      couponId: this.data.coupon.id || '', //优惠卷
+      userCouponCode: this.data.coupon.code || '', //优惠卷
       message: this.data.remark || '',// 买家留言
       channel: 1,// 渠道 1.小程序 2.APP 3.H5
       source: this.data.formCart ? 1 : 2, // 订单来源
@@ -330,7 +239,7 @@ Page({
       let datas = res.data || {}
       Event.emit('getLevel')  
       Event.emit('updateShoppingCart')
-      Storage.setPayOrderList(data)
+      Storage.setPayOrderList(datas)
       Tool.redirectTo('/pages/order-confirm/pay/pay?door=1')
     }).catch((res) => {
       this.setData({
@@ -338,59 +247,6 @@ Page({
       })
       console.log(res)
     })
-    // let storehouseId = this.data.addressType == 2? orderAddress.id : ''
-    // let params = {
-    //   "address": orderAddress.address,
-    //   "areaCode": orderAddress.areaCode || '',
-    //   "buyerRemark": this.data.remark,
-    //   "cityCode": orderAddress.cityCode || '',
-    //   "couponId": this.data.coupon.id || '',
-    //   "orderType": this.data.params.orderType,
-    //   "provinceCode": orderAddress.provinceCode || '',
-    //   "receiver": orderAddress.receiver || '',
-    //   "recevicePhone": orderAddress.receiverPhone || '',
-    //   tokenCoin: this.data.params.tokenCoin, // 一元劵  
-    //   reqName: '订单结算', 
-    // }
-    // let orderTypeParmas ={}
-    // if (this.data.door == 2){
-    //   orderTypeParmas = {
-    //     ...this.data.params,
-    //     url: Operation.discountSubmitOrder
-    //   }
-    // } else if (this.data.door == 5){
-    //   orderTypeParmas = {
-    //     ...this.data.params,
-    //     url: Operation.giftSubmitOrder
-    //   }
-    // } else if (this.data.door == 1){
-    //   orderTypeParmas = {
-    //     ...this.data.params,
-    //     url: Operation.seckillSubmitOrder
-    //   }
-    // }
-    // else {
-    //   orderTypeParmas = {
-    //     "orderProducts": this.data.params.orderProducts,
-    //     url: Operation.submitOrder
-    //   }
-    // }
-    // Object.assign(params, params, orderTypeParmas)
-    // let r = RequestFactory.wxRequest(params);
-    // r.successBlock = (req) => {
-    //   Event.emit('getLevel')  
-    //   Event.emit('updateShoppingCart')
-    //   let data = req.responseObject.data
-    //   Storage.setPayOrderList(data)
-    //   Tool.redirectTo('/pages/order-confirm/pay/pay?door=1')
-    // };
-    // r.failBlock = (req) => {
-    //   this.setData({
-    //     btnDisabled:false
-    //   })
-    //   this.failBlock(req)
-    // }
-    // r.addToQueue();
   },
   failBlock(req){
     let callBack = () => { }
@@ -413,10 +269,10 @@ Page({
     Tool.showAlert(req.responseObject.msg, callBack)
   },
   iconClicked(){ // 点击使用1元劵跳转
-    let useOneCoinNum = this.data.useOneCoinNum ? this.data.useOneCoinNum : Math.floor(this.data.orderInfos.totalAmounts)
-    let maxUseCoin= this.data.orderInfos.totalAmounts
+    let useOneCoinNum = this.data.useOneCoinNum ? this.data.useOneCoinNum : Math.floor(this.data.orderInfos.payAmount)
+    let maxUseCoin = this.data.orderInfos.payAmount
     if (this.data.useOneCoinNum){
-      maxUseCoin = Tool.add(this.data.orderInfos.totalAmounts, useOneCoinNum)
+      maxUseCoin = Tool.add(this.data.orderInfos.payAmount, useOneCoinNum)
     }
     Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + useOneCoinNum + '&maxUseCoin=' + maxUseCoin)
   },
@@ -427,26 +283,23 @@ Page({
   },
   getCouponProductPriceIds(){ // 获取请求优惠卷的参数
     let productIds = []
-    this.data.params.orderProducts.forEach((item) => {
+    this.data.params.orderProductList.forEach((item) => {
       productIds.push({
-        priceId:item.priceId,
-        productId:item.productId,
-        amount:item.num
+        priceCode: item.skuCode,
+        productCode: item.productCode,
+        amount: item.quantity
       })
     })
     return productIds
   },
   availableDiscountCouponForProduct() { // 产品可用优惠劵列表
-    if (this.data.door != 99&&this.data.door != 5) return
+    // if (this.data.door != 99&&this.data.door != 5) return
     let productIds = this.getCouponProductPriceIds()
     let params = {
       productPriceIds: productIds,
-      reqName: '产品可用优惠劵列表',
-      url: Operation.availableDiscountCouponForProduct
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
+    API.availableDiscountCouponForProduct(params).then((res) => {
+      let datas = res.data
       if (datas.totalPage==0){
         this.setData({
           coupon:{
@@ -455,10 +308,10 @@ Page({
             canClick:true,
           }
         })
-      }      
-    };
-    Tool.showErrMsg(r);
-    r.addToQueue();
+      }  
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   onPullDownRefresh: function () {
     this.requestOrderInfo()
