@@ -169,17 +169,6 @@ Page({
       }
       this.formatCouponInfos(params, 0, true,'')
     },
-    // 待激活
-    // getDiscountCouponNoActive() {
-    //   let params = {
-    //     ...this.data.params,
-    //     reqName: '待激活',
-    //     url: Operation.couponList,
-    //     status: 3
-    //   }
-    //   params.pageSize = 5
-    //   this.formatCouponInfos(params, 0, false, 'coupon-right-unUsed')
-    // },
     //已经优惠劵列表
     getDiscountCouponUserd() {
       let params = {

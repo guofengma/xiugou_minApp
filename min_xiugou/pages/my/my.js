@@ -96,16 +96,11 @@ Page({
 
     },
     getLevel(){
-      if (!this.data.didLogin) return
       let callBack =(datas)=>{
-        datas.availableBalance0 = Tool.formatNum(datas.availableBalance || 0)
-        // datas.userScore0 = Tool.formatNum(datas.userScore || 0)
-        datas.blockedBalance0 = Tool.formatNum(datas.blockedBalance || 0)
         Storage.setUserAccountInfo(datas)
         this.setData({
           userInfos: datas,
           range: (Number(datas.experience) - Number(datas.levelFloor)) / (Number(datas.levelCeil) - Number(datas.levelFloor)) * 100,
-          // range:40
         })
         this.initDatas()
         this.render()
@@ -125,7 +120,7 @@ Page({
       })
     },
     itemClicked(e){
-      // if (!this.didLogin(true)) return;
+      if (!this.didLogin(true)) return;
       let pageIndex = e.currentTarget.dataset.page
       let query = e.currentTarget.dataset.query
       let page = this.data.pageArr[pageIndex]
@@ -238,11 +233,6 @@ Page({
     })
   },
   requestAnimationFrame(callback){
-    // let currTime = new Date().getTime();
-    // let timeToCall = Math.max(0, 16 - (currTime - this.data.lastTime));
-    // let id = setTimeout(function () { callback(currTime + timeToCall); },
-    //   timeToCall);
-    // this.data.lastTime = currTime + timeToCall;
     let id = setTimeout(function () { callback(); },
       200);
     return id;
@@ -250,7 +240,6 @@ Page({
   drawSin(xOffset, color, waveHeight) {
     let ctx = this.data.ctx
    
-    
     ctx.save();
 
     let points = [];  //用于存放绘制Sin曲线的点

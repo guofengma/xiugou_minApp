@@ -447,7 +447,15 @@ const api =
       "method": "post",
       "action": "平台支付",
     }
-  ]
+  ],
+   /************************** 物流 *******************************/
+  'findAllExpress': [
+    "/express/query",
+    {
+      "method": "get",
+      "action": "物流公司选择",
+    }
+  ],
 }
 
 const API = new ApiUtils(api).result;

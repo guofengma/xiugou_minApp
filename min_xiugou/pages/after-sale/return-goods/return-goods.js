@@ -43,12 +43,9 @@ Page({
       datas.createTime = Tool.formatTime(datas.createTime)
       let refundAddress = datas.refundAddress || {}
       refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
-      // let address = datas.refundAddress || {}
-      // address.addressInfo = address.province + address.city + address.area + address.address
       if (status == 2 && !orderRefundExpress.expressNo && !datas.sendExpressNo) {
-        // let self = this
         datas.countDownSeconds = Math.floor((datas.cancelTime-datas.nowTime)/1000)
-        console.log(datas.cancelTime,datas.nowTime)
+        // console.log(datas.cancelTime,datas.nowTime)
         this.countdown(this)
         // if (!datas.expressNo) {
         //   datas.endTime = Tool.formatTime(datas.cancelTime)
@@ -65,22 +62,6 @@ Page({
         expressNo: expressNo,
         datas: datas
       })
-      // let afterSaleInfo = datas.afterSaleInfo || {}
-      // let imgList = afterSaleInfo.imgList || ''
-      // afterSaleInfo.showImgList = imgList.split(',')
-      // let status = datas.status
-      // let expressNo = this.data.expressNo
-      // // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
-      // if (datas.countDownSeconds && status == 2 && !datas.refundAddress.expressCode) {
-      //   this.countdown(this)
-      // }
-      // if (datas.refundAddress.expressCode ) {
-      //   expressNo = { id: 2, content: datas.refundAddress.expressCode }
-      // }
-      // this.setData({
-      //   expressNo: expressNo,
-      //   datas: datas
-      // })
       Event.emit('getDetail')
     }).catch((res) => {
       console.log(res)
