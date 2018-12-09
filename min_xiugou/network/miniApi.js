@@ -125,6 +125,15 @@ const api =
       "encrypt": false
     }
   ],
+  /**********************分享**************************/
+  "shareClick": [
+    "/user/shareClick",
+    {
+      "method": "get",
+      "action": "分享点击",
+      "isShowErrMsg": false,
+    }
+  ],
   /***************** 产品相关********************** */
   'getKeywords': [
     '/product/getKeywords',
@@ -359,22 +368,6 @@ const api =
       "encrypt": false,
     }
   ],
-  'getOrderDeliverInfo': [
-    '/order/deliverInfo',
-    {
-      "action": "订单物流信息",
-      "method": "post",
-      "encrypt": false,
-    }
-    ], 
-  'getOrderDeliverInfoDetail': [
-    '/order/deliverInfoDetail',
-    {
-      "action": "单个物流详情",
-      "method": "post",
-      "encrypt": false,
-    }
-  ],
   'confirmReceipt': [
     '/order/confirmReceipt',
     {
@@ -405,15 +398,6 @@ const api =
       "action": "再次购买",
       "method": "post",
       "encrypt": false,
-    }
-  ],
-  /**********************分享**************************/
-  "shareClick": [
-    "/user/shareClick",
-    {
-      "method": "get",
-      "action": "分享点击",
-      "isShowErrMsg": false,
     }
   ],
   /************************** 优惠券 *******************************/
@@ -454,6 +438,22 @@ const api =
     {
       "method": "get",
       "action": "物流公司选择",
+    }
+  ],
+  'getOrderDeliverInfo': [
+    '/order/deliverInfo',
+    {
+      "action": "订单物流信息",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'getOrderDeliverInfoDetail': [
+    '/order/deliverInfoDetail',
+    {
+      "action": "单个物流详情",
+      "method": "post",
+      "encrypt": false,
     }
   ],
 }
