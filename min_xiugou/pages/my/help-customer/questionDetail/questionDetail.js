@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation} = global;
+let { Tool, API} = global;
 
 import WxParse from '../../../../libs/wxParse/wxParse.js';
 
@@ -14,50 +14,39 @@ Page({
       this.findHelpQuestionById(options.id)
       this.findQuestionEffectById()
     },
-    isUseClicked(e){
+    isUseClicked(e) { // 解决问题是否有用
       let index = e.currentTarget.dataset.index
       let params = {
         id: this.data.list.id,
         hadHelp: index == 1 ? 0: 1,
-        reqName: '解决问题是否有用',
-        url: Operation.updateHelpQuestion
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        Tool.showSuccessToast(req.responseObject.data)
+      API.updateHelpQuestion(params).then((res) => {
+        Tool.showSuccessToast(res.data)
         this.findQuestionEffectById()
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
-    findHelpQuestionById(id) {
+    findHelpQuestionById(id) { //根据ID查询问题详情
       let params = {
         id: id,
-        reqName: '根据ID查询问题详情',
-        requestMethod: 'GET',
-        url: Operation.findHelpQuestionById
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
+      API.findHelpQuestionById(params).then((res) => {
         this.setData({
-          list: req.responseObject.data
+          list: res.data
         })
-        let html = req.responseObject.data.content || ''
+        let html = res.data.content || ''
         WxParse.wxParse('article', 'html', html, this, 5);
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     findQuestionEffectById(){
       let params = {
         id: this.data.id,
-        reqName: '获取帮助次数',
-        requestMethod: 'GET',
-        url: Operation.findQuestionEffectById
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data
+      API.findQuestionEffectById(params).then((res) => {
+        let datas = res.data
         if(datas.type==1){
           this.data.isClickedHelp = true
         } else if(datas.type===0){
@@ -70,9 +59,9 @@ Page({
           isClickedNoHelp: this.data.isClickedNoHelp,
           datas: datas
         })
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     onUnload: function () {
 

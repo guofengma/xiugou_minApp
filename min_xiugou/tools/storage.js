@@ -211,7 +211,14 @@ export default class Storage {
     static getExpressCom() {
       return this.getterFor('expressCom');
     } 
+    // 多包裹物流信息
+    static setExpressInfo(info) {
+      this.setterFor('expressNoInfo', info)
+    }
 
+    static getExpressInfo() {
+      return this.getterFor('expressNoInfo');
+    } 
     // 保存优惠券
     static setCoupon(info) {
       this.setterFor('coupon', info)

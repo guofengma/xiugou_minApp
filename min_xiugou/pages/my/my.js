@@ -48,7 +48,7 @@ Page({
       })
       if (this.data.didLogin){
         this.getLevel()
-        this.countUserOrderNum()
+        // this.countUserOrderNum()
         this.queryPushMsg()
       }else{
         this.setData({

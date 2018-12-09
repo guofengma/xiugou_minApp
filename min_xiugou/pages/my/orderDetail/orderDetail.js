@@ -68,27 +68,22 @@ Page({
         let showProducts =[]
         let showOutStatus = warehouseOrderDTOList[0].status
         warehouseOrderDTOList.forEach((item, index) => {
-          // showOutStatus.push(item.status)
           item.products.forEach((item1) => {
             showProducts.push(item1)
+            item1.specValues = (item1.specValues || '').split('@').join('-')
           })
         })
-        let expressList = datas.expressList || []
-        // showOutStatus.length>0
-        // datas.showProduct = showOrderList
-        let status = datas.warehouseOrderDTOList[0].status
-
         let showPriceList = ''
-        if (status != 1 && status != 5 ){
-          showPriceList:datas
+        if (showOutStatus != 1 && showOutStatus != 5 ){
+          showPriceList=datas
         } else {
-          showPriceList: datas.warehouseOrderDTOList[0]
+          showPriceList= warehouseOrderDTOList[0]
         }
-        if (showOutStatus == 3 || showOutStatus ==1) {
-          let name = showOutStatus == 1 ? "cancelTime" :"autoReceiveTime"
-          this.data.countDownSeconds = Math.floor((warehouseOrderDTOList[name] - warehouseOrderDTOList.nowTime) / 1000)
-          this.countdown(this)
-        }
+        warehouseOrderDTOList[0].showCreateTime = Tool.formatTime(warehouseOrderDTOList[0].createTime)
+        warehouseOrderDTOList[0].showPayTime = Tool.formatTime(datas.payTime)
+        warehouseOrderDTOList[0].showDeliverTime = Tool.formatTime(warehouseOrderDTOList[0].deliverTime)
+        warehouseOrderDTOList[0].showFinishTime = Tool.formatTime(warehouseOrderDTOList[0].finishTime)
+        warehouseOrderDTOList[0].showCancelTime = Tool.formatTime(warehouseOrderDTOList[0].cancelTime)
         this.setData({
           detail:datas,
           showProducts: showProducts,
@@ -96,8 +91,14 @@ Page({
           state: this.orderState(showOutStatus),
           status: showOutStatus
         })
+        if (showOutStatus == 3 || showOutStatus == 1) {
+          let name = showOutStatus == 1 ? "cancelTime" : "autoReceiveTime"
+          this.data.countDownSeconds = Math.floor((warehouseOrderDTOList[0][name] - warehouseOrderDTOList[0].nowTime) / 1000)
+          this.countdown(this)
+        }
+        let expressList = this.getExpressList()
         if (expressList.length == 1) {
-          this.getDelivery(detail, showOutStatus)
+          this.getDelivery(expressList.expressList[0].expressNo)
         } else if (expressList.length > 1) {
           let state = this.orderState(showOutStatus)
           state.info = '该订单已拆成N个包裹发出，点击“查看物流”可查看详情'
@@ -110,14 +111,6 @@ Page({
       }).catch((res) => {
         console.log(res)
       })
-      // let params = {
-      //   id: this.data.orderId,
-      //   reqName: '订单详情',
-      //   url: Operation.getOrderDetail
-      // }
-      // let r = RequestFactory.wxRequest(params);
-      // r.successBlock = (req) => {
-      //       let detail=req.responseObject.data;
       //       detail.createTime=detail.createTime?Tool.formatTime(detail.createTime):'';
       //       detail.sysPayTime=detail.sysPayTime?Tool.formatTime(detail.sysPayTime):'';
       //       detail.payTime=detail.payTime?Tool.formatTime(detail.payTime):'';
@@ -144,13 +137,6 @@ Page({
       //   if (detail.payWay.length > 1 || (detail.payWay.length == 1 && !detail.payWay.includes(this.data.payTypeArr[0]))){
       //     detail.isUsedThirdPay = true
       //   }
-      //       if (detail.status == 1 || detail.status == 3) { // 开始倒计时
-      //         let that = this
-      //         let time = setInterval(function () { that.time() }, 1000)
-      //         this.setData({
-      //           time: time
-      //         })
-      //       } 
       //   detail.showProductList = (detail.orderType == 5 || detail.orderType == 98) ? detail.orderProductList[0].orderProductPriceList : detail.orderProductList
       //       if (detail.orderType == 5 || detail.orderType == 98){
       //         detail.orderProductList[0].orderProductPriceList.forEach((item)=>{
@@ -158,19 +144,6 @@ Page({
       //           item.price = item.originalPrice
       //         })
       //       }
-      //       this.setData({
-      //           detail: detail,
-      //           address: address,
-      //         status:detail.status,
-      //           state: this.orderState(detail.status)//订单状态相关信息this.data.state
-      //       })
-      //       if (detail.expressNo) {
-      //         this.getDelivery(detail)
-      //       }
-      //       this.middleBtn()
-      //   };
-      //   Tool.showErrMsg(r)
-      // r.addToQueue();
     },
     onShow: function () {
 
@@ -216,17 +189,18 @@ Page({
     //确认收货
     confirmReceipt() {
       let content = '确认收货吗?'
-        let list = this.data.detail.orderProductList
-        list.forEach((item,index)=>{
-          let returnProductStatus = item.returnProductStatus || 99999
-          if (returnProductStatus == 1) {
-            content = '确认收货将关闭' + this.data.returnTypeArr[item.returnType] + "申请，确认收货吗？"
-          }
-        })
+      let list = this.data.showProducts
+        // list.forEach((item,index)=>{
+        //   let orderCustomerServiceInfo = item.orderCustomerServiceInfoDTO || {}
+        //   console.log(orderCustomerServiceInfo.status)
+        //   if (orderCustomerServiceInfo.status == 1) {
+        //     content = '确认收货将关闭' + this.data.returnTypeArr[orderCustomerServiceInfo.type] + "申请，确认收货吗？"
+        //   }
+        // })
         let that=this;
         Tool.showComfirm(content, function () {
           API.confirmReceipt({
-            orderNo: this.data.orderId,
+            orderNo: that.data.orderId,
           }).then((res) => {
             Tool.navigateTo('../my-order/my-order')
           }).catch((res) => {
@@ -244,46 +218,26 @@ Page({
         });
 
     },
-  countdown: function (that) { // 倒计时
-    clearTimeout(that.data.time);
-    let distanceTime = Tool.showDistanceTime(that.data.countDownSeconds || 0)
-    if (that.data.countDownSeconds <0) {
-      let status = that.data.status==1? 6:5
+    countdown: function (that) { // 倒计时
+      clearTimeout(that.data.time);
+      let distanceTime = Tool.showDistanceTime(that.data.countDownSeconds || 0)
+      if (that.data.countDownSeconds <0) {
+        let status = that.data.status==1? 5:4
+        that.setData({
+          status: status,
+          state: that.orderState(status)
+        })
+        return
+      }
+      let time = setTimeout(function () {
+        that.data.countDownSeconds--
+        that.countdown(that);
+      }, 1000)
       that.setData({
-        status: status,
-        state: that.orderState(status)
-      })
-      return
-    }
-    let time = setTimeout(function () {
-      that.data.countDownSeconds--
-      that.countdown(that);
-    }, 1000)
-    that.setData({
-      distanceTime: distanceTime,
-      time: time
-    });
-  },
-    // time() {
-    //   //待付款订单 倒计时处理
-    //   let detail = this.data.detail
-    //   let time = ''
-    //   if (detail.status==3){
-    //     time = detail.autoReceiveTime
-    //   } else {
-    //     time = detail.shutOffTime
-    //   }
-    //   let endTime = Tool.formatTime(time) 
-    //   let countdown = Tool.getDistanceTime(endTime, this)
-    //   if (countdown ==0){
-    //     detail.status = detail.status==1? 8:4
-    //     clearTimeout(this.data.time);
-    //     this.setData({
-    //       detail: detail,
-    //       state: this.orderState(detail.status)//订单状态相关信息
-    //     })
-    //   }
-    // },
+        distanceTime: distanceTime,
+        time: time
+      });
+    },
     orderState(n) {
         //按钮状态 left right middle 分别是底部左边 右边 和订单详情中的按钮文案
         let stateArr = [
@@ -329,7 +283,7 @@ Page({
     continuePay() {
       let params = {
         payAmount: this.data.showPriceList.payAmount, //总价
-        orderNo: this.data.showPriceList.orderNo,  // 流水号
+        orderNo: this.data.showPriceList.platformOrderNo,  // 流水号
       }
       Storage.setPayOrderList(params)
       Tool.navigateTo('/pages/order-confirm/pay/pay?door=1&isContinuePay=' + true)
@@ -342,7 +296,7 @@ Page({
         item.products.forEach((item1) => {
           list.push({
             productCode: item1.prodCode,
-            amount: item1.quantity,
+            showCount: item1.quantity,
             skuCode: item1.skuCode,
           })
         })
@@ -362,9 +316,10 @@ Page({
       let now = detail.warehouseOrderDTOList[0].nowTime
       this.data.showProducts.forEach((item,index)=>{
         let middle = ''
-        let innerState = item.status // 子订单状态
-        let returnType = item.returnType
-        let finishTime = item.finishTime
+        let orderCustomerServiceInfo = item.orderCustomerServiceInfo || {}
+        let innerState = orderCustomerServiceInfo.status // 子订单状态
+        let returnType = orderCustomerServiceInfo.type
+        let finishTime = orderCustomerServiceInfo.finishTime
         // 不支持的售后种类
         // let arr = Tool.bitOperation(this.data.afterSaleTypeArr, item.restrictions)
         // 支持的售后种类
@@ -376,8 +331,8 @@ Page({
           // if (afterSaleType.includes(4)) middle = {  id: 1, content: '退款' }
           middle = { id: 1, content: '退款' }
         }
-        // 确认收货的状态的订单售后截止时间和当前时间比
-        if (outOrderState == 3 || (outOrderState == 4 && finishTime - now > 0) ){
+        // 确认收货的状态的订单售后截止时间和当前时间比 (outOrderState == 4 && finishTime - now > 0)
+        if (outOrderState == 3 || outOrderState == 4  ){
           middle = { id: 2, content: '退换' }
           // if (afterSaleType.length>1){
           //   middle = { id: 4, content: '退换' }
@@ -405,7 +360,7 @@ Page({
       })
       
       this.setData({
-        detail: detail,
+        showProducts: this.data.showProducts,
         state: state
       })
     },
@@ -419,13 +374,7 @@ Page({
       let index = e.currentTarget.dataset.index
 
       let list = this.data.showProducts[index]
-
-      // list.orderNum = this.data.detail.orderNum
-
-      // list.createTime = this.data.detail.createTime
-
-      // list.showRefund = list.price * list.num
-
+      list.showcreateTime = this.data.detail.warehouseOrderDTOList[0].createTime
       list.address = this.data.address
 
       Storage.setInnerOrderList(list)
@@ -435,6 +384,7 @@ Page({
       this.goPage(list, btnTypeId)
     },
     goPage(list,btnTypeId){
+      // 升级礼包不支持售后 售后时间超出等都要给提示
       let page = ''
       let returnType = list.returnType
       let returnProductStatus = list.returnProductStatus
@@ -466,28 +416,38 @@ Page({
       if (this.data.detail.orderType == 5 || this.data.detail.orderType==98 ){
         Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.detail.orderProductList[0].activityCode)
       } else {
-        Tool.navigateTo('/pages/product-detail/product-detail?productId=' + id)
+        Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + id)
       }
     },
     orderRefund(){
       Tool.showAlert('目前只支持单件商品退款，请进行单件退款操作~')
     },
     seeLogistics(e){
-      let id = this.data.detail.expressNo;
-      Tool.navigateTo('/pages/logistics/logistics?id='+id)
+      let express = this.getExpressList()
+      if (express.length > 1) {
+        Storage.setExpressInfo(express.expressList)
+        Tool.navigateTo('/pages/logistics/logistics-list/logistics-list')
+      } else if (express.length == 1) {
+        Tool.navigateTo('/pages/logistics/logistics?id=' + express.expressList[0].expressNo)
+      } 
     },
-    logisticsClicked(){
-      // 跳转查看物流信息
-      if (this.data.detail.expressNo){
-        // let page = '/pages/logistics/logistics?orderId=' + this.data.orderId
-        // Tool.navigateTo(page)
-        this.seeLogistics()
-      }
+    getExpressList(){
+      let warehouseOrderDTOList = this.data.detail.warehouseOrderDTOList || [];
+      let expressList = warehouseOrderDTOList[0].expressList || []
+      return { length: expressList.length, expressList}
     },
-    getDelivery(detail, showOutStatus) {
+    // logisticsClicked(){
+    //   // 跳转查看物流信息
+    //   if (this.data.detail.expressNo){
+    //     // let page = '/pages/logistics/logistics?orderId=' + this.data.orderId
+    //     // Tool.navigateTo(page)
+    //     this.seeLogistics()
+    //   }
+    // },
+    getDelivery(expressNo) {
       // 查询物流信息最后一条数据
-      API.getOrderDeliverInfoDetail({
-        orderNo: this.data.orderId
+      API.getOrderDeliverInfo({
+        expressNo: expressNo
       }).then((res) => {
         let datas = res.data || {}
         let result = datas.result || {}

@@ -3,18 +3,18 @@ Page({
   data: {
     addressType:1,
     src:'/img/address-icon-gray.png',
-    result:[ // 换货
-      { state:"其他"},
-      { state: "等待商家处理", info: "", time: '' },
-      { state: "商家已同意", info: "请在规定时间内退货给卖家", time: ''},
-      // { state: "商家拒绝换货申请", info: "请联系客服" },
-      { state: "等待商家确认", info: "" },
-      { state: "待平台处理 ", info: "",time:'' },
-      { state: "换货完成", info: "" },
-      { state: "换货申请已撤销或换货关闭", info: "" },
-      // { state: "订单异常", info: "请联系客服" }
-    ],
-    resultIndex:0,
+    // result:[ // 换货
+    //   { state:"其他"},
+    //   { state: "等待商家处理", info: "", time: '' },
+    //   { state: "商家已同意", info: "请在规定时间内退货给卖家", time: ''},
+    //   // { state: "商家拒绝换货申请", info: "请联系客服" },
+    //   { state: "等待商家确认", info: "" },
+    //   { state: "待平台处理 ", info: "",time:'' },
+    //   { state: "换货完成", info: "" },
+    //   { state: "换货申请已撤销或换货关闭", info: "" },
+    //   // { state: "订单异常", info: "请联系客服" }
+    // ],
+    // resultIndex:0,
     expressNo: { id: 0, content:"填写寄回的物流信息"},
     SaleExpressNo: { id:1, content: "暂无商家物流信息"}
   },
@@ -75,9 +75,8 @@ Page({
       })
       if (status > 1 && !orderRefundExpress.expressNo && !datas.sendExpressNo) {
         datas.countDownSeconds = Math.floor((datas.cancelTime - datas.nowTime) / 1000 )
-        if (datas.countDownSeconds>0) this.countdown(this)
+        this.countdown(this)
       }
-      console.log(datas.cancelTime - datas.nowTime)
       Event.emit('getDetail')
       // let afterSaleInfo = datas.afterSaleInfo || {}
       // let imgList = afterSaleInfo.imgList || ''
@@ -114,13 +113,13 @@ Page({
   },
   countdown(that) { // 倒计时
     clearTimeout(that.data.time);
-    let distanceTime = Tool.showDistanceTime(this.data.datas.countDownSeconds || 0)
-    if (this.data.datas.countDownSeconds == 0) {
-      that.findReturnProductById(this.data.serviceNo)
+    let distanceTime = Tool.showDistanceTime(that.data.datas.countDownSeconds || 0)
+    if (that.data.datas.countDownSeconds == 0) {
+      that.findReturnProductById(that.data.serviceNo)
       return
     }
     let time = setTimeout(function () {
-      this.data.datas.countDownSeconds--
+      that.data.datas.countDownSeconds--
       that.countdown(that);
     }, 1000)
     that.setData({

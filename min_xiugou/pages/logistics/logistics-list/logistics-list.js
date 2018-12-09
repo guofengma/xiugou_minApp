@@ -1,18 +1,15 @@
-let { Tool, API, Storage, Event } = global
+let { Tool,Storage } = global
 Page({
   data: {
     hasExpress:true
   },
   onLoad: function (options) {
-
-  },
-  getOrderDeliverInfo() {
-    API.getOrderDeliverInfo({
-      orderNo:'',
-    }).then((res) => {
-      
-    }).catch((res) => {
-      console.log(res)
+    this.setData({
+      datas: Storage.getExpressInfo()
     })
   },
+  expressClicked(e){
+    let id = e.currentTarget.dataset.id
+    Tool.navigateTo('/pages/logistics/logistics?id=' + id)
+  }
 })

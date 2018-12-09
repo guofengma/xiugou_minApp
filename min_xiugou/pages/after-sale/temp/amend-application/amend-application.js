@@ -14,7 +14,11 @@ Component({
       let callBack = ()=>{
         this.findReturnProductById(1)
       }
-      let num = this.data.list.maxRevokeTimes - this.data.list.hadRevokeTimes || '';
+      let num = this.data.list.maxRevokeTimes - this.data.list.hadRevokeTimes || 0;
+      if (num == 0){
+        Tool.showComfirm('您没有撤销次数了')
+        return
+      }
       Tool.showComfirm(`确定撤销本次申请吗?剩余申请${num}次`, callBack)
     },
     revokeApplyReq(){ // 撤销申请

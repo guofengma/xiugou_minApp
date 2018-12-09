@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation} = global;
+let { Tool, API} = global;
 Page({
     data: {
       deliveryName: '',
@@ -66,12 +66,11 @@ Page({
         this.getDelivery()
     },
     getDelivery() {
-      API.getOrderDeliverInfoDetail({
-        expressNo: this.data.orderId,
-        expressCode:'',
-        orderNo:'',
+      API.getOrderDeliverInfo({
+        expressNo: this.data.id
       }).then((res) => {
-        let datas = res.data || {}
+        let datas = res.data || '{}'
+        datas = JSON.parse(datas)
         let result = datas.result || {}
         let list = result.list || []
         list.forEach((item) => {
@@ -79,10 +78,10 @@ Page({
           item.showTime = item.time.slice(11, 16)
         });
         this.setData({
-          mailNo: datas.number,
-          expName: datas.expName,
+          mailNo: result.number,
+          expName: result.expName,
           list:list,
-          status: this.data.statusText[datas.deliverystatus]
+          status: this.data.statusText[result.deliverystatus]
         })
       }).catch((res) => {
         console.log(res)

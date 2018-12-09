@@ -26,10 +26,10 @@
 <view class='order-state-info' >
     <view class='boxSize'>
         <!--等待付款的时候显示和待发货  -->
-        <template is="address-info" wx:if='{{status==1||status==5 }}' data="{{addressType,src,...address,hasData,door:1}}"/>
+        <template is="address-info" wx:if='{{status==1||status==5 }}' data="{{addressType,src,...detail,hasData,door:1}}"/>
 
         <!-- 待发货/已发货/已完成的时候显示 -->
-        <view class='logistics flexR-sb' wx:if="{{status==2||status==3||status==4 }}" bindtap='logisticsClicked'>
+        <view class='logistics flexR-sb' wx:if="{{status==2||status==3||status==4 }}" bindtap='seeLogistics'>
             <view>
                 <view class='info ellipsis'>{{state.info}}</view>
                 <view class='gray'>{{state.time}}</view>
@@ -43,7 +43,7 @@
 
 <view class='container'>
     <!--地址信息 如果发货了 显示地址 -->
-    <view class='my-order-address' wx:if='{{status==2||status==3||status==4 ||status==5 ||status== 6 }}'>
+    <view class='my-order-address' wx:if='{{status==2||status==3||status==4 }}'>
         <template is="address-info" data="{{addressType,src,...detail,hasData,door:1}}"/>
     </view>
 
@@ -114,12 +114,12 @@
           <view>订单编号：
             <text selectable="true">{{orderId}}</text>
           </view>
-          <view>创建时间：{{datas.warehouseOrderDTOList[0].createTime}}</view>
-          <view>支付交易号：{{datas.warehouseOrderDTOList[0].outTradeNo}}</view>
-          <view>付款时间：{{datas.warehouseOrderDTOList[0].payTime}}</view>
-          <view wx:if='{{detail.sendTime}}'>发货时间：{{datas.warehouseOrderDTOList[0].deliverTime}}</view>
-          <view wx:if='{{status==4}}'>成交时间：{{datas.warehouseOrderDTOList[0].finishTime}}</view>
-          <view wx:if='{{status==5}}'>关闭时间：{{datas.warehouseOrderDTOList[0].cancelTime}}</view>
+          <view>创建时间：{{detail.warehouseOrderDTOList[0].showCreateTime}}</view>
+          <view>支付交易号：{{detail.warehouseOrderDTOList[0].outTradeNo}}</view>
+          <view wx:if='{{status==4 || status==2 || status==3}}'>付款时间：{{detail.warehouseOrderDTOList[0].showPayTime}}</view>
+          <view wx:if='{{detail.sendTime}}'>发货时间：{{detail.warehouseOrderDTOList[0].deliverTime}}</view>
+          <view wx:if='{{status==4}}'>成交时间：{{detail.warehouseOrderDTOList[0].showFinishTime}}</view>
+          <view wx:if='{{status==5}}'>关闭时间：{{detail.warehouseOrderDTOList[0].showCancelTime}}</view>
           <!-- <view wx:if='{{status==8}}'>关闭时间：{{detail.showShutOffTime}}</view> -->
         </view>
     </view>
@@ -150,7 +150,7 @@
         <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='继续支付'}}" bindtap="continuePay">
           {{detail.outTradeNo? "继续支付":"去支付"}}
         </view>
-        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='再次购买' && detail.orderType!=5&& detail.orderType!=98}}" bindtap="continueBuy">
+        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='再次购买'}}" bindtap="continueBuy">
           {{state.bottomBtn[1]}}
         </view>
     </block>

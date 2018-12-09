@@ -1,7 +1,6 @@
 import ApiUtils from './api/ApiUtils';
 
-const api = 
-{
+const api = {
   /***************************** 秀场 ************************ */
   "getDiscoverById": [
     "/discover/getById",
@@ -348,7 +347,7 @@ const api =
     '/order/list',
     {
       "action": "用户订单列表",
-      "method": "post",
+      "method": "get",
       "encrypt": false,
     }
   ],
@@ -369,7 +368,7 @@ const api =
     }
   ],
   'confirmReceipt': [
-    '/order/confirmReceipt',
+    '/order/confirm-receipt',
     {
       "action": "订单确认收货",
       "method": "post",
@@ -453,6 +452,47 @@ const api =
     {
       "action": "单个物流详情",
       "method": "post",
+      "encrypt": false,
+    }
+  ],
+  /************************** 帮助中心 *******************************/
+  'addFeedback': [
+    '/user/feedback/addFeedback',
+    {
+      "action": "添加反馈",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'queryHelpQuestionList': [
+    '/help/helpQuestion/queryHelpQuestionList',
+    {
+      "action": "问题列表",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'updateHelpQuestion': [
+    '/help/helpQuestion/updateHelpQuestionToClick',
+    {
+      "action": "解决问题是否有用",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'findHelpQuestionById': [
+    '/help/helpQuestion/findHelpQuestionById',
+    {
+      "action": "根据ID查询问题详情",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'findQuestionEffectById': [
+    '/help/helpQuestion/findQuestionEffectById',
+    {
+      "action": "获取帮助次数",
+      "method": "get",
       "encrypt": false,
     }
   ],

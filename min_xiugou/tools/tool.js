@@ -240,7 +240,7 @@ export default class Tool {
       let hour = Math.floor(time / 60 / 60 % 24);
       let minute = Math.floor(time / 60 % 60);
       let second = Math.floor(time % 60);
-      if (day || hour|| minute|| second){
+      if (time>=0){
         return day + "天" + hour + "时" + minute + "分" + second + "秒";
       } else {
         return 0

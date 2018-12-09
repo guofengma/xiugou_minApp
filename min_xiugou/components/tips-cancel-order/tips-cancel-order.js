@@ -21,20 +21,6 @@ Component({
       }).catch((res) => {
         console.log(res)
       });
-      // let params = {
-      //   code: 'QXDD',
-      //   reqName: '获取数字字典',
-      //   requestMethod: 'GET',
-      //   url: Operation.queryDictionaryDetailsType,
-      // }
-      // let r = RequestFactory.wxRequest(params);
-      // r.successBlock = (req) => {
-      //   this.setData({
-      //     reasonArr: req.responseObject.data
-      //   })
-      // }
-      // Tool.showErrMsg(r)
-      // r.addToQueue();
     },
     reasonClicked(e) { // 选择取消订单的理由
       //取消订单的理由
@@ -54,17 +40,16 @@ Component({
         return
       }
       API.cancelOrder({
-        platformOrderNo: this.data.orderNum,
-        cancelType:'',
+        orderNo: this.data.orderNum,
+        cancelType:'2',
         cancelReason: this.data.content || '无',
-        platformRemarks:''
+        platformRemarks: this.data.content || '无',
       }).then((res) => {
         if (this.data.door == 1) {
           this.triggerEvent('cancelOrder', { ...this.data });
         } else {
           Tool.navigateTo('/pages/my/my-order/my-order?query='+this.data.num)
         }
-        Tool.navigateTo('/pages/my/my-order/my-order')
       }).catch((res) => {
         console.log(res)
       })

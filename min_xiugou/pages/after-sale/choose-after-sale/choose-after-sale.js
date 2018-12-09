@@ -11,7 +11,7 @@ Page({
     this.setData({
       list: Storage.getInnerOrderList() || ''
     })
-    this.initData()
+    // this.initData()
   },
   initData(){
     let afterSaleType = []
@@ -29,6 +29,6 @@ Page({
   goPage(e){
     let index = parseInt(e.currentTarget.dataset.index) 
     let page = ''
-    Tool.redirectTo('/pages/after-sale/apply-sale-after/apply-sale-after?refundType='+index)
+    Tool.redirectTo('/pages/after-sale/apply-sale-after/apply-sale-after?refundType=' + index + '&orderProductNo=' + this.data.list.orderProductNo)
   }
 })

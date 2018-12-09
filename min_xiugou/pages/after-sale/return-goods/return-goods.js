@@ -43,7 +43,8 @@ Page({
       datas.createTime = Tool.formatTime(datas.createTime)
       let refundAddress = datas.refundAddress || {}
       refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
-      if (status == 2 && !orderRefundExpress.expressNo && !datas.sendExpressNo) {
+      let orderRefundExpress = datas.orderRefundExpress || {}
+      if (status>1 && !orderRefundExpress.expressNo) {
         datas.countDownSeconds = Math.floor((datas.cancelTime-datas.nowTime)/1000)
         // console.log(datas.cancelTime,datas.nowTime)
         this.countdown(this)
@@ -53,7 +54,6 @@ Page({
         // }
       }
       let expressNo = this.data.expressNo
-      let orderRefundExpress = datas.orderRefundExpress || {}
       if (orderRefundExpress.expressCode) {
         expressNo = {
           id: 2, content: orderRefundExpress.expressNo }

@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation} = global;
+let { Tool, API} = global;
 
 Page({
     data: {
@@ -8,20 +8,14 @@ Page({
       this.queryHelpQuestionList()
     },
     queryHelpQuestionList(){
-      let params = {
-        reqName: '查询问题列表',
-        requestMethod: 'GET',
-        url: Operation.queryHelpQuestionList
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let data = req.responseObject.data? req.responseObject.data : []
+      API.queryHelpQuestionList({}).then((res) => {
+        let datas = res.data || []
         this.setData({
-          list: data
+          list: datas
         })
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     
     //跳到详情页
