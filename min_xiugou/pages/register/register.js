@@ -27,7 +27,6 @@ Page({
     if (options.inviteId == 'null' || options.inviteId == 'undefined' || !options.inviteId) {
       inviteId = ''
     }
-    app.shareClick(options.inviteId);
     app.deleteInviteId()
     let upUserId = Storage.getUpUserId() || {}
     // Tool.showAlert(upUserId.id)
