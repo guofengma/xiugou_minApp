@@ -116,6 +116,21 @@ Page({
       }
     },
     formatCouponInfos(params, index, isActive = false, couponClassName){
+      // let reqName = []
+      // API.availableDiscountCouponForProduct(params).then((res) => {
+      //   let datas = res.data
+      //   if (datas.totalPage == 0) {
+      //     this.setData({
+      //       coupon: {
+      //         id: '',
+      //         name: "暂无可用优惠劵",
+      //         canClick: true,
+      //       }
+      //     })
+      //   }
+      // }).catch((res) => {
+      //   console.log(res)
+      // })
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data
