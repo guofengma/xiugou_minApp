@@ -381,12 +381,10 @@ Page({
         Tool.showAlert('该商品属于升级礼包产品，不存在售后功能')
         return
       }
-      console.log(this.data.detail.warehouseOrderDTOList[0].nowTime)
       // else if (list.finishTime < this.data.detail.warehouseOrderDTOList[0].nowTime) {
       //   Tool.showAlert('该商品售后已过期')
       //   return
       // }
-      // list.address = this.data.address
 
       Storage.setInnerOrderList(list)
 
