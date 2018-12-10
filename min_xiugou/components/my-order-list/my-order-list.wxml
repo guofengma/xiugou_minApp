@@ -17,7 +17,7 @@
       <text wx:elif="{{item.showStatus==2}}">待发货</text>
       <text wx:elif="{{item.showStatus==3}}">待收货</text>
       <text wx:elif="{{item.showStatus==4 }}">已完成</text>
-      <text wx:elif="{{item.status== 5}}">已关闭</text>
+      <text wx:elif="{{item.showStatus== 5}}">已关闭</text>
       <!-- <text wx:elif="{{item.status== 7}}">已取消</text> -->
     </view>
   </view>

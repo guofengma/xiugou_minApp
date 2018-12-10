@@ -16,7 +16,7 @@ Component({
       }
       let num = this.data.list.maxRevokeTimes - this.data.list.hadRevokeTimes || 0;
       if (num == 0){
-        Tool.showComfirm('您没有撤销次数了')
+        Tool.showComfirm('平台售后操作已到上限')
         return
       }
       Tool.showComfirm(`确定撤销本次申请吗?剩余申请${num}次`, callBack)

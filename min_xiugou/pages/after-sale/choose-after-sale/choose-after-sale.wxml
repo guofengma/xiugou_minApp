@@ -19,4 +19,4 @@
 
 <view class='cell-line whiteBg font-26 flexR-sb'>订单编号：{{list.warehouseOrderNo}}</view>
 <template is="my-order-product-info" data="{{...list}}"/>
-<view class='cell-line whiteBg font-26 flexR-sb'>下单时间：{{list.createTime}}</view>
+<view class='cell-line whiteBg font-26 flexR-sb'>下单时间：{{list.showCreateTime}}</view>

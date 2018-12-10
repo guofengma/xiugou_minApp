@@ -374,8 +374,19 @@ Page({
       let index = e.currentTarget.dataset.index
 
       let list = this.data.showProducts[index]
-      list.showcreateTime = this.data.detail.warehouseOrderDTOList[0].createTime
-      list.address = this.data.address
+      list.showCreateTime = this.data.detail.warehouseOrderDTOList[0].showCreateTime
+
+      // 升级礼包不支持售后 售后时间超出等都要给提示
+      if (this.data.detail.orderSubType == 3) {
+        Tool.showAlert('该商品属于升级礼包产品，不存在售后功能')
+        return
+      }
+      console.log(this.data.detail.warehouseOrderDTOList[0].nowTime)
+      // else if (list.finishTime < this.data.detail.warehouseOrderDTOList[0].nowTime) {
+      //   Tool.showAlert('该商品售后已过期')
+      //   return
+      // }
+      // list.address = this.data.address
 
       Storage.setInnerOrderList(list)
 
@@ -384,11 +395,12 @@ Page({
       this.goPage(list, btnTypeId)
     },
     goPage(list,btnTypeId){
-      // 升级礼包不支持售后 售后时间超出等都要给提示
       let page = ''
-      let returnType = list.returnType
-      let returnProductStatus = list.returnProductStatus
-      let params = "?id=" + list.returnProductId
+      let orderCustomerServiceInfoDTO =list.orderCustomerServiceInfoDTO || {}
+      let returnType = orderCustomerServiceInfoDTO.type || ''
+      let serviceNo = orderCustomerServiceInfoDTO.serviceNo || ''
+      // let returnProductStatus = list.returnProductStatus
+      let params = "?serviceNo=" + serviceNo
       if (returnType == 1) {
 
         page = '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail'

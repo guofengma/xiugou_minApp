@@ -299,7 +299,7 @@ Component({
         } else {
           //order.countDownTime = '交易关闭';
           clearTimeout(this.data.time);
-          order.status = 5
+          order.showStatus = 5
           if (this.data.num == 1) {
             orderArry.splice(i, 1)
           } else {
