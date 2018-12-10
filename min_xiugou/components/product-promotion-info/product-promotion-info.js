@@ -105,9 +105,13 @@ Component({
       if (prop.status === 1){
         countdownDesc = '距开抢';
       }
+      let typeDesc = this.data.promotionDesc.typeDesc;
+
       //降价拍分多个阶段降价 展示文案不同
       if(this.data.promotionType == 2){
-
+        if (prop.status >= 2) {
+          typeDesc = '当前价';
+        }
         if (prop.status === 2) {
           countdownDesc = '距下次降价'; // 距下次降价
         }
@@ -117,13 +121,15 @@ Component({
         }
       }
 
-      let typeDesc = this.data.promotionDesc.typeDesc;
-
       if(this.data.promotionType == 1) {
         typeDesc = '秒杀价';
       }
       // 秒杀活动结束或已抢完时，'秒杀价'文案要改成'已抢X件'
-      if ([3, 4, 5].includes(prop.status) && this.data.promotionType == 1) {
+      if (
+        [3, 4, 5].includes(prop.status) && 
+        this.data.promotionType == 1    && 
+        (prop.totalNumber - prop.surplusNumber !== 0)
+      ) {
         typeDesc = `已抢${prop.totalNumber - prop.surplusNumber}件`;
       }
       // ==========
