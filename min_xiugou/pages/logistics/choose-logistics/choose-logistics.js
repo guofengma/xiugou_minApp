@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, Storage, Event, API } = global
 
 Page({
   data: {
@@ -17,29 +17,23 @@ Page({
     Tool.navigationPop()
   },
   findAllExpress(){
-    let params = {
-      reqName: '物流公司选择',
-      url: Operation.findAllExpress,
-      requestMethod: 'GET',
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
+    API.findAllExpress({}).then((res) => {
+      let datas = res.data || {}
       let arr = []
       for (let i in datas) {
-        if (i !=='hot' && i!=="*"){
+        if (i !=='hotVo' && i!=="*"){
           arr.push({name:i,list:datas[i]})
         }
       }
-      arr.unshift({ name:'常用物流', list:datas.hot})
+      arr.unshift({ name: '常用物流', list: datas.hotVo})
       arr.push({
         name: '*', list: datas['*']
       })
       this.setData({
         lists:arr
       })
-    };
-    Tool.showErrMsg(r);
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   }
 })

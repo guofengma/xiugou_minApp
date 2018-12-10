@@ -1,6 +1,6 @@
 <import src='/components/cell-line/cell-line.wxml'/>
 
-<import src='/components/my-order-product-info/my-order-product-info.wxml'/>
+<import src='/components/after-sale-prd-info/after-sale-prd-info.wxml'/>
 
 <import src='/components/update-img/update-img.wxml'/>
 
@@ -12,8 +12,8 @@
 <view class='apply-sale-after-page'>
   <view class='redBg flexR tips font-26' wx:if='{{reason[refundType].tips}}'>{{reason[refundType].tips}}</view>
   <view class='order-info'>
-    <view class='cell-line whiteBg'>订单编号：{{orderInfos.orderNum}}</view>
-    <template is="my-order-product-info" data="{{...orderInfos}}"/>
+    <view class='cell-line whiteBg'>订单编号：{{ orderInfos.warehouseOrderNo || orderInfos.platformOrderNo}}</view>
+    <template is="after-sale-prd-info" data="{{...orderInfos}}"/>
     <view class='cell-line whiteBg'>下单时间：{{orderInfos.createTime}}</view>
   </view>
 
@@ -22,7 +22,14 @@
       <template is="cell-line" data="{{name:reason[refundType].choose,content:reason[refundType].list[activeIndex].value}}"/> 
     </view>
     <view class='cell-line refund-num whiteBg' wx:if='{{refundType!=2}}'>
-      退款金额： <text class='red'>¥{{orderInfos.refundPrice}}</text>
+      <view>退款金额:
+        <text class='red'>¥ </text>
+      </view>
+      <view>
+        <input type='digit' bindinput='changeApplyAmount' value='{{applyRefundAmount}}' class='red' wx:if='{{refundType!=2&&orderInfos.status>3}}'></input>
+        <text class='red' wx:else>{{orderInfos.payAmount}}</text> 
+      </view>
+      
     </view>
     <!-- <view  bindtap='chooseType' wx:if='{{refundType==2}}'>
       <template is="cell-line" data="{{name:'更换型号',placeholder:selectType.spec}}"/> 
@@ -34,8 +41,8 @@
       <view  wx:if='{{refundType==2}}'>
         <text class='red'>*</text>请确保退换商品不影响二次销售
       </view>
-      <view wx:else >
-        最多¥23.80，含发货邮费¥0.00
+      <view wx:if='{{refundType!=2&&orderInfos.status>3}}' >
+        最多¥{{orderInfos.payAmount}}，含发货邮费¥{{orderInfos.freightAmount}}
       </view>
     </view>
     <view class='cell-line gray-9'>{{reason[refundType].info}}</view>

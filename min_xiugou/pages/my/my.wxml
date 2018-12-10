@@ -73,7 +73,7 @@
       <view class='list-cont flexC' catchtap='itemClicked' data-page='6' data-query='1'>
         <view>
           <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsale.png'}}"/>
-          <view class='reddot'  wx:if='{{countUserOrderNum.waitPayNum}}'>{{countUserOrderNum.waitPayNum}}</view>
+          <view class='reddot'  wx:if='{{countUserOrderNum.nonPay}}'>{{countUserOrderNum.nonPay}}</view>
         </view>
         <view>待付款</view>
         
@@ -82,7 +82,7 @@
       <view class='list-cont flexC' catchtap='itemClicked' data-page='6' data-query='2'>
         <view>
           <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconForsend.png'}}"/>
-          <view class='reddot' wx:if='{{countUserOrderNum.waitSendNum}}'>{{countUserOrderNum.waitSendNum}}</view>
+          <view class='reddot' wx:if='{{countUserOrderNum.nonDelivery}}'>{{countUserOrderNum.nonDelivery}}</view>
         </view>
         <view>待发货</view>
       </view>
@@ -90,7 +90,7 @@
       <view class='list-cont flexC' catchtap='itemClicked' data-page='6' data-query='3'>
         <view>
           <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'conForobtain.png'}}"/>
-          <view class='reddot' wx:if='{{countUserOrderNum.waitReceiveNum}}'>{{countUserOrderNum.waitReceiveNum}}</view>
+          <view class='reddot' wx:if='{{countUserOrderNum.nonReceiving}}'>{{countUserOrderNum.nonReceiving}}</view>
         </view>
         <view>待收货</view>
       
@@ -99,7 +99,7 @@
       <view class='list-cont flexC' catchtap='itemClicked' data-page='7'>
         <view>
           <image-sub imgStyle='{{"width:48rpx"}}' imgSrc="{{'iconAftersale.png'}}"/>
-          <view class='reddot' wx:if='{{countUserOrderNum.afterSaleServiceNum}}'>{{countUserOrderNum.afterSaleServiceNum}}</view>
+          <view class='reddot' wx:if='{{countUserOrderNum.afterSale}}'>{{countUserOrderNum.afterSale}}</view>
         </view>
         <view>售后/退款</view>
         

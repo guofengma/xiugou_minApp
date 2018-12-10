@@ -1,25 +1,25 @@
 <template name="temp-refund-info">
   <view class='suc-refound'>
     <view class='whiteBg after-sale-line  flexR-sb'>
-      <view>退款金额：<text class='red'>¥{{totalRefundPrice}}</text></view>
-      <view wx:if="{{status==6}}">已退款</view>
-      <view wx:if="{{status==1}}">退款中</view>
+      <view>退款金额：<text class='red'>¥{{refundPrice}}</text></view>
+      <view wx:if="{{status==5}}">已退款</view>
+      <view wx:if="{{status==1 || status==4 }}">退款中</view>
     </view>
     <!-- wx:if='{{status>1&&status!=3}}' -->
-    <block wx:if='{{orderReturnAmounts}}'>
+    <block wx:if="{{status==5}}">
       <view class='after-sale-line'>退款明细</view>
       <view class='after-sale-line whiteBg flexR-sb'>
         退回实际支付账户
-        <text>¥{{orderReturnAmounts.actualAmounts}}</text>
+        <text>¥{{refundCashAmount}}</text>
       </view>
       <view class='after-sale-line whiteBg flexR-sb'>
         退回余额账户
-        <text>¥{{ orderReturnAmounts.actualBalance }}</text>
+        <text>¥{{refundAccountAmount}}</text>
       </view>
-      <view class='after-sale-line whiteBg flexR-sb'>
+      <!-- <view class='after-sale-line whiteBg flexR-sb'>
         返回1元劵优惠
         <text>{{ orderReturnAmounts.actualTokenCoin || 0}} 张</text>
-      </view>
+      </view> -->
       <!-- <view class='after-sale-line whiteBg flexR-sb'>
         退回积分账户
         <text>¥{{ returnAmountsRecord.actualUserScore }}</text>

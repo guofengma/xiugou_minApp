@@ -50,14 +50,14 @@
         <view class='cart font-22 flexC' bindtap='btnClicked' data-key='1'>
           <image-sub wx:if ='{{productInfo.canUserBuy}}' imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor@3x.png'}}"/>
           <image-sub wx:else imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor-2@3x.png'}}"/>
-          <view class='gray'>购物车</view>
+          <view class='gray'>加入购物车</view>
           <!-- <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view> -->
         </view>
         <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy? "redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
           <text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>您已购买过该商品</text>
           <text wx:else>立即购买</text>
         </view>
-        <view class='add-cart font-28 flexR yellowBg shareBtn-view' >
+        <!-- <view class='add-cart font-28 flexR yellowBg shareBtn-view' >
           <button class='shareBtn flexR '  open-type="{{openType}}" catchtap='shareBtnClicked' >
            <view wx:if='{{productInfo.shareMoney=="0.00" || productInfo.shareMoney=="0.00 - 0.00"}}'>分享赚</view>
            <view wx:else class='flexR'>
@@ -68,7 +68,7 @@
               </view>
            </view>
           </button>
-        </view>
+        </view> -->
       </view>
     </view>
     <!--置顶的按钮-->

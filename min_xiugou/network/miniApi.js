@@ -1,7 +1,6 @@
 import ApiUtils from './api/ApiUtils';
 
-const api = 
-{
+const api = {
   /***************************** 秀场 ************************ */
   "getDiscoverById": [
     "/discover/getById",
@@ -56,6 +55,14 @@ const api =
       "encrypt": false,// 是否加签
     }
   ],
+  'queryDictionaryDetailsType': [
+    '/config/sysDictionary/queryDictionaryTypeList',
+    {
+      "action": "获取数据字典",
+      "method": "get",
+      "encrypt": false,// 是否加签
+    }
+  ],
   /***************************** 注册 ************************ */
   'queryAdList':[
     '/config/advertisement/queryAdvertisementList',
@@ -63,7 +70,6 @@ const api =
       "action": "获取文章详情",
       "method": "post",
       "encrypt": false,// 是否加签
-      'isShowLoading':true, //是否展示 loading 默认打印
       'isShowErrMsg':false, // 是否弹出接口的报错信息  默认打印
     }
   ],
@@ -115,6 +121,15 @@ const api =
       "action": "导师绑定<为你转身!>",
       "method": "get",
       "encrypt": false
+    }
+  ],
+  /**********************分享**************************/
+  "shareClick": [
+    "/user/shareClick",
+    {
+      "method": "get",
+      "action": "分享点击",
+      "isShowErrMsg": false,
     }
   ],
   /***************** 产品相关********************** */
@@ -253,14 +268,258 @@ const api =
       'isShowLoading': false,
     }
   ],
-  "shareClick": [
-    "/user/shareClick",
+  /**********************订单售后**************************/
+  'afterSaleList': [
+    '/after-sale/list',
     {
+      "action": "售后列表查询",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'applyAfterSale': [  //type 1.仅退款 2.退货退款 3.换货
+    '/after-sale/apply',
+    {
+      "action": "申请售后",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'afterSaleDetail': [
+    '/after-sale/detail',
+    {
+      "action": "售后详情",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'afterSaleOrderDetail': [
+    '/after-sale/order-detail',
+    {
+      "action": "售后子订单详情",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'cancelAfterSale': [
+    '/after-sale/cancel',
+    {
+      "action": "撤销售后",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'modifyAfterSale': [
+    '/after-sale/modify',
+    {
+      "action": "修改售后申请",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'afterSaleExpress': [
+    '/after-sale/express',
+    {
+      "action": "填写寄回物流单号接口",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  /**********************订单**************************/
+  'makeSureOrder': [
+    '/order/confirm',
+    {
+      "action": "确认订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'submitOrder': [
+    '/order/submit',
+    {
+      "action": "确认订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'depreciateSubmit': [ // submitType:提交类型 1：确认订单，2：提交订单
+    '/operator/activityDepreciate/submit',
+    {
+      "action": "降价拍-提交订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'seckillSubmit': [ // submitType:提交类型 1：确认订单，2：提交订单
+    '/operator/seckill/submit',
+    {
+      "action": "秒杀-提交订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'queryOrderPageList': [
+    '/order/list',
+    {
+      "action": "用户订单列表",
       "method": "get",
-      "action": "分享点击",
+      "encrypt": false,
+    }
+  ],
+  'searchOrder': [
+    '/order/search',
+    {
+      "action": "订单搜索",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'getOrderDetail': [
+    '/order/detail',
+    {
+      "action": "订单详情",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'confirmReceipt': [
+    '/order/confirm-receipt',
+    {
+      "action": "订单确认收货",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'cancelOrder': [
+    '/order/cancel',
+    {
+      "action": "取消订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'deleteOrder': [
+    '/order/delete',
+    {
+      "action": "删除订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'orderOneMore': [
+    '/order/another',
+    {
+      "action": "再次购买",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'countUserOrderNum':[
+    '/order/count',
+    {
+      "action": "获取订单数量",
+      "method": "post",
+      "encrypt": false,
+      'isShowLoading': false,
+    }
+  ],
+  /************************** 优惠券 *******************************/
+  "availableDiscountCouponForProduct": [
+    "/user/coupon/listAvailable",
+    {
+      "method": "post",
+      "action": "产品可用优惠劵列表",
       "isShowErrMsg": false,
     }
-  ]
+  ],
+  "couponList": [ // status 优惠券状态 0-未使用 1-已使用 2-已失效 3-未激活
+    "/user/coupon/list",
+    {
+      "method": "post",
+      "action": "优惠劵列表",
+      "isShowErrMsg": false,
+    }
+  ],
+  /************************** 支付 *******************************/
+  "wxPay": [ // status 优惠券状态 0-未使用 1-已使用 2-已失效 3-未激活
+    "/pay/wxminipay",
+    {
+      "method": "post",
+      "action": "微信支付",
+    }
+  ],
+  'sgpay':[
+    "/pay/sgpay",
+    {
+      "method": "post",
+      "action": "平台支付",
+    }
+  ],
+   /************************** 物流 *******************************/
+  'findAllExpress': [
+    "/express/query",
+    {
+      "method": "get",
+      "action": "物流公司选择",
+    }
+  ],
+  'getOrderDeliverInfo': [
+    '/order/deliverInfo',
+    {
+      "action": "订单物流信息",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'getOrderDeliverInfoDetail': [
+    '/order/deliverInfoDetail',
+    {
+      "action": "单个物流详情",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  /************************** 帮助中心 *******************************/
+  'addFeedback': [
+    '/user/feedback/addFeedback',
+    {
+      "action": "添加反馈",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'queryHelpQuestionList': [
+    '/help/helpQuestion/queryHelpQuestionList',
+    {
+      "action": "问题列表",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'updateHelpQuestion': [
+    '/help/helpQuestion/updateHelpQuestionToClick',
+    {
+      "action": "解决问题是否有用",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'findHelpQuestionById': [
+    '/help/helpQuestion/findHelpQuestionById',
+    {
+      "action": "根据ID查询问题详情",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'findQuestionEffectById': [
+    '/help/helpQuestion/findQuestionEffectById',
+    {
+      "action": "获取帮助次数",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
 }
 
 const API = new ApiUtils(api).result;

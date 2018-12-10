@@ -19,7 +19,7 @@
         </view>
       </view>
       <view class='address-content gray' wx:if='{{hasData}}'>
-        {{door==1? "收货地址：":""}}{{addressInfo || receiveAddress}}
+        {{door==1? "收货地址：":""}}{{addressInfo || address}}
       </view>
     </view>
   </view>

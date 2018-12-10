@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, API, Storage, Event } = global
 
 Page({
   data: {
@@ -20,28 +20,20 @@ Page({
     })
   },
   fillInExpressInfoById() {
-    let list = this.data.list
     let params = {
-      backAddress: list.returnAddress.address,
-      backPhone: list.returnAddress.recevicePhone,
-      backReceiver: list.returnAddress.receiver,
+      serviceNo: this.data.list.serviceNo,
       expressName: this.data.company.name || '无',
+      expressCode: this.data.company.id,
       expressNo:this.data.code || '0000000000000',
-      // receiveAddress: list.receive.address,
-      // receivePhone:list.receive.recevice_phone,
-      // receiver: list.receive.receiver,
-      id: list.id,
-      reqName: '退货换货填写物流信息',
-      url: Operation.fillInExpressInfoById
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    API.afterSaleExpress(params).then((res) => {
+      let datas = res.data
       Storage.setExpressNo(this.data.code)
       Event.emit('updataExpressNo')
       Tool.navigationPop()
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   onCodeClickListener: function () {
     // 扫二维码

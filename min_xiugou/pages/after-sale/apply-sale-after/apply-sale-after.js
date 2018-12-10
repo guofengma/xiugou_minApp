@@ -1,5 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation} = global;
-//this.selectComponent("#prd-info-type").isVisiableClicked()
+let { Tool, API, Storage} = global;
 Page({
   data: {
     ysf: { title: '申请售后' },
@@ -58,8 +57,9 @@ Page({
     let placeholder = this.data.reason[options.refundType].placeholder
     this.setData({
       refundType: options.refundType,
-      list: Storage.getInnerOrderList() || '',
-      returnProductId: options.returnProductId || '',
+      list: Storage.getInnerOrderList() || {},
+      orderProductNo: options.orderProductNo || '',
+      serviceNo: options.serviceNo || '',
       placeholder: { placeholder: placeholder, disabled: false }
     })
     Tool.isIPhoneX(this) 
@@ -67,22 +67,23 @@ Page({
   },
   initData(){
     let list = this.data.list
-    if (this.data.returnProductId) {
-      let imgList = list.imgList || []
+    if (this.data.serviceNo) {
+      let imgList = list.showImgList|| []
       imgList.forEach((item) => {
-        this.data.originalImg.push(item.originalImg)
-        this.data.smallImg.push(item.smallImg)
+        this.data.originalImg.push(item)
+        this.data.smallImg.push(item)
       })
       this.setData({
-        selectType:{
-          id: list.exchangePriceId || '',
-          spec: list.exchangeSpec || '',
-          specImg: list.exchangeSpecImg || '',
-        },
+        // selectType:{
+        //   id: list.exchangePriceId || '',
+        //   spec: list.exchangeSpec || '',
+        //   specImg: list.exchangeSpecImg || '',
+        // },
         originalImg: this.data.originalImg,
         smallImg: this.data.smallImg,
-        remark: list.remark,
-        returnReason:list.returnReason
+        remark: list.description || '',
+        returnReason: list.reason || '',
+        serviceNo: list.serviceNo
       })
       this.selectComponent("#update-img").initData()
     }
@@ -93,61 +94,60 @@ Page({
     this.queryDictionaryDetailsType(this.data.refundType)
   },
   queryDictionaryDetailsType(refundType){
-    let params = {
+    API.queryDictionaryDetailsType({
       code: this.data.queryReasonParams[refundType],
-      reqName: '获取数字字典',
-      requestMethod: 'GET',
-      url: Operation.queryDictionaryDetailsType
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock= (req) => {
-      let datas = req.responseObject.data || []
-     
-      if (this.data.returnReason){
-        datas.forEach((item,index)=>{
-          if(item.value==this.data.returnReason){
+    }).then((res) => {
+      let datas = res.data || []
+      if (this.data.returnReason) {
+        datas.forEach((item, index) => {
+          if (item.value == this.data.returnReason) {
             this.setData({
-              activeIndex:index
+              activeIndex: index
             })
             this.selectComponent('#chooseReason').setIndex(index);
           }
         })
       }
-      this.data.reason[refundType].list = req.responseObject.data
+      this.data.reason[refundType].list = datas
       this.setData({
         reason: this.data.reason
       })
+    }).catch((res) => {
+      console.log(res)
+    });
+  },
+  changeApplyAmoun(e){
+    let applyRefundAmount = e.detail.value
+    let totalAmount = this.data.orderInfos.totalAmount
+    if (applyRefundAmount > totalAmount){
+      Tool.showAlert(`最多只能申请${totalAmount}元`)
+      applyRefundAmount = totalAmount
     }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    this.setData({
+      applyRefundAmount: applyRefundAmount
+    })
   },
   findOrderProductInfo(){
-    let params = {
-      orderProductId: this.data.list.id,
-      reqName: '查看申请退款子订单详情',
-      url: Operation.findOrderProductInfo,
-      requestMethod: 'GET'
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      if (data.status != 1 && data.returnProductId) {
+    API.afterSaleOrderDetail({
+      orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || ''
+    }).then((res) => {
+      let data = res.data || {}
+      if (data.status != 1 && data.serviceNo) {
         let callBack = ()=>{
           Tool.redirectTo('/pages/my/my-order/my-order')
         }
         let content = "售后"+this.data.stateArr[data.status]+",不能修改申请"
         Tool.showAlert(content,callBack)
       } else {
-        data.imgUrl = data.specImg ? data.specImg : this.data.list.imgUrl
-        data.createTime = Tool.formatTime(data.orderCreateTime)
-        this.setData({
-          orderInfos: data
-        })
+        data.imgUrl = data.specImg? data.specImg : this.data.list.imgUrl
+        data.createTime = Tool.formatTime(data.createTime)
       }
-      
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+      this.setData({
+        orderInfos: data
+      })
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   chooseReason(){
     this.setData({
@@ -170,60 +170,48 @@ Page({
     
   },
   orderRefund(){
-    if (this.data.activeIndex===''){
-      Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
-      return
-    }
+    // if (this.data.activeIndex===''){
+    //   Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
+    //   return
+    // }
     // if (this.data.refundType == 2 && Tool.isEmptyStr(this.data.remark)){
     //   Tool.showAlert(this.data.reason[this.data.refundType].placeholder)
     //   return
     // }
     let list = this.data.list
-    let url = ''
-    let reqName = ''
-    if (this.data.refundType==0){
-      url = Operation.orderRefund
-      reqName = '申请仅退款'
-    } else if (this.data.refundType == 1) {
-      url = Operation.applyReturnGoods
-      reqName = '申请退货'
-    } else {
-      url = Operation.applyExchangeProduct
-      reqName = '申请换货'
-    }
-    if (this.data.returnProductId) {
-      url = Operation.updateApply
-      reqName = '修改退换货申请'
-    }
-    let imgList = []
-    
-    this.data.originalImg.forEach((item,index)=>{
-      imgList.push({
-        // height:item.height,
-        // width:
-        originalImg:item,
-        smallImg: this.data.smallImg[index]
-      })
-    })
+    // let imgList = []
+    // this.data.originalImg.forEach((item,index)=>{
+    //   imgList.push({
+    //     originalImg:item,
+    //     smallImg: this.data.smallImg[index]
+    //   })
+    // })
     let params = {
-      exchangePriceId: this.data.selectType.id || '',
-      exchangeSpec: this.data.selectType.spec || '',
-      exchangeSpecImg: this.data.selectType.specImg || '',
-      imgList: imgList,
-      orderProductId: list.id,
-      remark: this.data.remark,
-      returnProductId: Number(this.data.returnProductId) || '',
-      // returnReason:'无',
-      returnReason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
-      reqName: reqName,
-      url: url
+      // exchangePriceId: this.data.selectType.id || '',
+      // exchangeSpec: this.data.selectType.spec || '',
+      // exchangeSpecImg: this.data.selectType.specImg || '',
+      applyRefundAmount: this.data.applyRefundAmount || '',
+      imgList: this.data.originalImg.join(","),
+      orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || '',
+      reason:'无',
+      // reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
+      description: this.data.remark,
+      'type': Number(this.data.refundType)+1,
+      serviceNo: this.data.serviceNo || '',
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      Tool.redirectTo(this.data.page[this.data.refundType] + '?returnProductId=' + req.responseObject.data.id)
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    let reqName = this.data.serviceNo? 'modifyAfterSale':'applyAfterSale'
+    API[reqName](params).then((res) => {
+      let datas = res.data || {}
+      let serviceNo = ''
+      if (datas.serviceNo){
+        serviceNo = datas.serviceNo
+      } else{
+        serviceNo =this.data.serviceNo
+      }
+      Tool.redirectTo(this.data.page[this.data.refundType] + '?serviceNo=' + serviceNo)
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   updateApply(){
     
@@ -239,29 +227,6 @@ Page({
       remark: e.detail.value
     })
   },
-  // chooseType(){
-  //   let params = {
-  //     id: this.data.list.productId,
-  //     isShowLoading: false,
-  //     requestMethod: 'GET',
-  //     url: Operation.findProductStockBySpec,
-  //     reqName: "规格搜索"
-  //   }
-  //   let r = RequestFactory.wxRequest(params);
-  //   r.successBlock = (req) => {
-  //     let datas = req.responseObject.data
-  //     this.setData({
-  //       productSpec: datas.specMap,
-  //       priceList: datas.priceList,
-  //       selectPrice: this.data.list.price,
-  //       isInit: false,
-  //       imgUrl: this.data.list.specImg
-  //     })
-  //     this.selectComponent("#prd-info-type").isVisiableClicked()
-  //   }
-  //   Tool.showErrMsg(r)
-  //   r.addToQueue();
-  // },
   changeProdctType(e){
     this.setData({
       selectType: e.detail

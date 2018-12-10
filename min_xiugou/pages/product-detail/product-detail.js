@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation,API } = global
+ let { Tool, RequestFactory, Storage, Event, Operation,API } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
 import ProductFactorys from './temp/product.js'
@@ -52,11 +52,11 @@ Page({
   didLogin() {
     this.ProductFactory.didLogin()
     this.initRequest()
-    if(!this.data.didLogin){
-      this.setData({
-        openType:''
-      })
-    }
+    // if(!this.data.didLogin){
+    //   this.setData({
+    //     openType:''
+    //   })
+    // }
     // 领取红包的功能 取消
     // if (!this.data.userInfos.upUserid){
     //   let date = Storage.getRedEnvelopesDate() || ''
@@ -108,12 +108,12 @@ Page({
       return
     }
     let params = {
-      orderProducts:[{
-        num: this.data.productBuyCount,
-        priceId: this.data.selectType.skuCode,
-        productId: this.data.selectType.prodCode
+      orderProductList:[{
+        quantity: this.data.productBuyCount,
+        skuCode: this.data.selectType.skuCode,
+        productCode: this.data.selectType.prodCode
       }],
-      orderType:99
+      orderType:1
     }
     Storage.setSubmitOrderList(params)
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params)+'&type=99' )

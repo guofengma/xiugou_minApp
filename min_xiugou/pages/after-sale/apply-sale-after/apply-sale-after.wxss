@@ -1,4 +1,4 @@
-@import "/components/my-order-product-info/my-order-product-info";
+@import "/components/after-sale-prd-info/after-sale-prd-info";
 
 @import "/components/address-info/address-info"; 
 
@@ -44,6 +44,11 @@
 }
 .refund-num{
   margin-top: 10rpx;
+  display: flex
+}
+.refund-num input{
+  height:100%;
+  width:500rpx;
 }
 .btn-view{
   height: 100rpx;

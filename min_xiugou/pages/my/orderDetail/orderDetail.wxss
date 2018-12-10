@@ -106,6 +106,7 @@
 }
 .sale-after{
   border-bottom: 1rpx solid #eee;
+  border-top: 0;
 }
 /* .order-bar{
   position: fixed;

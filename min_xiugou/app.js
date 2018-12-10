@@ -13,7 +13,6 @@ import config from './config.js'
 
 App({
     onLaunch: function (o) {
-      console.log(o)
       if (!Storage.getPlatform()) {
         let uuid = Tool.getUUID()
         Storage.setPlatform(uuid)
@@ -32,10 +31,7 @@ App({
       this.deleteInviteId()
     },
     onShow: function () {
-      // 比如记录小程序启动时长
-      // let pages = getCurrentPages()
-      // let currentPage = pages[pages.length - 1]
-      // console.log(pages)
+
     },
     globalData: {
         userInfo: null,
@@ -119,6 +115,8 @@ App({
       let r = RequestFactory.wxRequest(params);
       r.successBlock = (req) => {
         let datas = req.responseObject.data || {}
+        datas.availableBalance0 = Tool.formatNum(datas.availableBalance || 0)
+        datas.blockedBalance0 = Tool.formatNum(datas.blockedBalance || 0)
         let levelName = datas.levelName || ''
         datas.levelName0 = levelName.length > 4 ? levelName.slice(0, 4) + '...' : levelName
         Storage.setUserAccountInfo(datas)

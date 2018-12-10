@@ -1,10 +1,10 @@
-let { Tool, RequestFactory, Operation, Storage, Event } = global
+let { Tool, API, Storage, Event } = global
 
 Component({
   properties: {
     list:Object,
     applyType:String,
-    returnProductId:Number
+    serviceNo:String
   },
   data: {
 
@@ -14,27 +14,27 @@ Component({
       let callBack = ()=>{
         this.findReturnProductById(1)
       }
-      Tool.showComfirm('您讲撤销本次申请，如果有问题未解决，你还可以再次发起，确定继续吗？', callBack)
-    },
-    revokeApplyReq(){
-      let params = {
-        returnProductId: this.data.list.id,
-        reqName: '查看退款退货换货情况',
-        url: Operation.revokeApply
+      let num = this.data.list.maxRevokeTimes - this.data.list.hadRevokeTimes || 0;
+      if (num == 0){
+        Tool.showComfirm('平台售后操作已到上限')
+        return
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
+      Tool.showComfirm(`确定撤销本次申请吗?剩余申请${num}次`, callBack)
+    },
+    revokeApplyReq(){ // 撤销申请
+      API.cancelAfterSale({
+        serviceNo: this.data.list.serviceNo
+      }).then((res) => {
         Event.emit('getDetail')
         Tool.navigationPop()
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     updateApplyClicked(){
       this.findReturnProductById(2)
     },
     updateApply(){
-      // Tool.redirectTo(this.data.pageArr[this.data.list.type] + '?returnProductId=' + this.data.list.id)
       this.data.list.address = {
         receiveAddress: this.data.list.receiveAddress,
         receiver: this.data.list.receiver,
@@ -44,27 +44,23 @@ Component({
       this.data.list.id = this.data.list.orderProductId
       Storage.setInnerOrderList(this.data.list)
       let types = this.data.list.type -1
-      Tool.redirectTo('/pages/after-sale/apply-sale-after/apply-sale-after?returnProductId=' + this.data.list.returnProductId + '&&refundType=' + types)
+      Tool.redirectTo('/pages/after-sale/apply-sale-after/apply-sale-after?serviceNo=' + this.data.list.serviceNo + '&refundType=' + types+'&orderProductNo=' + this.data.list.orderProductNo)
     },
     findReturnProductById(num) {
-      let params = {
-        returnProductId: this.data.returnProductId,
-        reqName: '查看退款退货换货情况',
-        url: Operation.findReturnProductById
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data
-        if (datas.status==1){
+      API.afterSaleDetail({
+        serviceNo: this.data.list.serviceNo
+      }).then((res) => {
+        let datas = res.data || {}
+        if (datas.status == 1) {
           num == 1 ? this.revokeApplyReq() : this.updateApply()
         } else {
-          let content = num==1? "不能撤销本次申请":"不能修改本次申请"
+          let content = num == 1 ? "不能撤销本次申请" : "不能修改本次申请"
           Tool.showAlert(content)
           this.triggerEvent('reloadPage');
         }
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
   }
 })
