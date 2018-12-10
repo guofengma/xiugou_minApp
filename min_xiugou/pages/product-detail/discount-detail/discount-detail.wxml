@@ -53,7 +53,8 @@
 <!--产品规格选择  -->
 <product-specification id='prd-info-type' 
   bind:subClicked="typeSubClicked"  
-  productSpec='{{productSpec}}' 
+  productSpec='{{productSpec}}'
+  surplusNumber='{{proNavData.surplusNumber}}'
   price = '{{proNavData.markdownPrice}}'
   priceList='{{priceList}}' 
   imgUrl="{{productInfo.imgUrl}}" 
