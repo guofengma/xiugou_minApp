@@ -456,15 +456,18 @@ Page({
       API.getOrderDeliverInfo({
         expressNo: expressNo
       }).then((res) => {
-        let datas = res.data || {}
+        let datas = res.data || '{}'
+        datas = JSON.parse(datas)
         let result = datas.result || {}
-        let list = result.list || []
-        let state = this.orderState(this.data.status)
-        state.info = list[0].status
-        state.time = list[0].time
-        this.setData({
-          state: state
-        })
+        if (datas.status==0){
+          let list = result.list || []
+          let state = this.orderState(this.data.status)
+          state.info = list[0].status
+          state.time = list[0].time
+          this.setData({
+            state: state
+          })
+        }
       }).catch((res) => {
         console.log(res)
       })

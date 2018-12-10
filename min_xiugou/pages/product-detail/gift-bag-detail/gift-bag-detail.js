@@ -49,13 +49,14 @@ Page({
       return
     }
     let params = {
-      orderProducts: [{
+      orderProductList: [{
         num:1,
         priceId: this.data.productInfo.id,
         productId: this.data.productInfo.id,
         priceList: this.data.selectType.priceList
       }],
-      orderType: 5,
+      orderType: 2,
+      orderSubType: this.data.productInfo.type==2? 3:4, // 3升级礼包 4 普通礼包
       packageCode: this.data.productInfo.packageCode
     }
     Storage.setSubmitOrderList(params)

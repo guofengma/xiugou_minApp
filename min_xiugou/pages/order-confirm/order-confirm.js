@@ -86,7 +86,7 @@ Page({
     this.requestOrderInfo(callBack)
   },
   requestOrderInfo(callBack = ()=>{}){ // 获取订单信息 优惠卷和省市区地址更改联动
-  // orderSubType: 1.秒杀 2.降价拍 3.升级礼包 4.普通礼包 orderType 1.普通订单 2.活动订单
+    // orderSubType: 1.秒杀 2.降价拍 3.升级礼包 4.普通礼包 orderType 1.普通订单 2.活动订单
     let params = {
       ...this.data.params,
       channel:1,

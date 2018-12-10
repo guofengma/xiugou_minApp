@@ -72,17 +72,23 @@ Page({
         let datas = res.data || '{}'
         datas = JSON.parse(datas)
         let result = datas.result || {}
-        let list = result.list || []
-        list.forEach((item) => {
-          item.showDate = item.time.slice(5, 10)  
-          item.showTime = item.time.slice(11, 16)
-        });
-        this.setData({
-          mailNo: result.number,
-          expName: result.expName,
-          list:list,
-          status: this.data.statusText[result.deliverystatus]
-        })
+        if (datas.status == 0) {
+          let list = result.list || []
+          list.forEach((item) => {
+            item.showDate = item.time.slice(5, 10)
+            item.showTime = item.time.slice(11, 16)
+          });
+          this.setData({
+            mailNo: result.number,
+            expName: result.expName,
+            list: list,
+            status: this.data.statusText[result.deliverystatus]
+          })
+        }else{
+          this.setData({
+            tips: datas.msg || '暂无物流信息~'
+          })
+        }
       }).catch((res) => {
         console.log(res)
       })
