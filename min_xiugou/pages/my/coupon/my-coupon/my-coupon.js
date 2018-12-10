@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation} = global;
+let { Tool, API, Storage, Event} = global;
 Page({
     data: {
       winHeight: "",//窗口高度
@@ -115,40 +115,25 @@ Page({
         return '全品类：全场通用券';
       }
     },
-    formatCouponInfos(params, index, isActive = false, couponClassName){
+    formatCouponInfos(reqUrl,params, index, isActive = false, couponClassName){
       // let reqName = []
-      // API.availableDiscountCouponForProduct(params).then((res) => {
-      //   let datas = res.data
-      //   if (datas.totalPage == 0) {
-      //     this.setData({
-      //       coupon: {
-      //         id: '',
-      //         name: "暂无可用优惠劵",
-      //         canClick: true,
-      //       }
-      //     })
-      //   }
-      // }).catch((res) => {
-      //   console.log(res)
-      // })
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data
-        if (req.responseObject.data.totalPage == 0 || datas.data==null) return
+      API[reqUrl](params).then((res) => {
+        let datas = res.data
+        if (datas.totalPage == 0 || datas.data == null) return
         let userLevelId = this.data.userInfo.levelId
-        datas.data.forEach((item,index0)=>{
-          item.outTime = Tool.timeStringForDateString(Tool.formatTime(item.expireTime),"YYYY.MM.DD");
+        datas.data.forEach((item, index0) => {
+          item.outTime = Tool.timeStringForDateString(Tool.formatTime(item.expireTime), "YYYY.MM.DD");
           item.start_time = Tool.timeStringForDateString(Tool.formatTime(item.startTime), "YYYY.MM.DD");
           // 未使用优惠卷
-          if(index==0){
-            couponClassName = '', isActive=true
+          if (index == 0) {
+            couponClassName = '', isActive = true
             let isNoLimitUsed = item.levels.includes(userLevelId)
             // 是否等级受限
-            couponClassName = isNoLimitUsed ?  couponClassName:'coupon-right-limitLevel'
+            couponClassName = isNoLimitUsed ? couponClassName : 'coupon-right-limitLevel'
             // 是否待激活
-            couponClassName = item.status == 3 ? 'coupon-right-unUsed':couponClassName
+            couponClassName = item.status == 3 ? 'coupon-right-unUsed' : couponClassName
             console.log(isNoLimitUsed)
-            isActive = (!isNoLimitUsed || item.status == 3)?  false:true
+            isActive = (!isNoLimitUsed || item.status == 3) ? false : true
           }
           item.couponClassName = couponClassName;
           item.active = isActive;
@@ -160,49 +145,41 @@ Page({
           lists: this.data.lists,
           totalPageArr: this.data.totalPageArr
         })
-      };
-      Tool.showErrMsg(r);
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     availableDiscountCouponForProduct(){
       let params = {
         ...this.data.params,
         productPriceIds: JSON.parse(this.data.productIds),
-        reqName: '产品可用优惠劵列表',
-        url: Operation.availableDiscountCouponForProduct
       }
-      this.formatCouponInfos(params, 0, true, '')
+      this.formatCouponInfos('availableDiscountCouponForProduct',params, 0, true, '')
     },
     
     //未使用
     getDiscountCouponNoUse() {
       let params = {
         ...this.data.params,
-        reqName: '未使用优惠劵列表',
-        url: Operation.couponList,
         status:0
       }
-      this.formatCouponInfos(params, 0, true,'')
+      this.formatCouponInfos('couponList',params, 0, true,'')
     },
     //已经优惠劵列表
     getDiscountCouponUserd() {
       let params = {
         ...this.data.params,
         status: 1,
-        reqName: '已使用优惠劵列表',
-        url: Operation.couponList
       }
-      this.formatCouponInfos(params, 1, false, 'coupon-right-used')
+      this.formatCouponInfos('couponList',params, 1, false, 'coupon-right-used')
     },
     //失效优惠劵列表
     getDiscountCouponLosed() {
       let params = {
         ...this.data.params,
-        reqName: '失效优惠劵列表',
         status:2,
-        url: Operation.couponList
       }
-      this.formatCouponInfos(params, 2, false, 'coupon-right-lose')
+      this.formatCouponInfos('couponList',params, 2, false, 'coupon-right-lose')
     },
     //优惠券详情
     toDetail(e){
@@ -218,7 +195,7 @@ Page({
           Tool.navigationPop()
         }
       } else{
-        Tool.navigateTo('../coupon-detail/coupon-detail')
+        Tool.navigateTo('/pages/my/coupon/coupon-detail/coupon-detail')
       }
     },
     btnClicked(e){

@@ -70,7 +70,6 @@ const api = {
       "action": "获取文章详情",
       "method": "post",
       "encrypt": false,// 是否加签
-      'isShowLoading':true, //是否展示 loading 默认打印
       'isShowErrMsg':false, // 是否弹出接口的报错信息  默认打印
     }
   ],
@@ -343,6 +342,22 @@ const api = {
       "encrypt": false,
     }
   ],
+  'depreciateSubmit': [ // submitType:提交类型 1：确认订单，2：提交订单
+    '/operator/activityDepreciate/submit',
+    {
+      "action": "降价拍-提交订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'seckillSubmit': [ // submitType:提交类型 1：确认订单，2：提交订单
+    '/operator/seckill/submit',
+    {
+      "action": "秒杀-提交订单",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
   'queryOrderPageList': [
     '/order/list',
     {
@@ -399,6 +414,15 @@ const api = {
       "encrypt": false,
     }
   ],
+  'countUserOrderNum':[
+    '/order/count',
+    {
+      "action": "获取订单数量",
+      "method": "post",
+      "encrypt": false,
+      'isShowLoading': false,
+    }
+  ],
   /************************** 优惠券 *******************************/
   "availableDiscountCouponForProduct": [
     "/user/coupon/listAvailable",
@@ -409,7 +433,7 @@ const api = {
     }
   ],
   "couponList": [ // status 优惠券状态 0-未使用 1-已使用 2-已失效 3-未激活
-    "/user/coupon/listAvailable",
+    "/user/coupon/list",
     {
       "method": "post",
       "action": "优惠劵列表",

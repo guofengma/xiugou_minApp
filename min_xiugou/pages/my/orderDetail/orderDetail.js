@@ -101,7 +101,7 @@ Page({
           this.getDelivery(expressList.expressList[0].expressNo)
         } else if (expressList.length > 1) {
           let state = this.orderState(showOutStatus)
-          state.info = '该订单已拆成N个包裹发出，点击“查看物流”可查看详情'
+          state.info = `该订单已拆成${expressList.length}个包裹发出，点击“查看物流”可查看详情`
           this.setData({
             state: state
           })
@@ -111,9 +111,6 @@ Page({
       }).catch((res) => {
         console.log(res)
       })
-      //       detail.createTime=detail.createTime?Tool.formatTime(detail.createTime):'';
-      //       detail.sysPayTime=detail.sysPayTime?Tool.formatTime(detail.sysPayTime):'';
-      //       detail.payTime=detail.payTime?Tool.formatTime(detail.payTime):'';
       //       detail.cancelTime = detail.cancelTime ? Tool.formatTime(detail.cancelTime) : '';
       //       detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
       //       detail.showFinishTime = detail.deliverTime? Tool.formatTime(detail.deliverTime) : Tool.formatTime(detail.finishTime)
@@ -380,11 +377,10 @@ Page({
       if (this.data.detail.orderSubType == 3) {
         Tool.showAlert('该商品属于升级礼包产品，不存在售后功能')
         return
+      }else if (list.afterSaleTime < this.data.detail.warehouseOrderDTOList[0].nowTime) {
+        Tool.showAlert('该商品售后已过期')
+        return
       }
-      // else if (list.finishTime < this.data.detail.warehouseOrderDTOList[0].nowTime) {
-      //   Tool.showAlert('该商品售后已过期')
-      //   return
-      // }
 
       Storage.setInnerOrderList(list)
 
@@ -423,11 +419,12 @@ Page({
     },
     productClicked(e){
       let id = e.currentTarget.dataset.productid
-      if (this.data.detail.orderType == 5 || this.data.detail.orderType==98 ){
-        Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.detail.orderProductList[0].activityCode)
-      } else {
-        Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + id)
-      }
+      Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + id)
+      // if (this.data.detail.orderType == 5 || this.data.detail.orderType==98 ){
+      //   Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.detail.orderProductList[0].activityCode)
+      // } else {
+        
+      // }
     },
     orderRefund(){
       Tool.showAlert('目前只支持单件商品退款，请进行单件退款操作~')

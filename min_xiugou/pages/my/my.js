@@ -1,6 +1,6 @@
 
 // pages/my/account.js
-let { Tool, RequestFactory, Storage, Event, Operation} = global
+let { Tool, Storage, Event,API} = global
 
 const app = getApp()
 
@@ -48,7 +48,7 @@ Page({
       })
       if (this.data.didLogin){
         this.getLevel()
-        // this.countUserOrderNum()
+        this.countUserOrderNum()
         this.queryPushMsg()
       }else{
         this.setData({
@@ -79,21 +79,14 @@ Page({
       app.queryPushMsg(callBack)
     },
     countUserOrderNum(){ // 获取订单数量
-      let params = {
-        isShowLoading: false,
-        reqName: '获取用户等级',
-        url: Operation.countUserOrderNum
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data
+      API.countUserOrderNum({}).then((res) => {
+        let datas = res.data
         this.setData({
           countUserOrderNum: datas
         })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
-
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     getLevel(){
       let callBack =(datas)=>{
