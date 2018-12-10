@@ -31,7 +31,6 @@ Page({
       door: options.door || '',
       inviteId: options.inviteId || ''
     })
-    app.shareClick(options.inviteId);
     this.ProductFactory = new ProductFactorys(this)
     this.didLogin()    
     Tool.isIPhoneX(this)

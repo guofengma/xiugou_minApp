@@ -36,7 +36,6 @@ Page({
     this.setData({
       prodCode: options.code
     })
-    app.shareClick(options.inviteId);
     this.ProductFactory = new ProductFactorys(this)
     this.didLogin()
     this.getTopicActivityData();    
