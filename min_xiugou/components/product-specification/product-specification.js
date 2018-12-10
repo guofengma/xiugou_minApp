@@ -53,7 +53,7 @@ Component({
         }
       })
       stockList.forEach((item)=>{
-        totalStock += item.sellStock
+        
         // 换货的时候 去掉价格不等的清单
         // 可以更换同价格的其他型号 或者 同型号的比购买时候低的同一种型号（同型号的价格低于或者等于购买时的价格）
         // if (this.data.commodityType == 5 && (item.id == this.data.productPriceId || item.price == this.data.price) ){
@@ -62,6 +62,9 @@ Component({
         // 降价拍和秒杀
         if ((this.data.commodityType == 2 || this.data.commodityType == 3) && item.skuCode == this.data.specIds){
           priceList.push(item)
+          totalStock += item.sellStock
+        } else if (!(this.data.commodityType == 2 || this.data.commodityType == 3)) {
+          totalStock += item.sellStock
         }
       })
       if (priceList.length==0){
