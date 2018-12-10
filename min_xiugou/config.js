@@ -1,13 +1,13 @@
 // 每次发布要 切换 h5webUrl地址 baseUrl请求地址  rasVersion加签版本
 const config = {
-  rasVersion: '1.0.4.3', //数据加签版本号
+  rasVersion: '1.0.4.5', //数据加签版本号
   rasClient: 'miniapp', // 数据加签端口
   // h5webUrl: 'https://uath5.sharegoodsmall.com',// 市场部内测环境
   // baseUrl: 'https://uatapi.sharegoodsmall.com/gateway',// 市场部内测环境
   h5webUrl: 'https://testh5.sharegoodsmall.com',
-  // baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
+  baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
   // h5webUrl: 'http://devh5.sharegoodsmall.com',
-  baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
+  // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
   // baseUrl: 'http://172.16.10.42:4090/gateway',  // 蒋
   // baseUrl: 'http://172.16.10.29:8903/gateway',  // 周
   // baseUrl:'http://172.16.10.238:8903/gateway',  // 高
