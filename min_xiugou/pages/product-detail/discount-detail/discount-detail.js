@@ -70,7 +70,7 @@ Page({
       if (data.status >= 4 && data.type == 1) {//type是否为隐藏类目，非隐藏要跳转  1：显示 2：隐藏
         jumpTimer = setTimeout(() => {
           //跳转到普通详情页
-          Tool.navigateTo('/pages/product-detail/product-detail?prodCode==' + data.prodCode)
+          Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + data.prodCode)
         }, 5000)
       }
       // 根据降价拍返回的sku数据生成sku选择组件所需数据

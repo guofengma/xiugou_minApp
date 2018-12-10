@@ -18,11 +18,16 @@ export default class ProductFactorys  {
       } else {
         datas.canUserBuy = true
       }
+      let imgUrls = datas.imgFileList || []
+      if (datas.imgUrl) imgUrls.unshift({
+        originalImg:datas.imgUrl,
+        smallImg: datas.imgUrl
+      })
       datas.content = datas.content || ''
       datas.showContent = datas.content.split(',')
       this.page.setData({
         isInit: false,
-        imgUrls: datas.imgFileList || [],
+        imgUrls: imgUrls,
         productInfo: datas,
         // productInfoList: datas,
         priceList: datas.skuList, // 价格表
@@ -37,7 +42,7 @@ export default class ProductFactorys  {
       // 执行额外需要做的操作
       callBack(datas)
     }).catch((res) => {
-
+      console.log(res)
     })
   }
   renderTable(paramList, paramName, paramValue) {  // 渲染表格
