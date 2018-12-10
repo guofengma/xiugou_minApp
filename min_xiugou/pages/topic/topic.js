@@ -34,7 +34,7 @@ Page({
     let prdType = dataset.type;  //1秒杀 2降价拍 3礼包 4助力免费领 5专题 99普通商品
     let code = dataset.code;
     if (prdType == 99 ){
-      Tool.navigateTo('/pages/product-detail/product-detail?productId=' + id + '&door=1')
+      Tool.navigateTo('/pages/product-detail/product-detail?productId=' + code + '&door=1')
     } else if (prdType==3){
       Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + code + '&door=1')
     } else if(prdType == 2){

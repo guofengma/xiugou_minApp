@@ -150,6 +150,10 @@ Page({
           date: new Date().toLocaleDateString(),
           id: options.inviteId
         })
+        //1、产品详情(1,2,101) 2、邀请注册(101) 3、秀场分享(在分享页面那边处理了) 4、拼店分享(暂无): 点击增加经验
+        if ([1, 2, 99, 101].includes(parseInt(options.type))) {
+          app.shareClick(options.inviteId);
+        }
       }
       if (options.type) { // 页面跳转
         Tool.navigateTo(this.data.redirectTo[options.type] + options.id)
