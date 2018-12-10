@@ -43,6 +43,7 @@ Page({
         return
       }
       let imgList = datas.imgList || ''
+      console.log(imgList)
       datas.showImgList = imgList.split(',')
       let status = datas.status
       datas.createTime = Tool.formatTime(datas.createTime)
@@ -73,8 +74,9 @@ Page({
         SaleExpressNo: SaleExpressNo,
         expressNo: expressNo,
       })
-      if (status > 1 && !orderRefundExpress.expressNo && !datas.sendExpressNo) {
+      if (status > 1 && !orderRefundExpress.expressNo && !datas.sendExpressNo && status <6) {
         datas.countDownSeconds = Math.floor((datas.cancelTime - datas.nowTime) / 1000 )
+        // console.log((datas.cancelTime - datas.nowTime) / 1000)
         this.countdown(this)
       }
       Event.emit('getDetail')

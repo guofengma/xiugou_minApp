@@ -17,15 +17,27 @@ Page({
     couponArr:[1,2], // 不支持优惠卷 不支持1元劵
     canUseTokenCoin: true,//支持使用支持1元劵
     canUseCoupon: true,//支持使用优惠卷
-    btnDisabled:false, //提交订单按钮是否可以点击
+    btnDisabled:false, //提交订单按钮是否可以点击,
+    confirmUrl:{ // 确认订单接口
+      1: 'seckillSubmit',
+      2: 'depreciateSubmit',
+      5: 'giftSubmit',
+      99: 'makeSureOrder'
+    },
+    submitUrl:{ // 提交订单接口
+      99:'submitOrder'
+    }
   },
   onLoad: function (options) {
     Tool.getUserInfos(this)
     this.setData({
-      // params: JSON.parse(options.params),
       params:Storage.getSubmitOrderList() || {},
       door: options.type,
-      formCart: options.formCart || false
+      formCart: options.formCart || false,
+      submitUrl: {
+        ...this.data.confirmUrl,
+        ...this.data.submitUrl
+      }
     })
     this.requestOrderInfo()
     Tool.isIPhoneX(this)
@@ -91,11 +103,14 @@ Page({
       ...this.data.params,
       channel:1,
       source: this.data.formCart ? 1 : 2, // 订单来源
+      submitType:1,
     }
-    API.makeSureOrder(params).then((res) => {
+    let reqUrl = this.data.confirmUrl[this.data.door]
+    // 1秒杀 2降价 3优惠套餐 4助力免费领 5礼包 99 普通
+    API[reqUrl](params).then((res) => {
       wx.stopPullDownRefresh() //停止下拉刷新du
       let item = res.data || {}
-      let userAdress = item.userAddressDTO || {}
+      let userAdress = item.userAddressDTO || item.userAddress || {}
       if (userAdress){
         item.address = { ...userAdress}
         item.address.addressInfo = userAdress.province + userAdress.city + userAdress.area + userAdress.address
@@ -118,10 +133,11 @@ Page({
           stock: item0.stock || 1,
         })
         let arr = Tool.bitOperation(this.data.couponArr, item0.restrictions)
-        let couponType = this.data.couponArr.filter(function (n) {
-          return arr.indexOf(n) == -1
-        });
-        couponType.forEach((item,index)=>{
+        // let couponType = this.data.couponArr.filter(function (n) {
+        //   return arr.indexOf(n) == -1
+        // });
+        // couponType.forEach((item, index) => {
+        arr.forEach((item,index)=>{
           if(item==this.data.couponArr[0]){
             canUseCoupon = true
           }
@@ -157,6 +173,7 @@ Page({
       //   this.getTokenCoin()
       // }
     }).catch((res) => {
+      this.failBlock(res)
       console.log(res)
     })
   },
@@ -225,17 +242,20 @@ Page({
       btnDisabled:true
     })
     let params = {
-      orderProductList: this.data.params.orderProductList,
-      orderType: this.data.params.orderType,// 订单类型
-      orderSubType: this.data.params.orderSubType || '', //订单子类型
+      ...this.data.params,
+      // orderProductList: this.data.params.orderProductList || '',
+      // orderType: this.data.params.orderType || '',// 订单类型
+      // orderSubType: this.data.params.orderSubType || '', //订单子类型
+      // tokenCoin: this.data.params.tokenCoin,//一元劵
+      // userCouponCode: this.data.coupon.code || '', //优惠卷
       addressId: this.data.orderInfos.address.id,// 收件地址
-      tokenCoin: this.data.params.tokenCoin,//一元劵
-      userCouponCode: this.data.coupon.code || '', //优惠卷
       message: this.data.remark || '',// 买家留言
       channel: 1,// 渠道 1.小程序 2.APP 3.H5
       source: this.data.formCart ? 1 : 2, // 订单来源
+      submitType: 2, // 提交类型 1：确认订单，2：提交订单
     }
-    API.submitOrder(params).then((res) => {
+    let reqUrl = this.data.submitUrl[this.data.door]
+    API[reqUrl](params).then((res) => {
       let datas = res.data || {}
       Event.emit('getLevel')  
       Event.emit('updateShoppingCart')
@@ -245,16 +265,13 @@ Page({
       this.setData({
         btnDisabled:false
       })
+      this.failBlock(res)
       console.log(res)
     })
   },
-  failBlock(req){
+  failBlock(res){
     let callBack = () => { }
-    if(req.responseObject.code == 10009) { // 超时登录
-      callBack = () => {
-        Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
-      }
-    } else if (req.responseObject.code == 54001) {
+    if(res.code == 54001) {
       if (this.data.formCart) {
         callBack = () => {
           Event.emit('updateShoppingCart')
@@ -266,7 +283,7 @@ Page({
         }
       }
     }
-    Tool.showAlert(req.responseObject.msg, callBack)
+    Tool.showAlert(res.msg, callBack)
   },
   iconClicked(){ // 点击使用1元劵跳转
     let useOneCoinNum = this.data.useOneCoinNum ? this.data.useOneCoinNum : Math.floor(this.data.orderInfos.payAmount)
@@ -293,7 +310,7 @@ Page({
     return productIds
   },
   availableDiscountCouponForProduct() { // 产品可用优惠劵列表
-    // if (this.data.door != 99&&this.data.door != 5) return
+    if (this.data.door != 99&&this.data.door != 5) return
     let productIds = this.getCouponProductPriceIds()
     let params = {
       productPriceIds: productIds,

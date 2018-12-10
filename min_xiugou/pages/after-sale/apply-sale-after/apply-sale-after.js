@@ -127,6 +127,11 @@ Page({
       applyRefundAmount: applyRefundAmount
     })
   },
+  changeApplyAmount(e){
+    this.setData({
+      applyRefundAmount:e.detail.value || 0
+    })
+  },
   findOrderProductInfo(){
     API.afterSaleOrderDetail({
       orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || ''
@@ -143,7 +148,8 @@ Page({
         data.createTime = Tool.formatTime(data.createTime)
       }
       this.setData({
-        orderInfos: data
+        orderInfos: data,
+        applyRefundAmount:data.payAmount
       })
     }).catch((res) => {
       console.log(res)
@@ -193,8 +199,8 @@ Page({
       applyRefundAmount: this.data.applyRefundAmount || '',
       imgList: this.data.originalImg.join(","),
       orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || '',
-      reason:'无',
-      // reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
+      // reason:'无',
+      reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
       description: this.data.remark,
       'type': Number(this.data.refundType)+1,
       serviceNo: this.data.serviceNo || '',

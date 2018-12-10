@@ -59,6 +59,7 @@ Component({
             warehouseOrderDTOList.forEach((item1, index1) => {
               item1.products.forEach((item2) => {
                 showOrderList.push(item2)
+                // console.log('@1@'.replace())
                 item2.specValues = (item2.specValues || '').split('@').join('-')
               })
             })

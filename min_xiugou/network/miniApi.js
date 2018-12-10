@@ -332,6 +332,7 @@ const api = {
       "action": "确认订单",
       "method": "post",
       "encrypt": false,
+      'isShowErrMsg': false,
     }
   ],
   'submitOrder': [
@@ -340,6 +341,7 @@ const api = {
       "action": "确认订单",
       "method": "post",
       "encrypt": false,
+      'isShowErrMsg': false,
     }
   ],
   'depreciateSubmit': [ // submitType:提交类型 1：确认订单，2：提交订单
@@ -348,6 +350,7 @@ const api = {
       "action": "降价拍-提交订单",
       "method": "post",
       "encrypt": false,
+      'isShowErrMsg': false,
     }
   ],
   'seckillSubmit': [ // submitType:提交类型 1：确认订单，2：提交订单
@@ -356,6 +359,16 @@ const api = {
       "action": "秒杀-提交订单",
       "method": "post",
       "encrypt": false,
+      'isShowErrMsg': false,
+    }
+  ],
+  'giftSubmit': [ // submitType:提交类型 1：确认订单，2：提交订单
+    '/operator/activitypackage/submit',
+    {
+      "action": "秒杀-提交订单",
+      "method": "post",
+      "encrypt": false,
+      'isShowErrMsg': false,
     }
   ],
   'queryOrderPageList': [

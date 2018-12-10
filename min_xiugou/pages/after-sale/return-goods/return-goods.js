@@ -44,7 +44,7 @@ Page({
       let refundAddress = datas.refundAddress || {}
       refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
       let orderRefundExpress = datas.orderRefundExpress || {}
-      if (status>1 && !orderRefundExpress.expressNo) {
+      if (status > 1 && !orderRefundExpress.expressNo && status < 6) {
         datas.countDownSeconds = Math.floor((datas.cancelTime-datas.nowTime)/1000)
         // console.log(datas.cancelTime,datas.nowTime)
         this.countdown(this)

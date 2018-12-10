@@ -107,7 +107,6 @@ Page({
     },
     wxPay(payList) { //微信支付
       payList = JSON.parse(payList)
-      console.log(payList)
       let that = this
       wx.requestPayment({
         'timeStamp': payList.timeStamp,
