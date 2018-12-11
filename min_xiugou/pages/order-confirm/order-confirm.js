@@ -116,7 +116,7 @@ Page({
         item.address.addressInfo = userAdress.province + userAdress.city + userAdress.area + userAdress.address
         item.address.hasData = userAdress.receiver? true : false
       }
-      console.log(userAdress)
+      // console.log(userAdress)
       //渲染产品信息列表
       let showProduct =[]
       let canUseTokenCoin = false, canUseCoupon = false
@@ -169,9 +169,6 @@ Page({
         canUseCoupon: canUseCoupon,
         canUseTokenCoin: canUseTokenCoin
       })
-      // if (this.data.useOneCoinNum>0){
-      //   this.getTokenCoin()
-      // }
     }).catch((res) => {
       this.failBlock(res)
       console.log(res)

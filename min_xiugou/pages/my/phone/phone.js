@@ -67,7 +67,6 @@ Page({
     //   this.cancel();
     // }
     // Tool.showErrMsg(r)
-    // r.addToQueue();
   },
   // 取消
   cancel() {
@@ -113,7 +112,6 @@ Page({
       //   })
       // };
       // Tool.showErrMsg(r)
-      // r.addToQueue();
     }
     Tool.codeEnable(this, callBack)
   },

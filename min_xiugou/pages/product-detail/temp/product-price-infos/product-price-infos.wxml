@@ -1,6 +1,7 @@
 <template name="product-info">
   <view class='prd-info boxSize'>
     <view class='prd-name ellipsis-2'>{{productInfo.name}}</view>
+    <view class='font-26 gray secondName'>{{productInfo.secondName || ''}}</view>
     <view class='flexR-sb'>
       <view>
         <view class='price' wx:if='{{showPrice}}'>

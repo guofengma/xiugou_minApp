@@ -48,10 +48,6 @@ Page({
         datas.countDownSeconds = Math.floor((datas.cancelTime-datas.nowTime)/1000)
         // console.log(datas.cancelTime,datas.nowTime)
         this.countdown(this)
-        // if (!datas.expressNo) {
-        //   datas.endTime = Tool.formatTime(datas.cancelTime)
-        //   time = setInterval(function () { Tool.getDistanceTime(datas.endTime, self); }, 1000);
-        // }
       }
       let expressNo = this.data.expressNo
       if (orderRefundExpress.expressCode) {
@@ -74,8 +70,8 @@ Page({
       that.findReturnProductById(that.data.serviceNo)
       return
     }
+    that.data.datas.countDownSeconds--
     let time = setTimeout(function () {
-      that.data.datas.countDownSeconds--
       that.countdown(that);
     }, 1000)
     that.setData({

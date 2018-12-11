@@ -27,6 +27,9 @@
     color: #999;
     /* margin-right: 20rpx */
 }
+.region{
+  width: 80% !important;
+}
 .region text{
   display: inline-block;
   width: calc(100% - 40rpx);

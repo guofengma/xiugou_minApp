@@ -70,7 +70,7 @@ Page({
         warehouseOrderDTOList.forEach((item, index) => {
           item.products.forEach((item1) => {
             showProducts.push(item1)
-            item1.specValues = (item1.specValues || '').split('@').join('-')
+            // item1.specValues = (item1.specValues || '').split('@').join('-')
           })
         })
         let showPriceList = ''
@@ -98,7 +98,7 @@ Page({
         }
         let expressList = this.getExpressList()
         if (expressList.length == 1) {
-          this.getDelivery(expressList.expressList[0].expressNo)
+          this.getDelivery(expressList.expressList[0].expNO)
         } else if (expressList.length > 1) {
           let state = this.orderState(showOutStatus)
           state.info = `该订单已拆成${expressList.length}个包裹发出，点击“查看物流”可查看详情`
@@ -420,11 +420,6 @@ Page({
     productClicked(e){
       let id = e.currentTarget.dataset.productid
       Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + id)
-      // if (this.data.detail.orderType == 5 || this.data.detail.orderType==98 ){
-      //   Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.detail.orderProductList[0].activityCode)
-      // } else {
-        
-      // }
     },
     orderRefund(){
       Tool.showAlert('目前只支持单件商品退款，请进行单件退款操作~')
@@ -435,12 +430,12 @@ Page({
         Storage.setExpressInfo(express.expressList)
         Tool.navigateTo('/pages/logistics/logistics-list/logistics-list')
       } else if (express.length == 1) {
-        Tool.navigateTo('/pages/logistics/logistics?id=' + express.expressList[0].expressNo)
+        Tool.navigateTo('/pages/logistics/logistics?id=' + express.expressList[0].expNO)
       } 
     },
     getExpressList(){
       let warehouseOrderDTOList = this.data.detail.warehouseOrderDTOList || [];
-      let expressList = warehouseOrderDTOList[0].expressList || []
+      let expressList = warehouseOrderDTOList[0].expList || []
       return { length: expressList.length, expressList}
     },
     // logisticsClicked(){

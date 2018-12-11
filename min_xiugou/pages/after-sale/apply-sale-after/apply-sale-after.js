@@ -176,10 +176,10 @@ Page({
     
   },
   orderRefund(){
-    // if (this.data.activeIndex===''){
-    //   Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
-    //   return
-    // }
+    if (this.data.activeIndex===''){
+      Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
+      return
+    }
     // if (this.data.refundType == 2 && Tool.isEmptyStr(this.data.remark)){
     //   Tool.showAlert(this.data.reason[this.data.refundType].placeholder)
     //   return

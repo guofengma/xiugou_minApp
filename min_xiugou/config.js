@@ -7,7 +7,7 @@ const config = {
   h5webUrl: 'https://testh5.sharegoodsmall.com',
   // baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
   // h5webUrl: 'http://devh5.sharegoodsmall.com',
-  baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
+  // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
   // baseUrl: 'http://172.16.10.42:4090/gateway',  // 蒋
   // baseUrl: 'http://172.16.10.29:8903/gateway',  // 周
   // baseUrl:'http://172.16.10.238:8903/gateway',  // 高
@@ -20,7 +20,7 @@ const config = {
   // baseUrl: 'http://172.16.10.151:9090/gateway',  // 李俊
   // baseUrl: 'http://zhifu.dnvhot.tech', // 吴
   // baseUrl: 'http://172.16.10.21:8080/gateway', // 申
-  // baseUrl: 'http://172.16.10.158:18096/gateway', // 杨飞
+  baseUrl: 'http://172.16.10.158:18096/gateway', // 杨飞
   // baseUrl: 'http://172.16.10.192:18080/gateway', //
   // baseUrl: 'http://172.16.10.177:9090/gateway', // 龚日红
   // baseUrl: 'http://172.16.10.164:8903/gateway', // 顾嘉豪

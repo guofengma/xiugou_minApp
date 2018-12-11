@@ -1,4 +1,4 @@
-let { Tool, API, Storage, Event, Operation } = global;
+let { Tool, API, Storage, Event } = global;
 Component({
   properties: {
     num:Number,
@@ -43,7 +43,6 @@ Component({
         status: index || '',
         keywords: this.properties.condition || '', // 关键字
       }
-      // let reqName = this.properties.condition ? "searchOrder" :"queryOrderPageList"
       API.queryOrderPageList(params).then((res) => {
         let datas = res.data || {}
         let secondMap = new Map()
@@ -59,8 +58,6 @@ Component({
             warehouseOrderDTOList.forEach((item1, index1) => {
               item1.products.forEach((item2) => {
                 showOrderList.push(item2)
-                // console.log('@1@'.replace())
-                item2.specValues = (item2.specValues || '').split('@').join('-')
               })
             })
             orderInfoArr.push({
@@ -72,14 +69,12 @@ Component({
               showProducts: showOrderList,
               showName: '平台级订单'
             })
-            // let now = Tool.timeStringForDate(new Date(), "YYYY-MM-DD HH:mm:ss");
             secondMap.set(key, 1);
           } else {
             warehouseOrderDTOList.forEach((item1, index1) => {
               let showNum =0
               item1.products.forEach((item2) => {
                 showNum += item2.quantity
-                item2.specValues = (item2.specValues || '').split('@').join('-')
               })
               orderInfoArr.push({
                 ...item,
@@ -322,10 +317,9 @@ Component({
       time: time
     })
   },
-    
-    onUnload(){
-      clearTimeout(this.data.time);
-    },
+  onUnload(){
+    clearTimeout(this.data.time);
+  },
   },
   ready: function () {
     //this.getData(this.properties.num);

@@ -120,8 +120,8 @@ Page({
       that.findReturnProductById(that.data.serviceNo)
       return
     }
+    that.data.datas.countDownSeconds--
     let time = setTimeout(function () {
-      that.data.datas.countDownSeconds--
       that.countdown(that);
     }, 1000)
     that.setData({
