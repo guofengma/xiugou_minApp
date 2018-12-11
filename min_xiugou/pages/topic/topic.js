@@ -38,9 +38,9 @@ Page({
     } else if (prdType==3){
       Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + code + '&door=1')
     } else if(prdType == 2){
-      Tool.navigateTo('/pages/discount-detail/discount-detail?code=' + code)
+      Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + code)
     } else if(prdType == 1) {
-      Tool.navigateTo('/pages/seckill-detail/seckill-detail?code=' + code)
+      Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code=' + code)
     }
   },
   // 获取专题信息列表
