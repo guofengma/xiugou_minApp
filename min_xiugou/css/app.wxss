@@ -217,6 +217,7 @@ button::after{
   bottom: 0;
   width: 100%;
   z-index: 999;
+  left: 0;
 }
 .fixed-bottom-iPhoneX{
   position: fixed;
@@ -227,6 +228,7 @@ button::after{
 .fixed-top{
   position: fixed;
   top: 0;
+  left:0;
   width: 100%;
   z-index: 999;
 }
