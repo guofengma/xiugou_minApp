@@ -55,6 +55,14 @@ const api = {
       "encrypt": false,// 是否加签
     }
   ],
+  'updateDealerPassword': [
+    '/user/updateLoginPassword',
+    {
+      "action": "修改密码",
+      "method": "post",
+      "encrypt": false,// 是否加签
+    }
+  ],
   'queryDictionaryDetailsType': [
     '/config/sysDictionary/queryDictionaryTypeList',
     {
@@ -531,6 +539,17 @@ const api = {
       "action": "获取帮助次数",
       "method": "get",
       "encrypt": false,
+    }
+  ],
+  /**********  获取省市区 *******************/
+  'queryAreaList': [
+    '/config/sysArea/queryAreaList',
+    {
+      "action": "获取省市区",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+      'isShowLoading': false,
     }
   ],
 }

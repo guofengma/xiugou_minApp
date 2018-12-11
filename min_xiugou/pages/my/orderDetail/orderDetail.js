@@ -313,10 +313,10 @@ Page({
       let now = detail.warehouseOrderDTOList[0].nowTime
       this.data.showProducts.forEach((item,index)=>{
         let middle = ''
-        let orderCustomerServiceInfo = item.orderCustomerServiceInfo || {}
-        let innerState = orderCustomerServiceInfo.status // 子订单状态
-        let returnType = orderCustomerServiceInfo.type
-        let finishTime = orderCustomerServiceInfo.finishTime
+        let orderCustomerServiceInfo = item.orderCustomerServiceInfoDTO || {}
+        let innerState = orderCustomerServiceInfo.status || ''// 子订单状态
+        let returnType = orderCustomerServiceInfo.type || '' // 退款类型
+        // let finishTime = orderCustomerServiceInfo.finishTime 
         // 不支持的售后种类
         // let arr = Tool.bitOperation(this.data.afterSaleTypeArr, item.restrictions)
         // 支持的售后种类
@@ -343,9 +343,9 @@ Page({
           //   }
           // }
         }
-        if (innerState<=4) {
-          let arr = ["退款中",'退货中','换货中']
-          middle = { id: 3, inner: innerState, content: arr[returnType-1],returnType: returnType } 
+        if (innerState>=1 && innerState<=4) {
+          let arr = ['其他售后',"退款中",'退货中','换货中']
+          middle = { id: 3, inner: innerState, content: arr[returnType],returnType: returnType } 
           // state.isHiddenComfirmBtn = true
         }
 
@@ -393,17 +393,17 @@ Page({
       let orderCustomerServiceInfoDTO =list.orderCustomerServiceInfoDTO || {}
       let returnType = orderCustomerServiceInfoDTO.type || ''
       let serviceNo = orderCustomerServiceInfoDTO.serviceNo || ''
+      let innerStatus = orderCustomerServiceInfoDTO.status || ''
       // let returnProductStatus = list.returnProductStatus
       let params = "?serviceNo=" + serviceNo
-      if (returnType == 1) {
-
+      if (returnType == 1 && innerStatus!=6) {
         page = '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail'
 
-      } else if (returnType == 2) {
+      } else if (returnType == 2 && innerStatus != 6) {
 
         page = '/pages/after-sale/return-goods/return-goods'
 
-      } else if (returnType == 3) {
+      } else if (returnType == 3 && innerStatus != 6) {
 
         page = '/pages/after-sale/exchange-goods/exchange-goods'
 
@@ -426,8 +426,11 @@ Page({
     },
     seeLogistics(e){
       let express = this.getExpressList()
-      if (express.length > 1) {
-        Storage.setExpressInfo(express.expressList)
+      if (express.length >1) {
+        Storage.setExpressInfo({
+          send: express.expressList,
+          unSend: express.unSendProductInfoList
+        })
         Tool.navigateTo('/pages/logistics/logistics-list/logistics-list')
       } else if (express.length == 1) {
         Tool.navigateTo('/pages/logistics/logistics?id=' + express.expressList[0].expNO)
@@ -436,7 +439,8 @@ Page({
     getExpressList(){
       let warehouseOrderDTOList = this.data.detail.warehouseOrderDTOList || [];
       let expressList = warehouseOrderDTOList[0].expList || []
-      return { length: expressList.length, expressList}
+      let unSendProductInfoList = warehouseOrderDTOList[0].unSendProductInfoList || []
+      return { length: expressList.length, expressList, unSendProductInfoList}
     },
     // logisticsClicked(){
     //   // 跳转查看物流信息

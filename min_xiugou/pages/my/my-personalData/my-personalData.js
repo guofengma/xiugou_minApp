@@ -77,7 +77,6 @@ Page({
       }).catch((res) => {
         console.log(res)
       });
-      let r = RequestFactory.wxRequest(params);
     },
     onUnload: function () {
       Event.off('refreshMemberInfoNotice', this.refreshMemberInfoNotice);

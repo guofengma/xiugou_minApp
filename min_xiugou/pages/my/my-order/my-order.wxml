@@ -19,7 +19,7 @@
               <view class="{{num==4?'active red':''}}" bindtap="getList" data-index="4">已完成</view>
           </view>
         </view>
-        <my-order-list id='orderList' num="{{num}}"
+        <my-order-list id='orderList' num="{{num}}"  bind:isAjax="isChange" 
           
         />
     </view>

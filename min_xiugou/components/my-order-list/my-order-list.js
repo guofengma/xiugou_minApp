@@ -20,6 +20,7 @@ Component({
     key: 0,
     time:"",
     returnTypeArr:['','退款','退货','换货'],
+    isAjax:false,
   },
   methods: {
     //获取列表数据
@@ -113,8 +114,10 @@ Component({
           secondArry: secondMap,
           key: key
         });
+        this.triggerEvent('isAjax');
         console.log(this.data.list)
       }).catch((res) => {
+        this.triggerEvent('isAjax');
         console.log(res)
       })
       
@@ -161,13 +164,18 @@ Component({
     //跳到物流页面
     logistics(e) {
       let index = e.currentTarget.dataset.index
-      let expressList = this.data.list[index].showWarehouseInfo.expressList || []
+      let expressList = this.data.list[index].showWarehouseInfo.expList || []
+      let unSendProductInfoList = this.data.list[index].showWarehouseInfo.unSendProductInfoList || []
       if (expressList.length>1){
         console.log('多物流')
-        Storage.setExpressInfo(expressList)
+        // Storage.setExpressInfo(expressList)
+        Storage.setExpressInfo({
+          send: expressList,
+          unSend: unSendProductInfoList
+        })
         Tool.navigateTo('/pages/logistics/logistics-list/logistics-list')
       } else if (expressList.length== 1){
-        Tool.navigateTo('/pages/logistics/logistics?id=' + expressList[0].expressNo)
+        Tool.navigateTo('/pages/logistics/logistics?id=' + expressList[0].expNO)
       } 
     },
     //删除订单

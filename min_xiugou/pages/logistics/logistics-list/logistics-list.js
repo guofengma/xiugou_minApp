@@ -4,8 +4,13 @@ Page({
     hasExpress:true
   },
   onLoad: function (options) {
+    let datas = Storage.getExpressInfo() || {}
+    let sendNum = datas.send.length
+    let unSendNum = datas.unSend.length>1? 1:0
     this.setData({
-      datas: Storage.getExpressInfo()
+      datas: Storage.getExpressInfo(),
+      sendNum: sendNum,
+      unSendNum: unSendNum
     })
   },
   expressClicked(e){

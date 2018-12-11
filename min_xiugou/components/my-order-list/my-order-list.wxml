@@ -61,6 +61,7 @@
           {{item.countDownTime}}
         </view>
         <view class="right" wx:if="{{ item.showStatus!=1 && item.showStatus!=2 && item.showStatus!=3 }}">
+        <!-- <view class="cancel-btn" bindtap="logistics" data-index='{{index}}'>查看物流</view> -->
           <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.showOrderNo}}" data-status="{{item.showStatus}}">删除订单</view>
           <view class="pay-btn red" bindtap='continueBuy' data-index='{{index}}'>再次购买</view>
         </view>

@@ -1,18 +1,24 @@
 <import src='/components/cell-line/cell-line.wxml'/>
 <import src='/components/after-sale-prd-info/after-sale-prd-info.wxml'/>
 <view class='tips redBg font-24 flexR'>
-  {{datas.length}}个包裹已发出
+  {{sendNum}}个包裹已发出
 </view>
 <view class='flexR font-24 tips-num gray-9'>
   <view class='line'></view>
-  <text>以下商品被拆分成{{datas.length}}个包裹</text>
+  <text>以下商品被拆分成{{sendNum+unSendNum}}个包裹</text>
   <view class='line'></view>
 </view>
-<view wx:for='{{datas}}' class='express' catchtap='expressClicked' data-id='{{item.expressNo}}' wx:key='{{index}}'>
+<view wx:for='{{datas.send}}' class='express' catchtap='expressClicked' data-id='{{item.expNO}}' wx:key='{{index}}'>
   <view>
-    <template wx:if='{{item.expressNo}}' is="cell-line" data="{{name:item.expressName+'：'+item.expressNo,placeholder:' '}}"/>
-    <view wx:else class='gray-9 font-24 flexR-sb whiteBg cell-line-view '>订单处理中。。。</view>
+    <template is="cell-line" data="{{name:item.expName+'：'+item.expNO,placeholder:' '}}"/>
+    <!-- <view wx:else class='gray-9 font-24 flexR-sb whiteBg cell-line-view '>订单处理中。。。</view> -->
   </view>
+  <view wx:for='{{item.list}}' wx:for-item="list" wx:for-index='{{key}}' wx:key='{{key}}'>
+    <template is="after-sale-prd-info" data="{{...list}}"/>
+  </view>
+</view>
+<view wx:if='{{datas.unSend.length>0}}' class='gray-9 font-24 flexR-sb whiteBg cell-line-view '>订单处理中。。。</view>
+<view wx:for='{{datas.unSend}}' wx:key='{{index}}'>
   <view>
     <template is="after-sale-prd-info" data="{{...item}}"/>
   </view>
