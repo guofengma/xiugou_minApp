@@ -6,7 +6,7 @@ Page({
   onLoad: function (options) {
     let datas = Storage.getExpressInfo() || {}
     let sendNum = datas.send.length
-    let unSendNum = datas.unSend.length>1? 1:0
+    let unSendNum = datas.unSend.length>=1? 1:0
     this.setData({
       datas: Storage.getExpressInfo(),
       sendNum: sendNum,

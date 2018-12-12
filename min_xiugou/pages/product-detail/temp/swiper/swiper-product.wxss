@@ -52,3 +52,12 @@
 .cart-label{
   right: 0;
 }
+.tips-product{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 40rpx;
+  color: #fff;
+  background: rgba(240, 0, 80, 0.8)
+}

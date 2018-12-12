@@ -161,6 +161,7 @@ Page({
       data.forEach((item, index) => {
         item.isTouchMove = false  //是否移动 
         item.showImg = item.imgUrl
+        // item.statusImg = this.data.statusImg[]
         item.stock = item.stock || 0
         item.showPrice = item.price
         item.showName = item.productName
@@ -253,7 +254,7 @@ Page({
         // let list = { "price_id": items[i].id, "num": items[i].showCount }
         
         orderProducts.push({
-          num: items[i].showCount,
+          quantity: items[i].showCount,
           skuCode: items[i].skuCode,
           productCode: items[i].productCode
         })
@@ -382,8 +383,8 @@ Page({
       return
     }
     Storage.setSubmitOrderList({
-      orderProducts: this.data.selectList,
-      orderType: 99
+      orderProductList: this.data.selectList,
+      orderType: 1
     })
     Tool.navigateTo(`/pages/order-confirm/order-confirm?type=99&formCart=${true}`)
   },

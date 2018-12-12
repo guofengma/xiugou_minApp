@@ -47,7 +47,7 @@
 <!--换货信息  -->
 
 <view class='exchange-info font-26 '>
-  <view class='flexR-sb after-sale-line gray'>换货订单</view>
+  <view class='flexR-sb after-sale-line gray'>换货信息</view>
   <template is="after-sale-prd-info" data="{{...datas}}"/>
   <view class='exchange-content whiteBg gray'>
     <view>更换型号： {{datas.specValues}}</view>

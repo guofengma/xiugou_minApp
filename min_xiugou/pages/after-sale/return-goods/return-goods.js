@@ -42,7 +42,7 @@ Page({
       let status = datas.status
       datas.createTime = Tool.formatTime(datas.createTime)
       let refundAddress = datas.refundAddress || {}
-      refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
+      refundAddress.addressInfo = (refundAddress.province || '') + (refundAddress.city || "" ) + (refundAddress.area || "")+ ( refundAddress.address || "")
       let orderRefundExpress = datas.orderRefundExpress || {}
       if (status > 1 && !orderRefundExpress.expressNo && status < 6) {
         datas.countDownSeconds = Math.floor((datas.cancelTime-datas.nowTime)/1000)

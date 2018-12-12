@@ -125,6 +125,7 @@ Page({
       priceList: this.data.productInfo[index].skuList,
       selectPrice: price,
       isInit:false,
+      productStatus: this.data.productInfo[index].productStatus,
       imgUrl: imgurl
     })
     this.selectComponent("#prd-info-type").isVisiableClicked()

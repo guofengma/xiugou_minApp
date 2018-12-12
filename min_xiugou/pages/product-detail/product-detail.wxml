@@ -15,7 +15,7 @@
     <!--topbar  -->
     <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'  size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}'/>
     <!-- 轮播 -->
-    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}'/>
+    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}' advanceSale='{{advanceSale}}'/>
     <!-- 活动产品倒计时提示 -->
     <view wx:if='{{proNavData}}' catchtap='goPage'>
       <product-promotion-info 
@@ -90,7 +90,8 @@
     price = '{{productInfo.price}}'
     priceList='{{priceList}}' 
     bind:counterInputOnChange='counterInputOnChange' 
-    imgUrl="{{productInfo.imgUrl}}" 
+    imgUrl="{{productInfo.imgUrl}}"
+    productStatus='{{productInfo.productStatus}}'
     showImgs='{{true}}'
     isInit="{{isInit}}" 
     bind:hiddenTips='hiddenTips'

@@ -25,10 +25,16 @@ export default class ProductFactorys  {
       })
       datas.content = datas.content || ''
       datas.showContent = datas.content.split(',')
+      let advanceSale = {
+        isAdvanceSale: datas.productStatus==3? true:false,
+        status: datas.productStatus,
+        time: Tool.formatTime(datas.upTime || "")
+      }
       this.page.setData({
         isInit: false,
         imgUrls: imgUrls,
         productInfo: datas,
+        advanceSale: advanceSale,
         // productInfoList: datas,
         priceList: datas.skuList, // 价格表
         productSpec: datas.specifyList, // 规格描述
@@ -106,6 +112,7 @@ export default class ProductFactorys  {
       productCode: this.page.data.selectType.prodCode,
       amount: this.page.data.selectType.buyCount,
       skuCode: this.page.data.selectType.skuCode,
+      status: this.page.data.selectType.productStatus,
       timestamp: new Date().getTime(),
     }
     // 加入购物车

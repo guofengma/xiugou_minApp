@@ -166,17 +166,15 @@ Component({
       let index = e.currentTarget.dataset.index
       let expressList = this.data.list[index].showWarehouseInfo.expList || []
       let unSendProductInfoList = this.data.list[index].showWarehouseInfo.unSendProductInfoList || []
-      if (expressList.length>1){
-        console.log('多物流')
-        // Storage.setExpressInfo(expressList)
+      if (expressList.length == 1 && unSendProductInfoList.length == 0) {
+        Tool.navigateTo('/pages/logistics/logistics?id=' + expressList[0].expNO)
+      } else if (expressList.length > 1) {
         Storage.setExpressInfo({
           send: expressList,
           unSend: unSendProductInfoList
         })
         Tool.navigateTo('/pages/logistics/logistics-list/logistics-list')
-      } else if (expressList.length== 1){
-        Tool.navigateTo('/pages/logistics/logistics?id=' + expressList[0].expNO)
-      } 
+      }
     },
     //删除订单
     deleteItem(e) {

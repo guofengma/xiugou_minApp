@@ -16,7 +16,8 @@
         <view class='header-content font-30'>
           <view class='price red' wx:if='{{commodityType==2 || commodityType ==3}}'>¥ {{price}}</view>
           <view class='price red' wx:else>¥ {{selectPrdList.price || price}}</view>
-          <view>库存{{selectPrdList.sellStock || totalStock}}件</view>
+          <view wx:if='{{commodityType==2 || commodityType==3}}'>库存{{surplusNumber}}件</view>
+          <view wx:else>库存{{selectPrdList.sellStock || totalStock}}件</view>
           <view class='tips ellipsis'>{{tips}}</view>
         </view>
       </view>

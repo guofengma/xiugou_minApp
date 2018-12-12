@@ -117,7 +117,7 @@
           <view>创建时间：{{detail.warehouseOrderDTOList[0].showCreateTime}}</view>
           <view>支付交易号：{{detail.warehouseOrderDTOList[0].outTradeNo}}</view>
           <view wx:if='{{status==4 || status==2 || status==3}}'>付款时间：{{detail.warehouseOrderDTOList[0].showPayTime}}</view>
-          <view wx:if='{{detail.sendTime}}'>发货时间：{{detail.warehouseOrderDTOList[0].deliverTime}}</view>
+          <view wx:if='{{status==4 || status==3}}'>发货时间：{{detail.warehouseOrderDTOList[0].deliverTime}}</view>
           <view wx:if='{{status==4}}'>成交时间：{{detail.warehouseOrderDTOList[0].showFinishTime}}</view>
           <view wx:if='{{status==5}}'>关闭时间：{{detail.warehouseOrderDTOList[0].showCancelTime}}</view>
           <!-- <view wx:if='{{status==8}}'>关闭时间：{{detail.showShutOffTime}}</view> -->
