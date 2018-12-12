@@ -48,16 +48,24 @@ Page({
       this.selectComponent("#prd-info-type").isVisiableClicked()
       return
     }
+    let orderProductList = []
+    this.data.selectType.priceList.forEach((item)=>{
+      orderProductList.push({
+        skuCode: item.skuCode
+      })
+    })
     let params = {
-      orderProductList: [{
-        num:1,
-        priceId: this.data.productInfo.id,
-        productId: this.data.productInfo.id,
-        priceList: this.data.selectType.priceList
-      }],
+      orderProductList: orderProductList,
+      quantity:1,
+      // orderProductList: [{
+      //   num:1,
+      //   priceId: this.data.productInfo.id,
+      //   productId: this.data.productInfo.id,
+      //   priceList: this.data.selectType.priceList
+      // }],
       orderType: 2,
       orderSubType: this.data.productInfo.type==2? 3:4, // 3升级礼包 4 普通礼包
-      packageCode: this.data.productInfo.packageCode
+      activityCode: this.data.productInfo.packageCode
     }
     Storage.setSubmitOrderList(params)
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&type=5")

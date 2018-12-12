@@ -57,7 +57,7 @@
     <view>
       <view>凭证图片</view>
       <view class='userImg'>
-         <block wx:for='{{showImgList}}' wx:key='unique'>
+         <block wx:for='{{datas.showImgList}}' wx:key='unique'>
           <image src='{{item}}'></image>
         </block>
       </view>

@@ -47,25 +47,10 @@ Page({
       verificationCode: this.data.code,
       phone: this.data.userInfos.phone,
     }).then((res) => {
+      // Tool.redirectTo('/pages/my/phone/phone?phone=' + this.data.userInfos.phone)
       Tool.navigateTo('/pages/my/phone/phone?phone=' + this.data.userInfos.phone + '&code=' + this.data.code)
     }).catch((res) => {
       console.log(res)
     });
-    // let params = {
-    //   verificationCode: this.data.code,
-    //   phone: this.data.userInfos.phone,
-    //   reqName:'验证旧手机验证码是否正确',
-    //   url: Operation.updateDealerPhoneById
-    // }
-    // let r = RequestFactory.wxRequest(params);
-    // r.successBlock = (req) => {
-    //   // Tool.redirectTo('/pages/my/phone/phone?phone=' + this.data.userInfos.phone)
-    //   Tool.navigateTo('/pages/my/phone/phone?phone=' + this.data.userInfos.phone + '&code=' + this.data.code)
-    // };
-    // r.failBlock = (req) => {
-    //   Tool.showAlert(req.responseObject.msg)
-    // }
-    // Tool.showErrMsg(r)
-    // r.addToQueue();
   }
 })

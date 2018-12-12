@@ -1,4 +1,4 @@
-let { Tool, API, Storage, Event, Operation } = global;
+let { Tool, API, Storage, Event } = global;
 Component({
   properties: {
     num:Number,
@@ -20,6 +20,7 @@ Component({
     key: 0,
     time:"",
     returnTypeArr:['','退款','退货','换货'],
+    isAjax:false,
   },
   methods: {
     //获取列表数据
@@ -43,7 +44,6 @@ Component({
         status: index || '',
         keywords: this.properties.condition || '', // 关键字
       }
-      // let reqName = this.properties.condition ? "searchOrder" :"queryOrderPageList"
       API.queryOrderPageList(params).then((res) => {
         let datas = res.data || {}
         let secondMap = new Map()
@@ -59,7 +59,6 @@ Component({
             warehouseOrderDTOList.forEach((item1, index1) => {
               item1.products.forEach((item2) => {
                 showOrderList.push(item2)
-                item2.specValues = (item2.specValues || '').split('@').join('-')
               })
             })
             orderInfoArr.push({
@@ -71,14 +70,12 @@ Component({
               showProducts: showOrderList,
               showName: '平台级订单'
             })
-            // let now = Tool.timeStringForDate(new Date(), "YYYY-MM-DD HH:mm:ss");
             secondMap.set(key, 1);
           } else {
             warehouseOrderDTOList.forEach((item1, index1) => {
               let showNum =0
               item1.products.forEach((item2) => {
                 showNum += item2.quantity
-                item2.specValues = (item2.specValues || '').split('@').join('-')
               })
               orderInfoArr.push({
                 ...item,
@@ -117,8 +114,10 @@ Component({
           secondArry: secondMap,
           key: key
         });
+        this.triggerEvent('isAjax');
         console.log(this.data.list)
       }).catch((res) => {
+        this.triggerEvent('isAjax');
         console.log(res)
       })
       
@@ -165,13 +164,18 @@ Component({
     //跳到物流页面
     logistics(e) {
       let index = e.currentTarget.dataset.index
-      let expressList = this.data.list[index].showWarehouseInfo.expressList || []
+      let expressList = this.data.list[index].showWarehouseInfo.expList || []
+      let unSendProductInfoList = this.data.list[index].showWarehouseInfo.unSendProductInfoList || []
       if (expressList.length>1){
         console.log('多物流')
-        Storage.setExpressInfo(expressList)
+        // Storage.setExpressInfo(expressList)
+        Storage.setExpressInfo({
+          send: expressList,
+          unSend: unSendProductInfoList
+        })
         Tool.navigateTo('/pages/logistics/logistics-list/logistics-list')
       } else if (expressList.length== 1){
-        Tool.navigateTo('/pages/logistics/logistics?id=' + expressList[0].expressNo)
+        Tool.navigateTo('/pages/logistics/logistics?id=' + expressList[0].expNO)
       } 
     },
     //删除订单
@@ -321,10 +325,9 @@ Component({
       time: time
     })
   },
-    
-    onUnload(){
-      clearTimeout(this.data.time);
-    },
+  onUnload(){
+    clearTimeout(this.data.time);
+  },
   },
   ready: function () {
     //this.getData(this.properties.num);

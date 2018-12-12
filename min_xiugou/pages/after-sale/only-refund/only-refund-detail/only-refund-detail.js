@@ -27,9 +27,10 @@ Page({
       if (datas.countDownSeconds){
         this.countdown()
       }
-      let afterSaleInfo = datas.afterSaleInfo || {}
-      let imgList = afterSaleInfo.imgList || ''
-      afterSaleInfo.showImgList = imgList.split(',')
+      // let afterSaleInfo = datas.afterSaleInfo || {}
+      let imgList = datas.imgList || ''
+      datas.showImgList = imgList.split(',')
+      // afterSaleInfo.showImgList = imgList.split(',')
       this.setData({
         datas:datas
       })

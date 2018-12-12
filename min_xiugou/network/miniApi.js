@@ -55,6 +55,14 @@ const api = {
       "encrypt": false,// 是否加签
     }
   ],
+  'updateDealerPassword': [
+    '/user/updateLoginPassword',
+    {
+      "action": "修改密码",
+      "method": "post",
+      "encrypt": false,// 是否加签
+    }
+  ],
   'queryDictionaryDetailsType': [
     '/config/sysDictionary/queryDictionaryTypeList',
     {
@@ -332,6 +340,7 @@ const api = {
       "action": "确认订单",
       "method": "post",
       "encrypt": false,
+      'isShowErrMsg': false,
     }
   ],
   'submitOrder': [
@@ -340,6 +349,7 @@ const api = {
       "action": "确认订单",
       "method": "post",
       "encrypt": false,
+      'isShowErrMsg': false,
     }
   ],
   'depreciateSubmit': [ // submitType:提交类型 1：确认订单，2：提交订单
@@ -348,6 +358,7 @@ const api = {
       "action": "降价拍-提交订单",
       "method": "post",
       "encrypt": false,
+      'isShowErrMsg': false,
     }
   ],
   'seckillSubmit': [ // submitType:提交类型 1：确认订单，2：提交订单
@@ -356,6 +367,16 @@ const api = {
       "action": "秒杀-提交订单",
       "method": "post",
       "encrypt": false,
+      'isShowErrMsg': false,
+    }
+  ],
+  'giftSubmit': [ // submitType:提交类型 1：确认订单，2：提交订单
+    '/operator/activitypackage/submit',
+    {
+      "action": "秒杀-提交订单",
+      "method": "post",
+      "encrypt": false,
+      'isShowErrMsg': false,
     }
   ],
   'queryOrderPageList': [
@@ -518,6 +539,17 @@ const api = {
       "action": "获取帮助次数",
       "method": "get",
       "encrypt": false,
+    }
+  ],
+  /**********  获取省市区 *******************/
+  'queryAreaList': [
+    '/config/sysArea/queryAreaList',
+    {
+      "action": "获取省市区",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+      'isShowLoading': false,
     }
   ],
 }

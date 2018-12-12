@@ -2,19 +2,27 @@ let { Tool, Storage, Event} = global;
 Page({
   data: {
     num: 0,
-    disabled:true
+    disabled:true,
+    isAjax:false,
   },
   //获取列表数据
   getList(e) {
+    if(this.data.isAjax) return
     let index = e.currentTarget.dataset.index;
     this.setData({
       num: index,
+      isAjax:true,
     });
     this.selectComponent("#orderList").getList();
   },
   // 上拉加载更多
   onReachBottom() {
     this.selectComponent("#orderList").onReachBottom()
+  },
+  isChange(){
+    this.setData({
+      isAjax: false
+    })
   },
   onLoad: function (options) {
     this.setData({

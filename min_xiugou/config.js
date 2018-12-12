@@ -1,13 +1,13 @@
 // 每次发布要 切换 h5webUrl地址 baseUrl请求地址  rasVersion加签版本
 const config = {
-  rasVersion: '1.0.4.3', //数据加签版本号
+  rasVersion: '1.0.4.5', //数据加签版本号
   rasClient: 'miniapp', // 数据加签端口
   // h5webUrl: 'https://uath5.sharegoodsmall.com',// 市场部内测环境
   // baseUrl: 'https://uatapi.sharegoodsmall.com/gateway',// 市场部内测环境
   h5webUrl: 'https://testh5.sharegoodsmall.com',
-  // baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
+  baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
   // h5webUrl: 'http://devh5.sharegoodsmall.com',
-  baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
+  // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
   // baseUrl: 'http://172.16.10.42:4090/gateway',  // 蒋
   // baseUrl: 'http://172.16.10.29:8903/gateway',  // 周
   // baseUrl:'http://172.16.10.238:8903/gateway',  // 高
@@ -17,12 +17,13 @@ const config = {
   // baseUrl: 'http://172.16.10.19:8903/gateway',  // 吴
   // baseUrl: 'http://172.16.10.88:8903/gateway',  // 陈
   // baseUrl: 'http://172.16.10.111:8903/gateway',  // 王
+  // baseUrl: 'http://172.16.10.151:9090/gateway',  // 李俊
   // baseUrl: 'http://zhifu.dnvhot.tech', // 吴
   // baseUrl: 'http://172.16.10.21:8080/gateway', // 申
   // baseUrl: 'http://172.16.10.158:18096/gateway', // 杨飞
   // baseUrl: 'http://172.16.10.192:18080/gateway', //
-  // baseUrl: 'http://172.16.10.177:18080/gateway', // 龚日红
-  // baseUrl: 'http://172.16.10.164:8903/gateway', // 顾嘉豪
+  // baseUrl: 'http://172.16.10.177:9090/gateway', // 龚日红
+  // baseUrl: 'http://172.16.10.164:9090/gateway', // 顾嘉豪
   wxVersion: 'V2.2.5', // 微信小程序版本
   AppId: 'wxa059b818226f8679',//小程序AppID
   Secret: '9fa19f4d1f7e37d318dba14f951f1b4c',//小程序Secret

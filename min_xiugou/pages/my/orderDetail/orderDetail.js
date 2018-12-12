@@ -70,7 +70,7 @@ Page({
         warehouseOrderDTOList.forEach((item, index) => {
           item.products.forEach((item1) => {
             showProducts.push(item1)
-            item1.specValues = (item1.specValues || '').split('@').join('-')
+            // item1.specValues = (item1.specValues || '').split('@').join('-')
           })
         })
         let showPriceList = ''
@@ -98,7 +98,7 @@ Page({
         }
         let expressList = this.getExpressList()
         if (expressList.length == 1) {
-          this.getDelivery(expressList.expressList[0].expressNo)
+          this.getDelivery(expressList.expressList[0].expNO)
         } else if (expressList.length > 1) {
           let state = this.orderState(showOutStatus)
           state.info = `该订单已拆成${expressList.length}个包裹发出，点击“查看物流”可查看详情`
@@ -313,10 +313,10 @@ Page({
       let now = detail.warehouseOrderDTOList[0].nowTime
       this.data.showProducts.forEach((item,index)=>{
         let middle = ''
-        let orderCustomerServiceInfo = item.orderCustomerServiceInfo || {}
-        let innerState = orderCustomerServiceInfo.status // 子订单状态
-        let returnType = orderCustomerServiceInfo.type
-        let finishTime = orderCustomerServiceInfo.finishTime
+        let orderCustomerServiceInfo = item.orderCustomerServiceInfoDTO || {}
+        let innerState = orderCustomerServiceInfo.status || ''// 子订单状态
+        let returnType = orderCustomerServiceInfo.type || '' // 退款类型
+        // let finishTime = orderCustomerServiceInfo.finishTime 
         // 不支持的售后种类
         // let arr = Tool.bitOperation(this.data.afterSaleTypeArr, item.restrictions)
         // 支持的售后种类
@@ -343,9 +343,9 @@ Page({
           //   }
           // }
         }
-        if (innerState<=4) {
-          let arr = ["退款中",'退货中','换货中']
-          middle = { id: 3, inner: innerState, content: arr[returnType-1],returnType: returnType } 
+        if (innerState>=1 && innerState<=4) {
+          let arr = ['其他售后',"退款中",'退货中','换货中']
+          middle = { id: 3, inner: innerState, content: arr[returnType],returnType: returnType } 
           // state.isHiddenComfirmBtn = true
         }
 
@@ -393,17 +393,17 @@ Page({
       let orderCustomerServiceInfoDTO =list.orderCustomerServiceInfoDTO || {}
       let returnType = orderCustomerServiceInfoDTO.type || ''
       let serviceNo = orderCustomerServiceInfoDTO.serviceNo || ''
+      let innerStatus = orderCustomerServiceInfoDTO.status || ''
       // let returnProductStatus = list.returnProductStatus
       let params = "?serviceNo=" + serviceNo
-      if (returnType == 1) {
-
+      if (returnType == 1 && innerStatus!=6) {
         page = '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail'
 
-      } else if (returnType == 2) {
+      } else if (returnType == 2 && innerStatus != 6) {
 
         page = '/pages/after-sale/return-goods/return-goods'
 
-      } else if (returnType == 3) {
+      } else if (returnType == 3 && innerStatus != 6) {
 
         page = '/pages/after-sale/exchange-goods/exchange-goods'
 
@@ -420,28 +420,27 @@ Page({
     productClicked(e){
       let id = e.currentTarget.dataset.productid
       Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + id)
-      // if (this.data.detail.orderType == 5 || this.data.detail.orderType==98 ){
-      //   Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + this.data.detail.orderProductList[0].activityCode)
-      // } else {
-        
-      // }
     },
     orderRefund(){
       Tool.showAlert('目前只支持单件商品退款，请进行单件退款操作~')
     },
     seeLogistics(e){
       let express = this.getExpressList()
-      if (express.length > 1) {
-        Storage.setExpressInfo(express.expressList)
+      if (express.length >1) {
+        Storage.setExpressInfo({
+          send: express.expressList,
+          unSend: express.unSendProductInfoList
+        })
         Tool.navigateTo('/pages/logistics/logistics-list/logistics-list')
       } else if (express.length == 1) {
-        Tool.navigateTo('/pages/logistics/logistics?id=' + express.expressList[0].expressNo)
+        Tool.navigateTo('/pages/logistics/logistics?id=' + express.expressList[0].expNO)
       } 
     },
     getExpressList(){
       let warehouseOrderDTOList = this.data.detail.warehouseOrderDTOList || [];
-      let expressList = warehouseOrderDTOList[0].expressList || []
-      return { length: expressList.length, expressList}
+      let expressList = warehouseOrderDTOList[0].expList || []
+      let unSendProductInfoList = warehouseOrderDTOList[0].unSendProductInfoList || []
+      return { length: expressList.length, expressList, unSendProductInfoList}
     },
     // logisticsClicked(){
     //   // 跳转查看物流信息

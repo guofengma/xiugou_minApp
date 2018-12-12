@@ -1,5 +1,5 @@
 // pages/my/account.js
-let { Tool, RequestFactory, Event, Storage, Operation } = global;
+let { Tool, API, Event, Storage } = global;
 Page({
     data: {
       userInfos: '',
@@ -65,14 +65,8 @@ Page({
       }
       Tool.uploadImage(1, callBack)
     },
-    updateUserInfo(params, callBack){
-      params = {
-        ...params,
-        reqName: '修改用户信息',
-        url: Operation.updateUserById
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
+    updateUserInfo(params, callBack) { //修改用户信息
+      API.updateUserById(params).then((res) => {
         let infos = Storage.getUserAccountInfo()
         callBack(infos)
         Storage.setUserAccountInfo(infos)
@@ -80,9 +74,9 @@ Page({
         this.setData({
           userInfos: infos
         })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      });
     },
     onUnload: function () {
       Event.off('refreshMemberInfoNotice', this.refreshMemberInfoNotice);

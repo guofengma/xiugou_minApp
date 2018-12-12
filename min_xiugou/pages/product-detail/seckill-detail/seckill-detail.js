@@ -115,8 +115,6 @@ Page({
     let params = {
       activityCode: this.data.prodCode,
       num: this.data.productBuyCount,
-      // orderType: 2,
-      // orderSubType: 2,
     }
     Storage.setSubmitOrderList(params)
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + '&type=' + this.data.door)
