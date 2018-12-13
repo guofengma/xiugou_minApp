@@ -84,6 +84,7 @@ Page({
       params: this.data.params,
     })
     let callBack = (item)=>{
+      console.log(item)
       this.setData({
         coupon: coupon,
         couponClick: false
@@ -175,7 +176,16 @@ Page({
         canUseTokenCoin: canUseTokenCoin
       })
       // 可以使用优惠卷的情况下 请求优惠券
-      if (this.data.canUseCoupon) this.availableDiscountCouponForProduct()
+      if (this.data.canUseCoupon && this.data.params.orderType==1){
+        this.availableDiscountCouponForProduct()
+      } else if (this.data.canUseCoupon && this.data.params.orderType != 1){
+        this.setData({
+          coupon: {
+            id: '',
+            name: "暂无可用优惠劵"
+          }
+        })
+      }
     }).catch((res) => {
       this.failBlock(res)
       console.log(res)
@@ -316,6 +326,7 @@ Page({
     }
     return productIds
   },
+  
   availableDiscountCouponForProduct() { // 产品可用优惠劵列表
     let productIds = this.getCouponProductPriceIds()
     let params = {
@@ -328,8 +339,7 @@ Page({
         this.setData({
           coupon:{
             id:'',
-            name:"暂无可用优惠劵",
-            canClick:true,
+            name:"暂无可用优惠劵"
           }
         })
       }  

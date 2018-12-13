@@ -209,7 +209,7 @@ Page({
     copy(e){
         let that=this;
         wx.setClipboardData({
-            data: that.data.detail.orderNum,
+            data: that.data.orderId,
             success: function(res) {
             }
         });
@@ -373,17 +373,6 @@ Page({
       let list = this.data.showProducts[index]
       list.showCreateTime = this.data.detail.warehouseOrderDTOList[0].showCreateTime
 
-      // 升级礼包不支持售后 售后时间超出等都要给提示
-      if (this.data.detail.orderSubType == 3) {
-        Tool.showAlert('该商品属于升级礼包产品，不存在售后功能')
-        return
-      }else if (list.afterSaleTime < this.data.detail.warehouseOrderDTOList[0].nowTime) {
-        Tool.showAlert('该商品售后已过期')
-        return
-      }
-
-      Storage.setInnerOrderList(list)
-
       // 跳转页面
 
       this.goPage(list, btnTypeId)
@@ -394,8 +383,18 @@ Page({
       let returnType = orderCustomerServiceInfoDTO.type || ''
       let serviceNo = orderCustomerServiceInfoDTO.serviceNo || ''
       let innerStatus = orderCustomerServiceInfoDTO.status || ''
-      // let returnProductStatus = list.returnProductStatus
       let params = "?serviceNo=" + serviceNo
+      // 升级礼包不支持售后 售后时间超出等都要给提示
+      if (this.data.detail.orderSubType == 3) {
+        Tool.showAlert('该商品属于升级礼包产品，不存在售后功能')
+        return
+      } else if (list.afterSaleTime < this.data.detail.warehouseOrderDTOList[0].nowTime && this.data.status > 2 && !(innerStatus < 6 && innerStatus >=1)) {
+        // 当前时间超出售后时间 且 发货的情况下 且 不在售后期间内
+        Tool.showAlert('该商品售后已过期')
+        return
+      }
+
+      Storage.setInnerOrderList(list)
       if (returnType == 1 && innerStatus!=6) {
         page = '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail'
 
@@ -435,15 +434,6 @@ Page({
         })
         Tool.navigateTo('/pages/logistics/logistics-list/logistics-list')
       }
-      // if (express.length > 1 || unSendProductInfoList.length > 1) {
-      //   Storage.setExpressInfo({
-      //     send: express.expressList,
-      //     unSend: express.unSendProductInfoList
-      //   })
-      //   Tool.navigateTo('/pages/logistics/logistics-list/logistics-list')
-      // } else if (express.length == 1) {
-      //   Tool.navigateTo('/pages/logistics/logistics?id=' + express.expressList[0].expNO)
-      // } 
     },
     getExpressList(){
       let warehouseOrderDTOList = this.data.detail.warehouseOrderDTOList || [];
@@ -451,14 +441,6 @@ Page({
       let unSendProductInfoList = warehouseOrderDTOList[0].unSendProductInfoList || []
       return { length: expressList.length, expressList, unSendProductInfoList}
     },
-    // logisticsClicked(){
-    //   // 跳转查看物流信息
-    //   if (this.data.detail.expressNo){
-    //     // let page = '/pages/logistics/logistics?orderId=' + this.data.orderId
-    //     // Tool.navigateTo(page)
-    //     this.seeLogistics()
-    //   }
-    // },
     getDelivery(expressNo) {
       // 查询物流信息最后一条数据
       API.getOrderDeliverInfo({
