@@ -25,9 +25,6 @@
 <template name="product-info-chooseBox">
   <view class='gray'>
     <text class='label red' >服务</text>
-    正品保障·极速发货·<text wx:if='{{productInfo.afterSaleServiceDays>0 || productInfo.aferServiceDays>0}}'>
-      <text wx:if='{{door!=5}}'>{{productInfo.afterSaleServiceDays>30? 30:productInfo.afterSaleServiceDays}}</text>
-      <text wx:else>{{productInfo.aferServiceDays>30? 30:productInfo.aferServiceDays}}</text>天无理由退换货</text>
-    <text wx:else>无售后服务</text>
+    正品保障·极速发货<text wx:if='{{productInfo.afterSaleServiceDays>0&&door!=5}}'>·{{productInfo.afterSaleServiceDays>30? 30:productInfo.afterSaleServiceDays}}天无理由退换货</text><text wx:else>·无售后服务</text>
   </view>
 </template>

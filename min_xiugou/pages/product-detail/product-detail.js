@@ -37,15 +37,20 @@ Page({
     Event.on('didLogin', this.didLogin, this);
   },
   onShow: function () {
-    
+    this.data.isOnshow = true
+    if (this.data.distanceTime <= 0) this.initRequest()
   },
   initRequest(){
     let callBack2 = (datas) => {
       if (datas.productStatus!=0){
         this.activityByProductId(this.data.productCode)
+        if (this.data.productInfo.productStatus == 3) {
+          console.log(111111)
+          this.data.distanceTime = Math.ceil((this.data.productInfo.upTime - this.data.productInfo.now) / 1000)
+          this.countdown(this)
+        }
       }else{
         this.ProductFactory.productDefect()
-        // if(this.data.)
       }
     }
     this.ProductFactory.requestFindProductByIdApp(callBack2)
@@ -177,7 +182,25 @@ Page({
   timeout(){
     this.activityByProductId(this.data.productId)
   },
+  countdown(that) { // 倒计时
+    clearTimeout(that.data.time);
+    if (that.data.distanceTime == 0 && that.data.isOnshow) {
+      that.initRequest()
+      return
+    }
+    that.data.distanceTime--
+    let time = setTimeout(function () {
+      that.countdown(that);
+    }, 1000)
+    this.setData({
+      time: time
+    })
+  },
+  onHide(){
+    this.data.isOnshow = false
+  },
   onUnload: function () {
+    clearInterval(this.data.time)
     Event.off('didLogin', this.didLogin);
   },
 })

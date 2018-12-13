@@ -58,9 +58,9 @@
      <!-- <view class="cancel-btn" bindtap="logistics" data-index='{{index}}'>查看物流</view> -->
     <view class="footer" wx:if='{{item.showStatus!=2}}'>
         <!-- 倒计时  -->
-        <view class="left red ellipsis" wx:if="{{item.showStatus==1}}">
+        <!-- <view class="left red ellipsis" wx:if="{{item.showStatus==1}}">
           {{item.countDownTime}}
-        </view>
+        </view> -->
         <view class="right" wx:if="{{ item.showStatus!=1 && item.showStatus!=2 && item.showStatus!=3 }}">
         <!-- <view class="cancel-btn" bindtap="logistics" data-index='{{index}}'>查看物流</view> -->
           <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.showOrderNo}}" data-status="{{item.showStatus}}">删除订单</view>

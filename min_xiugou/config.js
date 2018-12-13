@@ -9,7 +9,7 @@ const config = {
   // h5webUrl: 'http://devh5.sharegoodsmall.com',
   // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
   // baseUrl: 'http://172.16.10.42:4090/gateway',  // 蒋
-  // baseUrl: 'http://172.16.10.29:8903/gateway',  // 周
+  // baseUrl: 'http://172.16.10.29:9090/gateway',  // 周
   // baseUrl:'http://172.16.10.238:8903/gateway',  // 高
   // baseUrl:'http://172.16.10.56:8903/gateway',  // 沈
   // baseUrl: 'http://172.16.10.41:9090/gateway',  // 张
