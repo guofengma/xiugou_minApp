@@ -9,9 +9,14 @@ Component({
     isInit:Boolean,
     surplusNumber:Number, // 外部传入的库存
     commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包 5 换货
+    disabled: {
+      type: Boolean,
+      value: false
+    },
     exchangeNum:Number, // 换货的数量
     specIds: String,
     productPriceId:Number, // 换货的价格id
+    productStatus:Number,// 产品状态
   },
   data: {
     visiable:false,
@@ -54,7 +59,7 @@ Component({
         }
       })
       stockList.forEach((item)=>{
-        
+        totalStock += item.sellStock
         // 换货的时候 去掉价格不等的清单
         // 可以更换同价格的其他型号 或者 同型号的比购买时候低的同一种型号（同型号的价格低于或者等于购买时的价格）
         // if (this.data.commodityType == 5 && (item.id == this.data.productPriceId || item.price == this.data.price) ){
@@ -63,10 +68,7 @@ Component({
         // 降价拍和秒杀
         if ((this.data.commodityType == 2 || this.data.commodityType == 3) && item.skuCode == this.data.specIds){
           priceList.push(item)
-          totalStock = this.data.surplusNumber
-        } else if (!(this.data.commodityType == 2 || this.data.commodityType == 3)) {
-          totalStock += item.sellStock
-        }
+        } 
       })
       if (priceList.length==0){
         priceList = stockList
@@ -192,6 +194,7 @@ Component({
         this.data.priceList.forEach((item, index) => {
           console.log(item.propertyValues,selectIds)
           if (item.propertyValues == selectIds) {
+            item.productStatus = this.data.productStatus
             this.setData({
               selectPrdList: item
             })

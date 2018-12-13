@@ -1,4 +1,4 @@
-let { Tool, Storage, Event, API } = global
+let { Tool, Storage, Event, API, Config } = global
 
 
 Page({
@@ -10,7 +10,13 @@ Page({
     selectList:[], //选中的产品
     tipVal:'',
     activeType: ["", "秒", "降", "优惠套餐", "助力免费领", "支付有礼", "满减送", "刮刮乐"],
-    ysf: { title: '购物车' }
+    ysf: { title: '购物车' },
+    statusImg:{
+      0: Config.imgBaseUrl +'shixiao-icon.png',
+      1: '',
+      2: Config.imgBaseUrl + 'shixiao-icon.png',
+      3: Config.imgBaseUrl + 'advanxeSale-icon.png',
+    }
   },
   onLoad: function (options) {
     this.getLoginCart()
@@ -161,6 +167,15 @@ Page({
       data.forEach((item, index) => {
         item.isTouchMove = false  //是否移动 
         item.showImg = item.imgUrl
+        item.statusImg = this.data.statusImg[item.status]
+        if (!item.stock) {
+          item.statusImg = this.data.statusImg[0]
+        }
+        if ( !item.stock || item.status == 1 || item.status == 3){
+          item.disabled = false
+        } else {
+          item.disabled = true
+        }
         item.stock = item.stock || 0
         item.showPrice = item.price
         item.showName = item.productName
@@ -253,7 +268,7 @@ Page({
         // let list = { "price_id": items[i].id, "num": items[i].showCount }
         
         orderProducts.push({
-          num: items[i].showCount,
+          quantity: items[i].showCount,
           skuCode: items[i].skuCode,
           productCode: items[i].productCode
         })
@@ -382,14 +397,14 @@ Page({
       return
     }
     Storage.setSubmitOrderList({
-      orderProducts: this.data.selectList,
-      orderType: 99
+      orderProductList: this.data.selectList,
+      orderType: 1
     })
     Tool.navigateTo(`/pages/order-confirm/order-confirm?type=99&formCart=${true}`)
   },
   cartProductClicked(e){
     let state = e.currentTarget.dataset.state
-    if(state == 1) {
+    if (state == 1 || state == 3) {
       Tool.navigateTo('/pages/product-detail/product-detail?door=100&prodCode=' + e.currentTarget.dataset.id)
     }
   },

@@ -55,6 +55,7 @@
       <text wx:else>创建时间：{{item.createTime}}</text>
     </view> -->
     <view>
+     <!-- <view class="cancel-btn" bindtap="logistics" data-index='{{index}}'>查看物流</view> -->
     <view class="footer" wx:if='{{item.showStatus!=2}}'>
         <!-- 倒计时  -->
         <view class="left red ellipsis" wx:if="{{item.showStatus==1}}">

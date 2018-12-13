@@ -78,10 +78,12 @@ Page({
             item.showDate = item.time.slice(5, 10)
             item.showTime = item.time.slice(11, 16)
           });
+          if(list.length==0) this.data.tips = '暂无物流信息~'
           this.setData({
             mailNo: result.number,
             expName: result.expName,
             list: list,
+            tips:this.data.tips,
             status: this.data.statusText[result.deliverystatus]
           })
         }else{

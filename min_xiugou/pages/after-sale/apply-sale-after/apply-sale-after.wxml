@@ -26,7 +26,7 @@
         <text class='red'>¥ </text>
       </view>
       <view>
-        <input type='digit' bindinput='changeApplyAmount' value='{{applyRefundAmount}}' class='red' wx:if='{{refundType!=2&&orderInfos.status>3}}'></input>
+        <input type='digit' bindinput='changeApplyAmount' value='{{applyRefundAmount}}' class='red' wx:if='{{refundType!=2&&orderInfos.status>2&&orderInfos.status<6}}'></input>
         <text class='red' wx:else>{{orderInfos.payAmount}}</text> 
       </view>
       

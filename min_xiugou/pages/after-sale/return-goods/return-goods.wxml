@@ -21,7 +21,7 @@
     <view>
       <view class='tips-title'>{{datas.headerTitle}}</view>
       <!-- <view wx:if='{{datas.status!=3}}'>{{result[resultIndex].info}}</view> -->
-      <view>{{distanceTime}}</view>
+      <view wx:if='{{!expressNo.id}}'>{{distanceTime}}</view>
       <!-- <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view> -->
     </view>
   </view>
@@ -42,7 +42,7 @@
 
   <!--物流  -->
   <view catchtap='logClicked' data-express='{{expressNo}}' wx:if='{{datas.status!=6&&!expressNo.id || expressNo.id}}'>
-    <template is="cell-line" data="{{name:'退货物流',placeholder:expressNo.content}}"/>
+    <template is="cell-line" data="{{name:'退货物流',placeholder:expressNo.name}}"/>
   </view>
 </view>
 <view  wx:if='{{datas.status==1}}'>
@@ -51,7 +51,7 @@
 <!--换货信息  --> 
 
 <view class='exchange-info font-26 '>
-  <view class='flexR-sb after-sale-line gray'>退款订单</view>
+  <view class='flexR-sb after-sale-line gray'>退款信息</view>
   <template is="after-sale-prd-info" data="{{...datas}}"/>
   <template is="refund-explain" data="{{...datas}}"/>
 </view>

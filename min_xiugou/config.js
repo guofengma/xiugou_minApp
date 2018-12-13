@@ -24,6 +24,7 @@ const config = {
   // baseUrl: 'http://172.16.10.192:18080/gateway', //
   // baseUrl: 'http://172.16.10.177:9090/gateway', // 龚日红
   // baseUrl: 'http://172.16.10.164:9090/gateway', // 顾嘉豪
+  // baseUrl: 'http://172.16.10.178:9090/gateway', // 黄家欢
   wxVersion: 'V2.2.5', // 微信小程序版本
   AppId: 'wxa059b818226f8679',//小程序AppID
   Secret: '9fa19f4d1f7e37d318dba14f951f1b4c',//小程序Secret

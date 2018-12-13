@@ -25,7 +25,7 @@
 <!--换货信息  -->
 
 <view class='exchange-info font-26 '>
-  <view class='flexR-sb after-sale-line gray'>退款订单</view>
+  <view class='flexR-sb after-sale-line gray'>退款信息</view>
   <template is="after-sale-prd-info" data="{{...datas}}"/>
   <template is="refund-explain" data="{{...datas}}"/>
 </view>

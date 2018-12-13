@@ -23,3 +23,8 @@
     <template is="after-sale-prd-info" data="{{...item}}"/>
   </view>
 </view>
+<view wx:for='{{datas.unSend}}' wx:key='{{index}}'>
+  <view>
+    <template is="after-sale-prd-info" data="{{...item}}"/>
+  </view>
+</view>

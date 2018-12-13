@@ -226,9 +226,24 @@ export default class Storage {
 
     static getCoupon() {
       return this.getterFor('coupon');
+    }     
+    // queryStringParams
+    static setQueryStringParams(info) {
+      this.setterFor('queryStringParams', info)
+    }
+
+    static getQueryStringParams() {
+      return this.getterFor('queryStringParams');
+    }  
+    static setCoupon(info) {
+      this.setterFor('coupon', info)
+    }
+
+    static getCoupon() {
+      return this.getterFor('coupon');
     } 
     
-    // 保存优惠券
+    // 保存1元券
     static setTokenCoin(info) {
       this.setterFor('tokenCoin', info)
     }

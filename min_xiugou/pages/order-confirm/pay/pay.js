@@ -104,7 +104,7 @@ Page({
     wx.requestPayment({
       'timeStamp': payList.timeStamp,
       'nonceStr': payList.nonceStr,
-      'package': payList.packageValue,
+      'package': payList.package,
       'signType': payList.signType,
       'paySign': payList.paySign,
       'success': function (res) {

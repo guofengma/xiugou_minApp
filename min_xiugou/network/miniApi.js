@@ -467,6 +467,7 @@ const api = {
     {
       "method": "post",
       "action": "微信支付",
+      "encrypt": false,
     }
   ],
   'sgpay':[
@@ -474,6 +475,7 @@ const api = {
     {
       "method": "post",
       "action": "平台支付",
+      "encrypt": false,
     }
   ],
    /************************** 物流 *******************************/

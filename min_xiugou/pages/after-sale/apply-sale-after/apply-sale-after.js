@@ -5,6 +5,7 @@ Page({
     hidden:false,
     textarea:true,
     selectType:{}, // 换货参数
+    afterSaleType:[4],//支持7天无理由退换货
     reason:[
       {
         navbar:'申请退款',
@@ -91,7 +92,7 @@ Page({
       title: this.data.reason[this.data.refundType].navbar
     })
     this.findOrderProductInfo()
-    this.queryDictionaryDetailsType(this.data.refundType)
+    // this.queryDictionaryDetailsType(this.data.refundType)
   },
   queryDictionaryDetailsType(refundType){
     API.queryDictionaryDetailsType({
@@ -108,6 +109,12 @@ Page({
           }
         })
       }
+      let arr = Tool.bitOperation(this.data.afterSaleType, this.data.orderInfos.restrictions)
+      if (arr.includes(this.data.afterSaleType[0])) {
+        datas.unshift({
+          value:'7天无理由退换'
+        })
+      }
       this.data.reason[refundType].list = datas
       this.setData({
         reason: this.data.reason
@@ -116,20 +123,16 @@ Page({
       console.log(res)
     });
   },
-  changeApplyAmoun(e){
+  changeApplyAmount(e){
     let applyRefundAmount = e.detail.value
     let totalAmount = this.data.orderInfos.totalAmount
-    if (applyRefundAmount > totalAmount){
+    console.log(applyRefundAmount > totalAmount, applyRefundAmount, totalAmount)
+    if (applyRefundAmount > totalAmount) {
       Tool.showAlert(`最多只能申请${totalAmount}元`)
       applyRefundAmount = totalAmount
     }
     this.setData({
       applyRefundAmount: applyRefundAmount
-    })
-  },
-  changeApplyAmount(e){
-    this.setData({
-      applyRefundAmount:e.detail.value || 0
     })
   },
   findOrderProductInfo(){
@@ -151,6 +154,7 @@ Page({
         orderInfos: data,
         applyRefundAmount:data.payAmount
       })
+      this.queryDictionaryDetailsType(this.data.refundType)
     }).catch((res) => {
       console.log(res)
     });

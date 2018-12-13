@@ -45,6 +45,7 @@ Page({
         this.activityByProductId(this.data.productCode)
       }else{
         this.ProductFactory.productDefect()
+        // if(this.data.)
       }
     }
     this.ProductFactory.requestFindProductByIdApp(callBack2)
@@ -132,8 +133,8 @@ Page({
     }
   },
   btnClicked(e){
-    if ( this.data.productInfo.canUserBuy) {
-      let n = parseInt(e.currentTarget.dataset.key)
+    let n = parseInt(e.currentTarget.dataset.key)
+    if (this.data.productInfo.canUserBuy || n == 1 && this.data.productInfo.productStatus == 3) {
       this.selectComponent("#prd-info-type").isVisiableClicked(n)
     }
   },

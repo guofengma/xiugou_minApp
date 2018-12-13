@@ -152,7 +152,7 @@ Page({
     availableDiscountCouponForProduct(){
       let params = {
         ...this.data.params,
-        productPriceIds: JSON.parse(this.data.productIds),
+        productPriceIds: this.data.productIds,
       }
       this.formatCouponInfos('availableDiscountCouponForProduct',params, 0, true, '')
     },
@@ -249,7 +249,7 @@ Page({
         door: options.door || '',
         useType: options.useType || '',
         lists: this.data.lists,
-        productIds: options.productIds || '',
+        productIds: Storage.getQueryStringParams() || '',
         coinData: this.data.coinData,
         userInfo:userInfo
       })

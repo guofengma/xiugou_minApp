@@ -64,6 +64,7 @@
   bind:hiddenTips='hiddenTips'
   specIds='{{specIds}}'
   isIphoneX='{{isIPhoneX.isIPhoneX}}'
+  disabled='{{true}}'
 ></product-specification >
 
 <!--适配iPhone X  -->

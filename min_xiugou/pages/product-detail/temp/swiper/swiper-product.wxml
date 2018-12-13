@@ -26,4 +26,6 @@
   <view wx:if='{{imgUrls.length>0}}' class="activeIndex">
     {{activeIndex+"/"+ imgUrls.length}}
   </view>
+  <!-- 预售提示 -->
+  <view class='tips-product flexR font-26' wx:if="{{advanceSale.isAdvanceSale}}"> {{advanceSale.time}}开始售卖</view>
 </view>

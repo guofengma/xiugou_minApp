@@ -242,4 +242,4 @@
 />
 
 <!-- 优惠卷 -->
-<coupon-alert visiable="{{isShowCoupon}}" bind:isShowCoupon='isShowCoupon'/>
+<coupon-alert visiable="{{isShowCoupon}}" imgSrc="{{showCouponImg}}" bind:isShowCoupon='isShowCoupon'/>

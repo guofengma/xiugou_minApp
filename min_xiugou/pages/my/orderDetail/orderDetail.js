@@ -75,12 +75,12 @@ Page({
         })
         let showPriceList = ''
         if (showOutStatus != 1 && showOutStatus != 5 ){
-          showPriceList=datas
+          showPriceList = warehouseOrderDTOList[0]
         } else {
-          showPriceList= warehouseOrderDTOList[0]
+          showPriceList = datas
         }
         warehouseOrderDTOList[0].showCreateTime = Tool.formatTime(warehouseOrderDTOList[0].createTime)
-        warehouseOrderDTOList[0].showPayTime = Tool.formatTime(datas.payTime)
+        warehouseOrderDTOList[0].showPayTime = Tool.formatTime(datas.payTime || warehouseOrderDTOList[0].payTime)
         warehouseOrderDTOList[0].showDeliverTime = Tool.formatTime(warehouseOrderDTOList[0].deliverTime)
         warehouseOrderDTOList[0].showFinishTime = Tool.formatTime(warehouseOrderDTOList[0].finishTime)
         warehouseOrderDTOList[0].showCancelTime = Tool.formatTime(warehouseOrderDTOList[0].cancelTime)
@@ -426,15 +426,24 @@ Page({
     },
     seeLogistics(e){
       let express = this.getExpressList()
-      if (express.length >1) {
+      if (express.length == 1 && express.unSendProductInfoList.length ==0){
+        Tool.navigateTo('/pages/logistics/logistics?id=' + express.expressList[0].expNO)
+      } else if (express.length> 1) {
         Storage.setExpressInfo({
           send: express.expressList,
           unSend: express.unSendProductInfoList
         })
         Tool.navigateTo('/pages/logistics/logistics-list/logistics-list')
-      } else if (express.length == 1) {
-        Tool.navigateTo('/pages/logistics/logistics?id=' + express.expressList[0].expNO)
-      } 
+      }
+      // if (express.length > 1 || unSendProductInfoList.length > 1) {
+      //   Storage.setExpressInfo({
+      //     send: express.expressList,
+      //     unSend: express.unSendProductInfoList
+      //   })
+      //   Tool.navigateTo('/pages/logistics/logistics-list/logistics-list')
+      // } else if (express.length == 1) {
+      //   Tool.navigateTo('/pages/logistics/logistics?id=' + express.expressList[0].expNO)
+      // } 
     },
     getExpressList(){
       let warehouseOrderDTOList = this.data.detail.warehouseOrderDTOList || [];
@@ -461,8 +470,10 @@ Page({
         if (datas.status==0){
           let list = result.list || []
           let state = this.orderState(this.data.status)
-          state.info = list[0].status
-          state.time = list[0].time
+          if(list.length>0){
+            state.info = list[0].status
+            state.time = list[0].time
+          }      
           this.setData({
             state: state
           })

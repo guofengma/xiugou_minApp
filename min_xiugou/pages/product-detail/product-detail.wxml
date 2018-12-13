@@ -15,7 +15,7 @@
     <!--topbar  -->
     <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'  size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}'/>
     <!-- 轮播 -->
-    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}'/>
+    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}' advanceSale='{{advanceSale}}'/>
     <!-- 活动产品倒计时提示 -->
     <view wx:if='{{proNavData}}' catchtap='goPage'>
       <product-promotion-info 
@@ -48,13 +48,14 @@
       </view> -->
       <view class='flexR bottom-bar'>
         <view class='cart font-22 flexC' bindtap='btnClicked' data-key='1'>
-          <image-sub wx:if ='{{productInfo.canUserBuy}}' imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor@3x.png'}}"/>
+          <image-sub wx:if ='{{productInfo.canUserBuy || productInfo.productStatus==3}}' imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor@3x.png'}}"/>
           <image-sub wx:else imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor-2@3x.png'}}"/>
           <view class='gray'>加入购物车</view>
           <!-- <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view> -->
         </view>
         <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy? "redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
           <text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>您已购买过该商品</text>
+          <text wx:elif='{{productInfo.productStatus==3}}'>暂不可购买</text>
           <text wx:else>立即购买</text>
         </view>
         <!-- <view class='add-cart font-28 flexR yellowBg shareBtn-view' >
@@ -90,12 +91,14 @@
     price = '{{productInfo.price}}'
     priceList='{{priceList}}' 
     bind:counterInputOnChange='counterInputOnChange' 
-    imgUrl="{{productInfo.imgUrl}}" 
+    imgUrl="{{productInfo.imgUrl}}"
+    productStatus='{{productInfo.productStatus}}'
     showImgs='{{true}}'
     isInit="{{isInit}}" 
     bind:hiddenTips='hiddenTips'
     isIphoneX='{{isIPhoneX.isIPhoneX}}'
     commodityType = '{{1}}'
+    disabled='{{false}}'
 />
 
 <alert show='{{alertShow}}' props='{{alertProps}}' bind:subClicked='shareSubClicked'>

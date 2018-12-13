@@ -52,7 +52,7 @@
       <view>优惠券</view>
       <view class='gray'>
         <!-- 不支持使用优惠券 -->
-        <text wx:if='{{(door==99 || door==5)&&canUseCoupon}}'>{{coupon.name}}</text>
+        <text wx:if='{{canUseCoupon}}'>{{coupon.name}}</text>
         <text wx:else>不支持使用优惠券</text>
         <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
       </view>
