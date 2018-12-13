@@ -31,6 +31,6 @@
     text-align: center;
     font-size: 26rpx;
 }
-.canNotClicked{
+.disabled{
   background:#F7F7F7;
 }

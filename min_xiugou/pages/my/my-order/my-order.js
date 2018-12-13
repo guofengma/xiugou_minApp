@@ -17,6 +17,7 @@ Page({
   },
   // 上拉加载更多
   onReachBottom() {
+    console.log(11111)
     this.selectComponent("#orderList").onReachBottom()
   },
   isChange(){

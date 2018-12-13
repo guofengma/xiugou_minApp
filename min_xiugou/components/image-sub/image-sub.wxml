@@ -1,5 +1,14 @@
-<image 
+<image wx:if='{{isHttpImg}}'
     class='sub-image'
+    src="{{baseImgUrl}}" 
+    mode='{{mode||"widthFix"}}' 
+    style='{{imgStyle}}'
+    lazy-load='true'
+    binderror='binderror'
+    bindload = 'bindload'
+>
+</image>
+<image wx:else 
     src="{{baseImgUrl}}" 
     mode='{{mode||"widthFix"}}' 
     style='{{imgStyle}}'

@@ -44,20 +44,20 @@ Page({
       let refundAddress = datas.refundAddress || {}
       refundAddress.addressInfo = (refundAddress.province || '') + (refundAddress.city || "" ) + (refundAddress.area || "")+ ( refundAddress.address || "")
       let orderRefundExpress = datas.orderRefundExpress || {}
-      if (status > 1 && !orderRefundExpress.expressNo && status < 6) {
-        datas.countDownSeconds = Math.floor((datas.cancelTime-datas.nowTime)/1000)
-        // console.log(datas.cancelTime,datas.nowTime)
-        this.countdown(this)
-      }
       let expressNo = this.data.expressNo
       if (orderRefundExpress.expressCode) {
         expressNo = {
-          id: 2, content: orderRefundExpress.expressNo }
+          id: 2, content: orderRefundExpress.expressNo, name: orderRefundExpress.expressName }
       }
       this.setData({
         expressNo: expressNo,
         datas: datas
       })
+      if (status > 1 && !orderRefundExpress.expressNo && status < 6) {
+        datas.countDownSeconds = Math.floor((datas.cancelTime - datas.nowTime) / 1000)
+        // console.log(datas.cancelTime,datas.nowTime)
+        this.countdown(this)
+      }
       Event.emit('getDetail')
     }).catch((res) => {
       console.log(res)
@@ -65,6 +65,7 @@ Page({
   },
   countdown (that) { // 倒计时
     clearTimeout(that.data.time);
+    console.log(that.data.datas.countDownSeconds)
     let distanceTime = Tool.showDistanceTime(that.data.datas.countDownSeconds || 0)
     if (that.data.datas.countDownSeconds == 0) {
       that.findReturnProductById(that.data.serviceNo)

@@ -75,9 +75,9 @@ Page({
         })
         let showPriceList = ''
         if (showOutStatus != 1 && showOutStatus != 5 ){
-          showPriceList=datas
+          showPriceList = warehouseOrderDTOList[0]
         } else {
-          showPriceList= warehouseOrderDTOList[0]
+          showPriceList = datas
         }
         warehouseOrderDTOList[0].showCreateTime = Tool.formatTime(warehouseOrderDTOList[0].createTime)
         warehouseOrderDTOList[0].showPayTime = Tool.formatTime(datas.payTime || warehouseOrderDTOList[0].payTime)

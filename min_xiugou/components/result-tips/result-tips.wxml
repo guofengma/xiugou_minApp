@@ -13,10 +13,10 @@
       <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-cart.png'}}"/>
       <view>去添加点什么吧</view>
     </view>
-    <!-- 优惠卷 -->
+    <!-- 优惠券 -->
     <view wx:if="{{tipVal == 4}}">
       <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-yhj.png'}}"/>
-      <view>还没有优惠卷哦</view>
+      <view>还没有优惠券哦</view>
     </view>
     <!--  暂无消息通知-->
     <view wx:if="{{tipVal == 5}}">

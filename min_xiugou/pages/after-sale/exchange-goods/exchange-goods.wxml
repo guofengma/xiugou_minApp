@@ -15,7 +15,7 @@
     <image-sub wx:if='{{datas.status==6}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
     <view>
       <view class='tips-title'>{{datas.headerTitle}}</view>
-      <view>{{distanceTime}}</view>
+      <view wx:if='{{!expressNo.id}}'>{{distanceTime}}</view>
       <!-- <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view> -->
     </view>
   </view>
@@ -33,10 +33,10 @@
   <!--物流  -->
   <view>
    <view wx:if='{{expressNo.id!=0&&SaleExpressNo.id!=1}}' bindtap='logClicked' data-express='{{SaleExpressNo}}' data-type='2'>
-      <template is="cell-line" data="{{name:'平台物流',placeholder:SaleExpressNo.content}}"/>
+      <template is="cell-line" data="{{name:'平台物流',placeholder:SaleExpressNo.name}}"/>
     </view>
     <view bindtap='logClicked' data-express='{{expressNo}}' data-type='1' >
-      <template is="cell-line" data="{{name:'换货物流',placeholder:expressNo.content}}"/>
+      <template is="cell-line" data="{{name:'换货物流',placeholder:expressNo.name}}"/>
     </view>
   </view>
 </view>

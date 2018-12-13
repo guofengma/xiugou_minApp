@@ -1,6 +1,7 @@
 Component({
   properties: {
     visiable: Boolean,
+    imgSrc:String,
   },
   data: {
 

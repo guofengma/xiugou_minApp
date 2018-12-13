@@ -9,6 +9,10 @@ Component({
     isInit:Boolean,
     surplusNumber:Number, // 外部传入的库存
     commodityType: Number, // 1 普通商品 2 秒杀 3 降价拍 4礼包 5 换货
+    disabled: {
+      type: Boolean,
+      value: false
+    },
     exchangeNum:Number, // 换货的数量
     specIds: String,
     productPriceId:Number, // 换货的价格id

@@ -41,7 +41,7 @@ Page({
     })
     this.requestOrderInfo()
     Tool.isIPhoneX(this)
-    this.availableDiscountCouponForProduct()
+    // this.availableDiscountCouponForProduct()
     Event.on('updateOrderAddress', this.updateOrderAddress,this)
     Event.on('updateCoupon', this.couponClick,this)
     Event.on('getTokenCoin', this.tokenCoinClick,this)
@@ -137,6 +137,7 @@ Page({
         //   return arr.indexOf(n) == -1
         // });
         // couponType.forEach((item, index) => {
+        console.log(arr)
         arr.forEach((item,index)=>{
           if(item==this.data.couponArr[0]){
             canUseCoupon = true
@@ -159,6 +160,10 @@ Page({
       if (!this.data.isChangeAddress){
         addressList[1] = item.address
       }
+      // 升级礼包默认不支持优惠卷
+      if (this.data.orderSubType==3){
+        canUseCoupon=false
+      }
       // item.showTotalAmounts = item.totalAmounts
       // item.totalAmounts = Tool.add(item.totalAmounts, item.totalFreightFee)
       callBack(item)
@@ -169,6 +174,8 @@ Page({
         canUseCoupon: canUseCoupon,
         canUseTokenCoin: canUseTokenCoin
       })
+      // 可以使用优惠卷的情况下 请求优惠券
+      if (this.data.canUseCoupon) this.availableDiscountCouponForProduct()
     }).catch((res) => {
       this.failBlock(res)
       console.log(res)
@@ -267,8 +274,9 @@ Page({
     })
   },
   failBlock(res){
+    console.log(res)
     let callBack = () => { }
-    if(res.code == 54001) {
+    if (res.code == 54001 || res.code == 10003) {
       if (this.data.formCart) {
         callBack = () => {
           Event.emit('updateShoppingCart')
@@ -291,27 +299,29 @@ Page({
     Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=1&coin=" + useOneCoinNum + '&maxUseCoin=' + maxUseCoin)
   },
   couponClicked(){ // 点击使用优惠卷跳转
-    if ((this.data.door != 99 && this.data.door == 5) || this.data.coupon.canClick === false || !this.data.canUseCoupon) return
-    let productIds = this.getCouponProductPriceIds()
-    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=2&productIds=" + JSON.stringify(productIds))
+    if ( !this.data.canUseCoupon) return
+    // let productIds = this.getCouponProductPriceIds()
+    Tool.navigateTo("/pages/my/coupon/my-coupon/my-coupon?door=1&useType=2")
   },
   getCouponProductPriceIds(){ // 获取请求优惠卷的参数
     let productIds = []
-    this.data.params.orderProductList.forEach((item) => {
-      productIds.push({
-        priceCode: item.skuCode,
-        productCode: item.productCode,
-        amount: item.quantity
+    if (this.data.params.orderType==1){
+      this.data.params.orderProductList.forEach((item) => {
+        productIds.push({
+          priceCode: item.skuCode,
+          productCode: item.productCode,
+          amount: item.quantity
+        })
       })
-    })
+    }
     return productIds
   },
   availableDiscountCouponForProduct() { // 产品可用优惠劵列表
-    if (this.data.door != 99&&this.data.door != 5) return
     let productIds = this.getCouponProductPriceIds()
     let params = {
       productPriceIds: productIds,
     }
+    Storage.setQueryStringParams(params)
     API.availableDiscountCouponForProduct(params).then((res) => {
       let datas = res.data
       if (datas.totalPage==0){

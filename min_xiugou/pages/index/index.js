@@ -49,6 +49,11 @@ Page({
       taskDetail:{},
       width:0,
       isShowCoupon:false,// 优惠卷弹窗
+      couponList:[
+        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/newuser_n.png",// 没有选择导师的新用户
+        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/newuser_y.png",// 选择导师的新用户
+        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/olduser.png",//老用户
+      ]
     },
     close() {
       this.toggleCardShow();
@@ -112,15 +117,9 @@ Page({
       })
     },
     onLoad: function (options) {
-      let callBack = ()=>{
-        console.log('结束啦')
-      }
-      // Tool.timeCountdown('time', 'distanceTime', 'countDownSeconds', callBack, this) 
       // Event.on('getLevel', this.getLevel,this)
       Event.on('didLogin', this.didLogin, this); 
-      if (Storage.getFirstRegistration()){
-        this.isShowCoupon()
-      }else{
+      if (!Storage.getFirstRegistration()){
         this.selectComponent("#notice").getNotice()
       }
       // 初始化请求
@@ -406,8 +405,11 @@ Page({
       })
     },
     isShowCoupon() { // 展示优惠卷
+      let userId = Storage.getUserAccountInfo().upUserid
+      let index = userId? 1:0
       this.setData({
-        isShowCoupon: !this.data.isShowCoupon
+        isShowCoupon: !this.data.isShowCoupon,
+        showCouponImg: this.data.couponList[index]
       })
       if (!this.data.isShowCoupon) {
         Storage.setFirstRegistration(false)
@@ -422,7 +424,9 @@ Page({
       this.setData({
         isChange:true
       })
-      // this.discoverNotice()
+      if (Storage.getFirstRegistration()) {
+        this.isShowCoupon()
+      } 
     },
     onHide: function () {
       this.setData({

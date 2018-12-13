@@ -15,9 +15,13 @@ export default class ProductFactorys  {
       // 用户不能购买 限购但属于数量小于等于0且状态不是1
       if ((datas.buyLimit != -1 && !datas.leftBuyNum) || datas.productStatus != 1) {
         datas.canUserBuy = false
+        // if (datas.productStatus == 3) {
+        //   canAddCart = true
+        // }
       } else {
         datas.canUserBuy = true
       }
+
       let imgUrls = datas.imgFileList || []
       if (datas.imgUrl) imgUrls.unshift({
         originalImg:datas.imgUrl,

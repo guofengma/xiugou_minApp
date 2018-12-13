@@ -63,11 +63,11 @@ Page({
       // let orderRefundExpress = datas.orderRefundExpress || {}
       if (orderRefundExpress.expressCode) {
         expressNo = {
-          id: 2, content: orderRefundExpress.expressNo
+          id: 2, content: orderRefundExpress.expressNo, name: orderRefundExpress.expressName
         }
       }
       if (datas.sendExpressNo) {
-        SaleExpressNo = { id: 2, content: datas.sendExpressNo }
+        SaleExpressNo = { id: 2, content: datas.sendExpressNo, name: datas.sendExpressName }
       }
       this.setData({
         datas: datas,
