@@ -19,7 +19,10 @@
   <swiper autoplay="true" interval='3000' bindchange='sliderChange' circular="true">
     <block wx:for="{{imgUrls}}" wx:key="unique">
       <swiper-item> 
-        <image src="{{item.smallImg}}" class="slide-image" bindtap='swiperImgCliked' data-index='{{index}}'/>
+        <view bindtap='swiperImgCliked' data-index='{{index}}' class="slide-image">
+          <image-sub  imgSrc="{{item.smallImg}}" mode='aspectFit'/>
+          <!-- <image src="{{item.smallImg}}" class="slide-image"  mode='aspectFill'/> -->
+        </view> 
       </swiper-item>
     </block>
   </swiper>
