@@ -92,6 +92,11 @@ export default class ProductFactorys  {
       nodes: tbody
     })
   }
+  onShow(){
+    if (this.page.data.didLogin) {
+      this.queryPushNum()
+    }
+  }
   didLogin(){ // 是否登录 
     Tool.didLogin(this.page)
     Tool.getUserInfos(this.page)

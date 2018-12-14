@@ -112,7 +112,6 @@ Page({
       Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true+'&inviteId=' + this.data.inviteCode)
       return
     }
-    if (!this.data.productInfo.canUserBuy) return
     let params = {
       orderProductList:[{
         quantity: this.data.productBuyCount,
@@ -125,7 +124,6 @@ Page({
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params)+'&type=99' )
   },
   addToShoppingCart(){
-    if (this.data.productInfo.productStatus == 2) return
     this.ProductFactory.addToShoppingCart()
   },
   typeSubClicked(e){
@@ -140,8 +138,7 @@ Page({
   },
   btnClicked(e){
     let n = parseInt(e.currentTarget.dataset.key)
-    // this.selectComponent("#prd-info-type").isVisiableClicked(n)
-    if (this.data.productInfo.canUserBuy || n == 1 && this.data.productInfo.productStatus == 3) {
+    if (this.data.productInfo.canUserBuy || n == 1 && this.data.productInfo.productStatus !=2) {
       this.selectComponent("#prd-info-type").isVisiableClicked(n)
     }
   },
@@ -191,18 +188,17 @@ Page({
       return
     }
     that.data.distanceTime--
+    console.log(that.data.distanceTime)
     let time = setTimeout(function () {
       that.countdown(that);
     }, 1000)
-    this.setData({
-      time: time
-    })
+    this.data.time = time
   },
   onHide(){
     this.data.isOnshow = false
   },
   onUnload: function () {
-    clearInterval(this.data.time)
+    clearTimeout(this.data.time)
     Event.off('didLogin', this.didLogin);
   },
 })

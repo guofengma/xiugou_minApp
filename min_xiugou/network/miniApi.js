@@ -80,6 +80,30 @@ const api = {
       "encrypt": false,// 是否加签
     }
   ],
+  'queryUserAddressList': [
+    '/user/userAddress/query',
+    {
+      "action": "获取列表",
+      "method": "get",
+      "encrypt": false,// 是否加签
+    }
+  ],
+  'setDefaultAddress': [
+    '/user/userAddress/setDefault',
+    {
+      "action": "设置默认地址",
+      "method": "post",
+      "encrypt": false,// 是否加签
+    }
+  ],
+  'deleteAddress': [
+    '/user/userAddress/setDefault',
+    {
+      "action": "设置默认地址",
+      "method": "post",
+      "encrypt": false,// 是否加签
+    }
+  ],
   /***************************** 首页接口 ************************ */
   'queryAdList':[
     '/config/advertisement/queryAdvertisementList',

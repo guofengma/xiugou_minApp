@@ -95,25 +95,22 @@ Component({
           key++;
         })
         
-        if (!datas.totalPage) {
-          this.setData({
-            tipVal: 7
-          });
-        } else {
-          this.setData({
-            tipVal: ''
-          });
-        }
         // 这块是倒计时
         if (secondMap.size > 0) {
           this.countdown(this);
         }
+        let tipVal = ''
+        if (!datas.totalPage || list.concat(orderInfoArr).length == 0) {
+          tipVal=7
+        } 
         this.setData({
           list: list.concat(orderInfoArr),
           totalPage: datas.totalPage,
           secondArry: secondMap,
-          key: key
+          key: key,
+          tipVal: tipVal
         });
+
         this.triggerEvent('isAjax');
         console.log(this.data.list)
       }).catch((res) => {
