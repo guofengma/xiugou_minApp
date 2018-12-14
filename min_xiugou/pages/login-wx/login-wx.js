@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation } = global
+let { Tool, API, Storage } = global
 
 const app = getApp()
 
@@ -62,29 +62,23 @@ Page({
       openid: Storage.getWxOpenid() || '',
       nickname: this.data.userInfo.nickName,
       headImg: this.data.userInfo.avatarUrl,
-      reqName: '用户微信登陆',
-      url: Operation.wechatLogin,
     };
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock= (req) => {
-      // 存相关信息
-      Tool.loginOpt(req)
-      if (this.data.isBack){
+    API.wechatLogin(params).then((res) => {
+      Tool.loginOpt(res)
+      if (this.data.isBack) {
         Tool.navigationPop()
       } else {
         Tool.switchTab('/pages/index/index')
       }
-    }
-    r.failBlock = (req) => {
-      if (req.responseObject.code == 34005){
+    }).catch((res) => {
+      if (res.code == 34005) {
         Tool.navigateTo('/pages/register/register?inviteId=' + this.data.inviteCode)
-      } else if (req.responseObject.code == 40000){
+      } else if (res.code == 40000) {
         Tool.navigateTo('/pages/web-view/web-view?webType=3')
       } else {
-        Tool.showAlert(req.responseObject.msg)
+        Tool.showAlert(res.msg)
       }
-    }
-    r.addToQueue();
+    })
   },
   otherLogin(){
     Tool.navigateTo('/pages/login/login')

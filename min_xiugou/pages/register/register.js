@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation, Event, API } = global;
+let { Tool, Storage, Event, API } = global;
 const app = getApp()
 Page({
   data: {
@@ -56,23 +56,18 @@ Page({
     let params = {
       code: id,
       identity: Storage.getWxOpenid(),
-      reqName: '邀请码是否过期',
-      url: Operation.sweepCode
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    API.sweepCode(params).then((res) => {
 
-    }
-    r.failBlock = (req) => {
-      let msg = req.responseObject.msg
+    }).catch((res) => {
+      let msg = res.msg
       this.setData({
         invalidTips: {
           invalid: true,
           tips: msg
         }
       })
-    }
-    r.addToQueue();
+    })
   },
   isSeePwd() {
     this.setData({
@@ -102,28 +97,20 @@ Page({
       upUserId: this.data.inviteId || "", // 邀请者id 非必填
       inviteCode: this.data.inviteCode || "",//邀请码 非必填
     }
-    // this.verifyPhone(e.detail.value)  // 改动了
     this.verifyPhone(params)
   },
   verifyPhone(params){
-    
-    params = {
-      ...params,
-      reqName: '判断手机号是否已经注册',
-      url: Operation.findMemberByPhone,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
-      Storage.setMemberId(req.responseObject.data.id)
-      Tool.loginOpt(req)
+    API.findMemberByPhone(params).then((res) => {
+      let datas = res.data || {}
+      Storage.setMemberId(datas.id)
+      Tool.loginOpt(res)
       Storage.setUpUserId(null)
-      Storage.setFirstRegistration(true)
+      Storage.setFirstRegistration(datas.give)
       // 被邀请的人不走选择导师的页面
-      if (this.data.urlFrom && this.data.inviteId){
+      if (this.data.urlFrom && this.data.inviteId) {
         Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
-      } else if (this.data.inviteCode || this.data.inviteId){
-        let callBack = ()=>{
+      } else if (this.data.inviteCode || this.data.inviteId) {
+        let callBack = () => {
           Tool.switchTab('/pages/index/index')
         }
         Tool.showSuccessToast('注册成功', callBack)
@@ -145,9 +132,9 @@ Page({
       //   }
       //   Tool.showSuccessToast('注册成功', callBack)
       // }
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+       console.log(res)
+    })
   },
   changeInput(e){
     let n = parseInt(e.currentTarget.dataset.index)

@@ -48,7 +48,7 @@
       </view> -->
       <view class='flexR bottom-bar'>
         <view class='cart font-22 flexC' bindtap='btnClicked' data-key='1'>
-          <image-sub wx:if ='{{productInfo.canUserBuy || productInfo.productStatus==3}}' imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor@3x.png'}}"/>
+          <image-sub wx:if ='{{productInfo.productStatus!=2}}' imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor@3x.png'}}"/>
           <image-sub wx:else imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor-2@3x.png'}}"/>
           <view class='gray'>加入购物车</view>
           <!-- <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view> -->

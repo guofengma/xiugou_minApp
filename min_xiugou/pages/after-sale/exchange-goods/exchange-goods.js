@@ -145,7 +145,7 @@ Page({
   },
   onUnload: function () {
     Event.emit('getDetail')
-    clearInterval(this.data.time)
+    clearTimeout(this.data.time)
     Event.off('updataExpressNo', this.updataExpressNo)
   },
 })

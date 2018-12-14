@@ -9,10 +9,10 @@ Page({
       storeMessageNum:''
     },
     onLoad: function (options) {
-      this.queryPushNum()
-      Event.on('queryPushNum', this.queryPushNum, this)
+      
     },
     onShow: function () {
+      this.queryPushNum()
     },
     queryPushNum(){
       let callBack = (datas) => {
@@ -51,6 +51,6 @@ Page({
       })
     },
     onUnload: function () {
-      Event.off('queryPushNum', this.queryPushNum)
+      
     },
 })

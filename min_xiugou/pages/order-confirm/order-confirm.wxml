@@ -59,7 +59,7 @@
     </view>
     <!-- 1元劵 -->
     <!-- wx:if='{{userInfos.tokenCoin}}' -->
-    <view class='flexR-sb' catchtap='iconClicked' >
+    <view class='flexR-sb' catchtap='iconClicked' wx:if='{{userInfos.tokenCoin}}'>
       <view class='reducePrice' >
         1元现金券
       </view>

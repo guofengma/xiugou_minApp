@@ -138,7 +138,6 @@ Page({
         //   return arr.indexOf(n) == -1
         // });
         // couponType.forEach((item, index) => {
-        console.log(arr)
         arr.forEach((item,index)=>{
           if(item==this.data.couponArr[0]){
             canUseCoupon = true
@@ -176,9 +175,9 @@ Page({
         canUseTokenCoin: canUseTokenCoin
       })
       // 可以使用优惠卷的情况下 请求优惠券
-      if (this.data.canUseCoupon && this.data.params.orderType==1){
+      if (this.data.canUseCoupon && this.data.params.orderSubType != 4 && this.data.params.orderSubType != 3){
         this.availableDiscountCouponForProduct()
-      } else if (this.data.canUseCoupon && this.data.params.orderType != 1){
+      } else if (this.data.canUseCoupon && (this.data.params.orderSubType == 4 || this.data.params.orderSubType == 3)){
         this.setData({
           coupon: {
             id: '',
@@ -315,22 +314,25 @@ Page({
   },
   getCouponProductPriceIds(){ // 获取请求优惠卷的参数
     let productIds = []
-    if (this.data.params.orderType==1){
-      this.data.params.orderProductList.forEach((item) => {
-        productIds.push({
-          priceCode: item.skuCode,
-          productCode: item.productCode,
-          amount: item.quantity
-        })
+    let orderProductList = this.data.params.orderProductList || []
+    orderProductList.forEach((item) => {
+      productIds.push({
+        priceCode: item.skuCode,
+        productCode: item.productCode,
+        amount: item.quantity
       })
-    }
+    })
     return productIds
   },
   
   availableDiscountCouponForProduct() { // 产品可用优惠劵列表
+    // 1.秒杀 2.降价拍 3.升级礼包 4.普通礼包 orderType 1.普通订单 2.活动订单
     let productIds = this.getCouponProductPriceIds()
+    if (productIds.length==0) return
     let params = {
       productPriceIds: productIds,
+      activityCode: this.data.params.activityCode || '',
+      activityType: this.data.params.orderSubType || ''
     }
     Storage.setQueryStringParams(params)
     API.availableDiscountCouponForProduct(params).then((res) => {

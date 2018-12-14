@@ -1,6 +1,6 @@
 .header{
   height: 280rpx;
-  background:url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/me_bg_nor@3x.png) no-repeat left bottom;
+  background:url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/me_bg_nor@3x.png) no-repeat left bottom;
   background-size: 100% 100%;
 }
 .line{

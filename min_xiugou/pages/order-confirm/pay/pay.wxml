@@ -17,7 +17,7 @@
     <view class="inf">平台支付仅限APP使用</view>
     <!-- <view class="wrap" bindtap="payWay" data-index='0' data-val='16'>
         <view class="left">
-            <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/icon_03-05@2x.png"></image>
+            <image src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/icon_03-05@2x.png"></image>
             <view>银行卡支付</view>
         </view>
         <view class="right">

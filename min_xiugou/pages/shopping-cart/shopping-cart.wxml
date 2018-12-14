@@ -43,5 +43,8 @@
       <text class='red'>¥ {{totalPrice}}</text>
     </view>
   </view>
-  <view class='cart-btn redBg' bindtap='makeOrder'>结算</view>
+  <view class='cart-btn redBg' bindtap='makeOrder'>
+    结算
+    <text wx:if='{{selectList.length}}'>({{selectList.length}})</text>
+  </view>
 </view>

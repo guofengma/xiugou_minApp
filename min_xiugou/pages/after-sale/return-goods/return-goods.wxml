@@ -36,7 +36,7 @@
   </view> -->
 
   <!--商家地址  -->
-  <view wx:if='{{datas.status!=3}}'>
+  <view wx:if='{{datas.status>1&&datas.status!=6}}'>
     <template is="address-saler" data="{{addressType,src,datas,hasData:true,door:1}}"/>
   </view>
 

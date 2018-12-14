@@ -1,5 +1,5 @@
 // pages/my/account.js
-let { Tool, RequestFactory, Storage, Event, Operation  } = global;
+let { Tool  } = global;
 Page({
     data: {
       refuseDetail:'',

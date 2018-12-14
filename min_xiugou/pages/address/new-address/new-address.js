@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event, Operation} = global
+let { Tool, API, Event} = global
 
 Page({
   data: {
@@ -43,10 +43,6 @@ Page({
     })
   },
   formSubmit(e) {
-    // 测试数据
-      // this.setData({
-      //   region: [{ zipcode: 110000 }, { zipcode: 110100 }, { zipcode: 110101 }]
-      // })
       let params = e.detail.value;
       if (!(params.receiver.length >1 && params.receiver.length<17)) {
           Tool.showAlert("收货人姓名长度需在2-16位之间");
@@ -81,27 +77,23 @@ Page({
       this.requestAddUserAddress(params)
       
   },
-  requestAddUserAddress(params) {
+  requestAddUserAddress(params) { // 添加地址/修改地址
     params = {
       ...params,
       defaultStatus:this.data.isDefault? 1:2,
-      reqName: '添加地址/修改地址',
-      url: Operation.addUserAddress
+      id: this.data.id ? this.data.id:''
     }
-    if (this.data.id) params.id = this.data.id
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      //跳转到地址列表页面
+    API.addUserAddress(params).then((res) => {
       let tips = ''
-      if (this.data.id){
-        tips ='修改成功'
+      if (this.data.id) {
+        tips = '修改成功'
       } else {
-        tips ='添加成功'
+        tips = '添加成功'
       }
       this.successCallBack(tips)
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   successCallBack(title){
     Event.emit('updateAdressList');//发出通知

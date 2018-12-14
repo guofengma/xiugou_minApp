@@ -250,7 +250,7 @@
 /* 会员等级 */
 .user-level-view {
   height: 85rpx;
-  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/index-user-bg-2.png) no-repeat left bottom;
+  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/index-user-bg-2.png) no-repeat left bottom;
   background-size: 100% 100%;
   padding: 0 34rpx 0 50rpx;
   color: #9D732A;
@@ -265,7 +265,7 @@
   color: #fff;
   width: 147rpx;
   height: 37rpx;
-  background: transparent url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/index-user-bg-1.png) no-repeat left bottom;
+  background: transparent url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/index-user-bg-1.png) no-repeat left bottom;
   background-size: 100% 100%;
 }
 .msg-view{

@@ -1,5 +1,5 @@
 // pages/my/account.js
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, API, Storage } = global
 Page({
     data: {
         params: {},
@@ -35,61 +35,61 @@ Page({
     },
     //获取数据
     getData(createdTime) {
-        if (this.data.hasNext) {
-          let params = {
-            pageSize: this.data.pageSize,
-            page: this.data.currentPage,
-            createdTime: createdTime || '',
-            'type':100,
-            reqName: '消息',
-            url: Operation.queryMessage
+      if (this.data.hasNext) {
+        let params = {
+          pageSize: this.data.pageSize,
+          page: this.data.currentPage,
+          createdTime: createdTime || '',
+          'type':100,
+          // reqName: '消息',
+          // url: Operation.queryMessage
+        }
+        this.data.params = params
+        // this.setData({
+        //   params: params
+        // });
+        let list = this.data.list;
+        API.queryMessage(params).then((res) => {
+          let datas = [];
+          for (let i in res.data.data) {
+            let item = res.data.data[i];
+            item.displayTime0 = Tool.formatTime(item.displayTime || item.createdTime);
+            // item.pushTime = Tool.formatTime(item.pushTime);
+            // item.title=this.data.title[item.type-1];
+            item.param = item.param || '{}'
+            item.paramType = item.paramType || 0
+            if (Tool.isJson(item.param)) {
+              item.param = JSON.parse(item.param)
+            } else {
+              item.param = { param: item.param }
+            }
+            if (item.paramType == 101 || item.paramType == 100) {
+              let arr = Tool.bitOperation(this.data.payTypeArr, item.param.payType)
+              item.payName = []
+              arr.forEach((item0, index) => {
+                item.payName.push(this.data.payType[item0])
+              })
+              item.payName = item.payName.join('/')
+              item.orderNum = item.param.orderNum
+            }
+            item.payStyle = this.payStyle(item.payType);
+            datas.push(item)
           }
           this.setData({
-            params: params
+            list: list.concat(datas),
+            totalPage: res.data.totalPage,
           });
-          let r = RequestFactory.wxRequest(params);
-          let list = this.data.list;
-          r.successBlock = (req) => {
-            let datas = [];
-            for (let i in req.responseObject.data.data) {
-                let item = req.responseObject.data.data[i];
-                item.displayTime0 = Tool.formatTime(item.displayTime ||item.createdTime);
-                // item.pushTime = Tool.formatTime(item.pushTime);
-                // item.title=this.data.title[item.type-1];
-              item.param = item.param || '{}'
-              item.paramType = item.paramType || 0
-              if(Tool.isJson(item.param)){
-                item.param = JSON.parse(item.param)
-              } else {
-                item.param = { param: item.param}
-              }
-              if (item.paramType == 101 || item.paramType==100){
-                let arr = Tool.bitOperation(this.data.payTypeArr,item.param.payType)
-                item.payName = []
-                arr.forEach((item0,index)=>{
-                  item.payName.push(this.data.payType[item0])
-                })
-                item.payName = item.payName.join('/')
-                item.orderNum = item.param.orderNum
-              }
-              item.payStyle=this.payStyle(item.payType);
-                datas.push(item)
-            }
+          if (this.data.totalPage > this.data.currentPage) {
             this.setData({
-              list: list.concat(datas),
-              totalPage: req.responseObject.data.totalPage,
-            });
-            if (this.data.totalPage > this.data.currentPage) {
-                this.setData({
-                  currentPage: ++this.data.currentPage
-                })
-            } else {
-                this.data.hasNext = false
-            }
-            Event.emit('queryPushNum')
-        };
-        r.addToQueue();
-        }
+              currentPage: ++this.data.currentPage
+            })
+          } else {
+            this.data.hasNext = false
+          }
+        }).catch((res) => {
+          console.log(res)
+        })
+      }
 
     },
 

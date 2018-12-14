@@ -23,8 +23,8 @@ Component({
         baseImgUrl = this.data.imgSrc
       }else {
         
-        // 小程序线上图片（icon等）
-        baseImgUrl = Config.imgBaseUrl + this.data.imgSrc + '?_=' + new Date().getTime()
+        // 小程序线上图片（icon等）  + '?_=' + new Date().getTime()
+        baseImgUrl = Config.imgBaseUrl + this.data.imgSrc
       }
       this.setData({
         baseImgUrl:baseImgUrl

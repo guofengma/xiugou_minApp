@@ -45,7 +45,6 @@ Page({
       if (datas.productStatus!=0){
         this.activityByProductId(this.data.productCode)
         if (this.data.productInfo.productStatus == 3) {
-          console.log(111111)
           this.data.distanceTime = Math.ceil((this.data.productInfo.upTime - this.data.productInfo.now) / 1000)
           this.countdown(this)
         }
@@ -139,7 +138,7 @@ Page({
   },
   btnClicked(e){
     let n = parseInt(e.currentTarget.dataset.key)
-    if (this.data.productInfo.canUserBuy || n == 1 && this.data.productInfo.productStatus == 3) {
+    if (this.data.productInfo.canUserBuy || n == 1 && this.data.productInfo.productStatus !=2) {
       this.selectComponent("#prd-info-type").isVisiableClicked(n)
     }
   },
@@ -189,18 +188,17 @@ Page({
       return
     }
     that.data.distanceTime--
+    console.log(that.data.distanceTime)
     let time = setTimeout(function () {
       that.countdown(that);
     }, 1000)
-    this.setData({
-      time: time
-    })
+    this.data.time = time
   },
   onHide(){
     this.data.isOnshow = false
   },
   onUnload: function () {
-    clearInterval(this.data.time)
+    clearTimeout(this.data.time)
     Event.off('didLogin', this.didLogin);
   },
 })

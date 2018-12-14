@@ -71,7 +71,40 @@ const api = {
       "encrypt": false,// 是否加签
     }
   ],
-  /***************************** 注册 ************************ */
+  /***************************** 地址 ************************ */
+  'addUserAddress': [
+    '/user/userAddress/save',
+    {
+      "action": "新增地址 或 修改地址(传id)",
+      "method": "post",
+      "encrypt": false,// 是否加签
+    }
+  ],
+  'queryUserAddressList': [
+    '/user/userAddress/query',
+    {
+      "action": "获取列表",
+      "method": "get",
+      "encrypt": false,// 是否加签
+    }
+  ],
+  'setDefaultAddress': [
+    '/user/userAddress/setDefault',
+    {
+      "action": "设置默认地址",
+      "method": "post",
+      "encrypt": false,// 是否加签
+    }
+  ],
+  'deleteAddress': [
+    '/user/userAddress/setDefault',
+    {
+      "action": "设置默认地址",
+      "method": "post",
+      "encrypt": false,// 是否加签
+    }
+  ],
+  /***************************** 首页接口 ************************ */
   'queryAdList':[
     '/config/advertisement/queryAdvertisementList',
     {
@@ -86,6 +119,14 @@ const api = {
     {
       "action": "获取首页4个分类",
       "method": "get",
+      "encrypt": false
+    }
+  ],
+  'queryFeaturedList': [
+    '/config/advertisement/queryRecommendedPageList',
+    {
+      "action": "获取首页4个分类",
+      "method": "post",
       "encrypt": false
     }
   ],
@@ -128,6 +169,79 @@ const api = {
     {
       "action": "导师绑定<为你转身!>",
       "method": "get",
+      "encrypt": false
+    }
+  ],
+  'givePackage': [
+    '/user/userSign/givePackage',
+    {
+      "action": "获取红包",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
+  /********************* 登录 ************************ */
+  'verifyWechat': [
+    '/user/userLogin/verifyWechat',
+    {
+      "action": "验证openid是否注册",
+      "method": "post",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
+  'wechatLogin': [
+    '/user/userLogin/wechatLogin',
+    {
+      "action": "微信登陆",
+      "method": "post",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
+  'sweepCode': [
+    '/user/invite/checkValid',
+    {
+      "action": "邀请码是否过期",
+      "method": "post",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
+  'getLevel': [
+    '/user/getUser',
+    {
+      "action": "获取用户信息",
+      "method": "get",
+      "encrypt": false,
+      'isShowLoading': false,
+      "isShowErrMsg": false,
+    }
+  ],
+  /**********************消息**************************/
+  'noticeMessageCount': [
+    '/notice/newNoticeMessageCount',
+    {
+      "action": "获取用户信息",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+      'isShowLoading': false,
+    }
+  ],
+  'queryNoticeMessage': [
+    '/notice/queryNoticePage',
+    {
+      "action": "通知详情",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  'queryMessage': [
+    '/message/queryMessagePage',
+    {
+      "action": "消息",
+      "method": "post",
       "encrypt": false
     }
   ],
@@ -339,7 +453,7 @@ const api = {
     {
       "action": "确认订单",
       "method": "post",
-      "encrypt": false,
+      "encrypt": true,
       'isShowErrMsg': false,
     }
   ],
@@ -348,7 +462,7 @@ const api = {
     {
       "action": "确认订单",
       "method": "post",
-      "encrypt": false,
+      "encrypt": true,
       'isShowErrMsg': false,
     }
   ],
@@ -357,7 +471,7 @@ const api = {
     {
       "action": "降价拍-提交订单",
       "method": "post",
-      "encrypt": false,
+      "encrypt": true,
       'isShowErrMsg': false,
     }
   ],
@@ -366,7 +480,7 @@ const api = {
     {
       "action": "秒杀-提交订单",
       "method": "post",
-      "encrypt": false,
+      "encrypt": true,
       'isShowErrMsg': false,
     }
   ],
@@ -375,7 +489,7 @@ const api = {
     {
       "action": "秒杀-提交订单",
       "method": "post",
-      "encrypt": false,
+      "encrypt": true,
       'isShowErrMsg': false,
     }
   ],
@@ -442,6 +556,7 @@ const api = {
       "method": "post",
       "encrypt": false,
       'isShowLoading': false,
+      'isShowErrMsg': false,
     }
   ],
   /************************** 优惠券 *******************************/

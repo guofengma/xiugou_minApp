@@ -15,9 +15,6 @@ export default class ProductFactorys  {
       // 用户不能购买 限购但属于数量小于等于0且状态不是1
       if ((datas.buyLimit != -1 && !datas.leftBuyNum) || datas.productStatus != 1) {
         datas.canUserBuy = false
-        // if (datas.productStatus == 3) {
-        //   canAddCart = true
-        // }
       } else {
         datas.canUserBuy = true
       }
@@ -94,6 +91,11 @@ export default class ProductFactorys  {
     this.page.setData({
       nodes: tbody
     })
+  }
+  onShow(){
+    if (this.page.data.didLogin) {
+      this.queryPushNum()
+    }
   }
   didLogin(){ // 是否登录 
     Tool.didLogin(this.page)

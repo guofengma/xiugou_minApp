@@ -886,7 +886,7 @@ export default class Tool {
     // 登录以后的操作
 
     static loginOpt(req){
-      let datas = req.responseObject.data || {}
+      let datas = req.data || {}
       if (datas.token){
         global.Storage.setToken(datas.token)
       }

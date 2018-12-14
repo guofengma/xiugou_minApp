@@ -1,5 +1,5 @@
 // pages/my/account.js
-let { Tool, RequestFactory, Storage, Event, Operation } = global;
+let { Tool, API, Storage, Event } = global;
 import WxParse from '../../../../libs/wxParse/wxParse.js';
 Page({
     data: {
@@ -12,7 +12,6 @@ Page({
     },
     onLoad: function (options) {
       this.getData()
-      Event.emit('queryPushNum')
     },
     onShow: function () {
 
@@ -24,19 +23,18 @@ Page({
         let params = {
           pageSize: this.data.pageSize,
           page: this.data.currentPage,
-          reqName: '通知详情',
-          'type':200,
-          url: Operation.queryNoticeMessage
+          'type': 200,
         }
-        this.setData({
-          params: params
-        })
-        let r = RequestFactory.wxRequest(params);
-        r.successBlock = (req) => {
+        this.data.params = params
+        // this.setData({
+        //   params: params
+        // })
+        API.queryNoticeMessage(params).then((res) => {
           let list = [];
-          if (!req.responseObject.data.totalPage) return
-          for (let i in req.responseObject.data.data) {
-            let item = req.responseObject.data.data[i];
+          let datas = res.data || {}
+          if (!datas.totalPage) return
+          for (let i in datas.data) {
+            let item = datas.data[i];
             list.push(item)
             item.orderTime = Tool.formatTime(item.startTime)
           }
@@ -55,18 +53,18 @@ Page({
           });
           this.setData({
             list: this.data.list.concat(this.data.listContent),
-            totalPage: req.responseObject.data.totalPage,
+            totalPage: datas.totalPage,
           })
           if (this.data.totalPage > this.data.currentPage) {
-              this.setData({
-                currentPage: ++this.data.currentPage
-              })
+            this.setData({
+              currentPage: ++this.data.currentPage
+            })
           } else {
-              this.data.hasNext = false
+            this.data.hasNext = false
           }
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
+        }).catch((res) => {
+         
+        })
       }
 
     },

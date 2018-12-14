@@ -92,7 +92,7 @@ Page({
     Tool.navigateTo(page)
   },
   onUnload: function () {
-    clearInterval(this.data.time)
+    clearTimeout(this.data.time)
     Event.off('updataExpressNo', this.updataExpressNo)
   },
 })

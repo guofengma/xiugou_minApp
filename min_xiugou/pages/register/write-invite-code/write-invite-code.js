@@ -15,7 +15,7 @@ Page({
     API.mentorBind({
       code: this.data.code
     }).then((res) => {
-      this.dismiss()
+      this.next()
     }).catch((res) => {
       this.setData({
         disabled: false
