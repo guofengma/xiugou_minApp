@@ -1,11 +1,11 @@
 // 每次发布要 切换 h5webUrl地址 baseUrl请求地址  rasVersion加签版本
 const config = {
-  rasVersion: '1.0.4.5', //数据加签版本号
+  rasVersion: '1.0.4.12', //数据加签版本号
   rasClient: 'miniapp', // 数据加签端口
-  // h5webUrl: 'https://uath5.sharegoodsmall.com',// 市场部内测环境
-  // baseUrl: 'https://uatapi.sharegoodsmall.com/gateway',// 市场部内测环境
-  h5webUrl: 'https://testh5.sharegoodsmall.com',
-  baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
+  h5webUrl: 'https://h5.sharegoodsmall.com',// 市场部内测环境
+  baseUrl: 'https://api.sharegoodsmall.com/gateway',// 市场部内测环境
+  // h5webUrl: 'https://testh5.sharegoodsmall.com',
+  // baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
   // h5webUrl: 'http://devh5.sharegoodsmall.com',
   // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
   // baseUrl: 'http://172.16.10.42:4090/gateway',  // 蒋
@@ -33,6 +33,7 @@ const config = {
     m_fill: '?x-oss-process=image/resize,p_65', // 将图按比例缩略到原来的 65%
     m_mfit: '?x-oss-process=image/resize,m_mfit,h_300,w_300', // 将图缩略成宽度为 300，高度为 300，按短边优先
   },
-  imgBaseUrl:"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/",// 图片的地址
+  // imgBaseUrl:"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/",// 图片的地址
+  imgBaseUrl:"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/",// 图片的地址
 }
 export default config

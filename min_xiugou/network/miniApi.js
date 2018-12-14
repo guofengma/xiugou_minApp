@@ -453,7 +453,7 @@ const api = {
     {
       "action": "确认订单",
       "method": "post",
-      "encrypt": false,
+      "encrypt": true,
       'isShowErrMsg': false,
     }
   ],
@@ -462,7 +462,7 @@ const api = {
     {
       "action": "确认订单",
       "method": "post",
-      "encrypt": false,
+      "encrypt": true,
       'isShowErrMsg': false,
     }
   ],
@@ -471,7 +471,7 @@ const api = {
     {
       "action": "降价拍-提交订单",
       "method": "post",
-      "encrypt": false,
+      "encrypt": true,
       'isShowErrMsg': false,
     }
   ],
@@ -480,7 +480,7 @@ const api = {
     {
       "action": "秒杀-提交订单",
       "method": "post",
-      "encrypt": false,
+      "encrypt": true,
       'isShowErrMsg': false,
     }
   ],
@@ -489,7 +489,7 @@ const api = {
     {
       "action": "秒杀-提交订单",
       "method": "post",
-      "encrypt": false,
+      "encrypt": true,
       'isShowErrMsg': false,
     }
   ],
