@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -35,19 +35,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 48,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "注册",
 					"pathName": "pages/register/register",
-					"query": "inviteId=200"
+					"query": "inviteCode=200"
 				},
 				{
 					"id": 1,
 					"name": "产品详情页",
 					"pathName": "pages/product-detail/product-detail",
-					"query": "productId=77"
+					"query": "productId=SPU00000039"
 				},
 				{
 					"id": 2,
@@ -59,7 +59,7 @@
 					"id": 3,
 					"name": "降价拍详情页",
 					"pathName": "pages/product-detail/discount-detail/discount-detail",
-					"query": "code=JJP1810130020"
+					"query": "code=JJP1812030003"
 				},
 				{
 					"id": -1,
@@ -101,13 +101,13 @@
 					"id": 10,
 					"name": "申请售后",
 					"pathName": "pages/after-sale/apply-sale-after/apply-sale-after",
-					"query": "refundType=1&returnProductId=1"
+					"query": "refundType=0&orderProductNo=O1166141"
 				},
 				{
-					"id": -1,
+					"id": 11,
 					"name": "退货详情",
 					"pathName": "pages/after-sale/return-goods/return-goods",
-					"query": ""
+					"query": "serviceNo=3181208151417094177768"
 				},
 				{
 					"id": -1,
@@ -191,7 +191,7 @@
 					"id": 25,
 					"name": "礼包",
 					"pathName": "pages/product-detail/gift-bag-detail/gift-bag-detail",
-					"query": "giftBagId=TC201810130007"
+					"query": "giftBagId=TC201811290008"
 				},
 				{
 					"id": -1,
@@ -218,10 +218,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 30,
 					"name": "换货",
 					"pathName": "pages/after-sale/exchange-goods/exchange-goods",
-					"query": ""
+					"query": "serviceNo=3181208152857765177160"
 				},
 				{
 					"id": 31,
@@ -305,7 +305,7 @@
 					"id": 44,
 					"name": "webview",
 					"pathName": "pages/web-view/web-view",
-					"query": "id=1"
+					"query": "webType=5"
 				},
 				{
 					"id": -1,
@@ -336,6 +336,54 @@
 					"name": "产品缺失页面",
 					"pathName": "pages/product-detail/temp/defect/defect",
 					"query": "productId=77"
+				},
+				{
+					"id": -1,
+					"name": "css3玻璃球",
+					"pathName": "pages/my/test2",
+					"query": "productId=77"
+				},
+				{
+					"id": -1,
+					"name": "查看物流",
+					"pathName": "pages/logistics/logistics-list/logistics-list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "选择导师",
+					"pathName": "pages/mentorInfo/choose-mentor/choose-mentor",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "填写导师信息",
+					"pathName": "pages/mentorInfo/write-info/write-info",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "导师详情",
+					"pathName": "pages/mentorInfo/mentor-detail/mentor-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "仅退款",
+					"pathName": "pages/after-sale/only-refund/only-refund-detail/only-refund-detail",
+					"query": "serviceNo=3181208155653708177712"
+				},
+				{
+					"id": -1,
+					"name": "支付",
+					"pathName": "pages/order-confirm/pay/pay",
+					"query": ""
+				},
+				{
+					"id": 57,
+					"name": "订单详情",
+					"pathName": "pages/my/orderDetail/orderDetail",
+					"query": "orderId=O1166141"
 				}
 			]
 		}

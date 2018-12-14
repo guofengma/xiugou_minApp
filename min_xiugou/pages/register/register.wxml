@@ -1,4 +1,4 @@
-<form bindsubmit="formSubmit" class='form' wx:if='{{!invalidTips.invalid}}'>
+<form  class='form' wx:if='{{!invalidTips.invalid}}'>
   <view class='section'>
     <view class='flexR'>
       <text>手机号</text>
@@ -22,7 +22,7 @@
   </view>
   <view class='tips'>密码为6~18位数字和字母的组合(设置的手机号将作为账号登录)</view>
   <view class="btn-area">
-    <button formType="submit" class='loginBtn' disabled='{{disabled}}' wx:if='{{userInfo}}'>下一步</button>
+    <button catchtap='formSubmit' class='loginBtn' disabled='{{disabled}}' wx:if='{{userInfo}}'>下一步</button>
     <button wx:else open-type="getUserInfo" class="loginBtn" bindgetuserinfo="agreeGetUser" lang="zh_CN" disabled='{{disabled}}'>下一步</button>
   </view>
 

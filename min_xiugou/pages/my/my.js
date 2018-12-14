@@ -1,6 +1,6 @@
 
 // pages/my/account.js
-let { Tool, RequestFactory, Storage, Event, Operation} = global
+let { Tool, Storage, Event,API} = global
 
 const app = getApp()
 
@@ -29,13 +29,14 @@ Page({
         '/pages/my/task/task',//我的任务
         '/pages/my/extension/extension',//我的推广
         '/pages/discover/discover-fav/discover-fav',//发现收藏
+        '/pages/mentorInfo/mentor-detail/mentor-detail',//导师详情
       ]
     },
     onLoad: function (options) {
       this.didLogin()
       this.refreshMemberInfoNotice()
       Event.on('refreshMemberInfoNotice', this.refreshMemberInfoNotice, this);
-      Event.on('didLogin', this.didLogin, this);  
+      Event.on('didLogin', this.didLogin, this); 
     },
     onPullDownRefresh: function () {
       this.onLoad()
@@ -48,6 +49,7 @@ Page({
       if (this.data.didLogin){
         this.getLevel()
         this.countUserOrderNum()
+        this.queryPushMsg()
       }else{
         this.setData({
           countUserOrderNum:{}
@@ -68,33 +70,33 @@ Page({
     refreshMemberInfoNotice() {
       Tool.getUserInfos(this)
     },
-    countUserOrderNum(){ // 获取订单数量
-      let params = {
-        isShowLoading: false,
-        reqName: '获取用户等级',
-        url: Operation.countUserOrderNum
+    queryPushMsg(){
+      let callBack = (datas)=>{
+        this.setData({
+          pushMsg:datas
+        })
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data
+      app.queryPushMsg(callBack)
+    },
+    countUserOrderNum(){ // 获取订单数量
+      API.countUserOrderNum({}).then((res) => {
+        let datas = res.data
         this.setData({
           countUserOrderNum: datas
         })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
-
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     getLevel(){
-      if (!this.data.didLogin) return
       let callBack =(datas)=>{
-        datas.availableBalance0 = Tool.formatNum(datas.availableBalance || 0)
-        // datas.userScore0 = Tool.formatNum(datas.userScore || 0)
-        datas.blockedBalance0 = Tool.formatNum(datas.blockedBalance || 0)
         Storage.setUserAccountInfo(datas)
         this.setData({
-          userInfos: datas
+          userInfos: datas,
+          range: (Number(datas.experience) - Number(datas.levelFloor)) / (Number(datas.levelCeil) - Number(datas.levelFloor)) * 100,
         })
+        this.initDatas()
+        this.render()
       }
       app.getLevel(callBack)
     },
@@ -140,4 +142,133 @@ Page({
       Event.off('refreshMemberInfoNotice', this.refreshMemberInfoNotice);
       Event.off('didLogin', this.didLogin);
     },
+  initDatas() {
+    // 使用 wx.createContext 获取绘图上下文 context
+    // this.data.ctx = wx.createContext();
+    this.data.ctx = wx.createCanvasContext('firstCanvas')
+    // this.data.nowRange = 40;   //用于做一个临时的range
+    let systemInfo = wx.getSystemInfoSync()
+    //画布属性
+    this.data.mW = 80 / 750 * systemInfo.windowWidth;
+    this.data.mH = 80 / 750 * systemInfo.windowWidth;
+    this.data.lineWidth = 1 / 750 * systemInfo.windowWidth;
+
+    //圆属性
+    this.data.r = this.data.mH / 2; //圆心
+    this.data.cR = this.data.r - 2 * this.data.lineWidth; //圆半径
+
+    //Sin 曲线属性
+    this.setData({
+      rate: 750 * systemInfo.windowWidth,
+      nowRange: 1,//用于做一个临时的range
+      sX: 0,
+      axisLength: this.data.mW,//轴长
+      waveWidth: 0.12,//波浪宽度,数越小越宽
+      waveHeight: 0.008,//波浪高度,数越大越高
+      speed: 0.4,//波浪速度，数越大速度越快
+      xOffset: 10,//波浪x偏移量
+      IsdrawCircled: false, // 画圈函数
+      lastTime:0,
+    })
+
+    this.data.ctx.setLineWidth(this.data.lineWidth)
+
+  },
+  drawCircle() {
+    let ctx = this.data.ctx
+    let r = this.data.r
+    let cR = this.data.cR
+    ctx.beginPath();
+    ctx.strokeStyle = '#FFC079';
+    ctx.arc(r, r, cR + 1, 0, 2 * Math.PI);
+    ctx.stroke();
+    this.data.IsdrawCircled = true;
+  },
+  drawText() { // 写百分比文本函数
+    let ctx = this.data.ctx
+    this.data.ctx.save();
+    let size = 0.6* this.data.cR;
+    ctx.setTextAlign('center');
+    ctx.setFontSize(size)
+    ctx.setFillStyle('#ffffff')
+    ctx.fillText(this.data.userInfos.levelRemark || '', this.data.r, this.data.r + size / 2);
+    ctx.restore();
+  },
+  render() {
+    let ctx = this.data.ctx
+    ctx.clearRect(0, 0, this.data.mW, this.data.mH);
+
+    let rangeValue = this.data.range;
+
+    if (!this.data.IsdrawCircled) {
+      this.drawCircle();
+    }
+
+    if (this.data.nowRange <= rangeValue) {
+      this.data.nowRange += 1;
+    }
+
+    if (this.data.nowRange > rangeValue) {
+      this.data.nowRange -= 1;
+    }
+    ctx.beginPath();
+    ctx.arc(this.data.r, this.data.r, this.data.cR, 0, 2 * Math.PI);
+    ctx.clip();
+    this.drawSin(this.data.xOffset + Math.PI * 0.7, '#D01433', 18);
+    this.drawSin(this.data.xOffset, '#B1021B', 18);
+    this.drawText();
+    this.data.xOffset += this.data.speed;
+    let that = this
+    ctx.draw()
+    let timer = this.requestAnimationFrame(this.render);
+    this.setData({
+      timer:timer
+    })
+  },
+  requestAnimationFrame(callback){
+    let id = setTimeout(function () { callback(); },
+      200);
+    return id;
+  },
+  drawSin(xOffset, color, waveHeight) {
+    let ctx = this.data.ctx
+   
+    ctx.save();
+
+    let points = [];  //用于存放绘制Sin曲线的点
+
+    ctx.beginPath();
+    //在整个轴长上取点
+    let sX = this.data.sX
+    let axisLength = this.data.axisLength
+    let mH = this.data.mH
+    for (let x = sX; x < sX + axisLength; x += 20 / axisLength) {
+      //此处坐标(x,y)的取点，依靠公式 “振幅高*sin(x*振幅宽 + 振幅偏移量)”
+      let y = Math.sin((-sX - x) * this.data.waveWidth + xOffset) * 0.2 + 0.1;
+
+      let dY = mH * (1 - this.data.nowRange / 100);
+
+      points.push([x, dY + y * waveHeight]);
+      ctx.lineTo(x, dY + y * waveHeight);
+    }
+
+    //封闭路径
+    ctx.lineTo(axisLength, mH);
+    ctx.lineTo(sX, mH);
+    ctx.lineTo(points[0][0], points[0][1]);
+    
+    ctx.setFillStyle(color)
+    ctx.fill();
+
+    ctx.restore();
+  },
+  joinUsClicked(){
+    Tool.switchTab('/pages/discover/discover')
+  },
+  levelClicked(){
+    Tool.navigateTo('/pages/my/my-promotion/my-promotion')
+  },
+  onHide: function () {
+    clearTimeout(this.data.timer)
+  },
 })

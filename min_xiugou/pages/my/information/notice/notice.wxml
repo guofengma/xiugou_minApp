@@ -10,7 +10,7 @@
           <view class="content">
             <template is="wxParse" data="{{wxParseData:item}}"/>
           </view>
-          <!--<view class="watch-detail" bindtap="informationDetail" data-id="{{item.id}}">查看详情 <image src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/detail-btn.png"></image></view>-->
+          <!--<view class="watch-detail" bindtap="informationDetail" data-id="{{item.id}}">查看详情 <image src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/detail-btn.png"></image></view>-->
       </view>
   </block>
   <view wx:else class='sub-page'>

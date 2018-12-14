@@ -11,7 +11,10 @@
     </view>
     <view  class='prd-info-cell'>
       <view wx:if='{{show}}'>
-        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        <block wx:for='{{datas.showContent}}' wx:key='{{index}}'>
+          <image-sub imgStyle='{{"width:100%"}}' imgSrc="{{item}}"/>
+        </block>
+        <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}" /> -->
       </view>
       <view wx:else class='table-view'>
         <rich-text nodes="{{nodes}}" bindtap="tap"></rich-text>

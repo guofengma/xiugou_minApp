@@ -8,70 +8,74 @@
 
 
 <view class="order-list" wx:for="{{list}}" wx:key="unique" wx:for-item="item">
-  <view class="header" bindtap="toOrderDetail" data-id="{{item.id}}" data-status="{{item.status}}">
+  <view class="header" bindtap="toOrderDetail" data-id="{{item.showOrderNo}}" data-status="{{item.showStatus}}">
     <view class="left">
-      订单编号：{{item.orderNum}}
+      订单编号：{{item.showOrderNo}}
     </view>
     <view class="order-status red right">
-      <text wx:if="{{item.status==1}}">待支付</text>
-      <text wx:elif="{{item.status==2}}">待发货</text>
-      <text wx:elif="{{item.status==3}}">待收货</text>
-      <text wx:elif="{{item.status==4 || tem.status==5 || item.status==6 }}">已完成</text>
-      <text wx:elif="{{item.status== 8}}">已关闭</text>
-      <text wx:elif="{{item.status== 7}}">已取消</text>
+      <text wx:if="{{item.showStatus==1}}">待支付</text>
+      <text wx:elif="{{item.showStatus==2}}">待发货</text>
+      <text wx:elif="{{item.showStatus==3}}">待收货</text>
+      <text wx:elif="{{item.showStatus==4 }}">已完成</text>
+      <text wx:elif="{{item.showStatus== 5}}">已关闭</text>
+      <!-- <text wx:elif="{{item.status== 7}}">已取消</text> -->
     </view>
   </view>
   <view class="clearfix"></view>
   <view class="body">
-    <view class="item-area" bindtap="toOrderDetail" data-id="{{item.id}}" data-status="{{item.status}}">
-      <view class="item" wx:for="{{item.orderProductList}}" wx:key="item" wx:for-item="oItem">
+    <view class="item-area" bindtap="toOrderDetail" data-id="{{item.showOrderNo}}" data-status="{{item.showStatus}}">
+      <view class="item" wx:for="{{item.showProducts}}"  wx:for-item="oItem"  wx:for-index="key" wx:key="{{key}}">
         <image src="{{oItem.specImg}}" alt=""></image>
         <view class="goods-inf">
           <view class="ellipsis-2 label-line">
-            <text class='label-red-border' wx:if='{{item.orderType==98 || item.orderType==5}}'>礼包</text> {{oItem.productName}}
+            <!-- <text class='label-red-border' wx:if='{{item.orderType==98 || item.orderType==5}}'>礼包</text>  -->
+            {{oItem.productName}}
           </view>
-          <view class="color-classify">{{oItem.spec}} </view>
+          <view class="color-classify">{{oItem.specValues}} </view>
         </view>
         <view>
-          <view class="price">￥{{oItem.price}}</view>
+          <view class="price">￥{{oItem.unitPrice}}</view>
           <!--<view class="org-price">￥{{item.price}}</view>-->
-          <view class="num">x{{oItem.num}}</view>
+          <view class="num">x{{oItem.quantity}}</view>
         </view>
       </view>
     </view>
 
     <view class="amount">
-      <text>共{{item.orderProductList.length}}件商品 合计：</text>
-      <text class="red font-30">￥{{item.needPrice}}</text>
-      <text class="freight">(含运费￥{{item.freightPrice}})</text>
+      <text>共{{item.showNum}}件商品 {{ item.showStatus==1 || item.showStatus==5 ? "需付款":"实付款"}}：</text>
+      <text class="red font-30">￥{{item.showAmount}}</text>
+      <!-- <text class="freight">(含运费￥{{item.freightPrice}})</text> -->
     </view>
-    <view class="time">
+    <!-- <view class="time">
       <text wx:if="{{ item.status==4 || item.status==5}}">完成时间：{{item.showFinishTime}}</text>
       <text wx:elif="{{ item.status==3 }}">发货时间：{{item.sendTime}}</text>
       <text wx:elif="{{ item.status==2 }}">付款时间：{{item.payTime}}</text>
       <text wx:elif="{{ item.status==7 }}">取消时间：{{item.cancelTime}}</text>
       <text wx:elif="{{ item.status==8 }}">关闭时间：{{item.payEndTime}}</text>
       <text wx:else>创建时间：{{item.createTime}}</text>
-    </view>
+    </view> -->
     <view>
-      <view class="footer" wx:if='{{item.status!=2}}'>
+     <!-- <view class="cancel-btn" bindtap="logistics" data-index='{{index}}'>查看物流</view> -->
+    <view class="footer" wx:if='{{item.showStatus!=2}}'>
         <!-- 倒计时  -->
-        <view class="left red ellipsis" wx:if="{{item.status==1}}">
+        <!-- <view class="left red ellipsis" wx:if="{{item.showStatus==1}}">
           {{item.countDownTime}}
+        </view> -->
+        <view class="right" wx:if="{{ item.showStatus!=1 && item.showStatus!=2 && item.showStatus!=3 }}">
+        <!-- <view class="cancel-btn" bindtap="logistics" data-index='{{index}}'>查看物流</view> -->
+          <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.showOrderNo}}" data-status="{{item.showStatus}}">删除订单</view>
+          <view class="pay-btn red" bindtap='continueBuy' data-index='{{index}}'>再次购买</view>
         </view>
-        <view class="right" wx:if="{{ item.status!=1 && item.status!=2 && item.status!=3 }}">
-          <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.orderNum}}" data-status="{{item.status}}">删除订单</view>
-          <view class="pay-btn red" bindtap='continueBuy' data-id="{{item.id}}" wx:if='{{item.orderType!=5&&item.orderType!=98}}'>再次购买</view>
-        </view>
-        <view class="right" wx:elif="{{ item.status==1}}">
-          <view class="cancel-btn" bindtap="cancelItem" data-ordernum="{{item.orderNum}}">取消订单</view>
-          <view class="pay-btn red" bindtap='continuePay' data-item="{{item}}">
-            {{item.outTradeNo? "继续支付":"去支付"}}
+        <view class="right" wx:elif="{{ item.showStatus==1}}">
+          <view class="cancel-btn" bindtap="cancelItem" data-ordernum="{{item.showOrderNo}}">取消订单</view>
+          <view class="pay-btn red" bindtap='continuePay' data-index='{{index}}'>
+            <!-- {{item.outTradeNo? "继续支付":"去支付"}} -->
+            去支付
           </view>
         </view>
-        <view class="right" wx:elif="{{item.status==3}}">
-          <view class="cancel-btn" bindtap="logistics" data-id="{{item.expressNo}}">查看物流</view>
-          <view class="pay-btn red" bindtap="confirmReceipt" data-id="{{item.orderNum}}" data-index='{{index}}'>确认收货</view>
+        <view class="right" wx:elif="{{item.showStatus==3}}">
+          <view class="cancel-btn" bindtap="logistics" data-index='{{index}}'>查看物流</view>
+          <view class="pay-btn red" bindtap="confirmReceipt" data-id="{{item.showOrderNo}}" data-index='{{index}}'>确认收货</view>
         </view>
       </view>
       <view class="clearfix"></view>

@@ -1,0 +1,20 @@
+.textarea{
+  padding: 20rpx 30rpx;
+  width: 100%;
+}
+.title{
+  height: 84rpx;
+  padding: 0 30rpx;
+}
+.detail-remark{
+  position: relative;
+}
+.number{
+  position: absolute;
+  right: 20rpx;
+  bottom: 20rpx;
+}
+.loginBtn{
+  margin: 400rpx auto 20rpx auto;
+  border-radius: 50rpx;
+}

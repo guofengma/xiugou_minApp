@@ -3,7 +3,8 @@ import {
   Tool,
   Event,
   RequestFactory,
-  Operation
+  Operation,
+  API
 } from './tools/tcglobal';
 
 const ald = require('./libs/ald-stat/ald-stat.js')
@@ -11,7 +12,11 @@ const ald = require('./libs/ald-stat/ald-stat.js')
 import config from './config.js'
 
 App({
-    onLaunch: function () {
+    onLaunch: function (o) {
+      if (!Storage.getPlatform()) {
+        let uuid = Tool.getUUID()
+        Storage.setPlatform(uuid)
+      }
       //设置全局变量
       global.Storage = Storage;
       global.Tool = Tool;
@@ -19,17 +24,14 @@ App({
       global.RequestFactory = RequestFactory;
       global.Operation = Operation
       global.Config = config
+      global.API = API
       this.getSystemInfo();
-      if (!Storage.getPlatform()){
-        let uuid = Tool.getUUID()
-        Storage.setPlatform(uuid)
-      }
       this.wxLogin()
       let systemInfo = wx.getSystemInfoSync()
       this.deleteInviteId()
     },
     onShow: function () {
-      // 比如记录小程序启动时长
+
     },
     globalData: {
         userInfo: null,
@@ -53,27 +55,29 @@ App({
           let code = res.code
           if (code) {
             this.globalData.code = code;
-            this.toLogin(this.globalData.code, callBack)
+            this.toLogin(callBack)
           }
         }
       })
     },
-    toLogin(code, callBack = () => { }) {
-      if (!code) return
-      let params = {
-        wechatCode: code,
-        reqName:'获取openid和是否注册',
-        url: Operation.verifyWechat,
+    shareClick(userId) {
+      if (userId !== 'null' && userId !== 'undefined' && userId) {
+        API.shareClick({ userId: userId }).then(res => { });
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        Tool.loginOpt(req)
-        let datas = req.responseObject.data
+    },
+    toLogin(callBack = () => { }) {
+      if (!this.globalData.code) return
+      API.verifyWechat({
+        wechatCode: this.globalData.code
+      }).then((res) => {
+        Tool.loginOpt(res)
+        let datas = res.data || {}
+        this.globalData.openid = datas.openid
         Storage.setWxOpenid(datas.openid)
         callBack()
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     /**
      * 调用微信接口，获取设备信息接口
@@ -97,20 +101,27 @@ App({
 
       }
     },
-    getLevel(callBack=()=>{}) {
-      let params = {
-        isShowLoading: false,
-        reqName: '获取用户等级',
-        requestMethod: 'GET',
-        url: Operation.getLevel
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data
+    getLevel(callBack = () => { }) { // 获取用户等级
+      API.getLevel({}).then((res) => {
+        let datas = res.data || {}
+        datas.availableBalance0 = Tool.formatNum(datas.availableBalance || 0)
+        datas.blockedBalance0 = Tool.formatNum(datas.blockedBalance || 0)
+        let levelName = datas.levelName || ''
+        datas.levelName0 = levelName.length > 4 ? levelName.slice(0, 4) + '...' : levelName
         Storage.setUserAccountInfo(datas)
         callBack(datas)
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
+    queryPushMsg(callBack = () => { }) { // 消息未读详情
+      API.noticeMessageCount({}).then((res) => {
+        let detail = res.data || {};
+        detail.totalMessageNum = detail.messageCount + detail.noticeCount + detail.shopMessageCount
+        detail.hasMsg = detail.totalMessageNum > 0 ? true : false
+        callBack(detail)
+      }).catch((res) => {
+        console.log(res)
+      })
+    }
 })

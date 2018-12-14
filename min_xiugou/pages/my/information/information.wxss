@@ -36,7 +36,7 @@
     width: 260rpx;
     height: 200rpx;
     background: #fff;
-    background: transparent url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/notice.png) no-repeat;
+    background: transparent url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/notice.png) no-repeat;
     background-size: 100%;
     margin-left: 50rpx;
 }

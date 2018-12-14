@@ -211,8 +211,30 @@ export default class Storage {
     static getExpressCom() {
       return this.getterFor('expressCom');
     } 
+    // 多包裹物流信息
+    static setExpressInfo(info) {
+      this.setterFor('expressNoInfo', info)
+    }
 
+    static getExpressInfo() {
+      return this.getterFor('expressNoInfo');
+    } 
     // 保存优惠券
+    static setCoupon(info) {
+      this.setterFor('coupon', info)
+    }
+
+    static getCoupon() {
+      return this.getterFor('coupon');
+    }     
+    // queryStringParams
+    static setQueryStringParams(info) {
+      this.setterFor('queryStringParams', info)
+    }
+
+    static getQueryStringParams() {
+      return this.getterFor('queryStringParams');
+    }  
     static setCoupon(info) {
       this.setterFor('coupon', info)
     }
@@ -221,7 +243,7 @@ export default class Storage {
       return this.getterFor('coupon');
     } 
     
-    // 保存优惠券
+    // 保存1元券
     static setTokenCoin(info) {
       this.setterFor('tokenCoin', info)
     }
@@ -246,6 +268,14 @@ export default class Storage {
 
     static getPayOrderList() {
       return this.getterFor('payOrderList');
+    } 
+    // 提交订单的参数
+    static setSubmitOrderList(info) {
+      this.setterFor('submitOrderList', info)
+    }
+
+    static getSubmitOrderList() {
+      return this.getterFor('submitOrderList');
     } 
     
     // getToken()
@@ -292,5 +322,21 @@ export default class Storage {
   static getRedEnvelopesDate(info) {
     return this.getterFor('redEnvelopesDate');
   }
+  // 是否是首次注册
+  static setFirstRegistration(info) {
+    this.setterFor('FirstRegistration', info)
+  }
 
+  static getFirstRegistration(info) {
+    return this.getterFor('FirstRegistration');
+  }
+  
+  // 导师简介
+  static setMentorProfile(info) {
+    this.setterFor('mentorProfile', info)
+  }
+
+  static getMentorProfile(info) {
+    return this.getterFor('mentorProfile');
+  }
 }

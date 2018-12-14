@@ -12,16 +12,16 @@
 </view>
 <view class='flexC tips-exchange font-26'>
    <view class='flexR'>
-    <image-sub wx:if='{{datas.status==3}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
+    <image-sub wx:if='{{datas.status==6}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
     <view>
-      <view class='tips-title'>{{result[resultIndex].state}}</view>
-      <view>{{distanceTime}}</view>
-      <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view>
+      <view class='tips-title'>{{datas.headerTitle}}</view>
+      <view wx:if='{{!expressNo.id}}'>{{distanceTime}}</view>
+      <!-- <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view> -->
     </view>
   </view>
 </view>
-<view wx:if='{{datas.status==3}}' class='refusalReason whiteBg font-26 flexR-sb'>拒绝原因：{{result[resultIndex].info}}</view>
-<view wx:if='{{datas.status>1&&datas.status!=3}}'>
+<view wx:if='{{datas.status==6}}' class='refusalReason whiteBg font-26 flexR-sb'>{{datas.reject}}</view>
+<view wx:if='{{datas.status>1&&datas.status!=6}}'>
   <!--地址信息  -->
   <view class='address active whiteBg' >
     <template is="address-info" data="{{addressType,...datas,hasData:true,door:1}}"/>
@@ -32,40 +32,40 @@
 
   <!--物流  -->
   <view>
-    <view bindtap='logClicked' data-express='{{expressNo}}' data-type='1' wx:if='{{datas.status!=3&&!expressNo.id  || expressNo.id}}'>
-      <template is="cell-line" data="{{name:'退货物流',placeholder:expressNo.content}}"/>
+   <view wx:if='{{expressNo.id!=0&&SaleExpressNo.id!=1}}' bindtap='logClicked' data-express='{{SaleExpressNo}}' data-type='2'>
+      <template is="cell-line" data="{{name:'平台物流',placeholder:SaleExpressNo.name}}"/>
     </view>
-    <view wx:if='{{expressNo.id!=0&&SaleExpressNo.id!=1}}' bindtap='logClicked' data-express='{{SaleExpressNo}}' data-type='2'>
-      <template is="cell-line" data="{{name:'商家物流',placeholder:SaleExpressNo.content}}"/>
+    <view bindtap='logClicked' data-express='{{expressNo}}' data-type='1' >
+      <template is="cell-line" data="{{name:'换货物流',placeholder:expressNo.name}}"/>
     </view>
   </view>
 </view>
 
 <view wx:if='{{datas.status==1}}'>
-   <amend-application applyType='{{"换货"}}' list='{{datas}}' returnProductId='{{returnProductId}}' bind:reloadPage='findReturnProductById'/>
+  <amend-application applyType='{{"换货"}}' list='{{datas}}' serviceNo='{{serviceNo}}' bind:reloadPage='findReturnProductById'/>
 </view>
 <!--换货信息  -->
 
 <view class='exchange-info font-26 '>
-  <view class='flexR-sb after-sale-line gray'>换货订单</view>
+  <view class='flexR-sb after-sale-line gray'>换货信息</view>
   <template is="after-sale-prd-info" data="{{...datas}}"/>
   <view class='exchange-content whiteBg gray'>
-    <view>订单编号：{{datas.orderNum}}</view>
-    <view>换货原因：{{datas.returnReason}}</view>
+    <view>更换型号： {{datas.specValues}}</view>
+    <view>换货原因：{{datas.reason}}</view>
     <!-- <view>换货金额：¥{{list.showRefund}}</view> -->
-    <view>换货说明：{{datas.remark}}</view>
+    <view>换货说明：{{datas.description}}</view>
     <view>
       <view>凭证图片</view>
       <view class='userImg'>
-         <block wx:for='{{datas.imgList}}' wx:key='unique'>
-          <image src='{{item.smallImg}}'></image>
+         <block wx:for='{{datas.showImgList}}' wx:key='unique'>
+          <image src='{{item}}'></image>
         </block>
       </view>
     </view>
-    <view>申请时间：{{datas.applyTime}}</view>
-    <view>更换型号： {{datas.exchangeSpec}}</view>
-    <view>换货编号：{{datas.refundNo}}</view>
-    <view>数量：x {{datas.num}}</view>
+    <view>申请时间：{{datas.createTime}}</view>
+    <view>订单编号：{{ datas.warehouseOrderNo || datas.platformOrderNo}}</view>
+    <view>换货编号：{{datas.serviceNo}}</view>
+    <!-- <view>数量：x {{datas.num}}</view> -->
   </view>
 </view>
 

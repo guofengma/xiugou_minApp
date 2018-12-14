@@ -7,6 +7,8 @@ let bmap = require('../libs/baidu-map/bmap-wx.min');
 
 import config from '../config.js'
 
+import RSA from './rsa.js'
+
 //工具类
 
 
@@ -198,11 +200,11 @@ export default class Tool {
 
     // 日期倒计时 
 
-    static getDistanceTime(time, self,n) {
+    static getDistanceTime(time, self, noDay) {
       /*replace将时间字符串中所有的'-'替换成'/',parse将时间格式的字符串转换成毫秒*/
       let endTime = new Date(Date.parse(time.replace(/-/g, "/")));
       let nowTime = new Date();
-      /*getTime把一个date对象转换成毫秒*/
+      // /*getTime把一个date对象转换成毫秒*/
       let distance = endTime.getTime() - nowTime.getTime();
       let day = 0;
       let hour = 0;
@@ -217,7 +219,7 @@ export default class Tool {
         }
         minute = Math.floor(distance / 1000 / 60 % 60);
         second = Math.floor(distance / 1000 % 60);
-        if(n){
+        if (noDay){
           distanceTime =  hour + "时" + minute + "分" + second + "秒";
           if (hour==0){
             distanceTime = minute + "分" + second + "秒";
@@ -233,7 +235,36 @@ export default class Tool {
       })
       return distanceTime
     }
-
+    static showDistanceTime(time){
+      let day = Math.floor( time / 60 / 60 / 24 );
+      let hour = Math.floor(time / 60 / 60 % 24);
+      let minute = Math.floor(time / 60 % 60);
+      let second = Math.floor(time % 60);
+      if (time>=0){
+        return day + "天" + hour + "时" + minute + "分" + second + "秒";
+      } else {
+        return 0
+      }
+      // return  day + "天" + hour + "时" + minute + "分" + second + "秒";
+    }
+    // 时间倒计时
+    static timeCountdown(that,timerName, distanceTimeName, countDownSeconds,finishCB = () => { }, startCB = () => { }) { 
+      let self = this
+      clearTimeout(that.data[timerName]);
+      let distanceTime = Tool.showDistanceTime(countDownSeconds || 0)
+      if (that.data[countDownSeconds] < 0) {
+        finishCb()
+        return -1
+      }
+      let time = setTimeout(function () {
+        startCB()
+        self.timeCountdown(that, timerName, distanceTimeName, countDownSeconds, finishCB,startCB)
+      }, 1000)
+      // that.setData({
+      //   [distanceTimeName]: distanceTime,
+      //   [timerName]: time
+      // });
+    }
     //Object 空值判断
     static isEmpty(object) {
         if (object === null || object === undefined) {
@@ -264,7 +295,8 @@ export default class Tool {
     }
 
     //String 空值判断
-    static isEmptyStr(str) {
+    static isEmptyStr(str='') {
+        str = str.replace(/(^\s*)|(\s*$)/g, "")
         if (Tool.isEmpty(str)) {
             return true;
         }
@@ -426,12 +458,18 @@ export default class Tool {
 
           if (tempFilesSize <= 3145728){
             // console.log(tempFilePaths[0])
+            const headers = RSA.sign();
             wx.uploadFile({
               url: global.RequestFactory.aliyunOSSUploadImage(),
               filePath: tempFilePaths[0],
               name: 'file',
+              header: headers,
+              formData: {
+                ...headers
+              },
               success: function (res) {
                 let fileInfo = JSON.parse(res.data);
+                console.log(fileInfo)
                 successCallback(fileInfo)
               }
             })
@@ -848,16 +886,14 @@ export default class Tool {
     // 登录以后的操作
 
     static loginOpt(req){
-      // let cookies = req.header['Set-Cookie'] || req.header['set-cookie'] 
-      // if (cookies) this.formatCookie(cookies)
-      if (req.responseObject.data.token){
-        global.Storage.setToken(req.responseObject.data.token)
+      let datas = req.data || {}
+      if (datas.token){
+        global.Storage.setToken(datas.token)
       }
-      
-      global.Storage.setUserAccountInfo(req.responseObject.data)
+      global.Storage.setUserAccountInfo(datas)
       global.Event.emit('didLogin');
-      global.Storage.setWxOpenid(req.responseObject.data.openid)
-      global.Storage.setMemberId(req.responseObject.data.id)
+      global.Storage.setWxOpenid(datas.openid)
+      global.Storage.setMemberId(datas.id)
       global.Event.emit('refreshMemberInfoNotice');
     }
 
@@ -1001,14 +1037,13 @@ export default class Tool {
 
     // 退换货数据变换
 
-    static findReturnProductById(req){
-      // let data = req.responseObject.data
-      let returnProduct = req.responseObject.data
-      returnProduct.applyTime = global.Tool.formatTime(returnProduct.applyTime)
-      returnProduct.imgUrl = returnProduct.specImg
-      returnProduct.productName = returnProduct.productName
-      if (returnProduct.returnAddress) {
-        returnProduct.returnAddress.addressInfo = returnProduct.returnAddress.provinceName + returnProduct.returnAddress.cityName + returnProduct.returnAddress.areaName
+    static findReturnProductById(res){
+      let datas = res.data
+      datas.applyTime = global.Tool.formatTime(datas.applyTime)
+      datas.imgUrl = datas.specImg
+      datas.productName = datas.productName
+      if (datas.returnAddress) {
+        datas.returnAddress.addressInfo = datas.returnAddress.provinceName + datas.returnAddress.cityName + datas.returnAddress.areaName
       }
     }
 
@@ -1032,6 +1067,7 @@ export default class Tool {
     }
 
   static formatNum(num) { // 保留两位小数不四舍五入
+    num = Number(num)
     num = num < 0 ? 0 : num
     let index = String(num).lastIndexOf('.')
     if (index != -1) {

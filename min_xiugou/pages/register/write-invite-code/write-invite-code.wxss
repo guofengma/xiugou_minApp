@@ -2,7 +2,7 @@
   margin-bottom: 140rpx;
   height: 88rpx;
   border-radius: 10rpx;
-  padding:0  20rpx;
+  padding:0  30rpx;
 }
 .input-view input{
   width:75%;
@@ -11,19 +11,21 @@
   width: 25%;
 }
 .sub-page{
-  padding: 30rpx;
+  /* padding: 30rpx; */
 }
 .dismiss{
-  position: fixed;
-  width: 100%;
-  bottom: 150rpx;
+  margin-top: 30rpx;
 }
-.dismiss text{
+/* .dismiss text{
   border-bottom:1rpx solid #666;
-}
+} */
 button[disabled]:not([type]){
   background-color: #ddd;
 }
 .loginBtn{
   border-radius: 60rpx;
+}
+.title{
+  height: 84rpx;
+  padding:0 30rpx;
 }

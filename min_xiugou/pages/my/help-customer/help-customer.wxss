@@ -9,25 +9,24 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    /* height:220rpx; */
     padding: 20rpx 0 0 72rpx;
+    min-height: 140rpx;
 }
 
 .people {
-    background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_people.png") no-repeat 20rpx bottom;
+    background: url("https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/help_people.png") no-repeat 20rpx bottom;
     background-size: cover;
     width: 180rpx;
     height: 200rpx;
     margin-top: 20rpx
 }
 .content {
-    background: url("https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/help_content.png") no-repeat;
+    background: url("https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/help_content.png") no-repeat;
     background-size: cover;
     width:472rpx;
     height: 126rpx;
     margin-right: 40rpx;
     margin-top: 47rpx;
-
 }
 .tips{
    width: 430rpx; 
@@ -43,12 +42,15 @@
   color: #666666;
 }
 .icon{
-    width: 74rpx;
-    height: 74rpx;
+  width: 74rpx;
+}
+.wrap>view view{
+  margin-top: 8rpx;
 }
 .question-area{
-    font-size: 26rpx;
-    color: #222222;
+  font-size: 26rpx;
+  color: #222222;
+  border-top:1rpx solid #eee;
 }
 .question-item{
     width: 100%;

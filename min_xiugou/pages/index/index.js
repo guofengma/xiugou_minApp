@@ -2,7 +2,7 @@
 //获取应用实例
 const app = getApp()
 import { levelName, pages} from '../../tools/common.js'
-let { Tool, RequestFactory, Event, Storage, Operation} = global;
+let { Tool, RequestFactory, Event, Storage, Operation, API} = global;
 
 Page({
     data: {
@@ -47,7 +47,14 @@ Page({
         5: 'markdownPrice'
       },
       taskDetail:{},
-      width:0
+      width:0,
+      isShowCoupon:false,// 优惠卷弹窗
+      couponList:[
+        '',// 没有礼包
+        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/olduser.png",//老用户 1688
+        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/newuser_y.png",// 选择导师的新用户 2688
+        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/newuser_n.png",// 没有选择导师的新用户 666
+      ]
     },
     close() {
       this.toggleCardShow();
@@ -111,8 +118,11 @@ Page({
       })
     },
     onLoad: function (options) {
-      Event.on('getLevel', this.getLevel,this)
+      // Event.on('getLevel', this.getLevel,this)
       Event.on('didLogin', this.didLogin, this); 
+      if (!Storage.getFirstRegistration()){
+        this.selectComponent("#notice").getNotice()
+      }
       // 初始化请求
       this.initRequset(options)
       // 初始化传参
@@ -122,6 +132,14 @@ Page({
       })
     },
     onPullDownRefresh: function () {
+      this.setData({
+        recommendArr:[],
+        params: {
+          page: 1,
+          pageSize: 10
+        }
+      })
+      this.didLogin()
       this.onLoad(this.data.options)
       wx.stopPullDownRefresh();
     },
@@ -132,6 +150,10 @@ Page({
           date: new Date().toLocaleDateString(),
           id: options.inviteId
         })
+        //1、产品详情(1,2,101) 2、邀请注册(101) 3、秀场分享(在分享页面那边处理了) 4、拼店分享(暂无): 点击增加经验
+        if ([1, 2, 99, 101].includes(parseInt(options.type))) {
+          app.shareClick(options.inviteId);
+        }
       }
       if (options.type) { // 页面跳转
         Tool.navigateTo(this.data.redirectTo[options.type] + options.id)
@@ -214,27 +236,29 @@ Page({
     didLogin() {
       Tool.didLogin(this)
       if (this.data.didLogin){
-        this.findUserJobsByUserId();
+        // this.findUserJobsByUserId();
         this.getLevel()
+        this.queryPushMsg()
       }
     },
-    indexQueryCategoryList(){
-      let params = {
-        isShowLoading: false,
-        reqName: '获取首页4个分类',
-        requestMethod: 'GET',
-        url: Operation.indexQueryCategoryList
+    queryPushMsg() {
+      let callBack = (datas) => {
+        this.setData({
+          pushMsg: datas
+        })
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data || []
+      app.queryPushMsg(callBack)
+    },
+    indexQueryCategoryList(){
+      API.indexQueryCategoryList({}).then((res) => {
+        let datas = res.data || []
         this.data.iconArr.splice(5, 0, ...datas)
         this.setData({
           iconArr: this.data.iconArr
         })
-      };
-      //Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      });
     },
     discoverNotice() {
       if (!this.data.isChange) return
@@ -264,82 +288,21 @@ Page({
       Tool.navigateTo('/pages/discover/discover-detail/discover-detail?articleId='+id)
     },
     getLevel() {
-      let params = {
-        isShowLoading: false,
-        reqName: '获取用户等级',
-        requestMethod: 'GET',
-        url: Operation.getLevel
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        Storage.setUserAccountInfo(req.responseObject.data)
-        let userInfos = req.responseObject.data 
-        userInfos.experience = userInfos.experience ? userInfos.experience:0
-        let levelRemark = userInfos.levelRemark || ''
-        userInfos.levelRemark0 = levelRemark.length > 4 ? levelRemark.slice(0, 4) + '...' : levelRemark
+      let callBack = (datas)=>{
         this.setData({
-          userInfos: req.responseObject.data
+          userInfos: datas
         })
-        
-        // this.getLevelInfos()
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
-    },
-    getLevelInfos(){
-      let params = {
-        requestMethod: 'GET',
-        url: Operation.getLevelInfos,
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data || []
-        let userInfos = this.data.userInfos
-        let levelId = userInfos.levelId
-        // let levelId = 1
-        let userExp = userInfos.experience
-        // let userExp = 1300
-        let levelObj = datas.filter((item) =>{
-          return item.id == levelId
-        }) 
-        let index = datas.indexOf(levelObj[0])
-        // 下一等级
-        let nextLevel = datas[index+1]
-        // 当前等级
-        let preLevel = datas[index]
-        let width = 0
-        // 是否升级
-        let isUpdateLevel = !(userExp > nextLevel.upgradeExp)
-        userExp = userExp > nextLevel.upgradeExp? nextLevel.upgradeExp : userExp
-        if(index==0){
-          let Denominator = isUpdateLevel ? userExp / nextLevel.upgradeExp : userExp / nextLevel.upgradeExp - 0.01
-          width = Denominator  * (1 / (datas.length - 2))
-        } else if (index==datas.length-1){
-          width =1 
-        } else {
-          let Denominator = isUpdateLevel ? (userExp - preLevel.upgradeExp) / (nextLevel.upgradeExp - preLevel.upgradeExp) : (userExp - preLevel.upgradeExp) / (nextLevel.upgradeExp - preLevel.upgradeExp) - 0.01
-          width = index / (datas.length - 2) + Denominator * (1 / (datas.length - 2))
-        }
-        this.setData({
-          levelList:datas,
-          width: width*100
-        })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      app.getLevel(callBack)
     },
     queryAdList(types = 1, reqName='',callBack=()=>{}) {
-      let params = {
+      API.queryAdList({
         'type': types,
-        reqName: reqName,
-        url: Operation.queryAdList,
-      }
-      let r = RequestFactory.wxRequest(params);
-        r.successBlock = (req) => {
-          callBack(req.responseObject.data)
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
+      }).then((res) => {
+        callBack(res.data)
+      }).catch((res) => {
+        console.log(res)
+      });
     },
     adListClicked(e) {
       let adType = e.currentTarget.dataset.type;
@@ -364,25 +327,19 @@ Page({
       Tool.navigateTo(page)
     },
     queryFeaturedList() {
-      let params = {
-        ...this.data.params,
-        reqName: '获取推荐产品',
-        url: Operation.queryFeaturedList
-      }
-      let r = RequestFactory.wxRequest(params);
-        r.successBlock = (req) => {
-          let datas = req.responseObject.data
-          let list = datas.data || []
-          list.forEach((item,index)=>{
+      API.queryFeaturedList(this.data.params).then((res) => {
+        let datas = res.data || {}
+        let list = datas.data || []
+        list.forEach((item, index) => {
 
-          })
-          this.setData({
-            recommendArr: this.data.recommendArr.concat(datas.data),
-            recommendTotalPage: datas.totalPage,
-          })
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
+        })
+        this.setData({
+          recommendArr: this.data.recommendArr.concat(datas.data),
+          recommendTotalPage: datas.totalPage,
+        })
+      }).catch((res) => {
+        console.log(res)
+      });
     },
     searchClicked() {
       Tool.navigateTo('/pages/search/search?door=0')
@@ -423,6 +380,17 @@ Page({
         isShowNotice: !this.data.isShowNotice
       })
     },
+    isShowCoupon() { // 展示优惠卷
+      let index = Storage.getFirstRegistration()
+      this.setData({
+        isShowCoupon: !this.data.isShowCoupon,
+        showCouponImg: this.data.couponList[index]
+      })
+      if (!this.data.isShowCoupon) {
+        Storage.setFirstRegistration(null)
+        this.selectComponent("#notice").getNotice()
+      }
+    },
     onUnload: function () {
       Event.off('didLogin', this.didLogin);
       // Event.off('getLevel', this.getLevel)
@@ -431,7 +399,12 @@ Page({
       this.setData({
         isChange:true
       })
-      // this.discoverNotice()
+      if (Storage.getFirstRegistration()) {
+        this.isShowCoupon()
+      } 
+      if (this.data.didLogin) {
+        this.queryPushMsg()
+      }
     },
     onHide: function () {
       this.setData({

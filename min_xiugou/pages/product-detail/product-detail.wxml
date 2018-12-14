@@ -11,25 +11,25 @@
 
 
 <!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
-<view class='prduct-detail-view' wx:if='{{productInfoList}}'>
+<view class='prduct-detail-view' wx:if='{{productInfo}}'>
     <!--topbar  -->
-    <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'  size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked'/>
+    <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'  size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}'/>
     <!-- 轮播 -->
-    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked'/>
+    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}' advanceSale='{{advanceSale}}'/>
     <!-- 活动产品倒计时提示 -->
     <view wx:if='{{proNavData}}' catchtap='goPage'>
       <product-promotion-info 
         id="promotion"
         bind:countdown="timeout" 
         prop="{{proNavData}}"
-        promotionBg="{{'comming'}}" 
+        promotionBg="{{'comming'}}"
         promotionDesc="{{promotionDesc}}"
         from="normal"
         promotionType="{{activityType}}" 
       />
     </view>
     <!-- 产品信息 -->
-    <template is="product-info" data="{{productInfo,productInfoList,showPrice:true}}" />
+    <template is="product-info" data="{{productInfo,showPrice:true,groupPrice:true}}" />
     <!--产品规格选择  -->
     <view class='chooseBox'>
       <template is="product-info-chooseBox" data="{{productInfo}}" />
@@ -40,7 +40,7 @@
    
     <!-- 详情页 tabar  -->
     <view class=" boxSize {{isIPhoneX.className}}">
-      <template is="errTips"  wx:if='{{productInfoList.status==2}}'/>
+      <template is="errTips"  wx:if='{{productInfo.productStatus==2}}'/>
       <!-- <view class='cart font-22 flexC' bindtap='cartClicked'>
         <image src='/img/shoppingcart.png' mode='widthFix'></image>
         <view class='gray'>购物车</view>
@@ -48,24 +48,28 @@
       </view> -->
       <view class='flexR bottom-bar'>
         <view class='cart font-22 flexC' bindtap='btnClicked' data-key='1'>
-          <image-sub wx:if ='{{productInfoList.status==1&&productInfo.canUserBuy}}' imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor@3x.png'}}"/>
+          <image-sub wx:if ='{{productInfo.productStatus!=2}}' imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor@3x.png'}}"/>
           <image-sub wx:else imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor-2@3x.png'}}"/>
-          <view class='gray'>购物车</view>
+          <view class='gray'>加入购物车</view>
           <!-- <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view> -->
         </view>
-        <view class='buy-btn font-28 flexR {{ productInfoList.status==1 &&productInfo.canUserBuy? "redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
-          <text wx:if='{{productInfo.canUserBuy}}'>立即购买</text>
-          <text wx:else>您已购买过该商品</text>
+        <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy? "redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
+          <text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>您已购买过该商品</text>
+          <text wx:elif='{{productInfo.productStatus==3}}'>暂不可购买</text>
+          <text wx:else>立即购买</text>
         </view>
-        <view class='add-cart font-28 flexR yellowBg shareBtn-view' >
+        <!-- <view class='add-cart font-28 flexR yellowBg shareBtn-view' >
           <button class='shareBtn flexR '  open-type="{{openType}}" catchtap='shareBtnClicked' >
-            <view class='font-50'>赚</view>
-            <view class='font-22 shareMoney' style='margin-left:8rpx'>
-              <view>品牌奖励金</view>
-              <view class='ellipsis' wx:if='{{productInfoList.shareMoney}}'>¥ {{productInfoList.shareMoney}}</view>
-            </view>
+           <view wx:if='{{productInfo.shareMoney=="0.00" || productInfo.shareMoney=="0.00 - 0.00"}}'>分享赚</view>
+           <view wx:else class='flexR'>
+             <view class='font-50'>赚</view>
+              <view class='font-22 shareMoney' style='margin-left:8rpx'>
+                <view>品牌奖励金</view>
+                <view class='ellipsis'>¥ {{productInfo.shareMoney}}</view>
+              </view>
+           </view>
           </button>
-        </view>
+        </view> -->
       </view>
     </view>
     <!--置顶的按钮-->
@@ -73,7 +77,7 @@
   </view>
 <!-- </scroll-view> -->
 
-
+ 
 <!--适配iPhone X  -->
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
 
@@ -84,15 +88,17 @@
 <product-specification id='prd-info-type' 
     bind:subClicked="typeSubClicked"  
     productSpec='{{productSpec}}' 
-    price = '{{productInfoList.price}}'
+    price = '{{productInfo.price}}'
     priceList='{{priceList}}' 
     bind:counterInputOnChange='counterInputOnChange' 
-    imgUrl="{{productInfo.imgUrl}}" 
+    imgUrl="{{productInfo.imgUrl}}"
+    productStatus='{{productInfo.productStatus}}'
     showImgs='{{true}}'
-    isInit="{{false}}" 
+    isInit="{{isInit}}" 
     bind:hiddenTips='hiddenTips'
     isIphoneX='{{isIPhoneX.isIPhoneX}}'
     commodityType = '{{1}}'
+    disabled='{{false}}'
 />
 
 <alert show='{{alertShow}}' props='{{alertProps}}' bind:subClicked='shareSubClicked'>

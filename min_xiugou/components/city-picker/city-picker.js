@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation } = global;
+let { Tool, API } = global;
 
 Component({
   /**
@@ -106,70 +106,49 @@ Component({
         picker:[sheng,shi,qu]
       })
     },
+    getRequestData(fatherCode=0,callBack=()=>{}){
+      API.queryAreaList({
+        fatherCode: fatherCode
+      }).then((res) => {
+        let data = res.data || []
+        callBack(data)
+      }).catch((res) => {
+        console.log(res)
+      })
+    },
     // 获取省份
     getProvinceList() {
-      let params = {
-        fatherCode: 0,
-        isShowLoading: false,
-        requestMethod: 'GET',
-        reqName: '获取省',
-        url: Operation.queryAreaList
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let data = req.responseObject.data
+      this.getRequestData(0,(data)=>{
         this.setData({
           sheng: data
         })
         // 默认请求第一个
         this.getCityList(data[0].code) 
-      }
-      r.addToQueue();
+      })
     },
     // 获取市
     getCityList(id) {
-      console.log(id)
-      let params = {
-        fatherCode: id,
-        isShowLoading: false,
-        reqName: '获取市',
-        requestMethod: 'GET',
-        url: Operation.queryAreaList
-      }
-      let r = RequestFactory.wxRequest(params);
-      // let r = RequestFactory.getCityList({fatherZipcode:id});
-      r.successBlock = (req) => {
-        let data = req.responseObject.data
+      this.getRequestData(id, (data) => {
         this.setData({
           shi: data
         })
         // 默认请求第一个
-        if (data.length>0){
+        if (data.length > 0) {
           this.getAreaList(data[0].code)
         } else {
           this.setData({
-            qu:[]
+            qu: []
           })
         }
-      }
-      r.addToQueue();
+      })
     },
     // 获取区
     getAreaList(id) {
-      let params = {
-        fatherCode: id,
-        isShowLoading: false,
-        reqName: '获取区',
-        requestMethod: 'GET',
-        url: Operation.queryAreaList
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
+      this.getRequestData(id, (data) => {
         this.setData({
-          qu: req.responseObject.data
+          qu: data
         })
-      }
-      r.addToQueue();
+      })
     }
   },
   ready: function () {

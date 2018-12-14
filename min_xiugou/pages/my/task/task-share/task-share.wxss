@@ -2,8 +2,8 @@
 .task-share-card {
   width: 100%;
   height: 330rpx;
-  background: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/task_card_bg.png) no-repeat center;
-  background-size: 100%;
+  background: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/card_ready.png) no-repeat center;
+  background-size: 100% 100%;
   padding:24rpx 20rpx; 
   box-sizing: border-box; 
   position:relative;
@@ -13,15 +13,9 @@
   height: 182rpx;
 }
 .task-card.ready {
-  
   line-height: 182rpx;
-  background: url(https://dnlcrm.oss-cn-beijing.aliyuncs.com/xcx/card_ready.png)no-repeat center;
-  background-size: 100%;
-  color: #FF0050;
   font-size: 60rpx;
   text-align: center;
-  font-family:PingFangSC-Medium;
-  font-weight:500;
 }
 .task-card.coupon,.coupon-money .symbol {
   font-size: 24rpx;
@@ -145,4 +139,7 @@
   margin: 30rpx auto 0;
   background: #FF0050;
   color: #fff;
+}
+.task-detail-desc{
+  padding-top: 30rpx;
 }

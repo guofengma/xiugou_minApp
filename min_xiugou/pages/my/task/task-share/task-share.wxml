@@ -6,7 +6,7 @@
       <view class='lottery_btn inactive'>立即领取</view>
     </view>
     <view class='task-share-card' wx:else>
-      <!-- typeStatus：是否抽中优惠券 couponType：优惠券类型 status：是否领取-->
+      <!-- typeStatus：是否抽中优惠券 0.没中奖 1优惠券 2.秀豆奖品 couponType：优惠券类型 status：是1否2领取-->
       <view class='task-card coupon flexR' wx:if="{{scratchCard.typeStatus == 1}}">
         <view class='coupon-money'>{{scratchCard.couponType == 3 ? scratchCard.value / 10 : scratchCard.value}}<text class='symbol'>{{scratchCard.couponType == 3? '折': '元'}}</text></view>
         <view class='coupon-info'>
@@ -33,22 +33,22 @@
       </view>
       <view 
         class='lottery_btn active' 
-        catchtap='toggleModalShow'
-        wx:if="{{scratchCard.status == 2}}"
-      >立即领取</view>
-      <view 
-        class='lottery_btn active' 
         catchtap='seesese'
-        wx:elif="{{scratchCard.typeStatus === 0}}"
+        wx:if="{{scratchCard.typeStatus === 0}}"
       >再逛逛~</view>
       <view 
         class='lottery_btn active' 
+        catchtap='toggleModalShow'
+        wx:if="{{scratchCard.status == 2 && scratchCard.typeStatus > 0}}"
+      >立即领取</view>
+      <view 
+        class='lottery_btn active' 
         catchtap='toIndex'
-        wx:elif="{{scratchCard.status == 1}}"
+        wx:if="{{scratchCard.status == 1 && scratchCard.typeStatus > 0}}"
       >去使用</view>
     </view>
     <view class='task-detail-desc'>
-      <image mode='widthFix' src='{{imgUrl}}task_detail_bg.png' class='task-thumb'></image>
+      <image-sub imgStyle='{{"width:100%"}}' imgSrc="{{'renwu-bg-2.png'}}"/>
     </view>
   </view>
   <!-- 填写领取手机 -->

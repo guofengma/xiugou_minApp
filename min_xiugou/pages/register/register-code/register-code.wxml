@@ -1,25 +1,32 @@
 <view class='code-view'>
   <view class='inviterInfo '>
-    <view wx:if='{{!accoutInfo.id}}'>
-      <view class='tips font-30'>
-        请选择以下用户作为您的邀请者
+    <view>
+      <view class='tips font-26 flexR-sb'>
+        <view>请选择一个导师</view>
+        <view class='flexR gray-9' catchtap='changeClicked'>
+          <image-sub imgStyle='{{"width:32rpx;margin-right:10rpx"}}' imgSrc="{{'shuaxin-icon.png'}}"/>
+          换一换
+        </view>
       </view>
-      <view class='inviter flexR'>
-       <view class='flexC'wx:for='{{invite}}' wx:key="unique" bindtap='inviterClicked' data-key='{{item.code}}'>
-         <image src='{{ item.head_img? item.head_img:"../../../img/default-userImg.png"}}'></image>
-         <text class='inviter-name ellipsis'>{{item.nickname}}</text>
-         <text class='inviter-level ellipsis'>{{item.name}}</text>
-       </view>
+      <view wx:if='{{invite.length>0}}'>
+        <swiper duration="300" bindchange="bindchange" display-multiple-items='{{multiple}}'  previous-margin="120rpx" next-margin="120rpx" current='{{current}}' circular='true'>
+          <swiper-item wx:for="{{invite}}"   wx:key="{{index}}" >
+            <view class='inviter flexC'>
+              <view class='flexC' data-index='{{index}}' catchtap='itemClicked'>
+                <image-sub imgStyle='{{ index===activeIndex? "width:160rpx;height:160rpx":"width:120rpx;height:120rpx"}}' imgSrc="{{item.headImg || '/img/default-userImg.png'}}"  mode='scaleToFill'/>
+                <text class='inviter-name ellipsis'>{{item.nickname}}</text>
+              </view>
+            </view>
+          </swiper-item>
+        </swiper>
       </view>
-      <!-- <view>
-        <button class='changeBtn' bindtap='queryInviterList'>换一换</button>
-      </view> -->
+      <view wx:else class='gray-9 flexR'>暂无导师，请填写授权码或跳过该步骤~</view>
     </view>
   </view>
-  <button class='loginBtn' disabled='{{disabled}}' >下一步</button>
-  <view class='gray font-26 flexR dismiss' bindtap='dismiss'>跳过</view>
+  <button class='loginBtn' disabled='{{disabled}}' catchtap='mentorBind' >确认</button>
+  <view class='gray-9 font-26 flexR dismiss' bindtap='dismiss'>跳过</view>
 
-  <view class='gray font-26 fixed-bottom flexR write-code' bindtap='goPage'>
-    填写邀请码
+  <view class='gray-9 font-26 fixed-bottom flexR write-code' bindtap='goPage'>
+    <view class='flexR'> 填写授权码</view>
   </view>
 </view>

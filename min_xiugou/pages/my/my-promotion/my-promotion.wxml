@@ -6,8 +6,9 @@
   <view class="img-area flexR">
     <image class="avatar-img" src="{{userLevelInfo.headImg||'/img/default-userImg.png'}}" alt=""></image>
   </view>
-  <view class='levelName boxSize flexR'>
-    <text>{{userLevelInfo.levelName}}</text>
+  <view class='levelName boxSize flexC'>
+    <text class='font-30'>{{userLevelInfo.levelName}}品鉴官</text>
+    <view class='level-label font-22'>{{userLevelInfo.levelRemark}}</view>
   </view>
 </view>
 
@@ -25,15 +26,15 @@
       <view class='growing-bar-value' style='width:{{userLevelInfo.width}};'></view>
     </view>
     <view>
-      距离晋升还差
-      <text class='font-30'>{{userLevelInfo.surpluslExperience}}分</text>
+      距离晋升还差<text>{{userLevelInfo.surpluslExperience}}点Exp</text>
+      <text class='red' wx:if='{{!userLevelInfo.surpluslExperience}}'>(Exp已满)</text>
     </view>
   </view>
 </view>
 </view>
 
 <view class='growing-question'>
-  <view class='title ellipsis font-28 whiteBg'>预计晋升后可获得哪些福利？</view>
+  <!-- <view class='title ellipsis font-28 whiteBg'>预计晋升后可获得哪些福利？</view> -->
   <!-- <view class='ellipsis gray font-26'>去问产品这块是干啥的</view> -->
   <view>
    <template is="wxParse" data="{{wxParseData:article.nodes}}" />

@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation,Event } = global;
+let { Tool, Storage, Event, API } = global;
 const app = getApp()
 Page({
   data: {
@@ -22,6 +22,7 @@ Page({
     urlFrom: null,
   },
   onLoad: function (options) {
+    // Tool.navigateTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
     let inviteId = options.inviteId
     if (options.inviteId == 'null' || options.inviteId == 'undefined' || !options.inviteId) {
       inviteId = ''
@@ -55,23 +56,18 @@ Page({
     let params = {
       code: id,
       identity: Storage.getWxOpenid(),
-      reqName: '邀请码是否过期',
-      url: Operation.sweepCode
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    API.sweepCode(params).then((res) => {
 
-    }
-    r.failBlock = (req) => {
-      let msg = req.responseObject.msg
+    }).catch((res) => {
+      let msg = res.msg
       this.setData({
         invalidTips: {
           invalid: true,
           tips: msg
         }
       })
-    }
-    r.addToQueue();
+    })
   },
   isSeePwd() {
     this.setData({
@@ -101,35 +97,44 @@ Page({
       upUserId: this.data.inviteId || "", // 邀请者id 非必填
       inviteCode: this.data.inviteCode || "",//邀请码 非必填
     }
-    // this.verifyPhone(e.detail.value)  // 改动了
     this.verifyPhone(params)
   },
   verifyPhone(params){
-    console.log(params)
-    params = {
-      ...params,
-      reqName: '判断手机号是否已经注册',
-      url: Operation.findMemberByPhone,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
-      Storage.setMemberId(req.responseObject.data.id)
-      Tool.loginOpt(req)
+    API.findMemberByPhone(params).then((res) => {
+      let datas = res.data || {}
+      Storage.setMemberId(datas.id)
+      Tool.loginOpt(res)
       Storage.setUpUserId(null)
-      if (this.data.urlFrom){
+      Storage.setFirstRegistration(datas.give)
+      // 被邀请的人不走选择导师的页面
+      if (this.data.urlFrom && this.data.inviteId) {
         Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
-      } else if (!datas.upUserid){
-        Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
-      } else{
-        let callBack = ()=>{
+      } else if (this.data.inviteCode || this.data.inviteId) {
+        let callBack = () => {
           Tool.switchTab('/pages/index/index')
         }
         Tool.showSuccessToast('注册成功', callBack)
+      } else {
+        Tool.redirectTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
       }
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+      // if (this.data.urlFrom){
+      //   Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
+      // } else{
+      //   Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
+      // }
+      // else if (!datas.upUserid){ 
+      //   领取红包功能 取消了
+      //   Tool.navigateTo('/pages/register/red-envelopes/red-envelopes')
+      // } 
+      // else{
+      //   let callBack = ()=>{
+      //     Tool.switchTab('/pages/index/index')
+      //   }
+      //   Tool.showSuccessToast('注册成功', callBack)
+      // }
+    }).catch((res) => {
+       console.log(res)
+    })
   },
   changeInput(e){
     let n = parseInt(e.currentTarget.dataset.index)
@@ -177,20 +182,15 @@ Page({
       showSecond: true
     });
     this.countdown(this);
-    let params = {
+    API.sendMessage({
       phone: this.data.phone,
-      reqName: '发送短信',
-      url: Operation.sendMessage,
-      requestMethod: 'GET',
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock= (req) => {
+    }).then((res) => {
       wx.showToast({
         title: '验证码已发送',
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   countdown: function (that) { // 倒计时
     let second = that.data.second;

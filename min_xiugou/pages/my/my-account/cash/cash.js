@@ -13,11 +13,12 @@ Page({
         { name: "用户收益", icon: "xjhb-icon.png"},
         { name: "提现支出", icon: "txzc-icon.png" },
         { name: "消费支出", icon: "xfzc-icon.png" },
-        { name: "店主分红", icon: "dzfh-icon.png" },
-        { name: "店员分红", icon: "dpfh-icon.png" },
-        { name: "销售提成", icon: "xstc-icon.png" },
+        { name: "导师管理费", icon: "dzfh-icon.png" },
+        { name: "品牌分红奖", icon: "dpfh-icon.png" },
+        { name: "品牌推广奖励", icon: "xstc-icon.png" },
         { name: "现金红包", icon: "tg_03-04@2x.png" },
         { name: "任务奖励", icon: "xwjl-icon.png" },
+        { name: "消费退款", icon: "xstc-icon.png" },
       ]
     },
     //获取数据

@@ -1,30 +1,29 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, API, Storage, Event } = global
 Page({
   data: {
-    ysf: { title: '换货详情' },
     addressType:1,
     src:'/img/address-icon-gray.png',
-    result:[ // 换货
-      { state:"其他"},
-      { state: "等待商家处理", info: "", time: '' },
-      { state: "商家已同意", info: "请在规定时间内退货给卖家", time: ''},
-      { state: "商家拒绝换货申请", info: "请联系客服" },
-      { state: "请退货请商家", info: "等待商家确认" },
-      { state: "等待商家确认", info: "",time:'' },
-      { state: "换货完成", info: "" },
-      { state: "换货申请已撤销", info: "" },
-      { state: "订单异常", info: "请联系客服" }
-    ],
-    resultIndex:0,
+    // result:[ // 换货
+    //   { state:"其他"},
+    //   { state: "等待商家处理", info: "", time: '' },
+    //   { state: "商家已同意", info: "请在规定时间内退货给卖家", time: ''},
+    //   // { state: "商家拒绝换货申请", info: "请联系客服" },
+    //   { state: "等待商家确认", info: "" },
+    //   { state: "待平台处理 ", info: "",time:'' },
+    //   { state: "换货完成", info: "" },
+    //   { state: "换货申请已撤销或换货关闭", info: "" },
+    //   // { state: "订单异常", info: "请联系客服" }
+    // ],
+    // resultIndex:0,
     expressNo: { id: 0, content:"填写寄回的物流信息"},
     SaleExpressNo: { id:1, content: "暂无商家物流信息"}
   },
   onLoad: function (options) {
     this.setData({
       list: Storage.getInnerOrderList() || '',
-      returnProductId: options.returnProductId
+      serviceNo: options.serviceNo
     })
-    this.findReturnProductById(options.returnProductId)
+    this.findReturnProductById(options.serviceNo)
     Event.on('updataExpressNo', this.updataExpressNo,this)
   },
   updataExpressNo(){
@@ -34,66 +33,108 @@ Page({
     this.findReturnProductById(this.data.returnProductId)
   },
   findReturnProductById(returnProductId) {
-    let list = this.data.list
-    let params = {
-      returnProductId: Number(this.data.returnProductId) || this.data.list.returnProductId,
-      reqName: '查看退款退货换货情况',
-      url: Operation.findReturnProductById
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      Tool.findReturnProductById(req)
-      let datas = req.responseObject.data
+    API.afterSaleDetail({
+      serviceNo: this.data.serviceNo || this.data.list.serviceNo,
+    }).then((res) => {
+      let expressNo = this.data.expressNo
+      let datas = res.data || {}
       if (datas.type==2){
-        Tool.redirectTo('/pages/after-sale/return-goods/return-goods?returnProductId=' + returnProductId)
+        Tool.redirectTo('/pages/after-sale/return-goods/return-goods?serviceNo=' + this.data.serviceNo)
         return
       }
+      let imgList = datas.imgList || ''
+      console.log(imgList)
+      datas.showImgList = imgList.split(',')
       let status = datas.status
-      let expressNo = this.data.expressNo
+      datas.createTime = Tool.formatTime(datas.createTime)
+      // 平台地址
+      let refundAddress = datas.refundAddress || {}
+      refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
+      // let address = datas.refundAddress || {}
+      datas.addressInfo = datas.province + datas.city + datas.area + (datas.street || '')  + datas.address
+      this.setData({
+        datas: datas,
+        resultIndex: status
+      })
+      let orderRefundExpress = datas.orderRefundExpress || {}
       let SaleExpressNo = this.data.SaleExpressNo
-      let time =''
-      if (status == 1) {
-        this.data.result[status].time = datas.applyTime
-      }
-      if (status == 2) {
-        let self = this
-        if (!datas.expressNo) {
-          datas.endTime = Tool.formatTime(datas.outTime)
-          time = setInterval(function () { Tool.getDistanceTime(datas.endTime, self); }, 1000);
+      // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
+      
+      // let orderRefundExpress = datas.orderRefundExpress || {}
+      if (orderRefundExpress.expressCode) {
+        expressNo = {
+          id: 2, content: orderRefundExpress.expressNo, name: orderRefundExpress.expressName
         }
       }
-      if (datas.expressNo){
-        expressNo = { id: 2, content: datas.expressNo }
-      }
-      if (datas.ecExpressNo) {
-        SaleExpressNo = { id: 2, content: datas.ecExpressNo }
-      }
-      
-      if(status==6){
-        this.data.result[status].time = Tool.formatTime(datas.backsendTime)
-      }
-      if (status == 3) {
-        this.data.result[status].info = datas.refusalReason
-        this.data.result[status].time = Tool.formatTime(datas.refuseTime)
+      if (datas.sendExpressNo) {
+        SaleExpressNo = { id: 2, content: datas.sendExpressNo, name: datas.sendExpressName }
       }
       this.setData({
         datas: datas,
         SaleExpressNo: SaleExpressNo,
         expressNo: expressNo,
-        resultIndex: status,
-        time: time,
-        result: this.data.result
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+      if (status > 1 && !orderRefundExpress.expressNo && !datas.sendExpressNo && status <6) {
+        datas.countDownSeconds = Math.floor((datas.cancelTime - datas.nowTime) / 1000 )
+        // console.log((datas.cancelTime - datas.nowTime) / 1000)
+        this.countdown(this)
+      }
+      Event.emit('getDetail')
+      // let afterSaleInfo = datas.afterSaleInfo || {}
+      // let imgList = afterSaleInfo.imgList || ''
+      // afterSaleInfo.showImgList = imgList.split(',')
+      // if (datas.type==2){
+      //   Tool.redirectTo('/pages/after-sale/return-goods/return-goods?serviceNo=' + serviceNo)
+      //   return
+      // }
+      // datas.refundAddress.address = datas.refundAddress.refundAddress
+      // datas.refundAddress.receiver = datas.refundAddress.refundReceiver
+      // datas.refundAddress.receiverPhone = datas.refundAddress.refundReceiverPhone
+      // let status = datas.status
+      // let expressNo = this.data.expressNo
+      // let SaleExpressNo = this.data.SaleExpressNo
+      // // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
+      // if (datas.countDownSeconds && status == 2 && !datas.refundAddress.expressCode) {
+      //   this.countdown(this)
+      // }
+      // if (datas.refundAddress.expressCode){
+      //   expressNo = { id: 2, content: datas.refundAddress.expressCode}
+      // }
+      // if (datas.address.expressCode) {
+      //   SaleExpressNo = { id: 2, content: datas.address.expressCode }
+      // }
+      // this.setData({
+      //   datas: datas,
+      //   SaleExpressNo: SaleExpressNo,
+      //   expressNo: expressNo,
+      // })
+      // Event.emit('getDetail')
+    }).catch((res) => {
+      console.log(res)
+    })
+  },
+  countdown(that) { // 倒计时
+    clearTimeout(that.data.time);
+    let distanceTime = Tool.showDistanceTime(that.data.datas.countDownSeconds || 0)
+    if (that.data.datas.countDownSeconds == 0) {
+      that.findReturnProductById(that.data.serviceNo)
+      return
+    }
+    that.data.datas.countDownSeconds--
+    let time = setTimeout(function () {
+      that.countdown(that);
+    }, 1000)
+    that.setData({
+      distanceTime: distanceTime,
+      time: time
+    });
   },
   logClicked(e) {
     let express = e.currentTarget.dataset.express
     let types = e.currentTarget.dataset.type
     let page = ''
     if (express.id==0){
-      page = '/pages/logistics/write-logistics/write-logistics?id=' + this.data.datas.id
+      page = '/pages/logistics/write-logistics/write-logistics?serviceNo=' + this.data.datas.serviceNo
     } else if (express.id == 1) {
       return
     } else {
@@ -104,7 +145,7 @@ Page({
   },
   onUnload: function () {
     Event.emit('getDetail')
-    clearInterval(this.data.time)
+    clearTimeout(this.data.time)
     Event.off('updataExpressNo', this.updataExpressNo)
   },
 })

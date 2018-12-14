@@ -1,103 +1,104 @@
-let { Tool, RequestFactory, Storage, Operation } = global;
+let { Tool, Storage, API, Event } = global;
 Page({
   data: {
     ysf: { title: '授权码录入' },
-    invite:[],
-    inviteId:'',
-    code:'',
+    invite:[0,1],
     userInfo:'',
     openid:'',
-    num:4, // 请求推荐人的个数
-    disabled:true
+    disabled:false,
+    activeIndex:2,
+    current:1,
+    multiple:3
   },
   onLoad: function (options) {
+    // Event.on('updateMentor', this.updateMentor,this)
     this.setData({
       accoutInfo: options,
       userInfo: Storage.wxUserInfo() || false,
       openid: Storage.getWxOpenid() || '',
+      urlFrom: options.from || null
     })
-    if (!options.id){
-      this.queryInviterList() // 请求邀请者
-    } else {
-      this.initInputValue() // 初始化input的值
-    }
-    
+    this.queryInviterList() // 请求邀请者
   },
   onShow: function () {
 
   },
-  initInputValue(){
-    this.setData({
-      code: this.data.accoutInfo.id,
-      disabled:true,
-      inviteId: this.data.accoutInfo.id
-    })
+  changeClicked(){ // 换一换
+    this.queryInviterList()
   },
-  inputChange(e){
-    this.setData({
-      code:e.detail.value
-    })
-  },
-  requetSignMember() {
-    let params = {
-      "phone": this.data.accoutInfo.phone,
-      'password': this.data.accoutInfo.password,
-      'inviteId': this.data.accoutInfo.id || '', // 邀请者id 
-      'headImg': this.data.userInfo.avatarUrl,
-      'nickname': this.data.userInfo.nickName,
-      'openid': this.data.openid,
-      reqName: '注册',
-      url: Operation.signMember,
-    }
-    // 如果不是被邀请的 那么就取授权码
-    if (!this.data.accoutInfo.id) {
-      params.code = this.data.code
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.finishBlock = (req) => {
-      Storage.setMemberId(req.responseObject.data.id)
-      Tool.loginOpt(req)
-      Tool.redirectTo('/pages/real-name/real-name')
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
-  formSubmit(e){
-    if(Tool.isEmptyStr(e.detail.value.id)){
-      Tool.showAlert('请输入会员ID或选择一个邀请者')
-      return
-    }
-    // if (!this.data.isAgree){
-    //   Tool.showAlert('请勾选用户协议')
-    //   return
-    // }
-    this.requetSignMember()
-  },
-  // agreeCilcked(){
+  // updateMentor(){
   //   this.setData({
-  //     isAgree:!this.data.isAgree
+  //     current: this.data.current,
   //   })
   // },
-  queryInviterList(){
-    let params = {
-      amount: this.data.num,
-      reqName: '获取邀请者列表',
-      url: Operation.queryInviterList,
-    }
-    let r = RequestFactory.wxRequest(params);
-    // let r = RequestFactory.queryInviterList({ });
-    r.finishBlock = (req) => {
+  bindchange(e){ // 设置中间那项active
+    if (this.data.isAjax){
       this.setData({
-        invite: req.responseObject.data
+        isAjax:false
       })
+      return
     }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    this.setActive(e.detail.current)
+    // let activeIndex = e.detail.current +1
+    // if (activeIndex>=this.data.invite.length){
+    //   activeIndex -= this.data.invite.length
+    // }
+    // this.setData({
+    //   activeIndex: activeIndex
+    // })
   },
-  inviterClicked(e){
-    let id = e.currentTarget.dataset.key
+  itemClicked(e) { // 点击的头像的效果
+    let index = e.currentTarget.dataset.index
+    let current = index - 1 >= 0 ? index - 1 : this.data.invite.length - 1
     this.setData({
-      code: id || ''
+      current: current,
+    })
+    this.setActive(current)
+    Storage.setMentorProfile(this.data.invite[index])
+    Tool.navigateTo("/pages/mentorInfo/choose-mentor/choose-mentor")
+  },
+  setActive(current){
+    let activeIndex = current + 1
+    if (activeIndex >= this.data.invite.length) {
+      activeIndex -= this.data.invite.length
+    }
+    this.setData({
+      activeIndex: activeIndex
+    })
+  },
+  mentorBind() { // 绑定导师
+    if (this.data.disabled) return
+    this.setData({
+      disabled: true
+    })
+    API.mentorBind({
+      code: this.data.invite[this.data.activeIndex].code
+    }).then((res) => {
+      this.dismiss()
+    }).catch((res) => {
+      this.setData({
+        disabled: false
+      })
+    })
+  },
+  queryInviterList(){ // 获取导师的列表
+    API.queryInviterList({
+      
+    }).then((res) => {
+      let datas = res.data || []
+      this.data.multiple = datas.length >= 3 ? 3 : datas.length
+      let current = datas.length > 3 ? 1:0
+      let activeIndex = datas.length > 3 ? 2 : datas.length ==3? 1:0
+      this.setData({
+        activeIndex: activeIndex,
+        current: current,
+        invite: datas,
+        multiple: this.data.multiple,
+        disabled: datas.length>0? false:true,
+        isAjax:true
+      })
+    }).catch((res) => {
+      
     })
   },
   dismiss(){
@@ -107,6 +108,10 @@ Page({
     Tool.showSuccessToast('注册成功', callBack)
   },
   goPage(){
-    Tool.navigateTo('/pages/register/write-invite-code/write-invite-code')
+    Tool.navigateTo('/pages/register/write-invite-code/write-invite-code?from' + this.data.redirectTo)
+  },
+  onUnload(){
+    this.dismiss()
+    // Event.off('updateMentor', this.updateMentor)
   }
 })

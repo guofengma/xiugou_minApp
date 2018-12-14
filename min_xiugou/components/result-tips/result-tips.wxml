@@ -13,10 +13,10 @@
       <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-cart.png'}}"/>
       <view>去添加点什么吧</view>
     </view>
-    <!-- 优惠卷 -->
+    <!-- 优惠券 -->
     <view wx:if="{{tipVal == 4}}">
       <image-sub imgStyle='{{"width:230rpx"}}' imgSrc="{{'no-result-yhj.png'}}"/>
-      <view>还没有优惠卷哦</view>
+      <view>还没有优惠券哦</view>
     </view>
     <!--  暂无消息通知-->
     <view wx:if="{{tipVal == 5}}">
@@ -46,7 +46,7 @@
     </view>
 
     <!-- 是否展示去逛逛的提示 -->
-    <view wx:if='{{showBtn}}'>
+    <view wx:if='{{showBtn}}' class='lookAroundBtn'>
       <view class='font-24'>{{showTips ||  "快去商城逛逛吧"}}</view>
       <view class='result-tips-btn flexC red' catchtap='lookAround'>{{ btnName|| "去逛逛"}}</view>
     </view>

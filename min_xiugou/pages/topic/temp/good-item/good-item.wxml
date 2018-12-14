@@ -9,13 +9,13 @@
       <image src="{{specImg}}"
         class='good-item-thumb'
       ></image>
-      <image class='good-soldout' wx:if="{{status == 3}}" src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/soldout.png"></image>
-      <image class='good-soldout' wx:if="{{status >= 4}}" src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/closing@2x.png"></image>
+      <image class='good-soldout' wx:if="{{status == 3}}" src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/soldout.png"></image>
+      <image class='good-soldout' wx:if="{{status >= 4}}" src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/closing@2x.png"></image>
     </view>
     
     <view class='good-detail'>
       <view class='good-title ellipsis-2'>{{productName}}</view>
-      <view class='good-type good-type-tip' wx:if="{{status === 1}}">{{reseCount||0}}关注</view>
+      <view class='good-type good-type-tip' wx:if="{{status === 1}}">{{reseCount||0}}人已关注</view>
       <view class='good-type good-type-ing' wx:elif="{{status === 2}}">
         <view class='flexR-sb'>
           <view class='good-loot-already'>已抢{{totalNumber - surplusNumber}}件</view>
@@ -49,7 +49,7 @@
           wx:if="{{status === 1}}"
         >
           <image src='/img/Clock.png' class="icon" wx:if="{{!notifyFlag}}"></image>
-          <text>{{!notifyFlag ? '设置提醒' : '取消提醒'}}</text>
+          <text>{{!notifyFlag ? '提醒我' : '取消提醒'}}</text>
         </view>
         <view class='good-operate loot'
           catchtap="showGoodDetail" 

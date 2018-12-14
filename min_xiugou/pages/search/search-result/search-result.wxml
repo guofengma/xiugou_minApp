@@ -31,6 +31,7 @@
     productSpec='{{productSpec}}' 
     price = '{{selectPrice}}'
     priceList='{{priceList}}' 
+    productStatus='{{productStatus}}'
     bind:counterInputOnChange='counterInputOnChange' 
     isInit ="{{isInit}}"
     imgUrl="{{imgUrl}}" 

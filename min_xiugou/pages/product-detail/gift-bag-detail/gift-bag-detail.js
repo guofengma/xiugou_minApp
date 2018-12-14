@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, Storage, Event, API } = global
 
 import ProductFactorys from '../temp/product.js'
 
@@ -16,7 +16,6 @@ Page({
     productBuyCount: 1, //商品购买数量
     priceList: [],
     isShowGiftTips:false, //是否显示礼包升级提示
-    dismiss:false, // 能否可以购买礼包
   },
   onLoad: function (options) {
     this.setData({
@@ -33,6 +32,7 @@ Page({
   },
   onShow: function () {
     this.getGiftBagDetail()
+    this.ProductFactory.onShow()
   },
   didLogin() {
     this.ProductFactory.didLogin()
@@ -49,40 +49,36 @@ Page({
       this.selectComponent("#prd-info-type").isVisiableClicked()
       return
     }
+    let orderProductList = []
+    this.data.selectType.priceList.forEach((item)=>{
+      orderProductList.push({
+        skuCode: item.skuCode
+      })
+    })
     let params = {
-      orderProducts: [{
-        num:1,
-        priceId: this.data.productInfo.id,
-        productId: this.data.productInfo.id,
-        priceList: this.data.selectType.priceList
-      }],
-      orderType: 5,
-      packageCode: this.data.productInfo.packageCode
+      orderProductList: orderProductList,
+      quantity:1,
+      orderType: 2,
+      orderSubType: this.data.productInfo.type==2? 3:4, // 3升级礼包 4 普通礼包
+      activityCode: this.data.productInfo.packageCode
     }
-
+    Storage.setSubmitOrderList(params)
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + "&type=5")
   },
   getGiftBagDetail() { //获取礼包详情
-    let params = {
-      code:this.data.giftBagId,
-      isShowLoading:false,
-      reqName: '礼包详情',
-      requestMethod: 'GET',
-      url: Operation.getGiftBagDetail
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
+    API.getGiftBagDetail({
+      code: this.data.giftBagId
+    }).then((res) => {
+      let datas = res.data || {}
       if (datas.status == 0) { // 商品走丢了 删除了
         this.ProductFactory.productDefect()
         return
       }
-      if (this.data.didLogin){
-        if (datas.userBuy && datas.type==2){
-          this.data.isShowGiftTips =true
+      if (this.data.didLogin) {
+        if (datas.userBuy && datas.type == 2) {
+          this.data.isShowGiftTips = true
         }
         this.setData({
-          dismiss: !datas.userBuy,
           isShowGiftTips: this.data.isShowGiftTips
         })
       }
@@ -100,10 +96,17 @@ Page({
         })
         giftStock.push(total)
       }
+      // 不限购剩余测试小于0  不在购买时间  状态为1的情况下没有资格购买礼包
+      if ((datas.buyLimit != -1 && !datas.leftBuyNum) || !datas.buyTime || (datas.status == 1 && !datas.userBuy)) {
+        datas.canUserBuy = false
+      } else {
+        datas.canUserBuy = true
+      }
       // 显示各礼包总库存里面的最小库存
 
       datas.showStock = Math.min(...giftStock)
-
+      datas.content = datas.content || ''
+      datas.showContent = datas.content.split(',')
       this.setData({
         imgUrls: datas.imgFileList,
         productInfo: datas,
@@ -113,20 +116,19 @@ Page({
       })
 
       // 渲染表格
-      this.ProductFactory.renderTable(datas.paramValueList, 'param','paramValue')
+      this.ProductFactory.renderTable(datas.paramValueList || {}, 'paramName', 'paramValue')
 
-      this.selectComponent("#productInfos").initDatas()
-    }
-    r.failBlock = (req) => {
+      // this.selectComponent("#productInfos").initDatas()
+    }).catch((res) => {
+      console.log(res)
       let callBack =()=>{}
-      if (req.responseObject.code == 604) { // 超时登录
+      if (res.code == 604) { // 超时登录
         callBack = () => {
           Tool.navigationPop()
         }
       }
-      Tool.showAlert(req.responseObject.msg, callBack)
-    }
-    r.addToQueue();
+      Tool.showAlert(res.msg, callBack)
+    })
   },
   typeSubClicked(e) {
     this.setData({
@@ -135,9 +137,10 @@ Page({
     this.giftBagClicked()
   },
   btnClicked(e) {
-    if (this.data.dismiss || this.data.productInfo.status == 2) return
-    let n = parseInt(e.currentTarget.dataset.key)
-    this.selectComponent("#prd-info-type").isVisiableClicked(n)
+    if (this.data.productInfo.canUserBuy&& this.data.productInfo.status ==1 ){
+      let n = parseInt(e.currentTarget.dataset.key)
+      this.selectComponent("#prd-info-type").isVisiableClicked(n)
+    } 
   },
   goTop() {
     this.ProductFactory.goTop()

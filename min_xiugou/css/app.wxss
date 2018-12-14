@@ -155,7 +155,7 @@ button::after{
 
 .address.active{
   padding:30rpx;
-  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/line-bg.png) no-repeat left bottom;
+  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/line-bg.png) no-repeat left bottom;
   background-size: 100%;
 }
 .add-address-btn{
@@ -217,6 +217,7 @@ button::after{
   bottom: 0;
   width: 100%;
   z-index: 999;
+  left: 0;
 }
 .fixed-bottom-iPhoneX{
   position: fixed;
@@ -227,6 +228,7 @@ button::after{
 .fixed-top{
   position: fixed;
   top: 0;
+  left:0;
   width: 100%;
   z-index: 999;
 }

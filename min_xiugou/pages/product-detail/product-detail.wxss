@@ -32,7 +32,7 @@
   width: 44rpx;
 }
 .bottom-bar>view{
-  width: 20%;
+  width: 45%;
   /* border-right: 1rpx solid #ddd; */
   text-align: center;
   height: 100%;
@@ -58,16 +58,6 @@
   position: relative
 }
 
-.num-label{
-  position: absolute;
-  font-size: 22rpx;
-  width: 36rpx;
-  height: 36rpx;
-  top:-15rpx;
-  right:28rpx;
-  /* padding: 5rpx 6rpx; */
-  border-radius: 50rpx;
-}
 .price2{
   text-decoration: line-through;
   margin-right: 10rpx;
@@ -78,14 +68,14 @@
   margin: 0;
   padding: 0 10rpx;
   width: 100%;
+  height: 100%;
   background: transparent;
   color: #fff;
-  /* justify-content: flex-start; */
   line-height: 28rpx;
 }
 .shareMoney{
   max-width: 80%;
 }
-.shareBtn-view{
-  /* font-size:  */
+.shareBtn>view{
+  width: 100%;
 }

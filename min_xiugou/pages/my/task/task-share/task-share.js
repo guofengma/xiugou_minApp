@@ -1,9 +1,8 @@
-let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
+let { Tool, RequestFactory, Storage, Event, Operation} = global
 const app = getApp();
 Page({
 
   data: {
-    imgUrl: Config.imgBaseUrl,
     showPhoneModal: false,
     inputFocus: false,
     phone: '',

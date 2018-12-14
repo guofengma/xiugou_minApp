@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, Storage, Event, API, Config } = global
 
 
 Page({
@@ -10,7 +10,13 @@ Page({
     selectList:[], //选中的产品
     tipVal:'',
     activeType: ["", "秒", "降", "优惠套餐", "助力免费领", "支付有礼", "满减送", "刮刮乐"],
-    ysf: { title: '购物车' }
+    ysf: { title: '购物车' },
+    statusImg:{
+      0: Config.imgBaseUrl +'shixiao-icon.png',
+      1: '',
+      2: Config.imgBaseUrl + 'shixiao-icon.png',
+      3: Config.imgBaseUrl + 'advanxeSale-icon.png',
+    }
   },
   onLoad: function (options) {
     this.getLoginCart()
@@ -28,6 +34,9 @@ Page({
     })
   },
   onPullDownRefresh: function () {
+    this.setData({
+      items:[]
+    })
     this.initDatas()
     wx.stopPullDownRefresh();
   },
@@ -73,55 +82,42 @@ Page({
     let isArrParams = []
     for (let i = 0; i < list.length; i++) {
       isArrParams.push({
-        productId: list[i].productId, priceId: list[i].priceId, amount: list[i].showCount
+        productCode: list[i].productCode, skuCode: list[i].skuCode, amount: list[i].showCount
       })
     }
     return isArrParams
   },
   getRichItemList(){
     let isArrParams = this.getFormCookieToSessionParams()
-    let params = {
+    API.getRichItemList({
       cacheList: isArrParams,
-      reqName: '未登录时，获取购物车详细信息列表',
-      url: Operation.getRichItemList,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      this.formatShoppingListData(req)
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).then((res) => {
+      this.formatShoppingListData(res)
+    }).catch((res) => {
+
+    })
   },
-  shoppingcart0neMoreOrder(){
+  shoppingcart0neMoreOrder() { // 再来一单的时候批量加入购物车
     let isArrParams = this.getFormCookieToSessionParams()
-    let params = {
+    API.shoppingcart0neMoreOrder({
       cacheList: isArrParams,
-      reqName: '再来一单的时候批量加入购物车',
-      url: Operation.shoppingcart0neMoreOrder,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    }).then((res) => {
       Storage.clearShoppingCart()
-      this.formatShoppingListData(req)
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+      this.formatShoppingListData(res)
+    }).catch((res) => {
+
+    })
   },
-  shoppingCartLimit(){
+  shoppingCartLimit() { //登录合并购物车
     let isArrParams = this.getFormCookieToSessionParams()
-    let params = {
+    API.shoppingCartFormCookieToSession({
       cacheList: isArrParams,
-      reqName: '登录合并购物车',
-      url: Operation.shoppingCartFormCookieToSession,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    }).then((res) => {
       Storage.clearShoppingCart()
-      // this.getShoppingCartList()
-      this.formatShoppingListData(req)
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+      this.formatShoppingListData(res)
+    }).catch((res) => {
+
+    })
   },
   getStorageShoppingCart(){   
     let list = Storage.getShoppingCart()
@@ -142,48 +138,45 @@ Page({
     this.getTotalPrice()
     Storage.setShoppingCart(list)
   },
-  updateShoppingCart(count,index){
-    // 更新购物车
+  updateShoppingCart(count, index) {  // 更新购物车
     let prd = this.data.items[index]
-    let params = {
-      priceId: prd.priceId,
+    API.updateShoppingCart({
+      skuCode: prd.skuCode,
       amount: count,
-      reqName: '更新购物车数量',
-      isShowLoading: false,
-      url: Operation.updateShoppingCart,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    }).then((res) => {
       let list = this.data.items
       list[index].showCount = count
       this.setData({
         items: list
       })
       this.getTotalPrice()
-    };
-    r.addToQueue();
+    }).catch((res) => {
+
+    })
   },
-  getShoppingCartList(){
-    // 查询购物车
-    // let r = RequestFactory.getShoppingCartList();
-    let params = {
-      reqName: '获取购物车',
-      url: Operation.getShoppingCartList,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      this.formatShoppingListData(req)
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+  getShoppingCartList(){ // 查询购物车
+    API.getShoppingCartList({}).then((res) => {
+      this.formatShoppingListData(res)
+    }).catch((res) => {
+
+    })
   },
   formatShoppingListData(req){ // 格式化购物车的数据
-    let data = req.responseObject.data
-    data = data === null ? [] : data
+    let data = req.data || []
     if (data.length > 0) {
       data.forEach((item, index) => {
         item.isTouchMove = false  //是否移动 
         item.showImg = item.imgUrl
+        item.statusImg = this.data.statusImg[item.status]
+        if (!item.stock) {
+          item.statusImg = this.data.statusImg[0]
+        }
+        if ( !item.stock || item.status == 1 || item.status == 3){
+          item.disabled = false
+        } else {
+          item.disabled = true
+        }
+        item.stock = item.stock || 0
         item.showPrice = item.price
         item.showName = item.productName
         item.showType = item.specValues? item.specValues.join('—'):''
@@ -194,7 +187,7 @@ Page({
         if (this.data.items.length > 0) {
           let arr = this.data.items
           for (let i = 0; i < arr.length; i++) {
-            if (arr[i].priceId == item.priceId && item.status == 1) {
+            if (arr[i].skuCode == item.skuCode && item.status == 1) {
               item.isSelect = arr[i].isSelect
             }
           }
@@ -275,9 +268,9 @@ Page({
         // let list = { "price_id": items[i].id, "num": items[i].showCount }
         
         orderProducts.push({
-          num: items[i].showCount,
-          priceId: items[i].priceId,
-          productId: items[i].productId
+          quantity: items[i].showCount,
+          skuCode: items[i].skuCode,
+          productCode: items[i].productCode
         })
         // selectList.push(orderProducts)
       }
@@ -299,7 +292,7 @@ Page({
   
     //  点击了加按钮 那么不做操作 而且超过库存了
     if (btnName != 'reduce' && list[index].stock < count) {
-      count = list[index].showCount=list[index].stock
+      count = list[index].showCount=list[index].stock || 0
       let callBack = ()=>{
         this.updateShoppingCartWay(count, index)
       }
@@ -340,15 +333,10 @@ Page({
       }
     }
   },
-  deleteCart(items,index){
-    // 删除购物车
-    let params = {
-      priceId: items[index].priceId,
-      reqName: '删除购物车',
-      url: Operation.deleteFromShoppingCart,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+  deleteCart(items, index) {  // 删除购物车
+    API.deleteShoppingCart({
+      skuCode: items[index].skuCode
+    }).then((res) => {
       items.splice(index, 1)
       this.setData({
         items: items
@@ -360,8 +348,9 @@ Page({
       }
       this.isSelectAllPrd(items)
       this.getTotalPrice()
-    };
-    r.addToQueue();
+    }).catch((res) => {
+
+    })
   },
   deleteStorageShoppingCart(index){
     let list = this.data.items
@@ -393,13 +382,12 @@ Page({
     
   },
   makeOrder(){
-    let params = JSON.stringify({
-      orderProducts:this.data.selectList,
-      orderType: 99
-    })
-    
+    // let params = JSON.stringify({
+    //   orderProducts:this.data.selectList,
+    //   orderType: 99
+    // })
+
     // 如果没有登录 那么就跳转到登录页面
-    
     if(!this.data.didLogin){
       Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
       return
@@ -408,13 +396,16 @@ Page({
       Tool.showAlert('请选择要购买的商品')
       return
     }
-    Tool.navigateTo(`/pages/order-confirm/order-confirm?params=${params}&type=99&formCart=${true}`)
-    // Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + params+'&type=99')
+    Storage.setSubmitOrderList({
+      orderProductList: this.data.selectList,
+      orderType: 1
+    })
+    Tool.navigateTo(`/pages/order-confirm/order-confirm?type=99&formCart=${true}`)
   },
   cartProductClicked(e){
     let state = e.currentTarget.dataset.state
-    if(state == 1) {
-      Tool.navigateTo('/pages/product-detail/product-detail?door=100&productId=' + e.currentTarget.dataset.id)
+    if (state == 1 || state == 3) {
+      Tool.navigateTo('/pages/product-detail/product-detail?door=100&prodCode=' + e.currentTarget.dataset.id)
     }
   },
   lookAround(){

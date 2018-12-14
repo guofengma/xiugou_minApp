@@ -1,0 +1,17 @@
+.header{
+  height: 280rpx;
+  background:url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/me_bg_nor@3x.png) no-repeat left bottom;
+  background-size: 100% 100%;
+}
+.line{
+  padding: 0 30rpx;
+  height: 84rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.content{
+  padding: 30rpx 20rpx;
+  margin-top: 14rpx;
+}
+.content>view{
+  margin-bottom: 20rpx;
+}

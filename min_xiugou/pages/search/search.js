@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation } = global
+let { Tool, Storage,API } = global
 
 Page({
 
@@ -21,7 +21,6 @@ Page({
         placeholder:"搜索商品"
       })
       this.requestGetHotWordsListActive()
-      //this.getLocation()
     } else {
       this.setData({
         history: Storage.getSearchOrderHistory() || [],
@@ -43,37 +42,6 @@ Page({
   onShow: function () {
 
   },
-  getLocation(){
-    let callBack = (res) =>{
-      if(res){
-        this.setData({
-          province: res.originalData.result.addressComponent.province
-        })
-        this.getProvinceList(this.data.province)
-      }
-    }
-    Tool.queryLocation(callBack)
-  },
-  requestGetHotWordsListActive(){
-    let params = {
-      reqName: '获取热搜词',
-      requestMethod: 'GET',
-      url: Operation.getHotWordsListActive,
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
-      if(datas.length>0){
-        datas.forEach((item)=>{
-          item.wordShowName = item.wordName.length > 10 ? item.wordName.slice(0, 10) + "..." : item.wordName
-        })
-      }
-      this.setData({
-        hotWords: req.responseObject.data
-      })
-    }
-    r.addToQueue();
-  },
   getHotkeyword(e) {
     this.setData({
       keyWord: e.currentTarget.dataset.keyword,
@@ -89,24 +57,33 @@ Page({
       this.requestKeywords()
     }
   },
-  requestKeywords(){
-    let params = {
-      requestMethod: 'GET',
-      keyword: this.data.keyWord,
-      isShowLoading: false,
-      reqName: '动态获得搜索词',
-      url: Operation.getKeywords,
-    }
-    let r = RequestFactory.wxRequest(params)
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      this.setData({
-        activeSearchLists: req.responseObject.data || []
+  requestGetHotWordsListActive() { // 获取热词
+    API.getHotWordsListActive({
+      // keyword: this.data.keyWord
+    }).then((res) => {
+      let datas = res.data || []
+      datas.forEach((item) => {
+        item.wordShowName = item.wordName.length > 10 ? item.wordName.slice(0, 10) + "..." : item.wordName
       })
-    }
-    r.addToQueue();
+      this.setData({
+        hotWords: datas
+      })
+    }).catch((res) => {
+
+    })
   },
-  deleteKeyword(){
+  requestKeywords(){ // 动态获取搜索词
+    API.getKeywords({
+      keyword: this.data.keyWord
+    }).then((res) => {
+      this.setData({
+        activeSearchLists: res.data || []
+      })
+    }).catch((res) => {
+
+    })
+  },
+  deleteKeyword() { // 删除搜索词
     if(this.data.door==1){
       Storage.setSearchOrderHistory(null)
     } else {
@@ -117,8 +94,9 @@ Page({
       historyArr:[]
     })
   },
-  searchKeyword(){
-    if (!Tool.isEmptyStr(String(this.data.keyWord))) {
+  searchKeyword(){ // 查询关键字
+    this.data.keyWord = String(this.data.keyWord).replace(/(^\s*)|(\s*$)/g, "")
+    if (!Tool.isEmptyStr(this.data.keyWord)) {
       let keywords = this.data.history
       if (keywords.length > 0) {
         keywords.length == 10 ? keywords.splice(9, 1) : keywords
@@ -155,26 +133,5 @@ Page({
     } else {
       this.requestKeyword()
     }
-  },
-  getProvinceList() {
-    let params = {
-      reqName: '获取省份',
-      url: Operation.getProvinceList,
-    }
-    let r = RequestFactory.wxRequest(params)
-    r.successBlock = (req) => {
-      let data = req.responseObject.data
-      let showProvince = ''
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].name == this.data.province) {
-          showProvince = data[i]
-          break
-        }
-      }
-      this.setData({
-        provinceCode: showProvince.zipcode || -1
-      })
-    }
-    r.addToQueue();
-  },
+  }
 })

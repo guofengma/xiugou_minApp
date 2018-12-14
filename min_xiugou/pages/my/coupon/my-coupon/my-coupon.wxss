@@ -53,8 +53,11 @@
 }
 .coupon-img image{
   width: 230rpx;
-  margin-top: 200rpx;
+  /* margin-top: 200rpx; */
   margin-bottom: 20rpx;
+}
+.coupon-img{
+  height: 100%;
 }
 /* <!-- 选择现金优惠卷弹框 --> */
 

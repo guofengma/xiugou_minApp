@@ -1,4 +1,5 @@
 let { Tool, RequestFactory, Storage, Event, Operation } = global
+const app = getApp()
 Page({
   data: {
     assist: false,
@@ -11,9 +12,10 @@ Page({
     this.setData({
       articleId: articleId
     })
-    console.log(this.data)
-    this.getArticleDetail();
+    app.shareClick(options.inviteId);
     
+    Tool.isIPhoneX(this);
+    this.getArticleDetail();
   },
   onReady() {
 

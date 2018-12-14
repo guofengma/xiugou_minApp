@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event, Storage, Operation} = global;
+let { Tool, Event, Storage, API} = global;
 
 Page({
 
@@ -24,21 +24,17 @@ Page({
       this.queryDictionaryDetailsType()
     },
     queryDictionaryDetailsType() {
-      let params = {
-        code:'WTLX',
-        reqName: '获取数字字典',
-        requestMethod: 'GET',
-        url: Operation.queryDictionaryDetailsType
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        req.responseObject.data.unshift({ "value": "请选择问题类型", "code": "" })
+      API.queryDictionaryDetailsType({
+        code: 'WTLX',
+      }).then((res) => {
+        let datas = res.data || []
+        datas.unshift({ "value": "请选择问题类型", "code": "" })
         this.setData({
-          typeArr: req.responseObject.data
+          typeArr: datas
         })
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      });
     },
     //选择问题类型弹窗
     questionType() {
@@ -91,22 +87,18 @@ Page({
           smallImg: smallImg,
           typeKey: this.data.typeArr[this.data.activeIndex].detailId,
           content: this.data.content,
-          reqName: '添加反馈',
-          url: Operation.addFeedback
         };
-        let r = RequestFactory.wxRequest(params);
-        r.successBlock = (req) => {
+        API.addFeedback(params).then((res) => {
           this.setData({
-            success: true
+            success: true,
+            active: true
           })
-        };
-        Tool.showErrMsg(r)
-        r.completeBlock = (req) => { 
+        }).catch((res) => {
           this.setData({
             active: true
           })
-        };
-        r.addToQueue();
+          console.log(res)
+        });
       }
     },
     //确定

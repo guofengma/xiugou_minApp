@@ -33,8 +33,8 @@
             <view>
                 <text>会员等级</text>
             </view>
-            <view wx:if='{{userInfos.levelName}}'>
-                <text class="level">{{userInfos.levelName||''}}</text>
+            <view wx:if='{{userInfos.levelRemark}}'>
+                <text class="level">{{userInfos.levelRemark||''}}</text>
             </view>
         </view>
         <view class="item">
@@ -69,6 +69,15 @@
                 <text class="identify">{{userInfos.isRealName}}</text>
             </view>
         </view>
+    </view>
+    <view class="wrap flexR-sb whiteBg introduction item" catchtap='introductionaClicked'>
+      <view class='item-left'>
+        <text>简介</text>
+      </view>
+      <view class='flexR-sb'>
+        <text>{{userInfos.profile || '未填写'}}</text>
+        <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+      </view>
     </view>
 </view>
 

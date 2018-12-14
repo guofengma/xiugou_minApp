@@ -1,5 +1,5 @@
 // pages/my/account.js
-let { Tool, RequestFactory, Storage, Event, Operation} = global
+let { Tool, RequestFactory, Operation} = global
 Page({
     data: {
         hasInf: false,
@@ -24,7 +24,6 @@ Page({
             time: Tool.formatTime(datas[0].createdTime)
           })
         }
-          Event.emit('queryPushNum')
         };
         Tool.showErrMsg(r)
         r.addToQueue();

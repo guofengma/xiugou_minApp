@@ -14,7 +14,7 @@ Page({
   },
   onLoad: function (options) {
 
-    this.getTopicByCode(options.code || 'ZT20180002');
+    this.getTopicByCode(options.code || '');
   },
   // 点击标题切换当前页时改变样式
   swichNav: function (e) {
@@ -34,13 +34,13 @@ Page({
     let prdType = dataset.type;  //1秒杀 2降价拍 3礼包 4助力免费领 5专题 99普通商品
     let code = dataset.code;
     if (prdType == 99 ){
-      Tool.navigateTo('/pages/product-detail/product-detail?productId=' + id + '&door=1')
+      Tool.navigateTo('/pages/product-detail/product-detail?productId=' + code + '&door=1')
     } else if (prdType==3){
       Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + code + '&door=1')
     } else if(prdType == 2){
-      Tool.navigateTo('/pages/discount-detail/discount-detail?code=' + code)
+      Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + code)
     } else if(prdType == 1) {
-      Tool.navigateTo('/pages/seckill-detail/seckill-detail?code=' + code)
+      Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code=' + code)
     }
   },
   // 获取专题信息列表

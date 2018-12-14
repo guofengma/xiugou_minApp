@@ -5,7 +5,7 @@
   margin-bottom: 130rpx;
 }
 .select-address-box {
-  background-image: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/line-bg.png);
+  background-image: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/line-bg.png);
 }
 .select-selfLifting-address .address-icon{
   width: 44rpx;
@@ -22,12 +22,12 @@
   font-size: 26rpx;
 }
 .choose-leftbar{
-  background:transparent  url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/choose-circle.png) no-repeat;
+  background:transparent  url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/choose-circle.png) no-repeat;
   background-size: 32rpx;
   padding-left: 50rpx;
 }
 .select-address-box.active .choose-leftbar{
-  background-image: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/choose-right-icon.png) ;
+  background-image: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/choose-right-icon.png) ;
 }
 .choose-rightbar.flexR{
   justify-content: flex-end;
@@ -36,11 +36,11 @@
   padding-left: 44rpx;
 }
 .edit{
-  background:url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/edit-icon.png) no-repeat;
+  background:url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/edit-icon.png) no-repeat;
   background-size: 36rpx;
   margin-right: 30rpx;
 }
 .del{
-  background:url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/delete-icon.png) no-repeat;
+  background:url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/delete-icon.png) no-repeat;
   background-size: 36rpx;
 }

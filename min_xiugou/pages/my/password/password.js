@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, API, Storage} = global
 
 Page({
     data: {
@@ -65,18 +65,15 @@ Page({
       let params = {
         oldPassword: this.data.old,
         newPassword: this.data.newPwd,
-        reqName: '修改密码',
-        url: Operation.updateDealerPassword
       };
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock= (req) => {
-        Tool.navigationPop()
-      };
-      r.failBlock = (req) => {
-        Tool.showAlert(req.responseObject.msg)
-      };
-      Tool.showErrMsg(r);
-      r.addToQueue();
+      API.updateDealerPassword(params).then((res) => {
+        Tool.showSuccessToast("修改成功",()=>{
+          Tool.navigationPop()
+        })
+        // Tool.navigationPop()
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     //删除输入框内容
     deleteInp(e){

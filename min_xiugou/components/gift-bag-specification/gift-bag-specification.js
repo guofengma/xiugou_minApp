@@ -28,10 +28,9 @@ Component({
       let priceList = []
       isActive.forEach((item, index) => {
         productType.push(item.specValues)  
-        // item.num=1
         priceList.push({
-          productId: item.productId,
-          priceId: item.productPriceId,
+          prodCode: item.prodCode,
+          skuCode: item.skuCode,
           num:1,
           sourceId: item.id,
           specImg: item.specImg,
@@ -69,7 +68,7 @@ Component({
       // 深复制数组
       let obj = [...this.data.isActive]
       let item = this.data.productTypeList[key].value[index]
-      obj[key] = { index, ...item, specName: this.data.productTypeList[key].name}
+      obj[key] = { index, ...item, specName: this.data.productTypeList[key].specValues}
       this.setData({
         isActive: obj
       })
@@ -128,7 +127,8 @@ Component({
     isSelectAll() { // 是否选择了所有的规格选项
       let isActive = this.data.isActive
       let arr = isActive.filter((item) => {
-        if (item !== undefined && item.productPriceId) {
+        console.log(item)
+        if (item !== undefined && item.skuCode) {
           return item
         }
       })

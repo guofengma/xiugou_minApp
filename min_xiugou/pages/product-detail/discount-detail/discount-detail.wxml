@@ -11,7 +11,7 @@
 
 
 <!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
-  <view class='prduct-detail-view' wx:if='{{productInfoList}}'>
+  <view class='prduct-detail-view' wx:if='{{productInfo}}'>
     <!--topbar  -->
     <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
     <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
@@ -24,7 +24,7 @@
      promotionType="2"
      wx:if="{{proNavData.id}}"/>
     <!-- 产品信息 -->
-    <template is="product-info" data="{{productInfo,productInfoList,showPrice:false}}" />
+    <template is="product-info" data="{{productInfo,showPrice:false}}" />
     <!-- 规则 -->
     <view class='chooseBox'>
       <view bindtap='toggleShowRegular' style="padding: 0">
@@ -53,16 +53,18 @@
 <!--产品规格选择  -->
 <product-specification id='prd-info-type' 
   bind:subClicked="typeSubClicked"  
-  productSpec='{{productSpec}}' 
+  productSpec='{{productSpec}}'
+  surplusNumber='{{proNavData.surplusNumber}}'
   price = '{{proNavData.markdownPrice}}'
   priceList='{{priceList}}' 
   imgUrl="{{productInfo.imgUrl}}" 
   showImgs='{{true}}'
-  isInit="{{false}}" 
+  isInit="{{isInit}}" 
   commodityType='3'
   bind:hiddenTips='hiddenTips'
   specIds='{{specIds}}'
   isIphoneX='{{isIPhoneX.isIPhoneX}}'
+  disabled='{{true}}'
 ></product-specification >
 
 <!--适配iPhone X  -->
@@ -79,7 +81,7 @@
     <view class='regular-list-item'>1、降价拍活动开启后，每到规定时间都降低销售价；</view>
     <view class='regular-list-item'>2、什么时候降价？每个活动，每个商品的降价时间都是不固定的；</view>
     <view class='regular-list-item'>3、参与降价拍的商品是有限的，而且每个商品的购买都是有限制的；</view>
-    <view class='regular-list-item'>4、降价拍活动时间？每个活动的时间都是规定的，直到商品拍卖结束位置；</view>
+    <view class='regular-list-item'>4、降价拍活动时间？每个活动的时间都是规定的，直到商品拍卖结束为止；</view>
     <view class='regular-list-item'>5、关于购买限制？每个用户购买成功后都会扣除购买机会，即时退款也无法增加购买次数；</view>
   </view>
  </product-regular-toast>

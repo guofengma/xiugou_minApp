@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global;
+let { Tool,API, Storage, Event } = global;
 import WxParse from '../../libs/wxParse/wxParse.js';
 Component({
   properties: {
@@ -12,18 +12,15 @@ Component({
     close() {
       this.triggerEvent('isShowNotice')
     },
-    getNotice(){
+    getNotice() { // 通知详情
       let params = {
         pageSize: 5,
         page: 1,
-        reqName: '通知详情',
         'type': 100,
-        url: Operation.queryNoticeMessage
       }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let list = req.responseObject.data.data || [];
-        if (!req.responseObject.data.totalPage) return
+      API.queryNoticeMessage(params).then((res) => {
+        let list = res.data.data || [];
+        if (!res.data.totalPage) return
         let listArr = []
         // 多次渲染模板
         for (let i = 0; i < list.length; i++) {
@@ -40,14 +37,13 @@ Component({
         this.setData({
           list: this.data.listContent,
         })
-        console.log(this.data.list)
         this.triggerEvent('isShowNotice')
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+
+      })
     }
   },
   ready() {
-    this.getNotice()
+    // this.getNotice()
   }
 })

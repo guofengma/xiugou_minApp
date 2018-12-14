@@ -2,19 +2,29 @@
   <view class='msg-tips' wx:if='{{msgShow}}'>
     <view class='flexR' data-index='1' bindtap='msgTipsClicked'>
       <image src='/img/msg-tips-icon.png' mode='widthFix'></image>
-      <view>消息</view>
+      <view class='tips-line-view'>消息</view>
+      <view class='num-label redBg flexR' wx:if='{{messageNum>0}}'>{{messageNum}}</view>
     </view>
     <view class='flexR' data-index='2' bindtap='msgTipsClicked'>
-      <image src='/img/home-icon.png' mode='widthFix'></image>
-        <view>首页</view>
+      <image src='/img/msg-tips-searh.png' mode='widthFix'></image>
+        <view class='tips-line-view'>搜索</view>
     </view>
     <view class='flexR' data-index='3' bindtap='msgTipsClicked'>
       <view>
-        <button class='share'  open-type="{{openType}}" catchtap='btnClicked'>
+        <button class='share'  open-type="{{openType}}" >
         <image src='/img/share-icon.png' mode='widthFix'></image>
         分享
         </button>
       </view>
+    </view>
+    <view class='flexR' data-index='4' bindtap='msgTipsClicked'>
+     <view>
+        <button class='share'  session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"
+      open-type="contact">
+        <image src='/img/msg-tips-kefu.png' mode='widthFix'></image>
+        客服
+        </button>
+    </view>
     </view>
   </view>
 </template>

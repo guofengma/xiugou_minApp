@@ -3,7 +3,7 @@
       <view class="item boxSize flexR-sb">
         <view >
             <view class="font-26">
-              待提现（元）
+              待提现余额（元）
             </view>
             <view class="num">
               {{account}}
@@ -102,7 +102,7 @@
         <view class="content">
             
         </view>
-        <image class="close" bindtap="closeMask" src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/sc_03@2x.png"></image>
+        <image class="close" bindtap="closeMask" src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/sc_03@2x.png"></image>
     </view> -->
     
     <!-- <view class="mask" wx-if="{{isLevel}}">
@@ -112,7 +112,7 @@
             </view>
             
         </view>
-        <image class="close" bindtap="closeMask" src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/sc_03@2x.png"></image>
+        <image class="close" bindtap="closeMask" src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/sc_03@2x.png"></image>
     </view> -->
 </view>
 

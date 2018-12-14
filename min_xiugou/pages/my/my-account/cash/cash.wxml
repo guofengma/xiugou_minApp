@@ -9,7 +9,7 @@
               {{account}}
             </view>
           </view>
-          <!-- <view class="btn flexR" bindtap="beCash">提现</view> -->
+          <view class="btn flexR" bindtap="beCash">提现</view>
         </view>
     </view>
     <view class="list-area">

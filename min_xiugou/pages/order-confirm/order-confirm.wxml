@@ -28,7 +28,7 @@
   <view class='order-prd-info'>
     <view  wx:if='{{door==5}}' class='gift-view whiteBg'>
       <text class='label-red-border'>礼包</text>
-      <text class='gray font-24'>{{orderInfos.orderProductList[0].name}}</text>
+      <text class='gray font-24'>{{orderInfos.orderProductList[0].productName}}</text>
     </view> 
     <block wx:for="{{orderInfos.showProduct}}" wx:key='unique'>
        <template is="cart-product-info" data='{{innerCount,imgSize:180,...item}}'/>
@@ -52,13 +52,14 @@
       <view>优惠券</view>
       <view class='gray'>
         <!-- 不支持使用优惠券 -->
-        <text wx:if='{{(door==99 || door==5)&&canUseCoupon}}'>{{coupon.name}}</text>
+        <text wx:if='{{canUseCoupon}}'>{{coupon.name}}</text>
         <text wx:else>不支持使用优惠券</text>
         <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
       </view>
     </view>
     <!-- 1元劵 -->
-    <view class='flexR-sb' catchtap='iconClicked' wx:if='{{userInfos.tokenCoin}}' >
+    <!-- wx:if='{{userInfos.tokenCoin}}' -->
+    <view class='flexR-sb' catchtap='iconClicked' wx:if='{{userInfos.tokenCoin}}'>
       <view class='reducePrice' >
         1元现金券
       </view>
@@ -78,7 +79,7 @@
   </view>
   <!--支付bar  -->
   <view class='flexR payBar {{isIPhoneX.className}}'>
-    <view>应付款 <text class='red'>：¥{{orderInfos.totalAmounts}}</text></view>
+    <view>应付款 <text class='red'>：¥{{orderInfos.payAmount}}</text></view>
     <view class='btn redBg flexR' bindtap='payBtnClicked'>提交订单</view>
   </view>
 </view>

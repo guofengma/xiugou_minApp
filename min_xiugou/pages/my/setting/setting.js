@@ -1,5 +1,5 @@
 // pages/my/account.js
-let { Tool, RequestFactory, Event, Storage, Operation} = global;
+let { Tool, API, Event, Storage} = global;
 const app=getApp();
 Page({
     data: {
@@ -26,24 +26,18 @@ Page({
     },
     //确定
     outSure(){
-      let params = {
-        reqName: '退出登录',
-        requestMethod: 'GET',
-        url: Operation.exitLogin
-      };
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-          let data=req.responseObject;
-          Tool.showSuccessToast('成功退出');
-          app.globalData.flag=true;
-          Storage.setUserCookie(null)
-          Storage.setUserAccountInfo(null)
-          Event.emit('didLogin');
-          Event.emit('refreshMemberInfoNotice');
-          this.cancel()
-          Tool.switchTab("/pages/index/index")
-      };
-      r.addToQueue();
+      API.exitLogin({}).then((res) => {
+        Tool.showSuccessToast('成功退出');
+        app.globalData.flag = true;
+        Storage.getToken(null)
+        Storage.setUserAccountInfo(null)
+        Event.emit('didLogin');
+        Event.emit('refreshMemberInfoNotice');
+        this.cancel()
+        Tool.switchTab("/pages/index/index")
+      }).catch((res) => {
+        console.log(res)
+      });
     },
     //取消
     cancel(){

@@ -1,57 +1,43 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, API, Storage, Event } = global
 
 Page({
   data: {
-    ysf: { title: '仅退款详情' },
     list:{},
     state:'',
     datas:[],
-    stateInfo:[
-      "", "商家审核中", "商家已同意您的退款请求", "商家拒绝退款", '商家退款中', '商家退款中','退款成功','已关闭','超时处理'
-    ]
+    // stateInfo:[
+    //   "", "商家审核中", "商家已同意您的退款请求", "商家拒绝退款", '商家退款中', '商家退款中','退款成功','已关闭','超时处理'
+    // ]
   },
   onLoad: function (options) {
     this.setData({
       list: Storage.getInnerOrderList() || '',
-      returnProductId: options.returnProductId
+      serviceNo: options.serviceNo
     })
     this.findReturnProductById()
   },
   findReturnProductById(returnProductId) {
+    // 1.待审核 2.待寄回 3.待仓库确认 4.待平台处理 5.售后完成 6.售后关闭
     let list = this.data.list
     let params = {
-      returnProductId: this.data.returnProductId || this.data.list.returnProductId,
-      reqName: '查看退款退货换货情况',
-      url: Operation.findReturnProductById
+      serviceNo: this.data.serviceNo || this.data.list.serviceNo,
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      Tool.findReturnProductById(req)
-      let datas = req.responseObject.data
-      let orderReturnAmounts = datas.orderReturnAmounts || {}
-      if (orderReturnAmounts.actualTokenCoin) {
-        let index = orderReturnAmounts.actualTokenCoin.indexOf('.')
-        if(index!=-1){
-          orderReturnAmounts.actualTokenCoin = orderReturnAmounts.actualTokenCoin.slice(0, index)
-        }
-       
+    API.afterSaleDetail(params).then((res) => {
+      let datas = res.data || {}
+      if (datas.countDownSeconds){
+        this.countdown()
       }
-
-      datas.statusName = this.data.stateInfo[datas.status]
-      if (datas.status ==6){
-        datas.showRefundTime = Tool.formatTime(datas.orderReturnAmounts.refundTime)
-      } else if (datas.status == 3){
-        datas.statusName = '商家拒绝你的请求' 
-        datas.showRefundTime = Tool.formatTime(datas.refuseTime)
-      } else if (datas.status == 1) {
-        datas.showRefundTime = datas.applyTime
-      }
+      datas.createTime = Tool.formatTime(datas.createTime)
+      // let afterSaleInfo = datas.afterSaleInfo || {}
+      let imgList = datas.imgList || ''
+      datas.showImgList = imgList.split(',')
+      // afterSaleInfo.showImgList = imgList.split(',')
       this.setData({
-        datas: datas
+        datas:datas
       })
       Event.emit('getDetail')
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
-  },
+    }).catch((res) => {
+      console.log(res)
+    });
+  }
 })

@@ -1,36 +1,21 @@
-let { Tool, RequestFactory, Operation} = global;
+let { Tool, API} = global;
 
 Page({
     data: {
       list:''
     },
     onLoad: function (options) {
-      // Tool.getUserInfos(this)
       this.queryHelpQuestionList()
     },
     queryHelpQuestionList(){
-      let params = {
-        reqName: '查询问题列表',
-        requestMethod: 'GET',
-        url: Operation.queryHelpQuestionList
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let data = req.responseObject.data? req.responseObject.data : {}
-        let listArr = []
-        for (let key in data) {
-          listArr.push({ 
-            name: key, 
-            list:data[key], 
-            typeid: data[key][0].typeId
-          })
-        }
+      API.queryHelpQuestionList({}).then((res) => {
+        let datas = res.data || []
         this.setData({
-          list: listArr
+          list: datas
         })
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     
     //跳到详情页
@@ -44,6 +29,9 @@ Page({
     //跳到问题反馈页面
     questionFeedback(){
         Tool.navigateTo('questionFeedback/questionFeedback')
+    },
+    orderClicked(){
+      Tool.navigateTo('/pages/my/my-order/my-order')
     },
     //跳到问题列表页面
     questionList(e){
