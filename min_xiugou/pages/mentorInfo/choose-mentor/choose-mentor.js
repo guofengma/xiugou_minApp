@@ -1,4 +1,4 @@
-let { Tool, Storage, API } = global;
+let { Tool, Storage, API, Event } = global;
 Page({
   data: {
     disabled:false
@@ -16,9 +16,7 @@ Page({
     API.mentorBind({
       code: this.data.datas.code
     }).then((res) => {
-      let datas = res.data || {}
-      Storage.setFirstRegistration(datas.give)
-      this.toast()
+      this.dismiss()
     }).catch((res) => {
       this.setData({
         disabled: false
@@ -26,21 +24,13 @@ Page({
     })
   },
   choose(){
+    // Event.emit('updateMentor')
     this.dismiss()
   },
-  toast(){
+  dismiss(){
     let callBack = () => {
       Tool.switchTab('/pages/index/index')
     }
     Tool.showSuccessToast('注册成功', callBack)
-  },
-  dismiss(){
-    API.givePackage({}).then((res) => {
-      let datas = res.data || {}
-      Storage.setFirstRegistration(datas.give)
-      this.toast()
-    }).catch((res) => {
-
-    })
-  },
+  }
 })

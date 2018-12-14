@@ -74,9 +74,7 @@ Page({
     API.mentorBind({
       code: this.data.invite[this.data.activeIndex].code
     }).then((res) => {
-      let datas = res.data || {}
-      Storage.setFirstRegistration(datas.give)
-      this.toast()
+      this.dismiss()
     }).catch((res) => {
       this.setData({
         disabled: false
@@ -103,20 +101,11 @@ Page({
       
     })
   },
-  toast(){
+  dismiss(){
     let callBack = () => {
       Tool.switchTab('/pages/index/index')
     }
     Tool.showSuccessToast('注册成功', callBack)
-  },
-  dismiss(){
-    API.givePackage({}).then((res) => {
-      let datas = res.data || {}
-      Storage.setFirstRegistration(datas.give)
-      this.toast()
-    }).catch((res) => {
-
-    })
   },
   goPage(){
     Tool.navigateTo('/pages/register/write-invite-code/write-invite-code?from' + this.data.redirectTo)
