@@ -7,13 +7,13 @@
   border-bottom: 1rpx solid #eee;
 }
 .tips-content>view{
- background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/choose-circle.png) no-repeat 510rpx  center;
+ background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/choose-circle.png) no-repeat 510rpx  center;
  background-size: 44rpx 44rpx;
  
 }
 .tips-content>view.active{
   background-color:#F8F8F8; 
-  background-image: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/choose-icon-c.png)
+  background-image: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/choose-icon-c.png)
 }
 .cancel-btn{
   width: 276rpx;
@@ -22,7 +22,7 @@
   border-radius: 10rpx;
 }
 .tips-header{
-  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/close-icon.png) no-repeat right top;
+  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/close-icon.png) no-repeat right top;
   background-size: 64rpx 64rpx;
   position: relative;
 }

@@ -4,6 +4,6 @@
          {{header}}
       </view>
       <slot></slot>
-    <image class="close" bindtap="closeMask" src="https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/sc_03@2x.png"></image>
+    <image class="close" bindtap="closeMask" src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/sc_03@2x.png"></image>
   </view>
 </view>

@@ -33,7 +33,7 @@ const config = {
     m_fill: '?x-oss-process=image/resize,p_65', // 将图按比例缩略到原来的 65%
     m_mfit: '?x-oss-process=image/resize,m_mfit,h_300,w_300', // 将图缩略成宽度为 300，高度为 300，按短边优先
   },
-  // imgBaseUrl:"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/",// 图片的地址
+  // imgBaseUrl:"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/",// 图片的地址
   imgBaseUrl:"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/",// 图片的地址
 }
 export default config

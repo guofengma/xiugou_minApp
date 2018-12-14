@@ -20,11 +20,11 @@
   font-size:26rpx;
 }
 .reason-cell>view{
-  background: #fff url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/choose-circle.png) no-repeat center right;
+  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/choose-circle.png) no-repeat center right;
   background-size: 44rpx 44rpx;
 }
 .reason-cell>view.active{
-  background-image: url(https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/choose-right-icon.png)
+  background-image: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/choose-right-icon.png)
 }
 .after-sale-reason{
   width: 100%;
