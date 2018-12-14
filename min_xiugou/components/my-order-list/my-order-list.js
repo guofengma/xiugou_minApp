@@ -257,7 +257,7 @@ Component({
       console.log(item)
       let params = {
         payAmount: item.payAmount, //总价
-        orderNo: item.platformOrderNo  // 流水号
+        orderNo: item.warehouseOrderDTOList[0].outTradeNo  // 流水号
       };
       Storage.setPayOrderList(params)
       Tool.navigateTo('/pages/order-confirm/pay/pay?door=1&isContinuePay=true')

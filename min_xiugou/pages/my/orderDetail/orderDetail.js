@@ -280,7 +280,7 @@ Page({
     continuePay() {
       let params = {
         payAmount: this.data.showPriceList.payAmount, //总价
-        orderNo: this.data.showPriceList.platformOrderNo,  // 流水号
+        orderNo: this.data.showPriceList.warehouseOrderDTOList[0].outTradeNo,  // 流水号
       }
       Storage.setPayOrderList(params)
       Tool.navigateTo('/pages/order-confirm/pay/pay?door=1&isContinuePay=' + true)

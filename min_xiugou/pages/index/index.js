@@ -50,9 +50,10 @@ Page({
       width:0,
       isShowCoupon:false,// 优惠卷弹窗
       couponList:[
-        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/newuser_n.png",// 没有选择导师的新用户
-        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/newuser_y.png",// 选择导师的新用户
-        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/olduser.png",//老用户
+        '',// 没有礼包
+        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/olduser.png",//老用户 1688
+        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/newuser_y.png",// 选择导师的新用户 2688
+        "https://cdn.sharegoodsmall.com/sharegoods/resource/sg/images/package/newuser_n.png",// 没有选择导师的新用户 666
       ]
     },
     close() {
@@ -249,22 +250,15 @@ Page({
       app.queryPushMsg(callBack)
     },
     indexQueryCategoryList(){
-      // let params = {
-      //   isShowLoading: false,
-      //   reqName: '获取首页4个分类',
-      //   requestMethod: 'GET',
-      //   url: Operation.indexQueryCategoryList
-      // }
-      // let r = RequestFactory.wxRequest(params);
-      // r.successBlock = (req) => {
-      //   let datas = req.responseObject.data || []
-      //   this.data.iconArr.splice(5, 0, ...datas)
-      //   this.setData({
-      //     iconArr: this.data.iconArr
-      //   })
-      // };
-      // //Tool.showErrMsg(r)
-      // r.addToQueue();
+      API.indexQueryCategoryList({}).then((res) => {
+        let datas = res.data || []
+        this.data.iconArr.splice(5, 0, ...datas)
+        this.setData({
+          iconArr: this.data.iconArr
+        })
+      }).catch((res) => {
+        console.log(res)
+      });
     },
     discoverNotice() {
       if (!this.data.isChange) return
@@ -302,24 +296,13 @@ Page({
       app.getLevel(callBack)
     },
     queryAdList(types = 1, reqName='',callBack=()=>{}) {
-      // API.queryAdList({
-      //   'type': types,
-      // }).then((res) => {
-      //   callBack(res.data)
-      // }).catch((res) => {
-      //   console.log(res)
-      // });
-      let params = {
+      API.queryAdList({
         'type': types,
-        reqName: reqName,
-        url: Operation.queryAdList,
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        callBack(req.responseObject.data)
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).then((res) => {
+        callBack(res.data)
+      }).catch((res) => {
+        console.log(res)
+      });
     },
     adListClicked(e) {
       let adType = e.currentTarget.dataset.type;
@@ -341,29 +324,22 @@ Page({
         adType =1
       }
       let page = this.data.pageArr[adType]+val;
-      console.log(adType, val,prodtype)
       Tool.navigateTo(page)
     },
     queryFeaturedList() {
-      let params = {
-        ...this.data.params,
-        reqName: '获取推荐产品',
-        url: Operation.queryFeaturedList
-      }
-      let r = RequestFactory.wxRequest(params);
-        r.successBlock = (req) => {
-          let datas = req.responseObject.data
-          let list = datas.data || []
-          list.forEach((item,index)=>{
+      API.queryFeaturedList(this.data.params).then((res) => {
+        let datas = res.data || {}
+        let list = datas.data || []
+        list.forEach((item, index) => {
 
-          })
-          this.setData({
-            recommendArr: this.data.recommendArr.concat(datas.data),
-            recommendTotalPage: datas.totalPage,
-          })
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
+        })
+        this.setData({
+          recommendArr: this.data.recommendArr.concat(datas.data),
+          recommendTotalPage: datas.totalPage,
+        })
+      }).catch((res) => {
+        console.log(res)
+      });
     },
     searchClicked() {
       Tool.navigateTo('/pages/search/search?door=0')
@@ -405,14 +381,13 @@ Page({
       })
     },
     isShowCoupon() { // 展示优惠卷
-      let userId = Storage.getUserAccountInfo().upUserid
-      let index = userId? 1:0
+      let index = Storage.getFirstRegistration()
       this.setData({
         isShowCoupon: !this.data.isShowCoupon,
         showCouponImg: this.data.couponList[index]
       })
       if (!this.data.isShowCoupon) {
-        Storage.setFirstRegistration(false)
+        Storage.setFirstRegistration(null)
         this.selectComponent("#notice").getNotice()
       }
     },
@@ -427,6 +402,9 @@ Page({
       if (Storage.getFirstRegistration()) {
         this.isShowCoupon()
       } 
+      if (this.data.didLogin) {
+        this.queryPushMsg()
+      }
     },
     onHide: function () {
       this.setData({

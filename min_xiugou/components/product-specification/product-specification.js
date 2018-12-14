@@ -34,6 +34,7 @@ Component({
         Tool.showAlert(this.data.tips)
         return
       }
+      if (this.data.selectPrdList.sellStock==0) Tool.showAlert('库存不足')
       this.prdCanBuyAmount(this.data.innerCount)
       let isActive = this.data.isActive
       this.triggerEvent('subClicked', { ...this.data.selectPrdList, typeClicked: this.data.typeClicked, buyCount: this.data.innerCount });
@@ -67,7 +68,11 @@ Component({
         // }
         // 降价拍和秒杀
         if ((this.data.commodityType == 2 || this.data.commodityType == 3) && item.skuCode == this.data.specIds){
-          priceList.push(item)
+          if (this.data.surplusNumber>0){
+            priceList.push(item)
+            item.sellStock = this.data.surplusNumber
+          }
+
         } 
       })
       if (priceList.length==0){

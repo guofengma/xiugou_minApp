@@ -16,3 +16,6 @@
   border: 1rpx solid;
   margin-top: 43rpx;
 }
+.tips-img-view>view:nth-child(2){
+  padding-bottom: 20rpx;
+}

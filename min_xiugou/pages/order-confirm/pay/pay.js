@@ -105,7 +105,7 @@ Page({
       'timeStamp': payList.timeStamp,
       'nonceStr': payList.nonceStr,
       'package': payList.package,
-      'signType': payList.signType,
+      'signType': payList.signType || 'MD5',
       'paySign': payList.paySign,
       'success': function (res) {
         that.showResult(true)
@@ -131,28 +131,11 @@ Page({
         this.showResult(true)
       } else {
         let datas = req.responseObject.data
-        this.wxPayPackage(datas)
+        this.wxPay(datas)
       }
     };
     Tool.showErrMsg(r)
     r.addToQueue();
-  },
-  wxPayPackage(payList) { //微信支付--推广红包
-    payList = JSON.parse(payList)
-    let that = this
-    wx.requestPayment({
-      'timeStamp': payList.timeStamp,
-      'nonceStr': payList.nonceStr,
-      'package': payList.package,
-      'signType': 'MD5',
-      'paySign': payList.paySign,
-      'success': function (res) {
-        that.showResult(true)
-      },
-      'fail': function (res) {
-        that.showResult(false)
-      }
-    })
   },
   showResult(bool){ // 支付结果显示
     this.setData({
@@ -197,6 +180,23 @@ Page({
   // formatDatas() {
   //   this.setData({
   //     totalAmounts: this.data.payList.payAmount || 0,
+  //   })
+  // },
+  // wxPayPackage(payList) { //微信支付--推广红包
+  //   payList = JSON.parse(payList)
+  //   let that = this
+  //   wx.requestPayment({
+  //     'timeStamp': payList.timeStamp,
+  //     'nonceStr': payList.nonceStr,
+  //     'package': payList.package,
+  //     'signType': 'MD5',
+  //     'paySign': payList.paySign,
+  //     'success': function (res) {
+  //       that.showResult(true)
+  //     },
+  //     'fail': function (res) {
+  //       that.showResult(false)
+  //     }
   //   })
   // },
 })

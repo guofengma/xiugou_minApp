@@ -45,7 +45,6 @@ Page({
       if (datas.productStatus!=0){
         this.activityByProductId(this.data.productCode)
         if (this.data.productInfo.productStatus == 3) {
-          console.log(111111)
           this.data.distanceTime = Math.ceil((this.data.productInfo.upTime - this.data.productInfo.now) / 1000)
           this.countdown(this)
         }
@@ -113,6 +112,7 @@ Page({
       Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true+'&inviteId=' + this.data.inviteCode)
       return
     }
+    if (!this.data.productInfo.canUserBuy) return
     let params = {
       orderProductList:[{
         quantity: this.data.productBuyCount,
@@ -125,6 +125,7 @@ Page({
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params)+'&type=99' )
   },
   addToShoppingCart(){
+    if (this.data.productInfo.productStatus == 2) return
     this.ProductFactory.addToShoppingCart()
   },
   typeSubClicked(e){
@@ -139,6 +140,7 @@ Page({
   },
   btnClicked(e){
     let n = parseInt(e.currentTarget.dataset.key)
+    // this.selectComponent("#prd-info-type").isVisiableClicked(n)
     if (this.data.productInfo.canUserBuy || n == 1 && this.data.productInfo.productStatus == 3) {
       this.selectComponent("#prd-info-type").isVisiableClicked(n)
     }

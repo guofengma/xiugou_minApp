@@ -67,21 +67,17 @@ App({
     },
     toLogin(callBack = () => { }) {
       if (!this.globalData.code) return
-      let params = {
-        wechatCode: this.globalData.code,
-        reqName:'获取openid和是否注册',
-        url: Operation.verifyWechat,
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        Tool.loginOpt(req)
-        let datas = req.responseObject.data
+      API.verifyWechat({
+        wechatCode: this.globalData.code
+      }).then((res) => {
+        Tool.loginOpt(res)
+        let datas = res.data || {}
         this.globalData.openid = datas.openid
         Storage.setWxOpenid(datas.openid)
         callBack()
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     /**
      * 调用微信接口，获取设备信息接口
@@ -105,40 +101,27 @@ App({
 
       }
     },
-    getLevel(callBack=()=>{}) {
-      let params = {
-        isShowLoading: false,
-        reqName: '获取用户等级',
-        requestMethod: 'GET',
-        url: Operation.getLevel
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data || {}
+    getLevel(callBack = () => { }) { // 获取用户等级
+      API.getLevel({}).then((res) => {
+        let datas = res.data || {}
         datas.availableBalance0 = Tool.formatNum(datas.availableBalance || 0)
         datas.blockedBalance0 = Tool.formatNum(datas.blockedBalance || 0)
         let levelName = datas.levelName || ''
         datas.levelName0 = levelName.length > 4 ? levelName.slice(0, 4) + '...' : levelName
         Storage.setUserAccountInfo(datas)
         callBack(datas)
-      };
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
-    queryPushMsg(callBack = () => { }) {
-      let params = {
-        reqName: '消息未读详情',
-        isShowLoading: false,
-        url: Operation.queryPushNum,
-        requestMethod: 'GET'
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let detail = req.responseObject.data;
+    queryPushMsg(callBack = () => { }) { // 消息未读详情
+      API.noticeMessageCount({}).then((res) => {
+        let detail = res.data || {};
         detail.totalMessageNum = detail.messageCount + detail.noticeCount + detail.shopMessageCount
-        detail.hasMsg = detail.totalMessageNum>0? true:false
+        detail.hasMsg = detail.totalMessageNum > 0 ? true : false
         callBack(detail)
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     }
 })

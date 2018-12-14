@@ -29,6 +29,15 @@ export default class HttpUtils {
     if (isShowLoading) {
       global.Tool.showLoading();
     }
+    let sysInfo = global.Storage.sysInfo()
+    if (sysInfo) { 
+      params = {
+        ...params,
+        device: sysInfo.model,// 手机型号
+        wechatVersion: sysInfo.version,// 微信版本
+        systemVersion: sysInfo.system, // 系统版本
+      }
+    }
     const headers = this.getHeaders(url, params, config, method)
     return new Promise((resolve, reject) => {
       wx.request({

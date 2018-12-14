@@ -20,7 +20,7 @@
     <block wx:for="{{imgUrls}}" wx:key="unique">
       <swiper-item> 
         <view bindtap='swiperImgCliked' data-index='{{index}}' class="slide-image">
-          <image-sub  imgSrc="{{item.smallImg}}" mode='aspectFit'/>
+          <image-sub  imgSrc="{{item.smallImg}}" mode='aspectFill'/>
           <!-- <image src="{{item.smallImg}}" class="slide-image"  mode='aspectFill'/> -->
         </view> 
       </swiper-item>

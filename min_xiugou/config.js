@@ -5,11 +5,11 @@ const config = {
   // h5webUrl: 'https://uath5.sharegoodsmall.com',// 市场部内测环境
   // baseUrl: 'https://uatapi.sharegoodsmall.com/gateway',// 市场部内测环境
   h5webUrl: 'https://testh5.sharegoodsmall.com',
-  baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
+  // baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
   // h5webUrl: 'http://devh5.sharegoodsmall.com',
   // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
   // baseUrl: 'http://172.16.10.42:4090/gateway',  // 蒋
-  // baseUrl: 'http://172.16.10.29:9090/gateway',  // 周
+  baseUrl: 'http://172.16.10.64:9090/gateway',  // 周
   // baseUrl:'http://172.16.10.238:8903/gateway',  // 高
   // baseUrl:'http://172.16.10.56:8903/gateway',  // 沈
   // baseUrl: 'http://172.16.10.41:9090/gateway',  // 张

@@ -35,13 +35,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 25,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "注册",
 					"pathName": "pages/register/register",
-					"query": "inviteId=200"
+					"query": "inviteCode=200"
 				},
 				{
 					"id": 1,
