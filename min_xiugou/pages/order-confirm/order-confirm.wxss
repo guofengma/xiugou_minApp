@@ -4,6 +4,7 @@
 .orderComfirm{
   padding-bottom:100rpx;
   padding-top: 20rpx;
+  box-sizing: border-box;
 }
 .address-view{
   padding: 30rpx 100rpx 33rpx 30rpx;

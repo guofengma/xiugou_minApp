@@ -30,7 +30,7 @@ const config = {
   Secret: '9fa19f4d1f7e37d318dba14f951f1b4c',//小程序Secret
   imgSizeParams:{
     m_fixed:'?x-oss-process=image/resize,m_fixed,h_300,w_300', // 正方形
-    m_fill: '?x-oss-process=image/resize,p_70', // 将图按比例缩略到原来的 70%
+    m_fill: '?x-oss-process=image/resize,p_65', // 将图按比例缩略到原来的 65%
     m_mfit: '?x-oss-process=image/resize,m_mfit,h_300,w_300', // 将图缩略成宽度为 300，高度为 300，按短边优先
   },
   imgBaseUrl:"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/",// 图片的地址

@@ -71,6 +71,15 @@ const api = {
       "encrypt": false,// 是否加签
     }
   ],
+  /***************************** 地址 ************************ */
+  'addUserAddress': [
+    '/user/userAddress/save',
+    {
+      "action": "新增地址 或 修改地址(传id)",
+      "method": "post",
+      "encrypt": false,// 是否加签
+    }
+  ],
   /***************************** 首页接口 ************************ */
   'queryAdList':[
     '/config/advertisement/queryAdvertisementList',

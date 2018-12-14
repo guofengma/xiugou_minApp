@@ -22,7 +22,7 @@ Page({
     urlFrom: null,
   },
   onLoad: function (options) {
-    Tool.navigateTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
+    // Tool.navigateTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
     let inviteId = options.inviteId
     if (options.inviteId == 'null' || options.inviteId == 'undefined' || !options.inviteId) {
       inviteId = ''

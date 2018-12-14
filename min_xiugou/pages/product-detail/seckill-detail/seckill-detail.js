@@ -115,6 +115,12 @@ Page({
     let params = {
       activityCode: this.data.prodCode,
       num: this.data.productBuyCount,
+      orderProductList: [{
+        quantity: 1,
+        skuCode: this.data.selectType.skuCode,
+        productCode: this.data.selectType.prodCode
+      }],
+      orderSubType:1
     }
     Storage.setSubmitOrderList(params)
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params) + '&type=' + this.data.door)
