@@ -13,12 +13,7 @@
 .item{background: #fff;height: 96rpx;line-height: 96rpx;padding: 0 30rpx;display: flex;}
 .item view:first-child{width: 75%}
 .item view:nth-child(2){width: 25%;text-align: right;margin-right: 20rpx}
-/* .jt-img{
-    width:30rpx;
-    height: 30rpx;
-    vertical-align: middle;
-    margin-left: 10rpx;
-} */
+
 .detail-remark,.phone-area{
   background: #fff;
   margin-top: 2rpx

@@ -1,22 +1,23 @@
-let { Tool, RequestFactory,Operation } = global;
+let { Tool, API } = global;
 Page({
     data: {
       list:''
     },
     queryHelpQuestionList(id) {
-      let params = {
-        reqName: '查询问题列表',
-        requestMethod: 'GET',
-        url: Operation.queryHelpQuestionList
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        this.setData({
-          list: req.responseObject.data[id]
+      API.queryHelpQuestionList({
+
+      }).then((res) => {
+        let datas = res.data || []
+        datas.forEach((item,index)=>{
+          if(item.id==id){
+            this.setData({
+              list: item.helpQuestionExtList || []
+            })
+          }
         })
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     toDetail(e){
       let id = e.currentTarget.dataset.id

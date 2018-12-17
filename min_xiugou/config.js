@@ -2,10 +2,10 @@
 const config = {
   rasVersion: '1.0.4.12', //数据加签版本号
   rasClient: 'miniapp', // 数据加签端口
-  h5webUrl: 'https://h5.sharegoodsmall.com',// 市场部内测环境
-  baseUrl: 'https://api.sharegoodsmall.com/gateway',// 市场部内测环境
-  // h5webUrl: 'https://testh5.sharegoodsmall.com',
-  // baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
+  // h5webUrl: 'https://h5.sharegoodsmall.com',// 市场部内测环境
+  // baseUrl: 'https://api.sharegoodsmall.com/gateway',// 市场部内测环境
+  h5webUrl: 'https://testh5.sharegoodsmall.com',
+  baseUrl:'https://testapi.sharegoodsmall.com/gateway',// 测试环境
   // h5webUrl: 'http://devh5.sharegoodsmall.com',
   // baseUrl: 'http://devapi.sharegoodsmall.com/gateway',// 开发环境
   // baseUrl: 'http://172.16.10.42:4090/gateway',  // 蒋
@@ -14,7 +14,7 @@ const config = {
   // baseUrl:'http://172.16.10.56:8903/gateway',  // 沈
   // baseUrl: 'http://172.16.10.41:9090/gateway',  // 张
   // baseUrl: 'http://172.16.10.12:8180/gateway',  // 杨
-  // baseUrl: 'http://172.16.10.19:8903/gateway',  // 吴
+  // baseUrl: 'http://172.16.10.41:8903/gateway',  // 吴
   // baseUrl: 'http://172.16.10.88:8903/gateway',  // 陈
   // baseUrl: 'http://172.16.10.111:8903/gateway',  // 王
   // baseUrl: 'http://172.16.10.151:9090/gateway',  // 李俊
