@@ -50,12 +50,12 @@
     clear: both;
 }
 
-.detail .jt-img{
+/* .detail .jt-img{
     width:30rpx !important;
     height: 30rpx !important;
     vertical-align: middle;
     margin-left: 10rpx;
-}
+} */
 .back-detail{
     width: 90%;
     height: 222rpx;
