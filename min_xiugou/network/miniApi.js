@@ -10,6 +10,15 @@ const api = {
       "encrypt": false
     }
   ],
+  /***************************** 上传图片 ************************ */
+  'aliyunOSSUploadImage': [
+    '/common/upload/oss',
+    {
+      "action": "获上传图片",
+      "method": "get",
+      "encrypt": true,// 是否加签
+    }
+  ],
   /***************************** 短信 ************************ */
   /* 统一的短信接口
         1. code对应传递值-------> 用户注册：MOBILE_REGISTRATION_CODE 
@@ -705,6 +714,7 @@ const api = {
 }
 
 const API = new ApiUtils(api).result;
+console.log(API)
 /*
 * 使用说明
       API.queryAdList({
