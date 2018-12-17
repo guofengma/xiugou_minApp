@@ -437,53 +437,6 @@ export default class Tool {
     }
 
     /**
-     * 选择图片，并上传 
-     * @param imgCount
-     * @param successCallback
-     */
-    static uploadImage(imgCount, successCallback=()=>{}, failCallback=()=>{}) {
-      wx.chooseImage({
-        count: imgCount, // 默认9
-        sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
-        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-        success: function (res) {
-          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-          console.log(res)
-          let tempFilePaths = res.tempFilePaths;
-          if (tempFilePaths[0].lastIndexOf('.gif')!=-1){
-            global.Tool.showAlert('不支持gif格式图片')
-            return
-          }
-          let tempFilesSize = res.tempFiles[0].size
-
-          if (tempFilesSize <= 3145728){
-            // console.log(tempFilePaths[0])
-            const headers = RSA.sign();
-            wx.uploadFile({
-              url: global.RequestFactory.aliyunOSSUploadImage(),
-              filePath: tempFilePaths[0],
-              name: 'file',
-              header: headers,
-              formData: {
-                ...headers
-              },
-              success: function (res) {
-                let fileInfo = JSON.parse(res.data);
-                console.log(fileInfo)
-                successCallback(fileInfo)
-              }
-            })
-          } else{
-            global.Tool.showAlert('上传图片不能大于3M')
-          }
-        },
-        fail: function () {
-          failCallback()
-        },
-      })
-    }
-
-    /**
      * 从数组中移除一个对象
      * @param obj
      * @param arr

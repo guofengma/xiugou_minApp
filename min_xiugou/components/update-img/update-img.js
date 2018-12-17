@@ -38,26 +38,7 @@ Component({
         this.setData({
           clickedNum: clickedNum
         })
-      });
-      // let callBack = (fileInfo) => {
-      //   console.log(fileInfo.data)
-      //   let tempUrl = fileInfo.data;
-      //   this.data.originalImg.push(tempUrl);
-      //   this.data.smallImg.push(tempUrl + config.imgSizeParams.m_fill);
-      //   this.setData({
-      //     originalImg: this.data.originalImg,
-      //     smallImg: this.data.smallImg
-      //   })
-      //   console.log(this.data.originalImg, this.data.smallImg)
-      //   this.triggerEvent('uploadImage', { ...this.data})
-      // };
-      // let failCallback = () =>{
-      //   clickedNum--
-      //   this.setData({
-      //     clickedNum: clickedNum
-      //   })
-      // }
-      // Tool.uploadImage(1, callBack, failCallback)
+      })
     },
     //删除图片
     deleteImg(e) {
