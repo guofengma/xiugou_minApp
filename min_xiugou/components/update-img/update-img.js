@@ -1,4 +1,4 @@
-let { Tool, RequestFactory } = global;
+let { Tool, API } = global;
 import config from '../../config.js'
 Component({
   properties: {
@@ -17,13 +17,13 @@ Component({
       let clickedNum = this.data.clickedNum
       clickedNum++
       if (clickedNum > 3) return
-      console.log(22222)
       this.setData({
         clickedNum: clickedNum
       })
-      let callBack = (fileInfo) => {
-        console.log(fileInfo.data)
-        let tempUrl = fileInfo.data;
+      API.aliyunOSSUploadImage({}, {
+        imgCount: 1
+      }).then((res) => {
+        let tempUrl = res.data;
         this.data.originalImg.push(tempUrl);
         this.data.smallImg.push(tempUrl + config.imgSizeParams.m_fill);
         this.setData({
@@ -31,15 +31,33 @@ Component({
           smallImg: this.data.smallImg
         })
         console.log(this.data.originalImg, this.data.smallImg)
-        this.triggerEvent('uploadImage', { ...this.data})
-      };
-      let failCallback = () =>{
+        this.triggerEvent('uploadImage', { ...this.data })
+      }).catch((res) => {
+        console.log(res)
         clickedNum--
         this.setData({
           clickedNum: clickedNum
         })
-      }
-      Tool.uploadImage(1, callBack, failCallback)
+      });
+      // let callBack = (fileInfo) => {
+      //   console.log(fileInfo.data)
+      //   let tempUrl = fileInfo.data;
+      //   this.data.originalImg.push(tempUrl);
+      //   this.data.smallImg.push(tempUrl + config.imgSizeParams.m_fill);
+      //   this.setData({
+      //     originalImg: this.data.originalImg,
+      //     smallImg: this.data.smallImg
+      //   })
+      //   console.log(this.data.originalImg, this.data.smallImg)
+      //   this.triggerEvent('uploadImage', { ...this.data})
+      // };
+      // let failCallback = () =>{
+      //   clickedNum--
+      //   this.setData({
+      //     clickedNum: clickedNum
+      //   })
+      // }
+      // Tool.uploadImage(1, callBack, failCallback)
     },
     //删除图片
     deleteImg(e) {

@@ -15,7 +15,7 @@ const api = {
     '/common/upload/oss',
     {
       "action": "获上传图片",
-      "method": "get",
+      "method": "uploadImage",
       "encrypt": true,// 是否加签
     }
   ],

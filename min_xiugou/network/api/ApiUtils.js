@@ -61,6 +61,7 @@ export default class ApiUtils {
           console.log(`------------------ 请求结束:${action}`)
           // console.log( typeof response)
           if (response.code === 0 || response.code === 10000) {
+            console.log(response)
             return Promise.resolve(response);
           } else {
             app.aldstat.sendEvent(url, {

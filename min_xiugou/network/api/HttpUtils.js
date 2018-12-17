@@ -24,7 +24,65 @@ export default class HttpUtils {
   static post(url, params, config = {}) {
     return this.request(url, params, config,'post')
   }
-  static request(url, params, config, method) {
+
+  static uploadImage(url, params, config = {imgCount:9}) { // 上传图片接口封装
+    const headers = this.getHeaders(url, params, config,'post');
+    const isShowLoading = this.showLoading(config)
+    return new Promise((resolve, reject) => {
+      wx.chooseImage({
+        count: config.imgCount, // 默认9
+        sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+        success(res) {
+          if (isShowLoading) {
+            global.Tool.showLoading();
+          }
+          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+          console.log(res)
+          let tempFilePaths = res.tempFilePaths;
+          if (tempFilePaths[0].lastIndexOf('.gif') != -1) {
+            global.Tool.showAlert('不支持gif格式图片')
+            return
+          }
+          let tempFilesSize = res.tempFiles[0].size
+
+          if (tempFilesSize <= 3145728) {
+            // console.log(tempFilePaths[0])
+            wx.uploadFile({
+              url: url,
+              filePath: tempFilePaths[0],
+              name: 'file',
+              header: headers,
+              formData: {
+                ...headers
+              },
+              success(res) {
+                let fileInfo = JSON.parse(res.data);
+                resolve(fileInfo)
+                // config.successCallback(fileInfo)
+              },
+              fail(res) {
+                reject(res)
+              },
+              complete(res) {
+                if (isShowLoading) {
+                  global.Tool.hideLoading();
+                }
+              }
+            })
+          } else {
+            global.Tool.showAlert('上传图片不能大于3M')
+          }
+        },
+        fail(res) {
+          reject(res)
+        }
+      })
+    }) 
+   
+  }
+
+  static request(url, params, config, method) { // 接口请求封装
     const isShowLoading = this.showLoading(config)
     if (isShowLoading) {
       global.Tool.showLoading();
@@ -47,15 +105,15 @@ export default class HttpUtils {
         method: method,
         header: headers,
         success: function (res) {
-          if (isShowLoading) {
-            global.Tool.hideLoading();
-          }
           resolve(res.data);
         },
         fail: function (res) {
           reject(res.data);
         },
         complete: function (res) {
+          if (isShowLoading) {
+            global.Tool.hideLoading();
+          }
           console.log(res.data)
         }
       });

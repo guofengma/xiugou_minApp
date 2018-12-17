@@ -52,18 +52,20 @@ Page({
       this.updateUserInfo(params, callBack)
     },
     modifyImageTap: function () {
-      let callBack = (fileInfo) => {
-        let temporaryId = fileInfo.data;//临时Id
+      API.aliyunOSSUploadImage({},{
+        imgCount:1
+      }).then((res) => {
         let params = {
-          headImg: temporaryId,
-          'type':1
+          headImg: res.data,
+          'type': 1
         }
-        let callBack = (infos)=>{
-          infos.headImg = temporaryId
+        let callBack = (infos) => {
+          infos.headImg = res.data
         }
         this.updateUserInfo(params, callBack)
-      }
-      Tool.uploadImage(1, callBack)
+      }).catch((res) => {
+        console.log(res)
+      });
     },
     updateUserInfo(params, callBack) { //修改用户信息
       API.updateUserById(params).then((res) => {
