@@ -988,18 +988,6 @@ export default class Tool {
       return flag;
     }
 
-    // 退换货数据变换
-
-    static findReturnProductById(res){
-      let datas = res.data
-      datas.applyTime = global.Tool.formatTime(datas.applyTime)
-      datas.imgUrl = datas.specImg
-      datas.productName = datas.productName
-      if (datas.returnAddress) {
-        datas.returnAddress.addressInfo = datas.returnAddress.provinceName + datas.returnAddress.cityName + datas.returnAddress.areaName
-      }
-    }
-
     // 根据屏幕大小 高度自适应
 
     static getAdaptHeight(e,that){

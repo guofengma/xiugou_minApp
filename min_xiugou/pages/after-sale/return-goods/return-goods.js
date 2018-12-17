@@ -37,12 +37,7 @@ Page({
       serviceNo: this.data.serviceNo || this.data.list.serviceNo,
     }).then((res) => {
       let datas = res.data || {}
-      let imgList = datas.imgList || ''
-      datas.showImgList = imgList.split(',')
       let status = datas.status
-      datas.createTime = Tool.formatTime(datas.createTime)
-      let refundAddress = datas.refundAddress || {}
-      refundAddress.addressInfo = (refundAddress.province || '') + (refundAddress.city || "" ) + (refundAddress.area || "")+ ( refundAddress.address || "")
       let orderRefundExpress = datas.orderRefundExpress || {}
       let expressNo = this.data.expressNo
       if (orderRefundExpress.expressCode) {
@@ -55,7 +50,6 @@ Page({
       })
       if (status > 1 && !orderRefundExpress.expressNo && status < 6) {
         datas.countDownSeconds = Math.floor((datas.cancelTime - datas.nowTime) / 1000)
-        // console.log(datas.cancelTime,datas.nowTime)
         this.countdown(this)
       }
       Event.emit('getDetail')
