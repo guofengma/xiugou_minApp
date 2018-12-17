@@ -669,6 +669,39 @@ const api = {
       'isShowLoading': false,
     }
   ],
+  /**********  签到 *******************/
+  'getTokenCionExchange': [
+    '/common/config/getExchange',
+    {
+      "action": "获取秀豆兑换1元卷的比例",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'querySignList': [
+    '/user/userSign/querySignList',
+    {
+      "action": "签到",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'exchangeTokenCoin': [
+    '/user/exchangeTokenCoin',
+    {
+      "action": "兑换一元券",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'tokenCoinSign': [
+    '/user/userSign/sign',
+    {
+      "action": "签到获取秀豆",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
 }
 
 const API = new ApiUtils(api).result;

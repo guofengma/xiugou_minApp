@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation, Event, Storage} = global;
+let { Tool, Event, Storage,API} = global;
 const app = getApp()
 Page({
 
@@ -17,20 +17,13 @@ Page({
     this.getTokenCionExchange()
   },
   getTokenCionExchange(){
-    let params = {
-      isShowLoading: false,
-      reqName: '获取用户等级',
-      requestMethod: 'GET',
-      url: Operation.getTokenCionExchange
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    API.getTokenCionExchange({}).then((res) => {
       this.setData({
-        needXD: req.responseObject.data
+        needXD: res.data || {}
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   getLevel() {
     let callBack = (datas)=>{
@@ -42,52 +35,37 @@ Page({
     app.getLevel(callBack)
   },
   querySignList(){
-    let params = {
-      url: Operation.querySignList,
-      requestMethod: 'GET',
-      isShowLoading: false,
-    };
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    API.querySignList({}).then((res) => {
       this.getLevel()
-      let datas = req.responseObject.data || [];
+      let datas = res.data || [];
       let totalDay = datas[3].continuous ? datas[3].continuous : (datas[2].continuous || 0)
       this.setData({
-        lists:datas,
+        lists: datas,
         totalDay: totalDay,
-        todaySgin: datas[3].reward? true:false
+        todaySgin: datas[3].reward ? true : false
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   exchangeTokenCoin(){
     if (this.data.needXD > this.data.userInfos.userScore){
       Tool.showAlert("秀豆不足")
       return
     }
-    let params = {
-      url: Operation.exchangeTokenCoin,
-    };
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    API.exchangeTokenCoin({}).then((res) => {
       Tool.showSuccessToast("兑换成功")
       this.getLevel()
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   tokenCoinSign() {
     if(!this.data.canClick) return
-    let params = {
-      url: Operation.tokenCoinSign,
-    };
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      // Event.emit('getLevel')
+    API.tokenCoinSign({}).then((res) => {
       this.setData({
         animate0: true,
-        canClick:false
+        canClick: false
       })
       let that = this
       setTimeout(function () {
@@ -99,9 +77,9 @@ Page({
           animate1: true
         })
       }, 600)
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   ruleClicked(){
     // Tool.navigateTo('/pages/signIn/rule/rule')

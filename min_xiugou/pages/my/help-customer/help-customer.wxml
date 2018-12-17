@@ -12,7 +12,7 @@
   <!-- <view class="hot-question">热门问题</view> -->
   <view class="question-area">
       <view class="question-item" wx:for='{{list}}' wx:key='unique' >
-          <view class="left" catchtap="questionList" data-typeid='{{item.title}}'>
+          <view class="left" catchtap="questionList" data-typeid='{{item.id}}' >
             <!-- <image-sub imgStyle='{{"width:74rpx"}}' imgSrc="{{'help_order.png'}}"/> -->
             <image src="{{item.imgUrl || 'help_order.png'}}" class="icon" mode='widthFix'></image>
             <view>{{item.name}}</view>
