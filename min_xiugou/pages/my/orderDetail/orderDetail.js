@@ -34,14 +34,6 @@ Page({
       detail: {},//详情信息
       orderId: '',//订单ID
       status: '',//订单状态
-      payTypeArr: [1, 2, 4, 8, 16], // 平台支付 微信支付 微信支付 支付宝支付 银联支付
-      payType: {
-        1: '平台支付',
-        2: '微信支付',
-        4: '微信支付',
-        8: '支付宝支付',
-        16: '银联支付'
-      },
     },
     onLoad: function (options) {
         this.setData({
@@ -111,36 +103,6 @@ Page({
       }).catch((res) => {
         console.log(res)
       })
-      //       detail.cancelTime = detail.cancelTime ? Tool.formatTime(detail.cancelTime) : '';
-      //       detail.showOrderTotalPrice = Tool.add(detail.totalPrice,detail.freightPrice)
-      //       detail.showFinishTime = detail.deliverTime? Tool.formatTime(detail.deliverTime) : Tool.formatTime(detail.finishTime)
-      //       detail.deliverTime = Tool.formatTime(detail.deliverTime)
-      //       detail.showShutOffTime = Tool.formatTime(detail.shutOffTime)
-      //       let address = {}
-      //       address.receiver = detail.receiver;
-      //       address.recevicePhone = detail.recevicePhone;
-      //       address.addressInfo = detail.province + detail.city + detail.area + detail.address;
-      //       if(detail.sendTime!=''&&detail.sendTime!=null){
-      //           detail.sendTime=Tool.formatTime(detail.sendTime);
-      //           this.data.state.time= detail.sendTime?detail.sendTime:'';
-      //       }else{
-      //           detail.sendTime=''
-      //       }
-      //   detail.orderPayRecord = detail.orderPayRecord || {}
-      //   detail.payWay = Tool.bitOperation(this.data.payTypeArr,detail.orderPayRecord.type)
-      //   if (detail.payWay.includes(this.data.payTypeArr[0])){
-      //     detail.showPlatformTime = Tool.formatTime(detail.platformPayTime)
-      //   }
-      //   if (detail.payWay.length > 1 || (detail.payWay.length == 1 && !detail.payWay.includes(this.data.payTypeArr[0]))){
-      //     detail.isUsedThirdPay = true
-      //   }
-      //   detail.showProductList = (detail.orderType == 5 || detail.orderType == 98) ? detail.orderProductList[0].orderProductPriceList : detail.orderProductList
-      //       if (detail.orderType == 5 || detail.orderType == 98){
-      //         detail.orderProductList[0].orderProductPriceList.forEach((item)=>{
-      //           item.num = item.productNum
-      //           item.price = item.originalPrice
-      //         })
-      //       }
     },
     onShow: function () {
 
@@ -148,11 +110,11 @@ Page({
     //删除订单
     deleteItem() {
         let id = this.data.orderId;
-        let status = this.data.detail.status;
+        // let status = this.data.detail.status;
         this.setData({
             isDelete: true,
             orderId:id,
-            status:status
+            // status:status
         });
 
     },
@@ -240,15 +202,15 @@ Page({
         let stateArr = [
           { status: '其他', },
           { status: '等待买家付款', 
-            bottomBtn: ['取消订单','继续支付'],
+            bottomBtn: ['取消订单','去支付'],
             bottomId:[1,2],
             orderIcon: "order-state-1.png", 
             info: '',
             time: ''
           },
           { status: '买家已付款',
-            bottomBtn: ['', '订单退款'],
-            bottomId: ['',3],
+            // bottomBtn: ['', '订单退款'],
+            // bottomId: ['',3],
             orderIcon: "order-state-2.png.png", 
             info: '等待卖家发货...', 
             time: '' 
@@ -262,14 +224,14 @@ Page({
           },
           { status: '交易已完成',
             bottomBtn: ['删除订单', '再次购买'], 
-            bottomId: [6,5],
+            bottomId: [6,7],
             orderIcon: "order-state-5.png",
             info: '订单正在处理中...',
             time: ''
           },
           { status: '交易关闭',
             bottomBtn: ['删除订单', '再次购买'], 
-            bottomId: [6, 5], 
+            bottomId: [6, 7], 
             orderIcon: "order-state-6.png",
             info: '',
             time: ''
@@ -277,7 +239,32 @@ Page({
         ]
         return stateArr[n]
     },
-    continuePay() {
+    btnClicked(e){
+      let name = e.currentTarget.dataset.id
+      const btnEvent = {
+        1:()=>{ // 取消订单
+          this.cancelItem()
+        },
+        2:()=>{ //继续支付
+          this.continuePay()
+        },
+        3: () => {},
+        4: () => {//确认收货
+          this.confirmReceipt()
+        },
+        5: () => {//查看物流
+          this.seeLogistics()
+        },
+        6: () => {// 删除订单
+          this.deleteItem()
+        }, 
+        7: () => {// 再次购买
+          this.continueBuy()
+        },
+      }
+      btnEvent[name]()
+    },
+    continuePay() { // 继续支付
       let params = {
         payAmount: this.data.showPriceList.payAmount, //总价
         orderNo: this.data.showPriceList.warehouseOrderDTOList[0].outTradeNo,  // 流水号

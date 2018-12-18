@@ -21,6 +21,7 @@ Component({
     time:"",
     returnTypeArr:['','退款','退货','换货'],
     isAjax:false,
+    showStatusName: ['', '待支付', '待发货', '待收货', '已完成', '已关闭']
   },
   methods: {
     //获取列表数据

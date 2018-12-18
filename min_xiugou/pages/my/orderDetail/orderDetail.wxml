@@ -120,7 +120,6 @@
           <view wx:if='{{status==4 || status==3}}'>发货时间：{{detail.warehouseOrderDTOList[0].showDeliverTime}}</view>
           <view wx:if='{{status==4}}'>成交时间：{{detail.warehouseOrderDTOList[0].showFinishTime}}</view>
           <view wx:if='{{status==5}}'>关闭时间：{{detail.warehouseOrderDTOList[0].showCancelTime}}</view>
-          <!-- <view wx:if='{{status==8}}'>关闭时间：{{detail.showShutOffTime}}</view> -->
         </view>
     </view>
 
@@ -128,33 +127,14 @@
 
 <!--order bar  -->
 
-<view class='{{isIPhoneX.className}} order-bar flexR boxSize' >
-    <block>
-        <view class='order-btn btn-left flexR' wx:if="{{state.bottomBtn[0]=='删除订单'}}" bindtap="deleteItem">
-          {{state.bottomBtn[0]}}
-        </view>
-        <view class='order-btn btn-left flexR' wx:if="{{state.bottomBtn[0]=='取消订单'}}"  bindtap="cancelItem" > 
-          {{state.bottomBtn[0]}}
-        </view> 
-        <view class='order-btn btn-left flexR' wx:if="{{state.bottomBtn[0]=='查看物流'}}" bindtap="seeLogistics">
-          {{state.bottomBtn[0]}}
-        </view>        
-    </block>
-    <block>
-        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='确认收货'}}" bindtap="confirmReceipt">
-          {{state.bottomBtn[1]}}
-        </view>
-        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='删除订单'}}" bindtap="deleteItem">
-          {{state.bottomBtn[1]}}
-        </view>
-        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='继续支付'}}" bindtap="continuePay">
-          去支付
-        </view>
-        <view class='order-btn red flexR' wx:if="{{state.bottomBtn[1]=='再次购买'}}" bindtap="continueBuy">
-          {{state.bottomBtn[1]}}
-        </view>
-    </block>
-
+<view class='{{isIPhoneX.className}} order-bar flexR boxSize' wx:if='{{status!=2}}'>
+    <!--  -->
+    <view class='order-btn btn-left flexR' data-id='{{state.bottomId[0]}}' bindtap="btnClicked">
+      {{state.bottomBtn[0]}}
+    </view>
+    <view class='order-btn red flexR' data-id="{{state.bottomId[1]}}" bindtap="btnClicked">
+      {{state.bottomBtn[1]}}
+    </view>
 </view>
 </view>
 
