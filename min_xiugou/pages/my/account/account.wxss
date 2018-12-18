@@ -21,20 +21,6 @@
     margin-left: 10rpx;
 }
 
-/* .btn{
-    width: 80%;
-    margin-left: 10%;
-    height: 97rpx;
-    line-height: 97rpx;
-    text-align: center;
-    font-size: 32rpx;
-    color: #fff;
-    background-color: #e60012;
-    border-radius: 10rpx;
-    border: solid 1rpx #dddddd;
-    margin-top: 50rpx;
-} */
-
 .tips-icon{
     position: absolute;
     top: -83rpx;

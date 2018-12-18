@@ -1,5 +1,5 @@
 // pages/my/account.js
-let { Tool, RequestFactory, Event, Storage, Operation } = global;
+let { Tool, Event, Storage } = global;
 Page({
     data: {
         unBinded:false,
@@ -28,30 +28,13 @@ Page({
     },
     //微信解绑
     account(){
-        this.setData({
-            unBinded:true
-        })
+      this.setData({
+          unBinded:true
+      })
     },
     //确定
     sure(){
-      let params = {
-        reqName: '解绑微信号',
-        url: Operation.updateDealerOpenid
-      };
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let infos = Storage.getUserAccountInfo()
-        infos.openid = null
-        Storage.setUserAccountInfo(infos)
-        Event.emit('refreshMemberInfoNotice');//发出通知
-      }
-      r.completeBlock = (req) => {
-        this.setData({
-          unBinded: false
-        })
-      }
-      Tool.showErrMsg(r)
-      r.addToQueue();
+
     },
     //取消
     cancel(){

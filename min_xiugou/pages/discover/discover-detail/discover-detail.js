@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool,Storage, API } = global
 const app = getApp()
 Page({
   data: {
@@ -26,56 +26,47 @@ Page({
   onUnload() {
 
   },
-  getArticleDetail() {
-    let params = {
-      id: this.data.articleId,
-      url: Operation.getDiscoverById,
-      requestMethod: 'GET',
-      reqName: '获取文章详情'
-    }
+  getArticleDetail() { // 获取文章详情
     let _ = this;    
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data || {};
-      console.log(data);
+    API.getDiscoverById({
+      id: this.data.articleId,
+    }).then((res) => {
+      let data = res.data || {};
       let WxParse = require('../../../libs/wxParse/wxParse.js');
-      WxParse.wxParse('content', 'html', data.content, _, 0);
+      WxParse.wxParse('content', 'html', data.content|| '', this, 0);
       this.setData({
         details: data
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   sliderChange(e) {
     this.setData({
       activeIndex: e.detail.current + 1
     })
   },
-  toggleDiscoverLikeCollect(e) {
+  toggleDiscoverLikeCollect(e) { // 点赞收藏操作
     let data = e.currentTarget.dataset;
-    let type = data.type;
+    let typeVal = data.type;
     let params = {
-      type: type,//1.收藏 2.点赞
+      type: data.type,//1.收藏 2.点赞
       articleIds: [data.id],
       articleId: data.id,
-      reqName: '点赞收藏操作',
-      // status为ture说明已经操作过了  所以要调取消接口
-      url: data.status ? Operation.discoverCountCancel : Operation.discoveerCountSave
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data || {};
+    // status为ture说明已经操作过了  所以要调取消接口
+    let reqUrl = data.status ? 'discoverCountCancel' : 'discoveerCountSave'
+    API[reqUrl](params).then((res) => {
+      let data = res.data || {};
       let _details = this.data.details;
       // this.setData({
-      //   "details.hadLike": type == 2 ? !_details.hadLike : _details.hadLike,
-      //   "details.hadCollect": type == 1 ? !_details.hadCollect : _details.hadCollect,
+      //   "details.hadLike": typeVal == 2 ? !_details.hadLike : _details.hadLike,
+      //   "details.hadCollect": typeVal == 1 ? !_details.hadCollect : _details.hadCollect,
       // })
       this.getArticleDetail()
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
-    
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   showItemDetail(e) {
     let productId = e.currentTarget.dataset.id;
