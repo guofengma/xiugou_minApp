@@ -42,14 +42,14 @@ Page({
         Tool.redirectTo('/pages/after-sale/return-goods/return-goods?serviceNo=' + this.data.serviceNo)
         return
       }
-      let imgList = datas.imgList || ''
-      console.log(imgList)
-      datas.showImgList = imgList.split(',')
+      // let imgList = datas.imgList || ''
+      // console.log(imgList)
+      // datas.showImgList = imgList.split(',')
       let status = datas.status
-      datas.createTime = Tool.formatTime(datas.createTime)
+      // datas.createTime = Tool.formatTime(datas.createTime)
       // 平台地址
-      let refundAddress = datas.refundAddress || {}
-      refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
+      // let refundAddress = datas.refundAddress || {}
+      // refundAddress.addressInfo = refundAddress.province + refundAddress.city + refundAddress.area + refundAddress.address
       // let address = datas.refundAddress || {}
       datas.addressInfo = datas.province + datas.city + datas.area + (datas.street || '')  + datas.address
       this.setData({
@@ -80,35 +80,6 @@ Page({
         this.countdown(this)
       }
       Event.emit('getDetail')
-      // let afterSaleInfo = datas.afterSaleInfo || {}
-      // let imgList = afterSaleInfo.imgList || ''
-      // afterSaleInfo.showImgList = imgList.split(',')
-      // if (datas.type==2){
-      //   Tool.redirectTo('/pages/after-sale/return-goods/return-goods?serviceNo=' + serviceNo)
-      //   return
-      // }
-      // datas.refundAddress.address = datas.refundAddress.refundAddress
-      // datas.refundAddress.receiver = datas.refundAddress.refundReceiver
-      // datas.refundAddress.receiverPhone = datas.refundAddress.refundReceiverPhone
-      // let status = datas.status
-      // let expressNo = this.data.expressNo
-      // let SaleExpressNo = this.data.SaleExpressNo
-      // // 有结束时间 状态为2  并且没有物流单号的情况下 开始倒计时
-      // if (datas.countDownSeconds && status == 2 && !datas.refundAddress.expressCode) {
-      //   this.countdown(this)
-      // }
-      // if (datas.refundAddress.expressCode){
-      //   expressNo = { id: 2, content: datas.refundAddress.expressCode}
-      // }
-      // if (datas.address.expressCode) {
-      //   SaleExpressNo = { id: 2, content: datas.address.expressCode }
-      // }
-      // this.setData({
-      //   datas: datas,
-      //   SaleExpressNo: SaleExpressNo,
-      //   expressNo: expressNo,
-      // })
-      // Event.emit('getDetail')
     }).catch((res) => {
       console.log(res)
     })

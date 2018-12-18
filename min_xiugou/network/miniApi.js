@@ -422,6 +422,15 @@ const api = {
       "action": "售后详情",
       "method": "post",
       "encrypt": false,
+      transformResponse:(res)=>{
+        let datas = res.data || {}
+        let imgList = datas.imgList || ''
+        datas.showImgList = imgList.split(',')
+        datas.createTime = global.Tool.formatTime(datas.createTime)
+        // 平台地址
+        let refundAddress = datas.refundAddress || {}
+        refundAddress.addressInfo = (refundAddress.province || '') + (refundAddress.city || "") + (refundAddress.area || "") + (refundAddress.address || "")
+      }
     }
   ],
   'afterSaleOrderDetail': [

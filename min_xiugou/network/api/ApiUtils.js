@@ -62,6 +62,7 @@ export default class ApiUtils {
           // console.log( typeof response)
           if (response.code === 0 || response.code === 10000) {
             console.log(response)
+            item.transformResponse && item.transformResponse(response);
             return Promise.resolve(response);
           } else {
             app.aldstat.sendEvent(url, {
