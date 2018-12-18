@@ -763,6 +763,24 @@ const api = {
       "encrypt": false,
     }
   ],
+  /***************************** 专题 ************************ */
+  'getTopicById': [
+    '/topic/findByCode',
+    {
+      "action": "获取专题列表",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  /***************************** 推广 ************************ */
+  'promotionPromoterPay': [
+    '/promotion/promotionPromoter/pay',
+    {
+      "action": "支付红包费用",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
 }
 
 const API = new ApiUtils(api).result;

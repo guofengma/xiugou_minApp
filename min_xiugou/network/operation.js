@@ -28,9 +28,6 @@ export default class Operation {
         // 判断手机号是否可用
         this.findMemberByPhone = '/user/userSign/findMemberByPhone'
 
-        // 注册
-        this.signMember = '/user/userSign/signUser'
-
         // 获取推荐人列表
         this.queryInviterList = '/user/userSign/queryInviterList'
 
@@ -80,29 +77,11 @@ export default class Operation {
 
         this.getuserBalance= '/user/userBalance/query'
 
-
-
-        /******************提交订单 订单结算*********************** */
-
-
-        // 申请退款
-   
-        this.wxRefund = '/user/weChatPay/wxRefund'
-
-        // 使用优惠券查询
-
-        this.orderCalcDiscountCouponAndUseScore = '/order/order/orderCalcDiscountCouponAndUseScore'
-
-
         /******************我的---设置*********************** */
 
         //退出登录
 
         this.exitLogin ='/user/userLogin/signOut';
-
-        // 获取用户信息
-
-        this.getLevel = '/user/getUser'
 
         // 获取用户下一等级层级信息
 
@@ -275,10 +254,6 @@ export default class Operation {
 
         this.discoveerCountSave = '/discover/count/save';
 
-        // 根据openid判断用户是否存在
-
-        this.userExistByOpenid = '/user/userLogin/existedUserByOpenId'
-
         // 获取刮刮卡
 
         this.getScratchCard = '/scratch/scratchCard/findByCode'
@@ -317,10 +292,6 @@ export default class Operation {
         // 详情页用户领取红包
 
         this.givingPackageToUser = '/promotion/promotionPromoter/givingPackageToUser'
-
-        // 支付红包费用
-
-        this.promotionPromoterPay='/promotion/promotionPromoter/pay'
 
         // 分页查询用户领取红包记录列表
 
