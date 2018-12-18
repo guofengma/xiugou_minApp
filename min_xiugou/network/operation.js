@@ -149,21 +149,9 @@ export default class Operation {
 
         this.queryPushNum = '/notice/newNoticeMessageCount';
 
-        // 消息
-
-        this.queryMessage = '/message/queryMessagePage';
-
         // 通知详情
 
         this.queryNoticeMessage = '/notice/queryNoticePage';
-
-        // 拼店消息
-
-        this.queryStoreMessageList = '/user/storeMessage/queryStoreMessageList';
-
-        // 查看消息详情
-
-        this.findMessageDetail = '/message/queryById';
 
       /************************** 降价秒杀 *******************************/
       
