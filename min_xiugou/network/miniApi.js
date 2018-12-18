@@ -781,6 +781,23 @@ const api = {
       "encrypt": false,
     }
   ],
+  /***************************** 我的晋升 ************************ */
+  'getUserLevelInfo': [
+    '/user/getUserLevelInfo',
+    {
+      "action": "我的晋升",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'getNextLevelInfo': [
+    '/user/level/getNextLevelInfo',
+    {
+      "action": "获取用户下一等级层级信息",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
 }
 
 const API = new ApiUtils(api).result;

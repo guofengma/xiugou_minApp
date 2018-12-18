@@ -16,39 +16,6 @@ export default class Operation {
     constructor() {
         if (__instance()) return __instance();
 
-
-    /*************  注册登录相关接口 *********************/
-       
-        // 验证openid是否注册
-        this.verifyWechat = '/user/userLogin/verifyWechat'
-
-        // 微信登陆
-        this.wechatLogin = '/user/userLogin/wechatLogin'
-
-        // 判断手机号是否可用
-        this.findMemberByPhone = '/user/userSign/findMemberByPhone'
-
-        // 获取推荐人列表
-        this.queryInviterList = '/user/userSign/queryInviterList'
-
-        // 邀请码注册
-
-        this.updateUserCodeById = '/user/updateUserCodeById'
-    
-    /**********  获取数据字典 *******************/
-
-      this.queryDictionaryDetailsType = '/config/sysDictionary/queryDictionaryTypeList'
-
-    /********************** 搜索 *********************/  
-
-        // 获取热搜词语
-    
-        this.getHotWordsListActive = '/config/sysHotWord/queryHotName'
-
-        // 动态搜索框关键词匹配
-
-        this.getKeywords = '/product/getKeywords'
-
     /********************** 分类 *********************/
 
         // 热门分类列表
@@ -65,9 +32,6 @@ export default class Operation {
 
       /********************** 我的账户 *********************/
 
-        // 我的晋升
-
-        this.getUserLevelInfo = '/user/getUserLevelInfo'
 
         // 我的秀豆明细
 
@@ -76,20 +40,6 @@ export default class Operation {
         // 我的余额
 
         this.getuserBalance= '/user/userBalance/query'
-
-        /******************我的---设置*********************** */
-
-        //退出登录
-
-        this.exitLogin ='/user/userLogin/signOut';
-
-        // 获取用户下一等级层级信息
-
-        this.getNextLevelInfo ='/user/level/getNextLevelInfo'
-
-        // 查询等级信息
-
-        this.getLevelInfos = '/user/level/get'
 
         /******************我的---通讯录*********************** */
 
@@ -123,15 +73,6 @@ export default class Operation {
         // 验证旧手机短信是否正确
 
         this.updateDealerPhoneById = '/user/judgePhoneCode'
-
-
-        // 邀请码
-
-        this.createWxQrcode = '/user/dealer/createWxQrcode'
-
-        // 邀请码是否过期
-
-        this.sweepCode ='/user/invite/checkValid'
 
       /* 
         查询广告位列表 
