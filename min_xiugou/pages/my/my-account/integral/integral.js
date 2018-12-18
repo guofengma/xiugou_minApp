@@ -75,7 +75,6 @@ Page({
     onLoad: function (options) {
       this.getData();
       let account = Storage.getUserAccountInfo().userScore || 0
-      // account = Tool.formatNum(account)
       this.setData({
         account: account
       })
