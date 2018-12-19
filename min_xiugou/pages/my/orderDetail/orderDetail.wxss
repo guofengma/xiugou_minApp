@@ -13,7 +13,7 @@
 }
 .order-state{
   height: 200rpx;
-  background: transparent url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/myOrder-detail-bg.png) no-repeat;
+  background: transparent url(mrdomain/myOrder-detail-bg.png) no-repeat;
   color: #fff;
   padding-top: 35rpx;
   padding-left: 50rpx;
@@ -25,7 +25,7 @@
 }
 .order-state-icon,.detail-tips{
   padding-left: 70rpx;
-  /*background: transparent url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/order-state-1.png) no-repeat 10rpx center;*/
+  /*background: transparent url(mrdomain/order-state-1.png) no-repeat 10rpx center;*/
   /*background-size: 42rpx 42rpx;*/
     /*width: 42rpx;*/
     /*height: 42rpx;*/
@@ -160,7 +160,7 @@
 /*已发货的物流信息  */
 .logistics{
   padding-left: 70rpx;
-  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/order-state-3-dark.png) no-repeat 10rpx center;
+  background: #fff url(mrdomain/order-state-3-dark.png) no-repeat 10rpx center;
   background-size: 40rpx 40rpx
 }
 .logistics .info{
@@ -188,7 +188,7 @@
 }
 .coupon-line>view:first-child{
   border-top: 1rpx solid #eee;
-  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/iconForobtain.png) no-repeat 30rpx 25rpx;
+  background: #fff url(mrdomain/iconForobtain.png) no-repeat 30rpx 25rpx;
   background-size:32rpx 32rpx;
 }
 .gift-sale-after{

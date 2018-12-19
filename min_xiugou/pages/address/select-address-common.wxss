@@ -6,7 +6,7 @@
   margin-top: 20rpx;
   box-shadow: 0px 0px 20rpx 0px rgba(102, 102, 102, 0.1);
   border-radius: 20rpx;
-  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/line-bg-dark.png) no-repeat left bottom;
+  background: #fff url(mrdomain/line-bg-dark.png) no-repeat left bottom;
   background-size: 100%;
   overflow: hidden;
   position: relative;
@@ -16,7 +16,7 @@
   padding-right: 15%;
 }
 .select-address-box.active, .select-selfLifting-address .select-address-box{
-  background-image: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/line-bg.png);
+  background-image: url(mrdomain/line-bg.png);
 }
 .select-address-box .address-info{
   box-sizing: border-box;
@@ -31,7 +31,7 @@
   top: 0;
 }
 .select-address-box.active .leftbar,.select-address-box.active .topBar {
-  background:url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/default-text.png) no-repeat right top;
+  background:url(mrdomain/default-text.png) no-repeat right top;
   background-size: 70rpx 70rpx; 
 }
 .topBar {
