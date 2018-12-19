@@ -92,7 +92,10 @@ Page({
     })
   },
   setTip: function () {
-    this.ProductFactory.setTip(1)
+    this.ProductFactory.setTip(1, () => {
+      console.log('秒杀通知');
+      Event.emit('tip');
+    })
   },
   //根据不同状态有不同的事情处理
   footbarReady(e) {
