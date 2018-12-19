@@ -55,29 +55,28 @@ Component({
           let warehouseOrderDTOList = item.warehouseOrderDTOList || []
           let outStatus = item.warehouseOrderDTOList[0].status
           item.countDownSeconds = Math.floor((warehouseOrderDTOList[0].cancelTime - item.nowTime) / 1000) 
-          if (outStatus == 1) {
-            let showOrderList = []
-            warehouseOrderDTOList.forEach((item1, index1) => {
-              item1.products.forEach((item2) => {
+          let showOrderList = []
+          warehouseOrderDTOList.forEach((item1, index1) => {
+            let showNum = 0
+            item1.products.forEach((item2) => {
+              if (outStatus == 1) {
                 showOrderList.push(item2)
-              })
-            })
-            orderInfoArr.push({
-              ...item,
-              showStatus: 1,
-              showNum: item.quantity,
-              showOrderNo: item.platformOrderNo,
-              showAmount: item.payAmount,
-              showProducts: showOrderList,
-              showName: '平台级订单'
-            })
-            secondMap.set(key, 1);
-          } else {
-            warehouseOrderDTOList.forEach((item1, index1) => {
-              let showNum =0
-              item1.products.forEach((item2) => {
+              } else {
                 showNum += item2.quantity
+              }
+            })
+            if (outStatus == 1) {
+              orderInfoArr.push({
+                ...item,
+                showStatus: 1,
+                showNum: item.quantity,
+                showOrderNo: item.platformOrderNo,
+                showAmount: item.payAmount,
+                showProducts: showOrderList,
+                showName: '平台级订单'
               })
+              secondMap.set(key, 1);
+            } else {
               orderInfoArr.push({
                 ...item,
                 showWarehouseInfo: {
@@ -90,10 +89,48 @@ Component({
                 showProducts: item1.products,
                 showName: '仓库级订单'
               })
-            })
-            delete orderInfoArr[index].showWarehouseInfo.products
-          }
-          key++;
+            }
+          })
+          key++
+          // if (outStatus == 1) {
+          //   let showOrderList = []
+          //   warehouseOrderDTOList.forEach((item1, index1) => {
+          //     item1.products.forEach((item2) => {
+          //       showOrderList.push(item2)
+          //     })
+          //   })
+          //   orderInfoArr.push({
+          //     ...item,
+          //     showStatus: 1,
+          //     showNum: item.quantity,
+          //     showOrderNo: item.platformOrderNo,
+          //     showAmount: item.payAmount,
+          //     showProducts: showOrderList,
+          //     showName: '平台级订单'
+          //   })
+          //   secondMap.set(key, 1);
+          // } else {
+          //   warehouseOrderDTOList.forEach((item1, index1) => {
+          //     let showNum =0
+          //     item1.products.forEach((item2) => {
+          //       showNum += item2.quantity
+          //     })
+          //     orderInfoArr.push({
+          //       ...item,
+          //       showWarehouseInfo: {
+          //         ...item1,
+          //       },
+          //       showNum: showNum,
+          //       showAmount: item1.payAmount,
+          //       showStatus: item1.status,
+          //       showOrderNo: item1.warehouseOrderNo,
+          //       showProducts: item1.products,
+          //       showName: '仓库级订单'
+          //     })
+          //   })
+          //   delete orderInfoArr[index].showWarehouseInfo.products
+          // }
+          // key++;
         })
         
         // 这块是倒计时
@@ -118,30 +155,6 @@ Component({
         this.triggerEvent('isAjax');
         console.log(res)
       })
-      
-      //   let datas = [];
-      //   let secondMap = new Map();
-      //   let key = this.data.key;
-      //   for (let i in req.responseObject.data.data) {
-      //     let item = req.responseObject.data.data[i];
-      //     item.createTime = Tool.formatTime(item.createTime);
-      //     item.finishTime = Tool.formatTime(item.finishTime);
-      //     item.showFinishTime = item.deliverTime ? Tool.formatTime(item.deliverTime) : item.finishTime;
-      //     item.sendTime = Tool.formatTime(item.sendTime);
-      //     item.payTime = Tool.formatTime(item.payTime);
-      //     item.cancelTime = Tool.formatTime(item.cancelTime);
-      //     item.payEndTime = Tool.formatTime(item.shutOffTime);
-      //     // item.createTime = Tool.formatTime(item.orderCreateTime);
-      //     // 礼包不显示产品描述
-      //     // if (item.orderProductList[0].orderType == 98) item.orderProduct[0].spec=''
-      //     // 这块是倒计时 
-      //     if (item.status == 1) {
-      //       let now = Tool.timeStringForDate(new Date(), "YYYY-MM-DD HH:mm:ss");
-      //       secondMap.set(key, 1);
-      //     }
-      //     key++;
-      //     datas.push(item);
-      //   }
     },
     // 上拉加载更多
     onReachBottom() {

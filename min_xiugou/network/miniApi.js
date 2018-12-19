@@ -10,6 +10,22 @@ const api = {
       "encrypt": false
     }
   ],
+  "discoverCountCancel": [
+    "/discover/count/cancel",
+    {
+      "action": "取消 点赞/收藏",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  "discoveerCountSave": [
+    "/discover/count/save",
+    {
+      "action": "点赞/收藏",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
   /***************************** 上传图片 ************************ */
   'aliyunOSSUploadImage': [
     '/common/upload/oss',
@@ -21,15 +37,15 @@ const api = {
   ],
   /***************************** 短信 ************************ */
   /* 统一的短信接口
-        1. code对应传递值-------> 用户注册：MOBILE_REGISTRATION_CODE 
-        手机验证码登录：MOBILE_CODELOGIN_CODE 
-        设置交易密码：MOBILE_SETDEALPASSWORD_CODE 
-        忘记交易密码：MOBILE_FORGETDEALPASSWORD_CODE 
-        手机号修改验证旧手机：MOBILE_VERIFYAULDPHONE_CODE 
-        手机号修改绑定新手机：MOBILE_VERIFYNEWPHONE_CODE
-        登录时忘记密码：MOBILE_FORGETPASSWORD_CODE
-        2. phone:string
-        2018年10月18日接口修改 短信接口只需传phone即可  @ydg
+    1. code对应传递值-------> 用户注册：MOBILE_REGISTRATION_CODE 
+    手机验证码登录：MOBILE_CODELOGIN_CODE 
+    设置交易密码：MOBILE_SETDEALPASSWORD_CODE 
+    忘记交易密码：MOBILE_FORGETDEALPASSWORD_CODE 
+    手机号修改验证旧手机：MOBILE_VERIFYAULDPHONE_CODE 
+    手机号修改绑定新手机：MOBILE_VERIFYNEWPHONE_CODE
+    登录时忘记密码：MOBILE_FORGETPASSWORD_CODE
+    2. phone:string
+    2018年10月18日接口修改 短信接口只需传phone即可  @ydg
   */
   'sendMessage': [
     '/sms/sendRegMessage',
@@ -72,6 +88,16 @@ const api = {
       "encrypt": false,// 是否加签
     }
   ],
+  /* QXDD  取消订单
+    TKLY  退款理由
+    HHLY  换货理由
+    THYK  退货退款
+    WTLX  问题类型
+    SMBH  实名驳回
+    JJTK  拒接退款
+    CPBS  产品报损
+    GGW  广告位
+    JSBH  结算驳回 */
   'queryDictionaryDetailsType': [
     '/config/sysDictionary/queryDictionaryTypeList',
     {
@@ -106,9 +132,9 @@ const api = {
     }
   ],
   'deleteAddress': [
-    '/user/userAddress/setDefault',
+    '/user/userAddress/delete',
     {
-      "action": "设置默认地址",
+      "action": "删除地址 ",
       "method": "post",
       "encrypt": false,// 是否加签
     }
@@ -717,6 +743,58 @@ const api = {
     {
       "action": "签到获取秀豆",
       "method": "post",
+      "encrypt": false,
+    }
+  ],
+  /***************************** 我的账户 ************************ */
+  'getUserrScore': [
+    '/user/userScore/query',
+    {
+      "action": "查询秀豆账户",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'getuserBalance': [ // 'type':1 现金 
+    '/user/userBalance/query',
+    {
+      "action": "分页查询现金/待提现账户",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  /***************************** 专题 ************************ */
+  'getTopicById': [
+    '/topic/findByCode',
+    {
+      "action": "获取专题列表",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  /***************************** 推广 ************************ */
+  'promotionPromoterPay': [
+    '/promotion/promotionPromoter/pay',
+    {
+      "action": "支付红包费用",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  /***************************** 我的晋升 ************************ */
+  'getUserLevelInfo': [
+    '/user/getUserLevelInfo',
+    {
+      "action": "我的晋升",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'getNextLevelInfo': [
+    '/user/level/getNextLevelInfo',
+    {
+      "action": "获取用户下一等级层级信息",
+      "method": "get",
       "encrypt": false,
     }
   ],

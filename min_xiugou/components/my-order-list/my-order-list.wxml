@@ -80,7 +80,6 @@
 <!-- </view> -->
 
 <!--提示框  -->
-<!-- <template is="tips-cancel-order" data='{{isCancel,reason,content}}'/> -->
 
 <tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{orderNum}}' door='{{1}}' bind:cancelOrder='cancelOrder' />
 

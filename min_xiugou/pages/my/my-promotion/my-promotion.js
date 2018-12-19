@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, API, Storage, Event } = global
 import WxParse from '../../../libs/wxParse/wxParse.js';
 Page({
   data: {
@@ -9,41 +9,27 @@ Page({
     this.getUserLevelInfo()
     this.getNextLevelInfo()
   },
-  getUserLevelInfo() {
-    let params = {
-      isShowLoading: false,
-      reqName: '获取我的晋升',
-      requestMethod: 'GET',
-      url: Operation.getUserLevelInfo
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
+  getUserLevelInfo() { // 获取我的晋升
+    API.getUserLevelInfo({}).then((res) => {
+      let datas = res.data || {}
       datas.surpluslExperience = Tool.sub(datas.levelExperience, datas.experience)
-      datas.surpluslExperience = datas.surpluslExperience>0 ? datas.surpluslExperience:0
-      datas.width = datas.experience / datas.levelExperience *100+"%"
+      datas.surpluslExperience = datas.surpluslExperience > 0 ? datas.surpluslExperience : 0
+      datas.width = datas.experience / datas.levelExperience * 100 + "%"
       this.setData({
-        userLevelInfo:datas
+        userLevelInfo: datas
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   getNextLevelInfo(){
-    let params = {
-      isShowLoading: false,
-      reqName: '获取我的晋升',
-      requestMethod: 'GET',
-      url: Operation.getNextLevelInfo
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data
+    API.getNextLevelInfo({}).then((res) => {
+      let datas = res.data || {}
       let html = datas.content || ''
       WxParse.wxParse('article', 'html', html, this, 5);
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   goPage(e){
     let index = e.currentTarget.dataset.index
