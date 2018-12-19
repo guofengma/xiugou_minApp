@@ -15,6 +15,8 @@ Page({
     API.mentorBind({
       code: this.data.code
     }).then((res) => {
+      let datas = res.data || {}
+      Storage.setFirstRegistration(datas.give)
       this.next()
     }).catch((res) => {
       this.setData({

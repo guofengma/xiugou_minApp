@@ -16,8 +16,8 @@ Page({
         2:"抵价劵",
         3:"折扣劵",
         4:"抵扣劵" ,
-        11:"",
-        12:"",
+        11:"靓号兑换券",
+        12:"拼店券",
       },
       totalPageArr:[], //保存页数 
       params:{
@@ -125,9 +125,13 @@ Page({
         return '全品类：全场通用券';
       }
     },
-    formatCouponInfos(reqUrl,params, index, isActive = false, couponClassName){
+    formatCouponInfos:async function(reqUrl,params, index, isActive = false, couponClassName){
       // let reqName = []
-      // const response = await this.getActiveCoupon(params.status)
+      if(params.page==1 && reqUrl!='availableDiscountCouponForProduct'){
+        await this.getActiveCoupon({
+          status:params.status
+        })
+      }
       API[reqUrl](params).then((res) => {
         let datas = res.data
         if (datas.totalPage == 0 || datas.data == null) return
@@ -143,7 +147,6 @@ Page({
             couponClassName = isNoLimitUsed ? couponClassName : 'coupon-right-limitLevel'
             // 是否待激活
             couponClassName = item.status == 3 ? 'coupon-right-unUsed' : couponClassName
-            console.log(isNoLimitUsed)
             isActive = (!isNoLimitUsed || item.status == 3) ? false : true
           }
           item.couponClassName = couponClassName;
@@ -196,17 +199,14 @@ Page({
       API.couponListActive(params).then((res) => {
         let datas = res.data || []
         let list = []
-        console.log(datas)
         datas.forEach((item)=>{
           list.push({
             nickname:item.type==11? "兑换券: 靓号兑换券":"全场券: 全场通用券",
             'type':item.type,
-            // typeName:this.data.types[item.type],
             name:item.name,
             timeTips:'敬请期待',
             value:item.type==11? item.value:"拼店",
-            isCoinCoupon:true,
-            num:item.number,
+            num:item.type==11? "":item.number,
             active:true,
           })
         })
@@ -277,9 +277,6 @@ Page({
       Tool.switchTab('/pages/index/index')
     },
     onLoad: function (options) {
-      this.getActiveCoupon({
-        status:0
-      })
       let userInfo = Storage.getUserAccountInfo() || {}
       this.data.coinData.num = userInfo.tokenCoin || 0
       if (this.data.coinData.num && options.useType!=2){
