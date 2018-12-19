@@ -1,4 +1,5 @@
 let { Tool, API, Storage, Event} = global;
+const regeneratorRuntime = require('../../../../libs/asyncRuntime/runtime.js')
 Page({
     data: {
       winHeight: "",//窗口高度
@@ -9,7 +10,15 @@ Page({
           [  ],
           [  ]
       ],
-      types: ["其他", "满减劵", "抵价劵", "折扣劵","抵扣劵"],
+      types: {
+        0:"其他",
+        1:"满减劵",
+        2:"抵价劵",
+        3:"折扣劵",
+        4:"抵扣劵" ,
+        11:"",
+        12:"",
+      },
       totalPageArr:[], //保存页数 
       params:{
         page:1,
@@ -19,6 +28,7 @@ Page({
         nickname:'全品类：无金额门槛',
         'type':0,
         name:'1元现金券',
+        timeTips:'无时间限制',
         tips:'可叠加使用',
         isCoinCoupon:true,
         value:1,
@@ -73,7 +83,7 @@ Page({
       }
     },
     // 点击标题切换当前页时改变样式
-    swichNav: function (e) {
+    swichNav(e) {
       var cur = e.target.dataset.current;
       if (this.data.currentTaB == cur) {
         return false;
@@ -117,6 +127,7 @@ Page({
     },
     formatCouponInfos(reqUrl,params, index, isActive = false, couponClassName){
       // let reqName = []
+      // const response = await this.getActiveCoupon(params.status)
       API[reqUrl](params).then((res) => {
         let datas = res.data
         if (datas.totalPage == 0 || datas.data == null) return
@@ -181,6 +192,32 @@ Page({
       }
       this.formatCouponInfos('couponList',params, 2, false, 'coupon-right-lose')
     },
+    getActiveCoupon(params){
+      API.couponListActive(params).then((res) => {
+        let datas = res.data || []
+        let list = []
+        console.log(datas)
+        datas.forEach((item)=>{
+          list.push({
+            nickname:item.type==11? "兑换券: 靓号兑换券":"全场券: 全场通用券",
+            'type':item.type,
+            // typeName:this.data.types[item.type],
+            name:item.name,
+            timeTips:'敬请期待',
+            value:item.type==11? item.value:"拼店",
+            isCoinCoupon:true,
+            num:item.number,
+            active:true,
+          })
+        })
+        this.data.lists[params.status] = list
+        this.setData({
+          lists:this.data.lists
+        })
+      }).catch((res) => {
+        console.log(res)
+      })
+    },
     //优惠券详情
     toDetail(e){
       let index = e.currentTarget.dataset.index
@@ -240,6 +277,9 @@ Page({
       Tool.switchTab('/pages/index/index')
     },
     onLoad: function (options) {
+      this.getActiveCoupon({
+        status:0
+      })
       let userInfo = Storage.getUserAccountInfo() || {}
       this.data.coinData.num = userInfo.tokenCoin || 0
       if (this.data.coinData.num && options.useType!=2){
@@ -265,10 +305,6 @@ Page({
           this.availableDiscountCouponForProduct()
         }
       } else {
-        this.setData({
-
-        })
-        // this.getDiscountCouponNoActive()
         this.getDiscountCouponNoUse();
       }
       this.getDiscountCouponUserd();

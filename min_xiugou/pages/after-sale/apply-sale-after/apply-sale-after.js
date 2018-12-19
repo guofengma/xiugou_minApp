@@ -38,7 +38,7 @@ Page({
     activeIndex:'',
     refundType: 0, // 0为仅退款 1为退货退款  2为换货
     queryReasonParams:[
-      'TKLY', 'THTK','HHLY'
+      'JTK', 'THTK','HH','WFH'
     ], // 2 退款理由 3 换货理由 4 退货退款
     stateArr:['',"申请中","已同意","已拒绝",'中',"中","完成","超时","超时"],
     originalImg:[],
@@ -95,8 +95,10 @@ Page({
     // this.queryDictionaryDetailsType(this.data.refundType)
   },
   queryDictionaryDetailsType(refundType){
+    let code = this.data.queryReasonParams[refundType]
+    if(this.data.orderInfos.status<=2) code = this.data.queryReasonParams[3]
     API.queryDictionaryDetailsType({
-      code: this.data.queryReasonParams[refundType],
+      code: code,
     }).then((res) => {
       let datas = res.data || []
       if (this.data.returnReason) {
@@ -140,16 +142,18 @@ Page({
       orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || ''
     }).then((res) => {
       let data = res.data || {}
-      if (data.status != 1 && data.serviceNo) {
-        let callBack = ()=>{
-          Tool.redirectTo('/pages/my/my-order/my-order')
-        }
-        let content = "售后"+this.data.stateArr[data.status]+",不能修改申请"
-        Tool.showAlert(content,callBack)
-      } else {
-        data.imgUrl = data.specImg? data.specImg : this.data.list.imgUrl
-        data.createTime = Tool.formatTime(data.createTime)
-      }
+      // if (data.status != 1 && this.data.serviceNo) {
+      //   let callBack = ()=>{
+      //     Tool.redirectTo('/pages/my/my-order/my-order')
+      //   }
+      //   let content = "售后"+this.data.stateArr[data.status]+",不能修改申请"
+      //   Tool.showAlert(content,callBack)
+      // } else {
+      //   data.imgUrl = data.specImg? data.specImg : this.data.list.imgUrl
+      //   data.createTime = Tool.formatTime(data.createTime)
+      // }
+      data.imgUrl = data.specImg? data.specImg : this.data.list.imgUrl
+      data.createTime = Tool.formatTime(data.createTime)
       this.setData({
         orderInfos: data,
         applyRefundAmount:data.payAmount

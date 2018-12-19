@@ -1,5 +1,5 @@
 {
-  "evnName":"蒋大为",
+  "evnName":"周浩",
   "dev": {
     "h5webUrl": "http://devh5.sharegoodsmall.com",
     "baseUrl":"http://devapi.sharegoodsmall.com/gateway",
@@ -11,14 +11,14 @@
     "imgBaseUrl":"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/"
   },
   "prod": {
-    "h5webUrl": "https://th5.sharegoodsmall.com",
+    "h5webUrl": "https://h5.sharegoodsmall.com",
     "baseUrl":"https://api.sharegoodsmall.com/gateway",
     "imgBaseUrl":"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/"
   },
   "build": {
-    "h5webUrl": "https://th5.sharegoodsmall.com",
+    "h5webUrl": "https://h5.sharegoodsmall.com",
     "baseUrl":"https://api.sharegoodsmall.com/gateway",
-    "imgBaseUrl":"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/"
+    "imgBaseUrl":"https://uatcdn.sharegoodsmall.com/sharegoods/resource/xcx/"
   },
   "base":{
     "rasVersion": "1.0.4.12",
@@ -33,8 +33,11 @@
   },
   "devBaseUrl":{
     "dev":"http://devapi.sharegoodsmall.com/gateway",
+    "test":"https://testapi.sharegoodsmall.com/gateway",
+    "prod":"https://api.sharegoodsmall.com/gateway",
+    "build":"https://api.sharegoodsmall.com/gateway",
     "蒋大为":"http://172.16.10.42:4090/gateway",
-    "周浩":"http://172.16.10.42:4090/gateway",
+    "周浩":"http://172.16.10.64:9090/gateway",
     "高迪":"http://172.16.10.238:8903/gateway",
     "沈耀星":"http://172.16.10.56:8903/gateway",
     "张波":"http://172.16.10.41:9090/gateway",
