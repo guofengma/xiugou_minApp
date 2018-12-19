@@ -1,5 +1,5 @@
 {
-  "name": "wx-miniprogram-boilerplate",
+  "name": "wx-miniprogram-xiugou",
   "version": "0.0.1",
   "description": "基于gulp构建的微信小程序开发工作流",
   "main": "",
@@ -12,7 +12,7 @@
   "author": "chenweiwei",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YangQiGitHub/wx-miniprogram-boilerplate.git"
+    "url": "http://git.mr.com/dev/crm_mini_xiugou.git"
   },
   "license": "ISC",
   "devDependencies": {
