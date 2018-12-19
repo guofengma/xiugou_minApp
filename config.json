@@ -1,0 +1,52 @@
+{
+  "evnName":"蒋大为",
+  "dev": {
+    "h5webUrl": "http://devh5.sharegoodsmall.com",
+    "baseUrl":"http://devapi.sharegoodsmall.com/gateway",
+    "imgBaseUrl":"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/"
+  },
+  "test": {
+    "h5webUrl": "https://testh5.sharegoodsmall.com",
+    "baseUrl":"https://testapi.sharegoodsmall.com/gateway",
+    "imgBaseUrl":"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/"
+  },
+  "prod": {
+    "h5webUrl": "https://th5.sharegoodsmall.com",
+    "baseUrl":"https://api.sharegoodsmall.com/gateway",
+    "imgBaseUrl":"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/"
+  },
+  "build": {
+    "h5webUrl": "https://th5.sharegoodsmall.com",
+    "baseUrl":"https://api.sharegoodsmall.com/gateway",
+    "imgBaseUrl":"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/"
+  },
+  "base":{
+    "rasVersion": "1.0.4.12",
+    "rasClient":"miniapp",
+    "AppId": "wxa059b818226f8679",
+    "Secret":"9fa19f4d1f7e37d318dba14f951f1b4c",
+    "imgSizeParams":{
+      "m_fixed":"?x-oss-process=image/resize,m_fixed,h_300,w_300",
+      "m_fill": "?x-oss-process=image/resize,p_65",
+      "m_mfit": "?x-oss-process=image/resize,m_mfit,h_300,w_300"
+    }
+  },
+  "devBaseUrl":{
+    "dev":"http://devapi.sharegoodsmall.com/gateway",
+    "蒋大为":"http://172.16.10.42:4090/gateway",
+    "周浩":"http://172.16.10.42:4090/gateway",
+    "高迪":"http://172.16.10.238:8903/gateway",
+    "沈耀星":"http://172.16.10.56:8903/gateway",
+    "张波":"http://172.16.10.41:9090/gateway",
+    "杨小猛":"http://172.16.10.12:8180/gateway",
+    "吴成俊":"http://172.16.10.41:8903/gateway",
+    "陈帅":"http://172.16.10.88:8903/gateway",
+    "王昆仑":"http://172.16.10.111:8903/gateway",
+    "李俊":"http://172.16.10.151:9090/gateway",
+    "杨飞":"http://172.16.10.158:18096/gateway",
+    "申":"http://172.16.10.21:8080/gateway",
+    "龚日红":"http://172.16.10.177:9090/gateway",
+    "顾嘉豪":"http://172.16.10.164:9090/gateway",
+    "黄家欢":"http://172.16.10.178:9090/gateway"
+  }
+}
