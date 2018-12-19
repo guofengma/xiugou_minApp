@@ -34,7 +34,7 @@
 }
 .company{
   height: 112rpx;
-  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/wuliu-bg.png) no-repeat left top;
+  background: #fff url(mrdomain/wuliu-bg.png) no-repeat left top;
   background-size:690rpx 112rpx;
   border-top-left-radius:20rpx;
   border-top-right-radius:20rpx;

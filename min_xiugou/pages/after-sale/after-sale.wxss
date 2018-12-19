@@ -14,7 +14,7 @@
   align-items: flex-start;
   padding-left: 30rpx;
   color: #fff;
-  background: transparent url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/sale-after-bg.png) no-repeat;
+  background: transparent url(mrdomain/sale-after-bg.png) no-repeat;
   background-size: 100%;
 }
 .after-sale-line{
