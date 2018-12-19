@@ -31,17 +31,8 @@ const imgFiles = [
   `${srcPath}/img/*.{png,jpg,gif,ico}`,
   `${srcPath}/img/**/*.{png,jpg,gif,ico}`
 ];
-const existFolder = async function(path) {
-  // 判断是否存在argv.path的文件夹
-  return new Promise(function(resolve, reject) {
-    return fs.exists(path, e => {
-      console.log(e)
-      resolve(e)
-    })
-  })
-}
 //默认development环境
-var knowOptions = {
+let knowOptions = {
   string: 'env',
   default: {
     env: node_env|| 'dev'
@@ -54,7 +45,7 @@ let options = minimist(process.argv.slice(2), knowOptions);
 const string_src=(filename, string)=> {
   var src = require('stream').Readable({ objectMode: true })
   src._read = function () {
-    this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
+    this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: Buffer.from(string)}))
     this.push(null)
   }
   return src
@@ -163,6 +154,15 @@ gulp.task('test', gulp.series('build', 'watch'));
 /* prod */
 gulp.task('prod', gulp.series('build', 'watch'));
 
+
+const existFolder = async (path)=> {
+  // 判断是否存在argv.path的文件夹
+  return new Promise(function(resolve, reject) {
+    return fs.exists(path, e => {
+      resolve(e)
+    })
+  })
+}
 /**
  * auto 自动创建page or template or component
  *  -s 源目录（默认为_template)
