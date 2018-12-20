@@ -95,6 +95,7 @@ Page({
     this.ProductFactory.setTip(1, () => {
       console.log('秒杀通知');
       Event.emit('tip');
+      this.getTopicActivityData();
     })
   },
   //根据不同状态有不同的事情处理
