@@ -106,21 +106,7 @@ Page({
       userId: userInfo.id
     }
     API.addActivitySubscribe(params).then((res) => {
-      // banner标识了是来自最上层商品还是banner下面的商品
-      let items = this.data.topicList
-      let targetItem = null;
-      if (data.banner == 1) {
-        targetItem = items.topicNavbarList[this.data.currentTopicListIndex].topicNavbarBannerList.topicBannerProductList;
-      } else {
-        targetItem = items.topicNavbarList[this.data.currentTopicListIndex].topicBannerProducts;
-      }
-      console.log(targetItem);
-      //是否通知值为0or1
-      targetItem[itemIndex].notifyFlag = +!targetItem[itemIndex].notifyFlag;
-
-      this.setData({
-        topicList: items
-      })
+      this.getTopicByCode();
     }).catch((res) => {
       console.log(res)
     })
