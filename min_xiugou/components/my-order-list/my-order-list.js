@@ -283,6 +283,8 @@ Component({
           productCode: item.prodCode,
           showCount: item.quantity,
           skuCode: item.skuCode,
+          status:1,
+          isSelect:true
         })
       })
       if(list.length>0){

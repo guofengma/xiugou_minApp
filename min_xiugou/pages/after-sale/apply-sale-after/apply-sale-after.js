@@ -63,7 +63,7 @@ Page({
       serviceNo: options.serviceNo || '',
       placeholder: { placeholder: placeholder, disabled: false }
     })
-    Tool.isIPhoneX(this) 
+    Tool.isIPhoneX(this)
     this.initData()
   },
   initData(){
@@ -128,7 +128,7 @@ Page({
   changeApplyAmount(e){
     let applyRefundAmount = e.detail.value
     let totalAmount = this.data.orderInfos.totalAmount
-    console.log(applyRefundAmount > totalAmount, applyRefundAmount, totalAmount)
+    // console.log(applyRefundAmount > totalAmount, applyRefundAmount, totalAmount)
     if (applyRefundAmount > totalAmount) {
       Tool.showAlert(`最多只能申请${totalAmount}元`)
       applyRefundAmount = totalAmount
@@ -154,6 +154,7 @@ Page({
       // }
       data.imgUrl = data.specImg? data.specImg : this.data.list.imgUrl
       data.createTime = Tool.formatTime(data.createTime)
+      if (this.data.refundType != 2 && data.status > 2 && data.status < 6 && data.payAmount > 0) data.canEditAmout = true
       this.setData({
         orderInfos: data,
         applyRefundAmount:data.payAmount
@@ -169,7 +170,7 @@ Page({
       placeholder: { placeholder: ' ', disabled: true}
     })
   },
-  hiddenTips() { 
+  hiddenTips() {
     this.setData({
       textarea: !this.data.textarea,
     })
@@ -181,11 +182,15 @@ Page({
       hidden: e.detail.hidden,
       placeholder: { placeholder: placeholder, disabled: false }
     })
-    
+
   },
   orderRefund(){
     if (this.data.activeIndex===''){
       Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
+      return
+    }
+    if (this.data.orderInfos.canEditAmout&&Tool.isEmptyStr(this.data.applyRefundAmount)){
+      Tool.showAlert('请输入退款金额')
       return
     }
     // if (this.data.refundType == 2 && Tool.isEmptyStr(this.data.remark)){
@@ -200,35 +205,34 @@ Page({
     //     smallImg: this.data.smallImg[index]
     //   })
     // })
-    let params = {
-      // exchangePriceId: this.data.selectType.id || '',
-      // exchangeSpec: this.data.selectType.spec || '',
-      // exchangeSpecImg: this.data.selectType.specImg || '',
-      applyRefundAmount: this.data.applyRefundAmount || '',
-      imgList: this.data.originalImg.join(","),
-      orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || '',
-      // reason:'无',
-      reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
-      description: this.data.remark,
-      'type': Number(this.data.refundType)+1,
-      serviceNo: this.data.serviceNo || '',
-    }
-    let reqName = this.data.serviceNo? 'modifyAfterSale':'applyAfterSale'
-    API[reqName](params).then((res) => {
-      let datas = res.data || {}
-      let serviceNo = ''
-      if (datas.serviceNo){
-        serviceNo = datas.serviceNo
-      } else{
-        serviceNo =this.data.serviceNo
-      }
-      Tool.redirectTo(this.data.page[this.data.refundType] + '?serviceNo=' + serviceNo)
-    }).catch((res) => {
-      console.log(res)
-    });
+    // let params = {
+    //   // exchangePriceId: this.data.selectType.id || '',
+    //   // exchangeSpec: this.data.selectType.spec || '',
+    //   // exchangeSpecImg: this.data.selectType.specImg || '',
+    //   applyRefundAmount: this.data.applyRefundAmount || '',
+    //   imgList: this.data.originalImg.join(","),
+    //   orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || '',
+    //   reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
+    //   description: this.data.remark,
+    //   'type': Number(this.data.refundType)+1,
+    //   serviceNo: this.data.serviceNo || '',
+    // }
+    // let reqName = this.data.serviceNo? 'modifyAfterSale':'applyAfterSale'
+    // API[reqName](params).then((res) => {
+    //   let datas = res.data || {}
+    //   let serviceNo = ''
+    //   if (datas.serviceNo){
+    //     serviceNo = datas.serviceNo
+    //   } else{
+    //     serviceNo =this.data.serviceNo
+    //   }
+    //   Tool.redirectTo(this.data.page[this.data.refundType] + '?serviceNo=' + serviceNo)
+    // }).catch((res) => {
+    //   console.log(res)
+    // });
   },
   updateApply(){
-    
+
   },
   uploadImage(e){
     this.setData({

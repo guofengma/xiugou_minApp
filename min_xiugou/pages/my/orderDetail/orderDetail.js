@@ -286,6 +286,8 @@ Page({
           productCode: item1.prodCode,
           showCount: item1.quantity,
           skuCode: item1.skuCode,
+          status:1,
+          isSelect:true
         })
       })
     })
