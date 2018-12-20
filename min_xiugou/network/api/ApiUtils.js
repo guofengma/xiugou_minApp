@@ -61,7 +61,7 @@ export default class ApiUtils {
           console.log(`------------------ 请求结束:${action}`)
           // console.log( typeof response)
           if (response.code === 0 || response.code === 10000) {
-            console.log(response)
+            // console.log(response)
             item.transformResponse && item.transformResponse(response);
             return Promise.resolve(response);
           } else {
@@ -97,7 +97,7 @@ export default class ApiUtils {
           }
           return Promise.reject(err);
         } finally {
-          console.log('当前并发数:', that.currentConcurrent);
+          // console.log('当前并发数:', that.currentConcurrent);
           that.currentConcurrent--;
           that.next();
         }

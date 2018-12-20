@@ -151,14 +151,14 @@ gulp.task(
     'build',
     gulp.series('clean', gulp.parallel('constants','wxml', 'js', 'json', 'wxss','lessFile','img'))
 );
-/* dev */
+/* dev 紧开发模式下面监听代码变化并更新dist的文件 */
 gulp.task('dev', gulp.series('build', 'watch'));
 
 /* test */
-gulp.task('test', gulp.series('build', 'watch'));
+gulp.task('test', gulp.series('build'));
 
 /* prod */
-gulp.task('prod', gulp.series('build', 'watch'));
+gulp.task('prod', gulp.series('build'));
 
 
 const existFolder = async (path)=> {
