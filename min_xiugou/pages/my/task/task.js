@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, RequestFactory, Storage, Event, Operation, Config} = global
 Page({
   data: {
     jobs: []
@@ -34,7 +34,7 @@ Page({
     return ({
       title: data.remark,
       path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id}&jobId=${data.id}`,
-      imageUrl: 'https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/xcx/fexian_img@3x.png'
+      imageUrl: `${Config.imgBaseUrl}fexian_img@3x.png`
     });
   }
 })
