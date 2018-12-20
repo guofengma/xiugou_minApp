@@ -1,4 +1,4 @@
-let { Tool, Storage,API } = global;
+let { Tool, Storage, Event, API } = global;
 Page({
   data: {
     topicImgUrl:'',
@@ -13,8 +13,14 @@ Page({
     scrollLeft: 0, //tab标题的滚动条位置
   },
   onLoad: function (options) {
-
-    this.getTopicByCode(options.code || '');
+    this.setData({
+        topicCode: options.code || ''
+    });
+    this.getTopicByCode();
+    Event.on('tip', this.getTopicByCode, this)
+  },
+  onUnload() {
+    Event.off('tip', this.getTopicByCode)
   },
   // 点击标题切换当前页时改变样式
   swichNav: function (e) {
@@ -44,10 +50,10 @@ Page({
     }
   },
   // 获取专题信息列表
-  getTopicByCode(topicCode) {
+  getTopicByCode() {
     let userInfo = Storage.getUserAccountInfo();
     let params = {
-      code: topicCode,
+      code: this.data.topicCode,
       userId: userInfo.id
     }
     API.getTopicById(params).then((res) => {
@@ -100,21 +106,7 @@ Page({
       userId: userInfo.id
     }
     API.addActivitySubscribe(params).then((res) => {
-      // banner标识了是来自最上层商品还是banner下面的商品
-      let items = this.data.topicList
-      let targetItem = null;
-      if (data.banner == 1) {
-        targetItem = items.topicNavbarList[this.data.currentTopicListIndex].topicNavbarBannerList.topicBannerProductList;
-      } else {
-        targetItem = items.topicNavbarList[this.data.currentTopicListIndex].topicBannerProducts;
-      }
-      console.log(targetItem);
-      //是否通知值为0or1
-      targetItem[itemIndex].notifyFlag = +!targetItem[itemIndex].notifyFlag;
-
-      this.setData({
-        topicList: items
-      })
+      this.getTopicByCode();
     }).catch((res) => {
       console.log(res)
     })
