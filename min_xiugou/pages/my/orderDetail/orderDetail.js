@@ -192,9 +192,9 @@ Page({
       that.countdown(that);
     }, 1000)
     this.data.time = time
-    // that.setData({
-    //   distanceTime: distanceTime,
-    // });
+    that.setData({
+      distanceTime: distanceTime,
+    });
   },
   orderState(n) {
     //按钮状态 left right middle 分别是底部左边 右边 和订单详情中的按钮文案
@@ -432,20 +432,16 @@ Page({
     API.getOrderDeliverInfo({
       expressNo: expressNo
     }).then((res) => {
-      let datas = res.data || '{}'
-      datas = JSON.parse(datas)
-      let result = datas.result || {}
-      if (datas.status == 0) {
-        let list = result.list || []
-        let state = this.orderState(this.data.status)
-        if (list.length > 0) {
-          state.info = list[0].status
-          state.time = list[0].time
+        let datas = res.data || {}
+        let list = datas.list || []
+        if (list.length>0) {
+            let state = this.orderState(this.data.status)
+            state.info = list[0].status
+            state.time = list[0].time
+            this.setData({
+                state: state
+            })
         }
-        this.setData({
-          state: state
-        })
-      }
     }).catch((res) => {
       console.log(res)
     })

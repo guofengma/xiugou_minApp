@@ -7,7 +7,7 @@
 + ESLint代码检查 后面给我取消了。。。。伤不起
 + 使用命令行快速创建`page`、`template`和`component`
 + 用微信开发者工具打开 dist 目录看效果
-+ 图片上传地址  https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/
++ 图片上传地址  https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/  ==》 占位符(变量) html css: ${mrdomain}/xxx.png
 ### Getting Started
 
 ##### 0. 开始之前，请确保已经安装node和npm，全局安装gulp-cli
@@ -20,7 +20,7 @@ $ cd wx-miniprogram-boilerplate && npm install
 ```
 ##### 3. 编译代码，生成dist目录，使用开发者工具打开dist目录
 ```
-$ npm run dev  开发环境   config.json "evnName":"蒋大为"
+$ npm run dev --env 蒋大为   开发环境 config.json 中 devBaseUrl的key
 
 $ npm run test 测试环境
 

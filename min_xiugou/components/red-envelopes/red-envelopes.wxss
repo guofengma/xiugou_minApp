@@ -10,7 +10,7 @@
 }
 .red-envelopes-view{
   height: 724rpx;
-  background: url(mrdomain/tanguang_bg_hongbao_nor@2x.png) no-repeat left top;
+  background: url(${mrdomain}/tanguang_bg_hongbao_nor@2x.png) no-repeat left top;
   background-size: 100%;
 }
 .close{

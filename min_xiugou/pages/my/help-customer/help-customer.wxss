@@ -14,14 +14,14 @@
 }
 
 .people {
-    background: url("mrdomain/help_people.png") no-repeat 20rpx bottom;
+    background: url("${mrdomain}/help_people.png") no-repeat 20rpx bottom;
     background-size: cover;
     width: 180rpx;
     height: 200rpx;
     margin-top: 20rpx
 }
 .content {
-    background: url("mrdomain/help_content.png") no-repeat;
+    background: url("${mrdomain}/help_content.png") no-repeat;
     background-size: cover;
     width:472rpx;
     height: 126rpx;
