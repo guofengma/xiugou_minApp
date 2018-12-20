@@ -15,7 +15,7 @@
         </view>
         <view class="watch-detail" bindtap="informationDetail" wx:if='{{title[item.paramType][1]}}' data-type="{{item.paramType}}" data-param="{{item.param}}" data-index='{{index}}'>查看详情
           <image-sub imgStyle='{{"width:22rpx"}}' imgSrc="{{'detail-btn.png'}}"/>
-            <!-- <image src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/detail-btn.png"></image> -->
+            <!-- <image src="${mrdomain}/detail-btn.png"></image> -->
         </view>
     </view>
 </block>

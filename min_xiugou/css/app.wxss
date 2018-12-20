@@ -155,7 +155,7 @@ button::after{
 
 .address.active{
   padding:30rpx;
-  background: #fff url(mrdomain/line-bg.png) no-repeat left bottom;
+  background: #fff url(${mrdomain}/line-bg.png) no-repeat left bottom;
   background-size: 100%;
 }
 .add-address-btn{

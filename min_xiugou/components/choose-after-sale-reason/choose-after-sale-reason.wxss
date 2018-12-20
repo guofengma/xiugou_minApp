@@ -20,11 +20,11 @@
   font-size:26rpx;
 }
 .reason-cell>view{
-  background: #fff url(mrdomain/choose-circle.png) no-repeat center right;
+  background: #fff url(${mrdomain}/choose-circle.png) no-repeat center right;
   background-size: 44rpx 44rpx;
 }
 .reason-cell>view.active{
-  background-image: url(mrdomain/choose-right-icon.png)
+  background-image: url(${mrdomain}/choose-right-icon.png)
 }
 .after-sale-reason{
   width: 100%;

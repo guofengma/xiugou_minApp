@@ -166,7 +166,7 @@ Page({
     availableDiscountCouponForProduct(){
       let params = {
         ...this.data.params,
-        productPriceIds: this.data.productIds,
+        ...this.data.productIds,
       }
       this.formatCouponInfos('availableDiscountCouponForProduct',params, 0, true, '')
     },
@@ -210,7 +210,7 @@ Page({
             active:true,
           })
         })
-        this.data.lists[params.status] = list
+        this.data.lists[params.status] = [...this.data.lists[params.status],...list]
         this.setData({
           lists:this.data.lists
         })

@@ -10,9 +10,9 @@ const path = require('path');
 const replace = require('gulp-replace');
 const watch = require('gulp-watch');
 const node_env = process.argv.slice(2)[0]
+const domainImgUrl = '${mrdomain}/'
 //读入config.json文件
 const myConfig = require('./config.json');
-const myConfigJson = ['./config.json'];
 const srcPath = './min_xiugou/**';
 const distPath = './dist/';
 const wxmlFiles = [`${srcPath}/*.wxml`, `!${srcPath}/_template/*.wxml`];
@@ -36,7 +36,7 @@ const imgFiles = [
 let knowOptions = {
   string: 'env',
   default: {
-    env: node_env|| 'dev'
+    env: process.env.NODE_ENV|| 'dev'
   }
 };
 
@@ -60,13 +60,13 @@ const string_src=(filename, string)=> {
 /* 生成config.js文件 */
 const constants = ()=>{
   //取出对应的配置信息
-  let envConfig = myConfig[options.env];
-  let envName = myConfig['evnName']
+  let envConfig = myConfig[node_env];
+  // let envName = myConfig[options.env]
   let obj = {
     ...envConfig,
     ...myConfig['base'],
     // 如果是开发环境的指向联调人员的ip地址 否则指向环境内的baseUrl
-    baseUrl:options.env=='dev'? myConfig['devBaseUrl'][envName]:envConfig['baseUrl']
+    baseUrl:node_env=='dev'? myConfig['devBaseUrl'][options.env]:envConfig['baseUrl']
   }
   let conConfig = 'const config=' + JSON.stringify(obj) + '; export default config';
   //生成config.js文件
@@ -80,7 +80,8 @@ gulp.task(constants);
 /* 编译wxml文件 */
 const wxml = () => {
   return gulp
-    .src(wxmlFiles, { since: gulp.lastRun(wxml) })
+    .src(wxmlFiles, { since: gulp.lastRun(wxml)})
+    .pipe(replace(domainImgUrl, myConfig[node_env]['imgBaseUrl']))
     .pipe(gulp.dest(distPath));
 };
 gulp.task(wxml);
@@ -104,8 +105,8 @@ gulp.task(json);
 /* 编译wxss文件 */
 const wxss = () => {
   return gulp
-    .src(wxssFiles)
-    .pipe(replace('mrdomain/', myConfig[options.env]['imgBaseUrl']))
+    .src(wxssFiles, { since: gulp.lastRun(wxss)})
+    .pipe(replace(domainImgUrl, myConfig[node_env]['imgBaseUrl']))
     .pipe(gulp.dest(distPath));
 };
 gulp.task(wxss);
@@ -113,10 +114,10 @@ gulp.task(wxss);
 /* 编译less文件 */
 const lessFile = () => {
   return gulp
-      .src(lessFiles)
+      .src(lessFiles, { since: gulp.lastRun(lessFile)})
       .pipe(less())
       .pipe(rename({ extname: '.wxss' }))
-      .pipe(replace('mrdomain/', myConfig[options.env]['imgBaseUrl']))
+      .pipe(replace(domainImgUrl, myConfig[node_env]['imgBaseUrl']))
       .pipe(gulp.dest(distPath));
 };
 gulp.task(lessFile);
@@ -135,7 +136,6 @@ gulp.task(img);
 gulp.task('watch', () => {
   let watchWxssFiles = [...wxssFiles]
   let watchLessFiles = [...lessFiles]
-  let watchMyConfigJson = [...myConfigJson]
   watchLessFiles.pop();
   gulp.watch(watchWxssFiles, wxss);
   gulp.watch(watchLessFiles, lessFile);
@@ -143,7 +143,7 @@ gulp.task('watch', () => {
   gulp.watch(imgFiles, img);
   gulp.watch(jsonFiles, json);
   gulp.watch(wxmlFiles, wxml);
-  // gulp.watch(watchMyConfigJson, constants);
+  // gulp.watch( watchMyConfigJson, constants);
 });
 
 /* build */

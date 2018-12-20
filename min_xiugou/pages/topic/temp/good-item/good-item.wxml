@@ -9,8 +9,8 @@
       <image src="{{specImg}}"
         class='good-item-thumb'
       ></image>
-      <image class='good-soldout' wx:if="{{status == 3}}" src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/soldout.png"></image>
-      <image class='good-soldout' wx:if="{{status >= 4}}" src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/closing@2x.png"></image>
+      <image class='good-soldout' wx:if="{{status == 3}}" src="${mrdomain}/soldout.png"></image>
+      <image class='good-soldout' wx:if="{{status >= 4}}" src="${mrdomain}/closing@2x.png"></image>
     </view>
     
     <view class='good-detail'>

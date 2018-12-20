@@ -96,7 +96,7 @@
         <view class="content">
             
         </view>
-        <image class="close" bindtap="closeMask" src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/sc_03@2x.png"></image>
+        <image class="close" bindtap="closeMask" src="${mrdomain}/sc_03@2x.png"></image>
     </view> -->
 
   <!-- <view class="mask" wx-if="{{isLevel}}">
@@ -106,6 +106,6 @@
             </view>
             
         </view>
-        <image class="close" bindtap="closeMask" src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/sc_03@2x.png"></image>
+        <image class="close" bindtap="closeMask" src="${mrdomain}/sc_03@2x.png"></image>
     </view> -->
 </view>
