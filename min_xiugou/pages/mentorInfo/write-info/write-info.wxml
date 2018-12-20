@@ -4,5 +4,5 @@
     <textarea bindinput="detailRemark" maxlength="90" class="textarea boxSize whiteBg font-26" value='{{profile}}' placeholder="请输入一段说明文字..."/>
     <view class="gray-9 font-26 number">{{count}}/90</view>
   </view>
-  <button class='loginBtn flexR' disabled='{{disabled}}' formType="submit">完成</button>
+  <button class='loginBtn flexR' formType="submit">完成</button>
 </form>
