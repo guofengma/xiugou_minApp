@@ -19,20 +19,20 @@
 
   <view>
     <view bindtap='chooseReason'>
-      <template is="cell-line" data="{{name:reason[refundType].choose,content:reason[refundType].list[activeIndex].value}}"/> 
+      <template is="cell-line" data="{{name:reason[refundType].choose,content:reason[refundType].list[activeIndex].value}}"/>
     </view>
     <view class='cell-line refund-num whiteBg' wx:if='{{refundType!=2}}'>
       <view>退款金额:
         <text class='red'>¥ </text>
       </view>
       <view>
-        <input type='digit' bindinput='changeApplyAmount' value='{{applyRefundAmount}}' class='red' wx:if='{{refundType!=2&&orderInfos.status>2&&orderInfos.status<6}}'></input>
-        <text class='red' wx:else>{{orderInfos.payAmount}}</text> 
+        <input type='digit' bindinput='changeApplyAmount' value='{{applyRefundAmount}}' class='red' wx:if='{{canEditAmout}}'></input>
+        <text class='red' wx:else>{{orderInfos.payAmount}}</text>
       </view>
-      
+
     </view>
     <!-- <view  bindtap='chooseType' wx:if='{{refundType==2}}'>
-      <template is="cell-line" data="{{name:'更换型号',placeholder:selectType.spec}}"/> 
+      <template is="cell-line" data="{{name:'更换型号',placeholder:selectType.spec}}"/>
     </view> -->
     <!-- <view class='address active whiteBg' wx:if='{{refundType==2}}'>
       <template is="address-info" data="{{addressType:1,...list.address,hasData:true}}"/>
@@ -41,7 +41,7 @@
       <view  wx:if='{{refundType==2}}'>
         <text class='red'>*</text>请确保退换商品不影响二次销售
       </view>
-      <view wx:if='{{refundType!=2&&orderInfos.status>3}}' >
+      <view wx:if='{{refundType!=2&&orderInfos.status>2}}' >
         最多¥{{orderInfos.payAmount}}，含发货邮费¥{{orderInfos.freightAmount}}
       </view>
     </view>
@@ -52,9 +52,9 @@
   <view class='cell-line'>上传凭证</view>
 
   <view class='update-img-view whiteBg'>
-    <update-img id='update-img' bind:uploadImage='uploadImage' 
-       propsOriginalImg='{{originalImg}}'
-       propssmallImg ='{{smallImg}}'
+    <update-img id='update-img' bind:uploadImage='uploadImage'
+                propsOriginalImg='{{originalImg}}'
+                propssmallImg ='{{smallImg}}'
     />
   </view>
 </view>

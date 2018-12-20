@@ -620,6 +620,14 @@ const api = {
       "isShowErrMsg": false,
     }
   ],
+  "couponListActive": [ // status 优惠券状态 0-未使用 1-已使用 2-已失效
+    "/user/coupon/queryByUserCode",
+    {
+      "method": "get",
+      "action": "活动优惠劵列表",
+      "isShowErrMsg": false,
+    }
+  ],
   /************************** 支付 *******************************/
   "wxPay": [ // status 优惠券状态 0-未使用 1-已使用 2-已失效 3-未激活
     "/pay/wxminipay",

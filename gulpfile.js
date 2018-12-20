@@ -12,6 +12,7 @@ const watch = require('gulp-watch');
 const node_env = process.argv.slice(2)[0]
 //读入config.json文件
 const myConfig = require('./config.json');
+const myConfigJson = ['./config.json'];
 const srcPath = './min_xiugou/**';
 const distPath = './dist/';
 const wxmlFiles = [`${srcPath}/*.wxml`, `!${srcPath}/_template/*.wxml`];
@@ -31,22 +32,19 @@ const imgFiles = [
   `${srcPath}/img/*.{png,jpg,gif,ico}`,
   `${srcPath}/img/**/*.{png,jpg,gif,ico}`
 ];
-const existFolder = async function(path) {
-  // 判断是否存在argv.path的文件夹
-  return new Promise(function(resolve, reject) {
-    return fs.exists(path, e => {
-      console.log(e)
-      resolve(e)
-    })
-  })
-}
-//默认development环境
-var knowOptions = {
+//默认dev环境
+let knowOptions = {
   string: 'env',
   default: {
     env: node_env|| 'dev'
   }
 };
+
+/* 清除dist目录 */
+gulp.task('clean', done => {
+  del.sync(['dist/**/*']);
+  done();
+});
 
 let options = minimist(process.argv.slice(2), knowOptions);
 
@@ -54,13 +52,13 @@ let options = minimist(process.argv.slice(2), knowOptions);
 const string_src=(filename, string)=> {
   var src = require('stream').Readable({ objectMode: true })
   src._read = function () {
-    this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: new Buffer(string) }))
+    this.push(new gutil.File({ cwd: "", base: "", path: filename, contents: Buffer.from(string)}))
     this.push(null)
   }
   return src
 }
-// 生成config.js文件
-gulp.task('constants', ()=> {
+/* 生成config.js文件 */
+const constants = ()=>{
   //取出对应的配置信息
   let envConfig = myConfig[options.env];
   let envName = myConfig['evnName']
@@ -73,14 +71,11 @@ gulp.task('constants', ()=> {
   let conConfig = 'const config=' + JSON.stringify(obj) + '; export default config';
   //生成config.js文件
   return string_src("config.js", conConfig)
-      .pipe(gulp.dest('./dist/'))
-})
+      .pipe(gulp.dest(distPath))
+}
 
-/* 清除dist目录 */
-gulp.task('clean', done => {
-  del.sync(['dist/**/*']);
-  done();
-});
+gulp.task(constants);
+
 
 /* 编译wxml文件 */
 const wxml = () => {
@@ -140,6 +135,7 @@ gulp.task(img);
 gulp.task('watch', () => {
   let watchWxssFiles = [...wxssFiles]
   let watchLessFiles = [...lessFiles]
+  let watchMyConfigJson = [...myConfigJson]
   watchLessFiles.pop();
   gulp.watch(watchWxssFiles, wxss);
   gulp.watch(watchLessFiles, lessFile);
@@ -147,6 +143,7 @@ gulp.task('watch', () => {
   gulp.watch(imgFiles, img);
   gulp.watch(jsonFiles, json);
   gulp.watch(wxmlFiles, wxml);
+  // gulp.watch(watchMyConfigJson, constants);
 });
 
 /* build */
@@ -163,6 +160,15 @@ gulp.task('test', gulp.series('build', 'watch'));
 /* prod */
 gulp.task('prod', gulp.series('build', 'watch'));
 
+
+const existFolder = async (path)=> {
+  // 判断是否存在argv.path的文件夹
+  return new Promise(function(resolve, reject) {
+    return fs.exists(path, e => {
+      resolve(e)
+    })
+  })
+}
 /**
  * auto 自动创建page or template or component
  *  -s 源目录（默认为_template)

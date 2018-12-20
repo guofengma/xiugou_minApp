@@ -7,7 +7,7 @@
 + ESLint代码检查 后面给我取消了。。。。伤不起
 + 使用命令行快速创建`page`、`template`和`component`
 + 用微信开发者工具打开 dist 目录看效果
-
++ 图片上传地址  https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/
 ### Getting Started
 
 ##### 0. 开始之前，请确保已经安装node和npm，全局安装gulp-cli
