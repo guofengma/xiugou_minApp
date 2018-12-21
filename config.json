@@ -22,8 +22,10 @@
   "base":{
     "rasVersion": "1.0.4.12",
     "rasClient":"miniapp",
-    "AppId": "wxa059b818226f8679",
-    "Secret":"9fa19f4d1f7e37d318dba14f951f1b4c",
+    "AppId-test": "wxa059b818226f8679",
+    "Secret-test":"9fa19f4d1f7e37d318dba14f951f1b4c",
+    "AppId-prod": "wxc9bc82344767cb2a",
+    "Secret-prod":"da076ce823d017ea04d50232f2e646ff",
     "imgSizeParams":{
       "m_fixed":"?x-oss-process=image/resize,m_fixed,h_300,w_300",
       "m_fill": "?x-oss-process=image/resize,p_65",

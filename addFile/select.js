@@ -3,7 +3,7 @@ inquirer.registerPrompt('xiugouPath', require('inquirer-fuzzy-path'))
 module.exports = function() {
   return inquirer.prompt([
     {
-      type: 'fuzzypath',
+      type: 'xiugouPath',
       name: 'path',
       pathFilter: (isDirectory, nodePath) => isDirectory,
       rootPath: 'min_xiugou',

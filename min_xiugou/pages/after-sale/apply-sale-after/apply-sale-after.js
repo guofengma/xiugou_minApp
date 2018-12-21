@@ -205,31 +205,31 @@ Page({
     //     smallImg: this.data.smallImg[index]
     //   })
     // })
-    // let params = {
-    //   // exchangePriceId: this.data.selectType.id || '',
-    //   // exchangeSpec: this.data.selectType.spec || '',
-    //   // exchangeSpecImg: this.data.selectType.specImg || '',
-    //   applyRefundAmount: this.data.applyRefundAmount || '',
-    //   imgList: this.data.originalImg.join(","),
-    //   orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || '',
-    //   reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
-    //   description: this.data.remark,
-    //   'type': Number(this.data.refundType)+1,
-    //   serviceNo: this.data.serviceNo || '',
-    // }
-    // let reqName = this.data.serviceNo? 'modifyAfterSale':'applyAfterSale'
-    // API[reqName](params).then((res) => {
-    //   let datas = res.data || {}
-    //   let serviceNo = ''
-    //   if (datas.serviceNo){
-    //     serviceNo = datas.serviceNo
-    //   } else{
-    //     serviceNo =this.data.serviceNo
-    //   }
-    //   Tool.redirectTo(this.data.page[this.data.refundType] + '?serviceNo=' + serviceNo)
-    // }).catch((res) => {
-    //   console.log(res)
-    // });
+    let params = {
+      // exchangePriceId: this.data.selectType.id || '',
+      // exchangeSpec: this.data.selectType.spec || '',
+      // exchangeSpecImg: this.data.selectType.specImg || '',
+      applyRefundAmount: this.data.applyRefundAmount || '',
+      imgList: this.data.originalImg.join(","),
+      orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || '',
+      reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
+      description: this.data.remark,
+      'type': Number(this.data.refundType)+1,
+      serviceNo: this.data.serviceNo || '',
+    }
+    let reqName = this.data.serviceNo? 'modifyAfterSale':'applyAfterSale'
+    API[reqName](params).then((res) => {
+      let datas = res.data || {}
+      let serviceNo = ''
+      if (datas.serviceNo){
+        serviceNo = datas.serviceNo
+      } else{
+        serviceNo =this.data.serviceNo
+      }
+      Tool.redirectTo(this.data.page[this.data.refundType] + '?serviceNo=' + serviceNo)
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   updateApply(){
 
