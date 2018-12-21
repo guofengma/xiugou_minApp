@@ -29,12 +29,12 @@ $ npm run prod 生产环境
 $ npm run build  正式环境
 
 ```
-##### 4. 新建page、template或者component
+##### 4. 新建page、template或者component  命令行 gulp add
 ```
-  gulp auto -p mypage           创建名为mypage的page文件
-  gulp auto -t mytpl            创建名为mytpl的template文件
-  gulp auto -c mycomponent      创建名为mycomponent的component文件
-  gulp auto -s index -p mypage  复制pages/index中的文件创建名称为mypage的页面
+gulp add
+  1. gulp add  创建完以后
+  2. 在min_xiugou/app.json 里面手动添加 page的地址(这块没有写好 先手动写 )
+  3. npm run dev
 ```
 ##### 5. 上传代码前编译
 ```
@@ -81,21 +81,10 @@ Tasks:
   img              编译压缩图片文件
   watch            监听开发文件变化
 
-  auto             自动根据模板创建page,template或者component(小程序自定义组件)
+  add             自动根据模板创建page,template或者component(小程序自定义组件)
 
-gulp auto
+gulp add
 
-选项：
-  -s, --src        copy的模板                     [字符串] [默认值: "_template"]
-  -p, --page       生成的page名称                                       [字符串]
-  -t, --template   生成的template名称                                   [字符串]
-  -c, --component  生成的component名称                                  [字符串]
-  --msg            显示帮助信息                                           [布尔]
-
-示例：
-  1. gulp add  创建完以后
-  2. 在min_xiugou/app.json 里面手动添加 page的地址(这块没有写好 先手动写 )
-  3. npm run dev
 
 #### Q&A
 - **Q:** 为什么工作流中没有加入js转换，样式补全以及代码压缩？
