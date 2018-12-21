@@ -4,7 +4,7 @@
   "description": "基于gulp构建的微信小程序开发工作流",
   "main": "",
   "scripts": {
-    "dev": "gulp dev --env",
+    "dev": "gulp dev --env dev",
     "build": "gulp build",
     "prod": "gulp prod",
     "test": "gulp test"

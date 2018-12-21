@@ -61,7 +61,7 @@ const string_src=(filename, string)=> {
 const constants = ()=>{
   //取出对应的配置信息
   let envConfig = myConfig[node_env];
-  // let envName = myConfig[options.env]
+  console.log(options.env)
   let obj = {
     ...envConfig,
     ...myConfig['base'],
