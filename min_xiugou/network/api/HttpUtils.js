@@ -115,6 +115,7 @@ export default class HttpUtils {
             global.Tool.hideLoading();
           }
           console.log(res.data)
+          // console.log(JSON.stringify(res.data, null, "\t"))
         }
       });
     }) 

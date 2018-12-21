@@ -61,12 +61,12 @@ const string_src=(filename, string)=> {
 const constants = ()=>{
   //取出对应的配置信息
   let envConfig = myConfig[node_env];
-  // let envName = myConfig[options.env]
+  let name = options.env || 'dev'
   let obj = {
     ...envConfig,
     ...myConfig['base'],
     // 如果是开发环境的指向联调人员的ip地址 否则指向环境内的baseUrl
-    baseUrl:node_env=='dev'? myConfig['devBaseUrl'][options.env]:envConfig['baseUrl']
+    baseUrl:node_env=='dev'? myConfig['devBaseUrl'][name]:envConfig['baseUrl']
   }
   let conConfig = 'const config=' + JSON.stringify(obj) + '; export default config';
   //生成config.js文件
@@ -151,103 +151,42 @@ gulp.task(
     'build',
     gulp.series('clean', gulp.parallel('constants','wxml', 'js', 'json', 'wxss','lessFile','img'))
 );
-/* dev */
+/* dev 紧开发模式下面监听代码变化并更新dist的文件 */
 gulp.task('dev', gulp.series('build', 'watch'));
 
 /* test */
-gulp.task('test', gulp.series('build', 'watch'));
+gulp.task('test', gulp.series('build'));
 
 /* prod */
-gulp.task('prod', gulp.series('build', 'watch'));
+gulp.task('prod', gulp.series('build'));
 
 
-const existFolder = async (path)=> {
-  // 判断是否存在argv.path的文件夹
-  return new Promise(function(resolve, reject) {
-    return fs.exists(path, e => {
-      resolve(e)
-    })
-  })
-}
 /**
- * auto 自动创建page or template or component
- *  -s 源目录（默认为_template)
- * @example
- *   gulp auto -p mypage           创建名称为mypage的page文件
- *   gulp auto -t mytpl            创建名称为mytpl的template文件
- *   gulp auto -c mycomponent      创建名称为mycomponent的component文件
- *   gulp auto -s index -p mypage  创建名称为mypage的page文件
+ * add 自动创建page or template or component
+ * @example gulp add
  */
-const auto = done => {
-  const yargs = require('yargs')
-      .option({
-        s: {
-          alias: 'src',
-          default: '_template',
-          describe: 'copy的模板',
-          type: 'string'
-        },
-        p: {
-          alias: 'page',
-          describe: '生成的page名称',
-          conflicts: ['t', 'c'],
-          type: 'string'
-        },
-        t: {
-          alias: 'template',
-          describe: '生成的template名称',
-          type: 'string',
-          conflicts: ['c']
-        },
-        c: {
-          alias: 'component',
-          describe: '生成的component名称',
-          type: 'string'
-        },
-        version: { hidden: true },
-        help: { hidden: true }
+const add = done => {
+  return new Promise(function(resolve, reject) {
+    const handel = require('./addFile/handle')
+    const start = require('./addFile/start')
+    const inquirer = require('./addFile/inquirer')
+    require('./addFile/select')
+    ;(async () => {
+      // 控制台交互
+      const data = await inquirer({
+        placementPath: '.'
       })
-      .fail(msg => {
-        done();
-        console.error('创建失败!!!');
-        console.error(msg);
-        console.error('请按照如下命令执行...');
-        yargs.parse(['--msg']);
-        return;
-      })
-      .help('msg');
+      const argv = {
+        file: data.file,
+        path: data.placementPath,
+        templatePath: data.templatePath
+      }
+      console.log(data)
+      // 根据参数，创建模板
+      start(argv)
+    })()
+    resolve();
+  });
 
-  const argv = yargs.argv;
-  const source = argv.s;
-  console.log(argv,source)
-  const typeEnum = {
-    p: 'pages',
-    t: 'templates',
-    c: 'components'
-  };
-  let hasParams = false;
-  let name, type;
-  for (let key in typeEnum) {
-    hasParams = hasParams || !!argv[key];
-    if (argv[key]) {
-      name = argv[key];
-      type = typeEnum[key];
-    }
-  }
-  if (!hasParams) {
-    done();
-    yargs.parse(['--msg']);
-  }
-
-  const root = path.join(__dirname, 'src', type);
-  return gulp
-      .src(path.join(root, source, '*.*'))
-      .pipe(
-          rename({
-            dirname: name,
-            basename: name
-          })
-      )
-      .pipe(gulp.dest(path.join(root)));
 };
-gulp.task(auto);
+gulp.task(add);
