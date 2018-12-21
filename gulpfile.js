@@ -61,12 +61,12 @@ const string_src=(filename, string)=> {
 const constants = ()=>{
   //取出对应的配置信息
   let envConfig = myConfig[node_env];
-  console.log(options.env)
+  let name = options.env || 'dev'
   let obj = {
     ...envConfig,
     ...myConfig['base'],
     // 如果是开发环境的指向联调人员的ip地址 否则指向环境内的baseUrl
-    baseUrl:node_env=='dev'? myConfig['devBaseUrl'][options.env]:envConfig['baseUrl']
+    baseUrl:node_env=='dev'? myConfig['devBaseUrl'][name]:envConfig['baseUrl']
   }
   let conConfig = 'const config=' + JSON.stringify(obj) + '; export default config';
   //生成config.js文件
