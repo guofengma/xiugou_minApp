@@ -11,10 +11,13 @@ const replace = require('gulp-replace');
 const watch = require('gulp-watch');
 const node_env = process.argv.slice(2)[0]
 const domainImgUrl = '${mrdomain}/'
-//读入config.json文件
-const myConfig = require('./config.json');
+
 const srcPath = './min_xiugou/**';
 const distPath = './dist/';
+//读入config.json文件
+const myConfig = require('./config.json');
+//读入app.json文件
+const appJson = require('./min_xiugou/app.json');
 const wxmlFiles = [`${srcPath}/*.wxml`, `!${srcPath}/_template/*.wxml`];
 const lessFiles = [
   `${srcPath}/*.less`,
@@ -75,6 +78,18 @@ const constants = ()=>{
 }
 
 gulp.task(constants);
+
+//生成app.json
+const app = (page)=>{
+  //取出对应的配置信息
+  appJson['pages'].push(page)
+  let myAppJon = appJson
+  //生成config.js文件
+  return string_src("app.json", myAppJon)
+      .pipe(gulp.dest(distPath))
+}
+
+// gulp.task(app);
 
 
 /* 编译wxml文件 */
@@ -183,7 +198,8 @@ const add = done => {
       }
       console.log(data)
       // 根据参数，创建模板
-      start(argv)
+      await start(argv)
+
     })()
     resolve();
   });
