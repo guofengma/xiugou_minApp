@@ -10,6 +10,14 @@ const api = {
       "encrypt": false
     }
   ],
+  "queryDiscoverListByType": [ // 获取发现列表 type { 1：精选 2：热门 3：推荐 4：最新 全部则不传}, page, size
+    "/discover/query",
+    {
+      "action": " 获取发现列表",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
   "discoverCountCancel": [
     "/discover/count/cancel",
     {
@@ -18,11 +26,19 @@ const api = {
       "encrypt": false
     }
   ],
-  "discoveerCountSave": [
+  "discoverCountSave": [
     "/discover/count/save",
     {
       "action": "点赞/收藏",
       "method": "post",
+      "encrypt": false
+    }
+  ],
+  "queryDiscoverCollect": [
+    "/discover/queryCollect",
+    {
+      "action": "获取收藏列表",
+      "method": "get",
       "encrypt": false
     }
   ],
@@ -140,6 +156,14 @@ const api = {
     }
   ],
   /***************************** 首页接口 ************************ */
+  /*
+   查询广告位列表
+   type：1.APP首页banner广告位   2.APP首页推荐位   3.APP首页明星店铺推荐位    4.APP首页今日榜单广告位
+   5.APP首页精品推荐广告位  6.APP首页超值热卖广告位  7.APP首页专题广告位  8.APP首页为你推荐广告位
+   9.拼店首页banner推荐位  10.类目搜索banner广告位
+   status： 1.有效 2.无效
+   linkType：1.链接产品2.链接专题3.降价拍4.秒杀5.礼包
+   */
   'queryAdList':[
     '/config/advertisement/queryAdvertisementList',
     {

@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation } = global
+let { Tool, API, Operation } = global
 Page({
   data: {
     tabIndex: 0,
@@ -140,41 +140,29 @@ Page({
   },
   // 获取发现轮播广告
   getDiscoverSwiper() {
-    let params = {
-      'type': 11,
-      reqName: '获取发现轮播广告',
-      url: Operation.queryAdList,
-      // hasCookie: false
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data || {};
-      
-      this.setData({
-        swipers: data
-      })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    API.queryAdList({
+        'type': 11,
+    }).then((res) => {
+        this.setData({
+          swipers: res.data || {}
+        })
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   // 获取发现相关数据
   getDiscoveryByType(type, page = 1, size = 20, callback) {
     let params = {
       page: page,
       size: size, //默认20
-      url: Operation.queryDiscoverListByType,
-      requestMethod: 'GET',
-      reqName: '获取发现'
     };
     // 起初4是获取最新的  后来一波撕逼发现获取最新不需要传generalize参数了
     if (type !== 4) params.generalize = type; 
     
     const typeList = this.data.typeList;
     let obj = {};
-    
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data || {};
+    API.queryDiscoverListByType(params).then((res) => {
+      let data = res.data || {};
       if (typeof callback == 'function'){
         if (data.data == null) data.data = [];
         callback(data);
@@ -182,9 +170,9 @@ Page({
       }
       obj[typeList[type]] = data.data;
       this.setData(obj)
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   changeTabIndex(e) {
     let index = e.currentTarget.dataset.index;

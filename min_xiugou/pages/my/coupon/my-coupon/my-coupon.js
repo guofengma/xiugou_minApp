@@ -112,7 +112,11 @@ Page({
           return '限商品：限指定商品可使用';
         }
         if (products.length === 1) {
-          return `限商品：限${products[0]}可用`;
+          let productStr = products[0];
+          if (productStr.length > 15) {
+            productStr = productStr.substring(0, 15) + '...';
+          }
+          return `限商品：限${productStr}商品可用`;
         }
       }
       else if ((cat1.length + cat2.length + cat3.length) === 1) {

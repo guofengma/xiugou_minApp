@@ -33,8 +33,7 @@ $ npm run build  正式环境
 ```
 gulp add
   1. gulp add  创建完以后
-  2. 在min_xiugou/app.json 里面手动添加 page的地址(这块没有写好 先手动写 )
-  3. npm run dev
+  2. npm run dev 等命令行启动项目
 ```
 ##### 5. 上传代码前编译
 ```

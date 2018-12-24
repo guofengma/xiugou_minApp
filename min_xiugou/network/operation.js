@@ -30,17 +30,6 @@ export default class Operation {
 
         this.findProductCategoryList = '/product/productCategory/findProductCategoryList'
 
-      /********************** 我的账户 *********************/
-
-
-        // 我的秀豆明细
-
-        this.getUserrScore = '/user/userScore/query'
-
-        // 我的余额
-
-        this.getuserBalance= '/user/userBalance/query'
-
         /******************我的---通讯录*********************** */
 
         //通讯录列表
@@ -53,10 +42,6 @@ export default class Operation {
         // 修改用户信息 type:1:修改头像 2:修改名字 3:修改省市区
         
         this.updateUserById = '/user/updateUserById';
-
-        // 上传图片的地址 
-
-        this.aliyunOSSUploadImage = '/common/upload/oss'
 
         //  修改密码
 
@@ -74,16 +59,6 @@ export default class Operation {
 
         this.updateDealerPhoneById = '/user/judgePhoneCode'
 
-      /* 
-        查询广告位列表 
-        type：1.APP首页banner广告位   2.APP首页推荐位   3.APP首页明星店铺推荐位    4.APP首页今日榜单广告位
-        5.APP首页精品推荐广告位  6.APP首页超值热卖广告位  7.APP首页专题广告位  8.APP首页为你推荐广告位
-        9.拼店首页banner推荐位  10.类目搜索banner广告位
-        status： 1.有效 2.无效
-        linkType：1.链接产品2.链接专题3.降价拍4.秒杀5.礼包
-      */
-
-        this.queryAdList = '/config/advertisement/queryAdvertisementList'
 
         // 获取专题详情页
 
@@ -100,43 +75,6 @@ export default class Operation {
         // 四个分类
 
         this.indexQueryCategoryList ='/config/advertisement/queryCategoryList'
-
-
-        /************************** 帮助中心 *******************************/
-
-        // 解决问题是否有用
-
-        this.updateHelpQuestion = '/help/helpQuestion/updateHelpQuestionToClick'
-
-        // 根据ID查询问题详情
-
-        this.findHelpQuestionById = '/help/helpQuestion/findHelpQuestionById'
-
-        // 问题列表 可传参 也可以不传
-
-        this.queryHelpQuestionList = '/help/helpQuestion/queryHelpQuestionList'
-
-        // 添加反馈
-
-        this.addFeedback = '/user/feedback/addFeedback'
-
-        // 获取帮助次数
-
-        this.findQuestionEffectById = '/help/helpQuestion/findQuestionEffectById'
-
-        /************************** 优惠券 *******************************/
-
-        // 未使用优惠劵列表 status 优惠券状态 0-未使用 1-已使用 2-已失效 3-未激活
-
-        this.couponList = '/user/coupon/list';
-
-        // 优惠劵详情
-
-        this.getDiscountCouponById = '/user/discountCouponDealer/getDiscountCouponById';
-
-        // 产品可用优惠劵列表
-
-        this.availableDiscountCouponForProduct = '/user/coupon/listAvailable';
 
 
         /************************** 我的消息 *******************************/

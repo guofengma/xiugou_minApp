@@ -55,7 +55,7 @@ Page({
       articleId: data.id,
     }
     // status为ture说明已经操作过了  所以要调取消接口
-    let reqUrl = data.status ? 'discoverCountCancel' : 'discoveerCountSave'
+    let reqUrl = data.status ? 'discoverCountCancel' : 'discoverCountSave'
     API[reqUrl](params).then((res) => {
       let data = res.data || {};
       let _details = this.data.details;
