@@ -52,7 +52,7 @@ const api = {
       "isShowErrMsg": false,
     }
   ],
-  /***************************** 秀场 ************************ */
+  /***************************** 任务 ************************ */
   "addJobs": [
     "/user/userJobs/add",
     {
@@ -66,6 +66,15 @@ const api = {
     "/user/userJobs/findUserJobsByUserId",
     {
       "action": "查询是否有任务",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
+  "findByJobId": [
+    "/user/userJobs/findByJobId",
+    {
+      "action": "获取任务详情",
       "method": "get",
       "encrypt": false,
       "isShowErrMsg": false,
@@ -859,6 +868,23 @@ const api = {
       "encrypt": false,
     }
   ],
+  /***************************** 我的推广 ************************ */
+  'givingPackageToUser': [
+    '/promotion/promotionPromoter/givingPackageToUser',
+    {
+      "action": "详情页用户领取红包",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'userReceivePackage': [
+    '/promotion/promotionPromoter/userReceivePackage',
+    {
+      "action": "用户领取红包",
+      "method": "get",
+      "encrypt": false,
+    }
+  ]
 }
 
 const API = new ApiUtils(api).result;
