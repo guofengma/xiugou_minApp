@@ -5,8 +5,8 @@ const emoji = require('node-emoji')
 module.exports = async function(argv) {
   argv.file = argv.file.toString()
   const existPathFolder = await handel.existFolder(path.resolve(argv.path))
-  const fileName =
-    argv.file.substring(0, 1).toUpperCase() + argv.file.substring(1)
+  const fileName = argv.file
+    // argv.file.substring(0, 1).toUpperCase() + argv.file.substring(1)
   let className = ''
 
   for (let i = 0; i < argv.file.length; i++) {
@@ -40,5 +40,6 @@ module.exports = async function(argv) {
     await handel.createFile(createFileData)
 
     process.exit()
+
   }
 }
