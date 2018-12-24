@@ -80,6 +80,15 @@ const api = {
       "isShowErrMsg": false,
     }
   ],
+  "queryJobsByUserId": [
+    "/user/userJobs/queryJobsByUserId",
+    {
+      "action": "获取我的任务列表",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
   /***************************** 上传图片 ************************ */
   'aliyunOSSUploadImage': [
     '/common/upload/oss',
