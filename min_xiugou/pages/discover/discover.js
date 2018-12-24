@@ -158,7 +158,7 @@ Page({
     r.addToQueue();
   },
   // 获取发现相关数据
-  getDiscoveryByType(type, page = 1, size = 20) {
+  getDiscoveryByType(type, page = 1, size = 20, callback) {
     let params = {
       page: page,
       size: size, //默认20

@@ -6,7 +6,7 @@
     </view>
     <view class='prd-info whiteBg'>
       <view class='ellipsis-2 font-24 prd-name'>{{productName}}</view>
-      <view class='red font-30'>¥ {{originalPrice || 0}}起</view>
+      <view class='red font-30' wx:if="{{productType !== 5}}">¥ {{originalPrice || 0}}起</view>
     </view>
   </view>
 </template>
