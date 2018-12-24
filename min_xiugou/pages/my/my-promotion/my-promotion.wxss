@@ -1,6 +1,6 @@
 @import "/libs/wxParse/wxParse.wxss";
 .bg-area{
-  background: url("https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/home_jingshenqingk_bg@3x.png") no-repeat top center;
+  background: url("${mrdomain}/home_jingshenqingk_bg@3x.png") no-repeat top center;
   background-size:100% 100%;
   color: #fff;
   height: 364rpx;
@@ -24,7 +24,7 @@
   align-items: flex-start;
 }
 .level-label{
-  background: rgba(255,255,255,0.4)  url("https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/dianyuanxiangqiing_icon@3x.png") no-repeat 2rpx 2rpx;
+  background: rgba(255,255,255,0.4)  url("${mrdomain}/dianyuanxiangqiing_icon@3x.png") no-repeat 2rpx 2rpx;
   margin-top: 10rpx;
   height: 34rpx;
   line-height: 34rpx;
@@ -51,7 +51,7 @@
   width:690rpx;
   height:259rpx;
   margin: 0 auto;
-  /* background: transparent url("https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/promotion-bg.png") no-repeat; */
+  /* background: transparent url("${mrdomain}/promotion-bg.png") no-repeat; */
   background: #fff;
   /* background-size: 100%; */
   border-radius:14px;
@@ -64,7 +64,7 @@
 .icon-growing{
   height: 88rpx;
   padding-left: 40rpx;
-  background: transparent url("https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/my-promotion-icon.png") no-repeat left 28rpx;
+  background: transparent url("${mrdomain}/my-promotion-icon.png") no-repeat left 28rpx;
   background-size: 30rpx;
 }
 .growing-value{

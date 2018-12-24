@@ -13,7 +13,7 @@
 .content>view{
   width: 204rpx;
   height: 284rpx;
-  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/tanguang_bg_hongbao_nor@2x.png) no-repeat left top;
+  background: #fff url(${mrdomain}/tanguang_bg_hongbao_nor@2x.png) no-repeat left top;
   background-size: 100%;
   color: #fff;
   margin-bottom: 100rpx;

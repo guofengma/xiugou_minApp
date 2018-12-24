@@ -1,7 +1,7 @@
-let { Tool, RequestFactory, Operation, Storage } = global;
+let { Tool, Storage, Event, API } = global;
 Page({
   data: {
-    topicImgUrl:'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    topicImgUrl:'',
     topicTemplateId: 0, // 模板id 
     isShowBar:false,//是否显示导航
     topicInfos:{}, //专题信息
@@ -13,8 +13,14 @@ Page({
     scrollLeft: 0, //tab标题的滚动条位置
   },
   onLoad: function (options) {
-
-    this.getTopicByCode(options.code || '');
+    this.setData({
+        topicCode: options.code || ''
+    });
+    this.getTopicByCode();
+    Event.on('tip', this.getTopicByCode, this)
+  },
+  onUnload() {
+    Event.off('tip', this.getTopicByCode)
   },
   // 点击标题切换当前页时改变样式
   swichNav: function (e) {
@@ -44,50 +50,44 @@ Page({
     }
   },
   // 获取专题信息列表
-  getTopicByCode(topicCode) {
-      let userInfo = Storage.getUserAccountInfo();
-      let params = {
-        code: topicCode,
-        reqName: '获取专题列表',
-        url: Operation.getTopicById,
-        requestMethod: 'GET',
-        userId: userInfo.id
-      };
-
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let data = req.responseObject.data;
-        if(!data) return
-        console.log(data);
-        let width = '';
-        wx.getSystemInfo({
-          success: function (res) {
-            let topicNavbarListLength = data.topicNavbarList.length;
-            if( topicNavbarListLength < 0) {
-              width = '0';
-              return;
-            }
-            if (topicNavbarListLength <= 5) {
-              width = (100 / topicNavbarListLength) + '%';
-            } else {
-              width = (res.windowWidth / 5 ) + 'px';
-            }
+  getTopicByCode() {
+    let userInfo = Storage.getUserAccountInfo();
+    let params = {
+      code: this.data.topicCode,
+      userId: userInfo.id
+    }
+    API.getTopicById(params).then((res) => {
+      let data = res.data;
+      if (!data) return
+      let width = '';
+      wx.getSystemInfo({
+        success: function (res) {
+          let topicNavbarListLength = data.topicNavbarList.length;
+          if (topicNavbarListLength < 0) {
+            width = '0';
+            return;
           }
-        })
-        
-        // 设置专题标题
-        wx.setNavigationBarTitle({
-          title: data.name
-        })
-        this.setData({
-          topicList: data,
-          currentTopicListIndex: data.checkIndex,//data.topicNavbarList.length >> 1, // 这里取了个中位数，可能接口会提供
-          topicTabWidth: width,
-          topicTemplateId: data.templateId
-        })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+          if (topicNavbarListLength <= 5) {
+            width = (100 / topicNavbarListLength) + '%';
+          } else {
+            width = (res.windowWidth / 5) + 'px';
+          }
+        }
+      })
+
+      // 设置专题标题
+      wx.setNavigationBarTitle({
+        title: data.name
+      })
+      this.setData({
+        topicList: data,
+        currentTopicListIndex: data.checkIndex,//data.topicNavbarList.length >> 1, // 这里取了个中位数，可能接口会提供
+        topicTabWidth: width,
+        topicTemplateId: data.templateId
+      })
+    }).catch((res) => {
+      console.log(res)
+    })
   },
 
   // 是否设置商品提醒
@@ -95,39 +95,21 @@ Page({
     let userInfo = Storage.getUserAccountInfo();
 
     const data = e.currentTarget.dataset;
-    console.log(data);
 
-    let type = data.type,
+    let typeVal = data.type,
         itemIndex = data.index;
 
     let params = {
-      reqName: '订阅提醒',
-      url: Operation.addActivitySubscribe,
       activityId: data.activityId,
       activityType: data.activityType, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
-      type: type, // 1订阅 0 取消订阅
+      type: typeVal, // 1订阅 0 取消订阅
       userId: userInfo.id
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      // banner标识了是来自最上层商品还是banner下面的商品
-      let items = this.data.topicList
-      let targetItem = null;
-      if(data.banner == 1){
-        targetItem = items.topicNavbarList[this.data.currentTopicListIndex].topicNavbarBannerList.topicBannerProductList;
-      } else {
-        targetItem = items.topicNavbarList[this.data.currentTopicListIndex].topicBannerProducts;
-      }
-      console.log(targetItem);
-      //是否通知值为0or1
-      targetItem[itemIndex].notifyFlag = +!targetItem[itemIndex].notifyFlag;
-      
-      this.setData({
-        topicList: items
-      })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    API.addActivitySubscribe(params).then((res) => {
+      this.getTopicByCode();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   //切换专题活动tab
   changeTopicTabIndex(e) {

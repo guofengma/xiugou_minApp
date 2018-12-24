@@ -13,12 +13,7 @@
       订单编号：{{item.showOrderNo}}
     </view>
     <view class="order-status red right">
-      <text wx:if="{{item.showStatus==1}}">待支付</text>
-      <text wx:elif="{{item.showStatus==2}}">待发货</text>
-      <text wx:elif="{{item.showStatus==3}}">待收货</text>
-      <text wx:elif="{{item.showStatus==4 }}">已完成</text>
-      <text wx:elif="{{item.showStatus== 5}}">已关闭</text>
-      <!-- <text wx:elif="{{item.status== 7}}">已取消</text> -->
+      <text>{{showStatusName[item.showStatus]}}</text>
     </view>
   </view>
   <view class="clearfix"></view>
@@ -55,21 +50,18 @@
       <text wx:else>创建时间：{{item.createTime}}</text>
     </view> -->
     <view>
-     <!-- <view class="cancel-btn" bindtap="logistics" data-index='{{index}}'>查看物流</view> -->
     <view class="footer" wx:if='{{item.showStatus!=2}}'>
         <!-- 倒计时  -->
         <!-- <view class="left red ellipsis" wx:if="{{item.showStatus==1}}">
           {{item.countDownTime}}
         </view> -->
         <view class="right" wx:if="{{ item.showStatus!=1 && item.showStatus!=2 && item.showStatus!=3 }}">
-        <!-- <view class="cancel-btn" bindtap="logistics" data-index='{{index}}'>查看物流</view> -->
           <view class="cancel-btn" bindtap="deleteItem" data-id="{{item.showOrderNo}}" data-status="{{item.showStatus}}">删除订单</view>
           <view class="pay-btn red" bindtap='continueBuy' data-index='{{index}}'>再次购买</view>
         </view>
         <view class="right" wx:elif="{{ item.showStatus==1}}">
           <view class="cancel-btn" bindtap="cancelItem" data-ordernum="{{item.showOrderNo}}">取消订单</view>
           <view class="pay-btn red" bindtap='continuePay' data-index='{{index}}'>
-            <!-- {{item.outTradeNo? "继续支付":"去支付"}} -->
             去支付
           </view>
         </view>
@@ -88,7 +80,6 @@
 <!-- </view> -->
 
 <!--提示框  -->
-<!-- <template is="tips-cancel-order" data='{{isCancel,reason,content}}'/> -->
 
 <tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{orderNum}}' door='{{1}}' bind:cancelOrder='cancelOrder' />
 

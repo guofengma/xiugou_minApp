@@ -4,7 +4,7 @@
   box-sizing: border-box; 
   height: 220rpx;
   font-size: 22rpx;
-  background:url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/youhuiquan_bg_zhihui@3x.png) no-repeat left top;
+  background:url(${mrdomain}/youhuiquan_bg_zhihui@3x.png) no-repeat left top;
   background-size: 100%;
 }
 .topBar-item{
@@ -15,26 +15,26 @@
   padding:0 30rpx;
 }
 .item-ans.active{
-  background-image: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/youhuiquan_bg_nor@3x.png)
+  background-image: url(${mrdomain}/youhuiquan_bg_nor@3x.png)
 }
 .coupon-right{
   width: 110rpx;
   height: 154rpx;
 }
 .coupon-right-unUsed{
-  background: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/youhuiquan_icon_daijihuo_nor@3x.png) no-repeat 0rpx -8rpx;
+  background: url(${mrdomain}/youhuiquan_icon_daijihuo_nor@3x.png) no-repeat 0rpx -8rpx;
    background-size: 130rpx;
 }
 .coupon-right-limitLevel{
-  background: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/youhuiquan_icon_dengjishouxian_nor.png) no-repeat 0rpx -8rpx;
+  background: url(${mrdomain}/youhuiquan_icon_dengjishouxian_nor.png) no-repeat 0rpx -8rpx;
    background-size: 130rpx;
 }
 .coupon-right-used{
-  background: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/youhuiquan_icon_yishiyong_nor@3x.png) no-repeat 0rpx -8rpx;
+  background: url(${mrdomain}/youhuiquan_icon_yishiyong_nor@3x.png) no-repeat 0rpx -8rpx;
    background-size: 130rpx;
 }
 .coupon-right-lose{
-  background: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/youhuiquan_icon_yishixiao_nor@3x.png) no-repeat 0rpx -8rpx;
+  background: url(${mrdomain}/youhuiquan_icon_yishixiao_nor@3x.png) no-repeat 0rpx -8rpx;
    background-size: 130rpx;
 }
 .coupon-left{

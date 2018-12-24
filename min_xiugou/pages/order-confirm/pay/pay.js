@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event, Storage, Operation,API } = global
+let { Tool, Event, Storage,API } = global
 const app = getApp()
 Page({
   data: {
@@ -115,27 +115,23 @@ Page({
       }
     })
   },
-  /******红包支付******* */
+  /******支付红包推广费用******* */
   payPackage() {
     let payType = this.data.total == 0 ? 1 : 2
     let params = {
       packageId: this.data.packageId,
-      reqName: '支付红包推广费用',
-      requestMethod: 'GET',
-      url: Operation.promotionPromoterPay,
       "type": payType,
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    API.promotionPromoterPay(params).then((res) => {
       if (payType == 1) {
         this.showResult(true)
       } else {
-        let datas = req.responseObject.data
+        let datas = res.data || {}
         this.wxPay(datas)
       }
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   showResult(bool){ // 支付结果显示
     this.setData({

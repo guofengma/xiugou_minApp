@@ -14,11 +14,11 @@
   box-sizing: border-box;
   padding-left: 160rpx;
   position: relative;
-  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/chart-phone.png?1) no-repeat 90rpx center;
+  background: #fff url(${mrdomain}/chart-phone.png?1) no-repeat 90rpx center;
   background-size: 45rpx 45rpx;
 }
 .go-cart-view{
-  background-image: url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/chart-msg.png?1)
+  background-image: url(${mrdomain}/chart-msg.png?1)
 }
 .contact-seller>view:last-child:after{
   content: '';

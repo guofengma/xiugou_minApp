@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation, Config, Storage} = global;
+let { Tool, API, Config, Storage} = global;
 Page({
     data: {
       account:'',
@@ -26,18 +26,11 @@ Page({
       let params = {
         page: this.data.currentPage,
         size: this.data.pageSize,
-        requestMethod: 'GET',
-        reqName: '分页查询现金账户',
         'type':1,
-        url: Operation.getuserBalance
       }
-      this.setData({
-        params: params
-      });
-      let r = RequestFactory.wxRequest(params);
-      let list = this.data.list;
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data
+      this.data.params = params
+      API.getuserBalance(params).then((res) => {
+        let datas = res.data || {}
         if (datas.totalPage > 0) {
           datas.data.forEach((item) => {
             item.createTime = Tool.formatTime(item.createTime);
@@ -45,13 +38,13 @@ Page({
             item.balance = Tool.formatNum(item.balance || 0)
           })
           this.setData({
-            list: list.concat(datas.data),
+            list: this.data.list.concat(datas.data),
             totalPage: datas.totalPage,
           })
         }
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      });
     },
 
     // 上拉加载更多

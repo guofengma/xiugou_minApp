@@ -283,9 +283,8 @@ Page({
     })
   },
   failBlock(res){
-    console.log(res)
     let callBack = () => { }
-    if (res.code == 54001 || res.code == 10003) {
+    if (res.code == 54001) {
       if (this.data.formCart) {
         callBack = () => {
           Event.emit('updateShoppingCart')
@@ -295,6 +294,11 @@ Page({
         callBack = () => {
           Tool.navigationPop()
         }
+      }
+    } else {
+      callBack = () => {
+        this.data.params.tokenCoin = 0
+        this.requestOrderInfo()
       }
     }
     Tool.showAlert(res.msg, callBack)

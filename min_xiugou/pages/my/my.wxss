@@ -24,7 +24,7 @@
 }
 .content-top{
   position: relative;
-  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/bg_img_user@2x.png?_=1) no-repeat left bottom;
+  background: #fff url(${mrdomain}/bg_img_user@2x.png?_=1) no-repeat left bottom;
   background-size: 100% 100%;
   border-top: 1prx solid #eee;
   color: #fff;
@@ -81,7 +81,7 @@
   right: 0;
   width: 260rpx;
   height: 100rpx;
-  background: #F1D3A1 url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/porfile_icon@3x.png) no-repeat 5.5rpx 7.5rpx;
+  background: #F1D3A1 url(${mrdomain}/porfile_icon@3x.png) no-repeat 5.5rpx 7.5rpx;
   background-size:103rpx;
   border-top-left-radius:109rpx;
   border-bottom-left-radius:109rpx;
@@ -91,7 +91,7 @@
   color: #333
 }
 .my-account{
-  background: #fff url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/my-user-data-bg.png) no-repeat left bottom;
+  background: #fff url(${mrdomain}/my-user-data-bg.png) no-repeat left bottom;
   background-size: 100% 100%; 
   color: #fff;
   margin-top: 75rpx;
@@ -191,7 +191,7 @@
 }
 .joinUs>view{
   height:124rpx;
-  background:url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/my-joinus-bg.png) no-repeat left bottom;
+  background:url(${mrdomain}/my-joinus-bg.png) no-repeat left bottom;
   background-size: cover; 
 }
 .msg-view{

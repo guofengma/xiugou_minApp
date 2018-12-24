@@ -2,6 +2,120 @@
 
 秀购小程序
 
++ 基于`gulp+less`构建的微信小程序工程项目
++ 项目图片自动压缩
++ ESLint代码检查 后面给我取消了。。。。伤不起
++ 使用命令行快速创建`page`、`template`和`component`
++ 用微信开发者工具打开 dist 目录看效果
++ 图片上传地址  https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/  ==》 占位符(变量) html css: ${mrdomain}/xxx.png
+### Getting Started
+
+##### 0. 开始之前，请确保已经安装node和npm，全局安装gulp-cli
+```
+$ npm install --global gulp-cli
+```
+##### 2. 进目录，安装依赖
+```
+$ cd wx-miniprogram-boilerplate && npm install
+```
+##### 3. 编译代码，生成dist目录，使用开发者工具打开dist目录
+```
+$ npm run dev --env 蒋大为   开发环境 config.json 中 devBaseUrl的key
+
+$ npm run test 测试环境
+
+$ npm run prod 生产环境
+
+$ npm run build  正式环境
+
+```
+##### 4. 新建page、template或者component  命令行 gulp add
+```
+gulp add
+  1. gulp add  创建完以后
+  2. 在min_xiugou/app.json 里面手动添加 page的地址(这块没有写好 先手动写 )
+  3. npm run dev
+```
+##### 5. 上传代码前编译
+```
+
+```
+##### 6. 上传代码，审核，发版
+
+### 工程结构
+```
+wx-miniprogram-boilerplate
+├── dist         // 编译后目录
+├── node_modules // 项目依赖
+├── src
+│    ├── components // 微信小程序自定义组件
+│    ├── img     // 页面中的图片和icon
+│    ├── pages      // 小程序page文件
+│    ├── css     // ui框架，公共样式
+│    ├── template   // 模板
+│    ├── tools     // 公共js文件
+│    ├── app.js
+│    ├── app.json
+│    ├── app.less
+│    ├── project.config.json // 项目配置文件
+├── .gitignore
+├── .eslintrc.js
+├── package-lock.json
+├── package.json
+└── README.md
+
+```
+
+### Gulp说明
+
+```
+Tasks:
+  dev              开发编译，同时监听文件变化
+  build            整体编译
+
+  clean            清空产出目录
+  wxml             编译wxml文件（仅仅copy）
+  js               编译js文件，同时进行ESLint语法检查
+  json             编译json文件（仅仅copy）
+  wxss             编译less文件为wxss
+  img              编译压缩图片文件
+  watch            监听开发文件变化
+
+  add             自动根据模板创建page,template或者component(小程序自定义组件)
+
+gulp add
+
+
+#### Q&A
+- **Q:** 为什么工作流中没有加入js转换，样式补全以及代码压缩？
+
+
+  **A:** 微信开发者工具中自带babel将ES6转ES5,样式补全以及js代码压缩等功能，在此工作流中不做额外添加。
+![](https://img002.qufenqi.com/products/e5/21/e521bb1b6e01b197f22c44ea27f7313d.png)
+
+
+- **Q:** `addFile`目录的文件有什么用？
+
+
+  **A:** 使用`gulp add`命令自动生成文件，默认情况下是以对应目录下文件夹为`Template`中的文件为copy对象的。开发者可以根据业务需求，自定义`Template`下的文件。
+
+
+- **Q:** `addFile`目录的文件是否会被编译到`dist`目录？
+
+
+  **A:** 不会。
+
+### TODO
+- [x] 代码注释
+- [x] 规范命令行使用
+- [x] eslint
+- [x] gulp增量编译
+- [ ] request请求域名随环境切换
+
+### 最后
+将持续更新
+
+
 #  组件或者模板请在 components 文件夹中查找  部分组件和模板没有罗列在本文中
 省市区组件       city-picker
 

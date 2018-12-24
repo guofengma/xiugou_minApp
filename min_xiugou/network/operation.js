@@ -16,85 +16,6 @@ export default class Operation {
     constructor() {
         if (__instance()) return __instance();
 
-
-    /*************  注册登录相关接口 *********************/
-       
-        // 验证openid是否注册
-        this.verifyWechat = '/user/userLogin/verifyWechat'
-
-        // 微信登陆
-        this.wechatLogin = '/user/userLogin/wechatLogin'
-
-        // 判断手机号是否可用
-        this.findMemberByPhone = '/user/userSign/findMemberByPhone'
-
-        // 注册
-        this.signMember = '/user/userSign/signUser'
-
-        // 获取推荐人列表
-        this.queryInviterList = '/user/userSign/queryInviterList'
-
-        // 邀请码注册
-
-        this.updateUserCodeById = '/user/updateUserCodeById'
-        
-    /**********  获取省市区 *******************/
-
-      // 获取省
-      this.queryAreaList = '/config/sysArea/queryAreaList'
-    
-    /**********  获取数据字典 *******************/
-
-     /* QXDD  取消订单
-      TKLY  退款理由
-      HHLY  换货理由
-      THYK  退货退款
-      WTLX  问题类型
-      SMBH  实名驳回
-      JJTK  拒接退款
-      CPBS  产品报损
-      GGW  广告位
-      JSBH  结算驳回 */
-
-      this.queryDictionaryDetailsType = '/config/sysDictionary/queryDictionaryTypeList'
-
-    /********************** 搜索 *********************/  
-
-        // 获取热搜词语
-    
-        this.getHotWordsListActive = '/config/sysHotWord/queryHotName'
-
-        // 动态搜索框关键词匹配
-
-        this.getKeywords = '/product/getKeywords'
-          
-    /********************** 产品 *********************/
-
-        // 产品详情
-
-        this.findProductByIdApp = '/product/getProductDetail'
-
-        // 根据code获取产品
-
-        this.getProductDetailByCode ='/product/getProductDetailByCode'
-
-        // 搜索产品
-
-        this.searchProduct ='/product/productList'
-
-        // 获取产品规格
-
-        this.findProductStockBySpec = '/product/getProductSpec'
-
-        // 获取是否是活动产品
-
-        this.activityByProductId = '/operator/activity/queryByProductId'
-
-        // 礼包详情
-
-        this.getGiftBagDetail = '/operator/activitypackage/findActivityPackageDetail'
-
-
     /********************** 分类 *********************/
 
         // 热门分类列表
@@ -109,63 +30,8 @@ export default class Operation {
 
         this.findProductCategoryList = '/product/productCategory/findProductCategoryList'
 
-      
-
-    /********************** 购物车 *********************/
-        // 新增
-        
-      this.addToShoppingCart = '/user/shoppingcart/addItem'
-
-        // 修改
-
-      this.updateShoppingCart = '/user/shoppingcart/updateItem'
-
-        // 同步
-
-      this.shoppingCartFormCookieToSession ='/user/shoppingcart/loginArrange'
-
-        // 查询
-
-      this.getShoppingCartList ='/user/shoppingcart/list'
-
-        // 删除
-
-      this.deleteFromShoppingCart = '/user/shoppingcart/deleteItem'
-
-        // 未登录时，获取购物车详细信息列表
-
-      this.getRichItemList  ='/user/shoppingcart/getRichItemList'
-
-       // 再来一单的时候批量加入购物车
-
-      this.shoppingcart0neMoreOrder = '/user/shoppingcart/oneMoreOrder'
-      
-    /********************** 地址管理 *********************/
-        // 新增地址 或 修改地址(传id)
-
-        this.addUserAddress ='/user/userAddress/save';
-
-        // 获取列表
-        
-        this.queryUserAddressList ='/user/userAddress/query'
-
-        // 设置默认地址
-
-        this.setDefaultAddress ='/user/userAddress/setDefault'
-
-        // 删除地址 
-
-        this.deleteUserAddress ='/user/userAddress/delete'
-
-        // 自提地址
-
-        // this.queryStoreHouseList = '/user/userAddress/queryStoreHouseList'
-
       /********************** 我的账户 *********************/
 
-        // 我的晋升
-
-        this.getUserLevelInfo = '/user/getUserLevelInfo'
 
         // 我的秀豆明细
 
@@ -174,204 +40,6 @@ export default class Operation {
         // 我的余额
 
         this.getuserBalance= '/user/userBalance/query'
-
-
-        /********************** 我的订单 *********************/
-
-        // 订单 1.待支付 2：待发货 3：待收货 4：确认收货 5：已完成 6：退货关闭 7：用户关闭 8：超时关闭
-
-        this.queryOrderPageList ='/order/queryPage';
-
-      
-        // 订单详情
-
-        this.getOrderDetail ='/order/lookDetail';
-
-        // 确认收货
-
-        this.confirmReceipt ='/order/confirmReceipt';
-
-        // 获取订单数量
-
-        this.countUserOrderNum = '/order/countUserOrderNum'
-
-        // 删除已完成订单
-
-        this.deleteOrder ='/order/deleteCompletedOrder';
-
-        // 删除已关闭(取消) 订单
-
-        this.deleteClosedOrder ='/order/deleteClosedOrder';
-
-        // 取消订单
-
-        this.cancelOrder ='/order/cancelOrder';
-
-
-        /******************提交订单 订单结算*********************** */
-
-        // 普通商品结算
-        
-        this.makeSureOrder = '/order/makeSureOrder'
-
-        // 提交订单
-
-        this.submitOrder ='/order/submitOrder'
-
-        // 降价拍结算 
-
-        this.discountMakeSureOrder = '/operator/activityDepreciate/makeSureOrder' 
-
-        // 降价拍提交订单
-
-        this.discountSubmitOrder = '/operator/activityDepreciate/submitOrder' 
-
-        // 秒杀结算
-
-        this.seckillMkeSureOrder = '/operator/seckill/makeSureOrder'
-
-        // 秒杀下订单
-
-        this.seckillSubmitOrder = '/operator/seckill/submitOrder'
-
-        // 礼包结算
-
-        this.giftMkeSureOrder = '/operator/activitypackage/makeSureOrder'
-
-        // 礼包下订单
-
-        this.giftSubmitOrder = '/operator/activitypackage/submitOrder'
-
-        // 预支付
-
-        this.prePay = '/order/prePay'
-
-        // 第三方支付回调接口
-
-        this.paySuccess = '/order/paySuccess'
-
-        // 继续去支付
-
-        this.continueToPay = '/order/payRecord/continueToPay'
-
-        // 继续支付
-
-        this.continuePay = '/order/payRecord/continuePay'
-        
-        // 继续去预支付
-
-        this.againToPrePay  ='/order/order/againToPrePay'
-
-        // 主动查询订单状态
-
-        this.orderQuery = '/user/weChatPay/orderQuery'
-
-        // 发起支付
-        
-        this.wxPay = '/user/weChatPay/wxPay'
-
-        // 申请退款
-   
-        this.wxRefund = '/user/weChatPay/wxRefund'
-
-        // 使用优惠券查询
-
-        this.orderCalcDiscountCouponAndUseScore = '/order/order/orderCalcDiscountCouponAndUseScore'
-
-        /**********************订单售后**************************/ 
-
-        // 我的售后
-
-        this.queryAftermarketOrderPageList ='/order/queryAftermarketOrderList'
-
-        // 申请退款
-        
-        this.orderRefund = '/order/returnProduct/applyRefund'
-
-        // 申请换货
-
-        this.applyExchangeProduct = '/order/returnProduct/applyExchangeGoods'
-
-        // 申请退货
-
-        this.applyReturnGoods = '/order/returnProduct/applyReturnGoods'
-
-        // 撤销申请
-
-        this.revokeApply = '/order/returnProduct/revokeApply'
-
-        // 修改申请
-
-        this.updateApply = '/order/returnProduct/updateApply'
-
-        // 查看申请退款子订单详情
-
-        this.findOrderProductInfo = '/order/orderProduct/lookDetial'
-
-        // 查看退款退货换货情况
-
-        this.findReturnProductById = '/order/returnProduct/lookDetail'
-
-        // 退货换货填写物流信息
-
-        this.fillInExpressInfoById ='/order/returnProduct/fillSendInfo'
-
-        // 物流查看
-
-        this.findLogisticsDetail = '/order/logistics/findLogisticsDetail'
-
-        // 退换货物流查看
-
-        this.findReturnProduct = '/user/delivery/findReturnProduct'
-
-        // 根据订单id查询快递信息
-
-        this.findDelivery = '/user/delivery/find'
-
-        // 物流公司选择
-
-        this.findAllExpress = '/sysExpress/findAllExpress'
-
-        // 再次购买
-
-        this.orderOneMore ='/order/againOrder'
-
-        /****************** 一元劵*********************** */
-        
-        // 兑换一元券
-
-        this.exchangeTokenCoin = '/user/exchangeTokenCoin'
-  
-        // 签到
-
-        this.querySignList = '/user/userSign/querySignList'
-
-        // 签到获取秀豆
-
-        this.tokenCoinSign='/user/userSign/sign'
-
-        // 获取秀豆兑换1元卷的比例
-
-        this.getTokenCionExchange ='/common/config/getExchange'
-
-
-        /******************我的---设置*********************** */
-
-        //退出登录
-
-        this.exitLogin ='/user/userLogin/signOut';
-
-        // 获取用户信息
-
-        this.getLevel = '/user/getUser'
-
-        // 获取用户下一等级层级信息
-
-        this.getNextLevelInfo ='/user/level/getNextLevelInfo'
-
-        // 查询等级信息
-
-        this.getLevelInfos = '/user/level/get'
 
         /******************我的---通讯录*********************** */
 
@@ -405,33 +73,6 @@ export default class Operation {
         // 验证旧手机短信是否正确
 
         this.updateDealerPhoneById = '/user/judgePhoneCode'
-
-
-        // 邀请码
-
-        this.createWxQrcode = '/user/dealer/createWxQrcode'
-
-        // 邀请码是否过期
-
-        this.sweepCode ='/user/invite/checkValid'
-
-        /*************** 短信 ******************************/
-
-        /* 统一的短信接口
-          1. code对应传递值-------> 用户注册：MOBILE_REGISTRATION_CODE 
-          手机验证码登录：MOBILE_CODELOGIN_CODE 
-          设置交易密码：MOBILE_SETDEALPASSWORD_CODE 
-          忘记交易密码：MOBILE_FORGETDEALPASSWORD_CODE 
-          手机号修改验证旧手机：MOBILE_VERIFYAULDPHONE_CODE 
-          手机号修改绑定新手机：MOBILE_VERIFYNEWPHONE_CODE
-          登录时忘记密码：MOBILE_FORGETPASSWORD_CODE
-          2. phone:string
-          2018年10月18日接口修改 短信接口只需传phone即可  @ydg
-        */
-
-        this.sendMessage = '/sms/sendRegMessage'
-
-        /************************** 首页 *******************************/ 
 
       /* 
         查询广告位列表 
@@ -508,21 +149,9 @@ export default class Operation {
 
         this.queryPushNum = '/notice/newNoticeMessageCount';
 
-        // 消息
-
-        this.queryMessage = '/message/queryMessagePage';
-
         // 通知详情
 
         this.queryNoticeMessage = '/notice/queryNoticePage';
-
-        // 拼店消息
-
-        this.queryStoreMessageList = '/user/storeMessage/queryStoreMessageList';
-
-        // 查看消息详情
-
-        this.findMessageDetail = '/message/queryById';
 
       /************************** 降价秒杀 *******************************/
       
@@ -533,14 +162,6 @@ export default class Operation {
         // 获取专题信息
 
         this.getTopicById = '/topic/findByCode';
-
-        // 获取降价拍详情
-
-        this.getActivityDepreciateById = '/operator/activityDepreciate/findById';
-
-        // 获取秒杀详情
-
-        this.getActivitySeckillById = '/operator/seckill/findByCode';
 
         // 获取收藏列表
 
@@ -561,10 +182,6 @@ export default class Operation {
         // 点赞/收藏
 
         this.discoveerCountSave = '/discover/count/save';
-
-        // 根据openid判断用户是否存在
-
-        this.userExistByOpenid = '/user/userLogin/existedUserByOpenId'
 
         // 获取刮刮卡
 
@@ -604,10 +221,6 @@ export default class Operation {
         // 详情页用户领取红包
 
         this.givingPackageToUser = '/promotion/promotionPromoter/givingPackageToUser'
-
-        // 支付红包费用
-
-        this.promotionPromoterPay='/promotion/promotionPromoter/pay'
 
         // 分页查询用户领取红包记录列表
 

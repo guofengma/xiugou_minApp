@@ -16,7 +16,9 @@ Page({
     API.mentorBind({
       code: this.data.datas.code
     }).then((res) => {
-      this.dismiss()
+      let datas = res.data || {}
+      Storage.setFirstRegistration(datas.give)
+      this.toast()
     }).catch((res) => {
       this.setData({
         disabled: false
@@ -28,6 +30,15 @@ Page({
     this.dismiss()
   },
   dismiss(){
+    API.givePackage({}).then((res) => {
+      let datas = res.data || []
+      Storage.setFirstRegistration(datas.give)
+      this.toast()
+    }).catch((res) => {
+
+    })
+  },
+  toast(){
     let callBack = () => {
       Tool.switchTab('/pages/index/index')
     }

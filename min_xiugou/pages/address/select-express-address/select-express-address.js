@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event, Storage, Operation} = global
+let { Tool, API, Event, Storage} = global
 
 Page({
   data: {
@@ -26,40 +26,29 @@ Page({
    }
   },
   queryUserAddressList(){
-    let params = {
-      reqName: '获取地址列表',
-      requestMethod:'GET',
-      url: Operation.queryUserAddressList
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data || []
+    API.queryUserAddressList({}).then((res) => {
+      let data = res.data || []
       data.forEach((item) => {
         item.addressInfo = item.province + item.city + item.area + item.address
         item.hasData = true
       })
-      if (data.length>0){
+      if (data.length > 0) {
         this.setData({
-          addressList: req.responseObject.data
+          addressList:data
         })
       }
-    };
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   setDefault(e){
-    // let id = this.getAddressId(e).id
-    // let r = RequestFactory.setDefaultAddress({id:id});
-    let params = {
+    API.setDefaultAddress({
       id: this.getAddressId(e).id,
-      reqName: '设置默认地址',
-      url: Operation.setDefaultAddress
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    }).then((res) => {
       this.queryUserAddressList()
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   getAddressId(e){
     let index = e.currentTarget.dataset.index
@@ -69,22 +58,17 @@ Page({
   deleteAddress(e){
     let item = this.getAddressId(e)
     let callBack = ()=>{
-      // let r = RequestFactory.deleteUserAddress({ id: item.id });
-      let params = {
+      API.deleteAddress({
         id: item.id,
-        reqName: '删除地址',
-        url: Operation.deleteUserAddress
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
+      }).then((res) => {
         let list = this.data.addressList
         list.splice(item.index, 1)
         this.setData({
           addressList: list
         })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      });
     }
     Tool.showComfirm('是否确认删除此地址', callBack)
   },

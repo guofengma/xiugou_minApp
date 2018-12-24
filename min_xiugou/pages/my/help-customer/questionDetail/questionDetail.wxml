@@ -9,7 +9,7 @@
         <view class="no-help btn {{isClickedNoHelp? 'redBg':'red'}}" catchtap='isUseClicked' data-index='1'>没啥帮助({{datas.notHelp || 0}})</view>
         <view class="has-help btn {{isClickedHelp? 'redBg':'red'}}" catchtap='isUseClicked' data-index='2'>
         有用({{datas.isHelp || 0}})
-        <!-- <image src="https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/helped.png"></image><text>+1</text> -->
+        <!-- <image src="${mrdomain}/helped.png"></image><text>+1</text> -->
         </view>
     </view>
 </view>

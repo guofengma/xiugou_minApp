@@ -11,7 +11,7 @@
   width: 164rpx;
   height: 164rpx;
   margin: 0 auto;
-  background:url(https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/bg_seg.png) no-repeat left bottom;
+  background:url(${mrdomain}/bg_seg.png) no-repeat left bottom;
   background-size: 100%;
   color: #fff;
   margin-bottom: 14rpx;

@@ -41,13 +41,8 @@ Page({
           page: this.data.currentPage,
           createdTime: createdTime || '',
           'type':100,
-          // reqName: '消息',
-          // url: Operation.queryMessage
         }
         this.data.params = params
-        // this.setData({
-        //   params: params
-        // });
         let list = this.data.list;
         API.queryMessage(params).then((res) => {
           let datas = [];

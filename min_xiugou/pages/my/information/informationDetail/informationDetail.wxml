@@ -58,7 +58,7 @@
                     <text>订单疑问</text>
                 </view>
                 <view>
-                    <image class="jt-img" src='https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/xjt_10@2x.png' mode='widthFix'></image>
+                  <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
                 </view>
             </view>
             <view class="item" catchtap='feedback'>
@@ -70,7 +70,7 @@
                   <text>投诉</text>
               </view>
               <view>
-                <image class="jt-img" src='https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/xjt_10@2x.png' mode='widthFix'></image>
+              <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
               </view>
             <!-- </button> -->
 

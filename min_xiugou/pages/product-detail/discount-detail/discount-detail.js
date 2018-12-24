@@ -96,7 +96,11 @@ Page({
     })
   },
   setTip: function () {
-    this.ProductFactory.setTip(2)
+    this.ProductFactory.setTip(2, () => {
+      console.log('降价拍通知');
+      Event.emit('tip');
+      this.getTopicActivityData(this.data.prodCode);
+    })
   },
   //根据不同状态有不同的事情处理
   footbarReady(e) {

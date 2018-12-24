@@ -200,7 +200,7 @@ export default class ProductFactorys  {
   productDefect(){ // 跳转到产品缺失页面
     Tool.redirectTo('/pages/product-detail/temp/defect/defect')
   }
-  setTip(activityType) { // 设置消息提醒
+  setTip(activityType, cb) { // 设置消息提醒
     let userInfo = Storage.getUserAccountInfo();
     let prop = this.page.data.proNavData;
     let params = {
@@ -225,6 +225,7 @@ export default class ProductFactorys  {
         },
         "proNavData.notifyFlag": 1
       })
+      typeof cb === 'function' && cb();
     }).catch((res) => {
 
     })

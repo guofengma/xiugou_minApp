@@ -38,7 +38,7 @@ Page({
     activeIndex:'',
     refundType: 0, // 0为仅退款 1为退货退款  2为换货
     queryReasonParams:[
-      'TKLY', 'THTK','HHLY'
+      'JTK', 'THTK','HH','WFH'
     ], // 2 退款理由 3 换货理由 4 退货退款
     stateArr:['',"申请中","已同意","已拒绝",'中',"中","完成","超时","超时"],
     originalImg:[],
@@ -63,7 +63,7 @@ Page({
       serviceNo: options.serviceNo || '',
       placeholder: { placeholder: placeholder, disabled: false }
     })
-    Tool.isIPhoneX(this) 
+    Tool.isIPhoneX(this)
     this.initData()
   },
   initData(){
@@ -95,8 +95,10 @@ Page({
     // this.queryDictionaryDetailsType(this.data.refundType)
   },
   queryDictionaryDetailsType(refundType){
+    let code = this.data.queryReasonParams[refundType]
+    if(this.data.orderInfos.status<=2) code = this.data.queryReasonParams[3]
     API.queryDictionaryDetailsType({
-      code: this.data.queryReasonParams[refundType],
+      code: code,
     }).then((res) => {
       let datas = res.data || []
       if (this.data.returnReason) {
@@ -126,7 +128,7 @@ Page({
   changeApplyAmount(e){
     let applyRefundAmount = e.detail.value
     let totalAmount = this.data.orderInfos.totalAmount
-    console.log(applyRefundAmount > totalAmount, applyRefundAmount, totalAmount)
+    // console.log(applyRefundAmount > totalAmount, applyRefundAmount, totalAmount)
     if (applyRefundAmount > totalAmount) {
       Tool.showAlert(`最多只能申请${totalAmount}元`)
       applyRefundAmount = totalAmount
@@ -140,16 +142,19 @@ Page({
       orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || ''
     }).then((res) => {
       let data = res.data || {}
-      if (data.status != 1 && data.serviceNo) {
-        let callBack = ()=>{
-          Tool.redirectTo('/pages/my/my-order/my-order')
-        }
-        let content = "售后"+this.data.stateArr[data.status]+",不能修改申请"
-        Tool.showAlert(content,callBack)
-      } else {
-        data.imgUrl = data.specImg? data.specImg : this.data.list.imgUrl
-        data.createTime = Tool.formatTime(data.createTime)
-      }
+      // if (data.status != 1 && this.data.serviceNo) {
+      //   let callBack = ()=>{
+      //     Tool.redirectTo('/pages/my/my-order/my-order')
+      //   }
+      //   let content = "售后"+this.data.stateArr[data.status]+",不能修改申请"
+      //   Tool.showAlert(content,callBack)
+      // } else {
+      //   data.imgUrl = data.specImg? data.specImg : this.data.list.imgUrl
+      //   data.createTime = Tool.formatTime(data.createTime)
+      // }
+      data.imgUrl = data.specImg? data.specImg : this.data.list.imgUrl
+      data.createTime = Tool.formatTime(data.createTime)
+      if (this.data.refundType != 2 && data.status > 2 && data.status < 6 && data.payAmount > 0) data.canEditAmout = true
       this.setData({
         orderInfos: data,
         applyRefundAmount:data.payAmount
@@ -165,7 +170,7 @@ Page({
       placeholder: { placeholder: ' ', disabled: true}
     })
   },
-  hiddenTips() { 
+  hiddenTips() {
     this.setData({
       textarea: !this.data.textarea,
     })
@@ -177,11 +182,15 @@ Page({
       hidden: e.detail.hidden,
       placeholder: { placeholder: placeholder, disabled: false }
     })
-    
+
   },
   orderRefund(){
     if (this.data.activeIndex===''){
       Tool.showAlert('请选择' + this.data.reason[this.data.refundType].choose)
+      return
+    }
+    if (this.data.orderInfos.canEditAmout&&Tool.isEmptyStr(this.data.applyRefundAmount)){
+      Tool.showAlert('请输入退款金额')
       return
     }
     // if (this.data.refundType == 2 && Tool.isEmptyStr(this.data.remark)){
@@ -203,7 +212,6 @@ Page({
       applyRefundAmount: this.data.applyRefundAmount || '',
       imgList: this.data.originalImg.join(","),
       orderProductNo: this.data.orderProductNo || this.data.list.orderProductNo || '',
-      // reason:'无',
       reason: this.data.reason[this.data.refundType].list[this.data.activeIndex].value,
       description: this.data.remark,
       'type': Number(this.data.refundType)+1,
@@ -224,7 +232,7 @@ Page({
     });
   },
   updateApply(){
-    
+
   },
   uploadImage(e){
     this.setData({

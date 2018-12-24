@@ -27,11 +27,6 @@ Page({
       if (datas.countDownSeconds){
         this.countdown()
       }
-      datas.createTime = Tool.formatTime(datas.createTime)
-      // let afterSaleInfo = datas.afterSaleInfo || {}
-      let imgList = datas.imgList || ''
-      datas.showImgList = imgList.split(',')
-      // afterSaleInfo.showImgList = imgList.split(',')
       this.setData({
         datas:datas
       })

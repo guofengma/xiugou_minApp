@@ -74,7 +74,9 @@ Page({
     API.mentorBind({
       code: this.data.invite[this.data.activeIndex].code
     }).then((res) => {
-      this.dismiss()
+      let datas = res.data || {}
+      Storage.setFirstRegistration(datas.give)
+      this.toast()
     }).catch((res) => {
       this.setData({
         disabled: false
@@ -102,6 +104,15 @@ Page({
     })
   },
   dismiss(){
+    API.givePackage({}).then((res) => {
+      let datas = res.data || []
+      Storage.setFirstRegistration(datas.give)
+      this.toast()
+    }).catch((res) => {
+
+    })
+  },
+  toast(){
     let callBack = () => {
       Tool.switchTab('/pages/index/index')
     }

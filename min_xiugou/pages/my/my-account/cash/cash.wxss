@@ -7,7 +7,7 @@
     color: #fff;
     margin-bottom: 20rpx;
     position: relative;
-    /* background: url("https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/icon1-1_03@2x.png") no-repeat top center;
+    /* background: url("${mrdomain}/icon1-1_03@2x.png") no-repeat top center;
     background-size: 100% 100%; */
     background: #FF4F6E;
     border-radius: 16rpx;
