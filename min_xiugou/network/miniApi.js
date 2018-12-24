@@ -42,6 +42,35 @@ const api = {
       "encrypt": false
     }
   ],
+  "discoverNotice": [
+    "/discover/query",
+    {
+      "action": "秀场头条",
+      "method": "get",
+      "encrypt": false,
+      'isShowLoading': false,
+      "isShowErrMsg": false,
+    }
+  ],
+  /***************************** 秀场 ************************ */
+  "addJobs": [
+    "/user/userJobs/add",
+    {
+      "action": "领取任务",
+      "encrypt": false,
+      "method": "post",
+      "isShowErrMsg": false,
+    }
+  ],
+  "findUserJobsByUserId": [
+    "/user/userJobs/findUserJobsByUserId",
+    {
+      "action": "查询是否有任务",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
   /***************************** 上传图片 ************************ */
   'aliyunOSSUploadImage': [
     '/common/upload/oss',
