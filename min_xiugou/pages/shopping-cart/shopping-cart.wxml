@@ -6,13 +6,27 @@
 <!-- <scroll-view class="search-result" scroll-y > -->
   <view class='shopping-cart' wx-if='{{!tipVal}}'>
     <view wx:for='{{items}}'  data-index='{{index}}'  wx:key='unique' class='shopping-cart-line '>
+      <!--购物车的产品分类提示-->
+      <view class="prodClass flexR-sb font-20 whiteBg">
+        <!--有效的产品-->
+        <block wx:if="{{item.status ==1 || item.status ==3}}">
+          <view class="leftTips flexR-sb">
+            <view class="tips-label redBg">经验值翻倍</view>
+            <view class="ellipsis-2 tips-content gray boxSize">很好看是否好看的话费卡收费卡收费后视镜的好时机的哈开始接卡或收费卡收费卡换卡后收费卡或罚款实践活动卡仕达卡多喝水</view>
+          </view>
+          <view class="red" bindtap='collectBills'>去凑单 > </view>
+        </block>
+        <block wx:else>
+          <!--失效的产品-->
+          <view class="gray">失效宝贝3件</view>
+          <view class="red" bindtap='clearItems' >清空失效宝贝</view>
+        </block>
+      </view>
+      <!--产品信息-->
       <view class='flexR-sb whiteBg' >
         <view class='chooseImg'  bindtap='chooseClicked' data-index='{{index}}' >
-        <image src='{{ item.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
+          <image src='{{ item.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
         </view>
-        <!-- <view wx:else class='statusLabel flexR'>
-        失效
-        </view> -->
         <!--侧滑删除代码  -->
         <view class='move-box'>
           <delete-bar  bind:deleteClicked="deleteClicked" item='{{items}}' index="{{index}}">
@@ -20,10 +34,10 @@
           </delete-bar>
         </view>
       </view>
-      <view class='flexR font-22 {{item.isBegin? "redBg":"redBg-2"}}' wx:if='{{!item.isEnd && item.activityType}}'>
-        <text wx:if='{{item.isBegin}}'>该商品正在进行{{item.activityType==1? "秒杀":"降价拍"}}活动，快去看看~</text>
-        <text wx:else>{{item.activityType==1? "秒杀":"降价拍"}}活动未开始,暂不可购买</text>
-      </view>
+      <!--<view class='flexR font-22 {{item.isBegin? "redBg":"redBg-2"}}' wx:if='{{!item.isEnd && item.activityType}}'>-->
+        <!--<text wx:if='{{item.isBegin}}'>该商品正在进行{{item.activityType==1? "秒杀":"降价拍"}}活动，快去看看~</text>-->
+        <!--<text wx:else>{{item.activityType==1? "秒杀":"降价拍"}}活动未开始,暂不可购买</text>-->
+      <!--</view>-->
     </view>
   </view>
   <!--搜索结果异常显示 tipVal  -->

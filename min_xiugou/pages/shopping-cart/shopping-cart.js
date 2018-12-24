@@ -408,6 +408,12 @@ Page({
       Tool.navigateTo('/pages/product-detail/product-detail?door=100&prodCode=' + e.currentTarget.dataset.id)
     }
   },
+  collectBills(){ //去凑单
+    Tool.navigateTo('/pages/product-detail/product-detail')
+  },
+  clearItems(){ // 清楚失效宝贝
+    console.log('Todo')
+  },
   lookAround(){
     Tool.switchTab('/pages/index/index')
   },

@@ -63,7 +63,25 @@
   font-size: 24rpx;
   margin-left:30rpx; 
 } */
-.redBg-2{
-  background:rgba(213,18,67,0.5);
-  color:#fff;
+/*.redBg-2{*/
+  /*background:rgba(213,18,67,0.5);*/
+  /*color:#fff;*/
+/*}*/
+/*购物车分类*/
+.prodClass{
+  padding: 0 30rpx;
+  height: 80rpx;
+  border-bottom: 1rpx solid #F7F7F7;
+}
+.leftTips{
+  max-width:88%;
+}
+.leftTips .tips-content{
+  max-width: 79.3%;
+  padding: 0 28rpx;
+}
+.tips-label{
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  border-radius: 22rpx;
 }
