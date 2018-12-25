@@ -47,8 +47,11 @@ Page({
       Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + code)
     } else if(prdType == 1) {
       Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code=' + code)
+    }  else if(prdType == 5) {
+      Tool.navigateTo(`/pages/topic/topic?code=${code}`);
     }
-  },
+
+},
   // 获取专题信息列表
   getTopicByCode() {
     let userInfo = Storage.getUserAccountInfo();
