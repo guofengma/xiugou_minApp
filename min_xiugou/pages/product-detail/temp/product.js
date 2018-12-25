@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation,API } = global
+let { Tool, Storage, Event,API } = global
 const app = getApp()
 export default class ProductFactorys  {
   constructor(page) {

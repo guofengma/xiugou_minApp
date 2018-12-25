@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Operation, Event } = global;
+let { Tool, Storage, Event } = global;
 Page({
   data: {
     isAnimate:true,

@@ -1,4 +1,4 @@
-let { Tool, API, Storage, Operation } = global
+let { Tool, API, Storage } = global
 Page({
   data: {
     ysf: { title: '我的售后' },

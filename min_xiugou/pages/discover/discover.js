@@ -1,4 +1,4 @@
-let { Tool, API, Operation } = global
+let { Tool, API } = global
 Page({
   data: {
     tabIndex: 0,

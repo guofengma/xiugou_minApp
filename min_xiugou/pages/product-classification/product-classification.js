@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event, Storage, Operation } = global;
+let { Tool, API, Event, Storage} = global;
 Page({
   data: {
     leftBarLists:[
@@ -38,22 +38,16 @@ Page({
     Tool.navigateTo('/pages/search/search-result/search-result?keyword=' + name +"&categoryId="+id)
   },
   findProductCategoryList(id) {
-    let params = {
-      id:id,
-      isShowLoading: false,
-      reqName: '获取二、三级列表',
-      requestMethod: 'GET',
-      url: Operation.findProductCategoryList
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data || []
-       this.setData({
-         content:datas
-       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    API.findProductCategoryList({
+      id:id
+    }).then((res) => {
+      let datas = res.data || []
+      this.setData({
+        content:datas
+      })
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   adClicked(e){
     let linkType = e.currentTarget.dataset.linktype
@@ -66,13 +60,8 @@ Page({
     Tool.navigateTo(page)
   },
   findNameList() {
-    let params = {
-      reqName: '一级分类列表',
-      url: Operation.findNameList
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data || []
+    API.findNameList({}).then((res) => {
+      let datas = res.data || []
       datas.forEach((item,indx)=>{
         if(item.name.length>4){
           item.name = item.name.slice(0,4)+'...'
@@ -84,19 +73,13 @@ Page({
       this.setData({
         leftBarLists: datas
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   findHotList() {
-    let params = {
-      isShowLoading: false,
-      reqName: '热门分类列表',
-      url: Operation.findHotList
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data || []
+    API.findHotList({}).then((res) => {
+      let datas = res.data || []
       let content = []
       content = [{
         name:"为你推荐",
@@ -110,8 +93,8 @@ Page({
           productCategoryList: content
         }
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
 })

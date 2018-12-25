@@ -42,6 +42,101 @@ const api = {
       "encrypt": false
     }
   ],
+  "discoverNotice": [
+    "/discover/query",
+    {
+      "action": "秀场头条",
+      "method": "get",
+      "encrypt": false,
+      'isShowLoading': false,
+      "isShowErrMsg": false,
+    }
+  ],
+  /***************************** 任务 ************************ */
+  "addJobs": [
+    "/user/userJobs/add",
+    {
+      "action": "领取任务",
+      "encrypt": false,
+      "method": "post",
+      "isShowErrMsg": false,
+    }
+  ],
+  "findUserJobsByUserId": [
+    "/user/userJobs/findUserJobsByUserId",
+    {
+      "action": "查询是否有任务",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
+  "findByJobId": [
+    "/user/userJobs/findByJobId",
+    {
+      "action": "获取任务详情",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
+  "queryJobsByUserId": [
+    "/user/userJobs/queryJobsByUserId",
+    {
+      "action": "获取我的任务列表",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
+  "jobIncrHits": [
+    "/user/userJobs/incrHits",
+    {
+      "action": "获取分享详情",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  "checkScratchCodeStatus": [
+    "/scratch/scratchCardInformation/findByCode",
+    {
+      "action": "验证刮刮卡使用状态",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  "userExtVerify": [
+    "/user/userLogin/scratchUserVerify",
+    {
+      "action": "查询用户是否已注册",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
+  "getScratchCard": [
+    "/scratch/scratchCard/findByCode",
+    {
+      "action": "获取刮刮卡",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  "getScratchAward": [
+    "/scratch/scratchCardInformation/findById",
+    {
+      "action": "领取刮刮卡奖励",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
+  "existedUserByOpenId": [
+    "/user/userLogin/existedUserByOpenId",
+    {
+      "action": "根据用户openid检验是否注册",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
   /***************************** 上传图片 ************************ */
   'aliyunOSSUploadImage': [
     '/common/upload/oss',
@@ -830,10 +925,89 @@ const api = {
       "encrypt": false,
     }
   ],
+  /***************************** 我的推广 ************************ */
+  'givingPackageToUser': [
+    '/promotion/promotionPromoter/givingPackageToUser',
+    {
+      "action": "详情页用户领取红包",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'userReceivePackage': [
+    '/promotion/promotionPromoter/userReceivePackage',
+    {
+      "action": "用户领取红包",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'receiveJobMoney': [
+    '/user/userJobs/receiveMoney',
+    {
+      "action": "领取任务奖励",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'queryPromotionReceiveRecordPageList': [
+    '/promotion/promotionReceiveRecord/queryPromotionReceiveRecordPageList',
+    {
+      "action": "分页查询用户领取红包记录列表",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'queryPromotionPackagePageList': [
+    '/user/promotionPackage/queryPromotionPackagePageList',
+    {
+      "action": "推广红包列表",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'queryUserBuyPromotionPromoter': [
+    '/promotion/promotionPromoter/queryUserBuyPromotionPromoter',
+    {
+      "action": "分页查询用户购买信息列表",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  /***************************** 分类 ************************ */
+  'findProductCategoryList': [
+    '/product/productCategory/findProductCategoryList',
+    {
+      "action": "二、三级列表",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+      'isShowLoading': false,
+    }
+  ],
+  'findNameList': [
+    '/product/productCategory/findNameList',
+    {
+      "action": "一级分类列表",
+      "method": "post",
+      "encrypt": false,
+      "isShowErrMsg": false,
+      'isShowLoading': false,
+    }
+  ],
+  'findHotList': [
+    '/product/productCategory/findHotList',
+    {
+      "action": "热门分类列表",
+      "method": "post",
+      "encrypt": false,
+      "isShowErrMsg": false,
+      'isShowLoading': false,
+    }
+  ],
 }
 
 const API = new ApiUtils(api).result;
-console.log(API)
 /*
 * 使用说明
       API.queryAdList({

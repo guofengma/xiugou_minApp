@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, API, Storage, Event } = global
 
 Page({
   data: {
@@ -37,12 +37,11 @@ Page({
     let params = {
       page:this.data.page,
       pageSize: this.data.pagesize,
-      reqName: '分页查询用户购买信息列表',
-      url: Operation.queryUserBuyPromotionPromoter
+      // reqName: '分页查询用户购买信息列表',
+      // url: Operation.queryUserBuyPromotionPromoter
     };
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data || {}
+    API.queryUserBuyPromotionPromoter(params).then((res) => {
+      let datas = res.data || {}
       datas.data.forEach((item,index)=>{
         item.showRemianPrice = Tool.mul(item.price || 0, item.remain || 0)
         item.createTime = Tool.formatTime(item.createTime)
@@ -51,9 +50,9 @@ Page({
         list: this.data.list.concat(datas.data),
         totalPage: datas.totalPage
       })
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   onReachBottom() {
     this.data.page++;

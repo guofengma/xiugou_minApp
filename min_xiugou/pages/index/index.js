@@ -2,7 +2,7 @@
 //获取应用实例
 const app = getApp()
 import { levelName, pages} from '../../tools/common.js'
-let { Tool, RequestFactory, Event, Storage, Operation, API} = global;
+let { Tool, Event, Storage, API} = global;
 
 Page({
     data: {
@@ -71,34 +71,25 @@ Page({
       })
     },
     findUserJobsByUserId() {
-      let params = {
-        url: Operation.findUserJobsByUserId,
-        requestMethod: 'GET'
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let data = req.responseObject.data || {};
-        
+      API.findUserJobsByUserId({}).then((res) => {
+        let data = res.data || {};
+
         data.receiveFlag &&
         this.setData({
           taskDetail: data,
           hasTask: data.receiveFlag
         })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     getJob() {
-      let params = {
-        url: Operation.addJobs
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let data = req.responseObject.data || {};
+      API.addJobs({}).then((res) => {
+        let data = res.data || {}
         Tool.navigateTo(`/pages/my/task/task-detail/task-detail?jobId=${data.jobId}&status=1&id=${data.id}`)
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     // 滚动的时候任务要缩进去
     onPageScroll(e){
@@ -262,21 +253,14 @@ Page({
     },
     discoverNotice() {
       if (!this.data.isChange) return
-      let params = {
-        isShowLoading: false,
-        reqName: '获取秀场头条',
-        requestMethod: 'GET',
-        url: Operation.discoverNotice
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let datas = req.responseObject.data.data || []
+      API.discoverNotice({}).then((res) => {
+        let datas = res.data || []
         this.setData({
           noticeArr: Tool.sliceArray(datas, 2)
         })
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     noticeChange(e){ // 轮播结束以后继续请求
       if (e.detail.current==this.data.noticeArr.length-1){

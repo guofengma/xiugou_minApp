@@ -2,8 +2,6 @@ import {
   Storage,
   Tool,
   Event,
-  RequestFactory,
-  Operation,
   API
 } from './tools/tcglobal';
 
@@ -21,8 +19,6 @@ App({
       global.Storage = Storage;
       global.Tool = Tool;
       global.Event = Event;
-      global.RequestFactory = RequestFactory;
-      global.Operation = Operation
       global.Config = config
       global.API = API
       this.getSystemInfo();

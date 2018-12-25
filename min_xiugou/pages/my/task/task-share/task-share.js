@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation} = global
+let { Tool, API, Storage, Event} = global
 const app = getApp();
 Page({
 
@@ -33,41 +33,36 @@ Page({
     });
   },
   jobIncrHits() {
-    let params = {
-      url: Operation.jobIncrHits,
-      openId: this.data.userInfos.openid,
+    API.jobIncrHits({
       userJobId: this.data.jobId
-    };
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data || {};
+    }).then((res) => {
+      let data = res.data || {};
       this.setData({
         scratchCode: data.scratchCode,
         tableId: data.id,
       });
       this.checkScratchCodeStatus();
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   checkScratchCodeStatus() {
     let params = {
-      url: Operation.checkScratchCodeStatus,
+      // url: Operation.checkScratchCodeStatus,
       openid: this.data.userInfos.openid,
       scratchCardCode: this.data.scratchCode,
       tableId: this.data.tableId,
       type: 1 // 1.秀值
     };
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data || {};
+    API.checkScratchCodeStatus(params).then((res) => {
+      let data = res.data || {};
       this.setData({
         scratchCard: data,
         deadline: this.getDate(data.updateTime) + ' - ' + this.getDate(data.endTime)
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   getDate(timestamp) {
     return Tool.formatTime(timestamp).split(' ')[0] || '';
@@ -86,26 +81,25 @@ Page({
     this.getUserInfo();
     this.jobIncrHits();    
   },
-  checkUserExist() {
+  checkUserExist() { // 查询用户是否已注册
     let params = {
       openid: Storage.getterFor('openid'),
       phone: this.data.phone,
       source: 1, // 1. 小程序 2. H5
-      reqName: '查询用户是否已注册',
-      url: Operation.userExtVerify,
-      requestMethod: 'GET'
+      // reqName: '查询用户是否已注册',
+      // url: Operation.userExtVerify,
+      // requestMethod: 'GET'
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data;
+    API.userExtVerify(params).then((res) => {
+      let data = res.data;
       if(!data) {
-        this.toRegister();        
+        this.toRegister();
       } else {
         this.getAward();
       }
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   getUserInfo() {
     Tool.getUserInfos(this);
@@ -158,43 +152,41 @@ Page({
     let params = {
       scratchCardCode: this.data.scratchCode,
       openid: Storage.getterFor('openid'),
-      url: Operation.getScratchCard,
+      // url: Operation.getScratchCard,
       tableId: this.data.tableId,
       type: 1,
-      reqName: '获取刮刮卡',
+      // reqName: '获取刮刮卡',
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data || {};
+    API.getScratchCard(params).then((res) => {
+      let data = res.data || {};
       this.setData({
         scratchCard: data
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   // 获取奖励
   getAward() {
     console.log('get award');
     let _ = this;
     let params = {
-      url: Operation.getScratchAward,
+      // url: Operation.getScratchAward,
       id: _.data.scratchCard.id,
       phone: _.data.userInfos.phone || _.data.phone,
-      requestMethod: 'GET'
+      // requestMethod: 'GET'
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
+    API.getScratchAward(params).then((res) => {
       this.setData({
         showPhoneModal: false,
         inputFocus: false
       })
-      if(req.responseObject.code == 10000) {
-        _.checkScratchCodeStatus(); 
+      if(res.code == 10000) {
+        _.checkScratchCodeStatus();
       }
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   toIndex() {
     Tool.switchTab('/pages/index/index')
@@ -205,20 +197,17 @@ Page({
       Tool.switchTab('/pages/index/index');
 
     } else {
-      let params = {
-        url: Operation.existedUserByOpenId,
+      API.existedUserByOpenId({
         openid: Storage.getterFor('openid')
-      };
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        if (req.responseObject.data) {
+      }).then((res) => {
+        if (res.data) {
           Tool.switchTab('/pages/index/index');
         } else {
           Tool.navigateTo('/pages/register/register');
         }
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
+      }).catch((res) => {
+        console.log(res)
+      })
     }
   }
 })

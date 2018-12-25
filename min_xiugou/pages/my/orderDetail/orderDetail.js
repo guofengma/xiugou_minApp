@@ -1,4 +1,4 @@
-let { Tool, API, Storage, Event, Operation, Config } = global;
+let { Tool, API, Storage, Event, Config } = global;
 
 Page({
   data: {

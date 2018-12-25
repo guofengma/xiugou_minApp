@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
+let { Tool, API, Storage, Event, Config } = global
 Page({
   data: {
     detail: {},
@@ -7,7 +7,6 @@ Page({
     id: ''
   },
   onLoad (options) {
-    console.log(options)
     this.setData({
       id: options.id || '',
       jobId: options.jobId || '',
@@ -16,23 +15,18 @@ Page({
     this.getTaskDetail(options.jobId)
   },
   getTaskDetail(jobId) {
-    let params = {
-      url: Operation.findByJobId,
-      jobId: jobId,
-      requestMethod: 'GET'
-    }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data || {};
+    API.findByJobId({
+      jobId: jobId
+    }).then((res) => {
+      let data = res.data || {};
       this.setData({
         detail: data
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catcsh((res) => {
+      console.log(res)
+    })
   },
   onShareAppMessage () {
-    console.log(`/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id || ''}&jobId=${this.data.id}`);
     return ({
       title: this.data.detail.remarks,
       path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id || ''}&jobId=${this.data.id}`,

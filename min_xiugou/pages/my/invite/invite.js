@@ -1,5 +1,5 @@
 // pages/my/account.js
-let { Tool, RequestFactory, Event, Operation} = global;
+let { Tool, Event} = global;
 Page({
     data: {
       expanded:[false,false],
