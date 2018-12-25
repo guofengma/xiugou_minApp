@@ -58,15 +58,15 @@ export default class Tool {
     }
 
     static stringToDate(_date, _format, _delimiter) {
-        var formatLowerCase = _format.toLowerCase();
-        var formatItems = formatLowerCase.split(_delimiter);
-        var dateItems = _date.split(_delimiter);
-        var monthIndex = formatItems.indexOf("mm");
-        var dayIndex = formatItems.indexOf("dd");
-        var yearIndex = formatItems.indexOf("yyyy");
-        var month = parseInt(dateItems[monthIndex]);
+        let formatLowerCase = _format.toLowerCase();
+        let formatItems = formatLowerCase.split(_delimiter);
+        let dateItems = _date.split(_delimiter);
+        let monthIndex = formatItems.indexOf("mm");
+        let dayIndex = formatItems.indexOf("dd");
+        let yearIndex = formatItems.indexOf("yyyy");
+        let month = parseInt(dateItems[monthIndex]);
         month -= 1;
-        var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+        let formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
         return formatedDate;
     }
 
@@ -245,28 +245,6 @@ export default class Tool {
         } else {
             return 0
         }
-        // return  day + "天" + hour + "时" + minute + "分" + second + "秒";
-    }
-
-    // 时间倒计时
-    static timeCountdown(that, timerName, distanceTimeName, countDownSeconds, finishCB = () => {
-    }, startCB = () => {
-    }) {
-        let self = this
-        clearTimeout(that.data[timerName]);
-        let distanceTime = Tool.showDistanceTime(countDownSeconds || 0)
-        if (that.data[countDownSeconds] < 0) {
-            finishCb()
-            return -1
-        }
-        let time = setTimeout(function () {
-            startCB()
-            self.timeCountdown(that, timerName, distanceTimeName, countDownSeconds, finishCB, startCB)
-        }, 1000)
-        // that.setData({
-        //   [distanceTimeName]: distanceTime,
-        //   [timerName]: time
-        // });
     }
 
     //Object 空值判断
@@ -288,7 +266,7 @@ export default class Tool {
         if (Tool.isEmpty(obj)) {
             return true;
         }
-        for (var name in obj) {
+        for (let name in obj) {
             return false;
         }
         return true;
@@ -387,7 +365,7 @@ export default class Tool {
             }
         });
     }
-
+    // 成功的提示
     static showSuccessToast(title, finish = null) {
         let duration = 1000;
 
@@ -452,9 +430,7 @@ export default class Tool {
      * @returns {*}
      */
     static removeObjectFromArray(obj, arr) {
-        var index = arr.indexOf(obj);
-        // console.log('removeObjectFromArray index:' + index);
-
+        let index = arr.indexOf(obj);
         if (index > -1) {
             arr.splice(index, 1);
         }
@@ -613,16 +589,16 @@ export default class Tool {
         wx.getLocation({
             // type:'gcj02',
             success: function (res) {
-                var that = this;
+                let that = this;
                 /* 获取定位地理位置 */
                 // 新建bmap对象
-                var BMap = new bmap.BMapWX({
+                let BMap = new bmap.BMapWX({
                     ak: config.BaiduMapKey
                 });
-                var fail = function (data) {
+                let fail = function (data) {
                     console.log(data);
                 };
-                var success = function (data) {
+                let success = function (data) {
                     //返回数据内，已经包含经纬度
                     res.wxMarkerData = data.wxMarkerData;
                     res.originalData = data.originalData;
@@ -647,8 +623,7 @@ export default class Tool {
      * 判断密码
      */
     static checkPwd(value) {
-        console.log(value)
-        var Regx = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
+        let Regx = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
         if (Regx.test(value)) {
             return true;
         }
@@ -799,7 +774,7 @@ export default class Tool {
             });
             return;
         }
-        var time = setTimeout(function () {
+        let time = setTimeout(function () {
             that.setData({
                 second: second - 1,
                 getCodeBtEnable: false,
@@ -812,20 +787,6 @@ export default class Tool {
         });
     }
 
-    // 展示错误信息
-
-    static showErrMsg(r, callBack = ()=> {
-    }) {
-        r.failBlock = (req) => {
-            if (req.responseObject.code == 10009) { // 超时登录
-                callBack = ()=> {
-                    let page = '/pages/login-wx/login-wx'
-                    this.navigateTo(page + '?isBack=' + true)
-                }
-            }
-            this.showAlert(req.responseObject.msg, callBack)
-        }
-    }
 
     // 格式化服务器端返回的cookie
 
@@ -951,7 +912,7 @@ export default class Tool {
 
     // 减 
     static sub(arg1, arg2) {
-        var r1, r2, m, n;
+        let r1, r2, m, n;
         try {
             r1 = arg1.toString().split(".")[1].length;
         }
@@ -972,7 +933,7 @@ export default class Tool {
 
     // 乘法
     static mul(arg1, arg2) {
-        var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+        let m = 0, s1 = arg1.toString(), s2 = arg2.toString();
         try {
             m += s1.split(".")[1].length;
         }
@@ -1071,7 +1032,7 @@ export default class Tool {
             return v.toString(16);
         });
     }
-
+    // 去掉输入的表情符号
     static formatString(str) {
         return str.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "")
     }
@@ -1086,6 +1047,7 @@ export default class Tool {
         return result
     }
 
+    // 判断是不是json
     static isJson(text) {
         if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
             return true
