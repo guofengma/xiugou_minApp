@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Operation } = global
+let { Tool } = global
 Component({
   properties: {
     productSpec:Object,// 规格描述

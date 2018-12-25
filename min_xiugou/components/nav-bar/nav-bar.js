@@ -1,5 +1,3 @@
-// let { Tool, RequestFactory } = global;
-
 Component({
   properties: {
     

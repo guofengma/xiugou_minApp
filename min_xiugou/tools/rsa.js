@@ -51,8 +51,8 @@ const RSA = {
       return '';
     }
   },
-  checkInWhiteList(url) {
-    return rsa_config.whiteList.includes(url.replace(config.baseUrl,''));
-  }
+  // checkInWhiteList(url) {
+  //   return rsa_config.whiteList.includes(url.replace(config.baseUrl,''));
+  // }
 }
 export default RSA;

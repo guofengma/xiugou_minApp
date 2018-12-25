@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, Storage, Event } = global
 Page({
   data: {
     select:true,

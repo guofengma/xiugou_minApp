@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
+let { Tool, Storage, Config } = global
 Component({
   properties: {
     imgSrc:String,

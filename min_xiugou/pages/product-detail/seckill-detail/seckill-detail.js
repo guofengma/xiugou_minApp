@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation,API } = global
+let { Tool,Storage, Event,API } = global
 
 import WxParse from '../../../libs/wxParse/wxParse.js';
 import ProductFactorys from '../temp/product.js'
