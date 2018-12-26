@@ -74,8 +74,8 @@
       <view class='item-left'>
         <text>简介</text>
       </view>
-      <view class='flexR-sb'>
-        <text>{{userInfos.profile || '未填写'}}</text>
+      <view class="flexR-sb">
+        <view class="info-line">{{userInfos.profile || '未填写'}}</view>
         <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
       </view>
     </view>
