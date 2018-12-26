@@ -37,8 +37,8 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      orderId: options.orderId,
-      status: options.status,
+      orderId: options.orderId || '',
+      status: options.status || '',
       num: options.num || ''
     });
     Tool.isIPhoneX(this)
