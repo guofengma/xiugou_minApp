@@ -27,7 +27,7 @@ Page({
       coinData:{
         nickname:'全品类：无金额门槛',
         'type':0,
-        name:'1元现金券',
+        name:'1元抵扣券',
         timeTips:'无时间限制',
         tips:'可叠加使用',
         isCoinCoupon:true,
