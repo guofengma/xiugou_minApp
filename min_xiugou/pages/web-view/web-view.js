@@ -12,6 +12,7 @@ Page({
       3:'/download',//下载页面
       4:'/static/protocol/signInRule.html', //签到协议
       5:'/topic/first', // h5专题
+      6:'/static/protocol/about-us.html', //关于我们
     }
   },
   onLoad: function (options) {
