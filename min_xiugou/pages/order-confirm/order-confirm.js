@@ -1,4 +1,4 @@
-let { Tool, API, Event, Storage, Operation } = global
+let { Tool, API, Event, Storage } = global
 Page({
   data: {
     innerCount:1, //件数

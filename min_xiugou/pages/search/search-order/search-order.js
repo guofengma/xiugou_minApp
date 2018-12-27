@@ -1,5 +1,3 @@
-let { Tool, RequestFactory } = global
-
 Page({
   data: {
     num:0,

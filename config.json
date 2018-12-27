@@ -15,12 +15,12 @@
     "imgBaseUrl":"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/"
   },
   "build": {
-    "h5webUrl": "https://h5.sharegoodsmall.com",
-    "baseUrl":"https://api.sharegoodsmall.com/gateway",
+    "h5webUrl": "https://uath5.sharegoodsmall.com",
+    "baseUrl":"https://uatapi.sharegoodsmall.com/gateway",
     "imgBaseUrl":"https://uatcdn.sharegoodsmall.com/sharegoods/resource/xcx/"
   },
   "base":{
-    "rasVersion": "1.0.4.12",
+    "rasVersion": "1.0.5.6",
     "rasClient":"miniapp",
     "AppId-test": "wxa059b818226f8679",
     "Secret-test":"9fa19f4d1f7e37d318dba14f951f1b4c",

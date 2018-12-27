@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
+let { Tool, Storage, Event, Config } = global
 Component({
   properties: {
     type: {

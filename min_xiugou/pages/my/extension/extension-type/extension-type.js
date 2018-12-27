@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool,API,Storage, Event } = global
 Page({
   data: {
     page: 1,
@@ -12,19 +12,18 @@ Page({
     let params = {
       page: this.data.page,
       pageSize: this.data.pagesize,
-      reqName: '推广红包列表',
-      url: Operation.queryPromotionPackagePageList
+      // reqName: '推广红包列表',
+      // url: Operation.queryPromotionPackagePageList
     };
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data || {}
+    API.queryPromotionPackagePageList(params).then((res) => {
+      let datas = res.data || {}
       this.setData({
         list: this.data.list.concat(datas.data),
         totalPage: datas.totalPage
       })
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   },
   itemClicked(e){
     let index = e.currentTarget.dataset.index

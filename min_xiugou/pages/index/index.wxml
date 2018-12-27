@@ -187,7 +187,7 @@
               <!-- <image src='{{item.specImg}}' lazy-load='true'></image> -->
               <image-sub imgSrc="{{item.specImg}}" imgStyle='height:190rpx;width:190rpx' mode='aspectFill' />
               <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName || ''}}</view>
-              <view class='red font-28'>¥{{item.showPrice || 0}}起</view>
+              <view class='red font-28' wx:if="{{item.productType!=5}}">¥{{item.showPrice || 0}}起</view>
             </view>
           </block>
           <!-- 查看更多  -->

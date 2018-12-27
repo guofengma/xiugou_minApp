@@ -7,7 +7,6 @@ let bmap = require('../libs/baidu-map/bmap-wx.min');
 
 import config from '../config.js'
 
-import RSA from './rsa.js'
 
 //工具类
 
@@ -36,7 +35,7 @@ export default class Tool {
     }
 
     static formatTime(timestamp) {
-        let date=new Date(timestamp);
+        let date = new Date(timestamp);
         let year = date.getFullYear();
         let month = date.getMonth() + 1;
         let day = date.getDate();
@@ -59,15 +58,15 @@ export default class Tool {
     }
 
     static stringToDate(_date, _format, _delimiter) {
-        var formatLowerCase = _format.toLowerCase();
-        var formatItems = formatLowerCase.split(_delimiter);
-        var dateItems = _date.split(_delimiter);
-        var monthIndex = formatItems.indexOf("mm");
-        var dayIndex = formatItems.indexOf("dd");
-        var yearIndex = formatItems.indexOf("yyyy");
-        var month = parseInt(dateItems[monthIndex]);
+        let formatLowerCase = _format.toLowerCase();
+        let formatItems = formatLowerCase.split(_delimiter);
+        let dateItems = _date.split(_delimiter);
+        let monthIndex = formatItems.indexOf("mm");
+        let dayIndex = formatItems.indexOf("dd");
+        let yearIndex = formatItems.indexOf("yyyy");
+        let month = parseInt(dateItems[monthIndex]);
         month -= 1;
-        var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+        let formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
         return formatedDate;
     }
 
@@ -130,19 +129,19 @@ export default class Tool {
         return (time);
     }
 
-      static timeStringForDateString(string, formate) {
+    static timeStringForDateString(string, formate) {
         if ('1900-01-01 00:00:00' === string) {
-          // return '空';
+            // return '空';
         }
         let date = Tool.dateFromString(string);
         let timeString = Tool.timeStringForDate(date, formate);
         return timeString;
-      }
+    }
 
-      static timeStringForDate(date, formate) {
+    static timeStringForDate(date, formate) {
         let timeString = Date.format(date, formate);
         return timeString;
-      }
+    }
 
     static dayCountFromInterval(interval) {
         let days = 0;
@@ -201,70 +200,53 @@ export default class Tool {
     // 日期倒计时 
 
     static getDistanceTime(time, self, noDay) {
-      /*replace将时间字符串中所有的'-'替换成'/',parse将时间格式的字符串转换成毫秒*/
-      let endTime = new Date(Date.parse(time.replace(/-/g, "/")));
-      let nowTime = new Date();
-      // /*getTime把一个date对象转换成毫秒*/
-      let distance = endTime.getTime() - nowTime.getTime();
-      let day = 0;
-      let hour = 0;
-      let minute = 0;
-      let second = 0;
-      let distanceTime = ''
-      if (distance >= 0) {
-        day = Math.floor(distance / 1000 / 60 / 60 / 24);
-        hour = Math.floor(distance / 1000 / 60 / 60 % 24);
-        if(n){
-          hour= day * 24 + hour
+        /*replace将时间字符串中所有的'-'替换成'/',parse将时间格式的字符串转换成毫秒*/
+        let endTime = new Date(Date.parse(time.replace(/-/g, "/")));
+        let nowTime = new Date();
+        // /*getTime把一个date对象转换成毫秒*/
+        let distance = endTime.getTime() - nowTime.getTime();
+        let day = 0;
+        let hour = 0;
+        let minute = 0;
+        let second = 0;
+        let distanceTime = ''
+        if (distance >= 0) {
+            day = Math.floor(distance / 1000 / 60 / 60 / 24);
+            hour = Math.floor(distance / 1000 / 60 / 60 % 24);
+            if (n) {
+                hour = day * 24 + hour
+            }
+            minute = Math.floor(distance / 1000 / 60 % 60);
+            second = Math.floor(distance / 1000 % 60);
+            if (noDay) {
+                distanceTime = hour + "时" + minute + "分" + second + "秒";
+                if (hour == 0) {
+                    distanceTime = minute + "分" + second + "秒";
+                }
+            } else {
+                distanceTime = day + "天" + hour + "时" + minute + "分" + second + "秒";
+            }
+        } else {
+            distanceTime = 0
         }
-        minute = Math.floor(distance / 1000 / 60 % 60);
-        second = Math.floor(distance / 1000 % 60);
-        if (noDay){
-          distanceTime =  hour + "时" + minute + "分" + second + "秒";
-          if (hour==0){
-            distanceTime = minute + "分" + second + "秒";
-          }
-        } else{
-          distanceTime = day + "天" + hour + "时" + minute + "分" + second + "秒";
-        } 
-      } else {
-        distanceTime = 0
-      }
-      self.setData({
-        distanceTime: distanceTime
-      })
-      return distanceTime
+        self.setData({
+            distanceTime: distanceTime
+        })
+        return distanceTime
     }
-    static showDistanceTime(time){
-      let day = Math.floor( time / 60 / 60 / 24 );
-      let hour = Math.floor(time / 60 / 60 % 24);
-      let minute = Math.floor(time / 60 % 60);
-      let second = Math.floor(time % 60);
-      if (time>=0){
-        return day + "天" + hour + "时" + minute + "分" + second + "秒";
-      } else {
-        return 0
-      }
-      // return  day + "天" + hour + "时" + minute + "分" + second + "秒";
+
+    static showDistanceTime(time) {
+        let day = Math.floor(time / 60 / 60 / 24);
+        let hour = Math.floor(time / 60 / 60 % 24);
+        let minute = Math.floor(time / 60 % 60);
+        let second = Math.floor(time % 60);
+        if (time >= 0) {
+            return day + "天" + hour + "时" + minute + "分" + second + "秒";
+        } else {
+            return 0
+        }
     }
-    // 时间倒计时
-    static timeCountdown(that,timerName, distanceTimeName, countDownSeconds,finishCB = () => { }, startCB = () => { }) { 
-      let self = this
-      clearTimeout(that.data[timerName]);
-      let distanceTime = Tool.showDistanceTime(countDownSeconds || 0)
-      if (that.data[countDownSeconds] < 0) {
-        finishCb()
-        return -1
-      }
-      let time = setTimeout(function () {
-        startCB()
-        self.timeCountdown(that, timerName, distanceTimeName, countDownSeconds, finishCB,startCB)
-      }, 1000)
-      // that.setData({
-      //   [distanceTimeName]: distanceTime,
-      //   [timerName]: time
-      // });
-    }
+
     //Object 空值判断
     static isEmpty(object) {
         if (object === null || object === undefined) {
@@ -284,7 +266,7 @@ export default class Tool {
         if (Tool.isEmpty(obj)) {
             return true;
         }
-        for (var name in obj) {
+        for (let name in obj) {
             return false;
         }
         return true;
@@ -295,7 +277,7 @@ export default class Tool {
     }
 
     //String 空值判断
-    static isEmptyStr(str='') {
+    static isEmptyStr(str = '') {
         str = str.replace(/(^\s*)|(\s*$)/g, "")
         if (Tool.isEmpty(str)) {
             return true;
@@ -351,7 +333,8 @@ export default class Tool {
     }
 
     //弹窗提示
-    static showAlert(msg, okCB = () => { }) {
+    static showAlert(msg, okCB = () => {
+    }) {
         wx.showModal({
             title: '',
             content: msg,
@@ -363,22 +346,26 @@ export default class Tool {
             }
         });
     }
+
     //弹窗自定义
-    static showComfirm(msg, okCB = () => { }, errCB = () => { }, cancelText = '取消', confirmText = '确认') {
-      wx.showModal({
-        content: msg,
-        showCancel: true,
-        cancelText: cancelText,
-        confirmText: confirmText,
-        success: function (res) {
-          if (res.confirm) {
-            okCB();
-          } else {
-            errCB()
-          }
-        }
-      });
+    static showComfirm(msg, okCB = () => {
+    }, errCB = () => {
+    }, cancelText = '取消', confirmText = '确认') {
+        wx.showModal({
+            content: msg,
+            showCancel: true,
+            cancelText: cancelText,
+            confirmText: confirmText,
+            success: function (res) {
+                if (res.confirm) {
+                    okCB();
+                } else {
+                    errCB()
+                }
+            }
+        });
     }
+    // 成功的提示
     static showSuccessToast(title, finish = null) {
         let duration = 1000;
 
@@ -405,7 +392,7 @@ export default class Tool {
         Tool.sharedInstance().requestCount = rCount;
 
         if (Tool.canIUse('showLoading')) {
-            wx.showLoading({ title: '加载中...' });
+            wx.showLoading({title: '加载中...'});
         }
         else {
             wx.showToast({
@@ -443,9 +430,7 @@ export default class Tool {
      * @returns {*}
      */
     static removeObjectFromArray(obj, arr) {
-        var index = arr.indexOf(obj);
-        // console.log('removeObjectFromArray index:' + index);
-
+        let index = arr.indexOf(obj);
         if (index > -1) {
             arr.splice(index, 1);
         }
@@ -470,11 +455,11 @@ export default class Tool {
 
     static redirectTo(url, success, fail, complete) {
         wx.redirectTo({
-            url: url,
-            success: success,
-            fail: fail,
-            complete: complete,
-        }
+                url: url,
+                success: success,
+                fail: fail,
+                complete: complete,
+            }
         )
     }
 
@@ -486,7 +471,7 @@ export default class Tool {
             complete: complete,
         })
     }
-   
+
     static navigateTo(url, success, fail, complete) {
         wx.navigateTo({
             url: url,
@@ -560,7 +545,10 @@ export default class Tool {
      * @param fail
      * @param complete
      */
-    static getLocation(success = (res) => { }, fail = () => { }, complete = () => { }) {
+    static getLocation(success = (res) => {
+    }, fail = () => {
+    }, complete = () => {
+    }) {
         let resultHandler = (success, fail, complete) => {
             Tool.queryLocation((res) => {
                 if (Tool.isValid(res)) {
@@ -595,20 +583,22 @@ export default class Tool {
     }
 
     //调用微信接口，获取定位信息
-    static queryLocation(cb = (res) => { }, complete = () => { }) {
+    static queryLocation(cb = (res) => {
+    }, complete = () => {
+    }) {
         wx.getLocation({
             // type:'gcj02',
             success: function (res) {
-                var that = this;
+                let that = this;
                 /* 获取定位地理位置 */
                 // 新建bmap对象
-                var BMap = new bmap.BMapWX({
+                let BMap = new bmap.BMapWX({
                     ak: config.BaiduMapKey
                 });
-                var fail = function (data) {
+                let fail = function (data) {
                     console.log(data);
                 };
-                var success = function (data) {
+                let success = function (data) {
                     //返回数据内，已经包含经纬度
                     res.wxMarkerData = data.wxMarkerData;
                     res.originalData = data.originalData;
@@ -633,448 +623,440 @@ export default class Tool {
      * 判断密码
      */
     static checkPwd(value) {
-        console.log(value)
-        var Regx = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
+        let Regx = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,18}$/;
         if (Regx.test(value)) {
-          return true;
+            return true;
         }
         else {
-          return false;
+            return false;
         }
     }
+
     // 判断手机号
-    static checkPhone(value){
-      let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
-      if (reg.test(value)){
-        return true;
-      } else{
-        return false;
-      }
+    static checkPhone(value) {
+        let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
+        if (reg.test(value)) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
     // 判断人名
-    static checkName(value){
-      ///^([a-zA-Z0-9\u4e00-\u9fa5\·]{2,16})$/
-      if (!(/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,16}$/.test(value))){
-        return false 
-      } else {
-        return true
-      }
+    static checkName(value) {
+        ///^([a-zA-Z0-9\u4e00-\u9fa5\·]{2,16})$/
+        if (!(/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,16}$/.test(value))) {
+            return false
+        } else {
+            return true
+        }
     }
+
     // 判断身份证号是否适合规格
     static checkIdentityCode(num) {
-      num = num.toUpperCase();
-      //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X。
-      if (!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num))) {
-        // alert('输入的身份证号长度不对，或者号码不符合规定！\n15位号码应全为数字，18位号码末位可以为数字或X。');
-        return false
-      }
-      //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
-      //下面分别分析出生日期和校验位
-      var len, re;
-      len = num.length;
-      if (len == 15) {
-        re = new RegExp(/^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/);
-        var arrSplit = num.match(re);
-        //检查生日日期是否正确
-        var dtmBirth = new Date('19' + arrSplit[2] + '/' + arrSplit[3] + '/' + arrSplit[4]);
-        var bGoodDay;
-        bGoodDay = (dtmBirth.getYear() == Number(arrSplit[2]))
-          && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3]))
-          && (dtmBirth.getDate() == Number(arrSplit[4]))
-        if (!bGoodDay) {
-          // alert('输入的身份证号里出生日期不对！')
-          return false
-        } else {
-          //将15位身份证转成18位
-          //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
-          var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
-          var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
-          var nTemp = 0, i;
-          num = num.substr(0, 6) + '19' + num.substr(6, num.length - 6);
-          for (i = 0; i < 17; i++) {
-            nTemp += num.substr(i, 1) * arrInt[i];
-          }
-          num += arrCh[nTemp % 11];
-          return num
-        }
-      }
-      if (len == 18) {
-        re = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/);
-        var arrSplit = num.match(re)
-        //检查生日日期是否正确
-        var dtmBirth = new Date(arrSplit[2] + "/" + arrSplit[3] + "/" + arrSplit[4]);
-        var bGoodDay;
-        bGoodDay = (dtmBirth.getFullYear() == Number(arrSplit[2]))
-          && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3]))
-          && (dtmBirth.getDate() == Number(arrSplit[4]));
-        if (!bGoodDay) {
-          // alert(dtmBirth.getYear());
-          //alert(arrSplit[2]);
-          //alert('输入的身份证号里出生日期不对！');
-          return false
-        } else {
-          //检验18位身份证的校验码是否正确。
-          //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
-          var valnum;
-          var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
-          var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
-          var nTemp = 0, i;
-          for (i = 0; i < 17; i++) {
-            nTemp += num.substr(i, 1) * arrInt[i]
-          }
-          valnum = arrCh[nTemp % 11];
-          if (valnum != num.substr(17, 1)) {
-            //alert('18位身份证的校验码不正确！应该为：' + valnum);
+        num = num.toUpperCase();
+        //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X。
+        if (!(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test(num))) {
+            // alert('输入的身份证号长度不对，或者号码不符合规定！\n15位号码应全为数字，18位号码末位可以为数字或X。');
             return false
-          }
-          return num
         }
-      }
-      return false
+        //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
+        //下面分别分析出生日期和校验位
+        var len, re;
+        len = num.length;
+        if (len == 15) {
+            re = new RegExp(/^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/);
+            var arrSplit = num.match(re);
+            //检查生日日期是否正确
+            var dtmBirth = new Date('19' + arrSplit[2] + '/' + arrSplit[3] + '/' + arrSplit[4]);
+            var bGoodDay;
+            bGoodDay = (dtmBirth.getYear() == Number(arrSplit[2]))
+                && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3]))
+                && (dtmBirth.getDate() == Number(arrSplit[4]))
+            if (!bGoodDay) {
+                // alert('输入的身份证号里出生日期不对！')
+                return false
+            } else {
+                //将15位身份证转成18位
+                //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
+                var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
+                var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
+                var nTemp = 0, i;
+                num = num.substr(0, 6) + '19' + num.substr(6, num.length - 6);
+                for (i = 0; i < 17; i++) {
+                    nTemp += num.substr(i, 1) * arrInt[i];
+                }
+                num += arrCh[nTemp % 11];
+                return num
+            }
+        }
+        if (len == 18) {
+            re = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/);
+            var arrSplit = num.match(re)
+            //检查生日日期是否正确
+            var dtmBirth = new Date(arrSplit[2] + "/" + arrSplit[3] + "/" + arrSplit[4]);
+            var bGoodDay;
+            bGoodDay = (dtmBirth.getFullYear() == Number(arrSplit[2]))
+                && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3]))
+                && (dtmBirth.getDate() == Number(arrSplit[4]));
+            if (!bGoodDay) {
+                // alert(dtmBirth.getYear());
+                //alert(arrSplit[2]);
+                //alert('输入的身份证号里出生日期不对！');
+                return false
+            } else {
+                //检验18位身份证的校验码是否正确。
+                //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。
+                var valnum;
+                var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
+                var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');
+                var nTemp = 0, i;
+                for (i = 0; i < 17; i++) {
+                    nTemp += num.substr(i, 1) * arrInt[i]
+                }
+                valnum = arrCh[nTemp % 11];
+                if (valnum != num.substr(17, 1)) {
+                    //alert('18位身份证的校验码不正确！应该为：' + valnum);
+                    return false
+                }
+                return num
+            }
+        }
+        return false
     }
 
     // 获取用户账号信息 
 
-    static getUserInfos(that){
-      let userInfo = global.Storage.getUserAccountInfo()
-      if (userInfo) {
-        let idcard = userInfo.idcard
-        userInfo.showName = idcard ? userInfo.realname : userInfo.nickname
-        userInfo.isRealname = idcard ? true : false
-        // userInfo.showPhone = userInfo.phone.slice(0, 3) + "*****" + userInfo.phone.slice(7)
-        userInfo.showPhone = userInfo.phone
-        if (userInfo.province) userInfo.showRegion = userInfo.province + userInfo.city + userInfo.area
-        if (!userInfo.area) userInfo.showRegion = userInfo.province + userInfo.city
-      }
-      that.setData({
-        userInfos: userInfo || {}
-      })
-      return userInfo
-    }
-    // 倒计时是否可以点击
-
-    static codeEnable(that,cb=()=>{}) {
-      let tempEnable = that.data.getCodeBtEnable;
-        if (!tempEnable) {
-          return;
+    static getUserInfos(that) {
+        let userInfo = global.Storage.getUserAccountInfo()
+        if (userInfo) {
+            let idcard = userInfo.idcard
+            userInfo.showName = idcard ? userInfo.realname : userInfo.nickname
+            userInfo.isRealname = idcard ? true : false
+            // userInfo.showPhone = userInfo.phone.slice(0, 3) + "*****" + userInfo.phone.slice(7)
+            userInfo.showPhone = userInfo.phone
+            if (userInfo.province) userInfo.showRegion = userInfo.province + userInfo.city + userInfo.area
+            if (!userInfo.area) userInfo.showRegion = userInfo.province + userInfo.city
         }
         that.setData({
-          getCodeBtEnable: !tempEnable,
-          showSecond: that
+            userInfos: userInfo || {}
+        })
+        return userInfo
+    }
+
+    // 倒计时是否可以点击
+
+    static codeEnable(that, cb = ()=> {
+    }) {
+        let tempEnable = that.data.getCodeBtEnable;
+        if (!tempEnable) {
+            return;
+        }
+        that.setData({
+            getCodeBtEnable: !tempEnable,
+            showSecond: that
         });
-        this.countdown(that,this);
+        this.countdown(that, this);
         cb()
-      }
+    }
 
     // 倒计时
 
-    static countdown(that,self) {
-      // that 调用页面中的this slef 当前页面调用的this
-      let second = that.data.second;
-      clearTimeout(that.data.time);
-      if (second == 0) {
+    static countdown(that, self) {
+        // that 调用页面中的this slef 当前页面调用的this
+        let second = that.data.second;
+        clearTimeout(that.data.time);
+        if (second == 0) {
+            that.setData({
+                second: '59',
+                getCodeBtEnable: true,
+                showSecond: false
+            });
+            return;
+        }
+        let time = setTimeout(function () {
+            that.setData({
+                second: second - 1,
+                getCodeBtEnable: false,
+                showSecond: true,
+            });
+            self.countdown(that, self);
+        }, 1000)
         that.setData({
-          second: '59',
-          getCodeBtEnable: true,
-          showSecond: false
+            time: time
         });
-        return;
-      }
-      var time = setTimeout(function () {
-        that.setData({
-          second: second - 1,
-          getCodeBtEnable: false,
-          showSecond: true,
-        });
-        self.countdown(that,self);
-      }, 1000)
-      that.setData({
-        time: time
-      });
     }
 
-    // 展示错误信息
-
-    static showErrMsg(r,callBack=()=>{}) {
-      r.failBlock = (req) => {
-        if (req.responseObject.code==10009){ // 超时登录
-          callBack =()=>{
-            let page = '/pages/login-wx/login-wx'
-            this.navigateTo(page+'?isBack='+true)
-          }
-        } 
-        this.showAlert(req.responseObject.msg, callBack)
-      }
-    }
 
     // 格式化服务器端返回的cookie
 
     static formatCookie(cookies) {
-      let __cookies = [];
-      (cookies.match(/([\w\-.]*)=([^\s]+);/g) || []).forEach((str) => {
-        if (str.indexOf('Path=/') !== 0) {
-          __cookies.push(str);
-        } else if (str.indexOf('token2') != -1) {
-          let token2 = str.slice(7)
-          __cookies.push(token2);
-        }
-      });
-      //  最后发送的
-      let myCookie = __cookies.join('')
-      global.Storage.setUserCookie(myCookie)
-      return myCookie
+        let __cookies = [];
+        (cookies.match(/([\w\-.]*)=([^\s]+);/g) || []).forEach((str) => {
+            if (str.indexOf('Path=/') !== 0) {
+                __cookies.push(str);
+            } else if (str.indexOf('token2') != -1) {
+                let token2 = str.slice(7)
+                __cookies.push(token2);
+            }
+        });
+        //  最后发送的
+        let myCookie = __cookies.join('')
+        global.Storage.setUserCookie(myCookie)
+        return myCookie
     }
 
     // 是否登录
 
     static didLogin(that) {
-      let userInfo = global.Storage.getUserAccountInfo() ? global.Storage.getUserAccountInfo():{}
-      let didLogin = userInfo.id && global.Storage.getToken()? true : false
-      that.setData({
-        didLogin: didLogin
-      })
-      return didLogin
+        let userInfo = global.Storage.getUserAccountInfo() ? global.Storage.getUserAccountInfo() : {}
+        let didLogin = userInfo.id && global.Storage.getToken() ? true : false
+        that.setData({
+            didLogin: didLogin
+        })
+        return didLogin
     }
 
     // 登录以后的操作
 
-    static loginOpt(req){
-      let datas = req.data || {}
-      if (datas.token){
-        global.Storage.setToken(datas.token)
-      }
-      global.Storage.setUserAccountInfo(datas)
-      global.Event.emit('didLogin');
-      global.Storage.setWxOpenid(datas.openid)
-      global.Storage.setMemberId(datas.id)
-      global.Event.emit('refreshMemberInfoNotice');
+    static loginOpt(req) {
+        let datas = req.data || {}
+        if (datas.token) {
+            global.Storage.setToken(datas.token)
+        }
+        global.Storage.setUserAccountInfo(datas)
+        global.Event.emit('didLogin');
+        global.Storage.setWxOpenid(datas.openid)
+        global.Storage.setMemberId(datas.id)
+        global.Event.emit('refreshMemberInfoNotice');
     }
 
     /*获取当前页url*/
     static getCurrentPageUrl() {
-      let pages = getCurrentPages()    //获取加载的页面
-      let currentPage = pages[pages.length - 1]    //获取当前页面的对象
-      let url = currentPage.route    //当前页面url
-      return url
+        let pages = getCurrentPages()    //获取加载的页面
+        let currentPage = pages[pages.length - 1]    //获取当前页面的对象
+        let url = currentPage.route    //当前页面url
+        return url
     }
 
     /*获取当前页带参数的url*/
     static getCurrentPageUrlWithArgs() {
-      let pages = getCurrentPages()    //获取加载的页面
-      let currentPage = pages[pages.length - 1]    //获取当前页面的对象
-      let url = currentPage.route    //当前页面url
-      let options = currentPage.options    //如果要获取url中所带的参数可以查看options
+        let pages = getCurrentPages()    //获取加载的页面
+        let currentPage = pages[pages.length - 1]    //获取当前页面的对象
+        let url = currentPage.route    //当前页面url
+        let options = currentPage.options    //如果要获取url中所带的参数可以查看options
 
-      //拼接url的参数
-      let urlWithArgs = url + '?'
-      for (let key in options) {
-        let value = options[key]
-        urlWithArgs += key + '=' + value + '&'
-      }
-      urlWithArgs = urlWithArgs.substring(0, urlWithArgs.length - 1)
+        //拼接url的参数
+        let urlWithArgs = url + '?'
+        for (let key in options) {
+            let value = options[key]
+            urlWithArgs += key + '=' + value + '&'
+        }
+        urlWithArgs = urlWithArgs.substring(0, urlWithArgs.length - 1)
 
-      return urlWithArgs
+        return urlWithArgs
     }
 
     // 阻止多次跳转
     static throttle(fn, gapTime) {
-      if (gapTime == null || gapTime == undefined) {
-        gapTime = 1500
-      }
-
-      let _lastTime = null
-
-      // 返回新的函数
-      return function () {
-        let _nowTime = + new Date()
-        if (_nowTime - _lastTime > gapTime || !_lastTime) {
-          fn.apply(this, arguments)   //将this和参数传给原函数
-          _lastTime = _nowTime
+        if (gapTime == null || gapTime == undefined) {
+            gapTime = 1500
         }
-      }
+
+        let _lastTime = null
+
+        // 返回新的函数
+        return function () {
+            let _nowTime = +new Date()
+            if (_nowTime - _lastTime > gapTime || !_lastTime) {
+                fn.apply(this, arguments)   //将this和参数传给原函数
+                _lastTime = _nowTime
+            }
+        }
     }
 
     // 防止前端精度缺失
-    
+
     // 加
     static add(arg1, arg2) {
-      let r1, r2, m, c;
-      try {
-        r1 = arg1.toString().split(".")[1].length;
-      }
-      catch (e) {
-        r1 = 0;
-      }
-      try {
-        r2 = arg2.toString().split(".")[1].length;
-      }
-      catch (e) {
-        r2 = 0;
-      }
-      c = Math.abs(r1 - r2);
-      m = Math.pow(10, Math.max(r1, r2));
-      if (c > 0) {
-        let cm = Math.pow(10, c);
-        if (r1 > r2) {
-          arg1 = Number(arg1.toString().replace(".", ""));
-          arg2 = Number(arg2.toString().replace(".", "")) * cm;
-        } else {
-          arg1 = Number(arg1.toString().replace(".", "")) * cm;
-          arg2 = Number(arg2.toString().replace(".", ""));
+        let r1, r2, m, c;
+        try {
+            r1 = arg1.toString().split(".")[1].length;
         }
-      } else {
-        arg1 = Number(arg1.toString().replace(".", ""));
-        arg2 = Number(arg2.toString().replace(".", ""));
-      }
-      return (arg1 + arg2) / m;
+        catch (e) {
+            r1 = 0;
+        }
+        try {
+            r2 = arg2.toString().split(".")[1].length;
+        }
+        catch (e) {
+            r2 = 0;
+        }
+        c = Math.abs(r1 - r2);
+        m = Math.pow(10, Math.max(r1, r2));
+        if (c > 0) {
+            let cm = Math.pow(10, c);
+            if (r1 > r2) {
+                arg1 = Number(arg1.toString().replace(".", ""));
+                arg2 = Number(arg2.toString().replace(".", "")) * cm;
+            } else {
+                arg1 = Number(arg1.toString().replace(".", "")) * cm;
+                arg2 = Number(arg2.toString().replace(".", ""));
+            }
+        } else {
+            arg1 = Number(arg1.toString().replace(".", ""));
+            arg2 = Number(arg2.toString().replace(".", ""));
+        }
+        return (arg1 + arg2) / m;
     }
 
     // 减 
     static sub(arg1, arg2) {
-      var r1, r2, m, n;
-      try {
-        r1 = arg1.toString().split(".")[1].length;
-      }
-      catch (e) {
-        r1 = 0;
-      }
-      try {
-        r2 = arg2.toString().split(".")[1].length;
-      }
-      catch (e) {
-        r2 = 0;
-      }
-      m = Math.pow(10, Math.max(r1, r2)); //last modify by deeka //动态控制精度长度
-      n = (r1 >= r2) ? r1 : r2;
-      return Number(((arg1 * m - arg2 * m) / m).toFixed(n));
-    
+        let r1, r2, m, n;
+        try {
+            r1 = arg1.toString().split(".")[1].length;
+        }
+        catch (e) {
+            r1 = 0;
+        }
+        try {
+            r2 = arg2.toString().split(".")[1].length;
+        }
+        catch (e) {
+            r2 = 0;
+        }
+        m = Math.pow(10, Math.max(r1, r2)); //last modify by deeka //动态控制精度长度
+        n = (r1 >= r2) ? r1 : r2;
+        return Number(((arg1 * m - arg2 * m) / m).toFixed(n));
+
     }
 
     // 乘法
     static mul(arg1, arg2) {
-      var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
-      try {
-        m += s1.split(".")[1].length;
-      }
-      catch (e) {
-      }
-      try {
-        m += s2.split(".")[1].length;
-      }
-      catch (e) {
-      }
-      return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
+        let m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+        try {
+            m += s1.split(".")[1].length;
+        }
+        catch (e) {
+        }
+        try {
+            m += s2.split(".")[1].length;
+        }
+        catch (e) {
+        }
+        return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m);
     }
-    
+
     // 是否是iPhone 34rpx的底部像素差
 
     static isIPhoneX(that) {
-      let isIPhoneX = global.Storage.sysInfo().isIphoneX
-      // console.log(global.Storage.sysInfo())
-      let className = isIPhoneX ? 'fixed-bottom-iPhoneX' : 'fixed-bottom'
-      let showBottom = isIPhoneX
-      that.setData({
-        isIPhoneX: { isIPhoneX, showBottom, className }
-      })
-      return { isIPhoneX, showBottom, className }
+        let isIPhoneX = global.Storage.sysInfo().isIphoneX
+        // console.log(global.Storage.sysInfo())
+        let className = isIPhoneX ? 'fixed-bottom-iPhoneX' : 'fixed-bottom'
+        let showBottom = isIPhoneX
+        that.setData({
+            isIPhoneX: {isIPhoneX, showBottom, className}
+        })
+        return {isIPhoneX, showBottom, className}
     }
 
     static isIphoneXR_XS() {
-      const sysInfo = global.Storage.sysInfo();
-      let flag = false;
-      ['iPhone11,8', 'iPhone11,2', 'iPhone11,4', 'iPhone11,6', 'iPhone XS', 'iPhone XR', 'iPhone XS Max'].forEach((item) => {
-        if (sysInfo.model.search(item) != -1) flag = true;
-      })
-      return flag;
+        const sysInfo = global.Storage.sysInfo();
+        let flag = false;
+        ['iPhone11,8', 'iPhone11,2', 'iPhone11,4', 'iPhone11,6', 'iPhone XS', 'iPhone XR', 'iPhone XS Max'].forEach((item) => {
+            if (sysInfo.model.search(item) != -1) flag = true;
+        })
+        return flag;
     }
 
     // 根据屏幕大小 高度自适应
 
-    static getAdaptHeight(e,that){
-      //获取图片真实宽度
-      let imgwidth = e.detail.width,
-        imgheight = e.detail.height,
-        //宽高比
-        ratio = imgwidth / imgheight;
-      //计算的高度值
-      let viewHeight = 750 / ratio;
-      imgheight = viewHeight
-      let imgheights = that.data.imgheights || []
-      //把每一张图片的高度记录到数组里
-      imgheights.push(imgheight)
-      that.setData({ 
-        imgheights: imgheights,
-      })
+    static getAdaptHeight(e, that) {
+        //获取图片真实宽度
+        let imgwidth = e.detail.width,
+            imgheight = e.detail.height,
+            //宽高比
+            ratio = imgwidth / imgheight;
+        //计算的高度值
+        let viewHeight = 750 / ratio;
+        imgheight = viewHeight
+        let imgheights = that.data.imgheights || []
+        //把每一张图片的高度记录到数组里
+        imgheights.push(imgheight)
+        that.setData({
+            imgheights: imgheights,
+        })
     }
 
-  static formatNum(num) { // 保留两位小数不四舍五入
-    num = Number(num)
-    num = num < 0 ? 0 : num
-    let index = String(num).lastIndexOf('.')
-    if (index != -1) {
-      let num2 = num.toFixed(3);
-      num2 = num2.substring(0, num2.lastIndexOf('.') + 3)
-      return num2
-    } else {
-      num = num+'.00'
-    }
-    return num
-  }
-  
-  // 冒泡排序
-  static bubbleSort(array){
-    let i = 0, len = array.length, j, d; 
-    for (; i < len; i++) {
-      for (j = 0; j < len; j++) {
-        if (array[i] < array[j]) {
-          d = array[j]; array[j] = array[i]; array[i] = d;
+    static formatNum(num) { // 保留两位小数不四舍五入
+        num = Number(num)
+        num = num < 0 ? 0 : num
+        let index = String(num).lastIndexOf('.')
+        if (index != -1) {
+            let num2 = num.toFixed(3);
+            num2 = num2.substring(0, num2.lastIndexOf('.') + 3)
+            return num2
+        } else {
+            num = num + '.00'
         }
-      }
+        return num
     }
-    return array;
-  }
 
-  // 平均分割数字
-  static sliceArray(array,num) {
-    let result = [];
-    for (let i = 0, len = array.length; i < len; i += num) {
-      result.push(array.slice(i, i + num));
+    // 冒泡排序
+    static bubbleSort(array) {
+        let i = 0, len = array.length, j, d;
+        for (; i < len; i++) {
+            for (j = 0; j < len; j++) {
+                if (array[i] < array[j]) {
+                    d = array[j];
+                    array[j] = array[i];
+                    array[i] = d;
+                }
+            }
+        }
+        return array;
     }
-    return result
-  }
 
-  static getUUID() {
-    return 'xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/[xy]/g, function (c) {
-      let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-  }
-
-  static formatString(str){
-    return str.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "")
-  }
-
-  // 位运算
-  
-  static bitOperation(arr,num) {
-    let result = arr.filter((item0) => {
-      let bit = item0&num
-      return bit == item0
-    })
-    return result
-  }
-  
-  static isJson(text) {
-    if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').
-      replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-      replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-        return true
-
-    } else {
-
-        return false
-
+    // 平均分割数字
+    static sliceArray(array, num) {
+        let result = [];
+        for (let i = 0, len = array.length; i < len; i += num) {
+            result.push(array.slice(i, i + num));
+        }
+        return result
     }
-  }
+
+    static getUUID() {
+        return 'xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/[xy]/g, function (c) {
+            let r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+    // 去掉输入的表情符号
+    static formatString(str) {
+        return str.replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "")
+    }
+
+    // 位运算
+
+    static bitOperation(arr, num) {
+        let result = arr.filter((item0) => {
+            let bit = item0 & num
+            return bit == item0
+        })
+        return result
+    }
+
+    // 判断是不是json
+    static isJson(text) {
+        if (/^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+            return true
+
+        } else {
+
+            return false
+
+        }
+    }
 }
 

@@ -1,4 +1,4 @@
- let { Tool, RequestFactory, Storage, Event, Operation,API } = global
+ let { Tool, Storage, Event,API } = global
 
 import WxParse from '../../libs/wxParse/wxParse.js';
 import ProductFactorys from './temp/product.js'
@@ -8,6 +8,7 @@ Page({
     didLogin:false,
     imgUrls: [],
     msgShow:false,
+
     selectType:{}, // 是否选择了商品类型
     floorstatus:false, // 是否显示置顶的按钮
     productId:'', // 商品id

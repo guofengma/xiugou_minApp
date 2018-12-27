@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, API, Storage, Event } = global
 
 Page({
   data: {
@@ -26,16 +26,15 @@ Page({
       packageId: this.data.packageId,
       page: this.data.page,
       pageSize: this.data.pagesize,
-      reqName: '分页查询用户领取红包记录列表',
-      url: Operation.queryPromotionReceiveRecordPageList
+      // reqName: '分页查询用户领取红包记录列表',
+      // url: Operation.queryPromotionReceiveRecordPageList
     };
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let datas = req.responseObject.data || {}
+    API.queryPromotionReceiveRecordPageList(params).then((res) => {
+      let datas = res.data || {}
       datas.data.forEach((item, index) => {
         item.createTime = Tool.formatTime(item.createTime)
         if (item.phone)
-        item.showPhone = item.phone.slice(0, 3) + "*****" + item.phone.slice(7)
+          item.showPhone = item.phone.slice(0, 3) + "*****" + item.phone.slice(7)
       })
       if (this.data.status == 1) { // 开始倒计时
         let that = this
@@ -43,14 +42,14 @@ Page({
         this.setData({
           time: time
         })
-      } 
+      }
       this.setData({
         list: this.data.list.concat(datas.data),
         totalPage: datas.totalPage
       })
-    }
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    })
   }, 
   time() {
     let endTime = Tool.formatTime(Number(this.data.endTime))

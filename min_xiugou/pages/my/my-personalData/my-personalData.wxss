@@ -17,7 +17,7 @@
     justify-content: space-between;
 }
 
-.item view:first-child {
+.item>view:first-child {
   width:16%
 }
 
@@ -80,7 +80,7 @@
     color: #fff;
     display: inline-block;
 }
-.introduction view:first-child{
+.introduction>view:first-child{
   width:15%;
 }
 .introduction{
@@ -91,4 +91,8 @@
 }
 .introduction view:nth-child(2){
   text-align: justify;
+}
+.introduction .info-line{
+    width: 97%;
+    word-break:break-all;
 }

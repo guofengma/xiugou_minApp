@@ -7,7 +7,7 @@
         <view class="time">{{item.displayTime0}}</view>
         <view class="content">
             <view class="item">{{item.title}}</view>
-            <view class="info gray-9">{{item.content}}</view>
+            <view class="info gray-9" wx:for="{{item.showContent}}" wx:key="{{index}}">{{item}}</view>
             <!-- <view wx:if='{{item.paramType==100 || item.paramType==101}}'>
               <view>付款方式：{{item.payName}}</view>
               <view>交易订单：{{item.orderNum}}</view>

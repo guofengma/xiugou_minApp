@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, Storage, Event } = global
 import ProductFactorys from '../product.js'
 
 Component({
@@ -29,7 +29,7 @@ Component({
     },
     swiperImgCliked(e) { //点击放大图片
       let index = e.currentTarget.dataset.index
-      let src = this.data.imgUrls[index].smallImg
+      let src = encodeURI(this.data.imgUrls[index].smallImg)
       let urls = []
       this.data.imgUrls.forEach((item) => {
         if (item.smallImg) {
