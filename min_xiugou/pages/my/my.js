@@ -263,7 +263,8 @@ Page({
     ctx.restore();
   },
   joinUsClicked(){
-    Tool.switchTab('/pages/discover/discover')
+    // Tool.switchTab('/pages/discover/discover')
+    Tool.navigateTo('/pages/discover/discover-detail/discover-detail?articleId=1')
   },
   levelClicked(){
     Tool.navigateTo('/pages/my/my-promotion/my-promotion')
