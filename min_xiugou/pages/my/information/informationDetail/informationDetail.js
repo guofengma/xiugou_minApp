@@ -1,5 +1,5 @@
 // pages/my/account.js
-let { Tool  } = global;
+let { Tool,Storage  } = global;
 Page({
     data: {
       refuseDetail:'',

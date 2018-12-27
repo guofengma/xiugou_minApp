@@ -71,7 +71,7 @@ const constants = ()=> {
         // 如果是开发环境的指向联调人员的ip地址 否则指向环境内的baseUrl
         baseUrl: node_env == 'dev' ? myConfig['devBaseUrl'][name] : envConfig['baseUrl']
     }
-    let conConfig = 'const config=' + JSON.stringify(obj) + '; export default config';
+    let conConfig = 'const config=' + JSON.stringify(obj, null, "\t") + '; export default config';
     //生成config.js文件
     return string_src("config.js", conConfig)
         .pipe(gulp.dest(distPath))
@@ -83,7 +83,7 @@ gulp.task(constants);
 const app = done => {
 
     //生成config.js文件
-    return string_src("app.json", JSON.stringify(appJson) + '')
+    return string_src("app.json", JSON.stringify(appJson, null, "\t") + '')
         .pipe(gulp.dest(distPath))
 
 }
@@ -163,7 +163,7 @@ gulp.task('watch', () => {
 /* build */
 gulp.task(
     'build',
-    gulp.series('clean', gulp.parallel('constants', 'app', 'wxml', 'js', 'json', 'wxss', 'lessFile', 'img'))
+    gulp.series('clean', gulp.parallel('app','constants',  'wxml', 'js', 'json', 'wxss', 'lessFile', 'img'))
 );
 /* dev 紧开发模式下面监听代码变化并更新dist的文件 */
 gulp.task('dev', gulp.series('build', 'watch'));
