@@ -1,0 +1,84 @@
+<!-- assets/TemplateName.wxml -->
+<!-- <text>assets/TemplateName.wxml</text> -->
+<import src="/components/iPhoneX-line/iPhoneX-line.wxml" />
+<import src="/components/msg-tips/msg-tips.wxml" />
+<!-- 活动信息 -->
+<!-- <import src="/pages/experience/comp/activeInfo/activeInfo.wxml" />
+<import src="/pages/experience/comp/prodParms/prodParms.wxml" /> -->
+<view class="experience {{activeInfo||prodParms?'movePrevent':''}} {{isIPhoneX.isIPhoneX?'fixed-ihoneX':''}}">
+    <view class="showBoxSection">
+        <scroll-view scroll-x="true" class="showList">
+            <block wx:for="{{prodList}}" wx:key='unique' wx:for-index='key'>
+                <view class="showItem {{showIndex === key?'active':''}}" bindtap="selectProd" data-key="{{key}}">
+                    <view class="showItemImg">
+                        <image-sub imgStyle='{{"width:200rpx;height: 180rpx;"}}' imgSrc="{{item.imgUrl}}" mode="widthFix"></image-sub>
+                    </view>
+                    <view class="showItemTitle ellipsis">{{item.name}}</view>
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view scroll-x="true" class="showList {{scrollHide?'scrollHide':'hidden'}}">
+            <block wx:for="{{prodList}}" wx:key='unique' wx:for-index='key'>
+                <view class="showItem {{showIndex === key?'active':''}}" bindtap="selectProd" data-key="{{key}}">
+                    <view class="showItemTitle ellipsis">{{item.name}}</view>
+                </view>
+            </block>
+        </scroll-view>
+        <view class="proDetail">
+            <view class="prodImg" bindtap='imgCliked'>
+                <image-sub imgStyle='{{"width:360rpx;height: 360rpx;"}}' imgSrc="{{productInfo.imgUrl}}" mode="widthFix"></image-sub>
+            </view>
+            <view class="prodPrice red">
+                <view class="prodPriHead">{{productInfo.userLevelTypeName}}</view>
+                <view class="prodPriNum">¥{{productInfo.minPrice}}-{{productInfo.maxPrice}}</view>
+            </view>
+            <view class="prodStock gray-9">库存{{productInfo.totalStock}}</view>
+            <view class="prodDescribe">{{productInfo.name}}</view>
+            <view class="otherDescribe gray-9">{{productInfo.secondName || ''}}</view>
+        </view>
+    </view>
+    <view class="showBoxSection">
+        <view class="checkBoxList">
+            <view class="checkBox" data-select='activeInfo' data-type="1" bindtap="changgeState" bind:subClicked="changgeState">
+                活动规则
+            </view>
+            <view class="checkBox" data-select='prodParms' data-type="1" bindtap="changgeState" bind:subClicked="changgeState" wx:if="{{productInfo.paramList.length>0}}">
+                参数信息
+            </view>
+        </view>
+    </view>
+    <view class="showBoxSection">
+        <view class="detailInfo">
+            <view class="infoTitle">商品信息</view>
+            <view class="infoList" wx:for="{{productInfo.showContent}}" wx:key='unique'>
+                <image-sub imgStyle='{{"width:100%;"}}' imgSrc="{{item}}" mode="widthFix"></image-sub>
+            </view>
+        </view>
+    </view>
+    <view class='flexR bottom-bar {{isIPhoneX.className}}'>
+        <view class="noStock" wx:if="{{productInfo.totalStock<1}}">暂无库存</view>
+        <view class='cart font-22 flexC' catchtap='goCart'>
+            <image-sub wx:if='{{productInfo.productStatus!=2}}' imgStyle='{{"width:40rpx"}}' imgSrc="/img/xiangqianh_gwuche@3x.png" />
+            <!-- <image-sub wx:else imgStyle='{{"width:50rpx"}}' imgSrc="{{imgUrl}}" /> -->
+            <view class='gray'>购物车</view>
+            <view class='num-label redBg' wx:if='{{size>0}}'>
+                {{size}}
+            </view>
+        </view>
+        <view class='add-cart font-28 flexR {{ productInfo.canUserBuy? "yellowBg":"darkBg"}}' bindtap='btnClicked' data-key='1'>
+            <text>加入购物车</text>
+        </view>
+        <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy? "redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
+            <!-- <text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>您已购买过该商品</text> -->
+            <text wx:if='{{productInfo.productStatus==3}}'>暂不可购买</text>
+            <text wx:else>立即购买</text>
+        </view>
+    </view>
+</view>
+<!-- 适配iPhone X -->
+<template wx:if="{{isIPhoneX.isIPhoneX}}" is="iPhoneX-line" />
+<red-envelopes id="redEnvelopes" door="2" />
+<activeInfo show='{{activeInfo}}' id="active-info" operatorDetail="{{operatorDetail}}" coupon="{{operatorDetail.coupon.coupon}}" />
+<prodParms show='{{prodParms}}' id="prod-parms" paramList="{{productInfo.paramList}}" />
+<!-- 产品规格 -->
+<product-specification id='prd-info-type' bind:subClicked="typeSubClicked" productSpec='{{productSpec}}' price='{{productInfo.price}}' priceList='{{priceList}}' bind:counterInputOnChange='counterInputOnChange' imgUrl="{{productInfo.imgUrl}}" productStatus='{{productInfo.productStatus}}' showImgs='{{true}}' isInit="{{isInit}}" bind:hiddenTips='hiddenTips' isIphoneX='{{isIPhoneX.isIPhoneX}}' commodityType='{{1}}' disabled='{{false}}' />

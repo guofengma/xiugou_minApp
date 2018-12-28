@@ -1,0 +1,134 @@
+/* assets/TemplateName.less */
+@import "../../../../css/app.less";
+.activeInfo {
+  .infoMain {
+    width: 750rpx;
+    // height: 1226rpx;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 20rpx 20rpx 0px 0px;
+    position: absolute;
+    bottom: 0;
+    .infoTitle {
+      font-size: 34rpx;
+      margin: 30rpx auto;
+      text-align: center;
+    }
+    .infoBody {
+      max-height: 700rpx;
+      overflow-x: auto;
+      padding-bottom: 168rpx;
+      .infoBlock {
+        padding: 0 30rpx;
+        & + .infoBlock {
+          margin-top: 40rpx;
+        }
+        .blockTitle {
+          color: #999;
+          font-size: 26rpx;
+          .titleTag {
+            display: inline-block;
+            padding: 0 2rpx;
+            vertical-align: middle;
+            background: url("${mrdomain}/xp_detail_xp@2x.png") no-repeat top
+              center;
+            background-size: cover;
+            width: 30rpx;
+            height: 20rpx;
+          }
+          .titleContent {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10rpx;
+          }
+          .titleMoney {
+            display: inline-block;
+            width: 28rpx;
+            height: 22rpx;
+            vertical-align: middle;
+            background: url("${mrdomain}/xp_detail_coupon@2x.png") no-repeat top
+              center;
+            background-size: cover;
+          }
+          .titleQuery {
+            display: inline-block;
+            width: 27rpx;
+            height: 27rpx;
+            line-height: 27rpx;
+            vertical-align: middle;
+            background: url("${mrdomain}/xp_detail_contents@2x.png") no-repeat
+              top center;
+            background-size: cover;
+          }
+        }
+        .blockList {
+          .listItem {
+            font-size: 24rpx;
+            margin-top: 20rpx;
+          }
+        }
+        .blockCoupon {
+          height: 218rpx;
+          background: #eee;
+          font-size: 0;
+          margin-top: 20rpx;
+          background: url("${mrdomain}/xp_detail_coupon_bg@2x.png") no-repeat
+            top center;
+          background-size: cover;
+          .couponMoney {
+            width: 160rpx;
+            height: 150rpx;
+            line-height:150rpx;
+            color: #222;
+            font-size: 28rpx;
+            display: inline-block;
+            text-align: center;
+            .couponNum {
+              font-size: 68rpx;
+            }
+          }
+          .couponDescribe {
+            display: inline-block;
+            margin-left: 20rpx;
+            .describeName {
+              font-size: 26rpx;
+              color: #222;
+            }
+            .describeUp {
+              font-size: 22rpx;
+              color: #666;
+            }
+          }
+          .couponTime {
+            font-size: 24rpx;
+            color: #222;
+            padding: 15rpx 30rpx;
+          }
+        }
+        .activeExplain {
+          font-size: 24rpx;
+          font-weight: bold;
+          color: #333;
+        }
+      }
+      .footer {
+        height: 164rpx;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: #fff;
+        .makeSure {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 10rpx;
+          width: 690rpx;
+          height: 88rpx;
+          background: rgba(255, 0, 80, 1);
+          border-radius: 44rpx;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

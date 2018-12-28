@@ -806,6 +806,16 @@ const api = {
       "encrypt": false,
     }
   ],
+  /***************************** 经验值专区 ************************ */
+
+  'getOperatorDetail': [
+    '/operator/act-exp/detail',
+    {
+      "action": "获取经验值专区详情",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
 }
 
 const API = new ApiUtils(api).result;
