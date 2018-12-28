@@ -28,7 +28,7 @@ Page({
   onLoad: function(options) {
     this.ProductFactory = new ProductFactorys(this);
     this.didLogin();
-    this.getNewProd();
+    // this.getNewProd();
     this.getOperatorDetail();
     Tool.isIPhoneX(this);
     Event.on("didLogin", this.didLogin, this);
@@ -67,6 +67,7 @@ Page({
       // });
     }
   },
+  //大图展示
   imgCliked(event) {
     const urls = [],
       current =
@@ -79,6 +80,7 @@ Page({
       urls // 需要预览的图片http链接列表
     });
   },
+  //   搜索产品信息
   btnClicked(e) {
     let n = parseInt(e.currentTarget.dataset.key);
     if (
@@ -88,14 +90,13 @@ Page({
       this.selectComponent("#prd-info-type").isVisiableClicked(n);
     }
   },
-  hiddenTips() {
-    this.ProductFactory.hiddenTips();
-  },
+  //   产品加入数量
   counterInputOnChange(e) {
     this.setData({
       productBuyCount: e.detail
     });
   },
+  //   规格选择确认
   typeSubClicked(e) {
     this.setData({
       selectType: e.detail
@@ -106,6 +107,7 @@ Page({
       this.makeSureOrder();
     }
   },
+  // 立即购买
   makeSureOrder() {
     // 立即购买
     if (!this.data.didLogin) {
@@ -134,10 +136,11 @@ Page({
         "&type=99"
     );
   },
+  //   添加购物车
   addToShoppingCart() {
     this.ProductFactory.addToShoppingCart();
   },
-
+  // 产品列表点击
   selectProd(e) {
     let index = e.currentTarget.dataset.key;
     // 减少重复请求
@@ -149,6 +152,7 @@ Page({
       this.getNewProd();
     }
   },
+  //   获取产品信息
   getNewProd() {
     const callBack = res => {
       let total = res.skuList.reduce((acc, cur) => {
@@ -178,6 +182,7 @@ Page({
   goCart() {
     this.ProductFactory.cartClicked();
   },
+  //   页面滚动设置列表样式
   onPageScroll(e) {
     if (e.scrollTop > 100) {
       this.setData({
@@ -188,6 +193,9 @@ Page({
         scrollHide: false
       });
     }
+  },
+  hiddenTips() {
+    this.ProductFactory.hiddenTips();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
