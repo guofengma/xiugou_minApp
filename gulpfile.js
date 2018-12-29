@@ -199,10 +199,11 @@ const add = done => {
                 isPage: data.isPage,
             }
             // 如果是page页面 那么就直接在app.json 中写入数据
-            if(!appJson.pages.includes(argv.pathName)){
-                appJson.pages.push(argv.pathName)
+            if (argv.isPage) {
+                if(!appJson.pages.includes(argv.pathName)) appJson.pages.push(argv.pathName)
                 string_src("app.json", JSON.stringify(appJson, null, "\t")).pipe(gulp.dest('./'))
             }
+
             // 根据参数，创建模板
             start(argv)
 
