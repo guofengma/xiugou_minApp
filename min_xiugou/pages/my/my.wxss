@@ -91,7 +91,7 @@
   color: #333
 }
 .my-account{
-  background: #fff url(${mrdomain}/my-user-data-bg.png) no-repeat left bottom;
+  background: #fff url(${mrdomain}/bg_img_user@2x.png?_=1) no-repeat left bottom;
   background-size: 100% 100%; 
   color: #fff;
   margin-top: 75rpx;
@@ -191,8 +191,8 @@
 }
 .joinUs>view{
   height:124rpx;
-  background:url(${mrdomain}/my-joinus-bg.png) no-repeat left bottom;
-  background-size: cover; 
+  background:url(${mrdomain}/my-joinus-bg.png?_=1) no-repeat left bottom;
+  background-size: 100% 100%;
 }
 .msg-view{
   position: relative

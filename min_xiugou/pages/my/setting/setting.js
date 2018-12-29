@@ -16,7 +16,8 @@ Page({
     },
     //关于我们
     aboutUs(){
-        Tool.navigateTo('/pages/my/aboutUs/aboutUs')
+        Tool.navigateTo('/pages/web-view/web-view?webType=6')
+        // Tool.navigateTo('/pages/my/aboutUs/aboutUs')
     },
     //退出登录
     loginOut(){

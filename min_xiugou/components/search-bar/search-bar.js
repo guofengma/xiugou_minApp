@@ -1,4 +1,3 @@
-let { Tool, RequestFactory } = global
 Component({
   properties: {
     disabled:Boolean,

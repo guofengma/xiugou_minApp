@@ -65,6 +65,6 @@
 
   <!-- 优惠卷张数 -->
   <view class='font-24 gray-9 flexC' catchtap='goPage'>
-     已有{{userInfos.tokenCoin || 0}}张现金劵>
+     已有{{userInfos.tokenCoin || 0}}张抵扣券>
   </view>
 </view>

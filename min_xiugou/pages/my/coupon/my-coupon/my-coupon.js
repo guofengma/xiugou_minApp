@@ -27,7 +27,7 @@ Page({
       coinData:{
         nickname:'全品类：无金额门槛',
         'type':0,
-        name:'1元现金券',
+        name:'1元抵扣券',
         timeTips:'无时间限制',
         tips:'可叠加使用',
         isCoinCoupon:true,
@@ -112,7 +112,11 @@ Page({
           return '限商品：限指定商品可使用';
         }
         if (products.length === 1) {
-          return `限商品：限${products[0]}可用`;
+          let productStr = products[0];
+          if (productStr.length > 15) {
+            productStr = productStr.substring(0, 15) + '...';
+          }
+          return `限商品：限${productStr}商品可用`;
         }
       }
       else if ((cat1.length + cat2.length + cat3.length) === 1) {

@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Event, Storage, API } = global;
+let { Tool, Event, Storage, API } = global;
 Page({
   data: {
     count:0,

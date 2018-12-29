@@ -2,7 +2,7 @@ const handel = require('./handle')
 const colors = require('colors')
 const path = require('path')
 const emoji = require('node-emoji')
-module.exports = async function(argv) {
+module.exports = async function(argv,cb= ()=>{}) {
   argv.file = argv.file.toString()
   const existPathFolder = await handel.existFolder(path.resolve(argv.path))
   const fileName = argv.file
@@ -30,15 +30,17 @@ module.exports = async function(argv) {
 
   // 判断组件文件夹是否存在
   const existFileFolder = await handel.existFolder(filePath)
+
   if (existFileFolder) {
     console.warn(colors.green(`${fileName}文件夹已存在`))
+    return true
   } else {
     // 创建组件文件夹
     await handel.createFolder(filePath)
 
     // 创建文件
     await handel.createFile(createFileData)
-
+    cb()
     process.exit()
 
   }

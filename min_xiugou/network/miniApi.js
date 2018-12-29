@@ -10,6 +10,14 @@ const api = {
       "encrypt": false
     }
   ],
+  "queryDiscoverListByType": [ // 获取发现列表 type { 1：精选 2：热门 3：推荐 4：最新 全部则不传}, page, size
+    "/discover/query",
+    {
+      "action": " 获取发现列表",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
   "discoverCountCancel": [
     "/discover/count/cancel",
     {
@@ -18,10 +26,113 @@ const api = {
       "encrypt": false
     }
   ],
-  "discoveerCountSave": [
+  "discoverCountSave": [
     "/discover/count/save",
     {
       "action": "点赞/收藏",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  "queryDiscoverCollect": [
+    "/discover/queryCollect",
+    {
+      "action": "获取收藏列表",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
+  "discoverNotice": [
+    "/discover/query",
+    {
+      "action": "秀场头条",
+      "method": "get",
+      "encrypt": false,
+      'isShowLoading': false,
+      "isShowErrMsg": false,
+    }
+  ],
+  /***************************** 任务 ************************ */
+  "addJobs": [
+    "/user/userJobs/add",
+    {
+      "action": "领取任务",
+      "encrypt": false,
+      "method": "post",
+      "isShowErrMsg": false,
+    }
+  ],
+  "findUserJobsByUserId": [
+    "/user/userJobs/findUserJobsByUserId",
+    {
+      "action": "查询是否有任务",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
+  "findByJobId": [
+    "/user/userJobs/findByJobId",
+    {
+      "action": "获取任务详情",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
+  "queryJobsByUserId": [
+    "/user/userJobs/queryJobsByUserId",
+    {
+      "action": "获取我的任务列表",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+    }
+  ],
+  "jobIncrHits": [
+    "/user/userJobs/incrHits",
+    {
+      "action": "获取分享详情",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  "checkScratchCodeStatus": [
+    "/scratch/scratchCardInformation/findByCode",
+    {
+      "action": "验证刮刮卡使用状态",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  "userExtVerify": [
+    "/user/userLogin/scratchUserVerify",
+    {
+      "action": "查询用户是否已注册",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
+  "getScratchCard": [
+    "/scratch/scratchCard/findByCode",
+    {
+      "action": "获取刮刮卡",
+      "method": "post",
+      "encrypt": false
+    }
+  ],
+  "getScratchAward": [
+    "/scratch/scratchCardInformation/findById",
+    {
+      "action": "领取刮刮卡奖励",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
+  "existedUserByOpenId": [
+    "/user/userLogin/existedUserByOpenId",
+    {
+      "action": "根据用户openid检验是否注册",
       "method": "post",
       "encrypt": false
     }
@@ -140,6 +251,14 @@ const api = {
     }
   ],
   /***************************** 首页接口 ************************ */
+  /*
+   查询广告位列表
+   type：1.APP首页banner广告位   2.APP首页推荐位   3.APP首页明星店铺推荐位    4.APP首页今日榜单广告位
+   5.APP首页精品推荐广告位  6.APP首页超值热卖广告位  7.APP首页专题广告位  8.APP首页为你推荐广告位
+   9.拼店首页banner推荐位  10.类目搜索banner广告位
+   status： 1.有效 2.无效
+   linkType：1.链接产品2.链接专题3.降价拍4.秒杀5.礼包
+   */
   'queryAdList':[
     '/config/advertisement/queryAdvertisementList',
     {
@@ -806,10 +925,89 @@ const api = {
       "encrypt": false,
     }
   ],
+  /***************************** 我的推广 ************************ */
+  'givingPackageToUser': [
+    '/promotion/promotionPromoter/givingPackageToUser',
+    {
+      "action": "详情页用户领取红包",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'userReceivePackage': [
+    '/promotion/promotionPromoter/userReceivePackage',
+    {
+      "action": "用户领取红包",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'receiveJobMoney': [
+    '/user/userJobs/receiveMoney',
+    {
+      "action": "领取任务奖励",
+      "method": "get",
+      "encrypt": false,
+    }
+  ],
+  'queryPromotionReceiveRecordPageList': [
+    '/promotion/promotionReceiveRecord/queryPromotionReceiveRecordPageList',
+    {
+      "action": "分页查询用户领取红包记录列表",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'queryPromotionPackagePageList': [
+    '/user/promotionPackage/queryPromotionPackagePageList',
+    {
+      "action": "推广红包列表",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  'queryUserBuyPromotionPromoter': [
+    '/promotion/promotionPromoter/queryUserBuyPromotionPromoter',
+    {
+      "action": "分页查询用户购买信息列表",
+      "method": "post",
+      "encrypt": false,
+    }
+  ],
+  /***************************** 分类 ************************ */
+  'findProductCategoryList': [
+    '/product/productCategory/findProductCategoryList',
+    {
+      "action": "二、三级列表",
+      "method": "get",
+      "encrypt": false,
+      "isShowErrMsg": false,
+      'isShowLoading': false,
+    }
+  ],
+  'findNameList': [
+    '/product/productCategory/findNameList',
+    {
+      "action": "一级分类列表",
+      "method": "post",
+      "encrypt": false,
+      "isShowErrMsg": false,
+      'isShowLoading': false,
+    }
+  ],
+  'findHotList': [
+    '/product/productCategory/findHotList',
+    {
+      "action": "热门分类列表",
+      "method": "post",
+      "encrypt": false,
+      "isShowErrMsg": false,
+      'isShowLoading': false,
+    }
+  ],
 }
 
 const API = new ApiUtils(api).result;
-console.log(API)
 /*
 * 使用说明
       API.queryAdList({

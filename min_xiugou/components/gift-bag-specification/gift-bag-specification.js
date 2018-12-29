@@ -1,4 +1,4 @@
-let { Tool, RequestFactory } = global
+let { Tool} = global
 Component({
   properties: {
     productTypeList:Array,
