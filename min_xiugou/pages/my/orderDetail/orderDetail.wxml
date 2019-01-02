@@ -2,8 +2,6 @@
 
 <import src='/components/address-info/address-info.wxml'/>
 
-<!-- <import src='/components/tips-cancel-order/tips-cancel-order.wxml'/> -->
-
 <import src='/components/tips-delete-order/tips-delete-order.wxml'/>
 
 <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
@@ -140,7 +138,6 @@
 
 
 <!--提示框  -->
-<!-- <template is="tips-cancel-order" data='{{isCancel,content,reason}}'/> -->
 
 <tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{orderId}}' num='{{num}}'/>
 

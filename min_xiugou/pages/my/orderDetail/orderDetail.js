@@ -45,8 +45,10 @@ Page({
     if (options.status == 4) {
       this.addressType = 2
     }
-    Event.on('getDetail', this.getDetail, this)
-    this.getDetail();//获取详情  
+    // Event.on('getDetail', this.getDetail, this)
+  },
+  onShow: function () {
+    this.getDetail();//获取详情
   },
   cancelOrder() { },
   //获取详情
@@ -102,9 +104,6 @@ Page({
     }).catch((res) => {
       console.log(res)
     })
-  },
-  onShow: function () {
-
   },
   //删除订单
   deleteItem() {
@@ -448,6 +447,6 @@ Page({
   },
   onUnload: function () {
     clearTimeout(this.data.time)
-    Event.off('getDetail', this.getDetail)
+    // Event.off('getDetail', this.getDetail)
   },
 })
