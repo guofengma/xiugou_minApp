@@ -125,7 +125,7 @@ Page({
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params)+'&type=99' )
   },
   addToShoppingCart(){
-    this.ProductFactory.addToShoppingCart()
+    this.ProductFactory.addToShoppingCart("","")
   },
   typeSubClicked(e){
     this.setData({

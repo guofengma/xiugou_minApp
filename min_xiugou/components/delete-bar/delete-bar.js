@@ -2,6 +2,8 @@ Component({
   properties: {
     item:Array,
     index:Number,
+    prodskey:Number,
+    itemkey:Number,
   },
   data: {
     startX: 0, //开始坐标
@@ -15,6 +17,7 @@ Component({
       this.setData({
         items: this.properties.item
       })
+      console.log(this.data.index,this.data.prodkey)
       //开始触摸时 重置所有删除
       this.data.items.forEach(function (v, i) {
         if (v.isTouchMove)//只操作为true的
@@ -25,6 +28,7 @@ Component({
         startY: e.changedTouches[0].clientY,
         items: this.data.items
       })
+      // console.log(this.data.items)
       //this.triggerEvent('deleteClicked', { items:this.data.items} )
     },
     touchend() {
@@ -36,13 +40,15 @@ Component({
     touchmove: function (e) {
       var that = this,
         index = e.currentTarget.dataset.index,//当前索引
+        prodskey =  e.currentTarget.dataset.prodskey,
+        itemkey =  e.currentTarget.dataset.itemkey,
         startX = that.data.startX,//开始X坐标
         startY = that.data.startY,//开始Y坐标
         touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
         touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
         //获取滑动角度
         angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
-      that.data.items.forEach(function (v, i) {
+        that.data.items.forEach(function (v, i) {
         v.isTouchMove = false
         //滑动超过30度角 return
         // console.log(Math.abs(angle))
@@ -68,7 +74,7 @@ Component({
       that.setData({
         items: that.data.items
       })
-      this.triggerEvent('deleteClicked', { items: this.data.items})
+      this.triggerEvent('deleteClicked', { items: this.data.items,prodskey,itemkey })
     },
     /**
      * 计算滑动角度
@@ -88,15 +94,15 @@ Component({
       })
       // this.data.items.splice(e.currentTarget.dataset.index, 1)
       let index = e.currentTarget.dataset.index
+      let prodskey =  e.currentTarget.dataset.prodskey
+      let itemkey =  e.currentTarget.dataset.itemkey
       this.setData({
         items: this.data.items
       })
-      this.triggerEvent('deleteClicked', { items: this.data.items,index})
+      this.triggerEvent('deleteClicked', { items: this.data.items,index,prodskey,itemkey})
     }
   },
   ready: function () {
-    // this.setData({
-    //   items: this.properties.item
-    // })
+
   }
 })

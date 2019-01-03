@@ -129,178 +129,293 @@ Page({
       })
     }
   },
-  updateStorageShoppingCart(count, index){
+  getShoppingCartList(){ // 查询购物车
+    API.getShoppingCartList({}).then((res) => {
+      this.formatShoppingListData(res)
+    }).catch((res) => {
+      console.log(res)
+    })
+  },
+  formatShoppingListData(req){ // 格式化购物车的数据
+    let data = req.data || {}
+    let datas = []
+    // if (data.length > 0) {
+      for (let i in data){
+        let isFailed = i=='shoppingCartFailedGoodsVOS'? true:false
+        let myDatas = data[i] || []
+        myDatas.forEach((item,index)=>{
+          item.isTouchMove = false  //是否移动
+          item.activityType = item.activityType === null ? 0:item.activityType
+          item.labelName = this.data.activeType[item.activityType]
+          if (item.activityType){
+            let currentTime = new Date().getTime();
+            item.isBegin = item.activityBeginTime>currentTime? false:true
+            item.isEnd = item.activityEndTime > currentTime? false:true
+          }
+          item.products.forEach((item0,index0)=>{
+            item0.isTouchMove = false  //是否移动
+            item0.showImg = item0.imgUrl
+            item0.statusImg = this.data.statusImg[item0.productStatus]
+            if (!item0.sellStock) {
+              item0.statusImg = this.data.statusImg[0]
+            }
+            if ((!item0.sellStock || item0.productStatus == 1 || item0.productStatus == 3) && !isFailed){
+              item0.disabled = false
+            } else {
+              item0.disabled = true
+            }
+            item0.stock = item0.sellStock || 0
+            item0.showPrice = item0.price
+            item0.showName = item0.productName
+            item0.showType = item0.specValues? item0.specValues.join('—'):''
+            item0.showCount = item0.amount || 1  // 商品数量
+            item0.isSelect = false  //是否选择
+            if (this.data.items.length > 0) {
+              let arr = this.data.items
+              for (let i = 0; i < arr.length; i++) {
+                if (arr[i].skuCode == item0.skuCode && item0.status == 1) {
+                  item0.isSelect = arr[i].isSelect
+                }
+              }
+            }
+          })
+        })
+        datas.push({
+          isFailed:isFailed,
+          list:myDatas
+        })
+      }
+      this.setData({
+        items: datas,
+        tipVal: ''
+      })
+      this.isSelectAllPrd()
+      this.getTotalPrice()
+    // } else {
+    //   this.setData({
+    //     tipVal: 3,
+    //     items: []
+    //   })
+    // }
+  },
+  deleteClicked(e){
+    let items = e.detail.items
+    let itemkey = e.detail.itemkey
+    let prodskey = e.detail.prodskey
+    let key = e.detail.index
+    if (e.detail.index !== undefined){
+      if(!this.data.didLogin){
+        this.deleteStorageShoppingCart(e.detail.itemkey)
+        return 
+      }
+      let params = [{
+        skuCode:items[key].skuCode
+      }]
+      this.deleteCart(items, params,itemkey,prodskey,key)
+    }
+    this.data.items[itemkey].list[prodskey].products= items
+    this.setData({
+      items: this.data.items
+    })
+    this.getTotalPrice()
+  },
+  deleteCart(items, params,itemkey,prodskey,key) {  // 删除购物车
+    API.deleteShoppingCart({
+      skuCodes: params
+    }).then((res) => {
+      if(itemkey){
+        this.data.items[itemkey].list[prodskey].products.splice(key, 1)
+        this.setData({
+          items: this.data.items
+        })
+        // this.data.items[itemkey].list.forEach((item,index)=>{
+        //
+        // })
+        this.isSelectAllPrd()
+        this.getTotalPrice()
+      }
+      // this.formatShoppingListData(res)
+      // items.splice(index, 1)
+      // this.setData({
+      //   items: items
+      // })
+      // if (items.length == 0) {
+      //   this.setData({
+      //     tipVal: 3
+      //   })
+      // }
+      // this.isSelectAllPrd(items)
+      // this.getTotalPrice()
+    }).catch((res) => {
+
+    })
+  },
+  deleteStorageShoppingCart(index){
     let list = this.data.items
-    list[index].showCount = count
+    list.splice(index,1)
     this.setData({
       items: list,
     })
     this.getTotalPrice()
     Storage.setShoppingCart(list)
   },
-  updateShoppingCart(count, index) {  // 更新购物车
-    let prd = this.data.items[index]
-    API.updateShoppingCart({
-      skuCode: prd.skuCode,
-      amount: count,
-    }).then((res) => {
-      let list = this.data.items
-      list[index].showCount = count
-      this.setData({
-        items: list
-      })
-      this.getTotalPrice()
-    }).catch((res) => {
-
-    })
-  },
-  getShoppingCartList(){ // 查询购物车
-    API.getShoppingCartList({}).then((res) => {
-      this.formatShoppingListData(res)
-    }).catch((res) => {
-
-    })
-  },
-  formatShoppingListData(req){ // 格式化购物车的数据
-    let data = req.data || []
-    if (data.length > 0) {
-      data.forEach((item, index) => {
-        item.isTouchMove = false  //是否移动 
-        item.showImg = item.imgUrl
-        item.statusImg = this.data.statusImg[item.status]
-        if (!item.stock) {
-          item.statusImg = this.data.statusImg[0]
-        }
-        if ( !item.stock || item.status == 1 || item.status == 3){
-          item.disabled = false
-        } else {
-          item.disabled = true
-        }
-        item.stock = item.stock || 0
-        item.showPrice = item.price
-        item.showName = item.productName
-        item.showType = item.specValues? item.specValues.join('—'):''
-        item.showCount = item.amount || 1  // 商品数量
-        item.isSelect = false  //是否选择 
-        item.activityType = item.activityType === null ? 0:item.activityType
-        item.labelName = this.data.activeType[item.activityType]
-        if (this.data.items.length > 0) {
-          let arr = this.data.items
-          for (let i = 0; i < arr.length; i++) {
-            if (arr[i].skuCode == item.skuCode && item.status == 1) {
-              item.isSelect = arr[i].isSelect
-            }
-          }
-        }
-        if (item.activityType){
-          let currentTime = new Date().getTime();
-          item.isBegin = item.activityBeginTime>currentTime? false:true
-          item.isEnd = item.activityEndTime > currentTime? false:true
-        }
-      })
-      this.setData({
-        items: data,
-        tipVal: ''
-      })
-      this.isSelectAllPrd(data)
-      this.getTotalPrice()
-    } else {
-      this.setData({
-        tipVal: 3,
-        items: []
-      })
-    }
-  },
-  deleteClicked(e){
-    let items = e.detail.items
-    if (e.detail.index !== undefined){
-      if(!this.data.didLogin){
-        this.deleteStorageShoppingCart(e.detail.index)
-        return 
-      }
-      this.deleteCart(items, e.detail.index)
-    }
-    this.setData({
-      items: items
-    })
-    this.getTotalPrice()
-  },
   chooseClicked(e){
-    // 点击选择
-    let index = e.currentTarget.dataset.index 
-    let prdList = this.data.items
-    if (!prdList[index].stock || prdList[index].status!=1) {
+    // 点击选择 data-key="{{key0}}" data-itemkey="{{index}}" data-prodskey="{{key}}"
+    let key = e.currentTarget.dataset.key
+    let itemkey = e.currentTarget.dataset.itemkey
+    let prodskey = e.currentTarget.dataset.prodskey
+    let prdList = this.data.items[itemkey].list[prodskey].products
+    if (!prdList[key].sellStock || prdList[key].productStatus!=1) {
       return
     }
-    prdList[index].isSelect = !prdList[index].isSelect
-    
-    this.isSelectAllPrd(prdList)
+    prdList[key].isSelect = !prdList[key].isSelect
+
     this.setData({
-      items: prdList
+      items: this.data.items
     })
+    this.isSelectAllPrd()
     this.getTotalPrice()
+
   },
-  isSelectAllPrd(list){ //是否选中了所有商品
+  getExpProductsInfo(item,item1){
+    if(item.activityType==8){
+      let product = item.products[]
+    }
+  },
+  isSelectAllPrd(){ //是否选中了所有商品
     let selectAllArr = []
     let selectAll = false
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].isSelect === true) {
-        selectAllArr.push(list[i])
-      }
-    }
-    if (selectAllArr.length == list.length) {
+    let list = this.data.items[0].list
+    let productsNum = 0
+    list.forEach((item,index)=>{
+      productsNum+= item.products.length
+      item.products.forEach((item1,index1)=>{
+        if(item1.isSelect){
+          selectAllArr.push(item1)
+        }
+      })
+    })
+    if (selectAllArr.length == productsNum) {
       selectAll = true
     }
     this.setData({
       selectAll: selectAll
     })
   },
-  getTotalPrice(index){
-    let items = this.data.items
-    let orderProducts = []
-    let totalPrice = 0
-    for (let i = 0; i<items.length;i++){
-      // 选中的 且有效的 且库存大于0 的计算价格
-      if (items[i].isSelect && items[i].status == 1 && items[i].stock>0){
-        // totalPrice += items[i].showCount * items[i].showPrice
-        let unitPrice = Tool.mul(items[i].showCount,items[i].showPrice)
-        totalPrice = Tool.add(totalPrice, unitPrice)
-        // let list = { "price_id": items[i].id, "num": items[i].showCount }
-        
-        orderProducts.push({
-          quantity: items[i].showCount,
-          skuCode: items[i].skuCode,
-          productCode: items[i].productCode
-        })
-        // selectList.push(orderProducts)
-      }
+  selectAllClicked(){
+    //点击全选
+    let num =0
+    let selectAll = this.data.selectAll
+    let list = this.data.items[0].list
+    list.forEach((item,index)=>{
+      item.products.forEach((item1,index1)=>{
+        if (item1.sellStock && item1.productStatus==1){
+          num++;
+          item1.isSelect = !selectAll
+        }
+      })
+    })
+    if(num){
+      this.setData({
+        selectAll: !selectAll,
+        items: this.data.items
+      })
+      this.getTotalPrice()
     }
+    // let items = this.data.items
+    // let selectAll = this.data.selectAll
+    // let num =0
+    //
+    // for (let i = 0; i < items.length; i++) {
+    //   if (items[i].stock && items[i].status==1){
+    //     num++;
+    //     items[i].isSelect = !selectAll
+    //   }
+    // }
+    // if(num){
+    //   this.setData({
+    //     selectAll: !selectAll,
+    //     items: items
+    //   })
+    //   this.getTotalPrice()
+    // }
+
+  },
+  getTotalPrice(index){
+    let list = this.data.items[0].list
+    let orderProducts = []
+    let expProducts = []
+    let totalPrice = 0
+    // 选中的 且有效的 且库存大于0 的计算价格
+    list.forEach((item,index)=>{
+      item.products.forEach((item1,index1)=>{
+        if(item1.isSelect && item1.sellStock && item1.productStatus==1){
+          let unitPrice = Tool.mul(item1.showCount,item1.showPrice)
+          totalPrice = Tool.add(totalPrice, unitPrice)
+          orderProducts.push({
+            quantity: item1.showCount,
+            skuCode: item1.skuCode,
+            productCode: item1.productCode
+          })
+          if(item.activityType==8){
+            // 经验值渲染
+            expProducts.push(item1)
+            this.getExpProductsInfo(expProducts)
+          }
+        }
+      })
+    })
     this.setData({
       totalPrice: totalPrice,
       selectList: orderProducts
     })
+    // let items = this.data.items
+    // let orderProducts = []
+    // let totalPrice = 0
+    // for (let i = 0; i<items.length;i++){
+    //   // 选中的 且有效的 且库存大于0 的计算价格
+    //   if (items[i].isSelect && items[i].status == 1 && items[i].stock>0){
+    //     // totalPrice += items[i].showCount * items[i].showPrice
+    //     let unitPrice = Tool.mul(items[i].showCount,items[i].showPrice)
+    //     totalPrice = Tool.add(totalPrice, unitPrice)
+    //     // let list = { "price_id": items[i].id, "num": items[i].showCount }
+    //
+    //     orderProducts.push({
+    //       quantity: items[i].showCount,
+    //       skuCode: items[i].skuCode,
+    //       productCode: items[i].productCode
+    //     })
+    //     // selectList.push(orderProducts)
+    //   }
+    // }
+    // this.setData({
+    //   totalPrice: totalPrice,
+    //   selectList: orderProducts
+    // })
   },
   cartProductClicked(e){
     let index = e.currentTarget.dataset.index
   },
   counterInputOnChange(e) {
-    // 数量变化的时候 
+    // 数量变化的时候
+    console.log(e)
     let count = e.detail.innerCount;
-    let index = e.detail.e.currentTarget.dataset.index
+    // let index = e.detail.e.currentTarget.dataset.index
+    let index = e.detail.index
+    let prodskey = e.detail.prodskey
     let btnName = e.detail.e.currentTarget.dataset.name
-    let list = this.data.items
-  
+    let list = this.data.items[0].list[prodskey].products
+    // let id = list[index].id
     //  点击了加按钮 那么不做操作 而且超过库存了
-    if (btnName != 'reduce' && list[index].stock < count) {
-      count = list[index].showCount=list[index].stock || 0
+    if (btnName != 'reduce' && list[index].sellStock < count) {
+      count = list[index].showCount=list[index].sellStock || 0
       let callBack = ()=>{
-        this.updateShoppingCartWay(count, index)
+        this.updateShoppingCartWay(count, list[index])
       }
       Tool.showAlert('库存不足', callBack)
       this.setData({
-        items: list
+        items: this.data.items
       })
-      // return
     }
 
     //如果最多只能购买200件 不让再加了
@@ -321,72 +436,45 @@ Page({
     //数量为1的情况下不让减
 
     if (btnName == 'reduce' && list[index].showCount == 1) return 
-    this.updateShoppingCartWay(count, index)
+    this.updateShoppingCartWay(count,list[index],index)
     this.getTotalPrice()
   },
-  updateShoppingCartWay(count, index){
+  updateShoppingCartWay(count, item,index){
     if (index !== undefined) {
       if (!this.data.didLogin) {
         this.updateStorageShoppingCart(count, index)
       } else {
-        this.updateShoppingCart(count, index)
+        this.updateShoppingCart(count,item)
       }
     }
   },
-  deleteCart(items, index) {  // 删除购物车
-    API.deleteShoppingCart({
-      skuCode: items[index].skuCode
-    }).then((res) => {
-      items.splice(index, 1)
-      this.setData({
-        items: items
-      })
-      if (items.length == 0) {
-        this.setData({
-          tipVal: 3
-        })
-      }
-      this.isSelectAllPrd(items)
-      this.getTotalPrice()
-    }).catch((res) => {
-
-    })
-  },
-  deleteStorageShoppingCart(index){
+  updateStorageShoppingCart(count, index){
     let list = this.data.items
-    list.splice(index,1)
+    list[index].showCount = count
     this.setData({
       items: list,
     })
     this.getTotalPrice()
     Storage.setShoppingCart(list)
   },
-  selectAllClicked(){
-    //点击全选 
-    let items = this.data.items
-    let selectAll = this.data.selectAll
-    let num =0
-    for (let i = 0; i < items.length; i++) {
-      if (items[i].stock && items[i].status==1){
-        num++;
-        items[i].isSelect = !selectAll
-      } 
-    }
-    if(num){
+  updateShoppingCart(count, item) {  // 更新购物车
+    // let prd = this.data.items[index]
+    API.updateShoppingCart({
+      id:item.id,
+      // skuCode: prd.skuCode,
+      amount: count,
+    }).then((res) => {
+      // let list = this.data.items
+      item.showCount = count
       this.setData({
-        selectAll: !selectAll,
-        items: items
+        items:this.data.items
       })
       this.getTotalPrice()
-    }
-    
+    }).catch((res) => {
+
+    })
   },
   makeOrder(){
-    // let params = JSON.stringify({
-    //   orderProducts:this.data.selectList,
-    //   orderType: 99
-    // })
-
     // 如果没有登录 那么就跳转到登录页面
     if(!this.data.didLogin){
       Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)

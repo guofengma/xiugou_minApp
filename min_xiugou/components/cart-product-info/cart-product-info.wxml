@@ -3,7 +3,7 @@
     <!--勾选产品和产品是否失效的提示-->
     <view class='leftbar'>
       <image src='{{showImg}}' class='search-img' style='width:{{imgSize}}rpx;height:{{imgSize}}rpx'></image>
-      <view class='statusImg' wx:if='{{status!==1 || stock==0}}'>
+      <view class='statusImg' wx:if='{{isFailed}}'>
         <image  src='{{statusImg}}'></image>
       </view>
     </view>
@@ -31,7 +31,7 @@
         <view wx:if="{{showQnt}}" class='gray' >×{{showQnt}}</view>
         <!--购物车数量加减组件-->
         <view wx:if='{{inCart}}' catchtap='test' >
-           <adder-subtractor  count="{{innerCount}}" index="{{index}}" countSize='{{countSize}}' disabled="{{disabled}}" bind:countChange="counterInputOnChange"/>
+           <adder-subtractor  count="{{innerCount}}" index="{{index}}" prodskey="{{prodskey}}" itemkey='{{itemkey}}' countSize='{{countSize}}' disabled="{{disabled}}" bind:countChange="counterInputOnChange"/>
         </view>
       </view>
     </view>

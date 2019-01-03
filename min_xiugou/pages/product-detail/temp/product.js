@@ -113,20 +113,24 @@ export default class ProductFactorys  {
     }
     app.queryPushMsg(callBack)
   }
-  addToShoppingCart() { // 加入购物车
-    let params = {
-      productCode: this.page.data.selectType.prodCode,
+  addToShoppingCart(activityCode,activityType) { // 加入购物车
+    //
+    let params ={
+      spuCode: this.page.data.selectType.prodCode,
       amount: this.page.data.selectType.buyCount,
       skuCode: this.page.data.selectType.skuCode,
       status: this.page.data.selectType.productStatus,
-      timestamp: new Date().getTime(),
+      activityCode:activityCode || '',
+      activityType:activityType || '',
     }
     // 加入购物车
     if (!this.page.data.didLogin) {
       this.setStoragePrd(params)
       return
     }
-    API.addToShoppingCart(params).then((res) => {
+    API.addToShoppingCart({
+      shoppingCartParamList:[params]
+    }).then((res) => {
       this.getShoppingCartList()
       Event.emit('updateShoppingCart')
       Tool.showSuccessToast('添加成功')

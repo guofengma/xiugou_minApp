@@ -491,12 +491,12 @@ const api = {
     '/user/shoppingcart/list',
     {
       "action": "查询购物车",
-      "method": "post",
+      "method": "get",
       "encrypt": false,
     }
   ],
   'addToShoppingCart': [
-    '/user/shoppingcart/addItem',
+    '/user/shoppingcart/save',
     {
       "action": "加入购物车",
       "method": "post",
@@ -504,11 +504,20 @@ const api = {
     }
   ],
   'deleteShoppingCart': [
-    '/user/shoppingcart/deleteItem',
+    '/user/shoppingcart/delete',
     {
       "action": "删除购物车",
       "method": "post",
       "encrypt": false,
+    }
+  ],
+  'updateShoppingCart': [
+    '/user/shoppingcart/update',
+    {
+      "action": "购物车更新商品",
+      "method": "post",
+      "encrypt": false,
+      'isShowLoading': false,
     }
   ],
   'getRichItemList': [
@@ -533,15 +542,6 @@ const api = {
       "action": "再来一单",
       "method": "post",
       "encrypt": false,
-    }
-  ],
-  'updateShoppingCart': [
-    '/user/shoppingcart/updateItem',
-    {
-      "action": "购物车更新商品",
-      "method": "post",
-      "encrypt": false,
-      'isShowLoading': false,
     }
   ],
   /**********************订单售后**************************/

@@ -7,37 +7,32 @@
   <view class='shopping-cart' wx-if='{{!tipVal}}'>
     <view wx:for='{{items}}'  data-index='{{index}}'  wx:key='unique' class='shopping-cart-line '>
       <!--购物车的产品分类提示-->
-      <view class="prodClass flexR-sb font-20 whiteBg">
-        <!--有效的产品-->
-        <block wx:if="{{item.status ==1 || item.status ==3}}">
-          <view class="leftTips flexR-sb">
-            <view class="tips-label redBg">经验值翻倍</view>
-            <view class="ellipsis-2 tips-content gray boxSize">很好看是否好看的话费卡收费卡收费后视镜的好时机的哈开始接卡或收费卡收费卡换卡后收费卡或罚款实践活动卡仕达卡多喝水</view>
-          </view>
-          <view class="red" bindtap='collectBills'>去凑单 > </view>
-        </block>
-        <block wx:else>
-          <!--失效的产品-->
-          <view class="gray">失效宝贝3件</view>
-          <view class="red" bindtap='clearItems' >清空失效宝贝</view>
-        </block>
+      <view class="prodClass flexR-sb font-20 whiteBg" wx:if="{{item.isFailed}}">
+        <!--失效的产品-->
+        <view class="gray">失效宝贝{{item.list.length}}件</view>
+        <view class="red" bindtap='clearItems' >清空失效宝贝</view>
       </view>
       <!--产品信息-->
-      <view class='flexR-sb whiteBg' >
-        <view class='chooseImg'  bindtap='chooseClicked' data-index='{{index}}' >
-          <image src='{{ item.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
+      <block wx:for='{{item.list}}' wx:for-item='list' wx:for-index='key' wx:key="key">
+        <view class="prodClass flexR-sb font-20 whiteBg" wx:if="{{list.activityType==8&&!item.isFailed}}">
+          <view class="leftTips flexR-sb">
+            <view class="tips-label redBg">经验值翻倍</view>
+            <view class="ellipsis-2 tips-content gray boxSize">满1999元减，经验值翻10.99倍，送99张优惠券，差1998元</view>
+          </view>
+          <view class="red" bindtap='collectBills'>去凑单 > </view>
         </view>
-        <!--侧滑删除代码  -->
-        <view class='move-box'>
-          <delete-bar  bind:deleteClicked="deleteClicked" item='{{items}}' index="{{index}}">
-            <template is="cart-product-info" data='{{innerCount:item.showCount,imgSize:160,countSize:50,index,...item,inCart:true}}'/>
-          </delete-bar>
+        <view class='flexR-sb whiteBg' wx:for='{{list.products}}' wx:for-item='list0' wx:for-index='key0' wx:key="key0">
+          <view class='chooseImg'  bindtap='chooseClicked'  data-key="{{key0}}" data-itemkey="{{index}}" data-prodskey="{{key}}">
+            <image src='{{ list0.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
+          </view>
+          <!--侧滑删除代码  -->
+          <view class='move-box'>
+            <delete-bar  bind:deleteClicked="deleteClicked" item='{{list.products}}' index="{{key0}}" itemkey="{{index}}" prodskey="{{key}}">
+              <template is="cart-product-info" data='{{innerCount:list0.showCount,imgSize:160,countSize:50,...list0,inCart:true,isFailed:item.isFailed,index:key0,itemkey:index,prodskey:key}}'/>
+            </delete-bar>
+          </view>
         </view>
-      </view>
-      <!--<view class='flexR font-22 {{item.isBegin? "redBg":"redBg-2"}}' wx:if='{{!item.isEnd && item.activityType}}'>-->
-        <!--<text wx:if='{{item.isBegin}}'>该商品正在进行{{item.activityType==1? "秒杀":"降价拍"}}活动，快去看看~</text>-->
-        <!--<text wx:else>{{item.activityType==1? "秒杀":"降价拍"}}活动未开始,暂不可购买</text>-->
-      <!--</view>-->
+      </block>
     </view>
   </view>
   <!--搜索结果异常显示 tipVal  -->
