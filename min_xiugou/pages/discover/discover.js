@@ -27,7 +27,7 @@ Page({
     this.getDiscoverSwiper();
     this.getDiscoveryByType(1,1);
     // this.getDiscoveryByType(2,1);
-    this.getDiscoveryByType(3,1, 20, (data) => {
+    this.getDiscoveryByType(3,1, (data) => {
       let topic = this.data.topic;
       this.setData({
         topic: topic.concat(data.data),
@@ -35,7 +35,7 @@ Page({
         totalTopicPage: data.totalPage,
       })
     });
-    this.getDiscoveryByType(4, 1, 20, (data) => {
+    this.getDiscoveryByType(4, 1, (data) => {
       let discover = this.data.discover;
       this.setData({
         discover: discover.concat(data.data),
@@ -83,7 +83,7 @@ Page({
         return;
     }
     type == 3 &&
-      this.getDiscoveryByType(3, localData.currentTopicPage + 1, 10, (data) => {
+      this.getDiscoveryByType(3, localData.currentTopicPage + 1, (data) => {
       let topic = this.data.topic;
       this.setData({
         topic: topic.concat(data.data),
@@ -92,7 +92,7 @@ Page({
       })
     });
     type == 4 && 
-      this.getDiscoveryByType(4, localData.currentDiscoverPage + 1, 10, (data) => {
+      this.getDiscoveryByType(4, localData.currentDiscoverPage + 1, (data) => {
         console.log(data);
       let discover = this.data.discover;
       this.setData({
@@ -151,10 +151,10 @@ Page({
     });
   },
   // 获取发现相关数据
-  getDiscoveryByType(type, page = 1, size = 20, callback) {
+  getDiscoveryByType(type, page = 1, callback) {
     let params = {
       page: page,
-      size: size, //默认20
+      size: 10,
     };
     // 起初4是获取最新的  后来一波撕逼发现获取最新不需要传generalize参数了
     if (type !== 4) params.generalize = type; 
