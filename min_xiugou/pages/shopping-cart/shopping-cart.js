@@ -400,7 +400,7 @@ Page({
       orderProductList: this.data.selectList,
       orderType: 1
     })
-    Tool.navigateTo(`/pages/order-confirm/order-confirm?type=99&formCart=${true}`)
+    Tool.navigateTo(`/pages/order-confirm/order-confirm?type=99&formPage=1`)
   },
   cartProductClicked(e){
     let state = e.currentTarget.dataset.state

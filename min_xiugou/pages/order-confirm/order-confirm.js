@@ -26,14 +26,15 @@ Page({
     },
     submitUrl:{ // 提交订单接口
       99:'submitOrder'
-    }
+    },
+    formPage:2,// 1是购物车 2是直接下单 3是经验值专区
   },
   onLoad: function (options) {
     Tool.getUserInfos(this)
     this.setData({
       params:Storage.getSubmitOrderList() || {},
       door: options.type,
-      formCart: options.formCart || false,
+      formPage: options.formPage || 2,
       submitUrl: {
         ...this.data.confirmUrl,
         ...this.data.submitUrl
@@ -103,7 +104,7 @@ Page({
     let params = {
       ...this.data.params,
       channel:1,
-      source: this.data.formCart ? 1 : 2, // 订单来源
+      source: this.data.formPage, // 订单来源
       submitType:1,
     }
     let reqUrl = this.data.confirmUrl[this.data.door]
@@ -264,7 +265,7 @@ Page({
       addressId: this.data.orderInfos.address.id,// 收件地址
       message: this.data.remark || '',// 买家留言
       channel: 1,// 渠道 1.小程序 2.APP 3.H5
-      source: this.data.formCart ? 1 : 2, // 订单来源
+      source: this.data.formPage, // 订单来源
       submitType: 2, // 提交类型 1：确认订单，2：提交订单
     }
     let reqUrl = this.data.submitUrl[this.data.door]
@@ -285,7 +286,7 @@ Page({
   failBlock(res){
     let callBack = () => { }
     if (res.code == 54001) {
-      if (this.data.formCart) {
+      if (this.data.formPage==1) {
         callBack = () => {
           Event.emit('updateShoppingCart')
           Tool.switchTab('/pages/shopping-cart/shopping-cart')
