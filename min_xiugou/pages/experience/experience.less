@@ -1,6 +1,3 @@
-/* assets/TemplateName.wxss */
-// @import "./comp/activeInfo/activeInfo.less";
-// @import "./comp/prodParms/prodParms.less";
 /* 不显示滚动条 */
 ::-webkit-scrollbar {
   width: 0;
@@ -27,19 +24,27 @@
       margin-top: 20rpx;
     }
     .showList {
-      padding: 0 29rpx 0;
+      //   padding: 0 29rpx 0;
       overflow-x: auto;
       width: 100%;
       //   height: 260rpx;
       white-space: nowrap;
       background: #fff;
       transition: all 0.3s;
+      &.hiddenScroll {
+        height: 88rpx;
+        position: fixed;
+        top: -100rpx;
+        opacity: 0;
+      }
       &.scrollHide {
+        height: 88rpx;
         position: fixed;
         top: 0;
         left: 0;
         padding-bottom: 20rpx;
         box-shadow: 0px 1px 0px 0px rgba(228, 228, 228, 1);
+        opacity: 1;
         .showItem {
           border-radius: 33rpx;
           border: 1px solid rgba(228, 228, 228, 1);
@@ -47,6 +52,7 @@
           &.active {
             color: #ff0050;
             border: 1rpx solid #ff0050;
+            box-shadow: none !important;
           }
           .showItemTitle {
             width: 150rpx;
@@ -55,14 +61,17 @@
         }
       }
       .showItem {
-        width: 200rpx;
+        // width: 200rpx;
         display: inline-block;
-        box-shadow: 0rpx 4rpx 8rpx 0rpx #d9d9d9;
         border-radius: 10rpx;
-        margin: 20rpx 30rpx 0 1rpx;
-        // & + .showItem {
-        //   margin-left: 30rpx;
-        // }
+        margin: 20rpx 29rpx 0 1rpx;
+        border: 1rpx solid rgba(228, 228, 228, 1);
+        &:first-child {
+          margin-left: 30rpx;
+        }
+        &.active {
+          box-shadow: 0rpx 4rpx 8rpx 0rpx #d9d9d9;
+        }
         .showItemImg {
           width: 200rpx;
           height: 180rpx;
@@ -105,8 +114,9 @@
         margin-top: 22rpx;
       }
       .prodDescribe {
+        width: 600rpx;
         font-size: 26rpx;
-        margin: 22rpx 78rpx 0 78rpx;
+        margin: 22rpx auto 0;
       }
       .otherDescribe {
         font-size: 22rpx;
@@ -181,18 +191,19 @@
       width: 212rpx;
       height: 80rpx;
       margin-left: 198rpx;
-      background: rgba(251, 187, 80, 1);
       border-radius: 200rpx 0rpx 0rpx 200rpx;
     }
     .buy-btn {
       width: 212rpx;
       height: 80rpx;
-      background: linear-gradient(
-        90deg,
-        rgba(255, 0, 136, 1) 0%,
-        rgba(255, 0, 80, 1) 100%
-      );
       border-radius: 0rpx 40rpx 40rpx 0rpx;
+      &.redBg {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 0, 136, 1) 0%,
+          rgba(255, 0, 80, 1) 100%
+        );
+      }
     }
   }
 }

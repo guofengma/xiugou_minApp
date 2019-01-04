@@ -7,8 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    imgUrls: [],
     productInfo: "", // 商品信息
-    code: "JF201812270017", //经验分区code
+    code: "JF201901030055", //经验分区code
     productCode: "SPU00000324",
     operatorDetail: {}, //经验值详情
     showIndex: 0, //展示第几个商品
@@ -20,7 +21,8 @@ Page({
     productBuyCount: 1, //商品购买数量
     scrollHide: false, //滚动是否隐藏列表图片
     priceList: [],
-    size: 0
+    size: 0,
+    scrollLeft: 0 //同步滚动距离
   },
   /**
    * 生命周期函数--监听页面加载
@@ -53,7 +55,6 @@ Page({
           activeInfo: !this.activeInfo,
           movePrevent: !this.movePrevent
         });
-        // this.selectComponent("#active-info").changgeState('false')
         break;
       case "prodParms":
         this.setData({
@@ -62,32 +63,33 @@ Page({
         });
         break;
       default:
-      // this.setData({
-      //   movePrevent: !this.movePrevent
-      // });
+        break;
     }
   },
   //大图展示
   imgCliked(event) {
-    const urls = [],
-      current =
-        "https://testcdn.sharegoodsmall.com/sharegoods/f438465242f04063a11906cc4c1884dc.jpg?x-oss-process=image/resize,p_65";
-    for (let i = 0; i < 4; i++) {
-      urls.push(current);
-    }
+    let urls = [];
+    this.data.imgUrls.forEach(item => {
+      if (item.smallImg) {
+        urls.push(item.smallImg);
+      }
+    });
     wx.previewImage({
-      current, // 当前显示图片的http链接
+      current: this.data.imgUrls[0].smallImg, // 当前显示图片的http链接
       urls // 需要预览的图片http链接列表
+    });
+  },
+  // 滚动同步
+  togetherScroll(e) {
+    this.setData({
+      scrollLeft: e.detail.scrollLeft
     });
   },
   //   搜索产品信息
   btnClicked(e) {
-    let n = parseInt(e.currentTarget.dataset.key);
-    if (
-      this.data.productInfo.canUserBuy ||
-      (n == 1 && this.data.productInfo.productStatus != 2)
-    ) {
-      this.selectComponent("#prd-info-type").isVisiableClicked(n);
+    let n = parseInt(e.currentTarget.dataset.key)
+    if (this.data.productInfo.canUserBuy || n == 1 && this.data.productInfo.productStatus !=2) {
+      this.selectComponent("#prd-info-type").isVisiableClicked(n)
     }
   },
   //   产品加入数量
@@ -102,7 +104,7 @@ Page({
       selectType: e.detail
     });
     if (this.data.selectType.typeClicked === 1) {
-      this.addToShoppingCart(1);
+      this.addToShoppingCart();
     } else if (this.data.selectType.typeClicked === 2) {
       this.makeSureOrder();
     }
@@ -130,15 +132,11 @@ Page({
       orderType: 1
     };
     Storage.setSubmitOrderList(params);
-    Tool.navigateTo(
-      "/pages/order-confirm/order-confirm?params=" +
-        JSON.stringify(params) +
-        "&type=99"
-    );
+    Tool.navigateTo("/pages/order-confirm/order-confirm?formPage=3");
   },
   //   添加购物车
   addToShoppingCart() {
-    this.ProductFactory.addToShoppingCart();
+    this.ProductFactory.addToShoppingCart(this.productCode,8);
   },
   // 产品列表点击
   selectProd(e) {
@@ -155,23 +153,23 @@ Page({
   //   获取产品信息
   getNewProd() {
     const callBack = res => {
-      let total = res.skuList.reduce((acc, cur) => {
-        return acc + cur.sellStock;
-      }, 0);
-      res.totalStock = total;
-      this.setData({
-        productInfo: res
-      });
+      //   let total = res.skuList.reduce((acc, cur) => {
+      //     return acc + cur.sellStock;
+      //   }, 0);
+      //   res.totalStock = total;
+      //   this.setData({
+      //     productInfo: res
+      //   });
       if (res.productStatus != 0) {
         // this.activityByProductId(this.data.productCode);
-        if (this.data.productInfo.productStatus === 3) {
-          this.data.distanceTime = Math.ceil(
-            (this.data.productInfo.upTime - this.data.productInfo.now) / 1000
-          );
-          //   this.countdown(this);
-        }
+        // if (this.data.productInfo.productStatus === 3) {
+        //   this.data.distanceTime = Math.ceil(
+        //     (this.data.productInfo.upTime - this.data.productInfo.now) / 1000
+        //   );
+        //   //   this.countdown(this);
+        // }
       } else {
-        this.ProductFactory.productDefect();
+        // this.ProductFactory.productDefect();
       }
     };
     this.ProductFactory.requestFindProductByIdApp(callBack);

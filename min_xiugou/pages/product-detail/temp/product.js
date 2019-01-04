@@ -31,6 +31,11 @@ export default class ProductFactorys  {
         status: datas.productStatus,
         time: Tool.formatTime(datas.upTime || "")
       }
+      // 计算库存
+      let total = datas.skuList.reduce((acc, cur) => {
+        return acc + cur.sellStock;
+      }, 0);
+      datas.totalStock = total;
       this.page.setData({
         isInit: false,
         imgUrls: imgUrls,
