@@ -13,13 +13,13 @@ Page({
             101: ['退款成功', '/pages/my/information/informationDetail/informationDetail', 'allItem'],
             102: ['获得秀豆'],
             103: ['身份认证驳回'],
-            104: ['订单超时', '/pages/my/orderDetail/orderDetail?orderId=', 'param'],
+            104: ['订单超时', '/pages/my/orderDetail/orderDetail?orderId=', 'orderNo'],
             105: ['优惠券提醒', '/pages/my/coupon/my-coupon/my-coupon'],
             106: ['反馈问题回复'],
-            107: ['秒杀活动', '/pages/product-detail/seckill-detail/seckill-detail?code=', 'param'],
-            108: ['降价拍活动', '/pages/product-detail/discount-detail/discount-detail?code=', 'param'],
+            107: ['秒杀活动', '/pages/product-detail/seckill-detail/seckill-detail?code=', 'orderNo'],
+            108: ['降价拍活动', '/pages/product-detail/discount-detail/discount-detail?code=', 'orderNo'],
             109: ['待提现账户入账提醒'],
-            110: ['订单发货', '/pages/my/orderDetail/orderDetail?orderId=', 'param'],
+            110: ['订单发货', '/pages/my/orderDetail/orderDetail?orderId=', 'orderNo'],
             120: ['售后服务(退款申请)', '/pages/after-sale/only-refund/only-refund-detail/only-refund-detail?returnProductId=', 'returnProductId'],
             121: ['售后服务(退货申请)', '/pages/after-sale/return-goods/return-goods?returnProductId=', 'returnProductId'],
             122: ['售后服务(换货申请)', '/pages/after-sale/exchange-goods/exchange-goods?returnProductId=', 'returnProductId']
@@ -131,7 +131,7 @@ Page({
         Storage.setPayInfoList(this.data.list[index])
         let query = ''
         if (this.data.title[paramType][2] != 'allItem') {
-            query = param[this.data.title[paramType][2]]
+            query = param[this.data.title[paramType][2]] || ''
         } else {
 
         }
