@@ -9,8 +9,8 @@ Page({
   data: {
     imgUrls: [],
     productInfo: "", // 商品信息
-    code: "JF201901030055", //经验分区code
-    productCode: "SPU00000324",
+    activityCode: "", //经验分区code JF201901030055
+    productCode: "", //产品code SPU00000324
     operatorDetail: {}, //经验值详情
     showIndex: 0, //展示第几个商品
     prodList: [], //产品列表
@@ -31,20 +31,45 @@ Page({
     this.ProductFactory = new ProductFactorys(this);
     this.didLogin();
     // this.getNewProd();
-    this.getOperatorDetail();
+    this.init(options);
     Tool.isIPhoneX(this);
     Event.on("didLogin", this.didLogin, this);
   },
-  getOperatorDetail() {
-    API.getOperatorDetail({ activityCode: this.data.code }).then(res => {
-      let datas = res.data || {};
+  init(options) {
+    if (options.activityCode) {
       this.setData({
-        prodList: datas.prods,
-        operatorDetail: datas,
-        productCode: datas.prods[0].spuCode
+        activityCode: options.activityCode
       });
-      this.getNewProd();
-    });
+    } else {
+      Tool.showAlert("活动不存在，请稍后重试");
+      return;
+    }
+    if (options.productCode) {
+      this.getOperatorDetail(options.productCode);
+    } else {
+      this.getOperatorDetail();
+    }
+  },
+  getOperatorDetail(productCode) {
+    API.getOperatorDetail({ activityCode: this.data.activityCode }).then(
+      res => {
+        let datas = res.data || {};
+        this.setData({
+          prodList: datas.prods,
+          operatorDetail: datas,
+          productCode: productCode ? productCode : datas.prods[0].spuCode
+        });
+        if (productCode) {
+          datas.prods.some((item, index) => {
+            if (item.spuCode === productCode) {
+              this.showIndex = index;
+              return true;
+            }
+          });
+        }
+        this.getNewProd();
+      }
+    );
   },
   //   打开弹层
   changgeState(event) {
@@ -87,9 +112,12 @@ Page({
   },
   //   搜索产品信息
   btnClicked(e) {
-    let n = parseInt(e.currentTarget.dataset.key)
-    if (this.data.productInfo.canUserBuy || n == 1 && this.data.productInfo.productStatus !=2) {
-      this.selectComponent("#prd-info-type").isVisiableClicked(n)
+    let n = parseInt(e.currentTarget.dataset.key);
+    if (
+      this.data.productInfo.canUserBuy ||
+      (n == 1 && this.data.productInfo.productStatus != 2)
+    ) {
+      this.selectComponent("#prd-info-type").isVisiableClicked(n);
     }
   },
   //   产品加入数量
@@ -136,13 +164,13 @@ Page({
   },
   //   添加购物车
   addToShoppingCart() {
-    this.ProductFactory.addToShoppingCart(this.productCode,8);
+    this.ProductFactory.addToShoppingCart(this.productCode, 8);
   },
   // 产品列表点击
   selectProd(e) {
     let index = e.currentTarget.dataset.key;
     // 减少重复请求
-    if (this.data.showIndex !== -1) {
+    if (this.data.showIndex !== index) {
       this.setData({
         showIndex: index,
         productCode: this.data.prodList[index].spuCode
@@ -169,7 +197,7 @@ Page({
         //   //   this.countdown(this);
         // }
       } else {
-        // this.ProductFactory.productDefect();
+        this.ProductFactory.productDefect();
       }
     };
     this.ProductFactory.requestFindProductByIdApp(callBack);
