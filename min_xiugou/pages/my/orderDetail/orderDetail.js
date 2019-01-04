@@ -286,7 +286,9 @@ Page({
           showCount: item1.quantity,
           skuCode: item1.skuCode,
           status:1,
-          isSelect:true
+          isSelect:true,
+          activityCode:item1.activityCode || '',
+          activityType:item1.activityType || '',
         })
       })
     })

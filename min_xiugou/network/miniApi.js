@@ -521,25 +521,25 @@ const api = {
     }
   ],
   'getRichItemList': [
-    '/user/shoppingcart/getRichItemList',
+    '/user/shoppingcart/getRichItem',
     {
       "action": "未登录时，获取购物车详细信息列表",
       "method": "post",
       "encrypt": false,
     }
   ],
-  'shoppingCartFormCookieToSession': [
-    '/user/shoppingcart/loginArrange',
+  'shoppingcart0neMoreOrder': [ // 取消了 合并到加入购物车的接口了
+    '/user/shoppingcart/oneMoreOrder',
     {
-      "action": "登录合并购物车",
+      "action": "再来一单",
       "method": "post",
       "encrypt": false,
     }
   ],
-  'shoppingcart0neMoreOrder': [
-    '/user/shoppingcart/oneMoreOrder',
+  'shoppingCartFormCookieToSession': [ // 取消了 合并到加入购物车的接口了
+    '/user/shoppingcart/loginArrange',
     {
-      "action": "再来一单",
+      "action": "登录合并购物车",
       "method": "post",
       "encrypt": false,
     }
