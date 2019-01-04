@@ -54,7 +54,7 @@ Page({
             }
         } else {
             this.setData({
-              items: [],
+                items: [],
             })
             this.getStorageShoppingCart()
         }
@@ -76,7 +76,11 @@ Page({
         let isArrParams = []
         for (let i = 0; i < list.length; i++) {
             isArrParams.push({
-                spuCode: list[i].spuCode, skuCode: list[i].skuCode, amount: list[i].showCount
+                spuCode: list[i].spuCode,
+                skuCode: list[i].skuCode,
+                amount: list[i].showCount,
+                activityCode:list[i].activityCode || '',
+                activityType:list[i].activityType || '',
             })
         }
         return isArrParams
@@ -125,11 +129,11 @@ Page({
         let datas = []
         data.shoppingCartGoodsVOS = data.shoppingCartGoodsVOS || []
         data.shoppingCartFailedGoodsVOS = data.shoppingCartFailedGoodsVOS || []
-        if(!data.shoppingCartGoodsVOS.length&&!data.shoppingCartFailedGoodsVOS.length){
-              this.setData({
+        if (!data.shoppingCartGoodsVOS.length && !data.shoppingCartFailedGoodsVOS.length) {
+            this.setData({
                 tipVal: 3,
                 items: []
-              })
+            })
             return
         }
         for (let i in data) {
@@ -138,13 +142,25 @@ Page({
             myDatas.forEach((item, index)=> {
                 item.isTouchMove = false  //是否移动
                 item.activityType = item.activityType === null ? 0 : item.activityType
-                item.labelName = this.data.activeType[item.activityType]
-                if (item.activityType) {
-                    let currentTime = new Date().getTime();
-                    item.isBegin = item.activityBeginTime > currentTime ? false : true
-                    item.isEnd = item.activityEndTime > currentTime ? false : true
-                }
                 item.products.forEach((item0, index0)=> {
+                    let shoppingCartActivity = item0.shoppingCartActivity || []
+                    if (item0.productStatus == 2) item0.showUpdateTime = Tool.formatTime(item0.updateTime)
+                    item0.showActiveType = item.activityType
+                    item0.showActiveCode = item.activityCode
+                    if (shoppingCartActivity.length) {
+                        // 当前时间戳
+                        let currentTime = item0.createTime
+                        shoppingCartActivity.forEach((activity, actIndex)=> {
+                            item0.labelName = this.data.activeType[activity.activityType]
+                            if (activity.activeType == 1 || activity.activeType == 2) {
+                                item0.showActivity = {
+                                    activityType: activity.activityType,
+                                    isBegin: item0.beginTime > currentTime ? false : true,
+                                    isEnd: item0.endTime > currentTime ? false : true
+                                }
+                            }
+                        })
+                    }
                     item0.isTouchMove = false  //是否移动
                     item0.showImg = item0.imgUrl
                     item0.statusImg = this.data.statusImg[item0.productStatus]
@@ -159,23 +175,21 @@ Page({
                     item0.stock = item0.sellStock || 0
                     item0.showPrice = item0.price
                     item0.showName = item0.productName
-                    item0.showType = item0.specTitle? item0.specTitle.split("@").join('—') : ''
+                    item0.showType = item0.specTitle ? item0.specTitle.split("@").join('—') : ''
                     item0.showCount = item0.amount || 1  // 商品数量
                     item0.isSelect = false  //是否选择
                     if (this.data.items.length > 0) {
-                        if(!this.data.hasStorage && this.data.didLogin){
-                            let arr = this.data.items[0]
-                            arr.forEach((arrItem)=>{
-                                arrItem.list.forEach((listItem)=>{
-                                    listItem. products.forEach((prd)=>{
-                                        if (prd.skuCode == item0.skuCode && item0.productStatus == 1 )   item0.isSelect = prd.isSelect
-                                    })
+                        if (!this.data.hasStorage && this.data.didLogin) {
+                            let arr = this.data.items[0].list
+                            arr.forEach((listItem)=> {
+                                listItem.products.forEach((prd)=> {
+                                    if (prd.skuCode == item0.skuCode && item0.productStatus == 1)   item0.isSelect = prd.isSelect
                                 })
                             })
                         } else {
                             let arr = this.data.items
-                            arr.forEach((arrItem)=>{
-                                if (arrItem.skuCode == item0.skuCode && item0.productStatus == 1 )   item0.isSelect = arrItem.isSelect
+                            arr.forEach((arrItem)=> {
+                                if (arrItem.skuCode == item0.skuCode && item0.productStatus == 1)   item0.isSelect = arrItem.isSelect
                             })
                         }
                     }
@@ -218,8 +232,8 @@ Page({
     clearItems(){ // 清楚失效宝贝
         let prods = this.data.items[1]
         let params = []
-        prods.list.forEach((list)=>{
-            list.products.forEach((item)=>{
+        prods.list.forEach((list)=> {
+            list.products.forEach((item)=> {
                 params.push({
                     skuCode: item.skuCode
                 })
@@ -240,18 +254,17 @@ Page({
             console.log(res)
         })
     },
-    deleteStorageShoppingCart(params=[]){
+    deleteStorageShoppingCart(params = []){ // 未登录下 删除购物车
         let list = Storage.getShoppingCart() || []
-        params.forEach((item1,index1)=>{
-            list.forEach((item2,index2)=>{
-                if(item2.skuCode==item1.skuCode) list.splice(index2,1)
+        params.forEach((item1, index1)=> {
+            list.forEach((item2, index2)=> {
+                if (item2.skuCode == item1.skuCode) list.splice(index2, 1)
             })
         })
         Storage.setShoppingCart(list)
         this.initDatas()
     },
-    chooseClicked(e){
-        // 点击选择 data-key="{{key0}}" data-itemkey="{{index}}" data-prodskey="{{key}}"
+    chooseClicked(e){  // 点击选择
         let key = e.currentTarget.dataset.key
         let itemkey = e.currentTarget.dataset.itemkey
         let prodskey = e.currentTarget.dataset.prodskey
@@ -288,8 +301,7 @@ Page({
             selectAll: selectAll
         })
     },
-    selectAllClicked(){
-        //点击全选
+    selectAllClicked(){ //点击全选
         let num = 0
         let selectAll = this.data.selectAll
         let list = this.data.items[0].list
@@ -303,13 +315,12 @@ Page({
         })
         if (num) {
             this.setData({
-                selectAll: !selectAll,
-                items: this.data.items
+                selectAll: !selectAll
             })
             this.getTotalPrice()
         }
     },
-    getTotalPrice(index){
+    getTotalPrice(index){ // 计算选中产品的价格
         let list = this.data.items[0].list
         let orderProducts = []
         let expProducts = []
@@ -349,37 +360,31 @@ Page({
         let rules = datas.rules
         let totalPrice = 0
         datas.selectExpProd.forEach((item, index)=> {
-            totalPrice += (item.price * item.showCount)
+            let num = Tool.mul(item.price,item.showCount)
+            totalPrice = Tool.add(totalPrice,num)
         })
         let arr = rules.filter((item)=> {
-            console.log(item.startPrice,totalPrice)
             return item.startPrice < totalPrice
         })
-        console.log(arr)
         if (arr.length > 0) {
             // 已经满足至少1条规矩了
             datas.showRule = {...arr[arr.length - 1]}
             datas.showRule.couponNum = Math.floor(totalPrice / datas.startPrice) * datas.startCount
         } else {
             // 一条规则都没有满足
-            datas.showRule = [...rules[0]]
+            datas.showRule = {...rules[0]}
             datas.showRule.couponNum = Math.ceil(totalPrice / datas.startPrice) * datas.startCount
-            datas.showRule.differ = datas.showRule.startPrice - totalPrice
+            datas.showRule.differ = Tool.sub( datas.showRule.startPrice,totalPrice)
         }
         datas.showRule.couponNum = datas.showRule.couponNum > datas.maxCount ? datas.maxCount : datas.showRule.couponNum
     },
-    cartProductClicked(e){
-        let index = e.currentTarget.dataset.index
-    },
-    counterInputOnChange(e) {
+    counterInputOnChange(e) { // 加减数量选择器事件
         // 数量变化的时候
         let count = e.detail.innerCount;
-        // let index = e.detail.e.currentTarget.dataset.index
         let index = e.detail.index
         let prodskey = e.detail.prodskey
         let btnName = e.detail.e.currentTarget.dataset.name
         let list = this.data.items[0].list[prodskey].products
-        // let id = list[index].id
         //  点击了加按钮 那么不做操作 而且超过库存了
         if (btnName != 'reduce' && list[index].sellStock < count) {
             count = list[index].showCount = list[index].sellStock || 0
@@ -411,44 +416,43 @@ Page({
 
         if (btnName == 'reduce' && list[index].showCount == 1) return
         this.updateShoppingCartWay(count, list[index], index)
-        this.getTotalPrice()
+        // this.getTotalPrice()
     },
-    updateShoppingCartWay(count, item, index){
+    updateShoppingCartWay(count, item, index){ // 更新购物车的方式
         if (index !== undefined) {
             if (!this.data.didLogin) {
-                this.updateStorageShoppingCart(count, index)
+                this.updateStorageShoppingCart(count, item)
             } else {
                 this.updateShoppingCart(count, item)
             }
         }
     },
-    updateStorageShoppingCart(count, index){
-        let list = this.data.items
-        list[index].showCount = count
-        this.setData({
-            items: list,
+    updateStorageShoppingCart(count, item){ // 未登录下 更新购物车
+        let list = Storage.getShoppingCart() || []
+        list.forEach((item0)=>{
+            if(item0.skuCode==item.skuCode){
+                item0.showCount = count
+                item.showCount = count
+            }
         })
         this.getTotalPrice()
         Storage.setShoppingCart(list)
     },
     updateShoppingCart(count, item) {  // 更新购物车
-        // let prd = this.data.items[index]
         API.updateShoppingCart({
             id: item.id,
             amount: count,
         }).then((res) => {
-            // let list = this.data.items
             item.showCount = count
-            this.setData({
-                items: this.data.items
-            })
+            // this.setData({
+            //     items: this.data.items
+            // })
             this.getTotalPrice()
         }).catch((res) => {
 
         })
     },
-    makeOrder(){
-        // 如果没有登录 那么就跳转到登录页面
+    makeOrder(){ // 如果没有登录 那么就跳转到登录页面
         if (!this.data.didLogin) {
             Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
             return
@@ -463,16 +467,26 @@ Page({
         })
         Tool.navigateTo(`/pages/order-confirm/order-confirm?type=99&formPage=1`)
     },
-    cartProductClicked(e){
+    cartProductClicked(e){ // 点击产品跳转页面
         let state = e.currentTarget.dataset.state
+        let activityCode = e.currentTarget.dataset.code || ''
+        let prodsType = e.currentTarget.dataset.type
+        let id = e.currentTarget.dataset.id
         if (state == 1 || state == 3) {
-            Tool.navigateTo('/pages/product-detail/product-detail?door=100&prodCode=' + e.currentTarget.dataset.id)
+            if (prodsType == 8) {
+                // 跳转到经验专区
+                Tool.navigateTo(`/pages/experience/experience?activityCode=${activityCode}&productCode=${id}`)
+            } else {
+                // 普通产品
+                Tool.navigateTo('/pages/product-detail/product-detail?door=100&prodCode=' + id)
+            }
         }
     },
-    collectBills(){ //去凑单
-        Tool.navigateTo('/pages/product-detail/product-detail')
+    collectBills(e){ //去凑单
+        let activityCode = e.currentTarget.dataset.code
+        Tool.navigateTo(`/pages/experience/experience?activityCode=${activityCode}`)
     },
-    lookAround(){
+    lookAround(){ // 去逛逛
         Tool.switchTab('/pages/index/index')
     },
     onUnload: function () {

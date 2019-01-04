@@ -14,8 +14,8 @@
       </view>
       <!--产品信息-->
       <block wx:for='{{item.list}}' wx:for-item='list' wx:for-index='key' wx:key="key">
-        <view class="prodClass flexR-sb font-20 whiteBg" wx:if="{{list.activityType==8&&!item.isFailed}}">
-          <view class="leftTips flexR-sb">
+        <view class="prodClass flexR-sb font-20 whiteBg" wx:if="{{list.activityType==8&&!item.isFailed}}" bindtap='collectBills' data-code="{{list.activityCode}}">
+          <view class="leftTips flexR-sb" >
             <view class="tips-label redBg">经验值翻倍</view>
             <view class="ellipsis-2 tips-content gray boxSize">
               <block wx:if="{{list.showRule}}">
@@ -26,7 +26,7 @@
               </block>
             </view>
           </view>
-          <view class="red" bindtap='collectBills'>去凑单 > </view>
+          <view class="red" >去凑单 > </view>
         </view>
         <view class='flexR-sb whiteBg' wx:for='{{list.products}}' wx:for-item='list0' wx:for-index='key0' wx:key="key0">
           <view class='chooseImg'  bindtap='chooseClicked'  data-key="{{key0}}" data-itemkey="{{index}}" data-prodskey="{{key}}">
