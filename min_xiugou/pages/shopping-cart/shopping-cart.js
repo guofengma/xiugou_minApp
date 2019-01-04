@@ -62,16 +62,8 @@ Page({
     hasStorageShoppingCart(){
         let list = Storage.getShoppingCart() || []
         if (list.length) {
-            this.setData({
-                items: list,
-            })
-            if (list.showPrice) { // 从详情页进来的有价格 从再次购买进入的没有价格 防止报错
-                this.getTotalPrice()
-            }
-            this.data.hasStorage = true
             return true
         } else {
-            this.data.hasStorage = false
             return false
         }
     },
@@ -104,10 +96,9 @@ Page({
         API.addToShoppingCart({
             shoppingCartParamList: isArrParams,
         }).then((res) => {
-            Storage.clearShoppingCart()
+            // Storage.clearShoppingCart()
             this.data.hasStorage = true
             this.getShoppingCartList()
-            // this.formatShoppingListData(res)
         }).catch((res) => {
             console.log(res)
         })
