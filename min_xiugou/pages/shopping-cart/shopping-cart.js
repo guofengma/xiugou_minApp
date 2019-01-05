@@ -9,7 +9,7 @@ Page({
         totalPrice: 0, // 总价
         selectList: [], //选中的产品
         tipVal: '',
-        activeType: ["", "秒", "降", "优惠套餐", "助力免费领", "支付有礼", "满减送", "刮刮乐"],
+        activeType: ["", "秒", "降", "优惠套餐", "助力免费领", "支付有礼", "满减送", "刮刮乐","经验值专区"],
         ysf: {title: '购物车'},
         statusImg: {
             0: Config.imgBaseUrl + 'shixiao-icon.png',
@@ -44,7 +44,7 @@ Page({
         Tool.didLogin(this)
         this.initDatas()
     },
-    initDatas(){
+    initDatas(){ // 初始化请求
         if (this.data.didLogin) {
             let hasStorageShoppingCart = this.hasStorageShoppingCart()
             if (hasStorageShoppingCart) {
@@ -59,7 +59,7 @@ Page({
             this.getStorageShoppingCart()
         }
     },
-    hasStorageShoppingCart(){
+    hasStorageShoppingCart(){ // 判断本地是否有缓存的购物车数据
         let list = Storage.getShoppingCart() || []
         if (list.length) {
             return true
@@ -67,47 +67,19 @@ Page({
             return false
         }
     },
-    getFormCookieToSessionParams(){
-        let list = Storage.getShoppingCart() || []
-        if (!list.length) return
-        this.setData({
-            items: list,
-        })
-        let isArrParams = []
-        for (let i = 0; i < list.length; i++) {
-            isArrParams.push({
-                spuCode: list[i].spuCode,
-                skuCode: list[i].skuCode,
-                amount: list[i].showCount,
-                activityCode:list[i].activityCode || '',
-                activityType:list[i].activityType || '',
-            })
-        }
-        return isArrParams
-    },
-    getRichItemList(){
-        let isArrParams = this.getFormCookieToSessionParams()
-        API.getRichItemList({
-            shoppingCartParamList: isArrParams,
-        }).then((res) => {
-            this.formatShoppingListData(res)
-        }).catch((res) => {
-
-        })
-    },
     shoppingCartLimit() { //登录合并购物车 或者 再来一单的时候批量加入购物车
-        let isArrParams = this.getFormCookieToSessionParams()
+        let isArrParams = this.getReqParams()
         API.addToShoppingCart({
             shoppingCartParamList: isArrParams,
         }).then((res) => {
-            // Storage.clearShoppingCart()
+            Storage.clearShoppingCart()
             this.data.hasStorage = true
             this.getShoppingCartList()
         }).catch((res) => {
             console.log(res)
         })
     },
-    getStorageShoppingCart(){
+    getStorageShoppingCart(){ // 获取本地购物车数据
         let list = Storage.getShoppingCart() || []
         if (list.length) {
             this.getRichItemList()
@@ -116,6 +88,16 @@ Page({
                 tipVal: 3
             })
         }
+    },
+    getRichItemList(){ // 未登录的情况下 获取本地缓存购物车的线上最新产品信息
+        let isArrParams = this.getReqParams()
+        API.getRichItemList({
+            shoppingCartParamList: isArrParams,
+        }).then((res) => {
+            this.formatShoppingListData(res)
+        }).catch((res) => {
+
+        })
     },
     getShoppingCartList(){ // 查询购物车
         API.getShoppingCartList({}).then((res) => {
@@ -208,7 +190,7 @@ Page({
         this.isSelectAllPrd()
         this.getTotalPrice()
     },
-    deleteClicked(e){
+    deleteClicked(e){ // 点击删除购物车事件
         let items = e.detail.items
         let itemkey = e.detail.itemkey
         let prodskey = e.detail.prodskey
@@ -224,12 +206,9 @@ Page({
             this.deleteCart(params)
         }
         this.data.items[itemkey].list[prodskey].products = items
-        this.setData({
-            items: this.data.items
-        })
         this.getTotalPrice()
     },
-    clearItems(){ // 清楚失效宝贝
+    clearItems(){ // 批量清除失效产品事件
         let prods = this.data.items[1]
         let params = []
         prods.list.forEach((list)=> {
@@ -269,14 +248,9 @@ Page({
         let itemkey = e.currentTarget.dataset.itemkey
         let prodskey = e.currentTarget.dataset.prodskey
         let prdList = this.data.items[itemkey].list[prodskey].products
-        if (!prdList[key].sellStock || prdList[key].productStatus != 1) {
-            return
-        }
+        if (!prdList[key].sellStock || prdList[key].productStatus != 1)  return
         prdList[key].isSelect = !prdList[key].isSelect
 
-        this.setData({
-            items: this.data.items
-        })
         this.isSelectAllPrd()
         this.getTotalPrice()
 
@@ -415,8 +389,9 @@ Page({
         //数量为1的情况下不让减
 
         if (btnName == 'reduce' && list[index].showCount == 1) return
+
+        // 更新购物车
         this.updateShoppingCartWay(count, list[index], index)
-        // this.getTotalPrice()
     },
     updateShoppingCartWay(count, item, index){ // 更新购物车的方式
         if (index !== undefined) {
@@ -444,9 +419,6 @@ Page({
             amount: count,
         }).then((res) => {
             item.showCount = count
-            // this.setData({
-            //     items: this.data.items
-            // })
             this.getTotalPrice()
         }).catch((res) => {
 
@@ -466,6 +438,22 @@ Page({
             orderType: 1
         })
         Tool.navigateTo(`/pages/order-confirm/order-confirm?type=99&formPage=1`)
+    },
+    getReqParams(){ // 拼接购物车请求数据给接口
+        let list = Storage.getShoppingCart() || []
+        if (!list.length) return
+        this.data.items = list
+        let isArrParams = []
+        for (let i = 0; i < list.length; i++) {
+            isArrParams.push({
+                spuCode: list[i].spuCode,
+                skuCode: list[i].skuCode,
+                amount: list[i].showCount,
+                activityCode:list[i].activityCode || '',
+                activityType:list[i].activityType || '',
+            })
+        }
+        return isArrParams
     },
     cartProductClicked(e){ // 点击产品跳转页面
         let state = e.currentTarget.dataset.state
