@@ -375,7 +375,8 @@ Page({
     let innerStatus = orderCustomerServiceInfoDTO.status || ''
     let params = "?serviceNo=" + serviceNo
     // 升级礼包只支持换货 售后时间超出等都要给提示
-    let orderSubType = this.data.detail.orderSubType || ''
+    let orderProductActivityCodeDTOS = this.data.detail.orderProductActivityCodeDTOS || {}
+    let orderSubType = orderProductActivityCodeDTOS.orderType
     if ([3,5].includes(orderSubType) && btnTypeId==1) {
       let name = {
         3:'升级礼包',

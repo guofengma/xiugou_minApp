@@ -103,7 +103,7 @@ Page({
     let params = {
       ...this.data.params,
       channel:1,
-      source: this.data.formPage, // 订单来源
+      source: Number(this.data.formPage), // 订单来源
       submitType:1,
     }
     let reqUrl = this.data.confirmUrl[this.data.door]
@@ -264,7 +264,7 @@ Page({
       addressId: this.data.orderInfos.address.id,// 收件地址
       message: this.data.remark || '',// 买家留言
       channel: 1,// 渠道 1.小程序 2.APP 3.H5
-      source: this.data.formPage, // 订单来源
+      source: Number(this.data.formPage), // 订单来源
       submitType: 2, // 提交类型 1：确认订单，2：提交订单
     }
     let reqUrl = this.data.submitUrl[this.data.door]
@@ -298,7 +298,7 @@ Page({
     } else {
       callBack = () => {
         this.data.params.tokenCoin = 0
-        this.requestOrderInfo()
+        if(res.code != 10004)this.requestOrderInfo()
       }
     }
     Tool.showAlert(res.msg, callBack)
