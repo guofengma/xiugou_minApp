@@ -47,7 +47,7 @@ const adsensePage = {
     },
     11: {
         name: "秀场",
-        page: '/pages/experience/experience?activityCode=',
+        page: '/pages/discover/discover-detail/discover-detail?articleCode=',
     },
 }
 export {pages, adsensePage}
