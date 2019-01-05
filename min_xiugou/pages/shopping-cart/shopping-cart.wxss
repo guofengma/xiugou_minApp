@@ -26,9 +26,6 @@
   width:11%;
   text-align: right;
 }
-/* .search-result{
-  height:calc(100% - 100rpx);
-} */
 /*底部bar  */
 .cart-bar{
   height:100rpx;
@@ -54,19 +51,6 @@
 .leftBar image{
   margin-right: 22rpx;
 }
-/* .statusLabel{
-  width: 76rpx;
-	height: 39rpx;
-	background-color: #999999;
-	border-radius: 19rpx;
-  color: #fff;
-  font-size: 24rpx;
-  margin-left:30rpx; 
-} */
-/*.redBg-2{*/
-  /*background:rgba(213,18,67,0.5);*/
-  /*color:#fff;*/
-/*}*/
 /*购物车分类*/
 .prodClass{
   padding: 0 30rpx;
