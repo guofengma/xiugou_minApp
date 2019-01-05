@@ -9,7 +9,7 @@ Page({
         totalPrice: 0, // 总价
         selectList: [], //选中的产品
         tipVal: '',
-        activeType: ["", "秒", "降", "优惠套餐", "助力免费领", "支付有礼", "满减送", "刮刮乐","经验值专区"],
+        activeType: ["", "秒", "降", "优惠套餐", "助力免费领", "支付有礼", "满减送", "刮刮乐"],
         ysf: {title: '购物车'},
         statusImg: {
             0: Config.imgBaseUrl + 'shixiao-icon.png',
@@ -134,11 +134,17 @@ Page({
                         let currentTime = item0.createTime
                         shoppingCartActivity.forEach((activity, actIndex)=> {
                             item0.labelName = this.data.activeType[activity.activityType]
-                            if (activity.activeType == 1 || activity.activeType == 2) {
+                            if (activity.activityType == 1 || activity.activityType == 2) {
+                                let activeType = {
+                                    1:'seckill',
+                                    2:'depreciate',
+                                    3:'',
+                                    8:'experience'
+                                }[activity.activityType]
                                 item0.showActivity = {
                                     activityType: activity.activityType,
-                                    isBegin: item0.beginTime > currentTime ? false : true,
-                                    isEnd: item0.endTime > currentTime ? false : true
+                                    isBegin: activity[activeType].beginTime < currentTime ? false : true,
+                                    isEnd: activity[activeType].endTime > currentTime ? false : true
                                 }
                             }
                         })
