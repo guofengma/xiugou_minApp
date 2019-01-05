@@ -157,14 +157,15 @@ Page({
           productCode: this.data.selectType.prodCode
         }
       ],
-      orderType: 1
+      orderType: 2,
+      orderSubType: 5,
     };
     Storage.setSubmitOrderList(params);
-    Tool.navigateTo("/pages/order-confirm/order-confirm?formPage=3");
+    Tool.navigateTo("/pages/order-confirm/order-confirm?formPage=3&type=99");
   },
   //   添加购物车
   addToShoppingCart() {
-    this.ProductFactory.addToShoppingCart(this.productCode, 8);
+    this.ProductFactory.addToShoppingCart(this.data.productCode, 8);
   },
   // 产品列表点击
   selectProd(e) {

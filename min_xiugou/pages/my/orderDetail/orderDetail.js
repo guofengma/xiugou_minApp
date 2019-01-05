@@ -376,10 +376,10 @@ Page({
     let params = "?serviceNo=" + serviceNo
     // 升级礼包只支持换货 售后时间超出等都要给提示
     let orderSubType = this.data.detail.orderSubType || ''
-    if ([3,4].includes(orderSubType) && btnTypeId==1) {
+    if ([3,5].includes(orderSubType) && btnTypeId==1) {
       let name = {
         3:'升级礼包',
-        4:'经验值专区'
+        5:'经验值专区'
       }[orderSubType]
       Tool.showAlert(`该商品属于${name}产品，不存在退货退款功能`)
       return

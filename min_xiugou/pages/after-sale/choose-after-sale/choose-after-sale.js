@@ -16,7 +16,7 @@ Page({
   initData(){
     // 升级礼包和经验值专区的商品只能换货，其余发货商品都有换货、退款和退货
     let afterSaleType = []
-    if([3,4].includes(this.data.orderSubType)){
+    if([3,5].includes(this.data.orderSubType)){
       afterSaleType = [false,false,true]
     } else {
       afterSaleType = [true,true,true]

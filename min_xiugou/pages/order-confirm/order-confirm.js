@@ -85,7 +85,6 @@ Page({
       params: this.data.params,
     })
     let callBack = (item)=>{
-      console.log(item)
       this.setData({
         coupon: coupon,
         couponClick: false
