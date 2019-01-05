@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "经验值专区",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "product-specification": "/components/product-specification/product-specification",
+    "product-infos": "/pages/product-detail/temp/product-infos/product-infos",
+    "image-sub": "/components/image-sub/image-sub",
+    "activeInfo": "/pages/experience/comp/activeInfo/activeInfo",
+    "prodParms": "/pages/experience/comp/prodParms/prodParms"
+  }
+}

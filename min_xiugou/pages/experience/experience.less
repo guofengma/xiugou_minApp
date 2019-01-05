@@ -1,0 +1,209 @@
+/* 不显示滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.movePrevent {
+  overflow: hidden;
+}
+.clearfix {
+  clear: both;
+}
+.hidden {
+  display: none;
+}
+.experience {
+  padding-bottom: 100rpx;
+  &.fixed-ihoneX {
+    padding-bottom: 134rpx;
+  }
+  .showBoxSection {
+    background: #fff;
+    & + .showBoxSection {
+      margin-top: 20rpx;
+    }
+    .showList {
+      //   padding: 0 29rpx 0;
+      overflow-x: auto;
+      width: 100%;
+      //   height: 260rpx;
+      white-space: nowrap;
+      background: #fff;
+      transition: all 0.3s;
+      &.hiddenScroll {
+        height: 88rpx;
+        position: fixed;
+        top: -100rpx;
+        opacity: 0;
+      }
+      &.scrollHide {
+        height: 88rpx;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding-bottom: 20rpx;
+        box-shadow: 0px 1px 0px 0px rgba(228, 228, 228, 1);
+        opacity: 1;
+        .showItem {
+          border-radius: 33rpx;
+          border: 1px solid rgba(228, 228, 228, 1);
+          box-shadow: 0;
+          &.active {
+            color: #ff0050;
+            border: 1rpx solid #ff0050;
+            box-shadow: none !important;
+          }
+          .showItemTitle {
+            width: 150rpx;
+            margin: 12rpx 25rpx;
+          }
+        }
+      }
+      .showItem {
+        // width: 200rpx;
+        display: inline-block;
+        border-radius: 10rpx;
+        margin: 20rpx 29rpx 0 1rpx;
+        border: 1rpx solid rgba(228, 228, 228, 1);
+        &:first-child {
+          margin-left: 30rpx;
+        }
+        &.active {
+          box-shadow: 0rpx 4rpx 8rpx 0rpx #d9d9d9;
+        }
+        .showItemImg {
+          width: 200rpx;
+          height: 180rpx;
+          background: #f7f7f7;
+          border-radius: 10rpx 10rpx 0rpx 0rpx;
+        }
+        .showItemTitle {
+          font-size: 26rpx;
+          width: 180rpx;
+          margin: 12rpx 10rpx;
+        }
+      }
+    }
+    .proDetail {
+      text-align: center;
+      overflow: hidden;
+      margin-top: 30rpx;
+      .prodImg {
+        width: 360rpx;
+        // height: 360rpx;
+        margin: 0 auto;
+        background: #f7f7f7;
+      }
+      .prodPrice {
+        font-size: 20rpx;
+        margin-top: 20rpx;
+        .prodPriHead {
+          padding: 0rpx 10rpx;
+          border: 1rpx solid #ff0050;
+          border-radius: 4rpx;
+          display: inline-block;
+        }
+        .prodPriNum {
+          margin-left: 10rpx;
+          display: inline-block;
+        }
+      }
+      .prodStock {
+        font-size: 24rpx;
+        margin-top: 22rpx;
+      }
+      .prodDescribe {
+        width: 600rpx;
+        font-size: 26rpx;
+        margin: 22rpx auto 0;
+      }
+      .otherDescribe {
+        font-size: 22rpx;
+        margin: 20rpx 0 30rpx;
+      }
+    }
+    .checkBoxList {
+      overflow: hidden;
+      font-size: 26rpx;
+      .checkBox {
+        // height: 88rpx;
+        padding: 26rpx 0;
+        margin: 0 30rpx;
+        background: #fff url(${mrdomain}/xjt_10@2x.png) no-repeat right center;
+        background-size: 14rpx 24rpx;
+        & + .checkBox {
+          border-top: 1rpx solid #f7f7f7;
+        }
+      }
+    }
+    .detailInfo {
+      .infoTitle {
+        font-size: 26rpx;
+        padding: 26rpx 30rpx;
+      }
+      .infoList {
+      }
+    }
+  }
+  /*底部的bar   */
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    justify-content: flex-start;
+    padding: 10rpx 0;
+    height: 80rpx;
+    view {
+      height: 100%;
+      text-align: center;
+    }
+    .noStock {
+      position: absolute;
+      top: -40rpx;
+      width: 100%;
+      height: 40rpx;
+      line-height: 40rpx;
+      background: rgba(0, 0, 0, 0.2);
+      font-size: 24rpx;
+      font-weight: bold;
+      text-align: center;
+    }
+    image {
+      width: 44rpx;
+    }
+    .cart {
+      margin-left: 30rpx;
+      position: relative;
+      .num-label {
+        position: absolute;
+        height: 25rpx;
+        line-height: 25rpx;
+        min-width: 21rpx;
+        border-radius: 50%;
+        font-size: 20rpx;
+        padding: 0 2rpx;
+        top: 0;
+        left: 48rpx;
+      }
+    }
+    .add-cart {
+      width: 212rpx;
+      height: 80rpx;
+      margin-left: 198rpx;
+      border-radius: 200rpx 0rpx 0rpx 200rpx;
+    }
+    .buy-btn {
+      width: 212rpx;
+      height: 80rpx;
+      border-radius: 0rpx 40rpx 40rpx 0rpx;
+      &.redBg {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 0, 136, 1) 0%,
+          rgba(255, 0, 80, 1) 100%
+        );
+      }
+    }
+  }
+}

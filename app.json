@@ -72,7 +72,8 @@
     "pages/logistics/logistics-list/logistics-list",
     "pages/mentorInfo/choose-mentor/choose-mentor",
     "pages/mentorInfo/write-info/write-info",
-    "pages/mentorInfo/mentor-detail/mentor-detail"
+    "pages/mentorInfo/mentor-detail/mentor-detail",
+    "pages/experience/experience"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
