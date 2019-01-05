@@ -167,11 +167,19 @@ export default class ProductFactorys  {
       this.getStorageCartList()
       return
     }
+
     API.getShoppingCartList({}).then((res) => {
-      let data = res.data || []
-      let size = data.length > 99 ? 99 : data.length
+      let data = res.data || {}
+      let size = 0
+      for(let i in data){
+        data[i] = data[i] || []
+        data[i].forEach((item,index)=>{
+          item.products = item.products || []
+          size+= item.products.length
+        })
+      }
       this.page.setData({
-        size: size
+        size: size>99? 99:size
       })
     }).catch((res) => {
 
