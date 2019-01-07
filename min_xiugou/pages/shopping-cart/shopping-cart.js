@@ -320,7 +320,7 @@ Page({
                     orderProducts.push({
                         quantity: item1.showCount,
                         skuCode: item1.skuCode,
-                        productCode: item1.productCode
+                        productCode: item1.spuCode
                     })
                     if (item.activityType == 8) {
                         // 经验值渲染
