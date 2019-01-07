@@ -10,6 +10,14 @@ const api = {
       "encrypt": false
     }
   ],
+  "getDiscoverByCode": [
+    "/discover/getByCode",
+    {
+      "action": "获取文章详情",
+      "method": "get",
+      "encrypt": false
+    }
+  ],
   "queryDiscoverListByType": [ // 获取发现列表 type { 1：精选 2：热门 3：推荐 4：最新 全部则不传}, page, size
     "/discover/query",
     {

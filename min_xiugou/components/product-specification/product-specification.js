@@ -73,18 +73,18 @@ Component({
             item.sellStock = this.data.surplusNumber
           }
 
-        } 
+        }
       })
       if (priceList.length==0){
         priceList = stockList
       }
-      console.log("初始化中的价格" + priceList)
+      console.log("初始化中的价格", priceList)
       this.setData({
         priceList: priceList,
         // productSpec: lists,
         totalStock: totalStock,
         isInit:true
-      }) 
+      })
       // 渲染提示语
       this.getTipsSpec()
       // 如果是降价拍和秒杀 默认都选中
@@ -117,7 +117,7 @@ Component({
       let id = e.currentTarget.dataset.id
 
       this.renderSpecVeiw(key, index, specValue, id,true)
-      
+
     },
     renderSpecVeiw(key, index, specValue, id, setActive){ // 开始渲染
       // 深复制数组
@@ -133,7 +133,7 @@ Component({
       // 如果二次点击同一个规格 那么去掉 只点击一次 就加入请求
       this.data.isActive.forEach((item, index) => {
         if (item) {
-          if (item.specValue == obj[key].specValue) {
+          if (item.specValue == obj[key].specValue && item.key == obj.key && item.index == obj.index) {
             spec_id[index] = undefined
             obj[key] = { key }
           }
@@ -150,10 +150,10 @@ Component({
           this.setData({
             productSpec: this.data.productSpec
           })
-        }       
-      } 
+        }
+      }
       // 多规格 或者 单规格选择的那个规格库存大于0的情况下active
-      
+
       if ((this.data.productSpec.length > 1 || arr0.length > 0) && setActive){
         console.log("setActive******************",obj)
         this.setData({
@@ -194,7 +194,7 @@ Component({
           selectTypes.push(item.specValue)
         })
         // selectTypes = Tool.bubbleSort(selectTypes)
-        
+
         let selectIds = selectTypes.join('@')
         this.data.priceList.forEach((item, index) => {
           console.log(item.propertyValues,selectIds)
@@ -228,7 +228,7 @@ Component({
         if (!selectGroup.includes(item)){
           unSelectGroup.push(item)
         }
-        
+
       })
       console.log('未选规格组：',unSelectGroup)
       return unSelectGroup
@@ -247,7 +247,7 @@ Component({
       return selectIds
     },
     // 获取所选择的规格对应的路线
-    getSelectIdsline(ids){ 
+    getSelectIdsline(ids){
       let result = [];
       this.data.priceList.forEach((item, index) => {
         let _attr = "@" + item.propertyValues + "@";
@@ -267,7 +267,7 @@ Component({
     },
     // 获取经过已选节点所有线路上的全部节点 根据已经选择得属性值，得到余下还能选择的属性值
     filterAttrs(ids) {
-      
+
       let products = this.getSelectIdsline(ids);
       console.log(products)
       let result = [];
@@ -288,7 +288,7 @@ Component({
           selectItem = item0.specValue
         }
       })
-     
+
       // let selectItem = item[index].id
       // console.log(selectItem)
       let select_ids2 = this.del_array_val(select_ids, selectItem);
@@ -417,7 +417,7 @@ Component({
       return true
     }
   },
-  
+
   ready: function () {
     Tool.isIPhoneX(this)
   }
