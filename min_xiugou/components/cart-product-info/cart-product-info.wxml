@@ -3,7 +3,7 @@
     <!--勾选产品和产品是否失效的提示-->
     <view class='leftbar'>
       <image src='{{showImg}}' class='search-img' style='width:{{imgSize}}rpx;height:{{imgSize}}rpx'></image>
-      <view class='statusImg' wx:if='{{isFailed}}'>
+      <view class='statusImg' wx:if='{{statusImg}}'>
         <image  src='{{statusImg}}'></image>
       </view>
     </view>
