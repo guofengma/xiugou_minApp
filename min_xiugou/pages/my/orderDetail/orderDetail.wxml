@@ -49,7 +49,7 @@
     <view class='order-prd-info'>
       <view class='gift-view whiteBg' wx:if='{{detail.isGiftProds}}'>
         <text class='label-red-border'>礼包</text>
-        <!-- <text class='gray font-24'>{{detail.orderProductList[0].productName}}</text> -->
+         <!--<text class='gray font-24'>{{detail.activityName}}</text>-->
       </view>
       <view class='product-ifo-list'>
         <block wx:for="{{showProducts}}" wx:key="unique">

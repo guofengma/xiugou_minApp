@@ -65,9 +65,13 @@ Page({
             datas.isGiftProds = false
             warehouseOrderDTOList.forEach((item, index) => {
                 item.products.forEach((item1) => {
-                    item1.activityCodes = item1.activityCodes || {}
+                    item1.activityCodes = item1.activityCodes || []
+                    item1.activityCodes.forEach((item2)=>{
+                        if([3,4].includes(item2.orderType)) datas.isGiftProds = true
+                    })
+                    // console.log(item1.activityCodes)
                     // 判断是否是礼包
-                    if([3,4].includes(item1.activityCodes.orderType)) datas.isGiftProds = true
+
                     showProducts.push(item1)
                 })
             })
@@ -381,16 +385,29 @@ Page({
         let innerStatus = orderCustomerServiceInfoDTO.status || ''
         let params = "?serviceNo=" + serviceNo
         // 升级礼包只支持换货 售后时间超出等都要给提示
-        let activityCodes = list.activityCodes || {}
-        let orderSubType = activityCodes.orderType
-        if ([3, 5].includes(orderSubType) && btnTypeId == 1) {
-            let name = {
-                3: '升级礼包',
-                5: '经验值专区'
-            }[orderSubType]
-            Tool.showAlert(`该商品属于${name}产品，不存在退货退款功能`)
-            return
-        } else if (list.afterSaleTime < this.data.detail.warehouseOrderDTOList[0].nowTime && this.data.status > 2 && !(innerStatus < 6 && innerStatus >= 1)) {
+        let activityCodes = list.activityCodes || []
+        let orderSubType  = ''
+        activityCodes.forEach((item2)=>{
+            if([3,5].includes(item2.orderType)){
+                let name = {
+                    3: '升级礼包',
+                    5: '经验值专区'
+                }[item2.orderType]
+                orderSubType = item2.orderType
+                Tool.showAlert(`该商品属于${name}产品，不存在退货退款功能`)
+            }
+        })
+        if(orderSubType) return
+        // let orderSubType = activityCodes.orderType
+        // if ([3, 5].includes(orderSubType) && btnTypeId == 1) {
+        //     let name = {
+        //         3: '升级礼包',
+        //         5: '经验值专区'
+        //     }[orderSubType]
+        //     Tool.showAlert(`该商品属于${name}产品，不存在退货退款功能`)
+        //     return
+        // }
+        if (list.afterSaleTime < this.data.detail.warehouseOrderDTOList[0].nowTime && this.data.status > 2 && !(innerStatus < 6 && innerStatus >= 1)) {
             // 当前时间超出售后时间 且 发货的情况下 且 不在售后期间内
             Tool.showAlert('该商品售后已过期')
             return
