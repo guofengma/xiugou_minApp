@@ -51,7 +51,7 @@ Page({
     }
   },
   getOperatorDetail(productCode) {
-    API.getOperatorDetail({ activityCode: this.data.activityCode }).then(
+    API.getOperatorDetail({ code: this.data.activityCode }).then(
       res => {
         let datas = res.data || {};
         this.setData({
@@ -69,7 +69,10 @@ Page({
         }
         this.getNewProd();
       }
-    );
+    ).catch((res) => {
+        Tool.showAlert("活动不存在，请稍后重试");
+        console.log(res)
+      });
   },
   //   打开弹层
   changgeState(event) {
@@ -158,7 +161,7 @@ Page({
         }
       ],
       orderType: 2,
-      orderSubType: 5,
+      orderSubType: 5
     };
     Storage.setSubmitOrderList(params);
     Tool.navigateTo("/pages/order-confirm/order-confirm?formPage=3&type=99");
