@@ -62,8 +62,12 @@ Page({
             let warehouseOrderDTOList = datas.warehouseOrderDTOList || []
             let showProducts = []
             let showOutStatus = warehouseOrderDTOList[0].status
+            datas.isGiftProds = false
             warehouseOrderDTOList.forEach((item, index) => {
                 item.products.forEach((item1) => {
+                    item1.activityCodes = item1.activityCodes || {}
+                    // 判断是否是礼包
+                    if([3,4].includes(item1.activityCodes.orderType)) datas.isGiftProds = true
                     showProducts.push(item1)
                 })
             })
@@ -187,7 +191,7 @@ Page({
             })
             return
         }
-        that.data.countDownSeconds--
+        this.data.countDownSeconds--
         let time = setTimeout(function () {
             that.countdown(that);
         }, 1000)
@@ -284,7 +288,7 @@ Page({
         warehouseOrderDTOList.forEach((item, index) => {
             item.products.forEach((item1) => {
                 list.push({
-                    productCode: item1.prodCode,
+                    spuCode: item1.prodCode,
                     showCount: item1.quantity,
                     skuCode: item1.skuCode,
                     status: 1,
@@ -324,7 +328,7 @@ Page({
                 middle = {id: 1, content: '退款'}
             }
             // 确认收货的状态的订单售后截止时间和当前时间比 (outOrderState == 4 && finishTime - now > 0)
-            if (outOrderState == 3 || outOrderState == 4) {
+            if (outOrderState == 3 || outOrderState == 4) {datas.isGiftProds = true
                 middle = {id: 2, content: '退换'}
                 // if (afterSaleType.length>1){
                 //   middle = { id: 4, content: '退换' }
@@ -457,6 +461,5 @@ Page({
     },
     onUnload: function () {
         clearTimeout(this.data.time)
-        // Event.off('getDetail', this.getDetail)
     },
 })
