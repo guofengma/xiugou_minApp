@@ -9,6 +9,7 @@ Page({
     animate0:false,
     animate1:false,
     canClick:true,
+    btnCllick:false,// 一元券兑换按钮防重复点击
     todaySgin:false,
     needXD:1,
   },
@@ -53,10 +54,14 @@ Page({
       Tool.showAlert("秀豆不足")
       return
     }
+    if(this.data.btnCllick) return
+    this.data.btnCllick = true
     API.exchangeTokenCoin({}).then((res) => {
+      this.data.btnCllick = false
       Tool.showSuccessToast("兑换成功")
       this.getLevel()
     }).catch((res) => {
+      this.data.btnCllick = false
       console.log(res)
     })
   },
