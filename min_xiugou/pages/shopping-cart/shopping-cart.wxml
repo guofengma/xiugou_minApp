@@ -31,7 +31,7 @@
           </view>
           <view class="red" >去凑单 > </view>
         </view>
-        <view class='flexR-sb whiteBg' wx:for='{{list.products}}' wx:for-item='list0' wx:for-index='key0' wx:key="key0">
+        <view class='flexR-sb whiteBg product-line' wx:for='{{list.products}}' wx:for-item='list0' wx:for-index='key0' wx:key="key0">
           <view class='chooseImg'  bindtap='chooseClicked'  data-key="{{key0}}" data-itemkey="{{index}}" data-prodskey="{{key}}">
             <image src='{{ list0.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
           </view>

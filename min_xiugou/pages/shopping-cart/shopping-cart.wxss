@@ -57,6 +57,9 @@
   height: 80rpx;
   border-bottom: 1rpx solid #F7F7F7;
 }
+.product-line{
+  margin-bottom: 20rpx;
+}
 .leftTips{
   max-width:88%;
 }

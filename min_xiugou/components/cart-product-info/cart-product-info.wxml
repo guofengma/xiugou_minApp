@@ -24,7 +24,7 @@
           <text wx:else>{{showActivity.activityType==1? "秒杀":"降价拍"}}活动未开始,暂不可购买</text>
         </view>
         <view wx:if="{{item.limit}}">限购5件</view>
-        <view wx:if="{{productStatus==3}}">{{showUpdateTime}}开售</view>
+        <view wx:if="{{showUpdateTime}}">{{showUpdateTime}}开售</view>
       </view>
       <view class='prd-count-box flexR' >
         <view class='red'>¥ {{showPrice}}</view>

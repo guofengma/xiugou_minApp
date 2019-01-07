@@ -126,24 +126,24 @@ Page({
                 item.activityType = item.activityType === null ? 0 : item.activityType
                 item.products.forEach((item0, index0)=> {
                     let shoppingCartActivity = item0.shoppingCartActivity || []
-                    if (item0.productStatus == 2) item0.showUpdateTime = Tool.formatTime(item0.updateTime)
+                    // if (item0.productStatus == 3) item0.showUpdateTime = Tool.formatTime(item0.updateTime)
                     item0.showActiveType = item.activityType
                     item0.showActiveCode = item.activityCode
                     if (shoppingCartActivity.length) {
                         // 当前时间戳
-                        let currentTime = item0.createTime
+                        let currentTime = item.nowTime
                         shoppingCartActivity.forEach((activity, actIndex)=> {
                             item0.labelName = this.data.activeType[activity.activityType]
                             if (activity.activityType == 1 || activity.activityType == 2) {
                                 let activeType = {
-                                    1:'seckill',
-                                    2:'depreciate',
-                                    3:'',
-                                    8:'experience'
+                                    1: 'seckill',
+                                    2: 'depreciate',
+                                    3: '',
+                                    8: 'experience'
                                 }[activity.activityType]
                                 item0.showActivity = {
                                     activityType: activity.activityType,
-                                    isBegin: activity[activeType].beginTime < currentTime ? false : true,
+                                    isBegin: activity[activeType].beginTime > currentTime ? false : true,
                                     isEnd: activity[activeType].endTime > currentTime ? false : true
                                 }
                             }
@@ -340,8 +340,8 @@ Page({
         let rules = datas.rules
         let totalPrice = 0
         datas.selectExpProd.forEach((item, index)=> {
-            let num = Tool.mul(item.price,item.showCount)
-            totalPrice = Tool.add(totalPrice,num)
+            let num = Tool.mul(item.price, item.showCount)
+            totalPrice = Tool.add(totalPrice, num)
         })
         let arr = rules.filter((item)=> {
             return item.startPrice < totalPrice
@@ -354,7 +354,7 @@ Page({
             // 一条规则都没有满足
             datas.showRule = {...rules[0]}
             datas.showRule.couponNum = Math.ceil(totalPrice / datas.startPrice) * datas.startCount
-            datas.showRule.differ = Tool.sub( datas.showRule.startPrice,totalPrice)
+            datas.showRule.differ = Tool.sub(datas.showRule.startPrice, totalPrice)
         }
         datas.showRule.couponNum = datas.showRule.couponNum > datas.maxCount ? datas.maxCount : datas.showRule.couponNum
     },
@@ -410,8 +410,8 @@ Page({
     },
     updateStorageShoppingCart(count, item){ // 未登录下 更新购物车
         let list = Storage.getShoppingCart() || []
-        list.forEach((item0)=>{
-            if(item0.skuCode==item.skuCode){
+        list.forEach((item0)=> {
+            if (item0.skuCode == item.skuCode) {
                 item0.showCount = count
                 item.showCount = count
             }
@@ -455,8 +455,8 @@ Page({
                 spuCode: list[i].spuCode,
                 skuCode: list[i].skuCode,
                 amount: list[i].showCount,
-                activityCode:list[i].activityCode || '',
-                activityType:list[i].activityType || '',
+                activityCode: list[i].activityCode || '',
+                activityType: list[i].activityType || '',
             })
         }
         return isArrParams
