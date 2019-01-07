@@ -73,6 +73,7 @@ Page({
     })
   },
   requestKeywords(){ // 动态获取搜索词
+    if (Tool.isEmptyStr(this.data.keyWord)) return
     API.getKeywords({
       keyword: this.data.keyWord
     }).then((res) => {
@@ -95,7 +96,6 @@ Page({
     })
   },
   searchKeyword(){ // 查询关键字
-    this.data.keyWord = String(this.data.keyWord).replace(/(^\s*)|(\s*$)/g, "")
     if (!Tool.isEmptyStr(this.data.keyWord)) {
       let keywords = this.data.history
       if (keywords.length > 0) {
