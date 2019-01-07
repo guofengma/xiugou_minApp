@@ -26,7 +26,7 @@ Page({
     },
     submitUrl:{ // 提交订单接口
       99:'submitOrder'
-    }
+    },
   },
   onLoad: function (options) {
     Tool.getUserInfos(this)
@@ -251,9 +251,7 @@ Page({
       return
     }
     if (this.data.btnDisabled) return
-    this.setData({
-      btnDisabled:true
-    })
+    this.data.btnDisabled = true
     let params = {
       ...this.data.params,
       // orderProductList: this.data.params.orderProductList || '',
@@ -275,9 +273,7 @@ Page({
       Storage.setPayOrderList(datas)
       Tool.redirectTo('/pages/order-confirm/pay/pay?door=1')
     }).catch((res) => {
-      this.setData({
-        btnDisabled:false
-      })
+      this.data.btnDisabled = false
       this.failBlock(res)
       console.log(res)
     })
