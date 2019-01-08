@@ -58,8 +58,11 @@ Page({
         datas.sellstate = 0;//默认在活动中
         if(datas.startTime > new Date().getTime()){
             datas.sellstate = 1
+            datas.canUserBuy = false;
         }else if(datas.endTime < new Date().getTime()){
             datas.sellstate = 2
+            datas.canUserBuy = false;
+
         }
         this.setData({
           prodList: datas.prods,

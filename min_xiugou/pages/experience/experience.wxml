@@ -23,12 +23,12 @@
             <view class="prodImg" bindtap='imgCliked'>
                 <image-sub imgStyle='{{"width:360rpx;height: 360rpx;"}}' wx:if="{{productInfo.imgUrl}}" imgSrc="{{productInfo.imgUrl}}"
                            mode="widthFix"></image-sub>
-                           <div class="sell" wx:if="{{operatorDetail.sellstate == 1}}">
-                               <div class="startSell">{{operatorDetail.start_time}}开售</div>
-                           </div>
-                           <div class="sell" wx:elif="{{operatorDetail.sellstate == 2}}">
-                               <div class="startSell">活动已结束</div>
-                           </div>
+                           <view class="sell" >
+                               <view class="startSell">{{operatorDetail.start_time}}开售</view>
+                           </view>
+                           <!-- <view class="sell" wx:elif="{{operatorDetail.sellstate == 2}}">
+                               <view class="startSell">活动已结束</view>
+                           </view> -->
             </view>
             <view class="prodPrice red">
                 <view class="prodPriHead">{{productInfo.userLevelTypeName}}</view>
@@ -69,10 +69,10 @@
             <view class='num-label redBg' wx:if='{{size>0}}'>{{size}}</view>
         </view>
         <!-- <view class='add-cart font-28 flexR {{ productInfo.productStatus===1?"yellowBg":"darkBg"}}' bindtap='btnClicked' data-key='1'> -->
-        <view class='add-cart font-28 flexR {{ productInfo.canUserBuy?"yellowBg":"darkBg"}}' bindtap='btnClicked' data-key='1'>
+        <view class='add-cart font-28 flexR {{ productInfo.canUserBuy && operatorDetail.sellstate ===0?"yellowBg":"darkBg"}}' bindtap='btnClicked' data-key='1'>
             <text>加入购物车</text>
         </view>
-        <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy?"redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
+        <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy && operatorDetail.sellstate ===0?"redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
             <text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>已购买过该商品</text>
             <text wx:elif='{{productInfo.productStatus==3 || operatorDetail.sellstate !==0 || !productInfo.canUserBuy}}'>暂不可购买</text>
             <text wx:else>立即购买</text>
