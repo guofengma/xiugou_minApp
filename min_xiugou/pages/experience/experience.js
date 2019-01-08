@@ -8,7 +8,7 @@ Page({
    */
   data: {
     imgUrls: [],
-    productInfo: "", // 商品信息
+    productInfo: {}, // 商品信息
     activityCode: "", //经验分区code JF201901030055
     productCode: "", //产品code SPU00000324
     operatorDetail: {}, //经验值详情
@@ -51,9 +51,16 @@ Page({
     }
   },
   getOperatorDetail(productCode) {
-    API.getOperatorDetail({ code: this.data.activityCode }).then(
-      res => {
+    API.getOperatorDetail({ code: this.data.activityCode })
+      .then(res => {
         let datas = res.data || {};
+        datas.start_time = this.formatTime(datas.startTime)
+        datas.sellstate = 0;//默认在活动中
+        if(datas.startTime > new Date().getTime()){
+            datas.sellstate = 1
+        }else if(datas.endTime < new Date().getTime()){
+            datas.sellstate = 2
+        }
         this.setData({
           prodList: datas.prods,
           operatorDetail: datas,
@@ -72,7 +79,22 @@ Page({
     ).catch((res) => {
         Tool.showAlert("活动不存在，请稍后重试");
         console.log(res)
-      });
+      })
+  },
+  formatTime(timestamp) {
+    let date = new Date(timestamp);
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let second = date.getSeconds();
+
+    return (
+        month +'月'+day+'日'+[hour, minute].map(Tool.formatNumber).join(":")
+    );
+>>>>>>> develop-v1-3-0-experience
   },
   //   打开弹层
   changgeState(event) {
@@ -184,6 +206,12 @@ Page({
   },
   //   获取产品信息
   getNewProd() {
+    this.setData({
+      productInfo: {},
+      imgUrls: [],
+      productBuyCount: 1,
+      productSpec: [],
+    });
     const callBack = res => {
       //   let total = res.skuList.reduce((acc, cur) => {
       //     return acc + cur.sellStock;
