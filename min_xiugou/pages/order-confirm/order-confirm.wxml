@@ -28,7 +28,7 @@
   <view class='order-prd-info'>
     <view  wx:if='{{door==5}}' class='gift-view whiteBg'>
       <text class='label-red-border'>礼包</text>
-      <text class='gray font-24'>{{orderInfos.orderProductList[0].productName}}</text>
+      <text class='gray font-24'>{{orderInfos.actvityName}}</text>
     </view> 
     <block wx:for="{{orderInfos.showProduct}}" wx:key='unique'>
        <template is="cart-product-info" data='{{innerCount,imgSize:180,...item}}'/>

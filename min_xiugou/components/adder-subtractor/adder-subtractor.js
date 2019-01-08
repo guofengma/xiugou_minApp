@@ -4,6 +4,8 @@ Component({
     count: Number,
     countSize: Number,
     index: Number,
+    prodskey:Number,
+    itemkey:Number,
     disabled: {
       type: Boolean,
       value:false

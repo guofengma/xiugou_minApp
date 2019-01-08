@@ -42,5 +42,6 @@ module.exports = async function(argv,cb= ()=>{}) {
     await handel.createFile(createFileData)
     cb()
     process.exit()
+
   }
 }

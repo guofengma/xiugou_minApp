@@ -2,7 +2,7 @@
   <view class="bg">
     <view class='container'>
       <image class='avatar' src="{{ userInfos.headImg || '/img/default-userImg.png'}}"></image>
-      <view class='title1'>邀请好友</view>
+      <view class='title1'>分享好友</view>
       <view class='title2'>专属你的惊喜福利活动</view>
       <view class='title3'>免费领取福利</view>
       <view class='title4'>数量有限赶快参与吧~</view>
