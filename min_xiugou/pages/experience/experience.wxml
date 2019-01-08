@@ -23,12 +23,12 @@
             <view class="prodImg" bindtap='imgCliked'>
                 <image-sub imgStyle='{{"width:360rpx;height: 360rpx;"}}' wx:if="{{productInfo.imgUrl}}" imgSrc="{{productInfo.imgUrl}}"
                            mode="widthFix"></image-sub>
-                           <view class="sell" >
+                           <view class="sell" wx:if="{{operatorDetail.sellstate == 1}}">
                                <view class="startSell">{{operatorDetail.start_time}}开售</view>
                            </view>
-                           <!-- <view class="sell" wx:elif="{{operatorDetail.sellstate == 2}}">
+                           <view class="sell" wx:elif="{{operatorDetail.sellstate == 2}}">
                                <view class="startSell">活动已结束</view>
-                           </view> -->
+                           </view>
             </view>
             <view class="prodPrice red">
                 <view class="prodPriHead">{{productInfo.userLevelTypeName}}</view>
