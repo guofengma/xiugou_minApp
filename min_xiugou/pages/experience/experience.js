@@ -93,8 +93,7 @@ Page({
 
     return (
         month +'月'+day+'日'+[hour, minute].map(Tool.formatNumber).join(":")
-    );
->>>>>>> develop-v1-3-0-experience
+    )
   },
   //   打开弹层
   changgeState(event) {
