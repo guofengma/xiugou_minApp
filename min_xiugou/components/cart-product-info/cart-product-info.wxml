@@ -19,7 +19,7 @@
       <!--购物车产品的状态提示-->
       <view wx:if="{{inCart}}" class='red font-22' >
         <view wx:if='{{productStatus==1&&sellStock<innerCount}}'>库存不足</view>
-        <view class='flexR' wx:if='{{showActivity && !showActivity.isEnd}}'>
+        <view class='flexR' wx:if='{{showActivity && !showActivity.isEnd && productStatus!=3}}'>
           <text wx:if='{{showActivity.isBegin}}'>该商品正在进行{{showActivity.activityType==1? "秒杀":"降价拍"}}活动，快去看看~</text>
           <text wx:else>{{showActivity.activityType==1? "秒杀":"降价拍"}}活动未开始,暂不可购买</text>
         </view>

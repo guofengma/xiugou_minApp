@@ -215,20 +215,22 @@ Page({
         this.getTotalPrice()
     },
     clearItems(){ // 批量清除失效产品事件
-        let prods = this.data.items[1]
-        let params = []
-        prods.list.forEach((list)=> {
-            list.products.forEach((item)=> {
-                params.push({
-                    skuCode: item.skuCode
+        Tool.showComfirm('是否清空失效商品',()=>{
+            let prods = this.data.items[1]
+            let params = []
+            prods.list.forEach((list)=> {
+                list.products.forEach((item)=> {
+                    params.push({
+                        skuCode: item.skuCode
+                    })
                 })
             })
+            if (!this.data.didLogin) {
+                this.deleteStorageShoppingCart(params)
+                return
+            }
+            this.deleteCart(params)
         })
-        if (!this.data.didLogin) {
-            this.deleteStorageShoppingCart(params)
-            return
-        }
-        this.deleteCart(params)
     },
     deleteCart(params) {  // 删除购物车
         API.deleteShoppingCart({
