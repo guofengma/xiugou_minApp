@@ -3,7 +3,7 @@
         <view class="item boxSize flexR-sb">
           <view>
            <view class="font-26">
-                现金账户（元）
+                余额（元）
             </view>
             <view class="num">
               {{account}}

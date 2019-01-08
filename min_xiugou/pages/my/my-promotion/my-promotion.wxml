@@ -42,7 +42,7 @@
 </view>
 
 <view class='base-bar flexR {{isIPhoneX.className}}'>
-  <view class='flexR whiteBg' catchtap='goPage' data-index='0'>邀请好友</view>
+  <view class='flexR whiteBg' catchtap='goPage' data-index='0'>分享好友</view>
   <view class='redBg flexR' catchtap='goPage' data-index='1'>去购物</view>
 </view>
 
