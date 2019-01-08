@@ -11,7 +11,7 @@
 
 
 <!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
-<view class='prduct-detail-view' wx:if='{{productInfo}}'>
+<view class='prduct-detail-view' wx:if='{{productInfo}}' class="{{hasMask? 'preventTouchMove' : ' '}}">
     <!--topbar  -->
     <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'  size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}'/>
     <!-- 轮播 -->
@@ -47,7 +47,7 @@
         <view class='num-label redBg flexR' wx:if='{{size>0}}'>{{size}}</view>
       </view> -->
       <view class='flexR bottom-bar'>
-        <view class='cart font-22 flexC' bindtap='btnClicked' data-key='1'>
+        <view class='cart font-22 flexC whiteBg' bindtap='btnClicked' data-key='1'>
           <image-sub wx:if ='{{productInfo.productStatus!=2}}' imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor@3x.png'}}"/>
           <image-sub wx:else imgStyle='{{"width:50rpx"}}' imgSrc="{{'xiangqing_icon_jiarugouwuche_nor-2@3x.png'}}"/>
           <view class='gray'>加入购物车</view>

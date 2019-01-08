@@ -284,7 +284,8 @@ export default class ProductFactorys  {
   }
   hiddenTips() {
     this.page.setData({
-      msgShow: false
+      msgShow: false,
+      hasMask:!this.page.data.hasMask
     })
   }
   shareSubClicked(e){

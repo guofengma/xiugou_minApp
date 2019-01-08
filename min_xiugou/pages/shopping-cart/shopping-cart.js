@@ -126,7 +126,7 @@ Page({
                 item.activityType = item.activityType === null ? 0 : item.activityType
                 item.products.forEach((item0, index0)=> {
                     let shoppingCartActivity = item0.shoppingCartActivity || []
-                    // if (item0.productStatus == 3) item0.showUpdateTime = Tool.formatTime(item0.updateTime)
+                    // if (item0.productStatus == 3) item0.showUpdateTime = Tool.formatTime(item0.upTime)
                     item0.showActiveType = item.activityType
                     item0.showActiveCode = item.activityCode
                     if (shoppingCartActivity.length) {

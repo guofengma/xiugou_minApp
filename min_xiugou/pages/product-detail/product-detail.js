@@ -24,7 +24,8 @@ Page({
         {name:'取消',type:'share'},
         {name:'去登录',type:''}
       ]
-    }
+    },
+    hasMask:false
   },
   onLoad: function (options) {
     this.setData({

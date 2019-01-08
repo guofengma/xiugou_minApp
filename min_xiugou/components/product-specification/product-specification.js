@@ -378,7 +378,7 @@ Component({
         visiable: !this.data.visiable,
         typeClicked: types
       })
-      if (this.data.visiable || this.data.commodityType==5){
+      if (this.data.commodityType!=5){
         this.triggerEvent('hiddenTips');
       }
     },
