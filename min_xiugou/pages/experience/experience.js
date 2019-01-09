@@ -36,7 +36,6 @@ Page({
     this.init(options);
     Tool.isIPhoneX(this);
     Event.on("didLogin", this.didLogin, this);
-    wx.hideShareMenu({})
   },
   init(options) {
     if (options.activityCode) {
