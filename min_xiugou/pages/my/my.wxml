@@ -128,7 +128,7 @@
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='11'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconData.png'}}"/>
-        <view>我的晋升</view>
+        <view>我的资料</view>
       </view>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='12'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconCollect.png'}}"/>
