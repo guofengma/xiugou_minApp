@@ -12,8 +12,8 @@ export default class ProductFactorys  {
       this.page.data.userInfos = this.page.data.userInfos || {}
       datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelRemark + "价"
       datas.showPrice = (datas.minPrice == datas.maxPrice) ? '¥' + datas.maxPrice : '¥' + datas.minPrice + ' - ¥' + datas.maxPrice
-      // 用户不能购买 限购但属于数量小于等于0且状态不是1
-      if ((datas.buyLimit != -1 && !datas.leftBuyNum) || datas.productStatus != 1) {
+      // 用户不能购买 限购但属于数量小于等于0且状态不是1 (datas.buyLimit != -1 && !datas.leftBuyNum) || datas.productStatus != 1)
+      if (datas.productStatus != 1) {
         datas.canUserBuy = false
       } else {
         datas.canUserBuy = true
@@ -29,7 +29,7 @@ export default class ProductFactorys  {
       let advanceSale = {
         isAdvanceSale: datas.productStatus==3? true:false,
         status: datas.productStatus,
-        time: Tool.formatTime(datas.upTime || "")
+        time:Tool.timeStringFromInterval(datas.upTime/1000,'YYYY-MM-DD HH-mm')
       }
       // 计算库存
       let total = datas.skuList.reduce((acc, cur) => {

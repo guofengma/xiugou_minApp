@@ -288,7 +288,7 @@ Page({
         let val = e.currentTarget.dataset.val;
         let prodtype = e.currentTarget.dataset.prodtype
         if (adType == 10) {
-            Tool.showAlert("跳转链接等待H5页面域名确认")
+            Tool.navigateTo('/pages/web-view/web-view?webUrl='+val)
             return
         }
         if (prodtype == 1) {

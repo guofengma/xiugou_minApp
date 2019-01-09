@@ -190,7 +190,6 @@ Page({
       return
     }
     that.data.distanceTime--
-    console.log(that.data.distanceTime)
     let time = setTimeout(function () {
       that.countdown(that);
     }, 1000)

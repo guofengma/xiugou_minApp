@@ -77,8 +77,8 @@
             <text>加入购物车</text>
         </view>
         <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy && operatorDetail.sellstate ===0?"redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
-            <text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>已购买过该商品</text>
-            <text wx:elif='{{productInfo.productStatus==3 || operatorDetail.sellstate !==0 || !productInfo.canUserBuy}}'>暂不可购买</text>
+            <!--<text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>已购买过该商品</text>-->
+            <text wx:if='{{productInfo.productStatus==3 || operatorDetail.sellstate !==0 || !productInfo.canUserBuy}}'>暂不可购买</text>
             <text wx:else>立即购买</text>
         </view>
     </view>

@@ -28,10 +28,8 @@ Page({
     onShow: function () {
 
     },
-    updateShoppingCartByEmit(){
-        this.setData({
-            isUpdateCart: true
-        })
+    updateShoppingCartDatas(key){
+        this.data[key] = true
     },
     onPullDownRefresh: function () {
         this.setData({
@@ -126,7 +124,7 @@ Page({
                 item.activityType = item.activityType === null ? 0 : item.activityType
                 item.products.forEach((item0, index0)=> {
                     let shoppingCartActivity = item0.shoppingCartActivity || []
-                    if (item0.productStatus == 3) item0.showUpdateTime =  Tool.timeStringFromInterval(item0.upTime, "MM-DD")
+                    if (item0.productStatus == 3) item0.showUpdateTime =  Tool.timeStringFromInterval(item0.upTime/1000, "MM月DD日")
                     item0.showActiveType = item.activityType
                     item0.showActiveCode = item.activityCode
                     if (shoppingCartActivity.length&&item0.productStatus == 1) {

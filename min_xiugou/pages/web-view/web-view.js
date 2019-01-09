@@ -24,12 +24,10 @@ Page({
     }
     if (options.webUrl){ // 指定的url地址
       this.setData({
-        url: this.data.baseImgUrl+ options.webUrl + '?time=' + new Date().getTime()
+        url: options.webUrl + '?time=' + new Date().getTime()
       })
-    }
-    if (options.webType){ // 约定的arr中的地址
+    }else if (options.webType){ // 约定的arr中的地址
       let url = `${this.data.baseImgUrl}${this.data.arr[options.webType]}?device=${miniparams.device}&sg-token=${miniparams.token}&userCode=${miniparams.userid}&platform=${miniparams.platform}&time=${new Date().getTime()}`
-      // let url = this.data.webUrl + this.data.arr[options.webType] + '?time=' + new Date().getTime()
       this.setData({
         url: url
       })
