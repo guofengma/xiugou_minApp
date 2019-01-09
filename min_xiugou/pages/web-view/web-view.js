@@ -4,7 +4,7 @@ let { Tool, Config, Storage, Event} = global
 
 Page({
   data: {
-    webUrl: '',
+    baseImgUrl: '',
     url:"",
     arr:{
       1:'/static/protocol/extensionExplain.html',// 推广协议
@@ -22,24 +22,21 @@ Page({
       'token': Storage.getToken() || '', // 用户token
       'userid': Storage.getUserAccountInfo().id || '', // 用户ID
     }
-    this.setData({
-      webUrl: Config.h5webUrl
-    })
-    if (options.webUrl){
+    this.data.baseImgUrl = Config.h5webUrl
+    if (options.webUrl){ // 指定的url地址
       this.setData({
-        url: this.data.webUrl + options.webUrl + '?time=' + new Date().getTime() 
+        url: this.data.baseImgUrl+ options.webUrl + '?time=' + new Date().getTime()
       })
     }
-    if (options.webType){
-      let url = `${this.data.webUrl}${this.data.arr[options.webType]}?device=${miniparams.device}&sg-token=${miniparams.token}&userCode=${miniparams.userid}&platform=${miniparams.platform}&time=${new Date().getTime()}`
+    if (options.webType){ // 约定的arr中的地址
+      let url = `${this.data.baseImgUrl}${this.data.arr[options.webType]}?device=${miniparams.device}&sg-token=${miniparams.token}&userCode=${miniparams.userid}&platform=${miniparams.platform}&time=${new Date().getTime()}`
       // let url = this.data.webUrl + this.data.arr[options.webType] + '?time=' + new Date().getTime()
-      // if (options.webType == 5) url += ('&miniparams=' + miniparams)
       this.setData({
         url: url
       })
     }else{
       let callBack = () => {
-        let url = this.data.webUrl + '/promote?id=' + options.id + '&openid=' + Storage.getWxOpenid()
+        let url = this.data.baseImgUrl + '/promote?id=' + options.id + '&openid=' + Storage.getWxOpenid()
         this.setData({
           url: url + '?_=' + new Date().getTime()
         })
