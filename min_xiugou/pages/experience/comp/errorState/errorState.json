@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "image-sub": "/components/image-sub/image-sub"
+  }
+}

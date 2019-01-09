@@ -116,6 +116,12 @@ Page({
     },
     onPullDownRefresh: function () {
         this.setData({
+            imgUrls: [],// 轮播
+            adArr: [],// 广告位
+            starShop: [], // 明星店铺
+            todayList: [], // 今日榜单
+            fineQuality: [],//精品推荐
+            noticeArr: [],// 头条
             recommendArr: [],
             params: {
                 page: 1,
