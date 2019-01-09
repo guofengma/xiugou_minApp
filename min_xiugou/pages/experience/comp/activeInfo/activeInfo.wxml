@@ -47,7 +47,7 @@
                     <text class="titleQuery"></text>
                     <text class="titleContent">活动说明</text>
                 </view>
-                <view class="activeExplain">{{operatorDetail.contents}}</view>
+                <view class="activeExplain">{{operatorDetail.contents?operatorDetail.contents:''}}</view>
             </view>
             <view class="footer {{isIPhoneX.className}}">
                 <view class="makeSure btn-default" data-select='activeInfo' bindtap="changgeState">

@@ -1,11 +1,11 @@
 /* 不显示滚动条 */
+text {
+  display: inline;
+}
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
   color: transparent;
-}
-.movePrevent {
-  overflow: hidden;
 }
 .clearfix {
   clear: both;
@@ -101,7 +101,7 @@
           display: block;
           //margin-top: -44rpx;
           position: absolute;
-          bottom:0;
+          bottom: 0;
           left: 0;
           .startSell {
             display: block;
@@ -119,15 +119,18 @@
       .prodPrice {
         font-size: 20rpx;
         margin-top: 20rpx;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         .prodPriHead {
           padding: 0rpx 10rpx;
           border: 1rpx solid #ff0050;
           border-radius: 4rpx;
-          display: inline-block;
+        //   display: inline-block;
         }
         .prodPriNum {
           margin-left: 10rpx;
-          display: inline-block;
+        //   display: inline-block;
         }
       }
       .prodStock {
