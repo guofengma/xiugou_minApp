@@ -7,7 +7,8 @@
     "dev": "gulp dev --env",
     "build": "gulp build",
     "prod": "gulp prod",
-    "test": "gulp test"
+    "test": "gulp test",
+    "add": "gulp add"
   },
   "author": "chenweiwei",
   "repository": {

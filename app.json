@@ -73,7 +73,8 @@
 		"pages/mentorInfo/choose-mentor/choose-mentor",
 		"pages/mentorInfo/write-info/write-info",
 		"pages/mentorInfo/mentor-detail/mentor-detail",
-		"pages/experience/experience"
+		"pages/experience/experience",
+		"pages/my/my-exp/my-exp"
 	],
 	"window": {
 		"navigationBarBackgroundColor": "#ffffff",
