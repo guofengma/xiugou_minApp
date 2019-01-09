@@ -33,19 +33,19 @@ Component({
   },
   ready: function() {
     Tool.isIPhoneX(this);
-    switch (this.operatorDetail.type){
+    switch (this.data.operatorDetail.type){
 
         case 1:
-            this.operatorDetail.typeName ='满减劵';
+            this.data.operatorDetail.typeName ='满减劵';
             break;
         case 2:
-            this.operatorDetail.typeName ='抵价劵';
+            this.data.operatorDetail.typeName ='抵价劵';
             break;
         case 3:
-            this.operatorDetail.typeName ='折扣劵';
+            this.data.operatorDetail.typeName ='折扣劵';
             break;
         case 4:
-            this.operatorDetail.typeName ='抵扣劵'
+            this.data.operatorDetail.typeName ='抵扣劵'
             break;
     }
     // this.setData({
