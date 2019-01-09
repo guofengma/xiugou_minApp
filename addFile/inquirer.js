@@ -40,18 +40,16 @@ module.exports = async function run({ placementPath }) {
   ]
   // prompts执行步骤
   const prompts = []
-    .concat(inputName)
-    .concat(selectTemplate)
-    .concat(selectPlacementPath)
+      .concat(inputName)
+      .concat(selectTemplate)
+      .concat(selectPlacementPath)
   return new Promise(async function(resolve, reject) {
     const answers = await inquirer.prompt(prompts)
-    if(answers.template.includes('Page')){
-      console.log('创建了page页面')
-    }
+    console.log(template)
     resolve({
       file: answers.file,
       placementPath: answers.path,
-      pathName: answers.path.slice(answers.path.indexOf('/')+1),
+      pathName: answers.path.slice(answers.path.indexOf('/')+1)+"/"+answers.file+"/"+answers.file,
       isPage:answers.template.includes('Page'),
       templatePath: `./Template/${answers.template}` // 这里暂时写死模板地址，也可以换成选择放置地址的方法
     })

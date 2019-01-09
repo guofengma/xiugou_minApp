@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
+let { Tool, API, Storage, Event,Config } = global
 Component({
   properties: {
     item: {
@@ -65,24 +65,18 @@ Component({
     // 开启奖励
     openAward(e) {
       let dataset = e.currentTarget.dataset;
-      let params = {
-        url: Operation.receiveJobMoney,
-        id: dataset.id,
-        requestMethod: 'GET'
-      }
-      let r = RequestFactory.wxRequest(params);
-      r.successBlock = (req) => {
-        let data = req.responseObject.data || {};
-        console.log(data);
+      API.receiveJobMoney({
+        id: dataset.id
+      }).then((res) => {
+        let data = res.data || {};
         this.setData({
           cardType: 'success',
           cardData: data
         });
         this.toggleCardShow();
-      };
-      Tool.showErrMsg(r)
-      r.addToQueue();
-      
+      }).catch((res) => {
+        console.log(res)
+      })
     },
     toDetail(e) {
       let data = e.currentTarget.dataset;

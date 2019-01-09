@@ -1,4 +1,3 @@
-let { Tool, RequestFactory } = global
 Component({
   properties: {
     disabled:Boolean,
@@ -12,8 +11,10 @@ Component({
   },
   methods: {
     getKeyword(e){
+      let keyWord = String(e.detail.value).replace(/(^\s*)|(\s*$)/g, "")
+      if(keyWord.length>60) keyWord = keyWord.slice(0,60)
       this.setData({
-        keyWord:e.detail.value
+        keyWord:keyWord
       })
       this.triggerEvent('getKeyword',this.data);
     },

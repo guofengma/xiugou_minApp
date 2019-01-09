@@ -3,7 +3,7 @@
     <view class="item boxSize flexR-sb">
       <view>
         <view class="font-26">
-          待提现余额（元）
+          待入账（元）
         </view>
         <view class="num">
           {{account}}

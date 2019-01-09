@@ -1,4 +1,4 @@
-<import src="/components/iPhoneX-line/iPhoneX-line.wxml" />
+<import src="/components/iPhoneX-line/iPhoneX-line.wxml"/>
 <!-- 活动信息 -->
 <view class="experience {{activeInfo||prodParms?'movePrevent':''}} {{isIPhoneX.isIPhoneX?'fixed-ihoneX':''}}" wx:if="{{!isError}}">
     <view class="showBoxSection">
@@ -12,7 +12,8 @@
                 </view>
             </block>
         </scroll-view>
-        <scroll-view scroll-x="true" bindscroll="togetherScroll" scroll-left="{{scrollLeft}}" class="showList {{scrollHide?'scrollHide':'hiddenScroll'}}">
+        <scroll-view scroll-x="true" bindscroll="togetherScroll" scroll-left="{{scrollLeft}}"
+                     class="showList {{scrollHide?'scrollHide':'hiddenScroll'}}">
             <block wx:for="{{prodList}}" wx:key='unique' wx:for-index='key'>
                 <view class="showItem {{showIndex === key?'active':''}}" bindtap="selectProd" data-key="{{key}}">
                     <view class="showItemTitle ellipsis">{{item.name}}</view>
@@ -41,10 +42,12 @@
     </view>
     <view class="showBoxSection">
         <view class="checkBoxList">
-            <view class="checkBox" data-select='activeInfo' data-type="1" bindtap="changgeState" bind:subClicked="changgeState">
+            <view class="checkBox" data-select='activeInfo' data-type="1" bindtap="changgeState"
+                  bind:subClicked="changgeState">
                 活动规则
             </view>
-            <view class="checkBox" data-select='prodParms' data-type="1" bindtap="changgeState" bind:subClicked="changgeState" wx:if="{{productInfo.paramList.length>0}}">
+            <view class="checkBox" data-select='prodParms' data-type="1" bindtap="changgeState"
+                  bind:subClicked="changgeState" wx:if="{{productInfo.paramList.length>0}}">
                 参数信息
             </view>
         </view>
@@ -60,7 +63,7 @@
     <view class='flexR bottom-bar {{isIPhoneX.className}}'>
         <view class="noStock" wx:if="{{productInfo.totalStock<1}}">暂无库存</view>
         <view class='cart font-22 flexC' catchtap='goCart'>
-            <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="/img/xiangqianh_gwuche@3x.png" />
+            <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="/img/xiangqianh_gwuche@3x.png"/>
             <!-- <image-sub wx:else imgStyle='{{"width:50rpx"}}' imgSrc="{{imgUrl}}" /> -->
             <view class='gray'>购物车</view>
             <view class='num-label redBg' wx:if='{{size>0}}'>{{size}}</view>
@@ -69,9 +72,9 @@
         <view class='add-cart font-28 flexR {{ productInfo.canUserBuy ?"yellowBg":"darkBg"}}' bindtap='btnClicked' data-key='1'>
             <text>加入购物车</text>
         </view>
-        <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy ?"redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
-            <text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>已购买过该商品</text>
-            <text wx:elif='{{productInfo.productStatus==3 || !productInfo.canUserBuy}}'>暂不可购买</text>
+        <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy && operatorDetail.sellstate ===0?"redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
+            <!--<text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>已购买过该商品</text>-->
+            <text wx:if='{{productInfo.productStatus==3 || operatorDetail.sellstate !==0 || !productInfo.canUserBuy}}'>暂不可购买</text>
             <text wx:else>立即购买</text>
         </view>
     </view>
@@ -80,6 +83,11 @@
 <template wx:if="{{isIPhoneX.isIPhoneX}}" is="iPhoneX-line" />
 <activeInfo show='{{activeInfo}}' id="active-info" operatorDetail="{{operatorDetail}}" coupon="{{operatorDetail.coupon.coupon}}" />
 <prodParms show='{{prodParms}}' id="prod-parms" paramList="{{productInfo.paramList}}" />
-<errorState show='{{isError}}' type="{{1}}" id="error-state"/>
+<errorState show='{{isError}}' type="{{errorType}}" id="error-state"/>
 <!-- 产品规格 -->
-<product-specification id='prd-info-type' bind:subClicked="typeSubClicked" productSpec='{{productSpec}}' price='{{productInfo.price}}' priceList='{{priceList}}' bind:counterInputOnChange='counterInputOnChange' imgUrl="{{productInfo.imgUrl}}" productStatus='{{productInfo.productStatus}}' showImgs='{{true}}' isInit="{{isInit}}" bind:hiddenTips='hiddenTips' isIphoneX='{{isIPhoneX.isIPhoneX}}' commodityType='{{1}}' disabled='{{false}}' />
+<product-specification id='prd-info-type' bind:subClicked="typeSubClicked" productSpec='{{productSpec}}'
+                       price='{{productInfo.price}}' priceList='{{priceList}}'
+                       bind:counterInputOnChange='counterInputOnChange' imgUrl="{{productInfo.imgUrl}}"
+                       productStatus='{{productInfo.productStatus}}' showImgs='{{true}}' isInit="{{isInit}}"
+                       bind:hiddenTips='hiddenTips' isIphoneX='{{isIPhoneX.isIPhoneX}}' commodityType='{{1}}'
+                       disabled='{{false}}'/>

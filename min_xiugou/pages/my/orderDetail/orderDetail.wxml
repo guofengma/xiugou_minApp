@@ -2,8 +2,6 @@
 
 <import src='/components/address-info/address-info.wxml'/>
 
-<!-- <import src='/components/tips-cancel-order/tips-cancel-order.wxml'/> -->
-
 <import src='/components/tips-delete-order/tips-delete-order.wxml'/>
 
 <import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
@@ -49,9 +47,9 @@
 
     <!--订单信息  -->
     <view class='order-prd-info'>
-      <view class='gift-view whiteBg' wx:if='{{detail.orderSubType==3 || detail.orderSubType==4}}'>
+      <view class='gift-view whiteBg' wx:if='{{detail.isGiftProds}}'>
         <text class='label-red-border'>礼包</text>
-        <!-- <text class='gray font-24'>{{detail.orderProductList[0].productName}}</text> -->
+         <!--<text class='gray font-24'>{{detail.activityName}}</text>-->
       </view>
       <view class='product-ifo-list'>
         <block wx:for="{{showProducts}}" wx:key="unique">
@@ -67,7 +65,8 @@
       <!-- <view class='sale-after gift-sale-after flexR' wx:if="{{detail.orderProductList[0].middleBtn&&(detail.orderType==5 || detail.orderType==98)}}">
         <view class='order-btn btn-left flexR' catchtap='subBtnClicked' data-id='{{detail.orderProductList[0].middleBtn.id}}' data-returntype='{{detail.orderProductList[0].middleBtn.returnType}}' data-index='{{0}}'>{{detail.orderProductList[0].middleBtn.content}}</view>
       </view> -->
-      <view wx:if='{{ detail.orderSubType==3 || detail.orderSubType==4 }}' class='gray font-24 whiteBg coupon-line'>
+        <!--detail.orderSubType==3 || detail.orderSubType==4 -->
+      <view wx:if='{{detail.isGiftProds }}' class='gray font-24 whiteBg coupon-line'>
         <view class='flexR-sb' wx:for='{{detail.giftCouponDTOList}}'>
           <view>{{item.couponName}}</view>
           <view>x1</view>
@@ -140,7 +139,6 @@
 
 
 <!--提示框  -->
-<!-- <template is="tips-cancel-order" data='{{isCancel,content,reason}}'/> -->
 
 <tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{orderId}}' num='{{num}}'/>
 

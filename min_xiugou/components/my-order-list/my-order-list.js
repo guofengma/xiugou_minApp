@@ -280,11 +280,13 @@ Component({
       let products = this.data.list[index].showProducts
       products.forEach((item,index)=>{
         list.push({
-          productCode: item.prodCode,
+          spuCode: item.prodCode,
           showCount: item.quantity,
           skuCode: item.skuCode,
           status:1,
-          isSelect:true
+          isSelect:true,
+          activityCode:item.activityCode || '',
+          activityType:item.activityType || '',
         })
       })
       if(list.length>0){

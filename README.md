@@ -5,7 +5,7 @@
 + 基于`gulp+less`构建的微信小程序工程项目
 + 项目图片自动压缩
 + ESLint代码检查 后面给我取消了。。。。伤不起
-+ 使用命令行快速创建`page`、`template`和`component`  命令行 gulp add  创建完以后 在app.json 里面手动添加 page的地址(这块没有写好 先手动写 ) npm run dev
++ 使用命令行快速创建`page`、`template`和`component`
 + 用微信开发者工具打开 dist 目录看效果
 + 图片上传地址  https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/  ==》 占位符(变量) html css: ${mrdomain}/xxx.png
 ### Getting Started
@@ -29,12 +29,11 @@ $ npm run prod 生产环境
 $ npm run build  正式环境
 
 ```
-##### 4. 新建page、template或者component
+##### 4. 新建page、template或者component  命令行 gulp add
 ```
-  gulp auto -p mypage           创建名为mypage的page文件
-  gulp auto -t mytpl            创建名为mytpl的template文件
-  gulp auto -c mycomponent      创建名为mycomponent的component文件
-  gulp auto -s index -p mypage  复制pages/index中的文件创建名称为mypage的页面
+gulp add
+  1. gulp add  创建完以后
+  2. npm run dev 等命令行启动项目
 ```
 ##### 5. 上传代码前编译
 ```
@@ -81,23 +80,10 @@ Tasks:
   img              编译压缩图片文件
   watch            监听开发文件变化
 
-  auto             自动根据模板创建page,template或者component(小程序自定义组件)
+  add             自动根据模板创建page,template或者component(小程序自定义组件)
 
-gulp auto
+gulp add
 
-选项：
-  -s, --src        copy的模板                     [字符串] [默认值: "_template"]
-  -p, --page       生成的page名称                                       [字符串]
-  -t, --template   生成的template名称                                   [字符串]
-  -c, --component  生成的component名称                                  [字符串]
-  --msg            显示帮助信息                                           [布尔]
-
-示例：
-  gulp auto -p mypage           创建名为mypage的page文件
-  gulp auto -t mytpl            创建名为mytpl的template文件
-  gulp auto -c mycomponent      创建名为mycomponent的component文件
-  gulp auto -s index -p mypage  复制pages/index中的文件创建名称为mypage的页面
-```
 
 #### Q&A
 - **Q:** 为什么工作流中没有加入js转换，样式补全以及代码压缩？
@@ -107,13 +93,13 @@ gulp auto
 ![](https://img002.qufenqi.com/products/e5/21/e521bb1b6e01b197f22c44ea27f7313d.png)
 
 
-- **Q:** `_template`目录的文件有什么用？
+- **Q:** `addFile`目录的文件有什么用？
 
 
-  **A:** 使用`gulp auto`命令自动生成文件，`-s`参数可以指定copy的对象，默认情况下是以对应目录下文件夹为`_template`中的文件为copy对象的。开发者可以根据业务需求，自定义`_template`下的文件。
+  **A:** 使用`gulp add`命令自动生成文件，默认情况下是以对应目录下文件夹为`Template`中的文件为copy对象的。开发者可以根据业务需求，自定义`Template`下的文件。
 
 
-- **Q:** `_template`目录的文件是否会被编译到`dist`目录？
+- **Q:** `addFile`目录的文件是否会被编译到`dist`目录？
 
 
   **A:** 不会。

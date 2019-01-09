@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation } = global
+let { Tool, API, Storage, Event } = global
 Page({
   data: {
       showEdit: false,
@@ -39,14 +39,10 @@ Page({
   getCollectList(page = 1, size = 10) {
     let params = {
       page: page,
-      size: size,
-      url: Operation.queryCollect,
-      requestMethod: 'GET'
+      size: size
     }
-    let r = RequestFactory.wxRequest(params);
-    r.successBlock = (req) => {
-      let data = req.responseObject.data || {};
-      console.log(data);
+    API.queryDiscoverCollect(params).then((res) => {
+      let data = res.data || {}
       let items = page == 1 ? [] : this.data.items;// 第一页的话直接以接口数据为准
 
       this.setData({
@@ -54,9 +50,9 @@ Page({
         totalPage: data.totalPage,
         currentPage: data.currentPage
       })
-    };
-    Tool.showErrMsg(r)
-    r.addToQueue();
+    }).catch((res) => {
+      console.log(res)
+    });
   },
   onPageScroll(e){
     let flag =false;
@@ -149,21 +145,16 @@ Page({
         if(res.cancel) return;
         let params = {
           type: 1,
-          articleIds: checkedList,
-          reqName: '取消收藏操作',
-          url: Operation.discoverCountCancel
+          articleIds: checkedList
         }
-        console.log(params);
-        let r = RequestFactory.wxRequest(params);
-        r.successBlock = (req) => {
-          let data = req.responseObject.data || {};
-          console.log(data);
+        API.discoverCountCancel(params).then((res) => {
+          let data = res.data || {}
           _.toggleShowEdit();
           // 删完重新获取第一页数据 单个删除的话用splice比较好
           _.getCollectList();
-        };
-        Tool.showErrMsg(r)
-        r.addToQueue();
+        }).catch((res) => {
+          console.log(res)
+        })
       }
     })
     

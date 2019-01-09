@@ -78,11 +78,11 @@ Page({
           });
         }
         this.getNewProd();
-      })
-      .catch(res => {
+      }
+    ).catch((res) => {
         Tool.showAlert("活动不存在，请稍后重试");
-        console.log(res);
-      });
+        console.log(res)
+      })
   },
   formatTime(timestamp) {
     let date = new Date(timestamp);
@@ -96,7 +96,7 @@ Page({
 
     return (
         month +'月'+day+'日'+[hour, minute].map(Tool.formatNumber).join(":")
-    );
+    )
   },
   //   打开弹层
   changgeState(event) {
@@ -184,14 +184,15 @@ Page({
           productCode: this.data.selectType.prodCode
         }
       ],
-      orderType: 1
+      orderType: 2,
+      orderSubType: 5
     };
     Storage.setSubmitOrderList(params);
-    Tool.navigateTo("/pages/order-confirm/order-confirm?formPage=3");
+    Tool.navigateTo("/pages/order-confirm/order-confirm?formPage=3&type=99");
   },
   //   添加购物车
   addToShoppingCart() {
-    this.ProductFactory.addToShoppingCart(this.productCode, 8);
+    this.ProductFactory.addToShoppingCart(this.data.productCode, 8);
   },
   // 产品列表点击
   selectProd(e) {

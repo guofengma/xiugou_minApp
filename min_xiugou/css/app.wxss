@@ -84,8 +84,8 @@ button::after{
   display:-webkit-box;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:2;
-  height: 64rpx;
-  line-height:32rpx;
+  max-height: 76rpx;
+  line-height:38rpx;
 }
 .pwdImg{
   width: 40rpx;
@@ -246,4 +246,13 @@ button::after{
 /* wxparse 插件重写样式 */
 .wxParse-p image{
   width: 100%;
+}
+.preventTouchMove{
+  top: 0px ;
+  left:   0px ;
+  width:   100% ;
+  height:   100% ;
+  overflow:   hidden ;
+  position:   fixed ;
+  z-index:   0 ;
 }

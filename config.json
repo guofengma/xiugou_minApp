@@ -15,15 +15,17 @@
     "imgBaseUrl":"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/"
   },
   "build": {
-    "h5webUrl": "https://h5.sharegoodsmall.com",
-    "baseUrl":"https://api.sharegoodsmall.com/gateway",
+    "h5webUrl": "https://uath5.sharegoodsmall.com",
+    "baseUrl":"https://uatapi.sharegoodsmall.com/gateway",
     "imgBaseUrl":"https://uatcdn.sharegoodsmall.com/sharegoods/resource/xcx/"
   },
   "base":{
-    "rasVersion": "1.0.4.12",
+    "rasVersion": "1.0.4",
     "rasClient":"miniapp",
-    "AppId": "wxa059b818226f8679",
-    "Secret":"9fa19f4d1f7e37d318dba14f951f1b4c",
+    "AppId-test": "wxa059b818226f8679",
+    "Secret-test":"9fa19f4d1f7e37d318dba14f951f1b4c",
+    "AppId-prod": "wxc9bc82344767cb2a",
+    "Secret-prod":"da076ce823d017ea04d50232f2e646ff",
     "imgSizeParams":{
       "m_fixed":"?x-oss-process=image/resize,m_fixed,h_300,w_300",
       "m_fill": "?x-oss-process=image/resize,p_65",
@@ -48,7 +50,9 @@
     "杨飞":"http://172.16.10.158:18096/gateway",
     "申":"http://172.16.10.21:8080/gateway",
     "龚日红":"http://172.16.10.177:9090/gateway",
-    "顾嘉豪":"http://172.16.10.164:9090/gateway",
-    "黄家欢":"http://172.16.10.178:9090/gateway"
+    "顾嘉豪":"http://172.16.10.58:18080/gateway",
+    "岑登":"http://172.16.10.74:18080/gateway",
+    "黄家欢":"http://172.16.10.178:9090/gateway",
+    "王体忠":"http://172.16.10.56:9090/gateway"
   }
 }

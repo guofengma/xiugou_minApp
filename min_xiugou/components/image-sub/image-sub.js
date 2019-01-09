@@ -1,4 +1,4 @@
-let { Tool, RequestFactory, Storage, Event, Operation, Config } = global
+let { Tool, Storage, Config } = global
 Component({
   properties: {
     imgSrc:String,
@@ -22,7 +22,7 @@ Component({
       } else if (this.data.imgSrc.includes('/img/')){ // 本地图片
         baseImgUrl = this.data.imgSrc
       }else {
-        
+
         // 小程序线上图片（icon等）  + '?_=' + new Date().getTime()
         baseImgUrl = Config.imgBaseUrl + this.data.imgSrc
       }

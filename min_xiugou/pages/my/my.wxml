@@ -28,7 +28,7 @@
       <canvas style="width: 80rpx; height: 80rpx;" canvas-id="firstCanvas"></canvas>
      </view>
      <view class='level-content'>
-        <view class='levelName'>{{userInfos.levelName}}品鉴官</view>
+        <view class='levelName'>{{userInfos.levelName || ''}}品鉴官</view>
         <view>查看权益
           <image-sub imgStyle='{{"width:14rpx"}}' imgSrc="{{'jiantou-white.png'}}"/>
         </view>
@@ -42,19 +42,19 @@
   </view>
   <!-- 我的资产 -->
   <view class='my-account width-690'>
-    <view class='my-account-item'>我的资产</view>
+    <view class='my-account-item'>我的账户</view>
     <view class='my-account-list'>
       <view class='my-account-coin' catchtap='itemClicked' data-page='3' data-query='{{userInfos.availableBalance}}'>
         <view class='account-num' >{{userInfos.availableBalance0 || '0.00'}}</view>
-        <view>现金账户</view>
+        <view>余额</view>
       </view>
       <view class='my-account-xiudou' catchtap='itemClicked' data-page='4' data-query='{{userInfos.userScore}}'>
         <view class='account-num'>{{userInfos.userScore || 0}}</view>
-        <view>秀豆账户</view>
+        <view>秀豆</view>
       </view>
       <view class='my-account-leave' catchtap='itemClicked' data-page='5' data-query='{{userInfos.blockedBalance}}'>
         <view class='account-num'>{{userInfos.blockedBalance0 || '0.00'}}</view>
-        <view>待提现账户</view>
+        <view>待入账</view>
       </view>
     </view>
   </view>
@@ -116,7 +116,7 @@
     <view class='my-tools-list'>
       <view class='my-tools-cont' catchtap='itemClicked' data-page='8'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconInvite.png'}}"/>
-        <view>邀请好友</view>
+        <view>分享好友</view>
       </view>
       <!-- <view class='my-tools-cont' catchtap='itemClicked' data-page='9'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'iconCalendar.png'}}"/>
@@ -158,7 +158,7 @@
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'/img/iconFav.png'}}"/>
         <view>秀场收藏</view>
       </view>
-       <view class='my-tools-cont' catchtap='itemClicked' data-page='19' wx:if='{{userInfos.upUserid}}'>
+       <view class='my-tools-cont' catchtap='itemClicked' data-page='19' wx:if='{{userInfos.upUserCode}}'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'me_icon_daoshi_nor@3x.png'}}"/>
         <view>导师</view>
       </view>

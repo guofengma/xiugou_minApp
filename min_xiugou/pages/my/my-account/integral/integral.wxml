@@ -3,14 +3,14 @@
         <view class="item boxSize flexR-sb">
           <view>
             <view class="font-26">
-              秀豆账户（枚）
+              秀豆（枚）
             </view>
             <view class="num">
               {{account || 0}}
             </view>
           </view>
           <view class='coinBtn font-28 flexR' catchtap='goPage'>
-            <view>兑换1元现金劵</view>
+            <view>兑换1元抵扣券</view>
           </view>
         </view>
     </view>

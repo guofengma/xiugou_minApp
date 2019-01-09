@@ -238,7 +238,7 @@
   padding: 20rpx 12rpx;
 }
 .prd-name{
-  height: 64rpx;
+  height: 76rpx;
 }
 /* 任务 */
 .duty{

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "待提现账户",
+  "navigationBarTitleText": "待入账",
   "usingComponents": {
     "tips-info": "/components/tips-info/tips-info"
   }
