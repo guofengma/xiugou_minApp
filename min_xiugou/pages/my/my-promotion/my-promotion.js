@@ -39,6 +39,10 @@ Page({
       Tool.switchTab('/pages/index/index')
     }
   },
+  toExp() {
+    const userLevelInfo = this.data.userLevelInfo;
+    Tool.navigateTo(`/pages/my/my-exp/my-exp?experience=${userLevelInfo.experience}&levelExperience=${userLevelInfo.levelExperience}&surpluslExperience=${userLevelInfo.surpluslExperience}`)
+  },
   onUnload: function () {
     
   }

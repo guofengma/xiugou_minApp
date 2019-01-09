@@ -1023,6 +1023,15 @@ const api = {
             'isShowLoading': false,
         }
     ],
+    /***************************** 经验 ************************ */
+    'getExpList': [
+        '/user/detail',
+        {
+            "action": '获取经验列表',
+            "method": "post",
+            "encrypt": false
+        }
+    ]
 }
 
 const API = new ApiUtils(api).result;
