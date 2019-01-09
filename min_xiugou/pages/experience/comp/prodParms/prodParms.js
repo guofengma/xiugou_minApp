@@ -21,6 +21,7 @@ Component({
       this.setData({
         show: false
       });
+      this.triggerEvent('hiddenTips');
     }
   },
   ready: function () {
