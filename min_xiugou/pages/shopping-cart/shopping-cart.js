@@ -126,14 +126,14 @@ Page({
                 item.activityType = item.activityType === null ? 0 : item.activityType
                 item.products.forEach((item0, index0)=> {
                     let shoppingCartActivity = item0.shoppingCartActivity || []
-                    // if (item0.productStatus == 3) item0.showUpdateTime = Tool.formatTime(item0.upTime)
+                    if (item0.productStatus == 3) item0.showUpdateTime =  Tool.timeStringFromInterval(item0.upTime, "MM-DD")
                     item0.showActiveType = item.activityType
                     item0.showActiveCode = item.activityCode
-                    if (shoppingCartActivity.length) {
+                    if (shoppingCartActivity.length&&item0.productStatus == 1) {
                         // 当前时间戳
                         let currentTime = item.nowTime
                         shoppingCartActivity.forEach((activity, actIndex)=> {
-                            item0.labelName = this.data.activeType[activity.activityType]
+                            if (item0.productStatus == 1) item0.labelName = this.data.activeType[activity.activityType]
                             if (activity.activityType == 1 || activity.activityType == 2) {
                                 let activeType = {
                                     1: 'seckill',

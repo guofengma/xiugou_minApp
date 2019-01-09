@@ -4,7 +4,7 @@ let { Tool, Config, Storage, Event} = global
 
 Page({
   data: {
-    baseImgUrl: '',
+    baseImgUrl: Config.h5webUrl,
     url:"",
     arr:{
       1:'/static/protocol/extensionExplain.html',// 推广协议
@@ -22,7 +22,6 @@ Page({
       'token': Storage.getToken() || '', // 用户token
       'userid': Storage.getUserAccountInfo().id || '', // 用户ID
     }
-    this.data.baseImgUrl = Config.h5webUrl
     if (options.webUrl){ // 指定的url地址
       this.setData({
         url: this.data.baseImgUrl+ options.webUrl + '?time=' + new Date().getTime()

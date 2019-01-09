@@ -84,8 +84,8 @@ button::after{
   display:-webkit-box;
   -webkit-box-orient:vertical;
   -webkit-line-clamp:2;
-  max-height: 70rpx;
-  line-height:32rpx;
+  max-height: 76rpx;
+  line-height:38rpx;
 }
 .pwdImg{
   width: 40rpx;

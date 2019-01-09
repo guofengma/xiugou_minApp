@@ -11,13 +11,13 @@
 
 
 <!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
-<view class='prduct-detail-view' wx:if='{{productInfo}}' class="{{hasMask? 'preventTouchMove' : ' '}}">
+<view class='prduct-detail-view {{hasMask? "preventTouchMove":""}} ' wx:if='{{productInfo}}' class="{{hasMask? 'preventTouchMove' : ' '}}">
     <!--topbar  -->
     <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'  size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}'/>
     <!-- 轮播 -->
     <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}' advanceSale='{{advanceSale}}'/>
     <!-- 活动产品倒计时提示 -->
-    <view wx:if='{{proNavData}}' catchtap='goPage'>
+    <view wx:if='{{proNavData && productInfo.productStatus==1}}' catchtap='goPage'>
       <product-promotion-info 
         id="promotion"
         bind:countdown="timeout" 

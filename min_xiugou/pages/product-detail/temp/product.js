@@ -35,6 +35,9 @@ export default class ProductFactorys  {
       let total = datas.skuList.reduce((acc, cur) => {
         return acc + cur.sellStock;
       }, 0);
+      // 是否支持7天无理由退换货 数字4 位运算
+      let arr = Tool.bitOperation([4], datas.restrictions)
+      if(arr.includes(4)) datas.showAfterSaleServiceDays = true
       datas.totalStock = total;
       this.page.setData({
         isInit: false,
