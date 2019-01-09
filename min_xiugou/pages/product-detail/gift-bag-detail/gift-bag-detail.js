@@ -15,6 +15,7 @@ Page({
     productTypeList: [],
     productBuyCount: 1, //商品购买数量
     priceList: [],
+    hasMask:false,
     isShowGiftTips:false, //是否显示礼包升级提示
   },
   onLoad: function (options) {
