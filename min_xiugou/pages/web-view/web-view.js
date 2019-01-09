@@ -16,12 +16,12 @@ Page({
     }
   },
   onLoad: function (options) {
-    let miniparams = JSON.stringify({
+    let miniparams = {
       'device': Storage.getPlatform() || '', // 设备唯一标识
       'platform': 'mini', // 小程序标识
-      'sg-token': Storage.getToken() || '', // 用户token
-      'userid': Storage.getUserAccountInfo().id || '', // 设备唯一标识
-    })
+      'token': Storage.getToken() || '', // 用户token
+      'userid': Storage.getUserAccountInfo().id || '', // 用户ID
+    }
     this.setData({
       webUrl: Config.h5webUrl
     })
@@ -31,8 +31,9 @@ Page({
       })
     }
     if (options.webType){
-      let url = this.data.webUrl + this.data.arr[options.webType] + '?time=' + new Date().getTime()
-      if (options.webType == 5) url += ('&miniparams=' + miniparams)
+      let url = `${this.data.webUrl}${this.data.arr[options.webType]}?device=${miniparams.device}&sg-token=${miniparams.token}&userCode=${miniparams.userid}&platform=${miniparams.platform}&time=${new Date().getTime()}`
+      // let url = this.data.webUrl + this.data.arr[options.webType] + '?time=' + new Date().getTime()
+      // if (options.webType == 5) url += ('&miniparams=' + miniparams)
       this.setData({
         url: url
       })
