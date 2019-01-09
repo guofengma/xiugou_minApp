@@ -33,21 +33,24 @@ Component({
   },
   ready: function() {
     Tool.isIPhoneX(this);
-    switch (this.data.operatorDetail.type){
-
-        case 1:
-            this.data.operatorDetail.typeName ='满减劵';
-            break;
-        case 2:
-            this.data.operatorDetail.typeName ='抵价劵';
-            break;
-        case 3:
-            this.data.operatorDetail.typeName ='折扣劵';
-            break;
-        case 4:
-            this.data.operatorDetail.typeName ='抵扣劵'
-            break;
+    const Detail = this.data.operatorDetail;
+    switch (1) {
+      case 1:
+        Detail.typeName = "满减";
+        break;
+      case 2:
+        Detail.typeName = "抵价";
+        break;
+      case 3:
+        Detail.typeName = "折扣";
+        break;
+      case 4:
+        Detail.typeName = "抵扣";
+        break;
     }
+    this.setData({
+      operatorDetail: Detail
+    });
     // this.setData({
     //   coupon: this.data.operatorDetail.coupon.coupon
     // });

@@ -1,13 +1,12 @@
 <import src="/components/iPhoneX-line/iPhoneX-line.wxml"/>
 <!-- 活动信息 -->
-<view class="experience {{activeInfo||prodParms?'movePrevent':''}} {{isIPhoneX.isIPhoneX?'fixed-ihoneX':''}}">
+<view class="experience {{activeInfo||prodParms?'movePrevent':''}} {{isIPhoneX.isIPhoneX?'fixed-ihoneX':''}}" wx:if="{{!isError}}">
     <view class="showBoxSection">
         <scroll-view scroll-x="true" bindscroll="togetherScroll" scroll-left="{{scrollLeft}}" class="showList">
             <block wx:for="{{prodList}}" wx:key='unique' wx:for-index='key'>
                 <view class="showItem {{showIndex === key?'active':''}}" bindtap="selectProd" data-key="{{key}}">
                     <view class="showItemImg overflow">
-                        <image-sub imgStyle='{{"width:200rpx;height: 180rpx;"}}' imgSrc="{{item.imgUrl}}"
-                                   mode="widthFix"></image-sub>
+                        <image-sub imgStyle='{{"width:200rpx;height: 180rpx;"}}' imgSrc="{{item.imgUrl}}" mode="widthFix"/>
                     </view>
                     <view class="showItemTitle ellipsis">{{item.name}}</view>
                 </view>
@@ -24,12 +23,9 @@
         <view class="proDetail">
             <view class="prodImg" bindtap='imgCliked'>
                 <image-sub imgStyle='{{"width:360rpx;height: 360rpx;"}}' wx:if="{{productInfo.imgUrl}}" imgSrc="{{productInfo.imgUrl}}"
-                           mode="widthFix"></image-sub>
-                           <view class="sell" wx:if="{{operatorDetail.sellstate == 1}}">
-                               <view class="startSell">{{operatorDetail.start_time}}开售</view>
-                           </view>
-                           <view class="sell" wx:elif="{{operatorDetail.sellstate == 2}}">
-                               <view class="startSell">活动已结束</view>
+                           mode="widthFix"/>
+                           <view class="sell" wx:if="{{productInfo.productStatus === 3}}">
+                               <view class="startSell">{{productInfo.startTime}}开售</view>
                            </view>
             </view>
             <view class="prodPrice red">
@@ -60,7 +56,7 @@
         <view class="detailInfo {{productInfo.totalStock<1?'mgb40':''}}">
             <view class="infoTitle">商品信息</view>
             <view class="infoList" wx:for="{{productInfo.showContent}}" wx:key='unique'>
-                <image-sub imgStyle='{{"width:100%;"}}' imgSrc="{{item}}" mode="widthFix"></image-sub>
+                <image-sub imgStyle='{{"width:100%;"}}' imgSrc="{{item}}" mode="widthFix"/>
             </view>
         </view>
     </view>
@@ -73,7 +69,7 @@
             <view class='num-label redBg' wx:if='{{size>0}}'>{{size}}</view>
         </view>
         <!-- <view class='add-cart font-28 flexR {{ productInfo.productStatus===1?"yellowBg":"darkBg"}}' bindtap='btnClicked' data-key='1'> -->
-        <view class='add-cart font-28 flexR {{ productInfo.canUserBuy && operatorDetail.sellstate ===0?"yellowBg":"darkBg"}}' bindtap='btnClicked' data-key='1'>
+        <view class='add-cart font-28 flexR {{ productInfo.canUserBuy ?"yellowBg":"darkBg"}}' bindtap='btnClicked' data-key='1'>
             <text>加入购物车</text>
         </view>
         <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy && operatorDetail.sellstate ===0?"redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
@@ -84,10 +80,10 @@
     </view>
 </view>
 <!-- 适配iPhone X -->
-<template wx:if="{{isIPhoneX.isIPhoneX}}" is="iPhoneX-line"/>
-<activeInfo show='{{activeInfo}}' id="active-info" operatorDetail="{{operatorDetail}}"
-            coupon="{{operatorDetail.coupon.coupon}}"/>
-<prodParms show='{{prodParms}}' id="prod-parms" paramList="{{productInfo.paramList}}"/>
+<template wx:if="{{isIPhoneX.isIPhoneX}}" is="iPhoneX-line" />
+<activeInfo show='{{activeInfo}}' id="active-info" operatorDetail="{{operatorDetail}}" coupon="{{operatorDetail.coupon.coupon}}" />
+<prodParms show='{{prodParms}}' id="prod-parms" paramList="{{productInfo.paramList}}" />
+<errorState show='{{isError}}' type="{{errorType}}" id="error-state"/>
 <!-- 产品规格 -->
 <product-specification id='prd-info-type' bind:subClicked="typeSubClicked" productSpec='{{productSpec}}'
                        price='{{productInfo.price}}' priceList='{{priceList}}'
