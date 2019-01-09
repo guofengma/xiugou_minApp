@@ -1,0 +1,30 @@
+<view>
+    <view class="exp-container">
+        <view class='growing-value'>
+            <view class="exp-num">
+                <text class='red'>{{userLevelInfo.experience||0}}</text>
+                <text class='gray'>/{{userLevelInfo.levelExperience||0}}</text>
+            </view>
+            <view class='growing-bar'>
+                <view class='growing-bar-value' style="width: {{width}}"></view>
+            </view>
+            <view class="exp-fill">
+                距离晋升还差<text>{{userLevelInfo.surpluslExperience}}点Exp</text>
+                <text class='red' wx:if='{{!userLevelInfo.surpluslExperience}}'>(Exp已满)</text>
+            </view>
+        </view>
+    </view>
+    <view class="exp-list">
+        <view class="exp-item flexR" wx:for="{{list}}" wx:key="{{index}}">
+            <image src="/img/{{expStatus[item.sourceCode].icon}}.png" class="exp-item_icon"></image>
+            <view class="exp-item_body">
+                <view class="exp-item_detail flexR-sb">
+                    <view class="exp-item_title">{{expStatus[item.sourceCode].title}}</view>
+                    <view class="exp-item_num red">+{{item.experience}}</view>
+                </view>
+                <view class="exp-item_time">{{item.createTime}}</view>
+            </view>
+        </view>
+    </view>
+    <view class='no-more' wx:if="{{currentPage == totalPage || list.length == 0}}">我也是有底线的~</view>
+</view>
