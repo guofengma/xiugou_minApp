@@ -6,6 +6,7 @@
     "product-infos": "/pages/product-detail/temp/product-infos/product-infos",
     "image-sub": "/components/image-sub/image-sub",
     "activeInfo": "/pages/experience/comp/activeInfo/activeInfo",
-    "prodParms": "/pages/experience/comp/prodParms/prodParms"
+    "prodParms": "/pages/experience/comp/prodParms/prodParms",
+    "errorState": "/pages/experience/comp/errorState/errorState"
   }
 }

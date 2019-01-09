@@ -9,7 +9,7 @@ Page({
   data: {
     imgUrls: [],
     productInfo: {}, // 商品信息
-    activityCode: "", //经验分区code JF201901030055
+    activityCode: "", //经验分区code  test JF201901030055
     productCode: "", //产品code SPU00000324
     operatorDetail: {}, //经验值详情
     showIndex: 0, //展示第几个商品
@@ -17,6 +17,8 @@ Page({
     // 弹窗
     activeInfo: false, //活动信息
     prodParms: false, //产品参数
+    isError:false,
+    errorType: 0,
     movePrevent: false, //是否阻止滚动
     productBuyCount: 1, //商品购买数量
     scrollHide: false, //滚动是否隐藏列表图片
@@ -34,6 +36,7 @@ Page({
     this.init(options);
     Tool.isIPhoneX(this);
     Event.on("didLogin", this.didLogin, this);
+    wx.hideShareMenu({})
   },
   init(options) {
     if (options.activityCode) {
@@ -54,15 +57,12 @@ Page({
     API.getOperatorDetail({ code: this.data.activityCode })
       .then(res => {
         let datas = res.data || {};
-        datas.start_time = this.formatTime(datas.startTime)
-        datas.sellstate = 0;//默认在活动中
-        if(datas.startTime > new Date().getTime()){
-            datas.sellstate = 1
-            datas.canUserBuy = false;
-        }else if(datas.endTime < new Date().getTime()){
-            datas.sellstate = 2
-            datas.canUserBuy = false;
-
+        if([0,1,3].includes(datas.status)){
+            this.setData({
+                isError:true,
+                errorType:datas.status,
+            })
+            return;
         }
         this.setData({
           prodList: datas.prods,
@@ -214,13 +214,10 @@ Page({
       productSpec: [],
     });
     const callBack = res => {
-      //   let total = res.skuList.reduce((acc, cur) => {
-      //     return acc + cur.sellStock;
-      //   }, 0);
-      //   res.totalStock = total;
-      //   this.setData({
-      //     productInfo: res
-      //   });
+        res.startTime = this.formatTime(res.upTime)
+        this.setData({
+          productInfo: res
+        });
       if (res.productStatus != 0) {
         // this.activityByProductId(this.data.productCode);
         // if (this.data.productInfo.productStatus === 3) {
