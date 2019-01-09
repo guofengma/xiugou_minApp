@@ -50,7 +50,7 @@
   <view class='tips-line font-30'>升级礼包为定制特殊商品</view>
   <view class='font-28 tips-content'>
     <view class='first-tips'>
-      购买后即可立即享受晋升权限，该礼包产品不可退换货，如有产品质量问题，可联系客服进行申诉。
+      购买后即可立即享受晋升权限，该礼包产品不可退款，如有产品质量问题，可联系客服进行申诉。
     </view>
   </view>
 </tips-info>
