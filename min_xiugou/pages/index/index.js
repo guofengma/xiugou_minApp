@@ -296,7 +296,7 @@ Page({
         }
         // 超值热卖跳转转化
         if(prodtype) adType= changeType[prodtype]
-        console.log(adType)
+        // console.log(adType)
         let page = this.data.pageArr[adType].page + val;
         // 经验专区跳转重置page地址
         if(adType==6&&index!==undefined&&key!==undefined){

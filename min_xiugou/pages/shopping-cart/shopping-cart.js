@@ -350,8 +350,9 @@ Page({
             totalPrice = Tool.add(totalPrice, num)
         })
         let arr = rules.filter((item)=> {
-            return item.startPrice < totalPrice
+            return item.startPrice <= totalPrice
         })
+        // console.log(arr)
         if (arr.length > 0) {
             // 已经满足至少1条规矩了
             datas.showRule = {...arr[arr.length - 1]}

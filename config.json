@@ -36,7 +36,7 @@
     "dev":"http://devapi.sharegoodsmall.com/gateway",
     "test":"https://testapi.sharegoodsmall.com/gateway",
     "prod":"https://api.sharegoodsmall.com/gateway",
-    "build":"https://api.sharegoodsmall.com/gateway",
+    "build":"https://uath5.sharegoodsmall.com/gateway",
     "蒋大为":"http://172.16.10.42:4090/gateway",
     "周浩":"http://172.16.10.64:9090/gateway",
     "高迪":"http://172.16.10.238:8903/gateway",
