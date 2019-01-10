@@ -20,7 +20,7 @@
     "imgBaseUrl":"https://uatcdn.sharegoodsmall.com/sharegoods/resource/xcx/"
   },
   "base":{
-    "rasVersion": "1.0.4",
+    "rasVersion": "1.0.5",
     "rasClient":"miniapp",
     "AppId-test": "wxa059b818226f8679",
     "Secret-test":"9fa19f4d1f7e37d318dba14f951f1b4c",

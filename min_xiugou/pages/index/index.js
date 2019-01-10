@@ -293,22 +293,34 @@ Page({
         let adType = e.currentTarget.dataset.type;
         let val = e.currentTarget.dataset.val;
         let prodtype = e.currentTarget.dataset.prodtype
+        let index = e.currentTarget.dataset.index
+        let key = e.currentTarget.dataset.key
         if (adType == 10) {
             Tool.navigateTo('/pages/web-view/web-view?webUrl='+val)
             return
         }
-        if (prodtype == 1) {
-            adType = 4
-        } else if (prodtype == 2) {
-            adType = 3
-        } else if (prodtype == 3) {
-            adType = 5
-        } else if (prodtype == 5) {
-            adType = 2
-        } else if (prodtype == 99) {
-            adType = 1
+        let changeType = {
+            1:4,
+            2:3,
+            3:5,
+            6:6,
+            99:1
         }
+        if(prodtype) adType= changeType[prodtype]
         let page = this.data.pageArr[adType].page + val;
+        if(adType==6&&index!==undefined&&key!==undefined){
+            let topicBannerProductDTOList = this.data.hotSale[key].topicBannerProductDTOList || []
+            let list = topicBannerProductDTOList[index]
+            if(!list) return
+            let isEend = list.endTime>list.currTime? false:true
+            let isBegin = list.beginTime>list.currTime? false:true
+            if(isBegin&&!isEend){
+                page = this.data.pageArr[adType].page + this.data.hotSale[key].linkTypeCode+'&productCode='+val
+            } else {
+                page = this.data.pageArr[1].page +val
+            }
+        }
+
         if(this.data.pageArr[adType].tabbar){
             Tool.switchTab(page)
         }else {
