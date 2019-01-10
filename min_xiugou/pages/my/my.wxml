@@ -160,7 +160,7 @@
       </view>
        <view class='my-tools-cont' catchtap='itemClicked' data-page='19' wx:if='{{userInfos.upUserCode}}'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'me_icon_daoshi_nor@3x.png'}}"/>
-        <view>导师</view>
+        <view>我的顾问</view>
       </view>
     </view>
 
