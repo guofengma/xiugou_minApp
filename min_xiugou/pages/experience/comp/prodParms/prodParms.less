@@ -1,0 +1,63 @@
+/* assets/TemplateName.less */
+@import "../../../../css/app.less";
+.prodParms {
+  .infoMain {
+    width: 750rpx;
+    // height: 1226rpx;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 20rpx 20rpx 0px 0px;
+    position: absolute;
+    bottom: 0;
+    .infoTitle {
+      font-size: 34rpx;
+      margin: 30rpx auto;
+      text-align: center;
+    }
+    .infoBody {
+      height: 900rpx;
+      overflow-x: auto;
+      .infoBlock {
+        .blockList {
+          .listItem {
+            padding: 0 30rpx;
+            border-bottom: 1rpx solid #e4e4e4;
+            font-size: 0;
+            .itemName {
+              min-width: 156rpx;
+              display: inline-block;
+              padding: 28rpx;
+              font-size: 26rpx;
+              color: #999;
+            }
+            .itemDescribe {
+              display: inline-block;
+              padding: 28rpx;
+              margin-left: 20rpx;
+              font-size: 26rpx;
+              color: #333;
+            }
+          }
+        }
+      }
+      .footer {
+        height: 164rpx;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: #fff;
+        .makeSure {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 10rpx;
+          width: 690rpx;
+          height: 88rpx;
+          background: rgba(255, 0, 80, 1);
+          border-radius: 44rpx;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

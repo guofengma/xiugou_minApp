@@ -24,7 +24,8 @@ Page({
         {name:'取消',type:'share'},
         {name:'去登录',type:''}
       ]
-    }
+    },
+    hasMask:false
   },
   onLoad: function (options) {
     this.setData({
@@ -125,7 +126,7 @@ Page({
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params)+'&type=99' )
   },
   addToShoppingCart(){
-    this.ProductFactory.addToShoppingCart()
+    this.ProductFactory.addToShoppingCart("","")
   },
   typeSubClicked(e){
     this.setData({
@@ -189,7 +190,6 @@ Page({
       return
     }
     that.data.distanceTime--
-    console.log(that.data.distanceTime)
     let time = setTimeout(function () {
       that.countdown(that);
     }, 1000)

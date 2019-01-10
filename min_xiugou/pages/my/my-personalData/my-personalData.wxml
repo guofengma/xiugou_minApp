@@ -23,7 +23,7 @@
     <view class="wrap">
         <view class="item line">
             <view>
-                <text>授权ID</text>
+                <text>会员号</text>
             </view>
             <view>
                 <text>{{userInfos.code||''}}</text>

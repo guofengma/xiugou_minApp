@@ -35,6 +35,7 @@ Page({
     isContinuePay:false, //是否是继续支付
     outTrandNo:'',
     payType:'',//上次支付时选择的支付方式
+    payDisabled:false,// 防止重复点击支付
   },
   onLoad: function (options) {
     this.setData({
@@ -74,7 +75,9 @@ Page({
     if (!payWay.isSelect){
       Tool.showAlert('请选择支付方式')
       return
-    } 
+    }
+    if(this.data.payDisabled) return
+    this.data.payDisabled = true
     let payType = payWay.index == 0 ? 16 : 2
     if(this.data.door==1){
       this.payOrder(payType)
@@ -95,6 +98,7 @@ Page({
         this.wxPay(datas.payInfo)
       }
     }).catch((res) => {
+      this.data.payDisabled = false
       console.log(res)
     })
   },
@@ -130,10 +134,12 @@ Page({
         this.wxPay(datas)
       }
     }).catch((res) => {
+      this.data.payDisabled = false
       console.log(res)
     })
   },
   showResult(bool){ // 支付结果显示
+    this.data.payDisabled = false
     this.setData({
       tipsBtn: this.data.tipsBtnArr[this.data.door],
       tipsContent: this.data.tipsContentArr[this.data.door],

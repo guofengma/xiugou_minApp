@@ -1,0 +1,61 @@
+<import src="/components/iPhoneX-line/iPhoneX-line.wxml" />
+<view class="activeInfo model-view-bg" wx:if="{{show}}">
+    <view class="infoMain {{isIPhoneX.className}}">
+        <view class="infoTitle">活动信息</view>
+        <view class="infoBody">
+            <view class="infoBlock">
+                <view class="blockTitle">
+                    <text class="titleTag"></text>
+                    <text class="titleContent">经验值</text>
+                </view>
+                <view class="blockList">
+                    <view class="listItem" wx:for="{{operatorDetail.rules}}" wx:key="unique">
+                        购买满{{item.startPrice}}元，经验值翻{{item.rate}}倍
+                    </view>
+                </view>
+            </view>
+            <view class="infoBlock" wx:if="{{coupon.value}}">
+                <view class="blockTitle">
+                    <text class="titleMoney"></text>
+                    <text class="titleContent">{{typeName}}</text>
+                </view>
+                <view class="blockList">
+                    <view class="listItem">
+                        每满{{operatorDetail.startPrice}}元，赠送{{operatorDetail.startCount}}张优惠券
+                    </view>
+                    <view class="listItem">单笔订单最多可领{{operatorDetail.maxCount}}张优惠券</view>
+                </view>
+                <view class="blockCoupon">
+                    <view class="couponTop">
+                        <view class="couponMoney">
+                            ¥
+                            <text class="couponNum">{{coupon.value}}</text>
+                        </view>
+                        <view class="couponDescribe">
+                            <view class="describeName">
+                                {{coupon.name}}
+                                <view class="brand">{{typeName}}</view>
+                            </view>
+                            <view class="describeUp">满{{coupon.useConditions}}可用</view>
+                        </view>
+                    </view>
+                    <view class="couponTime">领取后{{coupon.effectiveDays}}天内可用</view>
+                </view>
+            </view>
+            <view class="infoBlock">
+                <view class="blockTitle">
+                    <text class="titleQuery"></text>
+                    <text class="titleContent">活动说明</text>
+                </view>
+                <view class="activeExplain">{{operatorDetail.contents?operatorDetail.contents:''}}</view>
+            </view>
+            <view class="footer {{isIPhoneX.className}}">
+                <view class="makeSure btn-default" data-select='activeInfo' bindtap="changgeState">
+                    确定
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 适配iPhone X -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

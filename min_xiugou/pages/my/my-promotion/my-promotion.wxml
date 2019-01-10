@@ -10,6 +10,7 @@
     <text class='font-30'>{{userLevelInfo.levelName}}品鉴官</text>
     <view class='level-label font-22'>{{userLevelInfo.levelRemark}}</view>
   </view>
+  <view class="exp-door flexR-sb" bindtap="toExp">经验明细 <image src="/img/me_arrow@3x.png" class="exp-icon"></image></view>
 </view>
 
 <view class='growing-view-bg'>
@@ -42,7 +43,7 @@
 </view>
 
 <view class='base-bar flexR {{isIPhoneX.className}}'>
-  <view class='flexR whiteBg' catchtap='goPage' data-index='0'>邀请好友</view>
+  <view class='flexR whiteBg' catchtap='goPage' data-index='0'>分享好友</view>
   <view class='redBg flexR' catchtap='goPage' data-index='1'>去购物</view>
 </view>
 

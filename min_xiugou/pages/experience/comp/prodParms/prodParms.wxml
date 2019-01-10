@@ -1,0 +1,21 @@
+<import src="/components/iPhoneX-line/iPhoneX-line.wxml" />
+<view class="prodParms model-view-bg" wx:if="{{show}}">
+    <view class="infoMain {{isIPhoneX.className}}">
+        <view class="infoTitle">产品参数</view>
+        <view class="infoBody">
+            <view class="infoBlock">
+                <view class="blockList">
+                    <view class="listItem" wx:for="{{paramList}}" wx:key='unique'>
+                        <view class="itemName">{{item.paramName}}</view>
+                        <view class="itemDescribe">{{item.paramValue}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="footer {{isIPhoneX.className}}">
+                <view class="makeSure btn-default" bindtap="changgeState">确定</view>
+            </view>
+        </view>
+    </view>
+</view>
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

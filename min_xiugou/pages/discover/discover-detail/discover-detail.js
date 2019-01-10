@@ -8,9 +8,9 @@ Page({
     details: {}
   },
   onLoad: function (options) {
-    let articleId = options.articleId;
     this.setData({
-      articleId: articleId
+      articleId: options.articleId || '',
+      articleCode: options.articleCode || '',
     })
     app.shareClick(options.inviteId);
     
@@ -27,9 +27,10 @@ Page({
 
   },
   getArticleDetail() { // 获取文章详情
-    let _ = this;    
-    API.getDiscoverById({
+    let reqUrl = this.data.articleCode? 'getDiscoverByCode':'getDiscoverById'
+    API[reqUrl]({
       id: this.data.articleId,
+      code:this.data.articleCode,
     }).then((res) => {
       let data = res.data || {};
       let WxParse = require('../../../libs/wxParse/wxParse.js');

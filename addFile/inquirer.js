@@ -45,6 +45,7 @@ module.exports = async function run({ placementPath }) {
       .concat(selectPlacementPath)
   return new Promise(async function(resolve, reject) {
     const answers = await inquirer.prompt(prompts)
+    console.log(template)
     resolve({
       file: answers.file,
       placementPath: answers.path,

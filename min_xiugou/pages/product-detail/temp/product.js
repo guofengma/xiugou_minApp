@@ -12,8 +12,8 @@ export default class ProductFactorys  {
       this.page.data.userInfos = this.page.data.userInfos || {}
       datas.userLevelTypeName = datas.priceType == (1 || 0 || null || undefined) ? '原价' : datas.priceType == 2 ? "拼店价" : this.page.data.userInfos.levelRemark + "价"
       datas.showPrice = (datas.minPrice == datas.maxPrice) ? '¥' + datas.maxPrice : '¥' + datas.minPrice + ' - ¥' + datas.maxPrice
-      // 用户不能购买 限购但属于数量小于等于0且状态不是1
-      if ((datas.buyLimit != -1 && !datas.leftBuyNum) || datas.productStatus != 1) {
+      // 用户不能购买 限购但属于数量小于等于0且状态不是1 (datas.buyLimit != -1 && !datas.leftBuyNum) || datas.productStatus != 1)
+      if (datas.productStatus != 1) {
         datas.canUserBuy = false
       } else {
         datas.canUserBuy = true
@@ -29,8 +29,16 @@ export default class ProductFactorys  {
       let advanceSale = {
         isAdvanceSale: datas.productStatus==3? true:false,
         status: datas.productStatus,
-        time: Tool.formatTime(datas.upTime || "")
+        time:Tool.timeStringFromInterval(datas.upTime/1000,'YYYY-MM-DD HH-mm')
       }
+      // 计算库存
+      let total = datas.skuList.reduce((acc, cur) => {
+        return acc + cur.sellStock;
+      }, 0);
+      // 是否支持7天无理由退换货 数字4 位运算
+      let arr = Tool.bitOperation([4], datas.restrictions)
+      if(arr.includes(4)) datas.showAfterSaleServiceDays = true
+      datas.totalStock = total;
       this.page.setData({
         isInit: false,
         imgUrls: imgUrls,
@@ -113,20 +121,24 @@ export default class ProductFactorys  {
     }
     app.queryPushMsg(callBack)
   }
-  addToShoppingCart() { // 加入购物车
-    let params = {
-      productCode: this.page.data.selectType.prodCode,
+  addToShoppingCart(activityCode,activityType) { // 加入购物车
+    //
+    let params ={
+      spuCode: this.page.data.selectType.prodCode,
       amount: this.page.data.selectType.buyCount,
       skuCode: this.page.data.selectType.skuCode,
       status: this.page.data.selectType.productStatus,
-      timestamp: new Date().getTime(),
+      activityCode:activityCode || '',
+      activityType:activityType || '',
     }
     // 加入购物车
     if (!this.page.data.didLogin) {
       this.setStoragePrd(params)
       return
     }
-    API.addToShoppingCart(params).then((res) => {
+    API.addToShoppingCart({
+      shoppingCartParamList:[params]
+    }).then((res) => {
       this.getShoppingCartList()
       Event.emit('updateShoppingCart')
       Tool.showSuccessToast('添加成功')
@@ -144,7 +156,7 @@ export default class ProductFactorys  {
       }
     }
     params.showCount = this.page.data.selectType.buyCount
-    list.push(params)
+    list.unshift(params)
     this.updateStorageShoppingCart(list)
   }
   updateStorageShoppingCart(list) { // 存储在本地
@@ -158,11 +170,19 @@ export default class ProductFactorys  {
       this.getStorageCartList()
       return
     }
+
     API.getShoppingCartList({}).then((res) => {
-      let data = res.data || []
-      let size = data.length > 99 ? 99 : data.length
+      let data = res.data || {}
+      let size = 0
+      for(let i in data){
+        data[i] = data[i] || []
+        data[i].forEach((item,index)=>{
+          item.products = item.products || []
+          size+= item.products.length
+        })
+      }
       this.page.setData({
-        size: size
+        size: size>99? 99:size
       })
     }).catch((res) => {
 
@@ -267,7 +287,8 @@ export default class ProductFactorys  {
   }
   hiddenTips() {
     this.page.setData({
-      msgShow: false
+      msgShow: false,
+      hasMask:!this.page.data.hasMask
     })
   }
   shareSubClicked(e){

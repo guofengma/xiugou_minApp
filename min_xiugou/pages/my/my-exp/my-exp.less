@@ -1,0 +1,67 @@
+.exp-container {
+  width:690rpx;
+  margin: 20rpx auto;
+  /* background: transparent url("${mrdomain}/promotion-bg.png") no-repeat; */
+  background: #fff;
+  /* background-size: 100%; */
+  border-radius:14px;
+  box-shadow:0px 0px 20px 0px rgba(0,0,0,0.1);
+  padding: 30rpx;
+  box-sizing:border-box;
+}
+.growing-bar{
+  width:100%;
+  height:16rpx;
+  background:#ddd;
+  border-radius:8px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom:26rpx;
+}
+.exp-num .red {
+  font-size: 48rpx;
+}
+.exp-num .gray, .exp-fill{
+  font-size: 20rpx;
+}
+.growing-bar-value{
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-image: linear-gradient(90deg, #FF567F 0%, #FC6D55 100%),
+  linear-gradient(#ffffff, #ffffff);
+}
+.exp-list {
+  background: #fff;
+}
+.exp-item {
+  border-bottom: 1rpx solid #eee;
+  padding: 20rpx 34prx;
+}
+.exp-item_icon {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx 0 20rpx 33rpx;
+}
+.exp-item_body {
+  flex: 1;
+  margin: 0 33rpx;
+}
+.exp-item_title {
+  font-size: 30rpx;
+  color: #222;
+}
+.exp-item_num.lose {
+  color: #000;
+}
+.exp-item_time {
+  color: #999;
+  font-size: 26rpx;
+}
+.no-more {
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+  margin: 30rpx 0;
+}

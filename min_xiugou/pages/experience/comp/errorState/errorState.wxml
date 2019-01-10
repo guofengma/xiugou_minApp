@@ -1,0 +1,11 @@
+<import src="/components/iPhoneX-line/iPhoneX-line.wxml" />
+<view class="errorState" wx:if="{{show}}">
+    <view class="itemBlock">
+        <view class="blockPic">
+            <image-sub imgStyle='{{"width:200rpx;height:200rpx"}}' imgSrc="/img/experience_noContent@3x.png" />
+        </view>
+        <view class="blockTitle">{{title}}</view>
+    </view>
+</view>
+<!-- 适配iPhone X -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

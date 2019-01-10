@@ -1,0 +1,259 @@
+.sub-page {
+  height: 100%;
+}
+image {
+  height: auto;
+  vertical-align: middle;
+}
+.flexR {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.flexR-sb {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.flexC {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.boxSize {
+  box-sizing: border-box;
+}
+button::after {
+  border: none;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.overflow {
+  overflow: hidden;
+}
+.logo {
+  width: 130rpx;
+  height: 130rpx;
+}
+/* 按钮样式 */
+.btn-base {
+  background-color: #ff0050;
+  color: #fff;
+  font-size: 32rpx;
+  height: 96rpx;
+}
+.loginBtn,
+.btn-default {
+  width: 580rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  background-color: #ff0050;
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+}
+.btn-large {
+  width: 100%;
+}
+.btn-small {
+  width: 220rpx;
+}
+.flexR > text {
+  height: 1.4rem;
+  line-height: 1.4rem;
+}
+.form input {
+  margin-left: 45rpx;
+  width: 360rpx;
+}
+/*溢出省略号  */
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-height: 76rpx;
+  line-height: 38rpx;
+}
+.pwdImg {
+  width: 40rpx;
+}
+.tips-view {
+  padding: 30rpx 40rpx;
+  color: #c8c8c8;
+}
+.gold {
+  color: #c2a38d;
+}
+.red {
+  color: #ff0050;
+}
+.gray {
+  color: #666;
+}
+.gray-9 {
+  color: #999;
+}
+.white {
+  color: #fff;
+}
+.redBg {
+  background-color: #ff0050;
+  color: #fff;
+}
+.grayBg {
+  background-color: #f8f8f8;
+  color: #fff;
+}
+.darkBg {
+  background: #ddd;
+  color: #fff;
+}
+.yellowBg {
+  background-color: #fbbb50;
+  color: #fff;
+}
+.whiteBg {
+  background-color: #fff;
+}
+/*模态背景框，半透明黑色，全屏*/
+.model-view-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100002;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/*模态框的样式  */
+
+.model-view-bg .tips-box {
+  width: 590rpx;
+  min-height: 300rpx;
+  background-color: #ffffff;
+  border-radius: 20rpx;
+  box-sizing: border-box;
+}
+
+.address.active {
+  padding: 30rpx;
+  background: #fff url(${mrdomain}/line-bg.png) no-repeat left bottom;
+  background-size: 100%;
+}
+.add-address-btn {
+  height: 100rpx;
+  color: #fff;
+  font-size: 30rpx;
+}
+.label-by,
+.label-jf {
+  margin-right: 15rpx;
+  padding: 0rpx 8rpx;
+  border-radius: 6rpx;
+  font-size: 22rpx;
+}
+.label-by {
+  color: #0186f5;
+  border: 1rpx solid #0186f5;
+  background: #f0f8ff;
+}
+.label-jf {
+  color: #fff;
+  background: #3cb034;
+  border: 1rpx solid #3cb034;
+}
+.font-20 {
+  font-size: 20rpx;
+}
+.font-22 {
+  font-size: 22rpx;
+}
+.font-24 {
+  font-size: 24rpx;
+}
+.font-26 {
+  font-size: 26rpx;
+}
+.font-28 {
+  font-size: 28rpx;
+}
+.font-30 {
+  font-size: 30rpx;
+}
+.font-32 {
+  font-size: 32rpx;
+}
+.font-34 {
+  font-size: 34rpx;
+}
+.font-38 {
+  font-size: 38rpx;
+}
+.font-50 {
+  font-size: 50rpx;
+}
+.jiantou {
+  width: 16rpx;
+}
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  left: 0;
+}
+.fixed-bottom-iPhoneX {
+  position: fixed;
+  bottom: 34rpx !important;
+  width: 100% !important;
+  z-index: 999 !important;
+}
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+.label-red-border {
+  border: 1rpx solid #ff0050;
+  border-radius: 6rpx;
+  padding: 0rpx 10rpx;
+  color: #ff0050;
+  font-size: 22rpx;
+  margin-right: 20rpx;
+}
+.base-bar {
+  height: 96rpx;
+}
+/* wxparse 插件重写样式 */
+.wxParse-p image {
+  width: 100%;
+}
+.preventTouchMove{
+  top: 0px ;
+  left:   0px ;
+  width:   100% ;
+  height:   100% ;
+  overflow:   hidden ;
+  position:   fixed ;
+  z-index:   0 ;
+}

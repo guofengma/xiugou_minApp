@@ -1,7 +1,7 @@
 <view class='sub-page'>
-  <view class='gray flexR-sb title font-24'>授权码录入</view>
+  <view class='gray flexR-sb title font-24'>会员号录入</view>
   <view class='input-view whiteBg flexR-sb font-26'>
-    <input placeholder='请输入邀请人授权码' class='font-26' value='{{code}}' bindinput='changeInput' placeholder-style='color:#999'></input>
+    <input placeholder='请输入邀请人会员号' class='font-26' value='{{code}}' bindinput='changeInput' placeholder-style='color:#999'></input>
   </view>
   <button class='loginBtn redBg' disabled='{{disabled}}' bindtap='mentorBind'>确定</button>
   <view class='flexR dismiss font-26 gray-9 ' catchtap='dismiss'>

@@ -120,9 +120,11 @@ Component({
       this.setData({
         visiable: !this.data.visiable,
       })
-      if (this.data.visiable){
-        this.triggerEvent('hiddenTips');
-      }
+      this.triggerEvent('hiddenTips')
+
+      // if (this.data.visiable){
+      //   this.triggerEvent('hiddenTips');
+      // }
     },
     isSelectAll() { // 是否选择了所有的规格选项
       let isActive = this.data.isActive

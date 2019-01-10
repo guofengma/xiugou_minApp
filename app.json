@@ -10,7 +10,6 @@
 		"pages/register/register",
 		"pages/register/register-code/register-code",
 		"pages/product-detail/product-detail",
-		"pages/my/aboutUs/aboutUs",
 		"pages/my/account/account",
 		"pages/my/setting/setting",
 		"pages/address/new-address/new-address",
@@ -73,7 +72,9 @@
 		"pages/logistics/logistics-list/logistics-list",
 		"pages/mentorInfo/choose-mentor/choose-mentor",
 		"pages/mentorInfo/write-info/write-info",
-		"pages/mentorInfo/mentor-detail/mentor-detail"
+		"pages/mentorInfo/mentor-detail/mentor-detail",
+		"pages/experience/experience",
+		"pages/my/my-exp/my-exp"
 	],
 	"window": {
 		"navigationBarBackgroundColor": "#ffffff",

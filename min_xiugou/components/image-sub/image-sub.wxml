@@ -1,6 +1,6 @@
 <image wx:if='{{isHttpImg}}'
     class='sub-image'
-    src="{{baseImgUrl}}" 
+    src="{{baseImgUrl}}"
     mode='{{mode||"widthFix"}}' 
     style='{{imgStyle}}'
     lazy-load='true'
@@ -9,7 +9,7 @@
 >
 </image>
 <image wx:else 
-    src="{{baseImgUrl}}" 
+    src="{{baseImgUrl}}"
     mode='{{mode||"widthFix"}}' 
     style='{{imgStyle}}'
     lazy-load='true'

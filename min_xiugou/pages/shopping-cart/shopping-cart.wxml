@@ -6,24 +6,45 @@
 <!-- <scroll-view class="search-result" scroll-y > -->
   <view class='shopping-cart' wx-if='{{!tipVal}}'>
     <view wx:for='{{items}}'  data-index='{{index}}'  wx:key='unique' class='shopping-cart-line '>
-      <view class='flexR-sb whiteBg' >
-        <view class='chooseImg'  bindtap='chooseClicked' data-index='{{index}}' >
-        <image src='{{ item.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
-        </view>
-        <!-- <view wx:else class='statusLabel flexR'>
-        失效
-        </view> -->
-        <!--侧滑删除代码  -->
-        <view class='move-box'>
-          <delete-bar  bind:deleteClicked="deleteClicked" item='{{items}}' index="{{index}}">
-            <template is="cart-product-info" data='{{innerCount:item.showCount,imgSize:160,countSize:50,index,...item,inCart:true}}'/>
-          </delete-bar>
-        </view>
+      <!--购物车的产品分类提示-->
+      <view class="prodClass flexR-sb font-20 whiteBg" wx:if="{{item.isFailed&&item.list.length}}">
+        <!--失效的产品-->
+        <view class="gray">失效宝贝{{item.list.length}}件</view>
+        <view class="red" catchtap='clearItems' >清空失效宝贝</view>
       </view>
-      <view class='flexR font-22 {{item.isBegin? "redBg":"redBg-2"}}' wx:if='{{!item.isEnd && item.activityType}}'>
-        <text wx:if='{{item.isBegin}}'>该商品正在进行{{item.activityType==1? "秒杀":"降价拍"}}活动，快去看看~</text>
-        <text wx:else>{{item.activityType==1? "秒杀":"降价拍"}}活动未开始,暂不可购买</text>
-      </view>
+      <!--产品信息-->
+      <block wx:for='{{item.list}}' wx:for-item='list' wx:for-index='key' wx:key="key">
+        <view class="product-line">
+          <view class="prodClass flexR-sb font-20 whiteBg" wx:if="{{list.activityType==8&&!item.isFailed}}" bindtap='collectBills' data-code="{{list.activityCode}}">
+            <view class="leftTips flexR-sb" >
+              <view class="tips-label redBg">经验值翻倍</view>
+              <view class="ellipsis-2 tips-content gray boxSize ">
+                <block wx:if="{{list.showRule}}">
+                  满{{list.showRule.startPrice}}元减，经验值翻{{list.showRule.rate}}倍
+                  <text wx:if="'{{list.showRule.couponNum}}">，送{{list.showRule.couponNum}}张优惠券</text>
+                  <text wx:if="{{list.showRule.differ}}">，差{{list.showRule.differ}}元</text>
+                </block>
+                <block wx:else>
+                  满{{list.rules[0].startPrice}}元减，经验值翻{{list.rules[0].rate}}倍
+                  <text wx:if="'{list.startCount}}">，送{{list.startCount}}张优惠券</text>
+                </block>
+              </view>
+            </view>
+            <view class="red" >去凑单 > </view>
+          </view>
+          <view class='flexR-sb whiteBg ' wx:for='{{list.products}}' wx:for-item='list0' wx:for-index='key0' wx:key="key0">
+            <view class='chooseImg'  bindtap='chooseClicked'  data-key="{{key0}}" data-itemkey="{{index}}" data-prodskey="{{key}}">
+              <image src='{{ list0.isSelect? "/img/choose-icon-c.png":"/img/choose-icon.png"}}' mode='widthFix'></image>
+            </view>
+            <!--侧滑删除代码  -->
+            <view class='move-box'>
+              <delete-bar  bind:deleteClicked="deleteClicked" item='{{list.products}}' index="{{key0}}" itemkey="{{index}}" prodskey="{{key}}">
+                <template is="cart-product-info" data='{{innerCount:list0.showCount,imgSize:160,countSize:50,...list0,inCart:true,isFailed:item.isFailed,index:key0,itemkey:index,prodskey:key}}'/>
+              </delete-bar>
+            </view>
+          </view>
+        </view>
+      </block>
     </view>
   </view>
   <!--搜索结果异常显示 tipVal  -->

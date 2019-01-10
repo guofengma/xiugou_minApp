@@ -11,7 +11,7 @@
 
 
 <!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
-  <view class='prduct-detail-view' wx:if='{{productInfo}}'>
+  <view class='prduct-detail-view {{hasMask? "preventTouchMove":""}}' wx:if='{{productInfo}}'>
     <!--topbar  -->
     <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
     <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
@@ -78,11 +78,9 @@
  wx:if="{{showRegular}}"
  >
   <view class='regular-list'>
-    <view class='regular-list-item'>1、降价拍活动开启后，每到规定时间都降低销售价；</view>
-    <view class='regular-list-item'>2、什么时候降价？每个活动，每个商品的降价时间都是不固定的；</view>
-    <view class='regular-list-item'>3、参与降价拍的商品是有限的，而且每个商品的购买都是有限制的；</view>
-    <view class='regular-list-item'>4、降价拍活动时间？每个活动的时间都是规定的，直到商品拍卖结束为止；</view>
-    <view class='regular-list-item'>5、关于购买限制？每个用户购买成功后都会扣除购买机会，即时退款也无法增加购买次数；</view>
+    <view class='regular-list-item'>1、参与降价拍的商品，活动开始之后，商品价格由高到低依次递减，直到竞买人应价，商品库存有限，活动时间有限，先拍先得；</view>
+    <view class='regular-list-item'>2、一个降价拍商品，每人只能抢购一件，下单之后不可立马取消订单，直到该商品结束降价拍活动，才开放退货退款入口。</view>
+    <view class='regular-list-item'>3、降价拍商品不与其它优惠同享。</view>
   </view>
  </product-regular-toast>
 

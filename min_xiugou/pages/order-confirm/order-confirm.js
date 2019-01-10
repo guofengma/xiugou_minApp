@@ -26,18 +26,19 @@ Page({
     },
     submitUrl:{ // 提交订单接口
       99:'submitOrder'
-    }
+    },
+    formPage:2,// 1是购物车 2是直接下单 3是经验值专区
   },
   onLoad: function (options) {
     Tool.getUserInfos(this)
+    this.data.formPage= options.formPage || 2
+    this.data.submitUrl =  {
+      ...this.data.confirmUrl,
+      ...this.data.submitUrl
+    }
+    this.data.params = Storage.getSubmitOrderList() || {},
     this.setData({
-      params:Storage.getSubmitOrderList() || {},
       door: options.type,
-      formCart: options.formCart || false,
-      submitUrl: {
-        ...this.data.confirmUrl,
-        ...this.data.submitUrl
-      }
     })
     this.requestOrderInfo()
     Tool.isIPhoneX(this)
@@ -54,41 +55,30 @@ Page({
     if (!this.data.tokenCoinClick) return
     let useOneCoinNum = Storage.getTokenCoin() || 0
     this.data.params.tokenCoin = Number(useOneCoinNum)
-    this.setData({
-      params: this.data.params
-    })
     let callBack = ()=>{
       this.setData({
         useOneCoinNum: this.data.params.tokenCoin,
-        tokenCoinClick:false
       })
+      this.data.tokenCoinClick = false
     }
     this.requestOrderInfo(callBack)
   },
   tokenCoinClick(){
-    this.setData({
-      tokenCoinClick: true
-    })
+    this.data.tokenCoinClick = true
   },
   couponClick() { // 是否点击了优惠卷
-    this.setData({
-      couponClick:true
-    })
+    this.data.couponClick = true
   },
   updateCoupon(){ // 点击优惠卷价格联动
     if (!this.data.couponClick) return
     let coupon = Storage.getCoupon()
     this.data.params.userCouponCode = coupon.code
     this.data.params.tokenCoin = 0
-    this.setData({
-      params: this.data.params,
-    })
     let callBack = (item)=>{
-      console.log(item)
       this.setData({
-        coupon: coupon,
-        couponClick: false
+        coupon: coupon
       })
+      this.data.couponClick =false
       if (this.data.useOneCoinNum > item.payAmount){
         Tool.showAlert("一元劵最多只能使用" + Math.floor(item.payAmount)+'张')
         this.setData({
@@ -103,7 +93,7 @@ Page({
     let params = {
       ...this.data.params,
       channel:1,
-      source: this.data.formCart ? 1 : 2, // 订单来源
+      source: Number(this.data.formPage), // 订单来源
       submitType:1,
     }
     let reqUrl = this.data.confirmUrl[this.data.door]
@@ -226,12 +216,10 @@ Page({
     addressList[this.data.addressType] = address
     // 参数 省市区code
     this.data.params.addressId = address.id
-    // this.data.params.provinceCode = address.provinceCode
-    // this.data.params.cityCode = address.cityCode
+
     this.setData({
       isChangeAddress:true,
-      addressList: addressList,
-      params: this.data.params
+      addressList: addressList
     })
     this.requestOrderInfo()
   },
@@ -251,20 +239,13 @@ Page({
       return
     }
     if (this.data.btnDisabled) return
-    this.setData({
-      btnDisabled:true
-    })
+    this.data.btnDisabled = true
     let params = {
       ...this.data.params,
-      // orderProductList: this.data.params.orderProductList || '',
-      // orderType: this.data.params.orderType || '',// 订单类型
-      // orderSubType: this.data.params.orderSubType || '', //订单子类型
-      // tokenCoin: this.data.params.tokenCoin,//一元劵
-      // userCouponCode: this.data.coupon.code || '', //优惠卷
       addressId: this.data.orderInfos.address.id,// 收件地址
       message: this.data.remark || '',// 买家留言
       channel: 1,// 渠道 1.小程序 2.APP 3.H5
-      source: this.data.formCart ? 1 : 2, // 订单来源
+      source: Number(this.data.formPage), // 订单来源
       submitType: 2, // 提交类型 1：确认订单，2：提交订单
     }
     let reqUrl = this.data.submitUrl[this.data.door]
@@ -275,9 +256,7 @@ Page({
       Storage.setPayOrderList(datas)
       Tool.redirectTo('/pages/order-confirm/pay/pay?door=1')
     }).catch((res) => {
-      this.setData({
-        btnDisabled:false
-      })
+      this.data.btnDisabled = false
       this.failBlock(res)
       console.log(res)
     })
@@ -285,7 +264,7 @@ Page({
   failBlock(res){
     let callBack = () => { }
     if (res.code == 54001) {
-      if (this.data.formCart) {
+      if (this.data.formPage==1) {
         callBack = () => {
           Event.emit('updateShoppingCart')
           Tool.switchTab('/pages/shopping-cart/shopping-cart')
@@ -297,8 +276,10 @@ Page({
       }
     } else {
       callBack = () => {
-        this.data.params.tokenCoin = 0
-        this.requestOrderInfo()
+        if(res.code != 10004 && this.data.params.tokenCoin != 0){
+          this.data.params.tokenCoin = 0
+          this.requestOrderInfo()
+        }
       }
     }
     Tool.showAlert(res.msg, callBack)

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "导师详情",
+  "navigationBarTitleText": "顾问详情",
   "usingComponents": {
     "image-sub": "/components/image-sub/image-sub"
   }
