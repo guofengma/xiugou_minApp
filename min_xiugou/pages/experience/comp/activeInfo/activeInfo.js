@@ -10,7 +10,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    typeName: ""
+    typeName: "",
+    contents: ""
   },
 
   /**
@@ -29,6 +30,9 @@ Component({
     Tool.isIPhoneX(this);
     // ready里面setData异步原因 在安卓不同步 通过设置延迟处理
     setTimeout(() => {
+      this.setData({
+        contents: Tool.htmlEscape(this.data.operatorDetail.contents)
+      });
       if (this.data.coupon) {
         switch (this.data.coupon.type) {
           case 1:
