@@ -9,7 +9,7 @@
                 <view class='growing-bar-value' style="width: {{width}}"></view>
             </view>
             <view class="exp-fill">
-                距离晋升还差<text>{{userLevelInfo.surpluslExperience}}点Exp</text>
+                距离晋升还差<text>{{userLevelInfo.surpluslExperience || 0}}点Exp</text>
                 <text class='red' wx:if='{{!userLevelInfo.surpluslExperience}}'>(Exp已满)</text>
             </view>
         </view>
@@ -20,7 +20,8 @@
             <view class="exp-item_body">
                 <view class="exp-item_detail flexR-sb">
                     <view class="exp-item_title">{{expStatus[item.sourceCode].title}}</view>
-                    <view class="exp-item_num red">+{{item.experience}}</view>
+                    <!-- sourceType 0: 删除 1：新增 2：归零 -->
+                    <view class="exp-item_num {{item.sourceType == '1' ? 'red' : 'lose' }}">+{{item.experience}}</view>
                 </view>
                 <view class="exp-item_time">{{item.createTime}}</view>
             </view>
