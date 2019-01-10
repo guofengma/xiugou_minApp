@@ -2,7 +2,7 @@
   <view class='inviterInfo '>
     <view>
       <view class='tips font-26 flexR-sb'>
-        <view>请选择一个导师</view>
+        <view>请选择一个顾问</view>
         <view class='flexR gray-9' catchtap='changeClicked'>
           <image-sub imgStyle='{{"width:32rpx;margin-right:10rpx"}}' imgSrc="{{'shuaxin-icon.png'}}"/>
           换一换
@@ -20,7 +20,7 @@
           </swiper-item>
         </swiper>
       </view>
-      <view wx:else class='gray-9 flexR'>暂无导师，请填写授权码或跳过该步骤~</view>
+      <view wx:else class='gray-9 flexR'>暂无顾问，请填写授权码或跳过该步骤~</view>
     </view>
   </view>
   <button class='loginBtn' disabled='{{disabled}}' catchtap='mentorBind' >确认</button>

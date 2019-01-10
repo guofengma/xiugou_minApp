@@ -5,7 +5,7 @@
   </view>
   <button class='loginBtn redBg' disabled='{{disabled}}' bindtap='mentorBind'>确定</button>
   <view class='flexR dismiss font-26 gray-9 ' catchtap='dismiss'>
-    <text>选择导师</text>
+    <text>选择顾问</text>
   </view>
 </view>
 

@@ -19,7 +19,7 @@
         </view>
 
         <view class='my-rank' wx:if='{{didLogin}}'>
-          授权ID {{userInfos.code || ''}}
+          会员号 {{userInfos.code || ''}}
         </view>
       </view>
     </view>
@@ -160,7 +160,7 @@
       </view>
        <view class='my-tools-cont' catchtap='itemClicked' data-page='19' wx:if='{{userInfos.upUserCode}}'>
         <image-sub imgStyle='{{"width:40rpx"}}' imgSrc="{{'me_icon_daoshi_nor@3x.png'}}"/>
-        <view>导师</view>
+        <view>我的顾问</view>
       </view>
     </view>
 

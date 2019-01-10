@@ -16,5 +16,5 @@
 <!--</view>-->
 <view class='font-26 content whiteBg'>
   <view>简介</view>
-  <view class='gray font-24'> {{datas.profile || '这位导师很懒，什么也没留下~'}}</view>
+  <view class='gray font-24'> {{datas.profile || '这位顾问很懒，什么也没留下~'}}</view>
 </view>

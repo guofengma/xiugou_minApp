@@ -156,7 +156,7 @@ export default class ProductFactorys  {
       }
     }
     params.showCount = this.page.data.selectType.buyCount
-    list.push(params)
+    list.unshift(params)
     this.updateStorageShoppingCart(list)
   }
   updateStorageShoppingCart(list) { // 存储在本地
