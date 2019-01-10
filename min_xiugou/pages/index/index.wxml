@@ -183,7 +183,7 @@
       <scroll-view scroll-x="true" class='hot-sale-scroll' wx:if='{{list.topicBannerProductDTOList.length>0}}'>
         <view class='hot-sale-content boxSize'>
           <block wx:for='{{list.topicBannerProductDTOList}}' wx:key='{{index}}' wx:if='{{index<8}}'>
-            <view class='hot-sale-prd flexC' catchtap='adListClicked' data-prodtype='{{item.productType}}' data-val='{{item.prodCode}}'>
+            <view class='hot-sale-prd flexC' catchtap='adListClicked' data-prodtype='{{item.productType}}' data-val='{{item.prodCode}}' data-index="{{index}}" data-key="{{key}}">
               <!-- <image src='{{item.specImg}}' lazy-load='true'></image> -->
               <image-sub imgSrc="{{item.specImg}}" imgStyle='height:190rpx;width:190rpx' mode='aspectFill' />
               <view class='ellipsis-2 font-24 gray prd-name'>{{item.productName || ''}}</view>

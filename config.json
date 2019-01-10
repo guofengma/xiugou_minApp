@@ -2,30 +2,30 @@
   "dev": {
     "h5webUrl": "http://devh5.sharegoodsmall.com",
     "baseUrl":"http://devapi.sharegoodsmall.com/gateway",
-    "imgBaseUrl":"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/"
+    "imgBaseUrl":"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/",
+    "AppId": "wxc9bc82344767cb2a"
   },
   "test": {
     "h5webUrl": "https://testh5.sharegoodsmall.com",
     "baseUrl":"https://testapi.sharegoodsmall.com/gateway",
-    "imgBaseUrl":"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/"
+    "imgBaseUrl":"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/",
+    "AppId": "wxa059b818226f8679"
   },
   "prod": {
     "h5webUrl": "https://h5.sharegoodsmall.com",
     "baseUrl":"https://api.sharegoodsmall.com/gateway",
-    "imgBaseUrl":"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/"
+    "imgBaseUrl":"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/",
+    "AppId": "wx3ee659054a9716f1"
   },
   "build": {
     "h5webUrl": "https://uath5.sharegoodsmall.com",
     "baseUrl":"https://uatapi.sharegoodsmall.com/gateway",
-    "imgBaseUrl":"https://uatcdn.sharegoodsmall.com/sharegoods/resource/xcx/"
+    "imgBaseUrl":"https://uatcdn.sharegoodsmall.com/sharegoods/resource/xcx/",
+    "AppId": "wxa059b818226f8679"
   },
   "base":{
-    "rasVersion": "1.0.4",
+    "rasVersion": "1.0.5",
     "rasClient":"miniapp",
-    "AppId-test": "wxa059b818226f8679",
-    "Secret-test":"9fa19f4d1f7e37d318dba14f951f1b4c",
-    "AppId-prod": "wxc9bc82344767cb2a",
-    "Secret-prod":"da076ce823d017ea04d50232f2e646ff",
     "imgSizeParams":{
       "m_fixed":"?x-oss-process=image/resize,m_fixed,h_300,w_300",
       "m_fill": "?x-oss-process=image/resize,p_65",
@@ -56,3 +56,4 @@
     "王体忠":"http://172.16.10.56:9090/gateway"
   }
 }
+

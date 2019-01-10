@@ -29,7 +29,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad(options) {
     this.ProductFactory = new ProductFactorys(this);
     this.didLogin();
     // this.getNewProd();
@@ -56,7 +56,8 @@ Page({
     API.getOperatorDetail({ code: this.data.activityCode })
       .then(res => {
         let datas = res.data || {};
-        if ([0, 1, 3].includes(datas.status)) {
+        // 判断是否是进入活动缺省页面
+        if ([0, 1, 3].includes(datas.status) || datas.prods.length < 1) {
           this.setData({
             isError: true,
             errorType: datas.status
@@ -87,13 +88,11 @@ Page({
   },
   formatTime(timestamp) {
     let date = new Date(timestamp);
-    let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
 
     let hour = date.getHours();
     let minute = date.getMinutes();
-    let second = date.getSeconds();
 
     return (
       month +
@@ -142,13 +141,10 @@ Page({
       scrollLeft: e.detail.scrollLeft
     });
   },
-  //   搜索产品信息
+  //   加入购物车
   btnClicked(e) {
     let n = parseInt(e.currentTarget.dataset.key);
-    if (
-      this.data.productInfo.canUserBuy ||
-      (n == 1 && this.data.productInfo.productStatus != 2)
-    ) {
+    if (this.data.productInfo.canBuy) {
       this.selectComponent("#prd-info-type").isVisiableClicked(n);
     }
   },
@@ -221,6 +217,7 @@ Page({
     });
     const callBack = res => {
       res.startTime = this.formatTime(res.upTime);
+      res.canBuy = res.totalStock > 0 && res.productStatus !== 3 ? true : false;
       this.setData({
         productInfo: res
       });

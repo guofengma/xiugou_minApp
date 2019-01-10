@@ -12,7 +12,7 @@ Page({
             {name: '分享', img: 'home_icon_fenxing_nor@3x.png', page: '/pages/topic/topic?code=ZT2018000001'},
             {name: '秀场', img: 'home_icon_xiuchang_nor@3x.png', page: '/pages/discover/discover', tabbar: true},
             {name: '签到', img: 'home_icon_qiangdao_nor@3x.png', page: '/pages/signIn/signIn', login: true},
-            {name: '必看', img: 'home_icon_bikan_nor@3x.png', page: '/pages/discover/discover-detail/discover-detail?articleId=1'},
+            {name: '必看', img: 'home_icon_bikan_nor@3x.png', page: '/pages/discover/discover-detail/discover-detail?articleCode=FX181226000001'},
             {name: '秒杀', img: 'home_icon_miaoshao_nor@3x.png', page: '/pages/topic/topic?code=ZT2018000002'},
         ],
         imgUrls: [],// 轮播
@@ -122,12 +122,9 @@ Page({
             todayList: [], // 今日榜单
             fineQuality: [],//精品推荐
             noticeArr: [],// 头条
-            recommendArr: [],
-            params: {
-                page: 1,
-                pageSize: 10
-            }
+            recommendArr: []
         })
+        this.data.params.page =1
         this.didLogin()
         this.onLoad(this.data.options)
         wx.stopPullDownRefresh();
@@ -150,27 +147,16 @@ Page({
 
     },
     initRequset(){
-        this.queryAdList(1, '轮播图片', (datas) => {
-            this.setData({
-                imgUrls: datas
-            })
-        });
-        this.queryAdList(2, '推荐位', (datas) => {
-            this.setData({
-                adArr: datas
-            })
-        });
-        this.queryAdList(4, '今日榜单', (datas) => {
-            this.setData({
-                todayList: datas
-            })
-        });
-        this.queryAdList(5, '精品推荐', (datas) => {
-            this.setData({
-                fineQuality: datas
-            })
-        });
-        this.queryAdList(6, '超值热卖', (datas) => {
+        //  轮播图片
+        this.queryAdList(1, 'imgUrls')
+        // 推荐位
+        this.queryAdList(2, 'adArr')
+        // 今日榜单
+        this.queryAdList(4, 'todayList')
+        // 精品推荐
+        this.queryAdList(5, 'fineQuality')
+        // 超值热卖
+        this.queryAdList(6, 'hotSale', (datas) => {
             datas.forEach((item, index) => {
                 let topicBannerProductDTOList = item.topicBannerProductDTOList || []
                 topicBannerProductDTOList.forEach((item0, index0) => {
@@ -185,10 +171,7 @@ Page({
                     }
                 })
             })
-            this.setData({
-                hotSale: datas
-            })
-        });
+        })
         this.queryFeaturedList()
         // this.indexQueryCategoryList()
     },
@@ -279,36 +262,54 @@ Page({
         }
         app.getLevel(callBack)
     },
-    queryAdList(types = 1, reqName = '', callBack = ()=> {
+    queryAdList(types = 1, key, callBack = ()=> {
     }) {
         API.queryAdList({
             'type': types,
         }).then((res) => {
             callBack(res.data)
+            key&&this.setData({
+              [key]:res.data
+            })
+
         }).catch((res) => {
             console.log(res)
         });
     },
-    adListClicked(e) {
+    adListClicked(e) { // 点击跳转页面
         let adType = e.currentTarget.dataset.type;
         let val = e.currentTarget.dataset.val;
         let prodtype = e.currentTarget.dataset.prodtype
+        let index = e.currentTarget.dataset.index
+        let key = e.currentTarget.dataset.key
         if (adType == 10) {
             Tool.navigateTo('/pages/web-view/web-view?webUrl='+val)
             return
         }
-        if (prodtype == 1) {
-            adType = 4
-        } else if (prodtype == 2) {
-            adType = 3
-        } else if (prodtype == 3) {
-            adType = 5
-        } else if (prodtype == 5) {
-            adType = 2
-        } else if (prodtype == 99) {
-            adType = 1
+        let changeType = {
+            1:4,
+            2:3,
+            3:5,
+            6:6,
+            99:1
         }
+        // 超值热卖跳转转化
+        if(prodtype) adType= changeType[prodtype]
         let page = this.data.pageArr[adType].page + val;
+        // 经验专区跳转重置page地址
+        if(adType==6&&index!==undefined&&key!==undefined){
+            let topicBannerProductDTOList = this.data.hotSale[key].topicBannerProductDTOList || []
+            let list = topicBannerProductDTOList[index]
+            if(!list) return
+            let isEend = list.endTime>list.currTime? false:true
+            let isBegin = list.beginTime>list.currTime? false:true
+            if(isBegin&&!isEend){
+                page = this.data.pageArr[adType].page + this.data.hotSale[key].linkTypeCode+'&productCode='+val
+            } else {
+                page = this.data.pageArr[1].page +val
+            }
+        }
+
         if(this.data.pageArr[adType].tabbar){
             Tool.switchTab(page)
         }else {
@@ -361,9 +362,6 @@ Page({
         if (this.data.params.page > this.data.recommendTotalPage) {
             return
         }
-        this.setData({
-            params: this.data.params,
-        })
         this.queryFeaturedList()
     },
     isShowNotice(){

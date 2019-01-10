@@ -1,4 +1,3 @@
-// components/alert/alert.js
 let { Tool, RequestFactory, Operation } = global;
 Component({
   properties: {
@@ -11,49 +10,57 @@ Component({
    * 组件的初始数据
    */
   data: {
-    //   show:false,//显示属性
-    // coupon: ""
+    typeName: ""
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    btnClicked(e) {
-      this.data.prodParms = false;
-      //   let index = e.currentTarget.dataset.index;
-      //   this.triggerEvent("subClicked", { index });
-    },
     changgeState(e) {
       this.setData({
         show: false
       });
-      this.triggerEvent('hiddenTips');
-    },
-    subClicked(e) {}
-  },
-  ready: function() {
-    Tool.isIPhoneX(this);
-    const Detail = this.data.operatorDetail;
-    switch (1) {
-      case 1:
-        Detail.typeName = "满减";
-        break;
-      case 2:
-        Detail.typeName = "抵价";
-        break;
-      case 3:
-        Detail.typeName = "折扣";
-        break;
-      case 4:
-        Detail.typeName = "抵扣";
-        break;
+      this.triggerEvent("hiddenTips");
     }
-    this.setData({
-      operatorDetail: Detail
-    });
+  },
+  attached() {},
+  ready() {
+    Tool.isIPhoneX(this);
+    // ready里面setData异步原因 在安卓不同步 通过设置延迟处理
+    setTimeout(() => {
+      if (this.data.coupon) {
+        switch (this.data.coupon.type) {
+          case 1:
+            this.setData({
+              typeName: "满减劵"
+            });
+            break;
+          case 2:
+            this.setData({
+              typeName: "抵价劵"
+            });
+            break;
+          case 3:
+            this.setData({
+              typeName: "折扣劵"
+            });
+            break;
+          case 4:
+            this.setData({
+              typeName: "抵扣劵"
+            });
+            break;
+          default:
+            break;
+        }
+      }
+    }, 1000);
     // this.setData({
-    //   coupon: this.data.operatorDetail.coupon.coupon
+    //   typeName: typeName
+    // });
+    // this.setData({
+    //   coupon: this.data.operatorcoupon.coupon
     // });
   }
 });
