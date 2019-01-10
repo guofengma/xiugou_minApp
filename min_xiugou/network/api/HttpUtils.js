@@ -37,7 +37,7 @@ export default class HttpUtils {
             global.Tool.showLoading();
           }
           // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-          console.log(res)
+          // console.log(res)
           let tempFilePaths = res.tempFilePaths;
           if (tempFilePaths[0].lastIndexOf('.gif') != -1) {
             global.Tool.showAlert('不支持gif格式图片')
@@ -113,7 +113,7 @@ export default class HttpUtils {
           if (isShowLoading) {
             global.Tool.hideLoading();
           }
-          console.log(res.data)
+          // console.log(res.data)
           // console.log(JSON.stringify(res.data, null, "\t"))
         }
       });

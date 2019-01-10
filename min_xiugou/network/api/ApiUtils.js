@@ -27,7 +27,7 @@ export default class ApiUtils {
       const key = JSON.stringify([url, params])
       let value = this.cache[key];
       if(!value) {
-        console.log('新值，执行中...')
+        // console.log('新值，执行中...')
         this.cache[key] = url;
         return true
       } else {
