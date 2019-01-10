@@ -50,7 +50,7 @@
         <view class="bottom">
           <view class='progress'
            style='width:{{200 * ((prop.totalNumber - prop.surplusNumber)/prop.totalNumber)}}rpx'></view>
-          <view style='position:absolute;left:50%;transform:translateX(-50%);z-index:2'>
+          <view style='position:absolute;width:100%;left:0;z-index:2' class="ellipsis">
             {{prop.status === 3 ? "已抢100%" : "还剩" + prop.surplusNumber + "件"}}
           </view>
         </view>
