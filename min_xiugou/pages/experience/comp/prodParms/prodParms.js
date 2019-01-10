@@ -1,4 +1,3 @@
-// components/alert/alert.js
 let { Tool, RequestFactory, Operation } = global
 Component({
   properties: {

@@ -33,8 +33,8 @@
                         </view>
                         <view class="couponDescribe">
                             <view class="describeName">
-                                经验值专区{{typeName}}优惠劵
-                                <view class="brand">{{typeName}}劵</view>
+                                {{coupon.name}}
+                                <view class="brand">{{typeName}}</view>
                             </view>
                             <view class="describeUp">满{{coupon.useConditions}}可用</view>
                         </view>
