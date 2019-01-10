@@ -24,7 +24,6 @@ export default class HttpUtils {
   static post(url, params, config = {}) {
     return this.request(url, params, config,'post')
   }
-
   static uploadImage(url, params, config = {imgCount:9}) { // 上传图片接口封装
     const headers = this.getHeaders(url, params, config,'post');
     const isShowLoading = this.showLoading(config)

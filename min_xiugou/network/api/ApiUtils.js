@@ -6,6 +6,7 @@ import { Tool } from '../../tools/tcglobal';
 export default class ApiUtils {
   constructor(Urls) {
     this.Urls = Urls
+    this.cache = {}
     // 最大并发量
     this.maxLimit = 5;
     // 请求队列,若当前请求并发量已经超过maxLimit,则将该请求加入到请求队列中
@@ -21,6 +22,19 @@ export default class ApiUtils {
     // 基本请求地址
     this.baseUrl = config.baseUrl
     this.init()
+  }
+  memoize (){
+    const key = JSON.stringify(arguments);
+    let value = this.cache[key];
+    console.log(value)
+    if(!value) {
+      console.log('新值，执行中...');         // 为了了解过程加入的log，正式场合应该去掉
+      value = arguments // 放在一个数组中，方便应对undefined，null等异常情况
+      this.cache[key] = value;
+    } else {
+      console.log('来自缓存');
+    }
+    console.log(this.cache)
   }
   init(){
     let that = this
@@ -57,6 +71,7 @@ export default class ApiUtils {
         const app = getApp();
         try {
           that.currentConcurrent++;
+          that.memoize(url, params)
           const response = await HttpUtils[method](url, params, reqConfig);
           console.log(`------------------ 请求结束:${action}`)
           // console.log( typeof response)
