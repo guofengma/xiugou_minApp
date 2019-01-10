@@ -59,9 +59,9 @@ export default class ApiUtils {
       let name = item.name, url = item.uri, method = item.method || 'post', action = item.action, myConfig = item.config || {}
       that.result[name] = async function (params,reqConfig={}) {
         Object.assign(reqConfig, reqConfig, myConfig)
-        if(!that.memoize(url, params)) {
-          return Promise.reject('重复请求')
-        }
+        // if(!that.memoize(url, params)) {
+        //   return Promise.reject('重复请求')
+        // }
         let val = JSON.stringify([url, params])
         // 若当前请求数并发量超过最大并发量限制，则将其阻断在这里。
         // startBlocking会返回一个promise，并将该promise的resolve函数放在this.requestQueue队列里。这样的话，除非这个promise被resolve,否则不会继续向下执行。
@@ -74,8 +74,7 @@ export default class ApiUtils {
         try {
           that.currentConcurrent++;
           const response = await HttpUtils[method](url, params, reqConfig)
-          // that.cache[val] = null
-          delete that.cache[val]
+          // delete that.cache[val]
           console.log(`------------------ 请求结束:${action}`)
           // console.log( typeof response)
           if (response.code === 0 || response.code === 10000) {
@@ -102,8 +101,7 @@ export default class ApiUtils {
             return Promise.reject(response);
           }
         } catch (err) {
-          // that.cache[val] = null
-          delete that.cache[val]
+          // delete that.cache[val]
           console.log('<============================== 请求结束：' + action + '第' + that.tryCount + '次请求');
           app.aldstat.sendEvent(url + ':interface error try again', {
             url: url,
