@@ -279,7 +279,7 @@ Page({
             console.log(res)
         });
     },
-    adListClicked(e) {
+    adListClicked(e) { // 点击跳转页面
         let adType = e.currentTarget.dataset.type;
         let val = e.currentTarget.dataset.val;
         let prodtype = e.currentTarget.dataset.prodtype
@@ -296,8 +296,10 @@ Page({
             6:6,
             99:1
         }
+        // 超值热卖跳转转化
         if(prodtype) adType= changeType[prodtype]
         let page = this.data.pageArr[adType].page + val;
+        // 经验专区跳转重置page地址
         if(adType==6&&index!==undefined&&key!==undefined){
             let topicBannerProductDTOList = this.data.hotSale[key].topicBannerProductDTOList || []
             let list = topicBannerProductDTOList[index]

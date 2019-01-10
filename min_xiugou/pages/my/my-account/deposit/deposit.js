@@ -60,7 +60,7 @@ Page({
           // item.showName = item.status == 2? "已冻结":item.showName
         })
         this.setData({
-          list: list.concat(datas.data),
+          list: this.data.list.concat(datas.data),
           totalPage: datas.totalPage,
         })
       }
