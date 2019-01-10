@@ -122,12 +122,9 @@ Page({
             todayList: [], // 今日榜单
             fineQuality: [],//精品推荐
             noticeArr: [],// 头条
-            recommendArr: [],
-            params: {
-                page: 1,
-                pageSize: 10
-            }
+            recommendArr: []
         })
+        this.data.params.page =1
         this.didLogin()
         this.onLoad(this.data.options)
         wx.stopPullDownRefresh();
@@ -365,9 +362,6 @@ Page({
         if (this.data.params.page > this.data.recommendTotalPage) {
             return
         }
-        this.setData({
-            params: this.data.params,
-        })
         this.queryFeaturedList()
     },
     isShowNotice(){
