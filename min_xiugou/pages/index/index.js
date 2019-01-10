@@ -12,7 +12,7 @@ Page({
             {name: '分享', img: 'home_icon_fenxing_nor@3x.png', page: '/pages/topic/topic?code=ZT2018000001'},
             {name: '秀场', img: 'home_icon_xiuchang_nor@3x.png', page: '/pages/discover/discover', tabbar: true},
             {name: '签到', img: 'home_icon_qiangdao_nor@3x.png', page: '/pages/signIn/signIn', login: true},
-            {name: '必看', img: 'home_icon_bikan_nor@3x.png', page: '/pages/discover/discover-detail/discover-detail?articleId=1'},
+            {name: '必看', img: 'home_icon_bikan_nor@3x.png', page: '/pages/discover/discover-detail/discover-detail?articleCode=FX181226000001'},
             {name: '秒杀', img: 'home_icon_miaoshao_nor@3x.png', page: '/pages/topic/topic?code=ZT2018000002'},
         ],
         imgUrls: [],// 轮播
