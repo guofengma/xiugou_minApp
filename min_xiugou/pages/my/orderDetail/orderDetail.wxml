@@ -67,7 +67,7 @@
       </view> -->
         <!--detail.orderSubType==3 || detail.orderSubType==4 -->
       <view wx:if='{{detail.isGiftProds }}' class='gray font-24 whiteBg coupon-line'>
-        <view class='flexR-sb' wx:for='{{detail.giftCouponDTOList}}'>
+        <view class='flexR-sb' wx:for='{{detail.giftCouponDTOList}}'  wx:key="{{index}}">
           <view>{{item.couponName}}</view>
           <view>x1</view>
         </view> 
