@@ -23,15 +23,15 @@ export default class ApiUtils {
     this.init()
     this.cache = {}
   }
-  memoize() {
-      const key = JSON.stringify(arguments);
+  memoize(url, params) {
+      const key = JSON.stringify([url, params])
       let value = this.cache[key];
       if(!value) {
-        console.log('新值，执行中...');
-        this.cache[key] = arguments[1];
-        return
+        console.log('新值，执行中...')
+        this.cache[key] = url;
+        return true
       } else {
-        console.log('来自缓存')
+        return false
       }
   }
   init(){
@@ -59,7 +59,10 @@ export default class ApiUtils {
       let name = item.name, url = item.uri, method = item.method || 'post', action = item.action, myConfig = item.config || {}
       that.result[name] = async function (params,reqConfig={}) {
         Object.assign(reqConfig, reqConfig, myConfig)
-        that.memoize(reqConfig, reqConfig)
+        if(!that.memoize(url, params)) {
+          return Promise.reject('重复请求')
+        }
+        let val = JSON.stringify([url, params])
         // 若当前请求数并发量超过最大并发量限制，则将其阻断在这里。
         // startBlocking会返回一个promise，并将该promise的resolve函数放在this.requestQueue队列里。这样的话，除非这个promise被resolve,否则不会继续向下执行。
         // 当之前发出的请求结果回来/请求失败的时候，则将当前并发量-1,并且调用this.next函数执行队列中的请求
@@ -70,7 +73,8 @@ export default class ApiUtils {
         const app = getApp();
         try {
           that.currentConcurrent++;
-          const response = await HttpUtils[method](url, params, reqConfig);
+          const response = await HttpUtils[method](url, params, reqConfig)
+          that.cache[val] = null
           console.log(`------------------ 请求结束:${action}`)
           // console.log( typeof response)
           if (response.code === 0 || response.code === 10000) {
@@ -97,6 +101,7 @@ export default class ApiUtils {
             return Promise.reject(response);
           }
         } catch (err) {
+          that.cache[val] = null
           console.log('<============================== 请求结束：' + action + '第' + that.tryCount + '次请求');
           app.aldstat.sendEvent(url + ':interface error try again', {
             url: url,
