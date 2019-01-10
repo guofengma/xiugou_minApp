@@ -6,7 +6,6 @@ import { Tool } from '../../tools/tcglobal';
 export default class ApiUtils {
   constructor(Urls) {
     this.Urls = Urls
-    this.cache = {}
     // 最大并发量
     this.maxLimit = 5;
     // 请求队列,若当前请求并发量已经超过maxLimit,则将该请求加入到请求队列中
@@ -22,19 +21,18 @@ export default class ApiUtils {
     // 基本请求地址
     this.baseUrl = config.baseUrl
     this.init()
+    this.cache = {}
   }
-  memoize (){
-    const key = JSON.stringify(arguments);
-    let value = this.cache[key];
-    console.log(value)
-    if(!value) {
-      console.log('新值，执行中...');         // 为了了解过程加入的log，正式场合应该去掉
-      value = arguments // 放在一个数组中，方便应对undefined，null等异常情况
-      this.cache[key] = value;
-    } else {
-      console.log('来自缓存');
-    }
-    console.log(this.cache)
+  memoize() {
+      const key = JSON.stringify(arguments);
+      let value = this.cache[key];
+      if(!value) {
+        console.log('新值，执行中...');
+        this.cache[key] = arguments[1];
+        return
+      } else {
+        console.log('来自缓存')
+      }
   }
   init(){
     let that = this
@@ -61,6 +59,7 @@ export default class ApiUtils {
       let name = item.name, url = item.uri, method = item.method || 'post', action = item.action, myConfig = item.config || {}
       that.result[name] = async function (params,reqConfig={}) {
         Object.assign(reqConfig, reqConfig, myConfig)
+        that.memoize(reqConfig, reqConfig)
         // 若当前请求数并发量超过最大并发量限制，则将其阻断在这里。
         // startBlocking会返回一个promise，并将该promise的resolve函数放在this.requestQueue队列里。这样的话，除非这个promise被resolve,否则不会继续向下执行。
         // 当之前发出的请求结果回来/请求失败的时候，则将当前并发量-1,并且调用this.next函数执行队列中的请求
@@ -71,7 +70,6 @@ export default class ApiUtils {
         const app = getApp();
         try {
           that.currentConcurrent++;
-          that.memoize(url, params)
           const response = await HttpUtils[method](url, params, reqConfig);
           console.log(`------------------ 请求结束:${action}`)
           // console.log( typeof response)
