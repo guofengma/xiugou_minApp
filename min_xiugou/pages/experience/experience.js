@@ -56,7 +56,8 @@ Page({
     API.getOperatorDetail({ code: this.data.activityCode })
       .then(res => {
         let datas = res.data || {};
-        if ([0, 1, 3].includes(datas.status)) {
+        // 判断是否是进入活动缺省页面
+        if ([0, 1, 3].includes(datas.status) || datas.prods.length < 1) {
           this.setData({
             isError: true,
             errorType: datas.status
@@ -145,10 +146,7 @@ Page({
   //   搜索产品信息
   btnClicked(e) {
     let n = parseInt(e.currentTarget.dataset.key);
-    if (
-      this.data.productInfo.canUserBuy ||
-      (n == 1 && this.data.productInfo.productStatus != 2)
-    ) {
+    if (this.data.productInfo.canBuy) {
       this.selectComponent("#prd-info-type").isVisiableClicked(n);
     }
   },
@@ -221,6 +219,7 @@ Page({
     });
     const callBack = res => {
       res.startTime = this.formatTime(res.upTime);
+      res.canBuy = res.totalStock > 0 && res.productStatus !== 3 ? true : false;
       this.setData({
         productInfo: res
       });
