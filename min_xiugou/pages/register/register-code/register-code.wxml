@@ -20,13 +20,13 @@
           </swiper-item>
         </swiper>
       </view>
-      <view wx:else class='gray-9 flexR'>暂无顾问，请填写授权码或跳过该步骤~</view>
+      <view wx:else class='gray-9 flexR'>暂无顾问，请填写会员号或跳过该步骤~</view>
     </view>
   </view>
   <button class='loginBtn' disabled='{{disabled}}' catchtap='mentorBind' >确认</button>
   <view class='gray-9 font-26 flexR dismiss' bindtap='dismiss'>跳过</view>
 
   <view class='gray-9 font-26 fixed-bottom flexR write-code' bindtap='goPage'>
-    <view class='flexR'> 填写授权码</view>
+    <view class='flexR'> 填写会员号</view>
   </view>
 </view>

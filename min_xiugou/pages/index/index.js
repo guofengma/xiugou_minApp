@@ -149,9 +149,6 @@ Page({
     initRequset(){
         //  轮播图片
         this.queryAdList(1, 'imgUrls')
-
-        this.queryAdList(1, 'imgUrls')
-
         // 推荐位
         this.queryAdList(2, 'adArr')
         // 今日榜单

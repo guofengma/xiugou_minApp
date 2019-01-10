@@ -23,7 +23,7 @@ export default class ApiUtils {
     this.init()
     this.cache = {}
   }
-  memoize(url, params) {
+  memoize(url, params) { // 防止重复请求 入参和url完全相同的情况下
       const key = JSON.stringify([url, params])
       let value = this.cache[key];
       if(!value) {
@@ -74,7 +74,8 @@ export default class ApiUtils {
         try {
           that.currentConcurrent++;
           const response = await HttpUtils[method](url, params, reqConfig)
-          that.cache[val] = null
+          // that.cache[val] = null
+          delete that.cache[val]
           console.log(`------------------ 请求结束:${action}`)
           // console.log( typeof response)
           if (response.code === 0 || response.code === 10000) {
@@ -101,7 +102,8 @@ export default class ApiUtils {
             return Promise.reject(response);
           }
         } catch (err) {
-          that.cache[val] = null
+          // that.cache[val] = null
+          delete that.cache[val]
           console.log('<============================== 请求结束：' + action + '第' + that.tryCount + '次请求');
           app.aldstat.sendEvent(url + ':interface error try again', {
             url: url,
