@@ -43,6 +43,7 @@ Page({
         activityCode: options.activityCode
       });
     } else {
+        debugger
       Tool.showAlert("活动不存在，请稍后重试");
       return;
     }
@@ -57,7 +58,7 @@ Page({
       .then(res => {
         let datas = res.data || {};
         // 判断是否是进入活动缺省页面
-        if ([0, 1, 3].includes(datas.status) || datas.prods.length < 1) {
+        if ([0, 1, 3].includes(datas.status) || !datas.prods || datas.prods.length<1) {
           this.setData({
             isError: true,
             errorType: datas.status
