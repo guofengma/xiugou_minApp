@@ -1,6 +1,6 @@
 <import src="/components/iPhoneX-line/iPhoneX-line.wxml"/>
 <!-- 活动信息 -->
-<view class="experience {{activeInfo||prodParms?'movePrevent':''}} {{isIPhoneX.isIPhoneX?'fixed-ihoneX':''}}" wx:if="{{!isError}}">
+<view class="experience {{isIPhoneX.isIPhoneX?'fixed-ihoneX':''}} {{hasMask?'preventTouchMove':''}}"  wx:if="{{!isError}}">
     <view class="showBoxSection">
         <scroll-view scroll-x="true" bindscroll="togetherScroll" scroll-left="{{scrollLeft}}" class="showList">
             <block wx:for="{{prodList}}" wx:key='unique' wx:for-index='key'>
@@ -73,7 +73,6 @@
             <text>加入购物车</text>
         </view>
         <view class='buy-btn font-28 flexR {{ productInfo.canUserBuy && operatorDetail.sellstate ===0?"redBg":"darkBg"}}' bindtap='btnClicked' data-key='2'>
-            <!--<text wx:if='{{productInfo.buyLimit != -1 && !productInfo.leftBuyNum}}'>已购买过该商品</text>-->
             <text wx:if='{{productInfo.productStatus==3 || operatorDetail.sellstate !==0 || !productInfo.canUserBuy}}'>暂不可购买</text>
             <text wx:else>立即购买</text>
         </view>
@@ -81,9 +80,9 @@
 </view>
 <!-- 适配iPhone X -->
 <template wx:if="{{isIPhoneX.isIPhoneX}}" is="iPhoneX-line" />
-<activeInfo show='{{activeInfo}}' id="active-info" operatorDetail="{{operatorDetail}}" coupon="{{operatorDetail.coupon.coupon}}" />
-<prodParms show='{{prodParms}}' id="prod-parms" paramList="{{productInfo.paramList}}" />
-<errorState show='{{isError}}' type="{{errorType}}" id="error-state"/>
+<activeInfo show='{{activeInfo}}' bind:hiddenTips='hiddenTips' id="active-info" operatorDetail="{{operatorDetail}}" coupon="{{operatorDetail.coupon.coupon}}" />
+<prodParms show='{{prodParms}}' bind:hiddenTips='hiddenTips' id="prod-parms" paramList="{{productInfo.paramList}}" />
+<errorState show='{{isError}}' bind:hiddenTips='hiddenTips' type="{{errorType}}" id="error-state"/>
 <!-- 产品规格 -->
 <product-specification id='prd-info-type' bind:subClicked="typeSubClicked" productSpec='{{productSpec}}'
                        price='{{productInfo.price}}' priceList='{{priceList}}'
