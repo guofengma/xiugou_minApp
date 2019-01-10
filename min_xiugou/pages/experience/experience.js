@@ -29,7 +29,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad(options) {
     this.ProductFactory = new ProductFactorys(this);
     this.didLogin();
     // this.getNewProd();
@@ -88,13 +88,11 @@ Page({
   },
   formatTime(timestamp) {
     let date = new Date(timestamp);
-    let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
 
     let hour = date.getHours();
     let minute = date.getMinutes();
-    let second = date.getSeconds();
 
     return (
       month +
@@ -143,7 +141,7 @@ Page({
       scrollLeft: e.detail.scrollLeft
     });
   },
-  //   搜索产品信息
+  //   加入购物车
   btnClicked(e) {
     let n = parseInt(e.currentTarget.dataset.key);
     if (this.data.productInfo.canBuy) {

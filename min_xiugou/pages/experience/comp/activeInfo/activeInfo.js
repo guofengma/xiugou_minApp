@@ -1,4 +1,3 @@
-// components/alert/alert.js
 let { Tool, RequestFactory, Operation } = global;
 Component({
   properties: {
@@ -11,8 +10,6 @@ Component({
    * 组件的初始数据
    */
   data: {
-    //   show:false,//显示属性
-    // coupon: ""
     typeName: ""
   },
 
@@ -27,40 +24,37 @@ Component({
       this.triggerEvent("hiddenTips");
     }
   },
-  attached(){
-    
-  },
+  attached() {},
   ready() {
     Tool.isIPhoneX(this);
     // ready里面setData异步原因 在安卓不同步 通过设置延迟处理
     setTimeout(() => {
+      if (this.data.coupon) {
         switch (this.data.coupon.type) {
           case 1:
             this.setData({
-              typeName: "满减"
+              typeName: "满减劵"
             });
             break;
           case 2:
             this.setData({
-              typeName: "抵价"
+              typeName: "抵价劵"
             });
-            // typeName = "抵价";
             break;
           case 3:
             this.setData({
-              typeName: "折扣"
+              typeName: "折扣劵"
             });
-            // typeName = "折扣";
             break;
           case 4:
             this.setData({
-              typeName: "抵扣"
+              typeName: "抵扣劵"
             });
-            // typeName = "抵扣";
             break;
           default:
             break;
         }
+      }
     }, 1000);
     // this.setData({
     //   typeName: typeName
