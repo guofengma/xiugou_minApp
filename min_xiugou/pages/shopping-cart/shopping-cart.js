@@ -161,12 +161,13 @@ Page({
                     item0.stock = item0.sellStock || 0
                     item0.showPrice = item0.price
                     item0.showName = item0.productName
-                    item0.showType = ''
+                    item0.showType = []
                     // item0.showType = item0.specTitle ? item0.specTitle.split("@").join('—') : ''
                     let specifies = item0.specifies || []
                     specifies.forEach((spec,specIndex)=>{
-                        item0.showType += spec.paramValue
+                        item0.showType.push(spec.paramValue)
                     })
+                    item0.showType = item0.showType.join('—')
                     item0.showCount = item0.amount || 1  // 商品数量
                     item0.isSelect = false  //是否选择
                     if (this.data.items.length > 0) {
