@@ -150,27 +150,16 @@ Page({
 
     },
     initRequset(){
-        this.queryAdList(1, '轮播图片', (datas) => {
-            this.setData({
-                imgUrls: datas
-            })
-        });
-        this.queryAdList(2, '推荐位', (datas) => {
-            this.setData({
-                adArr: datas
-            })
-        });
-        this.queryAdList(4, '今日榜单', (datas) => {
-            this.setData({
-                todayList: datas
-            })
-        });
-        this.queryAdList(5, '精品推荐', (datas) => {
-            this.setData({
-                fineQuality: datas
-            })
-        });
-        this.queryAdList(6, '超值热卖', (datas) => {
+        //  轮播图片
+        this.queryAdList(1, 'imgUrls')
+        // 推荐位
+        this.queryAdList(2, 'adArr')
+        // 今日榜单
+        this.queryAdList(4, 'todayList')
+        // 精品推荐
+        this.queryAdList(5, 'fineQuality')
+        // 超值热卖
+        this.queryAdList(6, 'hotSale', (datas) => {
             datas.forEach((item, index) => {
                 let topicBannerProductDTOList = item.topicBannerProductDTOList || []
                 topicBannerProductDTOList.forEach((item0, index0) => {
@@ -185,10 +174,7 @@ Page({
                     }
                 })
             })
-            this.setData({
-                hotSale: datas
-            })
-        });
+        })
         this.queryFeaturedList()
         // this.indexQueryCategoryList()
     },
@@ -279,12 +265,16 @@ Page({
         }
         app.getLevel(callBack)
     },
-    queryAdList(types = 1, reqName = '', callBack = ()=> {
+    queryAdList(types = 1, key, callBack = ()=> {
     }) {
         API.queryAdList({
             'type': types,
         }).then((res) => {
             callBack(res.data)
+            key&&this.setData({
+              [key]:res.data
+            })
+
         }).catch((res) => {
             console.log(res)
         });
