@@ -3,7 +3,7 @@
         <view class='growing-value'>
             <view class="exp-num">
                 <text class='red'>{{userLevelInfo.experience||0}}</text>
-                <text class='gray'>/{{userLevelInfo.levelExperience||0}}</text>
+                <text class='gray-9'>/{{userLevelInfo.levelExperience||0}}</text>
             </view>
             <view class='growing-bar'>
                 <view class='growing-bar-value' style="width: {{width}}"></view>
