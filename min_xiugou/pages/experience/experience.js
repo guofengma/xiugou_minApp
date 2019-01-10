@@ -43,7 +43,6 @@ Page({
         activityCode: options.activityCode
       });
     } else {
-        debugger
       Tool.showAlert("活动不存在，请稍后重试");
       return;
     }
