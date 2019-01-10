@@ -17,7 +17,6 @@ Page({
   },
   // 上拉加载更多
   onReachBottom() {
-    console.log(11111)
     this.selectComponent("#orderList").onReachBottom()
   },
   isChange(){
@@ -29,6 +28,9 @@ Page({
     this.setData({
       num: options.query || ''
     });
+    // this.selectComponent("#orderList").getData(this.data.num);
+  },
+  onShow(){
     this.selectComponent("#orderList").getData(this.data.num);
   },
   searchOrder(){
