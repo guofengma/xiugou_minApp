@@ -28,10 +28,10 @@ Page({
     this.setData({
       num: options.query || ''
     });
-    // this.selectComponent("#orderList").getData(this.data.num);
+    this.selectComponent("#orderList").getData(this.data.num);
   },
   onShow(){
-    this.selectComponent("#orderList").getData(this.data.num);
+    // this.selectComponent("#orderList").getData(this.data.num);
   },
   searchOrder(){
     Tool.navigateTo('/pages/search/search?door=1')

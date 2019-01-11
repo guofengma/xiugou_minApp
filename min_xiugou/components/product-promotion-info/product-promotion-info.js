@@ -95,11 +95,7 @@ Component({
     checkPromotionInfo() {
       // 获取完数据再展示
       let prop = this.data.prop;
-      let commingDesc = this.decorateTime(
-        prop.beginTime,
-        prop.date || (+new Date()),
-        prop.notifyFlag
-      )
+      let commingDesc = this.decorateTime(prop.beginTime);
       let countdownDesc = '距结束';
 
       if (prop.status === 1){
@@ -141,27 +137,22 @@ Component({
     },
     // 未开始 未设置提醒时： X月X日X:00开拍
     // 未开始 已设置提醒时： 明天X点开拍
-    decorateTime(beginDate, serverDate, isTip) {
+    decorateTime(beginDate) {
       let str = '';
       let targetDate = new Date(beginDate);
       let targetM = targetDate.getMonth() + 1;
       let targetD = targetDate.getDate();
       let targetH = targetDate.getHours();
       let targetMi = targetDate.getMinutes();
-      let diff = beginDate - serverDate;
-      let diffHour = Math.floor(diff / 1000 / 60 / 60);
-      let timeToTomorrow = 24 - new Date().getHours();
+      let currentD = new Date().getDate();
 
       let strHM = ([targetH, targetMi].map(Tool.formatNumber)).join(':') + '开拍'
 
       str = [targetM, '月', targetD, '日'].join('') + strHM;
-      if (isTip) {
-        if (diffHour - timeToTomorrow <= 0) {
-          str = '今天' + strHM;
-        }
-        else if (diffHour - timeToTomorrow > 0 && diffHour - timeToTomorrow < 24) {
-          str = '明天' + strHM;
-        }
+      if (targetD - currentD === 0) {
+        str = '今天' + strHM;
+      } else if (targetD - currentD === 1) {
+        str = '明天' + strHM;
       }
       this.setData({
         "promotionInfo.commingDesc": str
