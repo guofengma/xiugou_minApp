@@ -25,19 +25,30 @@ Page({
     })
   },
   onLoad: function (options) {
+    Event.on('myOrderUpadate',this.myOrderUpadate,this)
     this.setData({
       num: options.query || ''
-    });
+    })
+    this.data.options = options
     this.selectComponent("#orderList").getData(this.data.num);
   },
+  myOrderUpadate(){
+    this.data.update = true
+  },
   onShow(){
-    // this.selectComponent("#orderList").getData(this.data.num);
+    if(this.data.update){
+      this.getList({
+        currentTarget:{dataset:{index:this.data.num}}
+      })
+      this.data.update = false
+    }
   },
   searchOrder(){
     Tool.navigateTo('/pages/search/search?door=1')
   },
   
   onUnload: function () {
+    Event.off('myOrderUpadate',this.myOrderUpadate)
     //this.selectComponent("#orderList").onUnload();
   },
 })
