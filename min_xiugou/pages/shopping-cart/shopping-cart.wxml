@@ -14,7 +14,7 @@
       </view>
       <!--产品信息-->
       <block wx:for='{{item.list}}' wx:for-item='list' wx:for-index='key' wx:key="key">
-        <view class="product-line">
+        <view class="{{item.isFailed? '':'product-line'}}">
           <view class="prodClass flexR-sb font-20 whiteBg" wx:if="{{list.activityType==8&&!item.isFailed}}" bindtap='collectBills' data-code="{{list.activityCode}}">
             <view class="leftTips flexR-sb" >
               <view class="tips-label redBg">经验值翻倍</view>
