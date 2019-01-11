@@ -14,7 +14,7 @@
                     </view>
                 </view>
             </view>
-            <view class="infoBlock" wx:if="{{coupon.value}}">
+            <view class="infoBlock" wx:if="{{typeName}}">
                 <view class="blockTitle">
                     <text class="titleMoney"></text>
                     <text class="titleContent">{{typeName}}</text>
@@ -27,19 +27,28 @@
                 </view>
                 <view class="blockCoupon">
                     <view class="couponTop">
-                        <view class="couponMoney">
+                        <view class="couponMoney" wx:if="{{coupon.type===1 || coupon.type === 2}}">
                             ¥
                             <text class="couponNum">{{coupon.value}}</text>
                         </view>
+                        <view class="couponDeduction" wx:if="{{coupon.type === 3}}">
+                            <text>商品</text>
+                            <text>抵扣</text>
+                        </view>
+                        <view class="couponMoney" wx:if="{{coupon.type===4}}">
+                            <text class="couponNum">{{coupon.value/10}}</text>
+                            折
+                        </view>
+                        <view class="couponDeduction" wx:else></view>
                         <view class="couponDescribe">
                             <view class="describeName">
                                 {{coupon.name}}
                                 <view class="brand">{{typeName}}</view>
                             </view>
-                            <view class="describeUp">满{{coupon.useConditions}}可用</view>
+                            <view class="describeUp">{{valueType}}</view>
                         </view>
                     </view>
-                    <view class="couponTime">领取后{{coupon.effectiveDays}}天内可用</view>
+                    <!-- <view class="couponTime">领取后{{coupon.effectiveDays}}天内可用</view> -->
                 </view>
             </view>
             <view class="infoBlock">
@@ -47,7 +56,9 @@
                     <text class="titleQuery"></text>
                     <text class="titleContent">活动说明</text>
                 </view>
-                <view class="activeExplain">{{operatorDetail.contents?operatorDetail.contents:''}}</view>
+                <view class="activeExplain">
+                    <rich-text nodes="{{contents}}"></rich-text>
+                </view>
             </view>
             <view class="footer {{isIPhoneX.className}}">
                 <view class="makeSure btn-default" data-select='activeInfo' bindtap="changgeState">

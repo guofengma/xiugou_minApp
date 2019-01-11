@@ -1058,5 +1058,27 @@ export default class Tool {
 
         }
     }
+
+    // 配合rich-text 对字符串里的转译文案进行转换   后期待扩充
+    static htmlEscape(html){
+        if(!html){
+            return ""
+        }
+        var reg = /(&lt;)|(&gt;)|(&amp;)|(&quot;)|(\n)/g;
+        return html.replace(reg,function(match){
+            switch(match){
+                case "&lt;":
+                    return "<";
+                case "&gt;":
+                    return ">"
+                case "&amp;":
+                    return "&";
+                case "&quot;":
+                    return "\""
+                case "\n":
+                    return "<br/>"
+            }
+        })
+    }
 }
 

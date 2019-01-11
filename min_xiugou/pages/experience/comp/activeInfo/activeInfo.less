@@ -67,47 +67,73 @@
           }
         }
         .blockCoupon {
-          height: 218rpx;
+          height: 180rpx;
           background: #eee;
           font-size: 0;
           margin-top: 20rpx;
-          background: url("${mrdomain}/xp_detail_coupon_bg@2x.png") no-repeat
-            top center;
+          background: url("${mrdomain}/xp_detail_coupon_bg.png") no-repeat top
+            center;
           background-size: cover;
+          overflow: hidden;
+          .couponTop {
+            display: flex;
+            align-content: center;
+            .couponDeduction {
+              width: 160rpx;
+              height: 180rpx;
+              //   line-height: 90px;
+              color: #222;
+              font-size: 48rpx;
+              font-size: 48rpx;
+              display: inline-block;
+              text-align: center;
+              display: flex;
+              flex-direction: column;
+              align-content: center;
+              justify-content: center;
+              font-weight: lighter;
+              font-weight: 400;
+            }
+            .couponDescribe {
+              display: inline-block;
+              margin-left: 20rpx;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: center;
+              .describeName {
+                font-size: 26rpx;
+                color: #222;
+                display: flex;
+                .brand {
+                  width: 78rpx;
+                  height: 28rpx;
+                  margin-left: 10rpx;
+                  text-align: center;
+                  line-height: 28rpx;
+                  font-size: 20rpx;
+                  border-radius: 4rpx;
+                  border: 1rpx solid #ff0050;
+                  color: #ff0050;
+                }
+              }
+              .describeUp {
+                font-size: 22rpx;
+                color: #666;
+                margin-top: 10rpx;
+              }
+            }
+          }
           .couponMoney {
             width: 160rpx;
-            height: 150rpx;
-            line-height: 150rpx;
+            height: 180rpx;
+            line-height: 180rpx;
             color: #222;
             font-size: 28rpx;
             display: inline-block;
             text-align: center;
             .couponNum {
               font-size: 68rpx;
-            }
-          }
-          .couponDescribe {
-            display: inline-block;
-            margin-left: 20rpx;
-            .describeName {
-              font-size: 26rpx;
-              color: #222;
-              display: flex;
-              .brand {
-                width: 78rpx;
-                height: 28rpx;
-                margin-left: 10rpx;
-                text-align: center;
-                line-height: 28rpx;
-                font-size: 20rpx;
-                border-radius: 4rpx;
-                border: 1rpx solid #ff0050;
-                color: #ff0050;
-              }
-            }
-            .describeUp {
-              font-size: 22rpx;
-              color: #666;
             }
           }
           .couponTime {
@@ -119,6 +145,7 @@
         .activeExplain {
           font-size: 24rpx;
           font-weight: bold;
+          margin-top: 20rpx;
           color: #333;
         }
       }
