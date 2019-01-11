@@ -24,7 +24,7 @@
     "AppId": "wxa059b818226f8679"
   },
   "base":{
-    "rasVersion": "1.0.6",
+    "rasVersion": "1.0.7",
     "rasClient":"miniapp",
     "imgSizeParams":{
       "m_fixed":"?x-oss-process=image/resize,m_fixed,h_300,w_300",

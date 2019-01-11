@@ -31,15 +31,15 @@
                             ¥
                             <text class="couponNum">{{coupon.value}}</text>
                         </view>
-                        <view class="couponDeduction" wx:if="{{coupon.type === 3}}">
+                        <view class="couponDeduction" wx:if="{{coupon.type === 4}}">
                             <text>商品</text>
                             <text>抵扣</text>
                         </view>
-                        <view class="couponMoney" wx:if="{{coupon.type===4}}">
+                        <view class="couponMoney" wx:if="{{coupon.type===3}}">
                             <text class="couponNum">{{coupon.value/10}}</text>
                             折
                         </view>
-                        <view class="couponDeduction" wx:else></view>
+                        <!--<view class="couponDeduction" wx:else></view>-->
                         <view class="couponDescribe">
                             <view class="describeName">
                                 {{coupon.name}}
