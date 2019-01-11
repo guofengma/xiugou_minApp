@@ -139,7 +139,9 @@ Page({
             this.setData({
                 isDelete: false,
             })
-            Tool.navigateTo('../my-order/my-order')
+            Event.emit('myOrderUpadate')
+            Tool.navigationPop()
+            // Tool.navigateTo('../my-order/my-order')
         }).catch((res) => {
             this.setData({
                 isDelete: false,

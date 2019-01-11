@@ -29,7 +29,7 @@ export default class ProductFactorys  {
       let advanceSale = {
         isAdvanceSale: datas.productStatus==3? true:false,
         status: datas.productStatus,
-        time:Tool.timeStringFromInterval(datas.upTime/1000,'YYYY-MM-DD HH-mm')
+        time:Tool.timeStringFromInterval(datas.upTime/1000,'YYYY-MM-DD HH:mm')
       }
       // 计算库存
       let total = datas.skuList.reduce((acc, cur) => {
