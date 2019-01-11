@@ -39,6 +39,7 @@
                             <text class="couponNum">{{coupon.value/10}}</text>
                             折
                         </view>
+                        <view class="couponDeduction" wx:else></view>
                         <view class="couponDescribe">
                             <view class="describeName">
                                 {{coupon.name}}
