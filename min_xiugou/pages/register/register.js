@@ -94,7 +94,7 @@ Page({
       headImg: this.data.userInfo.avatarUrl,
       nickname: this.data.userInfo.nickName,
       openid: this.data.openid || Storage.getWxOpenid() || '',
-      upUserCode: this.data.openid || Storage.getWxOpenid() || '',
+      upUserCode: this.data.inviteId || "", // 邀请者id 非必填
       upUserId: this.data.inviteId || "", // 邀请者id 非必填
       inviteCode: this.data.inviteCode || "",//邀请码 非必填
     }
