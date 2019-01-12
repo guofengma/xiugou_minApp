@@ -36,6 +36,10 @@ Page({
   onShow: function () {
 
   },
+  changeInput(e){
+      let name = e.currentTarget.dataset.name
+      this.data[name] = e.detail.value
+  },
   pickerClicked(e) {
     this.setData({
       region: e.detail.result,
@@ -43,7 +47,12 @@ Page({
     })
   },
   formSubmit(e) {
-      let params = e.detail.value;
+      let params = {
+          receiver:this.data.receiver,
+          receiverPhone:this.data.receiverPhone,
+          address:this.data.address
+      }
+      console.log(params)
       if (!(params.receiver.length >1 && params.receiver.length<17)) {
           Tool.showAlert("收货人姓名长度需在2-16位之间");
           return

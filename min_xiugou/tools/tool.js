@@ -634,6 +634,7 @@ export default class Tool {
 
     // 判断手机号
     static checkPhone(value) {
+        value=value.replace(/(^\s*)|(\s*$)/g, "")
         let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
         if (reg.test(value)) {
             return true;
