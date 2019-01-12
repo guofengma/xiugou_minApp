@@ -72,6 +72,7 @@
   font-size: 26rpx;
   padding:0  30rpx;
   margin-top: 20rpx;
+  margin-bottom:80px
 }
 .price-tips{
   font-size: 30rpx;

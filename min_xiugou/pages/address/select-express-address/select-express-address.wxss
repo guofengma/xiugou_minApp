@@ -4,6 +4,9 @@
 .sub-page>.select-address-box:last-child{
   margin-bottom: 130rpx;
 }
+.select-express-address{
+  padding-bottom: 80rpx;
+}
 .select-address-box {
   background-image: url(${mrdomain}/line-bg.png);
 }
