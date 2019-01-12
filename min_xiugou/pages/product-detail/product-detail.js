@@ -172,7 +172,7 @@ Page({
     this.ProductFactory.shareSubClicked(e)
   },
   onShareAppMessage: function (res) {
-    return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.id)
+    return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.prodCode)
   },
   getShoppingCartList() {
     this.ProductFactory.getShoppingCartList()
