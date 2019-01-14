@@ -1,4 +1,4 @@
-let { Tool, API } = global
+let { Tool, API,Event } = global
 Component({
   properties: {
     isCancel: Boolean,
@@ -48,7 +48,10 @@ Component({
         if (this.data.door == 1) {
           this.triggerEvent('cancelOrder', { ...this.data });
         } else {
-          Tool.navigateTo('/pages/my/my-order/my-order?query='+this.data.num)
+          // let num = this.data.num || ''
+          Event.emit('myOrderUpadate')
+          Tool.navigationPop()
+          // Tool.redirectTo('/pages/my/my-order/my-order?query='+num)
         }
       }).catch((res) => {
         console.log(res)

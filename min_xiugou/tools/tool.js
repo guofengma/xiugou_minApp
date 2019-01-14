@@ -634,6 +634,7 @@ export default class Tool {
 
     // 判断手机号
     static checkPhone(value) {
+        value=value.replace(/(^\s*)|(\s*$)/g, "")
         let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
         if (reg.test(value)) {
             return true;
@@ -1057,6 +1058,28 @@ export default class Tool {
             return false
 
         }
+    }
+
+    // 配合rich-text 对字符串里的转译文案进行转换   后期待扩充
+    static htmlEscape(html){
+        if(!html){
+            return ""
+        }
+        var reg = /(&lt;)|(&gt;)|(&amp;)|(&quot;)|(\n)/g;
+        return html.replace(reg,function(match){
+            switch(match){
+                case "&lt;":
+                    return "<";
+                case "&gt;":
+                    return ">"
+                case "&amp;":
+                    return "&";
+                case "&quot;":
+                    return "\""
+                case "\n":
+                    return "<br/>"
+            }
+        })
     }
 }
 

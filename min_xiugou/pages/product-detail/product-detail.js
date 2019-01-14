@@ -24,7 +24,8 @@ Page({
         {name:'取消',type:'share'},
         {name:'去登录',type:''}
       ]
-    }
+    },
+    hasMask:false
   },
   onLoad: function (options) {
     this.setData({
@@ -171,7 +172,7 @@ Page({
     this.ProductFactory.shareSubClicked(e)
   },
   onShareAppMessage: function (res) {
-    return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.id)
+    return this.ProductFactory.onShareAppMessage(99,this.data.productInfo.prodCode)
   },
   getShoppingCartList() {
     this.ProductFactory.getShoppingCartList()
@@ -189,7 +190,6 @@ Page({
       return
     }
     that.data.distanceTime--
-    console.log(that.data.distanceTime)
     let time = setTimeout(function () {
       that.countdown(that);
     }, 1000)

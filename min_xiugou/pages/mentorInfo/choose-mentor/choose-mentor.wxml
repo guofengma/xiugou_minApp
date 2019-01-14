@@ -4,8 +4,8 @@
 </view>
 <view class='info gray-9 font-24'>
   <view wx:if='{{datas.profile}}'>{{datas.profile}}</view>
-  <view wx:else class='flexR'>这位导师很懒，什么也没留下~</view>
+  <view wx:else class='flexR'>这位顾问很懒，什么也没留下~</view>
 </view>
-<view class='loginBtn font-34 flexR' catchtap='mentorBind'>选择该导师</view>
+<view class='loginBtn font-34 flexR' catchtap='mentorBind'>选择该顾问</view>
 
 <view class='gray-9 font-26 flexR' catchtap='dismiss'>跳过</view>

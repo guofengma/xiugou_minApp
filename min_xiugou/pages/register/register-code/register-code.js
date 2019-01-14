@@ -1,7 +1,6 @@
 let { Tool, Storage, API, Event } = global;
 Page({
   data: {
-    ysf: { title: '授权码录入' },
     invite:[0,1],
     userInfo:'',
     openid:'',

@@ -1,4 +1,3 @@
-// components/alert/alert.js
 let { Tool, RequestFactory, Operation } = global
 Component({
   properties: {
@@ -21,6 +20,7 @@ Component({
       this.setData({
         show: false
       });
+      this.triggerEvent('hiddenTips');
     }
   },
   ready: function () {

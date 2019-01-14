@@ -139,7 +139,9 @@ Page({
             this.setData({
                 isDelete: false,
             })
-            Tool.navigateTo('../my-order/my-order')
+            Event.emit('myOrderUpadate')
+            Tool.navigationPop()
+            // Tool.navigateTo('../my-order/my-order')
         }).catch((res) => {
             this.setData({
                 isDelete: false,
@@ -332,7 +334,7 @@ Page({
                 middle = {id: 1, content: '退款'}
             }
             // 确认收货的状态的订单售后截止时间和当前时间比 (outOrderState == 4 && finishTime - now > 0)
-            if (outOrderState == 3 || outOrderState == 4) {datas.isGiftProds = true
+            if (outOrderState == 3 || outOrderState == 4) {detail.isGiftProds = true
                 middle = {id: 2, content: '退换'}
                 // if (afterSaleType.length>1){
                 //   middle = { id: 4, content: '退换' }
@@ -360,6 +362,7 @@ Page({
         })
 
         this.setData({
+            detail:this.data.detail,
             showProducts: this.data.showProducts,
             state: state
         })

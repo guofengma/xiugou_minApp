@@ -9,30 +9,46 @@
                     <text class="titleContent">经验值</text>
                 </view>
                 <view class="blockList">
-                    <view class="listItem" wx:for="{{operatorDetail.rules}}" wx:key="unique">购买满{{item.startPrice}}元，经验值翻{{item.rate}}倍</view>
+                    <view class="listItem" wx:for="{{operatorDetail.rules}}" wx:key="unique">
+                        购买满{{item.startPrice}}元，经验值翻{{item.rate}}倍
+                    </view>
                 </view>
             </view>
-            <view class="infoBlock">
+            <view class="infoBlock" wx:if="{{typeName}}">
                 <view class="blockTitle">
                     <text class="titleMoney"></text>
-                    <text class="titleContent">优惠劵</text>
+                    <text class="titleContent">{{typeName}}</text>
                 </view>
                 <view class="blockList">
-                    <view class="listItem">每满{{operatorDetail.startPrice}}元，赠送{{operatorDetail.startCount}}张优惠券</view>
+                    <view class="listItem">
+                        每满{{operatorDetail.startPrice}}元，赠送{{operatorDetail.startCount}}张优惠券
+                    </view>
                     <view class="listItem">单笔订单最多可领{{operatorDetail.maxCount}}张优惠券</view>
                 </view>
                 <view class="blockCoupon">
                     <view class="couponTop">
-                        <view class="couponMoney">
+                        <view class="couponMoney" wx:if="{{coupon.type===1 || coupon.type === 2}}">
                             ¥
                             <text class="couponNum">{{coupon.value}}</text>
                         </view>
+                        <view class="couponDeduction" wx:if="{{coupon.type === 4}}">
+                            <text>商品</text>
+                            <text>抵扣</text>
+                        </view>
+                        <view class="couponMoney" wx:if="{{coupon.type===3}}">
+                            <text class="couponNum">{{coupon.value/10}}</text>
+                            折
+                        </view>
+                        <!--<view class="couponDeduction" wx:else></view>-->
                         <view class="couponDescribe">
-                            <view class="describeName">{{coupon.type==1?'满减劵':''}}</view>
-                            <view class="describeUp">满{{coupon.useConditions}}可用</view>
+                            <view class="describeName">
+                                {{coupon.name}}
+                                <view class="brand">{{typeName}}</view>
+                            </view>
+                            <view class="describeUp">{{valueType}}</view>
                         </view>
                     </view>
-                    <view class="couponTime">领取后{{coupon.effectiveDays}}天内可用</view>
+                    <!-- <view class="couponTime">领取后{{coupon.effectiveDays}}天内可用</view> -->
                 </view>
             </view>
             <view class="infoBlock">
@@ -41,7 +57,7 @@
                     <text class="titleContent">活动说明</text>
                 </view>
                 <view class="activeExplain">
-                    {{operatorDetail.contents}}
+                    <rich-text nodes="{{contents}}"></rich-text>
                 </view>
             </view>
             <view class="footer {{isIPhoneX.className}}">
@@ -52,5 +68,5 @@
         </view>
     </view>
 </view>
-<!--适配iPhone X  -->
+<!-- 适配iPhone X -->
 <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

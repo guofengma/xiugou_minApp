@@ -29,6 +29,7 @@ Page({
       disabled: false,
     },
     showRegular: false,
+    hasMask:false,
     jumpCommonProductTimer: null, // 定时跳转普通商品倒计时
     screenShow: false, // 用于判断是否锁屏
   },

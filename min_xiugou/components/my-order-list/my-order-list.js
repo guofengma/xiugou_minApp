@@ -150,7 +150,7 @@ Component({
         });
 
         this.triggerEvent('isAjax');
-        console.log(this.data.list)
+        // console.log(this.data.list)
       }).catch((res) => {
         this.triggerEvent('isAjax');
         console.log(res)

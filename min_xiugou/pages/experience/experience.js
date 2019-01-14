@@ -8,8 +8,8 @@ Page({
    */
   data: {
     imgUrls: [],
-    productInfo: "", // 商品信息
-    activityCode: "", //经验分区code JF201901030055
+    productInfo: {}, // 商品信息
+    activityCode: "", //经验分区code  test JF201901030055
     productCode: "", //产品code SPU00000324
     operatorDetail: {}, //经验值详情
     showIndex: 0, //展示第几个商品
@@ -17,17 +17,19 @@ Page({
     // 弹窗
     activeInfo: false, //活动信息
     prodParms: false, //产品参数
-    movePrevent: false, //是否阻止滚动
+    isError: false,
+    errorType: 0,
     productBuyCount: 1, //商品购买数量
     scrollHide: false, //滚动是否隐藏列表图片
     priceList: [],
     size: 0,
-    scrollLeft: 0 //同步滚动距离
+    scrollLeft: 0, //同步滚动距离
+    hasMask: false
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad(options) {
     this.ProductFactory = new ProductFactorys(this);
     this.didLogin();
     // this.getNewProd();
@@ -51,9 +53,17 @@ Page({
     }
   },
   getOperatorDetail(productCode) {
-    API.getOperatorDetail({ code: this.data.activityCode }).then(
-      res => {
+    API.getOperatorDetail({ code: this.data.activityCode })
+      .then(res => {
         let datas = res.data || {};
+        // 判断是否是进入活动缺省页面
+        if ([0, 1, 3].includes(datas.status) || !datas.prods || datas.prods.length<1) {
+          this.setData({
+            isError: true,
+            errorType: datas.status
+          });
+          return;
+        }
         this.setData({
           prodList: datas.prods,
           operatorDetail: datas,
@@ -62,17 +72,35 @@ Page({
         if (productCode) {
           datas.prods.some((item, index) => {
             if (item.spuCode === productCode) {
-              this.showIndex = index;
+              this.setData({
+                showIndex: index
+              });
               return true;
             }
           });
         }
         this.getNewProd();
-      }
-    ).catch((res) => {
+      })
+      .catch(res => {
         Tool.showAlert("活动不存在，请稍后重试");
-        console.log(res)
+        console.log(res);
       });
+  },
+  formatTime(timestamp) {
+    let date = new Date(timestamp);
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+
+    return (
+      month +
+      "月" +
+      day +
+      "日" +
+      [hour, minute].map(Tool.formatNumber).join(":")
+    );
   },
   //   打开弹层
   changgeState(event) {
@@ -80,14 +108,14 @@ Page({
     switch (type) {
       case "activeInfo":
         this.setData({
-          activeInfo: !this.activeInfo,
-          movePrevent: !this.movePrevent
+          activeInfo: !this.data.activeInfo,
+          hasMask: !this.data.hasMask
         });
         break;
       case "prodParms":
         this.setData({
-          prodParms: !this.prodParms,
-          movePrevent: !this.movePrevent
+          prodParms: !this.data.prodParms,
+          hasMask: !this.data.hasMask
         });
         break;
       default:
@@ -113,13 +141,10 @@ Page({
       scrollLeft: e.detail.scrollLeft
     });
   },
-  //   搜索产品信息
+  //   加入购物车
   btnClicked(e) {
     let n = parseInt(e.currentTarget.dataset.key);
-    if (
-      this.data.productInfo.canUserBuy ||
-      (n == 1 && this.data.productInfo.productStatus != 2)
-    ) {
+    if (this.data.productInfo.canBuy) {
       this.selectComponent("#prd-info-type").isVisiableClicked(n);
     }
   },
@@ -184,14 +209,18 @@ Page({
   },
   //   获取产品信息
   getNewProd() {
+    this.setData({
+      productInfo: {},
+      imgUrls: [],
+      productBuyCount: 1,
+      productSpec: []
+    });
     const callBack = res => {
-      //   let total = res.skuList.reduce((acc, cur) => {
-      //     return acc + cur.sellStock;
-      //   }, 0);
-      //   res.totalStock = total;
-      //   this.setData({
-      //     productInfo: res
-      //   });
+      res.startTime = this.formatTime(res.upTime);
+      res.canBuy = res.totalStock > 0 && res.productStatus !== 3 ? true : false;
+      this.setData({
+        productInfo: res
+      });
       if (res.productStatus != 0) {
         // this.activityByProductId(this.data.productCode);
         // if (this.data.productInfo.productStatus === 3) {
@@ -262,5 +291,5 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {}
+  // onShareAppMessage: function() {}
 });

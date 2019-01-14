@@ -22,7 +22,7 @@ Component({
       } else if (this.data.imgSrc.includes('/img/')){ // 本地图片
         baseImgUrl = this.data.imgSrc
       }else {
-        
+
         // 小程序线上图片（icon等）  + '?_=' + new Date().getTime()
         baseImgUrl = Config.imgBaseUrl + this.data.imgSrc
       }

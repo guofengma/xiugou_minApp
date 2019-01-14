@@ -28,10 +28,8 @@ Page({
     onShow: function () {
 
     },
-    updateShoppingCartByEmit(){
-        this.setData({
-            isUpdateCart: true
-        })
+    updateShoppingCartDatas(key){
+        this.data[key] = true
     },
     onPullDownRefresh: function () {
         this.setData({
@@ -121,19 +119,22 @@ Page({
         for (let i in data) {
             let isFailed = i == 'shoppingCartFailedGoodsVOS' ? true : false
             let myDatas = data[i] || []
+            data[i].showLength = 0
             myDatas.forEach((item, index)=> {
+                item.products = item.products || []
+                data[i].showLength += item.products.length
                 item.isTouchMove = false  //是否移动
                 item.activityType = item.activityType === null ? 0 : item.activityType
                 item.products.forEach((item0, index0)=> {
                     let shoppingCartActivity = item0.shoppingCartActivity || []
-                    // if (item0.productStatus == 3) item0.showUpdateTime = Tool.formatTime(item0.updateTime)
+                    if (item0.productStatus == 3) item0.showUpdateTime =  Tool.timeStringFromInterval(item0.upTime/1000, "MM月DD日")
                     item0.showActiveType = item.activityType
                     item0.showActiveCode = item.activityCode
-                    if (shoppingCartActivity.length) {
+                    if (shoppingCartActivity.length&&item0.productStatus == 1) {
                         // 当前时间戳
                         let currentTime = item.nowTime
                         shoppingCartActivity.forEach((activity, actIndex)=> {
-                            item0.labelName = this.data.activeType[activity.activityType]
+                            if (item0.productStatus == 1) item0.labelName = this.data.activeType[activity.activityType]
                             if (activity.activityType == 1 || activity.activityType == 2) {
                                 let activeType = {
                                     1: 'seckill',
@@ -163,7 +164,12 @@ Page({
                     item0.stock = item0.sellStock || 0
                     item0.showPrice = item0.price
                     item0.showName = item0.productName
-                    item0.showType = item0.specTitle ? item0.specTitle.split("@").join('—') : ''
+                    item0.showType = []
+                    let specifies = item0.specifies || []
+                    specifies.forEach((spec,specIndex)=>{
+                        item0.showType.push(spec.paramValue)
+                    })
+                    item0.showType = item0.showType.join('—')
                     item0.showCount = item0.amount || 1  // 商品数量
                     item0.isSelect = false  //是否选择
                     if (this.data.items.length > 0) {
@@ -185,6 +191,7 @@ Page({
             })
             datas.push({
                 isFailed: isFailed,
+                showLength:data[i].showLength,
                 list: myDatas
             })
         }
@@ -215,20 +222,22 @@ Page({
         this.getTotalPrice()
     },
     clearItems(){ // 批量清除失效产品事件
-        let prods = this.data.items[1]
-        let params = []
-        prods.list.forEach((list)=> {
-            list.products.forEach((item)=> {
-                params.push({
-                    skuCode: item.skuCode
+        Tool.showComfirm('是否清空失效商品',()=>{
+            let prods = this.data.items[1]
+            let params = []
+            prods.list.forEach((list)=> {
+                list.products.forEach((item)=> {
+                    params.push({
+                        skuCode: item.skuCode
+                    })
                 })
             })
+            if (!this.data.didLogin) {
+                this.deleteStorageShoppingCart(params)
+                return
+            }
+            this.deleteCart(params)
         })
-        if (!this.data.didLogin) {
-            this.deleteStorageShoppingCart(params)
-            return
-        }
-        this.deleteCart(params)
     },
     deleteCart(params) {  // 删除购物车
         API.deleteShoppingCart({
@@ -344,8 +353,9 @@ Page({
             totalPrice = Tool.add(totalPrice, num)
         })
         let arr = rules.filter((item)=> {
-            return item.startPrice < totalPrice
+            return item.startPrice <= totalPrice
         })
+        // console.log(arr)
         if (arr.length > 0) {
             // 已经满足至少1条规矩了
             datas.showRule = {...arr[arr.length - 1]}
