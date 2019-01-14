@@ -119,7 +119,10 @@ Page({
         for (let i in data) {
             let isFailed = i == 'shoppingCartFailedGoodsVOS' ? true : false
             let myDatas = data[i] || []
+            data[i].showLength = 0
             myDatas.forEach((item, index)=> {
+                item.products = item.products || []
+                data[i].showLength += item.products.length
                 item.isTouchMove = false  //是否移动
                 item.activityType = item.activityType === null ? 0 : item.activityType
                 item.products.forEach((item0, index0)=> {
@@ -162,7 +165,6 @@ Page({
                     item0.showPrice = item0.price
                     item0.showName = item0.productName
                     item0.showType = []
-                    // item0.showType = item0.specTitle ? item0.specTitle.split("@").join('—') : ''
                     let specifies = item0.specifies || []
                     specifies.forEach((spec,specIndex)=>{
                         item0.showType.push(spec.paramValue)
@@ -189,6 +191,7 @@ Page({
             })
             datas.push({
                 isFailed: isFailed,
+                showLength:data[i].showLength,
                 list: myDatas
             })
         }

@@ -11,7 +11,7 @@
 
 
 <!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
-<view class='prduct-detail-view {{hasMask? "preventTouchMove":""}} ' wx:if='{{productInfo}}' class="{{hasMask? 'preventTouchMove' : ' '}}">
+<view class='prduct-detail-view {{hasMask? "preventTouchMove":""}}' wx:if='{{productInfo}}'>
     <!--topbar  -->
     <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}'  size='{{size}}' openType='{{openType}}' bind:subClicked='shareBtnClicked' messageNum='{{messageNum}}'/>
     <!-- 轮播 -->
