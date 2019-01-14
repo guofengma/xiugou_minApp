@@ -71,7 +71,7 @@ Page({
   },
   updateCoupon(){ // 点击优惠卷价格联动
     if (!this.data.couponClick) return
-    let coupon = Storage.getCoupon()
+    let coupon = Storage.getCoupon() || {}
     this.data.params.userCouponCode = coupon.code
     this.data.params.tokenCoin = 0
     let callBack = (item)=>{

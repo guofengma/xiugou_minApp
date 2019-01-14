@@ -53,10 +53,10 @@ Page({
   },
   // 获取专题信息列表
   getTopicByCode() {
-    let userInfo = Storage.getUserAccountInfo();
+    let userInfo = Storage.getUserAccountInfo() || {};
     let params = {
       code: this.data.topicCode,
-      userId: userInfo.id
+      userId: userInfo.code|| ""
     }
     API.getTopicById(params).then((res) => {
       let data = res.data;
@@ -94,7 +94,7 @@ Page({
 
   // 是否设置商品提醒
   toggleSubscribeItem(e) {
-    let userInfo = Storage.getUserAccountInfo();
+    let userInfo = Storage.getUserAccountInfo() || {};
 
     const data = e.currentTarget.dataset;
 
@@ -105,7 +105,7 @@ Page({
       activityId: data.activityId,
       activityType: data.activityType, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
       type: typeVal, // 1订阅 0 取消订阅
-      userId: userInfo.id
+      userId: userInfo.code || ""
     }
     API.addActivitySubscribe(params).then((res) => {
       this.getTopicByCode();

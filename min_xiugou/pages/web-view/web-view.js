@@ -16,11 +16,12 @@ Page({
         }
     },
     onLoad: function (options) {
+        let userInfo = Storage.getUserAccountInfo() || {}
         let miniparams = {
             'device': Storage.getPlatform() || '', // 设备唯一标识
             'platform': 'mini', // 小程序标识
             'token': Storage.getToken() || '', // 用户token
-            'userid': Storage.getUserAccountInfo().id || '', // 用户ID
+            'userid': userInfo.id || '', // 用户ID
         }
         if (options.webUrl) { // 指定的url地址
             this.setData({

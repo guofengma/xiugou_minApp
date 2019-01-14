@@ -57,6 +57,7 @@ export default class ProductFactorys  {
       // 执行额外需要做的操作
       callBack(datas)
     }).catch((res) => {
+      if(!this.page.data.productInfo) wx.hideShareMenu({})
       console.log(res)
     })
   }
@@ -301,11 +302,11 @@ export default class ProductFactorys  {
     })
   }
   onShareAppMessage(typeId,id){ // 分享
-    let that = this
     let upUserId = Storage.getUpUserId() || {}
     let inviteCode = this.page.data.userInfos.code || upUserId.id || ''
     let imgUrl = this.page.data.productInfo.imgUrl? this.page.data.productInfo.imgUrl : ''
-    let name = this.page.data.productInfo.name.length > 10 ? this.page.data.productInfo.name.slice(0, 10) + "..." : this.page.data.productInfo.name
+    let name = this.page.data.productInfo.name || ""
+    name = this.page.data.productInfo.name.length > 10 ? this.page.data.productInfo.name.slice(0, 10) + "..." : this.page.data.productInfo.name
     return {
       title: name,
       path: `/pages/index/index?type=${typeId}&id=${id}&inviteId=${inviteCode}`,
