@@ -1,0 +1,45 @@
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
+
+<view class='logistics' wx:if="{{list.length>0}}">
+  <view class="title flexR-sb font-30">
+    <text>{{expName}}：{{mailNo}}</text>
+    <image src='/img/wuliu-icon.png' mode='widthFix'></image>
+  </view>
+  <view class='font-26'>
+    <view class='company'>
+      <view class='flexR'>
+        <image src='/img/wuliu-icon-de.png' mode='widthFix' class='logo-w'></image>
+        <!-- <view>本数据由 <text class='blue'>{{expName}}</text> 提供</view> -->
+        <view>物流状态 <text class='blue'>{{status}}</text></view>
+      </view>
+    </view>
+    <view class='infos'>
+      <view>
+        <block wx:for='{{list}}' wx:key='unique'>
+          <view class='flexR-sb gray'>
+            <view class='time-line'>
+              <view class='font-28'>{{item.showDate}}</view>
+              <view class='font-20'>{{item.showTime}}</view>
+            </view>
+            <view class='time-content'>
+              <!--<image src='{{item.middleImage}}' mode='widthFix' class='state-icon'></image>-->
+              <view class='dian'><view></view></view>
+              <!--<view class='font-30 state-title'>{{item.title}}</view>-->
+              <view>
+                {{item.status}}
+                <!--<text class='orange'>{{item.content2}}</text>-->
+                <!--{{item.content3}}-->
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>  
+  </view>
+</view>
+
+<view class='sub-page' wx:else>
+  <template is="result-tips"  data="{{tipVal:6,tips}}" />
+</view>
+ 

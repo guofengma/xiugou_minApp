@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "支付方式",
+  "usingComponents": {
+    "image-sub": "/components/image-sub/image-sub"
+  }
+}

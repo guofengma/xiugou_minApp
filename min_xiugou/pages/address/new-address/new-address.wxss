@@ -1,0 +1,36 @@
+.address{
+  font-size: 26rpx
+}
+.main-area{margin-bottom: 80rpx}
+.wrap{margin-top: 30rpx}
+.icon-img{width: 36rpx;height: 36rpx;vertical-align: middle;margin-top: -5rpx}
+.btn-img{width: 30rpx;height: 36rpx;vertical-align: middle;}
+.main-area text{margin: 0 20rpx}
+.item,.default{background: #fff;height: 96rpx;line-height: 96rpx;padding: 0 30rpx;display: flex;}
+.mar-top2{margin-top: 2rpx}
+.item view:first-child{width: 25%}
+.item input{height: 96rpx;line-height: 96rpx}
+.item .textarea{width:100%;
+    height: 128rpx;
+    background-color: #ffffff;
+    border-radius: 10rpx;
+    border: solid 1rpx #eeeeee;
+    padding: 10rpx;
+}
+.item view.textarea{
+  width: 100%;
+}
+.item view:nth-child(2){width: 75%;}
+.line{border-bottom: 1px solid #eee}
+.special{padding: 20rpx;height: 148rpx}
+.width80{width: 80%}
+.width20{width: 20%;text-align: right}
+.default view:first-child{width: 75%}
+.default view:nth-child(2){width: 25%;text-align: right}
+.default image{ width: 32rpx;}
+.item image{ width: 15rpx;height: 19rpx;}
+/* .right{text-align: right;} */
+.right text{color: #c8c8c8 ;}
+.region{
+  padding-right: 20rpx;
+}

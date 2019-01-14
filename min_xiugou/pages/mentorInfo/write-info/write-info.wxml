@@ -1,0 +1,8 @@
+<form bindsubmit="formSubmit" class='form'>
+  <view class='title flexR-sb gray-9 font-24'>请填写您的介绍：</view>
+  <view class="detail-remark">
+    <textarea bindinput="detailRemark" maxlength="90" class="textarea boxSize whiteBg font-26" value='{{profile}}' placeholder="请输入一段说明文字..."/>
+    <view class="gray-9 font-26 number">{{count}}/90</view>
+  </view>
+  <button class='loginBtn flexR' formType="submit">完成</button>
+</form>

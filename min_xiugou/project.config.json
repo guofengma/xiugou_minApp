@@ -1,0 +1,391 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": false,
+		"uglifyFileName": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.2.5",
+	"appid": "wxa059b818226f8679",
+	"projectname": "%E7%A7%80%E8%B4%AD%E5%B0%8F%E7%A8%8B%E5%BA%8F-%E5%B8%82%E5%9C%BA%E9%83%A8%E5%86%85%E6%B5%8B",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "注册",
+					"pathName": "pages/register/register",
+					"query": "inviteCode=200"
+				},
+				{
+					"id": 1,
+					"name": "产品详情页",
+					"pathName": "pages/product-detail/product-detail",
+					"query": "productId=SPU00000039"
+				},
+				{
+					"id": 2,
+					"name": "秒杀详情页",
+					"pathName": "pages/product-detail/seckill-detail/seckill-detail",
+					"query": "code=MS1810150002"
+				},
+				{
+					"id": 3,
+					"name": "降价拍详情页",
+					"pathName": "pages/product-detail/discount-detail/discount-detail",
+					"query": "code=JJP1812030003"
+				},
+				{
+					"id": -1,
+					"name": "关于我们",
+					"pathName": "pages/my/aboutUs/aboutUs",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "设置",
+					"pathName": "pages/my/setting/setting",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的订单",
+					"pathName": "pages/my/my-order/my-order",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的晋升",
+					"pathName": "pages/my/my-promotion/my-promotion",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "邀请者--选择",
+					"pathName": "pages/register/register-code/register-code",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "填写邀请码",
+					"pathName": "pages/register/write-invite-code/write-invite-code",
+					"query": ""
+				},
+				{
+					"id": 10,
+					"name": "申请售后",
+					"pathName": "pages/after-sale/apply-sale-after/apply-sale-after",
+					"query": "refundType=0&orderProductNo=O1166141"
+				},
+				{
+					"id": 11,
+					"name": "退货详情",
+					"pathName": "pages/after-sale/return-goods/return-goods",
+					"query": "serviceNo=3181208151417094177768"
+				},
+				{
+					"id": -1,
+					"name": "我的首页",
+					"pathName": "pages/my/my",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "详情页",
+					"pathName": "pages/product-detail/product-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的秀豆",
+					"pathName": "pages/my/my-account/integral/integral",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的礼包",
+					"pathName": "pages/product-detail/gift-bag-detail/gift-bag-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "全部分类",
+					"pathName": "pages/product-classification/product-classification",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "关于我们",
+					"pathName": "pages/my/aboutUs/aboutUs",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "用户协议",
+					"pathName": "pages/register/agreement/agreement",
+					"query": ""
+				},
+				{
+					"id": 17,
+					"name": "订单确认页",
+					"pathName": "pages/order-confirm/order-confirm",
+					"query": "type=5"
+				},
+				{
+					"id": -1,
+					"name": "仅退款提交页",
+					"pathName": "pages/after-sale/only-refund/only-refund-detail/only-refund-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "仅退款结果页",
+					"pathName": "pages/after-sale/only-refund/apply-result/apply-result",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "签到",
+					"pathName": "pages/signIn/signIn",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "pages/login-wx/login-wx",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "选择售后",
+					"pathName": "pages/after-sale/choose-after-sale/choose-after-sale",
+					"query": ""
+				},
+				{
+					"id": 25,
+					"name": "礼包",
+					"pathName": "pages/product-detail/gift-bag-detail/gift-bag-detail",
+					"query": "giftBagId=TC201811290008"
+				},
+				{
+					"id": -1,
+					"name": "专题",
+					"pathName": "pages/topic/topic",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "查看物流",
+					"pathName": "pages/logistics/logistics",
+					"query": "id=3378761371158"
+				},
+				{
+					"id": -1,
+					"name": "物流公司选择",
+					"pathName": "pages/logistics/choose-logistics/choose-logistics",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "问题反馈",
+					"pathName": "pages/my/help-customer/help-customer",
+					"query": ""
+				},
+				{
+					"id": 30,
+					"name": "换货",
+					"pathName": "pages/after-sale/exchange-goods/exchange-goods",
+					"query": "serviceNo=3181208152857765177160"
+				},
+				{
+					"id": 31,
+					"name": "我的推广订单",
+					"pathName": "pages/my/extension/extension",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的推广列表",
+					"pathName": "pages/my/extension/extension-type/extension-type",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "秀购发现",
+					"pathName": "pages/discover/discover",
+					"query": ""
+				},
+				{
+					"id": 34,
+					"name": "秀购发现详情",
+					"pathName": "pages/discover/discover-detail/discover-detail",
+					"query": "articleId=4"
+				},
+				{
+					"id": -1,
+					"name": "发现收藏",
+					"pathName": "pages/discover/discover-fav/discover-fav",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的任务",
+					"pathName": "pages/my/task/task",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "任务详情",
+					"pathName": "pages/my/task/task-detail/task-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "任务分享",
+					"pathName": "pages/my/task/task-share/task-share",
+					"query": ""
+				},
+				{
+					"id": 37,
+					"name": "任务详情",
+					"pathName": "pages/my/task/task-detail/task-detail",
+					"query": "jobId=12"
+				},
+				{
+					"id": 38,
+					"name": "任务分享",
+					"pathName": "pages/my/task/task-share/task-share",
+					"query": "jobId=12"
+				},
+				{
+					"id": -1,
+					"name": "红包",
+					"pathName": "pages/register/red-envelopes/red-envelopes",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "签到规则",
+					"pathName": "pages/signIn/rule/rule",
+					"query": ""
+				},
+				{
+					"id": 38,
+					"name": "填写邀请码",
+					"pathName": "pages/register/write-invite-code/write-invite-code",
+					"query": ""
+				},
+				{
+					"id": 44,
+					"name": "webview",
+					"pathName": "pages/web-view/web-view",
+					"query": "webType=5"
+				},
+				{
+					"id": -1,
+					"name": "邀请码",
+					"pathName": "pages/register/write-invite-code/write-invite-code",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "支付成功",
+					"pathName": "pages/my/information/informationDetail/informationDetail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的推广订单详情",
+					"pathName": "pages/my/extension/extension-detail/extension-detail",
+					"query": ""
+				},
+				{
+					"id": 48,
+					"name": "首页",
+					"pathName": "pages/index/index",
+					"query": "inviteId=251"
+				},
+				{
+					"id": -1,
+					"name": "产品缺失页面",
+					"pathName": "pages/product-detail/temp/defect/defect",
+					"query": "productId=77"
+				},
+				{
+					"id": -1,
+					"name": "css3玻璃球",
+					"pathName": "pages/my/test2",
+					"query": "productId=77"
+				},
+				{
+					"id": -1,
+					"name": "查看物流",
+					"pathName": "pages/logistics/logistics-list/logistics-list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "选择导师",
+					"pathName": "pages/mentorInfo/choose-mentor/choose-mentor",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "填写导师信息",
+					"pathName": "pages/mentorInfo/write-info/write-info",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "导师详情",
+					"pathName": "pages/mentorInfo/mentor-detail/mentor-detail",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "仅退款",
+					"pathName": "pages/after-sale/only-refund/only-refund-detail/only-refund-detail",
+					"query": "serviceNo=3181208155653708177712"
+				},
+				{
+					"id": -1,
+					"name": "支付",
+					"pathName": "pages/order-confirm/pay/pay",
+					"query": ""
+				},
+				{
+					"id": 57,
+					"name": "订单详情",
+					"pathName": "pages/my/orderDetail/orderDetail",
+					"query": "orderId=O1166141"
+				}
+			]
+		}
+	}
+}

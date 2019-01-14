@@ -1,0 +1,8 @@
+@import '../task.wxss';
+
+.task-detail-title {
+  font-size: 26rpx;
+}
+.task-detail-desc{
+  padding-top: 30rpx;
+}

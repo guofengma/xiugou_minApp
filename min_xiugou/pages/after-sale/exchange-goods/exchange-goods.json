@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "换货详情",
+  "usingComponents": {
+    "amend-application": "/pages/after-sale/temp/amend-application/amend-application",
+    "contact-seller": "/components/contact-seller/contact-seller",
+    "product-specification": "/components/product-specification/product-specification",
+    "image-sub": "/components/image-sub/image-sub"
+  }
+}

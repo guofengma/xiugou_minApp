@@ -1,0 +1,90 @@
+<view class="order">
+   <!--支付详情/支付详情退款成功-->
+    <view class="detail">
+        <view class="header red font-30" wx:if='{{list.paramType==100}}'>
+            <view class="title">支付订单</view>
+            <view class="money">-{{list.param.tradeAmount}}</view>
+            <view class="result">交易成功</view>
+        </view>
+        <view class="header red font-30" wx:else>
+            <view class="title">订单退款</view>
+            <view class="money">+{{list.param.refundAmounts}}</view>
+            <view class="result success">退款成功</view>
+        </view>
+        <!-- <view class="wrap">
+
+        </view> -->
+        <view class="wrap">
+             <block>
+                <view class="item line" bindtap="myAccount">
+                    <view>
+                        <text>{{ list.paramType==100? "付款编号":"退款编号"}}</text>
+                    </view>
+                    <view>
+                        <text>{{list.paramType==100? list.param.outTradeNo:list.param.refundNo}}</text>
+                    </view>
+                </view>
+                <!--<view class="item line" bindtap="information">-->
+                    <!--<view>-->
+                        <!--<text>付款方式</text>-->
+                    <!--</view>-->
+                    <!--<view>-->
+                        <!--<text>余额支付 ￥ 80.50</text>-->
+                    <!--</view>-->
+                <!--</view>-->
+            </block>
+            <view class="item line" bindtap="information">
+                <view>
+                    <text>创建时间</text>
+                </view>
+                <view>
+                    <text>{{list.showCreateTime}}</text>
+                    <!-- <text wx:if='{{status==1}}'>{{detail.pay_time}}</text> -->
+                    <!-- <text wx:else>{{detail.create_time}}</text> -->
+                </view>
+            </view>
+            <view class="item" bindtap="information">
+                <view>
+                    <text>订单号</text>
+                </view>
+                <view>
+                    <text>{{list.orderNum || list.param.orderNo}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="wrap">
+            <view class="item line" bindtap="order">
+                <view>
+                    <text>订单疑问</text>
+                </view>
+                <view>
+                  <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+                </view>
+            </view>
+            <view class="item" catchtap='feedback'>
+              <!-- <button class="go-cart-view contact-btn flexR-sb" 
+                session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"
+                open-type="contact"
+              > -->
+              <view>
+                  <text>投诉</text>
+              </view>
+              <view>
+              <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+              </view>
+            <!-- </button> -->
+
+            </view>
+        </view>
+    </view>
+    <!--提现驳回详情-->
+    <!-- <view class="back-detail wrap" wx:if="{{status==8}}">
+        <view class="header">
+            提现驳回详情
+        </view>
+        <view class="content">
+            {{refuseDetail}}
+        </view>
+    </view> -->
+</view>
+

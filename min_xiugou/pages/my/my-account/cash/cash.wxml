@@ -1,0 +1,42 @@
+<view>
+    <view class='cash'>
+        <view class="item boxSize flexR-sb">
+          <view>
+           <view class="font-26">
+                余额（元）
+            </view>
+            <view class="num">
+              {{account}}
+            </view>
+          </view>
+          <view class="btn flexR" bindtap="beCash">提现</view>
+        </view>
+    </view>
+    <view class="list-area">
+        <view class="list-item flexR-sb" wx:for="{{list}}" wx:key="unique">
+          <view class='flexR-sb list-first'>
+            <image src="{{imgBaseUrl+types[item.useType].icon}}"></image>
+            <view class="detail">
+              <view class="style">{{types[item.useType].name}}</view>
+              <view class="time">{{item.createTime}}</view>
+              <view class="number">编号：{{item.serialNo}}</view>
+            </view>
+          </view>
+            <view class="money {{item.add?'red':''}}">
+                <text>{{item.add?'+':'-'}}</text>{{item.balance}}
+            </view>
+        </view>
+       <!-- <view class="list-item">
+            <image src="/img/avatar.jpg"></image>
+            <view>
+                <view class="style">店主分红</view>
+                <view class="time">2018-05-25 12:15:45</view>
+                <view class="number">流水号：123456789012345678</view>
+            </view>
+            <view class="money {{add?'add':''}}">
+                <text>{{add?'+':'-'}}</text>100.50
+            </view>
+        </view>-->
+    </view>
+</view>
+

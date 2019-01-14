@@ -1,0 +1,16 @@
+<import src="/libs/wxParse/wxParse.wxml" />
+
+<view class='detail'>
+    <view class="title">{{list.title}}</view>
+    <view class="content">
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+    <view class="opr flexR">
+        <view class="no-help btn {{isClickedNoHelp? 'redBg':'red'}}" catchtap='isUseClicked' data-index='1'>没啥帮助({{datas.notHelp || 0}})</view>
+        <view class="has-help btn {{isClickedHelp? 'redBg':'red'}}" catchtap='isUseClicked' data-index='2'>
+        有用({{datas.isHelp || 0}})
+        <!-- <image src="${mrdomain}/helped.png"></image><text>+1</text> -->
+        </view>
+    </view>
+</view>
+

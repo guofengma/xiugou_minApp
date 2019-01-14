@@ -1,0 +1,70 @@
+<view class='sign-page sub-page'>
+  <view class='gray-9 font-24 rule' catchtap='ruleClicked'>
+    <image-sub imgStyle='{{"width:30rpx"}}' imgSrc="{{'home_icon.png'}}"/>
+    <text> 签到规则</text>
+  </view>
+  <!-- 签到按钮 -->
+  <view class='sign-btn-view '>
+    <view class='sign-btn flexR' catchtap='tokenCoinSign'>
+      <view wx:if='{{!todaySgin}}'>
+       <text class='font-38 ' wx:if='{{!animate0&!animate1}}'>签</text>
+        <view class='font-38 animated  {{animate0? "zoomIn":""}}' wx:if='{{!animate1&&animate0}}'>
+          <image-sub imgStyle='{{"width:100rpx"}}' imgSrc="{{'home_icon1.png'}}"/>
+        </view>
+      </view>
+      <view class='animated flexC {{animate1? "zoomIn2":""}}' wx:if='{{animate1&&animate0 || todaySgin}}'>
+        <image-sub imgStyle='{{"width:66rpx"}}' imgSrc="{{'icon.png'}}"/>
+        <view class=' white flexR {{userInfos.userScore0.length>4? "font-30":"font-38"}}'>{{userInfos.userScore || 0}}</view>
+      </view>
+    </view>
+   
+    <view class='font-24 gray-9 flexR totalDay'>
+      <text>连续签到{{lists[3].continuous || lists[2].continuous || 0}}天</text>
+    </view>
+  </view>
+  <!-- 签到日历 -->
+  <view class='sign-date-view boxSize overflow'>
+    <view style='display:inline-block'>
+     <view class='line-view flexC' wx:for='{{lists}}' wx:key='{{index}}'>
+      <view class='line lineBegin {{index<3? "active":""}}' wx:if='{{index==0}}'></view>
+      <view class='xdNum font-24 flexC  boxSize {{item.continuous&&item.reward? "whiteBg":""}} {{item.reward===0&&index!=3? "noSgin":""}} {{item.canReward? " boldBg":""}}'>
+        <text wx:if='{{index!=3}}'>+{{item.canReward? item.canReward:item.reward}}</text>
+        <view wx:if='{{index==3}}'>
+          <text wx:if='{{!item.reward}}'>+{{item.canReward}}</text>
+          <view wx:else>
+            <image-sub imgStyle='{{"width:36rpx"}}' imgSrc="{{'home_icon2.png'}}"/>
+          </view>
+        </view>
+      </view>
+      <view class='time font-22 white'>{{item.signDate}}</view>
+      <view class='line {{index<3? "active":""}}'></view>
+    </view>
+    </view>
+  </view>
+  <!-- 兑换1元劵 -->
+  <view class='coin-coupon-view whiteBg flexR-sb boxSize' catchtap='exchangeTokenCoin'>
+    <view class='leftBar flexR'>
+      <view class='left red font-24'>
+        <text class='coinNum'>1</text>元
+      </view>
+      <view class='right'>
+        <view class='font-28'>现金抵扣劵</view>
+        <view class='gray font-24'>全场通用/无时间限制</view>
+      </view>
+    </view>
+    <view class='rightBar flexC'>
+      <view class='font-24'>消耗秀豆</view>
+      <view class='red font-24'>- {{needXD}} -</view>
+      <view class='redBg coinBtn flexC font-24'>立即兑换</view>
+    </view>
+  </view>
+  <!-- 备注 -->
+  <view class='font-24 gray-9 tips'>
+    注：{{needXD}}秀豆兑换1张劵，无兑换限制，点击即可兑换
+  </view>
+
+  <!-- 优惠卷张数 -->
+  <view class='font-24 gray-9 flexC' catchtap='goPage'>
+     已有{{userInfos.tokenCoin || 0}}张抵扣券>
+  </view>
+</view>

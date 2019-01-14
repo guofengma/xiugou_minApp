@@ -1,0 +1,25 @@
+.wrap{
+  padding-top: 30rpx;
+  min-height: 85%;
+}
+.item{
+  height: 96rpx;
+  line-height: 96rpx;
+  padding: 0 30rpx;
+  display: flex;
+  border-bottom: 1px solid #eee
+}
+.item view:first-child{
+  width: 80%
+}
+.item view:nth-child(2){
+  width: 25%;
+  text-align: right;
+  margin-right: 20rpx
+}
+.btn-content{
+    margin-top:70rpx;
+}
+.contact{
+  margin: 30rpx auto;
+}

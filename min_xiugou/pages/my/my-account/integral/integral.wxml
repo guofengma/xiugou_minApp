@@ -1,0 +1,32 @@
+<view>
+    <view class='cash'>
+        <view class="item boxSize flexR-sb">
+          <view>
+            <view class="font-26">
+              秀豆（枚）
+            </view>
+            <view class="num">
+              {{account || 0}}
+            </view>
+          </view>
+          <view class='coinBtn font-28 flexR' catchtap='goPage'>
+            <view>兑换1元抵扣券</view>
+          </view>
+        </view>
+    </view>
+    <view class="list-area">
+        <view class="list-item flexR-sb" wx:for="{{list}}" wx:key="unique">
+          <view class='flexR-sb detail-content'>
+            <image src="{{imgBaseUrl+useTypeArr[item.useType].icon}}"></image>
+            <view class="detail">
+              <view class="style">{{useTypeArr[item.useType].name}}</view>
+              <view class="time">{{item.createTime}}</view>
+            </view>
+          </view>
+          <view class="money {{item.add?'red':''}}">
+              <text>{{item.add?'+':'-'}}</text>{{item.userScore || 0}}
+          </view>
+        </view>
+    </view>
+</view>
+

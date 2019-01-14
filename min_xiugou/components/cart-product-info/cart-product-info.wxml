@@ -1,0 +1,40 @@
+<template name="cart-product-info">
+  <view class="cart-product-info flexR" catchtap='cartProductClicked' data-id = '{{spuCode}}' data-state='{{productStatus}}' data-code="{{showActiveCode}}" data-type="{{showActiveType}}">
+    <!--勾选产品和产品是否失效的提示-->
+    <view class='leftbar'>
+      <image src='{{showImg}}' class='search-img' style='width:{{imgSize}}rpx;height:{{imgSize}}rpx'></image>
+      <view class='statusImg' wx:if='{{statusImg}}'>
+        <image  src='{{statusImg}}'></image>
+      </view>
+    </view>
+    <!--产品信息-->
+    <view class='right-bar' style='width:480rpx'>
+      <view class='right-top-bar'>
+        <view class='ellipsis-2 prdName'>
+          <text class='red font-22 labelName' wx:if='{{labelName}}'>{{labelName}}</text>
+          {{showName}}
+        </view>
+        <view class='gray ellipsis'>{{showType}} </view>
+      </view>
+      <!--购物车产品的状态提示-->
+      <view wx:if="{{inCart}}" class='red font-22' >
+        <view wx:if='{{productStatus==1&&sellStock<innerCount}}'>库存不足</view>
+        <view class='flexR' wx:if='{{showActivity && !showActivity.isEnd}}'>
+          <text wx:if='{{showActivity.isBegin}}'>该商品正在进行{{showActivity.activityType==1? "秒杀":"降价拍"}}活动，快去看看~</text>
+          <text wx:else>{{showActivity.activityType==1? "秒杀":"降价拍"}}活动未开始,暂不可购买</text>
+        </view>
+        <view wx:if="{{item.limit}}">限购5件</view>
+        <view wx:if="{{showUpdateTime}}">{{showUpdateTime}}开售</view>
+      </view>
+      <view class='prd-count-box flexR' >
+        <view class='red'>¥ {{showPrice}}</view>
+        <view wx:if="{{showQnt}}" class='gray' >×{{showQnt}}</view>
+        <!--购物车数量加减组件-->
+        <view wx:if='{{inCart}}' catchtap='test' >
+           <adder-subtractor  count="{{innerCount}}" index="{{index}}" prodskey="{{prodskey}}" itemkey='{{itemkey}}' countSize='{{countSize}}' disabled="{{disabled}}" bind:countChange="counterInputOnChange"/>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+</template>

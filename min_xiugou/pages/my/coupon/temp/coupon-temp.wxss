@@ -1,0 +1,53 @@
+.item-ans{
+  width: 690rpx;
+  margin:20rpx auto;
+  box-sizing: border-box; 
+  height: 220rpx;
+  font-size: 22rpx;
+  background:url(${mrdomain}/youhuiquan_bg_zhihui@3x.png) no-repeat left top;
+  background-size: 100%;
+}
+.topBar-item{
+  height: 154rpx;
+}
+.bottomBar-item{
+  height: 66rpx;
+  padding:0 30rpx;
+}
+.item-ans.active{
+  background-image: url(${mrdomain}/youhuiquan_bg_nor@3x.png)
+}
+.coupon-right{
+  width: 110rpx;
+  height: 154rpx;
+}
+.coupon-right-unUsed{
+  background: url(${mrdomain}/youhuiquan_icon_daijihuo_nor@3x.png) no-repeat 0rpx -8rpx;
+   background-size: 130rpx;
+}
+.coupon-right-limitLevel{
+  background: url(${mrdomain}/youhuiquan_icon_dengjishouxian_nor.png) no-repeat 0rpx -8rpx;
+   background-size: 130rpx;
+}
+.coupon-right-used{
+  background: url(${mrdomain}/youhuiquan_icon_yishiyong_nor@3x.png) no-repeat 0rpx -8rpx;
+   background-size: 130rpx;
+}
+.coupon-right-lose{
+  background: url(${mrdomain}/youhuiquan_icon_yishixiao_nor@3x.png) no-repeat 0rpx -8rpx;
+   background-size: 130rpx;
+}
+.coupon-left{
+  width: 162rpx;
+  box-sizing: border-box;
+}
+.coupon-center{
+  width: 380rpx;
+  box-sizing: border-box;
+}
+.coupon-left .red text,.coupon-left .gray text {
+  font-size: 50rpx;
+}
+.coupon-center>view{
+  margin-bottom: 4rpx;
+}

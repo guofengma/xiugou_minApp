@@ -1,0 +1,38 @@
+@import "/css/app";
+
+.tips-content>view,.tips-header{
+  height: 100rpx;
+  line-height: 100rpx;
+  padding:0 40rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.tips-content>view{
+ background: #fff url(${mrdomain}/choose-circle.png) no-repeat 510rpx  center;
+ background-size: 44rpx 44rpx;
+ 
+}
+.tips-content>view.active{
+  background-color:#F8F8F8; 
+  background-image: url(${mrdomain}/choose-icon-c.png)
+}
+.cancel-btn{
+  width: 276rpx;
+  height: 80rpx;
+  margin: 20rpx;
+  border-radius: 10rpx;
+}
+.tips-header{
+  background: #fff url(${mrdomain}/close-icon.png) no-repeat right top;
+  background-size: 64rpx 64rpx;
+  position: relative;
+}
+.tips-cancel-order{
+  font-size: 32rpx;
+}
+.fr{
+  width: 64rpx;
+  height: 100rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

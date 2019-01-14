@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "分享点击",
+  "usingComponents": {
+    "image-sub": "/components/image-sub/image-sub"
+  }
+}

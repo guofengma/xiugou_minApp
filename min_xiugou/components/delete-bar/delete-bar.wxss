@@ -1,0 +1,29 @@
+@import "/css/app";
+.touch-item {
+ display: flex;
+ justify-content: space-between;
+ width: 100%;
+ overflow: hidden;
+}
+.content {
+ width: 100%;
+ margin-right:0;
+ -webkit-transition: all 0.4s;
+ transition: all 0.4s;
+ -webkit-transform: translateX(90px);
+ transform: translateX(90px);
+ margin-left: -90px
+}
+.del {
+ width: 130rpx;
+ -webkit-transform: translateX(90px);
+ transform: translateX(90px);
+ -webkit-transition: all 0.4s;
+ transition: all 0.4s;
+ font-size: 30rpx;
+}
+.touch-move-active .content,
+.touch-move-active .del {
+ -webkit-transform: translateX(0);
+ transform: translateX(0);
+}

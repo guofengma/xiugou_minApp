@@ -1,0 +1,44 @@
+@import "/libs/wxParse/wxParse.wxss";
+.title{
+    height: 100rpx;
+    line-height: 110rpx;
+    padding: 0 20rpx;
+    font-size: 32rpx;
+}
+.content{
+    font-size: 26rpx;
+    color: #666666;
+    padding: 0 20rpx;
+    line-height: 30rpx;
+    text-align: justify;
+    min-height: 300rpx
+}
+.opr{
+    margin-top: 200rpx;
+    text-align: center;
+    width: 100%;
+}
+.opr .btn{
+    width: 300rpx;
+    height: 96rpx;
+    line-height: 96rpx;
+    border-radius: 10rpx;
+    border:1rpx solid;
+    text-align: center;
+    margin-bottom: 20rpx;
+    font-size: 32rpx;
+}
+.has-help text{
+    position: absolute;
+    font-size: 28rpx;
+    top: -10rpx;
+    right:50rpx
+}
+.has-help{
+  margin-left: 20rpx;
+}
+.has-help image{
+    width:42rpx ;
+    height: 42rpx;
+    margin-left: 10rpx
+}

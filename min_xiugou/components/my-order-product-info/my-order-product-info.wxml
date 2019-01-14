@@ -1,0 +1,24 @@
+<template name="my-order-product-info">
+  <view class="my-order-product-info boxSize flexR" >
+    <view class='leftbar'>
+      <image src='{{imgUrl || specImg}}' mode='widthFix'></image>
+    </view>
+    <view class='right-bar flexR-sb'>
+      <view class='topbar'>
+        <view class='ellipsis-2'>{{productName}}</view>
+        <view class='gray-9 {{isSaleAfter? "ellipsis":"ellipsis-2"}}'>
+         {{spec || specValues }}
+        </view>
+      </view>
+      <view class='flexC right-price' >
+        <view>¥ {{price || unitPrice}}</view>
+        <view class='cost-price' wx:if="{{showOriginalPrice}}">¥ {{showOriginalPrice}}</view>
+        <view  class='gray-9'>x{{num || quantity}}</view>
+      </view>
+      <!-- <view class='flexR-sb isSaleAfter' wx:if='{{isSaleAfter}}'>
+        <text class='red'>{{typeName}}</text>
+        <text class='red'>{{typeState}}</text>
+      </view> -->
+    </view>
+  </view>
+</template>

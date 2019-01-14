@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "选择顾问",
+  "usingComponents": {
+    "image-sub": "/components/image-sub/image-sub"
+  }
+}

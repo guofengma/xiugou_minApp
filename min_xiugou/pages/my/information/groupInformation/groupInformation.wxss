@@ -1,0 +1,56 @@
+.time{
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    font-size: 26rpx;
+    color: #999999;
+}
+.title{
+    height: 97rpx;
+    line-height: 97rpx;
+    padding:0 20rpx;
+    background-color: #ffffff;
+    border-bottom: solid 1rpx #eeeeee;
+    font-size: 30rpx;
+    color: #222222;
+    text-indent: 20rpx;
+}
+.content{
+    padding: 30rpx;
+    background: #fff;
+    font-size: 26rpx;
+    color: #999999;
+}
+
+.item{
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 26rpx;
+}
+
+.info{
+    font-size: 28rpx;
+    padding:50rpx 0;
+    width: 100%;
+    text-align: center;
+}
+.opr{
+    height: 120rpx;
+    background: #fff;
+    border-top: 1rpx solid #eee;
+    padding: 0 20rpx;
+}
+.btn{
+    width: 180rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    background-color: #ffffff;
+    border-radius: 30rpx;
+    border: 1rpx solid;
+    font-size: 26rpx;
+    text-align:center;
+    margin-top:30rpx;
+    margin-left:80%;
+    transform:translateX(-40%);
+
+}

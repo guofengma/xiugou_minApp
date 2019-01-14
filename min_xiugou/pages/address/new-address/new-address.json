@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "新增收货地址",
+  "usingComponents": {
+    "city-picker": "/components/city-picker/city-picker"
+  }
+}

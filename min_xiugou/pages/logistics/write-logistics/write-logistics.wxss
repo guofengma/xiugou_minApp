@@ -1,0 +1,25 @@
+@import "/components/my-order-product-info/my-order-product-info";
+
+@import "/components/cell-line/cell-line";
+
+.my-order-product-info{
+  background: #f7f7f7;
+}
+.log-img{
+  width: 46rpx;
+  margin-left: 20rpx;
+}
+.cell-line{
+  height: 88rpx;
+  padding: 0 30rpx;
+  margin-top: 20rpx;
+  background: #fff;
+}
+.input{
+  width:480rpx;
+  padding-left: 20rpx;
+}
+.cell-line.flexR{
+  justify-content: flex-start;
+}
+

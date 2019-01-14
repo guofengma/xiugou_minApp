@@ -1,0 +1,20 @@
+.after-sale-prd-info{
+  padding: 20rpx 30rpx;
+}
+.after-sale-prd-info-img{
+  width: 160rpx;
+  height: 160rpx;
+}
+.after-sale-prd-info-right{
+  width: 500rpx;
+}
+.prd-types{
+  width: 350rpx;
+}
+.after-sale-name{
+  margin-bottom: 30rpx;
+  margin-right: 50rpx;
+}
+.after-sale-prd-info-right{
+  height: 160rpx;
+}

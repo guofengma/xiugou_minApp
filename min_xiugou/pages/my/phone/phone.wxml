@@ -1,0 +1,39 @@
+<!--pages/my/account.wxml-->
+<view class="phone">
+    <view class='tips'>我们将发送验证码到您的新手机上，请注意查收</view>
+    <view class="wrap">
+        <view class="section">
+            <view class="item">新手机</view>
+            <input type="text" class="lar-inp inp" placeholder-style="color:#c8c8c8;" placeholder="请输入手机号" value='{{phone}}'
+              bindinput='changePhone'
+            />
+        </view>
+        <view class="section">
+            <view class="item">验证码</view>
+            <input type="text" class="small-inp inp" placeholder-style="color:#c8c8c8;" placeholder="请输入验证码" value='{{code}}' bindinput='changeInput'/>
+            <view bindtap="getCodeTap" class='code'>{{showSecond? second+"秒后重新获取":"获取验证码"}}</view>
+        </view>
+    </view>
+    <view class="btn redBg" bindtap="next">下一步</view>
+    <!--确认弹窗-->
+    <view class="tips-delete-order model-view-bg " wx:if='{{isNext}}'>
+        <view>
+            <view class='tips-box '>
+                <view class='tips-icon flexR'>
+                    <view>
+                        <image src="/img/tktx_03@2x.png"></image>
+                    </view>
+                </view>
+                <view class='content'>
+                    <view class='big'>是否确定修改原手机号？</view>
+                    <view class='big'>选择确认将立即解除原绑定手机号</view>
+                </view>
+                <view class='flexR-sb btn-content'>
+                    <view class='redBg deleteBtn flexR' bindtap='sure'>确定</view>
+                    <view class='deleteBtn leftBtn gray flexR' bindtap='cancel'>取消</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+

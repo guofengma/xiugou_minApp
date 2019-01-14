@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "adder-subtractor": "/components/adder-subtractor/adder-subtractor"
+  }
+}

@@ -1,0 +1,34 @@
+<template name="coupon-temp">
+    <view class="item-ans {{item.active? 'active':''}}"  bindtap="toDetail" data-id="{{item.id}}" data-index='{{index}}' data-key="{{key}}">
+      <view class='flexR-sb topBar-item'>
+        <view class='coupon-left flexC'>
+          <view class='{{item.active? "red":"gray"}} font-30' wx:if='{{item.type<4 || item.type==11}}'>
+            {{item.type !=3? "¥":''}}
+            <text >{{item.value}}</text>
+            {{item.type ==3? "折":''}}
+          </view>
+          <view class='{{item.active? "red":"gray"}} font-30' wx:elif="{{item.type==4}}">
+            <view>商品</view>
+            <view>抵扣</view>
+          </view>
+          <view class='{{item.active? "red":"gray"}} font-30' wx:else>
+            <view>{{item.value}}</view>
+          </view>
+          <!-- <view class='gray' >{{item.typeName}}</view> -->
+        </view>
+        <view class='coupon-center'>
+          <view class='font-26'>
+          {{item.name}}
+          <text class='gray font-22' wx:if='{{item.tips}}'>({{item.tips}})</text>
+          </view>
+          <!-- <view class='gray' wx:if='{{!item.isCoinCoupon&&item.type!=4}}'>满{{item.useConditions || 0}}可用</view> -->
+          <view class='gray time' wx:if='{{item.timeTips}}' >使用有效期：{{item.timeTips}}</view>
+          <view class='gray time' wx:else>使用有效期：{{item.start_time}}-{{item.outTime}}</view>
+        </view>
+        <view class='coupon-right flexC font-28 {{item.couponClassName}}' >
+          <text wx:if='{{item.num}}'>x{{item.num}}</text>
+        </view>
+      </view>
+      <view class='gray bottomBar-item flexR-sb ellipsis'>{{item.nickname}}</view>
+    </view>
+</template>

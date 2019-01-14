@@ -1,0 +1,14 @@
+<!-- 选择现金优惠卷弹框 -->
+
+<view class='model-view-bg' wx:if='{{show}}'>
+   <view class='use-container overflow boxSize flexC'>
+    <view class='use-content flexC'>
+       <slot></slot>
+    </view>
+    <view class='use-footer flexR whiteBg'>
+      <block wx:for='{{props.btn}}' wx:key='{{index}}'>
+        <button class='boxSize flexR' style='width:{{props.btn.length==1? 100:50}}%' catchtap='btnClicked' data-index='{{index+1}}' open-type='{{item.type}}'>{{item.name}}</button>
+      </block> 
+    </view>
+   </view>
+</view>

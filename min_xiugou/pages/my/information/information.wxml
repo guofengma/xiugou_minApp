@@ -1,0 +1,58 @@
+<!--pages/my/account.wxml-->
+<view class="order">
+    <view class="">
+        <view class="item" bindtap="notice">
+            <view class="left">
+              <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'information-notice.png'}}"/>
+              <text>通知</text>
+            </view>
+            <view>
+                <view class="num redBg" wx:if="{{datas.noticeCount>0}}">{{datas.noticeCount}}</view>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'packup-btn.png'}}"/>
+            </view>
+        </view>
+    </view>
+    <view class="wrap">
+        <view class="item" bindtap="information">
+            <view class="left">
+              <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'infomation.png'}}"/>
+              <text>消息</text>
+            </view>
+            <view>
+                <view class="num redBg" wx:if="{{datas.messageCount>0}}">{{datas.messageCount}}</view>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'packup-btn.png'}}"/>
+            </view>
+        </view>
+    </view>
+    <view class="wrap">
+        <view class="item" bindtap="groupInformation">
+            <view class="left">
+              <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'group-information.png'}}"/>
+              <text>拼店消息</text>
+            </view>
+            <view>
+                <view class="num redBg" wx:if="{{datas.shopMessageCount>0}}">{{datas.shopMessageCount}}</view>
+                <image-sub imgStyle='{{"width:15rpx;margin-left:5rpx"}}' imgSrc="{{'packup-btn.png'}}"/>
+            </view>
+        </view>
+    </view>
+    <view class="tips-delete-order model-view-bg " wx:if='{{isNew}}'>
+        <view>
+            <view class='tips-box '>
+              <image-sub imgStyle='{{"width:64rpx"}}' imgSrc="{{'close-icon.png'}}"/>
+                <view class='tips-icon flexR'>
+                    <view></view>
+                </view>
+                <view class='content'>
+                    <view class='big'>新客送百元礼包</view>
+                    <view>首单满500立减160</view>
+                    <view>价值688元的新手礼包</view>
+                </view>
+                <view class='flexR-sb btn-content'>
+                    <view class='redBg deleteBtn flexR' bindtap=''>马上去领</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+

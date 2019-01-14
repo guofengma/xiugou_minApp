@@ -1,0 +1,59 @@
+{
+  "dev": {
+    "h5webUrl": "http://devh5.sharegoodsmall.com",
+    "baseUrl":"http://devapi.sharegoodsmall.com/gateway",
+    "imgBaseUrl":"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/",
+    "AppId": "wxc9bc82344767cb2a"
+  },
+  "test": {
+    "h5webUrl": "https://testh5.sharegoodsmall.com",
+    "baseUrl":"https://testapi.sharegoodsmall.com/gateway",
+    "imgBaseUrl":"https://mr-uat-sg.oss-cn-hangzhou.aliyuncs.com/sharegoods/resource/xcx/",
+    "AppId": "wxa059b818226f8679"
+  },
+  "prod": {
+    "h5webUrl": "https://h5.sharegoodsmall.com",
+    "baseUrl":"https://api.sharegoodsmall.com/gateway",
+    "imgBaseUrl":"https://cdn.sharegoodsmall.com/sharegoods/resource/xcx/",
+    "AppId": "wx3ee659054a9716f1"
+  },
+  "build": {
+    "h5webUrl": "https://uath5.sharegoodsmall.com",
+    "baseUrl":"https://uatapi.sharegoodsmall.com/gateway",
+    "imgBaseUrl":"https://uatcdn.sharegoodsmall.com/sharegoods/resource/xcx/",
+    "AppId": "wxa059b818226f8679"
+  },
+  "base":{
+    "rasVersion": "1.0.7",
+    "rasClient":"miniapp",
+    "imgSizeParams":{
+      "m_fixed":"?x-oss-process=image/resize,m_fixed,h_300,w_300",
+      "m_fill": "?x-oss-process=image/resize,p_65",
+      "m_mfit": "?x-oss-process=image/resize,m_mfit,h_300,w_300"
+    }
+  },
+  "devBaseUrl":{
+    "dev":"http://devapi.sharegoodsmall.com/gateway",
+    "test":"https://testapi.sharegoodsmall.com/gateway",
+    "prod":"https://api.sharegoodsmall.com/gateway",
+    "build":"https://uath5.sharegoodsmall.com/gateway",
+    "蒋大为":"http://172.16.10.42:4090/gateway",
+    "周浩":"http://172.16.10.64:9090/gateway",
+    "高迪":"http://172.16.10.238:8903/gateway",
+    "沈耀星":"http://172.16.10.56:8903/gateway",
+    "张波":"http://172.16.10.41:9090/gateway",
+    "杨小猛":"http://172.16.10.38:9090/gateway",
+    "吴成俊":"http://172.16.10.41:8903/gateway",
+    "陈帅":"http://172.16.10.88:8903/gateway",
+    "王昆仑":"http://172.16.10.111:8903/gateway",
+    "李俊":"http://172.16.10.151:9090/gateway",
+    "杨飞":"http://172.16.10.109:18096/gateway",
+    "申":"http://172.16.10.21:8080/gateway",
+    "龚日红":"http://172.16.10.177:9090/gateway",
+    "顾嘉豪":"http://172.16.10.58:18080/gateway",
+    "岑登":"http://172.16.10.74:18080/gateway",
+    "黄家欢":"http://172.16.10.178:9090/gateway",
+    "王体忠":"http://172.16.10.56:9090/gateway"
+  }
+}
+

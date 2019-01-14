@@ -1,0 +1,3 @@
+<template name="errTips">
+  <view class='no-sale flexR font-26'>{{ tipsContent || '商品已经下架啦~'}}</view>
+</template>

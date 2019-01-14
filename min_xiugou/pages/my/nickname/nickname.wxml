@@ -1,0 +1,10 @@
+<!--pages/my/account.wxml-->
+<view class="order">
+    <view class="wrap">
+        <view class="section">
+            <input type="text" class="inp boxSize" bindinput='inputChange' value='{{nickname}}' />
+        </view>
+    </view>
+    <view class="btn redBg" bindtap='updateDealerNickname'>保存</view>
+</view>
+

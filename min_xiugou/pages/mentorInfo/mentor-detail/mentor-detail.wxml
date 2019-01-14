@@ -1,0 +1,20 @@
+<view class='header flexR'>
+  <image-sub wx:if='{{datas.headImg}}' imgStyle='{{"width:160rpx;height:160rpx;border-radius:50%"}}' imgSrc="{{datas.headImg}}" mode='scaleToFill'/>
+  <image-sub wx:else imgStyle='{{"width:160rpx;height:160rpx;border-radius:50%"}}' imgSrc="{{'/img/default-userImg.png'}}" mode='scaleToFill'/>
+</view>
+<view class='font-26 line flexR-sb whiteBg'>
+  名称：{{datas.nickname}}
+</view>
+<!--<view class='font-26 line flexR-sb whiteBg'>-->
+  <!--职称：{{datas.levelName}}品鉴官-->
+<!--</view>-->
+<!--<view class='font-26 line flexR-sb whiteBg'>-->
+  <!--授权号：{{datas.code || ''}}-->
+<!--</view>-->
+<!--<view class='font-26 line flexR-sb whiteBg'>-->
+  <!--手机号：{{datas.phone || ''}}-->
+<!--</view>-->
+<view class='font-26 content whiteBg'>
+  <view>简介</view>
+  <view class='gray font-24'> {{datas.profile || '这位顾问很懒，什么也没留下~'}}</view>
+</view>

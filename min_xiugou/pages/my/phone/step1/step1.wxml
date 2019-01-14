@@ -1,0 +1,11 @@
+<view class='view-box'>
+  <view class='gray'>短信验证码将发送至绑定的手机号：+86 {{userInfos.showPhone}}</view>
+
+  <view class='flexR-sb codeView'>
+    <text>验证码</text>
+    <input type='text' name='code' placeholder="请输入验证号" value='{{code}}' bindinput='changeInput'></input>
+    <text catchtap="getCodeTap" class='codeBtn'>{{showSecond? second+"秒后重新获取":"获取验证码"}}</text>
+  </view>
+
+  <view class='loginBtn btn' bindtap='next'>下一步</view>
+</view>

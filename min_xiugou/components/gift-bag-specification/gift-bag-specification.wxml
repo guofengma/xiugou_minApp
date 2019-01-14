@@ -1,0 +1,53 @@
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<view class='prd-info-type' bindtap='isVisiableClicked'>
+  <slot></slot>
+</view>
+
+<view class='model-view-bg ' wx:if="{{visiable}}">
+ <view class='product-specification {{isIPhoneX.className}}'>
+    <view class='header {{showImgs? "":"active"}}'>
+      <view wx:if='{{showImgs}}'>
+        <view class='img-view'>
+          <image src='{{imgUrl}}'></image>
+        </view>
+        <!--产品信息  -->
+        <view class='header-content font-30'>
+          <view class='price red'>¥ {{ productInfo.levelPrice}}</view>
+          <view>库存{{minStock || productInfo.showStock}}件</view>
+          <view class='tips ellipsis'>{{tips}}</view>
+        </view>
+      </view>
+     
+      <!--取消  -->
+      <icon class='cancel' type="cancel" size="30" color='#dddddd' bindtap='isVisiableClicked'/>
+    </view>
+    <!--滚动区域  -->
+    <scroll-view scroll-y  class='scroll-y'>
+      <!--类型  -->
+      <view class='prd-type-info' wx:for='{{productTypeList}}' wx:for-index="key" wx:for-item="list" wx:key='unique'>
+        <view class='type-name'>{{list.name}}</view>
+        <view class='type-list'>
+          <block  wx:for='{{list.value}}' wx:key='unique'> 
+            <view class='{{(item.surplusNumber==0? "no-store":"") +" " +(isActive[key].index === index ? "active":"")}}'  bindtap='typeListClicked' 
+                  data-index='{{index}}' data-type='{{key}}' data-typename='{{item.specValues}}' data-id='{{item.productPriceId}}' data-stock="{{item.surplusNumber}}">
+                  {{item.specValues}}
+            </view>
+          </block>
+          
+        </view>
+      </view>
+      <!--数量选择器  -->
+      <view class='counter'>
+        <text class='font-30'>购买数量 x1 </text>
+      </view>
+    </scroll-view>
+    
+
+    <!--按钮  -->
+    <view class='btn redBg' bindtap='makeSureType'>确认</view>
+ </view>
+</view>
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

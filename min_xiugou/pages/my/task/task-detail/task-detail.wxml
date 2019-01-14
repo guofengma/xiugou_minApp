@@ -1,0 +1,11 @@
+<view class='container'>
+  <view class='task-detail-info'>
+    <text class='task-detail-title'>任务说明：</text>
+    <view class='task-detail-desc'>
+      {{detail.remarks || ''}}
+      <image-sub imgStyle='{{"width:100%"}}' imgSrc="{{'renwu-bg-1@3x.png'}}"/>
+    </view>
+  </view>
+  <view class='fixed-height'></view>
+  <button class='share' open-type='share' wx:if="{{status == 1}}">分享好友帮您点击</button>
+</view>

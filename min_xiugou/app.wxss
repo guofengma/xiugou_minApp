@@ -1,0 +1,18 @@
+@import "/components/iPhoneX-line/iPhoneX-line";
+
+/*搜索产品异常显示  */
+
+@import  "/components/result-tips/result-tips";
+
+@import "/css/app.wxss";
+
+page{
+  height: 100%;
+  background-color:#F7F7F7;
+  color: #222;
+  font-family:PingFangSC-Medium;
+}
+button[disabled]:not([type]) {
+  background-color: rgba(213,18,67,0.5);
+  color: #fff;
+}

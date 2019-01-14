@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "秀购",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "image-sub": "/components/image-sub/image-sub",
+    "notice": "/components/notice/notice",
+    "task-card": "/components/task-card/task-card",
+    "coupon-alert":"/components/coupon-alert/coupon-alert"
+  }
+}

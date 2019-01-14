@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "秒杀详情",
+  "usingComponents": {
+    "product-specification": "/components/product-specification/product-specification",
+    "tips-info": "/components/tips-info/tips-info",
+    "product-promotion-info": "/components/product-promotion-info/product-promotion-info",
+    "product-promotion-footbar": "/components/product-promotion-footbar/product-promotion-footbar",
+    "swiper-product": "/pages/product-detail/temp/swiper/swiper-product",
+    "topBar": "/pages/product-detail/temp/topBar/topBar",
+    "product-infos": "/pages/product-detail/temp/product-infos/product-infos"
+  }
+}

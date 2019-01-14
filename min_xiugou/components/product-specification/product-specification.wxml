@@ -1,0 +1,60 @@
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<view class='prd-info-type' bindtap='isVisiableClicked'>
+  <slot></slot>
+  <!-- <image mode='widthFix' src='/img/common-accessory-icon.png' class='jt-imgs'></image> -->
+</view>
+
+<view class='model-view-bg ' wx:if="{{visiable}}">
+ <view class='product-specification {{isIPhoneX.className}}'>
+    <view class='header {{showImgs? "":"active"}}'>
+      <view wx:if='{{showImgs}}'>
+        <view class='img-view'>
+          <image src='{{selectPrdList.specImg || imgUrl}}'></image>
+        </view>
+        <!--产品信息  -->
+        <view class='header-content font-30'>
+          <view class='price red' wx:if='{{commodityType==2 || commodityType ==3}}'>¥ {{price}}</view>
+          <view class='price red' wx:else>¥ {{selectPrdList.price || price}}</view>
+          <view wx:if='{{commodityType==2 || commodityType==3}}'>库存{{surplusNumber}}件</view>
+          <view wx:else>库存{{selectPrdList.sellStock || totalStock}}件</view>
+          <view class='tips ellipsis'>{{tips}}</view>
+        </view>
+      </view>
+     
+      <!--取消  -->
+      <icon class='cancel' type="cancel" size="30" color='#dddddd' bindtap='isVisiableClicked'/>
+    </view>
+    <!--滚动区域  -->
+    <scroll-view scroll-y  class='scroll-y'>
+      <!--类型  -->
+      <view class='prd-type-info' wx:for='{{productSpec}}' wx:for-index="key" wx:for-item="list" wx:key='unique'>
+        <view class='type-name'>{{list.specName}}</view>
+        <view class='type-list'>
+          <block  wx:for='{{list.specValues}}' wx:key='unique'> 
+            <view bindtap='typeListClicked' 
+                  data-index='{{index}}' data-key='{{key}}' data-specvalue='{{item.specValue}}' data-id='{{item.id}}'
+                  data-canclick = '{{item.hasStock}}'
+                  class='{{item.hasStock? "":"no-store"}} {{isActive[key].index === index ? "active":""}} {{item.hasStock==undefined? "block":""}}' 
+            >
+                  {{item.specValue}}
+            </view>
+          </block>
+          
+        </view>
+      </view>
+      <!--数量选择器  -->
+      <view class='counter'>
+        <text class='font-30'>购买数量</text>
+        <adder-subtractor    count="{{exchangeNum || innerCount}}" countSize='{{60}}' bind:countChange="counterInputOnChange" disabled="{{disabled}}"/>
+      </view>
+    </scroll-view>
+    
+
+    <!--按钮  -->
+    <view class='btn redBg' bindtap='makeSureType'>确认</view>
+ </view>
+</view>
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

@@ -1,0 +1,122 @@
+.good-item {
+  width: 335rpx;
+  display: inline-block;
+  background: #fff;
+  margin-bottom: 27rpx;
+}
+.good-item:nth-child(odd){
+  margin-right: 20rpx;
+}
+.good-item-thumb-container {
+  position:relative;
+}
+.good-item-thumb{
+  width: 100%;
+  height: 335rpx;
+}
+.good-soldout {
+  width:238rpx;
+  height:238rpx;
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+.good-detail {
+  padding: 20rpx 20rpx 30rpx;
+  height:219rpx;
+  position:relative;
+}
+.good-title {
+  display: -webkit-box;
+  font-size:24rpx;
+  word-break: break-all;
+  max-height: 64rpx;
+}
+.good-type {
+  font-size: 22rpx;
+  margin-top: 21rpx;
+}
+/* 关注  */
+.good-type-tip {
+  color: #33B4FF;
+}
+/* 抢光  */
+.good-type-out{
+  color: #999;
+}
+/* 已抢  */
+.good-type-ing{
+  color: #fff;
+  background: #f2b7c6;
+  border-radius: 20rpx;
+  padding-right: 12rpx;
+  position: relative;
+}
+.good-type-ing .good-loot-already{
+  border-radius: 20rpx;
+  padding: 0 12rpx;
+  position:relative;
+  z-index:1;
+}
+.good-loot-progress {
+  position: relative;
+}
+.good-loot-progressbg {
+  height:29rpx;
+  max-width: 100%;
+  position:absolute;
+  left:0;
+  border-radius:20rpx;
+  background:#FF0050;
+  z-index:0;
+}
+.good-foot{
+  display:flex;
+  flex-direction:row;
+  align-items:flex-end;
+  justify-content:space-between;
+  position:absolute;
+  bottom:30rpx;
+  width:295rpx;
+}
+.good-price-discount{
+  color: #E60012;
+  font-size: 32rpx;
+  line-height: 32rpx;
+}
+.good-price-origin {
+  color: #999;
+  font-size: 22rpx;
+  line-height: 20rpx;
+  text-decoration: line-through;
+}
+.good-operate{
+  width: 160rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius:10rpx;
+  font-size: 24rpx;
+  text-align: center;
+}
+/* 马上抢  */
+.good-operate.loot {
+  color: #fff;
+  background:#FF0050;
+}
+/* 抢光了  */
+.good-operate.out{
+  color: #999;
+  background:#f7f7f7;
+}
+/* 提醒  */
+.good-operate.tip{
+  color: #fff;
+  background:#33B4FF;
+}
+.good-operate.tip .icon {
+  display: inline-block;
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 10rpx;
+}

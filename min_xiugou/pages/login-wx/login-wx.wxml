@@ -1,0 +1,26 @@
+<view class='flexC loginContainer'>
+  <view class='loginBg'>
+    <!-- <image class='loginImg-wx' src='/img/login-bg2.png' mode="widthFix"></image> -->
+    <view class='logoView flexR'>
+      <image class='logo' src='/img/logo-img.png'></image>
+    </view>
+  </view>
+  <view>
+    <button class='loginBtn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信登录</button>
+    <!-- <button class='loginBtn' bindtap=''>微信登录</button> -->
+    <!-- <view class='gray font-26 login-2'>
+     <text catchtap='otherLogin'>账号登录</text>
+    </view> -->
+     <!-- <button open-type="openSetting" lang="zh_CN">取消</button>  -->
+  </view>
+</view>
+
+<block wx:if="{{visiable}}">
+  <view class="model-view-bg">
+    <view class="my-award-filter">
+      <view class="title"><view>提示</view></view>
+      <view class='content'>您同意了授权</view>
+      <button open-type="getUserInfo" class="agree" bindgetuserinfo="agreeGetUser" lang="zh_CN">确定</button>
+    </view>
+  </view>
+</block>

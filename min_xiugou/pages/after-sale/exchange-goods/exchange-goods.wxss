@@ -1,0 +1,6 @@
+
+@import "/pages/after-sale/after-sale";
+
+.exchange-info{
+  margin-top: -20rpx;
+}

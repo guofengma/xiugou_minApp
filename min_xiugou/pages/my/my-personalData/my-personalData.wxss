@@ -1,0 +1,98 @@
+/* pages/my/account.wxss */
+.order {
+    font-size: 26rpx;
+    padding-top: 30rpx;
+}
+
+.wrap {
+    margin-top: 30rpx
+}
+
+.item {
+    background: #fff;
+    height: 96rpx;
+    line-height: 96rpx;
+    padding: 0 30rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item>view:first-child {
+  width:16%
+}
+
+.item view:nth-child(2) {
+    max-width: 83%;
+    text-align: right;
+    color: #999;
+    /* margin-right: 20rpx */
+}
+.region{
+  width: 80% !important;
+}
+.region text{
+  display: inline-block;
+  width: calc(100% - 40rpx);
+}
+.line {
+    border-bottom: 1px solid #eee
+}
+
+.item image,.item cover-image  {
+    width: 35rpx;
+    height: 30rpx;
+    vertical-align: middle;
+    margin-right: 5rpx;
+    display:inline-block;
+}
+.clearfix {
+    clear: both;
+}
+
+.jt-img {
+    width: 15rpx !important;
+    height: 20rpx !important;
+    vertical-align: middle;
+    margin-left: 10rpx;
+}
+.item .user-img {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+}
+.level{
+    width: 137rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    background-color: #ff7e00;
+    border-radius: 20rpx;
+    color: #fff;
+    display: inline-block;
+}
+.identify{
+    padding: 0 20rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    background-color: #0186f5;
+    border-radius: 20rpx;
+    color: #fff;
+    display: inline-block;
+}
+.introduction>view:first-child{
+  width:15%;
+}
+.introduction{
+  height: auto;
+  line-height: 36rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.introduction view:nth-child(2){
+  text-align: justify;
+}
+.introduction .info-line{
+    width: 97%;
+    word-break:break-all;
+}

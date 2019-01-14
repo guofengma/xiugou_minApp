@@ -1,0 +1,27 @@
+.tab-h{
+  width: 100%; 
+  overflow: hidden;
+  white-space: nowrap;
+  /* margin-bottom: 20rpx; */
+}
+/* .tab-h-view{
+  padding: 0 30rpx;
+} */
+.tab-item{
+  width:50%;
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  font-size: 32rpx;
+}
+.tab-item text{
+  display: inline-block;
+  height: 96rpx;
+  line-height: 96rpx;
+  padding: 5rpx 0;
+  color: #666;
+}
+.tab-item text.current {
+  color: #FF0050;
+  border-bottom: 8rpx solid #FF0050;
+}

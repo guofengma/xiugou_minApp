@@ -1,0 +1,16 @@
+<import src='/components/address-info/address-info.wxml'/>
+
+<template name="address-saler">
+  <!--商家地址  -->
+  <view class='flexR-sb address-view whiteBg boxSize'>
+    <view class='address-right red'>
+      <view class='flexC'>
+        <text>寄回</text>
+        <text>地址</text>
+      </view>
+    </view>
+    <view class='address-left'>
+      <template is="address-info" data="{{addressType,src,...datas.refundAddress,hasData,door}}"/>
+    </view>
+  </view>
+</template>

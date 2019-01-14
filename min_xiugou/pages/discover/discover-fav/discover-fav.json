@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "秀场收藏",
+  "onReachBottomDistance": true,
+  "usingComponents": {
+    "image-sub": "/components/image-sub/image-sub"
+  }
+}

@@ -1,0 +1,19 @@
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
+
+<import src="../../../../libs/wxParse/wxParse.wxml" />
+<view class='sub-page'>
+  <block wx:if="{{list.length>0}}">
+      <view class="notice-item" wx:for="{{list}}" wx:key="unique">
+          <view class="time">{{item[0].orderTime}}</view>
+          <view class="title">{{item[0].title}}</view>
+          <view class="content">
+            <template is="wxParse" data="{{wxParseData:item}}"/>
+          </view>
+          <!--<view class="watch-detail" bindtap="informationDetail" data-id="{{item.id}}">查看详情 <image src="${mrdomain}/detail-btn.png"></image></view>-->
+      </view>
+  </block>
+  <view wx:else class='sub-page'>
+    <template is="result-tips"  data="{{tipVal:5}}" />
+  </view>
+</view>

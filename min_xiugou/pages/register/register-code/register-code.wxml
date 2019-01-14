@@ -1,0 +1,32 @@
+<view class='code-view'>
+  <view class='inviterInfo '>
+    <view>
+      <view class='tips font-26 flexR-sb'>
+        <view>请选择一个顾问</view>
+        <view class='flexR gray-9' catchtap='changeClicked'>
+          <image-sub imgStyle='{{"width:32rpx;margin-right:10rpx"}}' imgSrc="{{'shuaxin-icon.png'}}"/>
+          换一换
+        </view>
+      </view>
+      <view wx:if='{{invite.length>0}}'>
+        <swiper duration="300" bindchange="bindchange" display-multiple-items='{{multiple}}'  previous-margin="120rpx" next-margin="120rpx" current='{{current}}' circular='true'>
+          <swiper-item wx:for="{{invite}}"   wx:key="{{index}}" >
+            <view class='inviter flexC'>
+              <view class='flexC' data-index='{{index}}' catchtap='itemClicked'>
+                <image-sub imgStyle='{{ index===activeIndex? "width:160rpx;height:160rpx":"width:120rpx;height:120rpx"}}' imgSrc="{{item.headImg || '/img/default-userImg.png'}}"  mode='scaleToFill'/>
+                <text class='inviter-name ellipsis'>{{item.nickname}}</text>
+              </view>
+            </view>
+          </swiper-item>
+        </swiper>
+      </view>
+      <view wx:else class='gray-9 flexR'>暂无顾问，请填写会员号或跳过该步骤~</view>
+    </view>
+  </view>
+  <button class='loginBtn' disabled='{{disabled}}' catchtap='mentorBind' >确认</button>
+  <view class='gray-9 font-26 flexR dismiss' bindtap='dismiss'>跳过</view>
+
+  <view class='gray-9 font-26 fixed-bottom flexR write-code' bindtap='goPage'>
+    <view class='flexR'> 填写会员号</view>
+  </view>
+</view>

@@ -1,0 +1,43 @@
+<form  class='form' wx:if='{{!invalidTips.invalid}}'>
+  <view class='section'>
+    <view class='flexR'>
+      <text>手机号</text>
+      <input type='text' name='phone' placeholder="请输入手机号" value='{{phone}}' bindinput='changeInput' data-index='1'></input>
+    </view>
+    <view class='codeView flexR-sb '>
+      <view class='flexR'>
+        <text>验证码</text>
+        <input type='text' name='code' placeholder="请输入验证号" value='{{code}}' bindinput='changeInput' data-index='2'></input>
+      </view>
+      <text catchtap="getCodeTap" class='red'>{{showSecond? second+"秒后重新获取":"获取验证码"}}</text>
+    </view>
+    <view class='flexR-sb pwdVeiw'>
+      <view class='flexR'>
+       <text>密码</text>
+      <input wx:if='{{isSee}}' type='text' name='password' placeholder="请设置密码" value='{{pwd}}' bindinput='changeInput' data-index='3'></input>
+      <input wx:else type='password' name='password' placeholder="请设置密码" value='{{pwd}}' bindinput='changeInput' data-index='3'></input>
+      </view>
+      <image class='pwdImg' style='margin-left:90rpx' src='{{isSee? "../../img/see-pwd-icon.png":"../../img/unsee-pwd-icon.png"}}' mode="widthFix" bindtap='isSeePwd'></image>
+    </view>
+  </view>
+  <view class='tips'>密码为6~18位数字和字母的组合(设置的手机号将作为账号登录)</view>
+  <view class="btn-area">
+    <button catchtap='formSubmit' class='loginBtn' disabled='{{disabled}}' wx:if='{{userInfo}}'>下一步</button>
+    <button wx:else open-type="getUserInfo" class="loginBtn" bindgetuserinfo="agreeGetUser" lang="zh_CN" disabled='{{disabled}}'>下一步</button>
+  </view>
+
+  <view class='rule'>
+      <image src='{{isAgree? "/img/select-icon.png":"/img/no-select.png"}}' 
+            mode="widthFix" 
+            bindtap='agreeCilcked'>
+      </image>
+      <text class='gray font-22' catchtap='toPage'>阅读并接受<text class='red'>《用户协议》</text></text>
+    </view>
+</form>
+
+<view class='invalid-img-view' wx:else>
+   <view class='invalid-view'>
+     <image src='/img/Invalid.png' mode='widthFix'></image>
+   </view>
+   <view class='flexR font-30 gray'>{{invalidTips.tips}}</view>
+</view>

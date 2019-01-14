@@ -1,0 +1,65 @@
+@import "/components/after-sale-prd-info/after-sale-prd-info";
+
+@import "/components/address-info/address-info"; 
+
+@import "/components/cell-line/cell-line";
+
+@import "/components/update-img/update-img";
+
+.apply-sale-after-page{
+  height: 100%;
+  padding-bottom: 120rpx;
+}
+.tips{
+  height: 40rpx;
+}
+
+.textarea{
+  font-size: 26rpx;
+}
+.textarea{
+  height: 180rpx;
+  background: #fff;
+  width: 100%;
+  padding: 20rpx 30rpx;
+  font-size: 26rpx;
+  box-sizing: border-box;
+}
+
+.update-img-view{
+  padding: 20rpx 30rpx;
+  margin-bottom: 150rpx;
+}
+.cell-line{
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 26rpx;
+  padding: 0 30rpx;
+}
+.my-order-product-info{
+  background-color: #f7f7f7;
+}
+.order-info{
+  margin: 20rpx 0;
+}
+.refund-num{
+  margin-top: 10rpx;
+  display: flex
+}
+.refund-num input{
+  height:100%;
+  width:500rpx;
+}
+.btn-view{
+  height: 100rpx;
+
+}
+.btn-view{
+  height: 100rpx;
+}
+.address.active{
+  margin: 20rpx 0;
+}
+.cell-line-tips{
+  padding: 20rpx 30rpx 0 30rpx;
+}

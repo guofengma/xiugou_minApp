@@ -1,0 +1,35 @@
+<import src='/components/after-sale-prd-info/after-sale-prd-info.wxml'/>
+
+<import src='/pages/after-sale/temp/temp-refund-info/temp-refund-info.wxml'/>
+
+<import src='/pages/after-sale/temp/refund-explain/refund-explain'/>
+
+<view class='flexC tips-exchange font-26'>
+  <view class='flexR'>
+    <image-sub wx:if='{{datas.status==3}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
+    <view>
+     <view class='tips-title'>{{datas.headerTitle}}</view>
+     <!-- <view wx:if='{{datas.showRefundTime}}'>{{datas.showRefundTime}}</view> -->
+    </view>
+  </view>
+  <!--退款中不需要要显示时间  -->
+</view>
+<view wx:if='{{datas.status==6}}' class='refusalReason whiteBg font-26 flexR-sb'>{{datas.reject}}</view>
+<view wx:if='{{datas.status==1}}'>
+   <amend-application applyType='{{"退款"}}' list='{{datas}}' serviceNo='{{serviceNo}}' bind:reloadPage='findReturnProductById'/>
+</view>
+<!--退款成功以后才显示以下内容  -->
+
+<template is="temp-refund-info" data="{{...datas}}"/>
+
+<!--换货信息  -->
+
+<view class='exchange-info font-26 '>
+  <view class='flexR-sb after-sale-line gray'>退款信息</view>
+  <template is="after-sale-prd-info" data="{{...datas}}"/>
+  <template is="refund-explain" data="{{...datas}}"/>
+</view>
+
+<!--联系卖家  -->
+
+ <contact-seller></contact-seller> 

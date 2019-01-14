@@ -1,0 +1,44 @@
+@import "/components/msg-tips/msg-tips.wxss";
+@import "/css/app";
+/*topbar  */
+.topbar>image{
+  width: 76rpx;
+  height: 76rpx; 
+}
+.topbar{
+  height: 90rpx;
+  z-index: 9999;
+  border-bottom: 1rpx solid #eee;
+  border-top: 1rpx solid #eee;
+}
+.right-bar{
+  position: absolute;
+  right: 20rpx;
+}
+.msg-view{
+  width: 70rpx;
+  position: relative;
+}
+
+/* 购物车 */
+.cart-view{
+  position: relative;
+  margin-right: 20rpx;
+}
+.num-label{
+  top:-10rpx;
+  left:24rpx;
+}
+.msg-tips{
+  right: 12rpx;
+}
+.top-img{
+  width: 42rpx;
+}
+.top-img-2{
+ width: 70rpx;
+}
+.msg-view .messageNum{
+  top: 0rpx;
+  left: 42rpx;
+}

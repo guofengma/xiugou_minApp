@@ -1,0 +1,20 @@
+<template name="discover-article">
+  <view class="discover-article-container">
+    <view class='discover-article_thumb' bindtap='handleItemClicked' data-id="{{id}}" data-type="{{type}}" data-index="{{index}}">
+      <image src="{{coverImg}}"></image>
+      <view class='discover-article_desc ellipsis-2' wx:if="{{pureContent}}">{{pureContent}}</view>
+    </view>
+    <view class="discover-article_body">
+      <view class='discover-article_info'>
+        <view class='discover_author'>
+          <image class='discover_avatar' src='{{userHeadImg}}'></image>
+          <view class='discover_author_name'>{{userName}}</view>
+          <view class='discover_view'>
+            <image src='/img/icon_view@3x.png'></image>
+            <text>{{(click > 999999 ? '999999+' : click) || 0}}</text>
+          </view>  
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

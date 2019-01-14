@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "申请售后",
+  "usingComponents": {
+    "product-specification": "/components/product-specification/product-specification",
+    "choose-after-sale-reason": "/components/choose-after-sale-reason/choose-after-sale-reason",
+    "update-img": "/components/update-img/update-img"
+  }
+}

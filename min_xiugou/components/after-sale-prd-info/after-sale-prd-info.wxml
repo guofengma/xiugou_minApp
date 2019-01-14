@@ -1,0 +1,15 @@
+<template name="after-sale-prd-info">
+  <view class='after-sale-prd-info flexR-sb font-26 whiteBg'>
+   <image src='{{imgUrl || specImg}}' class='after-sale-prd-info-img'></image>
+   <view class='after-sale-prd-info-right'>
+     <view class='flexR-sb'>
+      <view class='ellipsis-2 after-sale-name'>{{productName}}</view>
+      <view class='gray-9'>¥{{unitPrice}}</view>
+     </view>
+     <view class='gray-9 flexR-sb '>
+       <view class='ellipsis prd-types'>规格：{{specValues}}</view>
+       <view>x{{quantity}}</view>
+     </view>
+   </view>
+  </view>
+</template>

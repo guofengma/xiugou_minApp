@@ -1,0 +1,5 @@
+.iPhoneX-line{
+  height: 34rpx;
+  background: #fff;
+  /* border-top: 1rpx solid #fff; */
+}

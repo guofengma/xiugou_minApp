@@ -1,0 +1,12 @@
+<view class="task-container">
+  <block wx:for="{{jobs}}" wx:key="unique">
+    <task-item
+      item="{{item}}" 
+      date="{{item.countDown}}" 
+      status="{{item.status}}" 
+      remark="{{item.remarks}}"
+      name="{{item.name}}"
+      bind:countdown="countdown "
+    ></task-item>
+  </block>
+</view>

@@ -1,0 +1,29 @@
+@import "/pages/product-detail/product-detail.wxss";
+.price2{
+  text-decoration: line-through;
+  margin: 0 10rpx;
+}
+.tips-content{
+  color: #666;
+  padding: 60rpx;
+}
+
+.tips-title{
+  margin: 60rpx 50rpx 0 50rpx; 
+  text-align: center;
+  font-size: 26rpx;
+}
+.tips-line{
+  text-align: center;
+}
+.first-tips{
+  margin-bottom: 28rpx;
+}
+.buy-btn{
+  width:  100% !important;
+  justify-content: center;
+}
+
+.gift-btn-view{
+  justify-content: center;
+}

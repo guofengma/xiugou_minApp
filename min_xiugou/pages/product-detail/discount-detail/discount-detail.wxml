@@ -1,0 +1,87 @@
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<!-- 消息显示模板 -->
+<import src= "/components/msg-tips/msg-tips.wxml"/>
+
+<import src='/components/cell-line/cell-line.wxml'/>
+
+<import src= "/pages/product-detail/temp/product-price-infos/product-price-infos.wxml"/>
+
+<import src= "/components/goT-top-btn/goT-top-btn.wxml"/>
+
+
+<!-- <scroll-view class="bigWrap" scroll-y="true" scroll-top="{{scrollTop}}"   bindscroll="scroll" style="height:100%"> -->
+  <view class='prduct-detail-view {{hasMask? "preventTouchMove":""}}' wx:if='{{productInfo}}'>
+    <!--topbar  -->
+    <topBar imgUrl='{{productInfo.imgUrl}}' floorstatus='{{floorstatus}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
+    <swiper-product imgUrls='{{imgUrls}}' msgShow='{{msgShow}}' didLogin='{{didLogin}}' size='{{size}}' openType='share'/>
+     <product-promotion-info 
+     id="promotion"
+     bind:countdown="timeout" 
+     prop="{{proNavData}}"
+     promotionBg="{{proNavData.status == 1 ? 'comming' : 'ing'}}" 
+     promotionDesc="{{promotionDesc}}"
+     promotionType="2"
+     wx:if="{{proNavData.id}}"/>
+    <!-- 产品信息 -->
+    <template is="product-info" data="{{productInfo,showPrice:false}}" />
+    <!-- 规则 -->
+    <view class='chooseBox'>
+      <view bindtap='toggleShowRegular' style="padding: 0">
+        <template is="cell-line" data="{{name:'抢拍规则',placeholder:' '}}"  /> 
+      </view>
+      <template is="product-info-chooseBox" data="{{productInfo}}" />
+    </view>
+    <!--产品图文详情切换  -->
+    <product-infos  id='productInfos' nodes='{{nodes}}' datas='{{productInfo}}'/>
+    <!-- 详情页 tabar  -->
+    <product-promotion-footbar 
+      id="promotionFootbar"
+      promotionFootbar="{{promotionFootbar}}"
+      promotionType="2"
+      bindtap="footbarReady"
+      data-key="2"
+      props = '{{proNavData}}'
+      isIphoneX='{{isIPhoneX.isIPhoneX}}'
+    ></product-promotion-footbar>
+    <!--置顶的按钮-->
+    <template is="goT-top-btn" data='{{floorstatus}}'/>
+  </view>
+
+<!-- </scroll-view> -->
+
+<!--产品规格选择  -->
+<product-specification id='prd-info-type' 
+  bind:subClicked="typeSubClicked"  
+  productSpec='{{productSpec}}'
+  surplusNumber='{{proNavData.surplusNumber}}'
+  price = '{{proNavData.markdownPrice}}'
+  priceList='{{priceList}}' 
+  imgUrl="{{productInfo.imgUrl}}" 
+  showImgs='{{true}}'
+  isInit="{{isInit}}" 
+  commodityType='3'
+  bind:hiddenTips='hiddenTips'
+  specIds='{{specIds}}'
+  isIphoneX='{{isIPhoneX.isIPhoneX}}'
+  disabled='{{true}}'
+></product-specification >
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />
+
+<product-regular-toast
+ title='降价拍规则'
+ content="{{regularContent}}" 
+ bind:close="toggleShowRegular" 
+ catchtouchmove="regularTouch"
+ wx:if="{{showRegular}}"
+ >
+  <view class='regular-list'>
+    <view class='regular-list-item'>1、参与降价拍的商品，活动开始之后，商品价格由高到低依次递减，直到竞买人应价，商品库存有限，活动时间有限，先拍先得；</view>
+    <view class='regular-list-item'>2、一个降价拍商品，每人只能抢购一件，下单之后不可立马取消订单，直到该商品结束降价拍活动，才开放退货退款入口。</view>
+    <view class='regular-list-item'>3、降价拍商品不与其它优惠同享。</view>
+  </view>
+ </product-regular-toast>
+
+

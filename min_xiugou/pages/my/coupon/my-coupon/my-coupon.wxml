@@ -1,0 +1,49 @@
+<import src='/pages/my/coupon/temp/coupon-temp.wxml'/>
+
+<!--搜索结果异常显示  -->
+<import src='/components/result-tips/result-tips.wxml' />
+
+<view class='pagesize'>
+    <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+        <view class="tab-item {{currentTab==0?'red':'gray'}}"  data-current="0" bindtap="swichNav">未使用</view>
+        <view class="tab-item {{currentTab==1?'red':'gray'}}" data-current="1" bindtap="swichNav">已使用</view>
+        <view class="tab-item {{currentTab==2?'red':'gray'}}" data-current="2" bindtap="swichNav">已失效</view>
+    </scroll-view>
+    <swiper class="tab-content {{currentTab==0&&door==1? 'tab-active':''}}" current="{{currentTab}}" duration="300" bindchange="switchTab">
+        <swiper-item wx:for="{{lists}}" wx:for-index="key" wx:for-item="list"  wx:key="{{key}}">
+            <scroll-view scroll-y class="scoll-h" bindscrolltolower="onScroll" wx:if='{{currentTab==key}}'>
+              <block wx:for="{{list}}" wx:key="{{index}}">
+                <template is="coupon-temp" data="{{item,index,key}}"/>
+              </block>
+              <view wx:if='{{list.length==0}}' class='flexC coupon-img'>
+                <!-- <image src='/img/coupon-icon.png' mode='widthFix'></image>
+                <view class='gray font-30'>暂无优惠券~</view> -->
+                <template is="result-tips"  data="{{tipVal:4,showBtn:true}}" />
+              </view>
+            </scroll-view>
+        </swiper-item>
+    </swiper>
+    <view class='btn-view flexR fixed-bottom font-30 whiteBg' wx:if="{{currentTab==0&door==1&&lists[0].length>0&&useType==2}}" catchtap='giveUpUse'>放弃使用优惠券</view> 
+</view>
+
+
+<!-- 选择现金优惠卷弹框 -->
+
+<view class='model-view-bg' wx:if='{{show}}'>
+   <view class='use-container overflow boxSize'>
+    <view class='use-header flexR'>请选择劵数</view>
+    <view class='use-content flexR'>
+      <view catchtap='addClicked' data-index='1'>
+        <image-sub imgStyle='{{"width:48rpx;border:1rpx solid #ddd"}}' imgSrc="{{'youhuiquan_icon_jian_nor@3x.png'}}"/>
+      </view>
+      <input class='use-input whiteBg boxSize' value='{{coinNum}}' bindinput="bindKeyInput" type='number'></input>
+      <view catchtap='addClicked' data-index='2'>
+        <image-sub imgStyle='{{"width:48rpx;border:1rpx solid #ddd"}}' imgSrc="{{'youhuiquan_icon_jia_nor@3x.png'}}"/>
+      </view>
+    </view>
+    <view class='use-footer flexR'>
+      <view class='boxSize flexR' catchtap='btnClicked' data-index='1'>取消</view>
+      <view class='flexR' catchtap='btnClicked' data-index='2'>确定</view>
+    </view>
+   </view>
+</view>

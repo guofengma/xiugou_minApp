@@ -1,0 +1,27 @@
+.prd-img-view{
+  width:100%;
+  position: relative;
+}
+.prd-info{
+  padding: 15rpx 15rpx 24rpx 15rpx;
+  box-sizing: border-box;
+}
+.prd-name{
+  margin-bottom: 15rpx;
+  height:66rpx;
+}
+.topic-prd-info{
+  margin-bottom:26rpx;
+  display: inline-block;
+  /* margin-right: 26rpx;  */
+}
+.prd-info-model{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 24rpx;
+  background: rgba(0,0,0,0.5);
+  color:#fff;
+  padding: 12rpx;
+
+}

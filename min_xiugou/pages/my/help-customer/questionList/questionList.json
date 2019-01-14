@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "帮助与客服",
+  "usingComponents": {
+    "image-sub": "/components/image-sub/image-sub"
+  }
+}

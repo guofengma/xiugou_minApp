@@ -1,0 +1,148 @@
+<import src='/components/my-order-product-info/my-order-product-info.wxml'/>
+
+<import src='/components/address-info/address-info.wxml'/>
+
+<import src='/components/tips-delete-order/tips-delete-order.wxml'/>
+
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<view class='orderDetail'>
+<view class='order-state boxSize'>
+    <view class='order-state-icon'
+          style="background:url('{{imgSrcUrl+state.orderIcon}}') no-repeat 10rpx center;background-size:42rpx 42rpx">
+        <view class='order-status'>
+            {{state.status}}
+        </view>
+        <view wx:if='{{detail.buyerRemark}}' class='font-26'>{{detail.buyerRemark}}</view>
+        <view class='timeDown' wx:if="{{status==1 || status==3}}">
+          {{distanceTime}} {{status==1? "后自动取消订单":"后自动确认收货"}}
+        </view>
+    </view>
+</view>
+
+<!--订单的物流状态  -->
+<view class='order-state-info' >
+    <view class='boxSize'>
+        <!--等待付款的时候显示和待发货  -->
+        <template is="address-info" wx:if='{{status==1||status==5 }}' data="{{addressType,src,...detail,hasData,door:1}}"/>
+
+        <!-- 待发货/已发货/已完成的时候显示 -->
+        <view class='logistics flexR-sb' wx:if="{{status==2||status==3||status==4 }}" bindtap='seeLogistics'>
+            <view>
+                <view class='info ellipsis'>{{state.info}}</view>
+                <view class='gray'>{{state.time}}</view>
+            </view>
+            <view class='right-icon'>
+              <image src='/img/common-accessory-icon.png' mode='widthFix'></image>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class='container'>
+    <!--地址信息 如果发货了 显示地址 -->
+    <view class='my-order-address' wx:if='{{status==2||status==3||status==4 }}'>
+        <template is="address-info" data="{{addressType,src,...detail,hasData,door:1}}"/>
+    </view>
+
+    <!--订单信息  -->
+    <view class='order-prd-info'>
+      <view class='gift-view whiteBg' wx:if='{{detail.isGiftProds}}'>
+        <text class='label-red-border'>礼包</text>
+         <!--<text class='gray font-24'>{{detail.activityName}}</text>-->
+      </view>
+      <view class='product-ifo-list'>
+        <block wx:for="{{showProducts}}" wx:key="unique">
+          <view catchtap='productClicked' data-productid='{{item.prodCode}}'>
+            <template is="my-order-product-info" data="{{...item}}"/>
+          </view>
+          <view class='sale-after flexR' wx:if="{{item.middleBtn}}">
+            <view class='order-btn btn-left flexR' catchtap='subBtnClicked' data-id='{{item.middleBtn.id}}' data-returntype='{{item.middleBtn.returnType}}' data-index='{{index}}'>{{item.middleBtn.content}}</view>
+          </view>
+        </block>
+      </view>
+      <!-- 判断礼包的按钮 -->
+      <!-- <view class='sale-after gift-sale-after flexR' wx:if="{{detail.orderProductList[0].middleBtn&&(detail.orderType==5 || detail.orderType==98)}}">
+        <view class='order-btn btn-left flexR' catchtap='subBtnClicked' data-id='{{detail.orderProductList[0].middleBtn.id}}' data-returntype='{{detail.orderProductList[0].middleBtn.returnType}}' data-index='{{0}}'>{{detail.orderProductList[0].middleBtn.content}}</view>
+      </view> -->
+        <!--detail.orderSubType==3 || detail.orderSubType==4 -->
+      <view wx:if='{{detail.isGiftProds }}' class='gray font-24 whiteBg coupon-line'>
+        <view class='flexR-sb' wx:for='{{detail.giftCouponDTOList}}'  wx:key="{{index}}">
+          <view>{{item.couponName}}</view>
+          <view>x1</view>
+        </view> 
+      </view>
+    </view>
+
+    <!-- 商品价格等信息 -->
+    <view class='order-pay-info gray-9 boxSize'>
+        <view class='flexR-sb'>
+            <text>商品价格</text>
+            <text>¥{{showPriceList.productPrice}}</text>
+        </view>
+         <view class='flexR-sb'>
+            <text>运费（快递）</text>
+            <text>¥{{showPriceList.freightAmount}}</text>
+        </view>
+        <view class='flexR-sb'>
+            <text>优惠券优惠</text>
+            <text>-¥{{showPriceList.couponAmount || 0}}</text>
+        </view>
+        <view class='flexR-sb'>
+            <text>1元现金券</text>
+            <text>-¥{{showPriceList.tokenCoinAmount || 0}}</text>
+        </view>
+        <view class='flexR-sb total'>
+            <text>订单总价</text>
+            <text>¥{{showPriceList.orderAmount}}</text>
+        </view>
+        <view class='flexR-sb total totalPay'>
+            <view class='popup'>
+                <view></view>
+            </view>
+            <text>{{status==1 || status==5? "需付款":"实付款"}}</text>
+            <text class='red'>¥{{showPriceList.payAmount}}</text>
+        </view>
+    </view>
+
+    <!--订单付款信息  -->
+    <view class='order-create-info '>
+        <!--复制按钮  -->
+        <view class='copy-btn gray-9 flexR' bindtap="copy">复制</view>
+        <view class='content gray-9'>
+          <view>订单编号：
+            <text selectable="true">{{orderId}}</text>
+          </view>
+          <view>创建时间：{{detail.warehouseOrderDTOList[0].showCreateTime}}</view>
+          <view>支付交易号：{{detail.warehouseOrderDTOList[0].outTradeNo}}</view>
+          <view wx:if='{{status==4 || status==2 || status==3}}'>付款时间：{{detail.warehouseOrderDTOList[0].showPayTime}}</view>
+          <view wx:if='{{status==4 || status==3}}'>发货时间：{{detail.warehouseOrderDTOList[0].showDeliverTime}}</view>
+          <view wx:if='{{status==4}}'>成交时间：{{detail.warehouseOrderDTOList[0].showFinishTime}}</view>
+          <view wx:if='{{status==5}}'>关闭时间：{{detail.warehouseOrderDTOList[0].showCancelTime}}</view>
+        </view>
+    </view>
+
+</view>
+
+<!--order bar  -->
+
+<view class='{{isIPhoneX.className}} order-bar flexR boxSize' wx:if='{{status!=2}}'>
+    <!--  -->
+    <view class='order-btn btn-left flexR' data-id='{{state.bottomId[0]}}' bindtap="btnClicked">
+      {{state.bottomBtn[0]}}
+    </view>
+    <view class='order-btn red flexR' data-id="{{state.bottomId[1]}}" bindtap="btnClicked">
+      {{state.bottomBtn[1]}}
+    </view>
+</view>
+</view>
+
+
+<!--提示框  -->
+
+<tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{orderId}}' num='{{num}}'/>
+
+<template is="tips-delete-order" data='{{isDelete}}' />
+
+<!--适配iPhone X  -->
+<template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

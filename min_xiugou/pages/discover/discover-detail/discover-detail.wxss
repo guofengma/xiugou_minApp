@@ -1,0 +1,138 @@
+@import "/pages/discover/discover.wxss";
+@import "/libs/wxParse/wxParse.wxss";
+page{
+  background: #fff;
+}
+.discover-detail-swiper {
+  position: relative;
+}
+.discover-detail-swiper swiper {
+  height: 750rpx;
+}
+.discover-detail-swiper image {
+  width: 100%;
+  height: 750rpx;
+}
+.activeIndex{
+  background: rgba(0,0,0,0.7);
+  font-size: 22rpx;
+  color: #fff;
+  height: 40rpx;
+  line-height: 40rpx;
+  width: 90rpx;
+  text-align: center;
+  position: absolute;
+  right: 30rpx;
+  bottom: 30rpx;
+  border-radius: 20rpx;
+  z-index: 100;
+}
+.discover-detail-content,.discover-detail-recommend {
+  padding: 32rpx;
+}
+.fixed-height{
+  height: 94rpx;
+}
+.fixed-height.iphoneX{
+  height: 128rpx;
+}
+.discover-detail-content .content {
+  font-size: 26rpx;
+  text-indent: 2em;
+  line-height: 44rpx;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  margin-top: 10rpx;
+}
+.discover-detail-recommend .item{
+  display: flex;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+  border: 1rpx solid #eee;
+}
+.item .item-thumb {
+  background: #f7f7f7;
+  width: 132rpx;
+  height: 132rpx;
+}
+.item {
+  margin-bottom: 20rpx;
+}
+.item .item-thumb image{
+  width: 100%;
+  height: 100%;
+}
+.item .item-body {
+  flex: 1;
+  padding: 10rpx 18rpx 0;
+  font-size: 26rpx;  
+}
+.item .item-title {
+  color: #333;
+  height:76rpx;
+}
+.item .item-info {
+  margin-top: 6rpx;
+}
+.item .item-price {
+  color: #FF1A54;
+  font-family:PingFangSC-Medium;
+  font-weight:500;
+}
+.item .addCart-icon {
+  width: 34rpx;
+  height: 34rpx;
+}
+.discover-detail-operate {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background: #fff;
+}
+.discover-detail-operate.iphoneX {
+  bottom: 34rpx;
+}
+.discover-detail-operate .operate {
+  flex: 1;
+  border-top: 1rpx solid #ddd; 
+  box-sizing: border-box; 
+  /* justify-content:center; */
+}
+.discover-detail-operate .fav {
+  position: relative;
+  font-size: 22rpx;
+  display:flex;
+  align-items:center;
+  height: 97rpx;
+  margin-left: 32rpx;
+  max-width: 300rpx;
+}
+.discover-detail-operate .operate_share {
+  width: 250rpx;
+  background:#FF1A54;
+  font-size: 28rpx;
+  color: #fff;
+  height:98rpx;
+  line-height:98rpx;
+  border-radius:0;
+}
+.discover-detail-operate .assist::after {
+  display: block;
+  content: '';
+  width: 4rpx;
+  height: 32rpx;
+  background: #eee;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.discover-detail-operate .icon{
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 20rpx;
+}
+.operate_share .icon {
+  width: 40rpx;
+  height: 40rpx;
+}

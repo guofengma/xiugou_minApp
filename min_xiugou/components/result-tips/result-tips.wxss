@@ -1,0 +1,19 @@
+.tips-img-view image{
+  width: 350rpx;
+  margin-bottom: 20rpx;
+}
+.tips-img-view {
+  height:90%;
+  text-align: center;
+  /* margin-top: 75rpx; */
+  font-size: 30rpx;
+  color: #999;
+}
+.result-tips-btn{
+  width:300rpx;
+  height:98rpx;
+  border-radius:49rpx;
+  border: 2rpx solid;
+  margin: 43rpx auto 0 auto;
+  box-sizing: border-box;
+}

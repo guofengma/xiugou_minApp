@@ -1,0 +1,26 @@
+<!-- <template name="tips-cancel-order"> -->
+  <view class="tips-cancel-order model-view-bg " wx:if='{{isCancel}}'>
+      <view class='tips-box overflow'>
+        <view class='tips-header flexR'>
+          请选择
+          <view class='fr' bindtap='dismissCancel'></view>
+        </view>
+        <view class='tips-content'>
+          <block wx:for='{{reasonArr}}' wx:key='{{index}}'>
+            <view data-content='{{item.value}}'  class="{{reason===index?'active':''}}" bindtap='reasonClicked' data-index="{{index}}">
+              {{item.value}}
+            </view>
+          </block>
+          <!-- <view data-content='信息填写错误，请重新拍' class="{{reason==2?'active':''}}" bindtap='reasonClicked'
+                data-index="2">信息填写错误，请重新拍
+          </view>
+          <view data-content='其他原因' class="{{reason==3?'active':''}}" bindtap='reasonClicked' data-index="3">
+              其他原因
+          </view> -->
+        </view>
+        <view class='flexR'>
+          <view class='redBg cancel-btn flexR' bindtap='cancelOrder'>确认</view>
+        </view> 
+      </view>
+  </view>
+<!-- </template> -->

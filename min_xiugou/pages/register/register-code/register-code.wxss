@@ -1,0 +1,86 @@
+.code-view{
+  font-size: 26rpx;
+  padding-top: 92rpx;
+  overflow-x: hidden;
+}
+.code-view>.code-name{
+  padding: 30rpx 40rpx;
+  color: #c8c8c8;
+}
+.inviter>view:last-child{
+   margin-right: 0;
+}
+.loginBtn{
+  margin-bottom: 30rpx;
+  margin-top: 120rpx;
+  border-radius: 50rpx;
+}
+.inviter{
+  height: 216rpx;
+}
+.inviter image{
+  border-radius: 50%;
+  width: 120rpx;
+  height: 120rpx;
+}
+.tips{
+  margin-bottom: 160rpx;
+  padding: 0 30rpx;
+  position: relative;
+}
+/* .tips:before{
+  content: '';
+  position: absolute;
+  height: 28rpx;
+  width: 6rpx;
+  background: #FF0050;
+  top:6rpx;
+  left:-14rpx;
+} */
+.inviter-level,.inviter-name{
+  width: 120rpx;
+}
+.inviter-name{
+  margin-top: 20rpx;
+}
+.inviter .flexC{
+  margin-right:40rpx;
+}
+.inviter .middleImg{
+  width: 160rpx;
+  height: 160rpx;
+}
+/* .changeBtn{
+  width: 130rpx;
+	height: 40rpx;
+  line-height: 40rpx;
+	background-color: #d3d0d4;
+	border-radius: 5px;
+  color: #fff;
+  font-size: 24rpx;
+  margin-top:36rpx;
+  margin-bottom:60rpx;
+} */
+.rule image{
+  width: 36rpx;
+  margin-right: 10rpx;
+}
+.rule.flexR{
+  justify-content: center;
+}
+.flexC>text{
+  text-align: center
+}
+.dismiss{
+  margin-bottom: 100rpx;
+}
+.write-code{
+ bottom:63rpx;
+}
+.write-code>view{
+  border: 1rpx solid #D9D9D9;
+  border-radius: 34rpx;
+  height: 42rox;
+  width: 200rpx;
+  margin: 0 auto
+}

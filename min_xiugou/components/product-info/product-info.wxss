@@ -1,0 +1,20 @@
+.info{
+  /* height:80rpx; */
+  font-size: 30rpx;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  /* line-height:38rpx; */
+}
+.price{
+  margin-top: 10rpx;
+  font-size: 30rpx;
+}
+.price .gray{
+  margin-left: 10rpx;
+}
+.prd-info image{
+  width: 30rpx;
+}

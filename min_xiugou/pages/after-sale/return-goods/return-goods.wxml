@@ -1,0 +1,61 @@
+<import src='/components/address-info/address-info.wxml'/>
+
+<import src='/components/cell-line/cell-line.wxml'/>
+
+<import src='/components/after-sale-prd-info/after-sale-prd-info.wxml'/>
+
+<import src='/components/address-saler/address-saler.wxml'/>
+
+<import src='/pages/after-sale/temp/temp-refund-info/temp-refund-info.wxml'/>
+
+<import src='/pages/after-sale/temp/refund-explain/refund-explain'/>
+
+
+<!--提示语  -->
+<view class='redBg font-26 flexR tips' wx:if='{{datas.status==2 || datas.status==7}}'>
+  商家已同意退货退款申请，请尽快发货
+</view>
+<view class='flexC tips-exchange font-26'>
+  <view class='flexR'>
+    <image-sub wx:if='{{datas.status==6}}' imgStyle='{{"width:70rpx;margin-right:14rpx;"}}' imgSrc="{{'icon@2x.png'}}"/>
+    <view>
+      <view class='tips-title'>{{datas.headerTitle}}</view>
+      <!-- <view wx:if='{{datas.status!=3}}'>{{result[resultIndex].info}}</view> -->
+      <view wx:if='{{!expressNo.id}}'>{{distanceTime}}</view>
+      <!-- <view wx:if='{{result[resultIndex].time}}'>{{result[resultIndex].time}}</view> -->
+    </view>
+  </view>
+</view>
+<view wx:if='{{datas.status==6}}' class='refusalReason whiteBg font-26 flexR-sb'>{{datas.reject}}</view>
+<!--退款成功以后才显示以下内容  -->
+<template is="temp-refund-info" data="{{...datas}}"/>
+<view wx:if='{{datas.status>1}}'>
+  <!--地址信息  -->
+  <!-- <view class='address active whiteBg'>
+    <template is="address-info" data="{{addressType,...datas,hasData:true}}"/>
+  </view> -->
+
+  <!--商家地址  -->
+  <view wx:if='{{datas.status>1&&datas.status!=6}}'>
+    <template is="address-saler" data="{{addressType,src,datas,hasData:true,door:1}}"/>
+  </view>
+
+  <!--物流  -->
+  <view catchtap='logClicked' data-express='{{expressNo}}' wx:if='{{datas.status!=6&&!expressNo.id || expressNo.id}}'>
+    <template is="cell-line" data="{{name:'退货物流',placeholder:expressNo.name}}"/>
+  </view>
+</view>
+<view  wx:if='{{datas.status==1}}'>
+   <amend-application applyType='{{"退货"}}' list='{{datas}}' serviceNo='{{serviceNo}}' bind:reloadPage='findReturnProductById'/>
+</view>
+<!--换货信息  --> 
+
+<view class='exchange-info font-26 '>
+  <view class='flexR-sb after-sale-line gray'>退款信息</view>
+  <template is="after-sale-prd-info" data="{{...datas}}"/>
+  <template is="refund-explain" data="{{...datas}}"/>
+</view>
+
+<!--联系卖家  -->
+
+<contact-seller userInfos='{{userInfos}}'></contact-seller> 

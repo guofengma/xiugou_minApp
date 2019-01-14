@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的任务",
+  "usingComponents": {
+    "task-item": "/components/task-item/task-item"
+  }
+}

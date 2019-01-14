@@ -1,0 +1,21 @@
+<import src='/components/iPhoneX-line/iPhoneX-line.wxml'/>
+
+<view class='contact-seller {{isIPhoneX.className}}'>
+  <!-- <view class='flexC'> -->
+    <!-- <view>联系卖家</view>
+    <view class='gray'>9:00-17:00</view> -->
+     <button class="go-cart-view contact flexC" 
+      session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"
+      open-type="contact"
+      >
+        <view>在线客服</view>
+        <view class='gray'>9:00-22:00</view>
+    </button>
+  <!-- </view> -->
+  <view class='flexC' bindtap='makePhoneCall'>
+    <view>咨询电话</view>
+    <view class='gray'>400-969-6365</view>
+  </view>
+</view>
+  <!--适配iPhone X  -->
+  <template wx:if='{{isIPhoneX.isIPhoneX}}' is="iPhoneX-line" />

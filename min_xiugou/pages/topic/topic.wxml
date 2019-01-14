@@ -1,0 +1,36 @@
+<import src='/pages/topic/temp/temp1/temp1.wxml'/>
+<import src='/pages/topic/temp/temp2/temp2.wxml'/>
+<import src='/pages/topic/temp/temp3/temp3.wxml'/>
+<import src='/pages/topic/temp/temp4/temp4.wxml'/>
+<!-- 降价拍 -->
+<import src='/pages/topic/temp/temp-reducePrice/temp-reducePrice.wxml'/>
+<!-- 秒杀拍 -->
+<import src='/pages/topic/temp/temp-secKill/temp-secKill.wxml'/>
+
+<view class='topic-page'>
+  <!-- 轮播 -->
+  <view class='ad-view' style='margin-bottom:{{isShowBar? "0":"20"}}rpx;'>
+    <image src="{{topicList.imgUrl}}" class="slide-image" catchtap='adListClicked'  class='ad-img' mode='widthFix'/>
+    <!-- 专题文字介绍 -->
+     <!-- <view class='infos gray font-24 ellipsis-2 boxSize'>
+      shdkjahdkajsdjkahsdkashdjkabdsjka嘎嘎嘎嘎嘎嘎嘎嘎叫大受打击AV硕大的
+    </view>  -->
+  </view>
+  <!-- 产品模块 -->
+  <!-- <block wx:for="{{topicDetailList}}"  wx:key='unique' > -->
+
+    <template wx:if="{{topicTemplateId==1}}" is="topic-temp1" data="{{scrollLeft,topicList,currentTopicListIndex,topicTabWidth}}"/>
+
+    <template wx:elif="{{topicTemplateId==2}}" is="topic-temp2" data="{{scrollLeft,topicList,currentTopicListIndex,topicTabWidth}}"/>
+
+    <template wx:elif="{{topicTemplateId==3}}" is="topic-temp3" data="{{scrollLeft,topicList,currentTopicListIndex,topicTabWidth}}"/>
+
+    <template wx:elif="{{topicTemplateId==4}}" is="topic-temp4" data="{{scrollLeft,topicList,currentTopicListIndex,topicTabWidth}}"/> 
+
+    <template wx:elif="{{topicTemplateId==5}}" is="temp-reducePrice" data="{{topicList,currentTopicListIndex,topicTabWidth}}"/> 
+
+    <template wx:elif="{{topicTemplateId==6}}" is="temp-secKill" data="{{topicList,currentTopicListIndex,topicTabWidth}}"/> 
+    
+  <!-- </block> -->
+
+</view>

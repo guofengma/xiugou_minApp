@@ -1,0 +1,122 @@
+.help-customer {
+    font-size: 26rpx;
+    color: #222222;
+    padding-top: 2rpx;
+    padding-bottom:290rpx;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20rpx 0 0 72rpx;
+    min-height: 140rpx;
+}
+
+.people {
+    background: url("${mrdomain}/help_people.png") no-repeat 20rpx bottom;
+    background-size: cover;
+    width: 180rpx;
+    height: 200rpx;
+    margin-top: 20rpx
+}
+.content {
+    background: url("${mrdomain}/help_content.png") no-repeat;
+    background-size: cover;
+    width:472rpx;
+    height: 126rpx;
+    margin-right: 40rpx;
+    margin-top: 47rpx;
+}
+.tips{
+   width: 430rpx; 
+   display: inline-block;
+   margin: 25rpx 30rpx;
+   color: #999999;
+}
+.hot-question{
+  height: 70rpx;
+  line-height: 70rpx;
+  padding: 0 20rpx;
+  font-size: 26rpx;
+  color: #666666;
+}
+.icon{
+  width: 74rpx;
+}
+.wrap>view view{
+  margin-top: 8rpx;
+}
+.question-area{
+  font-size: 26rpx;
+  color: #222222;
+  border-top:1rpx solid #eee;
+}
+.question-item{
+    width: 100%;
+    height: 160rpx;
+    border-bottom: 1rpx solid #eee;
+    background: #fff;
+}
+.left{
+    float: left;
+    width: 30%;
+    text-align: center;
+    color:#666666;
+    position: relative;
+}
+.left:after{
+  content: '';
+  position: absolute;
+  right:0;
+  top: 0;
+  width:1rpx;
+  height: 160rpx;
+  background: #ddd;
+}
+.left image{
+  margin-top: 25rpx;
+}
+.right{
+    float: right;
+    width: 70%;
+}
+.item{
+    height: 80rpx;
+    line-height: 80rpx;
+    /* border-left:1rpx solid #ddd; */
+    padding:0 20rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+.right .item:first-child{
+  border-bottom:1rpx solid #ddd
+}
+.wrap{
+    margin-top: 20rpx;
+    display: flex;
+    justify-content:space-around;
+    text-align: center;
+    background: #fff;
+    height: 174rpx;
+    width: 100%;
+    font-size: 22rpx;
+    color: #666666;
+}
+.wrap .icon{
+    margin-top: 32rpx;
+}
+.go-cart-view{
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  line-height: inherit;
+  font-size: 22rpx;
+  color: #666;
+}
+.contact-btn{
+  text-align: left;
+  font-size: 24rpx;
+}

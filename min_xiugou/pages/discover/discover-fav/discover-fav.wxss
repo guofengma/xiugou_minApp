@@ -1,0 +1,50 @@
+@import "/pages/discover/discover-item/discover-item.wxss"
+@import  "/components/result-tips/result-tips";
+.discover-fav-top,.discover-list {
+  padding: 0 30rpx;
+}
+.discover-fav-top {
+  font-size: 26rpx;
+}
+.discover-fav-manage {
+  padding: 30rpx 0 30rpx 30rpx;
+}
+.discover-fav-top text,.discover-fav-manage{
+  color: #FF1A54;
+}
+.discover-fav-edit {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-top: 1rpx solid #ddd;
+  background: #fff;
+}
+.discover-fav-edit .checkAll {
+  flex: 1;
+  font-size: 26rpx;
+  color: #999;
+  display: flex;
+  align-items: center;
+}
+.discover-fav-edit .checkAll-icon {
+  width: 44rpx;
+  height: 44rpx;
+  padding: 10rpx 20rpx 10rpx 40rpx;
+}
+.discover-fav-edit .delete {
+  font-size: 32rpx;
+  color: #fff;
+  height: 96rpx;
+  line-height: 96rpx;
+  width: 218rpx;
+  background: #FF1A54;
+  text-align: center;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

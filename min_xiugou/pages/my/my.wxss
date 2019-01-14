@@ -1,0 +1,207 @@
+.my{
+  font-size: 24rpx;
+  color: #424242;
+}
+.width-690{
+  width: 690rpx;
+  margin: 20rpx  auto 0 auto;
+  border-radius: 18rpx;
+}
+.top-view image{
+  width: 40rpx;
+  margin-left: 20rpx;
+}
+.top-view {
+  padding:  20rpx 30rpx 0 30rpx;
+}
+.list-cont>view{
+  position: relative;
+}
+.my-info{
+  display: flex;
+  align-content: center;
+  padding-top: 17rpx;
+}
+.content-top{
+  position: relative;
+  background: #fff url(${mrdomain}/bg_img_user@2x.png?_=1) no-repeat left bottom;
+  background-size: 100% 100%;
+  border-top: 1prx solid #eee;
+  color: #fff;
+  height: 360rpx;
+}
+.my-avatar{
+  display: flex;
+  align-items: center;
+  padding-top: 86rpx;
+}
+.my-name{
+  color: #fff;
+  margin-right: 13rpx;
+  font-size:36rpx;
+  font-weight:500;
+  width: 260rpx;
+}
+.my-info-arrow{
+  width: 14rpx;
+  height: 24rpx;
+  margin-left:12rpx; 
+  
+}
+.avatar-img{
+  width: 106rpx;
+  height:106rpx;
+  border: solid 4rpx #ffffff;
+  border-radius: 50%;
+  margin: 0 20rpx 0 38rpx;
+    
+}
+.my-rank{
+   position: relative;
+  /* width:88rpx; */
+  margin-top: 4rpx;
+}
+.my-rank image{
+  position: relative;
+  width:88rpx;
+  height:48rpx;
+  
+}
+ .level-content{
+   width: 180rpx;
+ }
+ .level-circle{
+   border-radius: 50%;
+   background: linear-gradient( #FE2A65, #FE2746);
+   display: inline-block;
+   margin: 0 12rpx;
+ }
+ .my-save{
+  position: absolute;
+  right: 0;
+  width: 260rpx;
+  height: 100rpx;
+  background: #F1D3A1 url(${mrdomain}/porfile_icon@3x.png) no-repeat 5.5rpx 7.5rpx;
+  background-size:103rpx;
+  border-top-left-radius:109rpx;
+  border-bottom-left-radius:109rpx;
+  bottom: 140rpx;
+}
+.levelName{
+  color: #333
+}
+.my-account{
+  background: #fff url(${mrdomain}/bg_img_user@2x.png?_=1) no-repeat left bottom;
+  background-size: 100% 100%; 
+  color: #fff;
+  margin-top: 75rpx;
+}
+.my-account-item{
+   height: 88rpx;
+   line-height: 88rpx;
+   font-size: 32rpx;
+   padding: 0 30rpx;
+   /* padding: 0 60rpx; */
+   border-bottom: 1rpx solid #f6f6f6;
+}
+.my-account-list{
+  display: flex;
+  height: 206rpx;
+  justify-content: space-around;
+  align-items: center;
+  color: #ffffff;
+}
+.my-account-list>view{
+  width: 221rpx;
+  height: 123rpx;
+  border-radius: 10rpx;
+  text-align: center;
+}
+.account-num{
+  font-size:37rpx; 
+  line-height:76rpx;
+  font-weight:600;
+  height: 76rpx;
+}
+.my-order{
+  background: #ffffff; 
+}
+.my-order-item{
+   padding: 0 30rpx;
+   display: flex;
+   justify-content: space-between;
+   height: 88rpx;
+   /* color: #666; */
+   line-height: 88rpx;
+   border-bottom: 1rpx solid #f6f6f6;
+}
+.my-order-list{
+  display: flex;
+  height: 206rpx;
+}
+.my-order-list>view{
+  width: 25%;
+}
+.my-tools-cont{
+  width: 25%;
+  text-align: center;
+}
+.my-tools{
+  margin: 20rpx auto;
+}
+
+.my-tools-item{
+  height: 88rpx;
+  padding: 0 30rpx;
+  border-bottom: 1rpx solid #f6f6f6;
+}
+.my-tools-list{
+  padding:30rpx  0;
+  display: flex;
+  flex-wrap: wrap;
+  height: 390rpx;
+  align-items: center;
+}
+.my-tools-list image,.list-cont>view{
+  margin-bottom: 18rpx;
+}
+
+.my-wait-pay{
+  position: relative;
+}
+.reddot{
+  position: absolute;
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 50%;
+  background: red;
+  text-align: center;
+  color: white;
+  right: -14rpx;
+  top: -18rpx;
+}
+.see-all{
+  color: #A9A9A9
+}
+
+.joinUs{
+  position: absolute;
+  top:272rpx;
+  width: 100%;
+}
+.joinUs>view{
+  height:124rpx;
+  background:url(${mrdomain}/my-joinus-bg.png?_=1) no-repeat left bottom;
+  background-size: 100% 100%;
+}
+.msg-view{
+  position: relative
+}
+.msg-tips-icon{
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  position: absolute;
+  right: -5rpx;
+  top:-5rpx;
+}

@@ -1,0 +1,17 @@
+.mentor-img{
+  margin-top: 120rpx;
+}
+.mentor-name{
+  margin: 30rpx 0;
+}
+.info{
+  width:690rpx;
+  min-height:300rpx;
+  margin: 0 auto;
+}
+.loginBtn{
+  margin: 0 auto;
+  border-radius: 50rpx;
+  margin-top: 120rpx;
+  margin-bottom: 30rpx;
+}

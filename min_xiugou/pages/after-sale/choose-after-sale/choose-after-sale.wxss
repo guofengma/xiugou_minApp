@@ -1,0 +1,38 @@
+@import "/components/my-order-product-info/my-order-product-info";
+
+
+.my-order-product-info{
+  background-color: #f7f7f7;
+}
+.cell-line{
+  height: 88rpx;
+  
+}
+.cell-line,.after-sale-type{
+  padding: 0 30rpx;
+}
+.after-sale-type{
+  height: 96rpx;
+}
+.group{
+  height: 158rpx;
+  border-top: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+  padding-left: 160rpx;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20rpx;
+  background: #fff url('${mrdomain}/shouhou_icon_tuikuan_nor@2x.png') no-repeat 40rpx center;
+  background-size: 90rpx 90rpx;
+}
+.group .font-30{
+  color: #666;
+}
+.group2{
+  background-image: url('${mrdomain}/shouhou_icon_tuihuo_nor@2x.png')
+}
+
+.group3{
+  background-image: url('${mrdomain}/shouhou_icon_huanhuo_nor@2x.png')
+}

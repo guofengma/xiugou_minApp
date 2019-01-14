@@ -1,0 +1,13 @@
+<!-- <template name="update-img"> -->
+  <view class='choose-img-view'>
+    <view class='selected-img' wx:for="{{smallImg}}" wx:key="unique" wx:for-index="index">
+      <image src='{{item}}' class='userImg'></image>
+      <image src='/img/close-red.png' mode='widthFix' class='close-img' bindtap="deleteImg" data-index="{{index}}"></image>
+    </view>
+    <view class='choose-img-holder' bindtap="uploadImg" wx:if="{{smallImg.length<3}}">
+      <image src='/img/horder.png' mode='widthFix' ></image>
+      <view class='font-26 gray'>上传图片</view>
+      <view class='gray font-22'>可传3张</view>
+    </view>
+  </view>
+<!-- </template> -->

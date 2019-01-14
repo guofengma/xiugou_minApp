@@ -1,0 +1,34 @@
+<!-- 消息显示模板 -->
+<import src= "/components/msg-tips/msg-tips.wxml"/>
+
+<view class='slider' style='height:{{imgheights[0]}}rpx;min-height:400rpx;'>
+  <!--广告轮播  -->
+  <view class='slider-nav boxSize'>
+    <view class='fr flexR-sb'>
+      <view class='cart-view' catchtap='goCart'>
+        <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'xiangqing_icon_gouwuche_nor@3x.png'}}"/>
+        <view class='num-label redBg flexR cart-label' wx:if='{{size>0}}'>{{size}}</view>
+      </view>
+      <view class='msg-view' catchtap='msgClicked'>
+        <image-sub imgStyle='{{"width:70rpx"}}' imgSrc="{{'xiangqing_icon_more_nor@3x.png'}}"/>
+        <view class='messageNum redBg flexR' wx:if='{{messageNum>0}}'></view>
+      </view>
+    </view>
+    <template is="msg-tips" data="{{msgShow,openType,messageNum}}" /> 
+  </view>
+  <swiper autoplay="true" interval='3000' bindchange='sliderChange' circular="true">
+    <block wx:for="{{imgUrls}}" wx:key="unique">
+      <swiper-item> 
+        <view bindtap='swiperImgCliked' data-index='{{index}}' class="slide-image">
+          <image-sub  imgSrc="{{item.smallImg}}" mode='aspectFill'/>
+          <!-- <image src="{{item.smallImg}}" class="slide-image"  mode='aspectFill'/> -->
+        </view> 
+      </swiper-item>
+    </block>
+  </swiper>
+  <view wx:if='{{imgUrls.length>0}}' class="activeIndex">
+    {{activeIndex+"/"+ imgUrls.length}}
+  </view>
+  <!-- 预售提示 -->
+  <view class='tips-product flexR font-26' wx:if="{{advanceSale.isAdvanceSale}}"> {{advanceSale.time}}开售</view>
+</view>

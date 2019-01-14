@@ -1,0 +1,18 @@
+<template name='time-quantum'>
+  <view class='tab-timeq'>
+    <scroll-view scroll-x style="width: auto;height:140rpx">
+      <view 
+        class='tab-timeq-item {{index == currentTopicListIndex ? "tab-timeq-ing" : ""}}'            wx:for="{{topicNavbarList}}" wx:key="{{item.id}}" 
+        data-index="{{index}}" 
+        bindtap="changeTopicTabIndex"
+        style="width:{{width}}"
+      >
+        <view class='tab-item-wrap'>
+          <view class='tab-timeq-item-time'>{{item.navName}}</view>
+          <view class='tab-timeq-item-desc' wx:if="{{item.desc}}">{{item.desc}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>    
+  
+</template>

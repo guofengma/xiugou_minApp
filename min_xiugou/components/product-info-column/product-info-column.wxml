@@ -1,0 +1,15 @@
+<!--商品信息  -->
+<import src='/components/product-info/product-info.wxml' />
+
+<template name="product-column">
+   <view class='product-column'>
+      <view bindtap='productCliked' wx:for='{{productInfo}}' catchtap='productCliked' wx:key='unique' data-id='{{item.prodCode}}' data-index='{{index}}'>
+        <view class='view-prd-img-c'>
+          <image src='{{item.imgUrl}}'></image>
+        </view>
+        <view class='cell-line-c boxSize'>
+          <template is="product-info" data='{{...item,index}}'/>
+        </view>
+      </view>
+   </view>
+</template>

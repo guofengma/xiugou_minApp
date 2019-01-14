@@ -1,0 +1,10 @@
+<template name="product-info">
+  <view class='info ellipsis-2'>{{name}}</view>
+  <view class='flexR-sb prd-info' catchtap='addShoppingCartClicked' data-index='{{index}}' data-imgurl="{{imgUrl}}" data-price='{{minPrice}}'>
+    <view class='price red'>
+      <text class='now'>￥{{minPrice}}</text>
+      <text class='font-24'>起</text>
+    </view>
+    <image src='/img/cart-small.png' mode="widthFix"></image>
+  </view>
+</template>

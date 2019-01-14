@@ -1,0 +1,27 @@
+
+<!-- <view> -->
+    <import src='/components/tips-cancel-order/tips-cancel-order.wxml' />
+
+    <!-- <import src='/components/tips-delete-order/tips-delete-order.wxml' /> -->
+    <!--搜索结果异常显示  -->
+    <import src='/components/result-tips/result-tips.wxml' />
+
+    <view class='my-order sub-page'>
+        <view class='fixed-top whiteBg'>
+          <view catchtap='searchOrder'  class='searchOrder' >
+            <search-bar  placeholder='搜索订单' disabled='{{true}}'/>
+          </view>
+          <view class="tab-area">
+              <view class="{{num==''?'active red':''}}" bindtap="getList" data-index="">全部</view>
+              <view class="{{num==1?'active red':''}}" bindtap="getList" data-index="1">待付款</view>
+              <view class="{{num==2?'active red':''}}" bindtap="getList" data-index="2">待发货</view>
+              <view class="{{num==3?'active red':''}}" bindtap="getList" data-index="3">待收货</view>
+              <view class="{{num==4?'active red':''}}" bindtap="getList" data-index="4">已完成</view>
+          </view>
+        </view>
+        <my-order-list id='orderList' num="{{num}}"  bind:isAjax="isChange" 
+          
+        />
+    </view>
+<!-- </view> -->
+

@@ -1,0 +1,58 @@
+<view class="feedback">
+<import src='/components/update-img/update-img.wxml'/>
+    <view class="type">
+        <view class="item {{mask?'grey':''}}" bindtap="questionType">
+            <view>
+                <text>{{typeArr[activeIndex].value}}</text>
+            </view>
+            <view>
+              <image-sub wx:if='{{mask}}' imgStyle='{{"width:30rpx;margin-left:10rpx;"}}' imgSrc="{{'expand-btn.png'}}"/>
+              <image-sub wx:else imgStyle='{{"width:30rpx;margin-left:10rpx;"}}' imgSrc="{{'packup-btn.png'}}"/>
+            </view>
+        </view>
+    </view>
+    <view class="wrap">
+        <view class="item">详细说明</view>
+        <view class="detail-remark">
+            <textarea bindinput="detailRemark" maxlength="90" class="textarea" wx:if='{{!mask&&!success}}' placeholder="请输入一段说明文字..."/>
+            <view class='textarea' wx:if="{{mask || success }}"></view> 
+            <view class="number">{{count}}/90</view>
+        </view>
+    </view>
+    <view class="wrap">
+        <view class="item">上传图片</view>
+        <view class="phone-area">
+          <update-img bind:uploadImage='uploadImage'/>
+        </view>
+        
+    </view>
+
+    <view class="btn {{active?'active':''}}" bindtap="addFeedback">提交</view>
+    <!--选择类型弹窗-->
+    <view wx:if="{{mask}}" class="mask">
+        <view class="type-area">
+          <block wx:for='{{typeArr}}' wx:key='unique'>
+            <view class="item" bindtap="chooseType" data-index="{{index}}" data-content="{{item.dValue}}" wx:if='{{index>0}}'>
+              <view>
+                  <text class="{{activeIndex==index?'red':''}}">{{item.value}}</text>
+              </view>
+              <view>
+                <image-sub  imgStyle='{{"width:30rpx"}}' imgSrc="{{activeIndex==index?  'checked.png':''}}"/>
+                  <!-- <image class="jt-img" src="{{activeIndex==index?  bgImgUrl:''}}" mode='widthFix'></image> -->
+              </view>
+            </view>
+          </block>
+        </view>
+    </view>
+    <!--提交成功弹窗-->
+    <view wx:if="{{success}}" class="success-mask">
+        <view class="success-area">
+            <view class="success-content">
+              <image-sub  imgStyle='{{"width:142rpx"}}' imgSrc="{{'success.png'}}"/>
+              <view class="success">提交成功!</view>
+              <view class="tip">已提交给相关客服人员 并催促尽快处理！</view>
+            </view>
+            <view class="success-btn" bindtap="sure">确定</view>
+        </view>
+    </view>
+</view>

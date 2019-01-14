@@ -1,0 +1,37 @@
+@import "/css/app";
+@import "/pages/product-detail/temp/errTips/errTips.wxss";
+
+.footbar{
+  border-top:1rpx solid #eee;
+  border-radius: 0;
+  height:98rpx;
+  font-size: 28rpx;
+  line-height: 30rpx;
+  text-align: center;
+  position:fixed;
+  bottom:0;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content: center;
+  z-index: 1;
+}
+.footbar.isIphoneX {
+  bottom: 34rpx
+}
+.footbar-primary{
+  background: #33B4FF;
+  color: #fff;
+}
+.footbar-main{
+  background: #FF0050;
+  color: #fff;
+}
+.footbar-disabled{
+  background: #ccc;
+  color: #fff;
+}
+.text-small{
+  font-size: 24rpx;
+}

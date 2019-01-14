@@ -1,0 +1,122 @@
+@import "/components/address-info/address-info";
+
+@import "/components/cart-product-info/cart-product-info.wxss";
+.orderComfirm{
+  padding-bottom:100rpx;
+  padding-top: 20rpx;
+  box-sizing: border-box;
+}
+.address-view{
+  padding: 30rpx 100rpx 33rpx 30rpx;
+  position: relative;
+  border-top: 1rpx solid #eee;
+  background: #fff url(${mrdomain}/line-bg.png) no-repeat left bottom;
+  background-size: 100%;
+  margin-bottom: 20rpx;
+}
+.choose-address-icon{
+  width: 24rpx;
+  margin-left: 160rpx;
+  position:absolute;
+  height:100%;
+  right: 30rpx;
+  top:0;
+}
+.choose-address-icon image,.order-info-other .gray image{
+  vertical-align: middle;
+}
+.order-info-other{
+  font-size: 26rpx;
+  background: #fff;
+  margin-bottom: 196rpx;
+}
+.order-info-other>view{
+  height: 88rpx;
+  border-top: 1rpx solid #eee;
+  padding: 0 30rpx;
+}
+.order-info-other .gray image{
+  width: 15rpx;
+  margin-left: 5rpx;
+  position: relative;
+  top: -2.5rpx;
+}
+.leaving-msg{
+  justify-content: flex-start;
+}
+.leaving-msg input{
+  width: 500rpx;
+  padding-left: 10rpx;
+}
+
+.switch{
+  width:60rpx;
+}
+.btn{
+  width: 200rpx;
+  color: #fff;
+  height: 97rpx;
+  font-size: 32rpx;
+  margin-left: 24rpx;
+}
+.payBar{
+  justify-content: flex-end;
+  font-size: 30rpx;
+  /* position: fixed;
+  bottom: 0;
+  width: 100%; */
+  border-top: 1rpx solid #eee;
+  background: #fff;
+  z-index: 9999;
+}
+.choose-addressType{
+  width: 690rpx;
+  margin:20rpx auto;
+  border:  2rpx solid #61686c;
+  font-size: 26rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.choose-addressType>view{
+  width: 50%;
+  background: #fff;
+  height: 50rpx;
+  color:#61686c;
+}
+.choose-addressType>view.active{
+  background:  #61686c;
+  color: #fff;
+}
+.reducePrice{
+  /* min-height:88rpx; */
+  width:30%;
+  /* text-align:justify;
+  line-height:38rpx;
+  padding-top:15rpx; */
+}
+.gift-view{
+  padding:15rpx 30rpx 0 30rpx;
+}
+/* 礼包优惠卷 */
+.gift-items{
+  border-top: 1rpx solid #ddd;
+  border-bottom: 1rpx solid #ddd;
+  margin-bottom: 30rpx;
+  background: #fff url(${mrdomain}/iconForobtain.png) no-repeat 30rpx 25rpx;
+  background-size:32rpx 32rpx;
+}
+.gift-items>.gift-line:last-child{
+  border-bottom: 0;  
+}
+.gift-line{
+  margin-left: 72rpx;
+  border-bottom: 1rpx solid #ddd;
+  height: 68rpx;
+  padding-right: 30rpx;
+}
+.getExp{
+  margin-left: 0;
+  padding-left: 70rpx;
+  background: #fff url(${mrdomain}/iconForobtain.png) no-repeat 30rpx center;
+  background-size:32rpx 25rpx;
+}

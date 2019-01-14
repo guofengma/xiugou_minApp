@@ -1,0 +1,24 @@
+<import src='/pages/topic/temp/topic-prd-info/topic-prd-info.wxml'/>
+
+<import src='/pages/topic/temp/topic-bar/topic-bar.wxml'/>
+
+<template name="topic-temp2">
+  <!--导航  -->
+  <!-- <template is="topic-bar" data="{{topicList,scrollLeft,currentTopicListIndex,topicTabWidth}}"/> -->
+  <!--产品 -->
+  <view class='topic-prd-content topic-temp1'>
+      <block wx:for='{{topicList.topicNavbarList[currentTopicListIndex].topicBannerProducts}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
+        <template is="topic-prd-info" data="{{width:'335',bg:'#fff',ellipsis:'ellipsis',...list,key}}"/>
+      </block>
+  </view>
+  <block wx:for='{{topicList.topicNavbarList[currentTopicListIndex].topicNavbarBannerList}}'  wx:key='unique'>
+    <view class='topic-banner topic-temp'>
+      <image src='{{item.bannerImg}}' mode='widthFix'></image>
+    </view>
+    <view class='topic-prd-content topic-temp1'>
+      <block wx:for='{{item.topicBannerProductList}}' wx:for-item="list" wx:for-index='key'  wx:key='unique'>
+        <template is="topic-prd-info" data="{{width:'335',bg:'#fff',ellipsis:'ellipsis',...list,key}}"/>
+      </block>
+    </view>
+  </block>
+</template>

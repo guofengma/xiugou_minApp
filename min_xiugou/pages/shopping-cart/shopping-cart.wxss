@@ -1,0 +1,74 @@
+@import "/components/cart-product-info/cart-product-info.wxss";
+
+/*搜索产品异常显示  */
+
+@import  "/components/result-tips/result-tips";
+
+
+.shopping-cart-line{
+  margin-bottom: 20rpx;
+}
+.shopping-cart{
+  padding-top: 5rpx;
+  padding-bottom: 130rpx;
+}
+.shopping-cart-line.flexR-sb{
+  box-sizing: border-box;
+  background: #fff;
+}
+.chooseImg image,.leftBar image{
+  width: 46rpx;
+}
+.move-box{
+  width: 88%;
+}
+.chooseImg{
+  width:11%;
+  text-align: right;
+}
+/*底部bar  */
+.cart-bar{
+  height:100rpx;
+  background:#fff;
+  z-index:9999;
+  border-top: 1rpx solid #eee;
+  border-bottom: 1rpx solid #eee;
+  font-size: 26rpx;
+}
+.cart-btn{
+  width: 30%;
+  text-align: center;
+  color: #fff;
+  height: 100%;
+  line-height: 100rpx;
+  font-size: 32rpx;
+}
+.leftBar{
+  width: 70%;
+  padding-left: 38rpx;
+  padding-right: 15rpx;
+}
+.leftBar image{
+  margin-right: 22rpx;
+}
+/*购物车分类*/
+.prodClass{
+  padding: 0 30rpx;
+  height: 80rpx;
+  border-bottom: 1rpx solid #F7F7F7;
+}
+.product-line{
+  margin-bottom: 20rpx;
+}
+.leftTips{
+  max-width:88%;
+}
+.leftTips .tips-content{
+  max-width: 79.3%;
+  padding: 0 28rpx;
+}
+.tips-label{
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  border-radius: 22rpx;
+}

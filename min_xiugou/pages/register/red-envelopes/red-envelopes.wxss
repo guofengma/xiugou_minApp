@@ -1,0 +1,45 @@
+.red-envelopes{
+  padding: 80rpx 30rpx 50rpx 30rpx;
+}
+.topBar{
+  margin-bottom: 60rpx;
+}
+.content{
+  /* width: 490rpx; */
+  width: 514rpx;
+  flex-wrap:wrap;
+  margin: 0 auto;
+}
+.content>view{
+  width: 204rpx;
+  height: 284rpx;
+  background: #fff url(${mrdomain}/tanguang_bg_hongbao_nor@2x.png) no-repeat left top;
+  background-size: 100%;
+  color: #fff;
+  margin-bottom: 100rpx;
+  position: relative;
+}
+.title{
+  padding-top: 50rpx;
+}
+.code-btn{
+  border:1rpx solid;
+  border-radius: 30rpx;
+  width: 200rpx;
+  height:50rpx;
+  margin: 0 auto;
+}
+.dismiss view{
+  border-bottom: 1rpx solid #666;
+}
+.dismiss{
+  text-align: center;
+  margin-bottom: 60rpx;
+  margin-top: 40rpx;
+}
+.ling{
+  color: #80522A;
+  position: absolute;
+  bottom: 80rpx;
+  width: 100%;
+}

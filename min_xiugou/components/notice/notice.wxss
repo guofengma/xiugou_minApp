@@ -1,0 +1,42 @@
+@import "/css/app";
+@import "/libs/wxParse/wxParse.wxss";
+.container{
+  padding-top: 88rpx;
+  position: relative;
+}
+.notice-view{
+  width: 590rpx;
+  /* padding:0 30rpx; */
+  height: 780rpx;
+  border-radius: 14rpx;
+  background:url(${mrdomain}/index-notice-bg.png?1) no-repeat left top;
+  background-size: 100%;
+}
+.title{
+  font-size: 30rpx;
+  margin-bottom: 10rpx;
+  text-align: center
+}
+.scroll-view{
+  padding-top: 290rpx;
+}
+
+.notice-scroll{
+  height: 380rpx;
+  padding: 0 30rpx;
+}
+.notice-title{
+  font-size: 70rpx;
+  color: #fff;
+}
+.notice-scroll .wxParse-inline{
+  text-align: justify;
+  color: #666;
+  font-size: 24rpx;
+}
+.close{
+  position: absolute;
+  right: 0;
+  top:0rpx;
+  z-index: 100004;
+}

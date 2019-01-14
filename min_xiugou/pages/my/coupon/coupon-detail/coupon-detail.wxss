@@ -1,0 +1,10 @@
+@import "/pages/my/coupon/temp/coupon-temp";
+
+.tips{
+  margin: 0 auto;
+  margin-bottom: 300rpx;
+  margin-top: 36rpx;
+  font-size: 24rpx;
+  width: 640rpx;
+  line-height: 40rpx;
+}

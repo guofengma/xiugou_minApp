@@ -1,0 +1,17 @@
+<view class="wrap font-26">
+  <block wx:for="{{list}}" wx:key="unique">
+    <view class="item whiteBg" catchtap='toDetail' data-id="{{item.id}}">
+      <view>
+        <text>{{item.title}}</text>
+      </view>
+      <view>
+        <image-sub imgStyle='{{"width:16rpx;"}}' imgSrc="{{'xjt_10@2x.png'}}"/>
+      </view>
+    </view>
+  </block>
+</view>
+<view class="contact font-26 flexC">
+    <view>联系客服400-969-6365</view>
+    <view>9:00-22:00</view>
+</view>
+

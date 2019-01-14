@@ -1,0 +1,75 @@
+@import "/css/app";
+.model-view-bg{
+  align-items: flex-start;
+  padding-top: 80rpx;
+}
+.container{
+  width: 514rpx;
+  padding-top:80rpx;
+  position: relative;
+}
+.red-envelopes-view{
+  height: 724rpx;
+  background: url(${mrdomain}/tanguang_bg_hongbao_nor@2x.png) no-repeat left top;
+  background-size: 100%;
+}
+.close{
+  position: absolute;
+  top:0;
+  right: -47rpx;
+  z-index: 100004
+}
+.red-envelopes-view{
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+.red-info{
+  font-size: 28rpx;
+  padding-top: 52rpx;
+}
+.amout{
+  font-size: 100rpx;
+  display: inline-block
+}
+.red-succ{
+  font-size: 46rpx;
+  position: absolute;
+  bottom: 36rpx;
+  width: 100%;
+}
+.btn-name{
+  position: absolute;
+  width: 100%;
+  bottom: 170rpx;
+  height: 160rpx;
+  font-size: 28rpx;
+  color: #80522A
+}
+@keyframes zoomIn{
+  0%{
+    opacity:0;
+    transform:scale3d(.3,.3,.3);
+  }
+  50%{
+    opacity:1
+  }
+}
+.zoomIn-lt{
+  animation-name:zoomIn;
+  transform-origin:0 0;
+}
+.zoomIn-rt{
+  animation-name:zoomIn;
+  transform-origin:100% 0;
+}
+.zoomIn-lb{
+  animation-name:zoomIn;
+  transform-origin:0 100%;
+}
+.zoomIn-rb{
+  animation-name:zoomIn;
+  transform-origin:100% 100%;
+}
+.animated{animation-duration:.5s;animation-fill-mode:both}
+
