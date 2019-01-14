@@ -106,13 +106,12 @@ Page({
         if (!Storage.getFirstRegistration()) {
             this.selectComponent("#notice").getNotice()
         }
+        options = options || {}
         // 初始化请求
         this.initRequset(options)
         // 初始化传参
         this.initOptions(options)
-        this.setData({
-            options: options
-        })
+        this.data.options = options
     },
     onPullDownRefresh: function () {
         this.setData({
@@ -130,14 +129,15 @@ Page({
         wx.stopPullDownRefresh();
     },
     initOptions(options){
+        // console.log(options)
         // 分享过来有邀请者id的那么存储在本地 当天有效 次日失效
         if (options.inviteId != 'null' && options.inviteId != 'undefined' && options.inviteId) {
             Storage.setUpUserId({
                 date: new Date().toLocaleDateString(),
                 id: options.inviteId
             })
-            // delete options.inviteId
             //1、产品详情(1,2,101) 2、邀请注册(101) 3、秀场分享(在分享页面那边处理了) 4、拼店分享(暂无): 点击增加经验
+            options.type = options.type || 0
             if ([1, 2, 99, 101].includes(parseInt(options.type))) {
                 app.shareClick(options.inviteId);
             }

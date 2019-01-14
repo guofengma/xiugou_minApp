@@ -240,9 +240,10 @@ Page({
     }
     if (this.data.btnDisabled) return
     this.data.btnDisabled = true
+    let address = this.data.orderInfos.address || {}
     let params = {
       ...this.data.params,
-      addressId: this.data.orderInfos.address.id,// 收件地址
+      addressId: address.id,// 收件地址
       message: this.data.remark || '',// 买家留言
       channel: 1,// 渠道 1.小程序 2.APP 3.H5
       source: Number(this.data.formPage), // 订单来源

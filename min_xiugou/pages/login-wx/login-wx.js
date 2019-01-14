@@ -84,12 +84,13 @@ Page({
     Tool.navigateTo('/pages/login/login')
   },
   getUserInfo(){
+    let that = this
     wx.getUserInfo({
       success: res => {
-        this.getLogin(res.userInfo)
+        that.getLogin(res.userInfo)
       },
       fail: function () {
-        this.tips()
+        that.tips()
       }
     })
   },
