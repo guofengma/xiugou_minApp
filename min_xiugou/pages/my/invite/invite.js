@@ -23,7 +23,7 @@ Page({
       return {
         title: title,
         desc: desc,
-        path: '/pages/index/index?type=101&id=' + userinfo.id 
+        path: '/pages/index/index?type=101&id=' + userinfo.code
       }
     },
     onUnload: function () {

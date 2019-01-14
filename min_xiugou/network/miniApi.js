@@ -447,7 +447,8 @@ const api = {
         {
             "action": "产品详情",
             "method": "get",
-            "encrypt": false
+            "encrypt": false,
+            'isShowLoading': false,
         }
     ],
     'activityByProductId': [
@@ -455,6 +456,7 @@ const api = {
         {
             "action": "获取是否是活动产品",
             "method": "get",
+            "isShowErrMsg": false,
             "encrypt": false,
         }
     ],
@@ -480,7 +482,7 @@ const api = {
     'getGiftBagDetail': [
         '/operator/activitypackage/findActivityPackageDetail',
         {
-            "action": "获取秒杀详情",
+            "action": "获取礼包详情",
             "method": "get",
             "encrypt": false,
             'isShowLoading': false,

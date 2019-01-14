@@ -101,8 +101,7 @@
    line-height: 88rpx;
    font-size: 32rpx;
    padding: 0 30rpx;
-   /* padding: 0 60rpx; */
-   border-bottom: 1rpx solid #f6f6f6;
+   border-bottom: 1rpx solid rgba(255,255,255,0.7);
 }
 .my-account-list{
   display: flex;

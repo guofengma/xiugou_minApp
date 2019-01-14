@@ -31,8 +31,8 @@
 }
 .discover-top-swiper image {
   width: 600rpx;
-  height: 350rpx;
-  border-radius: 15rpx;
+  /*height: 350rpx;*/
+  border-radius: 12rpx;
 }
 
 .discover-hot-swiper .slide-image {
@@ -73,6 +73,7 @@
   background:#fff;
   padding:20rpx;
   margin-bottom:20rpx;
+  border-radius: 12rpx;
 }
 .discover-tab-new,.discover-tab-hot-assist {
   margin-top: 136rpx;

@@ -828,7 +828,7 @@ export default class Tool {
         global.Storage.setUserAccountInfo(datas)
         global.Event.emit('didLogin');
         global.Storage.setWxOpenid(datas.openid)
-        global.Storage.setMemberId(datas.id)
+        global.Storage.setMemberId(datas.code)
         global.Event.emit('refreshMemberInfoNotice');
     }
 

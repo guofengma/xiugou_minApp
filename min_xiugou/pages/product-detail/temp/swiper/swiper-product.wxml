@@ -14,7 +14,7 @@
         <view class='messageNum redBg flexR' wx:if='{{messageNum>0}}'></view>
       </view>
     </view>
-    <template is="msg-tips" data="{{msgShow,openType,messageNum}}" /> 
+    <template is="msg-tips" data="{{msgShow,openType,messageNum}}" />
   </view>
   <swiper autoplay="true" interval='3000' bindchange='sliderChange' circular="true">
     <block wx:for="{{imgUrls}}" wx:key="unique">

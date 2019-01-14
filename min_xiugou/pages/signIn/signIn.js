@@ -95,8 +95,5 @@ Page({
   },
   onUnload: function () {
 
-  },
-  onShareAppMessage: function () {
-
   }
 })
