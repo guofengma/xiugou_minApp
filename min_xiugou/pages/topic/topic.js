@@ -60,8 +60,9 @@ Page({
       userId: userInfo.code|| ""
     }
     API.getTopicById(params).then((res) => {
-      let data = res.data;
-      if (!data) return
+      let data = res.data
+      data.topicNavbarList || []
+      if (!data || !data.topicNavbarList.length) return
       let width = '';
       wx.getSystemInfo({
         success: function (res) {
