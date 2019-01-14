@@ -18,6 +18,7 @@ Page({
     });
     this.getTopicByCode();
     Event.on('tip', this.getTopicByCode, this)
+    Event.on('didLogin', this.didLogin, this)
   },
   onUnload() {
     Event.off('tip', this.getTopicByCode)
@@ -94,6 +95,10 @@ Page({
 
   // 是否设置商品提醒
   toggleSubscribeItem(e) {
+    if(!this.data.didLogin){
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=true')
+      return
+    }
     let userInfo = Storage.getUserAccountInfo() || {};
 
     const data = e.currentTarget.dataset;
@@ -132,5 +137,11 @@ Page({
     } else if(data.type == 2){
       Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + data.code)
     }
-  }
+  },
+  didLogin() {
+    Tool.didLogin(this)
+  },
+  onUnload: function () {
+    Event.off('didLogin', this.didLogin);
+  },
 })

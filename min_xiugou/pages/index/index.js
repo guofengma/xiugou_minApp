@@ -345,11 +345,9 @@ Page({
         }
         this.getIsLogin(callBack)
     },
-    getIsLogin(callBack = ()=> {
-    }){
-        let cookie = Storage.getToken() || ''
+    getIsLogin(callBack = ()=> {}){
         if (!this.data.didLogin) {
-            Tool.navigateTo('/pages/login-wx/login-wx?isBack=' + true)
+            Tool.navigateTo('/pages/login-wx/login-wx?isBack=true')
             return
         }
         callBack()
