@@ -16,7 +16,8 @@ Page({
     this.setData({
         topicCode: options.code || ''
     });
-    this.getTopicByCode();
+    this.getTopicByCode()
+    this.didLogin()
     Event.on('tip', this.getTopicByCode, this)
     Event.on('didLogin', this.didLogin, this)
   },
