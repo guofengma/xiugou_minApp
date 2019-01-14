@@ -7,9 +7,9 @@
   <view class='shopping-cart' wx-if='{{!tipVal}}'>
     <view wx:for='{{items}}'  data-index='{{index}}'  wx:key='unique' class='shopping-cart-line '>
       <!--购物车的产品分类提示-->
-      <view class="prodClass flexR-sb font-20 whiteBg" wx:if="{{item.isFailed&&item.list.length}}">
+      <view class="prodClass flexR-sb font-20 whiteBg" wx:if="{{item.isFailed&&item.showLength}}">
         <!--失效的产品-->
-        <view class="gray">失效宝贝{{item.list.length}}件</view>
+        <view class="gray">失效宝贝{{item.showLength}}件</view>
         <view class="red" catchtap='clearItems' >清空失效宝贝</view>
       </view>
       <!--产品信息-->
