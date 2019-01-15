@@ -54,7 +54,8 @@ Page({
     }
   },
   // 获取专题信息列表
-  getTopicByCode() {
+  getTopicByCode(tabIndex) {
+    console.log(tabIndex)
     let userInfo = Storage.getUserAccountInfo() || {};
     let params = {
       code: this.data.topicCode,
@@ -63,11 +64,11 @@ Page({
     API.getTopicById(params).then((res) => {
       let data = res.data
       data.topicNavbarList || []
-      if (!data || !data.topicNavbarList.length) return
+      let topicNavbarListLength = data.topicNavbarList.length;
+      if (!data || !topicNavbarListLength) return
       let width = '';
       wx.getSystemInfo({
         success: function (res) {
-          let topicNavbarListLength = data.topicNavbarList.length;
           if (topicNavbarListLength < 0) {
             width = '0';
             return;
@@ -84,9 +85,11 @@ Page({
       wx.setNavigationBarTitle({
         title: data.name
       })
+      //data.topicNavbarList.length >> 1, // 这里取了个中位数，可能接口会提供
+      let currentTopicListIndex = tabIndex? tabIndex:data.checkIndex
       this.setData({
         topicList: data,
-        currentTopicListIndex: data.checkIndex,//data.topicNavbarList.length >> 1, // 这里取了个中位数，可能接口会提供
+        currentTopicListIndex: currentTopicListIndex,
         topicTabWidth: width,
         topicTemplateId: data.templateId
       })
@@ -115,7 +118,7 @@ Page({
       userId: userInfo.code || ""
     }
     API.addActivitySubscribe(params).then((res) => {
-      this.getTopicByCode();
+      this.getTopicByCode(this.data.currentTopicListIndex);
     }).catch((res) => {
       console.log(res)
     })
