@@ -10,7 +10,7 @@
   color: #999;
 }
 .result-tips-btn{
-  width:280rpx;
+  width:230rpx;
   height:70rpx;
   border-radius:49rpx;
   border: 2rpx solid;

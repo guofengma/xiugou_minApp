@@ -227,6 +227,8 @@
 .recommend-prd-item{
   width: 340rpx;
   border: 1rpx solid #EDEDED;
+  border-radius: 10rpx;
+  overflow: hidden;
   margin-bottom:10rpx; 
 }
 .recommend-prd-content{
