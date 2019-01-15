@@ -11,7 +11,7 @@ Page({
             2: '/static/protocol/service.html',// 用户协议
             3: '/download',//下载页面
             4: '/static/protocol/signInRule.html', //签到协议
-            5: '/topic/first', // h5专题
+            5: '/topic/second', // h5专题
             6: '/static/protocol/about-us.html', //关于我们
         }
     },

@@ -1081,5 +1081,14 @@ export default class Tool {
             }
         })
     }
+
+    // 埋点方法封装
+
+    static sensors(event,params={}){
+        if(!config.sensorsUrl) return
+        params.platformType = 'miniapp'
+        const app = getApp()
+        app.sensors.track(event, params)
+    }
 }
 
