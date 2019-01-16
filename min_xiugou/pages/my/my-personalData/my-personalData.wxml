@@ -23,10 +23,10 @@
     <view class="wrap">
         <view class="item line">
             <view>
-                <text>会员号</text>
+                <text>{{userInfos.perfectNumberCode? "靓号":"会员号"}}</text>
             </view>
             <view>
-                <text>{{userInfos.code||''}}</text>
+                <text> {{userInfos.code || userInfos.perfectNumberCode || ''}}</text>
             </view>
         </view>
         <view class="item line">

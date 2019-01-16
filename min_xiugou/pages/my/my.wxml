@@ -19,7 +19,7 @@
         </view>
 
         <view class='my-rank' wx:if='{{didLogin}}'>
-          会员号 {{userInfos.code || ''}}
+          {{userInfos.perfectNumberCode? "靓号":"会员号"}} {{userInfos.code || userInfos.perfectNumberCode || ''}}
         </view>
       </view>
     </view>
