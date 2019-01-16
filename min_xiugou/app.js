@@ -5,8 +5,6 @@ import {
     API
 } from './tools/tcglobal';
 
-// const ald = require('./libs/ald-stat/ald-stat.js')
-
 import config from './config.js'
 
 const sensors = require('./libs/sensorsdata/sensorsdata.min.js');
@@ -78,6 +76,7 @@ App({
             this.globalData.openid = datas.openid
             datas.openid && sensors.setOpenid(datas.openid)
             Storage.setWxOpenid(datas.openid)
+            if(datas.id) Tool.sensors("Login",{loginMethod:"微信小程序登录"})
             callBack()
         }).catch((res) => {
             console.log(res)

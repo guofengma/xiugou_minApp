@@ -320,6 +320,14 @@ Page({
         }else {
             Tool.navigateTo(page)
         }
+        if(preseat=='banner位') Tool.sensors("BannerClick",{
+            pageType:"首页",
+            bannerLocation:"首页",
+            bannerName:'"首页"',
+            bannerID:this.data.imgUrls.id,
+            url:page,
+            bannerRank:index
+        })
 
     },
     queryFeaturedList() {

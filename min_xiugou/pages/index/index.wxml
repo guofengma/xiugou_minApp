@@ -18,7 +18,7 @@
     <swiper indicator-dots="true" autoplay="true" interval='3000' style='height:460rpx' indicator-color='rgba(255, 255, 255, 0.6)' indicator-active-color='#fff' circular="true">
       <block wx:for="{{imgUrls}}" wx:key='unique'>
         <swiper-item>
-          <image-sub imgSrc="{{item.imgUrl}}" catchtap='adListClicked' data-preseat="banner位" data-type='{{item.linkType}}' data-val='{{item.linkTypeCode}}' mode='aspectFill' />
+          <image-sub imgSrc="{{item.imgUrl}}" catchtap='adListClicked' data-preseat="banner位" data-type='{{item.linkType}}' data-index='{{index}}' data-val='{{item.linkTypeCode}}' mode='aspectFill' />
         </swiper-item>
       </block>
     </swiper>
