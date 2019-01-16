@@ -114,7 +114,7 @@ Page({
     this.setData({
       selectType: e.detail
     })
-    this.ProductFactory.addToShoppingCart()
+    this.ProductFactory.addToShoppingCart("","",'产品列表页')
   },
   addShoppingCartClicked(e) { // 规格选择
     let index = e.currentTarget.dataset.index

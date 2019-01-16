@@ -60,7 +60,7 @@
           <view class="pay-btn red" bindtap='continueBuy' data-index='{{index}}'>再次购买</view>
         </view>
         <view class="right" wx:elif="{{ item.showStatus==1}}">
-          <view class="cancel-btn" bindtap="cancelItem" data-ordernum="{{item.showOrderNo}}">取消订单</view>
+          <view class="cancel-btn" bindtap="cancelItem" data-ordernum="{{item.showOrderNo}}" data-index="{{index}}">取消订单</view>
           <view class="pay-btn red" bindtap='continuePay' data-index='{{index}}'>
             去支付
           </view>
@@ -81,6 +81,6 @@
 
 <!--提示框  -->
 
-<tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{orderNum}}' door='{{1}}' bind:cancelOrder='cancelOrder' />
+<tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{orderNum}}' door='{{1}}' bind:cancelOrder='cancelOrder' list="{{orderListsItem}}"/>
 
 <template is="tips-delete-order" data='{{isDelete}}' />

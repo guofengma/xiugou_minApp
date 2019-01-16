@@ -193,7 +193,7 @@ Page({
   },
   //   添加购物车
   addToShoppingCart() {
-    this.ProductFactory.addToShoppingCart(this.data.productCode, 8);
+    this.ProductFactory.addToShoppingCart(this.data.productCode, 8,"经验专区");
   },
   // 产品列表点击
   selectProd(e) {

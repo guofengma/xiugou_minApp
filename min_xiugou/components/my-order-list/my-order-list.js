@@ -228,10 +228,12 @@ Component({
       this.getData(this.data.num);
     },
     cancelItem(e) {
-      let orderNum = e.currentTarget.dataset.ordernum;
+      let orderNum = e.currentTarget.dataset.ordernum
+      let index = e.currentTarget.dataset.index
       this.setData({
         isCancel: true,
         orderNum: orderNum,
+        orderListsItem:this.data.list[index]
       });
     },
     //确认收货

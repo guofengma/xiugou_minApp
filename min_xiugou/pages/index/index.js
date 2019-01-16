@@ -175,7 +175,7 @@ Page({
             })
         })
         this.queryFeaturedList()
-        // this.indexQueryCategoryList()
+        this.indexQueryCategoryList()
     },
     onUnload(){
         Storage.setUpUserId(null)
