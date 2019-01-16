@@ -8,6 +8,8 @@
   width: 336rpx;
   margin-bottom: 20rpx;
   position: relative;
+  border-radius: 12rpx;
+  overflow: hidden;
 }
 .discover-list-item-edit {
   width: 44rpx;

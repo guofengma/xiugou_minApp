@@ -4,10 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    questionType:String
   },
   data: {
     userInfos:{},
-    ysf: { title: '售后页面' },
     phone:'400-9696-365'
   },
 
@@ -15,11 +15,18 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    contact(way="在线"){
+      Tool.sensors("Contact",{
+        questionType:this.data.questionType,
+        origin:way
+      })
+    },
     makePhoneCall () {
+      let that = this
       wx.makePhoneCall({
         phoneNumber: this.data.phone,
         success: ()=>{
-          console.log("成功拨打电话")
+          this.contact("热线")
         }
       })
     },

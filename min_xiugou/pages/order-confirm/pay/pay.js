@@ -88,7 +88,8 @@ Page({
   payOrder(payType) { // 普通支付流程
     let name = this.data.payList.payAmount == 0 ? 'sgpay' : 'wxPay'
     API[name]({
-      orderNo: this.data.payList.orderNo
+      orderNo: this.data.payList.orderNo,
+      openId:Storage.getWxOpenid() || '',
     }).then((res) => {
       let datas = res.data || {}
       if (this.data.payList.payAmount == 0) {

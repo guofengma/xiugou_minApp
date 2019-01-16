@@ -70,7 +70,7 @@ export default class ApiUtils {
         if (that.currentConcurrent >= that.maxLimit) {
           await that.startBlocking();
         }
-        const app = getApp();
+        // const app = getApp();
         try {
           that.currentConcurrent++;
           const response = await HttpUtils[method](url, params, reqConfig)
@@ -82,10 +82,10 @@ export default class ApiUtils {
             item.transformResponse && item.transformResponse(response);
             return Promise.resolve(response);
           } else {
-            app.aldstat.sendEvent(url, {
-              url: url,
-              errMsg: response.msg
-            })
+            // app.aldstat.sendEvent(url, {
+            //   url: url,
+            //   errMsg: response.msg
+            // })
             // 假如返回未登陆并且当前页面不是登陆页面则进行跳转
             if (response.code === 10009) {
               let callBack = () => {
@@ -103,10 +103,10 @@ export default class ApiUtils {
         } catch (err) {
           // delete that.cache[val]
           console.log('<============================== 请求结束：' + action + '第' + that.tryCount + '次请求');
-          app.aldstat.sendEvent(url + ':interface error try again', {
-            url: url,
-            count: that.tryCount,
-          })
+          // app.aldstat.sendEvent(url + ':interface error try again', {
+          //   url: url,
+          //   count: that.tryCount,
+          // })
           that.tryCount++;
           if (that.tryCount <= that.maxTryCount) {
             that.result[name]()

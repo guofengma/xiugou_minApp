@@ -47,6 +47,7 @@ Page({
       keyWord: e.currentTarget.dataset.keyword,
       hotWordId:e.currentTarget.dataset.id || ''
     })
+    this.data.isHistory = e.currentTarget.dataset.ishistory? true:false
     this.searchKeyword()
   },
   getKeyword(e){
@@ -122,7 +123,7 @@ Page({
     }
   },
   requestKeyword(){
-    Tool.redirectTo('/pages/search/search-result/search-result?keyword=' + this.data.keyWord + '&hotWordId=' + this.data.hotWordId)
+    Tool.redirectTo('/pages/search/search-result/search-result?keyword=' + this.data.keyWord + '&hotWordId=' + this.data.hotWordId+"&isHistory="+this.data.isHistory)
   },
   requestOrder() {
     Tool.redirectTo('/pages/search/search-order/search-order?condition=' + this.data.keyWord)

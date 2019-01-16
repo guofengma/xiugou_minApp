@@ -33,6 +33,7 @@ Page({
       door: options.door || '',
       inviteId: options.inviteId || ''
     })
+    this.data.preseat = options.preseat || ''
     this.ProductFactory = new ProductFactorys(this)
     this.didLogin()    
     Tool.isIPhoneX(this)
@@ -126,7 +127,7 @@ Page({
     Tool.navigateTo('/pages/order-confirm/order-confirm?params=' + JSON.stringify(params)+'&type=99' )
   },
   addToShoppingCart(){
-    this.ProductFactory.addToShoppingCart("","")
+    this.ProductFactory.addToShoppingCart("","",'产品详情页')
   },
   typeSubClicked(e){
     this.setData({

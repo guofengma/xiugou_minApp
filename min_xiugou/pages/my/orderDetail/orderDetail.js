@@ -440,7 +440,7 @@ Page({
     },
     productClicked(e) {
         let id = e.currentTarget.dataset.productid
-        Tool.navigateTo('/pages/product-detail/product-detail?prodCode=' + id)
+        Tool.navigateTo('/pages/product-detail/product-detail?preseat=订单详情页&prodCode=' + id)
     },
     seeLogistics(e) {
         let express = this.getExpressList()

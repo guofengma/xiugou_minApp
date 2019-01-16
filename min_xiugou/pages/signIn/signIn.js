@@ -50,15 +50,19 @@ Page({
     })
   },
   exchangeTokenCoin(){
+    if(this.data.btnCllick || this.data.userInfos) return
     if (this.data.needXD > this.data.userInfos.userScore){
       Tool.showAlert("秀豆不足")
       return
     }
-    if(this.data.btnCllick) return
     this.data.btnCllick = true
     API.exchangeTokenCoin({}).then((res) => {
       this.data.btnCllick = false
       Tool.showSuccessToast("兑换成功")
+      Tool.sensors("ReceiveOneyuan",{
+        yiYuanCouponsAmount:1,
+        YiYuanCouponsGetMethod:"秀豆兑换"
+      })
       this.getLevel()
     }).catch((res) => {
       this.data.btnCllick = false
@@ -94,9 +98,6 @@ Page({
     Tool.navigateTo('/pages/my/coupon/my-coupon/my-coupon')
   },
   onUnload: function () {
-
-  },
-  onShareAppMessage: function () {
 
   }
 })

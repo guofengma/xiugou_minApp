@@ -27,9 +27,9 @@
 
     <template wx:elif="{{topicTemplateId==4}}" is="topic-temp4" data="{{scrollLeft,topicList,currentTopicListIndex,topicTabWidth}}"/> 
 
-    <template wx:elif="{{topicTemplateId==5}}" is="temp-reducePrice" data="{{topicList,currentTopicListIndex,topicTabWidth}}"/> 
+    <template wx:elif="{{topicTemplateId==5}}" is="temp-reducePrice" data="{{topicList,currentTopicListIndex,topicTabWidth}}"/>
 
-    <template wx:elif="{{topicTemplateId==6}}" is="temp-secKill" data="{{topicList,currentTopicListIndex,topicTabWidth}}"/> 
+    <template wx:elif="{{topicTemplateId==6}}" is="temp-secKill" data="{{topicList,currentTopicListIndex,topicTabWidth}}"/>
     
   <!-- </block> -->
 

@@ -70,6 +70,7 @@ Page({
       } else {
         Tool.switchTab('/pages/index/index')
       }
+      Tool.sensors("Login",{loginMethod:"微信小程序登录"})
     }).catch((res) => {
       if (res.code == 34005) {
         Tool.navigateTo('/pages/register/register?inviteId=' + this.data.inviteCode)
@@ -84,12 +85,13 @@ Page({
     Tool.navigateTo('/pages/login/login')
   },
   getUserInfo(){
+    let that = this
     wx.getUserInfo({
       success: res => {
-        this.getLogin(res.userInfo)
+        that.getLogin(res.userInfo)
       },
       fail: function () {
-        this.tips()
+        that.tips()
       }
     })
   },

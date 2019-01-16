@@ -2,16 +2,16 @@
     <view class="item-ans {{item.active? 'active':''}}"  bindtap="toDetail" data-id="{{item.id}}" data-index='{{index}}' data-key="{{key}}">
       <view class='flexR-sb topBar-item'>
         <view class='coupon-left flexC'>
-          <view class='{{item.active? "red":"gray"}} font-30' wx:if='{{item.type<4 || item.type==11}}'>
+          <view class='font-30' wx:if='{{item.type<4 || item.type==11}}'>
             {{item.type !=3? "¥":''}}
             <text >{{item.value}}</text>
             {{item.type ==3? "折":''}}
           </view>
-          <view class='{{item.active? "red":"gray"}} font-30' wx:elif="{{item.type==4}}">
+          <view class='font-30' wx:elif="{{item.type==4}}">
             <view>商品</view>
             <view>抵扣</view>
           </view>
-          <view class='{{item.active? "red":"gray"}} font-30' wx:else>
+          <view class='font-30' wx:else>
             <view>{{item.value}}</view>
           </view>
           <!-- <view class='gray' >{{item.typeName}}</view> -->

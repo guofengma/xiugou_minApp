@@ -140,7 +140,7 @@
 
 <!--提示框  -->
 
-<tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{orderId}}' num='{{num}}'/>
+<tips-cancel-order isCancel='{{isCancel}}' bind:dismissCancel='dismissCancel' orderNum='{{orderId}}' num='{{num}}' list="{{showPriceList}}"/>
 
 <template is="tips-delete-order" data='{{isDelete}}' />
 

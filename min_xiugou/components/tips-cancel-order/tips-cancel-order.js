@@ -2,6 +2,7 @@ let { Tool, API,Event } = global
 Component({
   properties: {
     isCancel: Boolean,
+    list:Object,
     orderNum:String,
     door:Number,
     num:Number,
@@ -45,6 +46,14 @@ Component({
         cancelReason: this.data.content || '无',
         platformRemarks: this.data.content || '无',
       }).then((res) => {
+        Tool.sensors('CancelPayOrder',{
+          orderID:this.data.orderNum,
+          list:this.data.list,
+          orderAmount:this.data.list.orderAmount,
+          actualPaymentAmount:this.data.list.showAmount || this.data.list.payAmount,
+          transportationCosts:this.data.list.freightAmount,
+          deliveryMethod:"云仓发货",
+        })
         if (this.data.door == 1) {
           this.triggerEvent('cancelOrder', { ...this.data });
         } else {

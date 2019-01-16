@@ -118,6 +118,11 @@ Page({
       } else {
         Tool.redirectTo('/pages/register/register-code/register-code?from=' + this.data.urlFrom)
       }
+      let isInvite = this.data.inviteId || this.data.inviteCode
+      Tool.sensors("SignUp",{
+        signUpMethod:isInvite? "邀请注册":"自主注册",
+        inviteID:this.data.inviteId || this.data.inviteCode
+      })
       // if (this.data.urlFrom){
       //   Tool.navigateTo(decodeURIComponent(this.data.urlFrom))
       // } else{

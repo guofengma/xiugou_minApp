@@ -37,6 +37,7 @@ Page({
     this.setData({
       prodCode: options.code
     })
+    this.data.preseat = options.preseat || ''
     this.ProductFactory = new ProductFactorys(this)
     this.didLogin()
     this.getTopicActivityData();    
@@ -154,7 +155,7 @@ Page({
   },
   onUnload: function () {
     Event.off('didLogin', this.didLogin);
-    this.selectComponent('#promotion').clearInterval();
+    this.selectComponent('#promotion')&&this.selectComponent('#promotion').clearInterval();
     clearTimeout(this.data.jumpCommonProductTimer);
   },
   //倒计时结束 执行下一步操作  刷新当前页面或跳转什么的

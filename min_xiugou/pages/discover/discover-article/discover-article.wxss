@@ -1,5 +1,7 @@
 .discover-article_thumb {
   position: relative;
+  border-radius: 12rpx;
+  overflow: hidden;
 }
 .discover-article_thumb image{
   width: 100%;
@@ -7,15 +9,16 @@
 }
 .discover-article_thumb .discover-article_desc {
   position: absolute;
-  width: 100%;
+  /*width: 100%;*/
   bottom: 0;
   left: 0;
+  text-align: justify;
   font-size: 22rpx;
   line-height:36rpx;
   color: #fff;
   padding: 10rpx 20rpx;
   background: linear-gradient( rgba(255,255,255,0),rgba(0,0,0,0.3));
-  box-sizing: border-box;
+  /*box-sizing: border-box;*/
   height: auto;
 }
 .discover-article_body {

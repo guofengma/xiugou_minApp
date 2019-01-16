@@ -220,6 +220,16 @@ Page({
     let reqName = this.data.serviceNo? 'modifyAfterSale':'applyAfterSale'
     API[reqName](params).then((res) => {
       let datas = res.data || {}
+      if(!this.data.serviceNo){
+        Tool.sensors("ApplyReturn",{
+          orderID:params.orderProductNo,
+          commodityID:this.data.orderInfos.skuCode,
+          commodityName:this.data.orderInfos.productName,
+          commodityAmount:this.data.orderInfos.payAmount,
+          partlyReturn:this.data.applyRefundAmount==this.data.orderInfos.payAmount? false:true,
+          applyReturnCause:params.reason
+        })
+      }
       let serviceNo = ''
       if (datas.serviceNo){
         serviceNo = datas.serviceNo

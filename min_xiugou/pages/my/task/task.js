@@ -28,7 +28,7 @@ Page({
         let data = e.target.dataset;
         return ({
             title: data.remark,
-            path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').id}&jobId=${data.id}`,
+            path: `/pages/my/task/task-share/task-share?inviteId=${Storage.getterFor('userAccountInfo').code}&jobId=${data.id}`,
             imageUrl: `${Config.imgBaseUrl}fexian_img@3x.png`
         });
     }

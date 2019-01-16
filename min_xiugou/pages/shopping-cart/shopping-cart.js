@@ -479,10 +479,10 @@ Page({
         if (state == 1 || state == 3) {
             if (prodsType == 8) {
                 // 跳转到经验专区
-                Tool.navigateTo(`/pages/experience/experience?activityCode=${activityCode}&productCode=${id}`)
+                Tool.navigateTo(`/pages/experience/experience?activityCode=${activityCode}&productCode=${id}&preseat=购物车`)
             } else {
                 // 普通产品
-                Tool.navigateTo('/pages/product-detail/product-detail?door=100&prodCode=' + id)
+                Tool.navigateTo('/pages/product-detail/product-detail?preseat=购物车&door=100&prodCode=' + id)
             }
         }
     },

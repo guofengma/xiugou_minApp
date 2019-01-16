@@ -16,8 +16,10 @@ Page({
     this.setData({
         topicCode: options.code || ''
     });
-    this.getTopicByCode();
+    this.getTopicByCode()
+    this.didLogin()
     Event.on('tip', this.getTopicByCode, this)
+    Event.on('didLogin', this.didLogin, this)
   },
   onUnload() {
     Event.off('tip', this.getTopicByCode)
@@ -39,32 +41,38 @@ Page({
     let id = dataset.id;
     let prdType = dataset.type;  //1秒杀 2降价拍 3礼包 4助力免费领 5专题 99普通商品
     let code = dataset.code;
+    let page = ''
     if (prdType == 99 ){
-      Tool.navigateTo('/pages/product-detail/product-detail?productId=' + code + '&door=1')
+      page ='/pages/product-detail/product-detail?productId=' + code + '&door=1'
     } else if (prdType==3){
-      Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + code + '&door=1')
+      page ='/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + code + '&door=1'
     } else if(prdType == 2){
-      Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + code)
+      page ='/pages/product-detail/discount-detail/discount-detail?code=' + code
     } else if(prdType == 1) {
-      Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code=' + code)
+      page ='/pages/product-detail/seckill-detail/seckill-detail?code=' + code
     } else if(prdType == 5) {
-      Tool.navigateTo(`/pages/topic/topic?code=${code}`);
+      page =`/pages/topic/topic?code=${code}`
     }
+    //埋点需求
+    page = page +"&preseat=专题页"
+    Tool.navigateTo(page)
   },
   // 获取专题信息列表
-  getTopicByCode() {
-    let userInfo = Storage.getUserAccountInfo();
+  getTopicByCode(tabIndex) {
+    console.log(tabIndex)
+    let userInfo = Storage.getUserAccountInfo() || {};
     let params = {
       code: this.data.topicCode,
-      userId: userInfo.id
+      userId: userInfo.code|| ""
     }
     API.getTopicById(params).then((res) => {
-      let data = res.data;
-      if (!data) return
+      let data = res.data
+      data.topicNavbarList || []
+      let topicNavbarListLength = data.topicNavbarList.length;
+      if (!data || !topicNavbarListLength) return
       let width = '';
       wx.getSystemInfo({
         success: function (res) {
-          let topicNavbarListLength = data.topicNavbarList.length;
           if (topicNavbarListLength < 0) {
             width = '0';
             return;
@@ -81,9 +89,11 @@ Page({
       wx.setNavigationBarTitle({
         title: data.name
       })
+      //data.topicNavbarList.length >> 1, // 这里取了个中位数，可能接口会提供
+      let currentTopicListIndex = tabIndex? tabIndex:data.checkIndex
       this.setData({
         topicList: data,
-        currentTopicListIndex: data.checkIndex,//data.topicNavbarList.length >> 1, // 这里取了个中位数，可能接口会提供
+        currentTopicListIndex: currentTopicListIndex,
         topicTabWidth: width,
         topicTemplateId: data.templateId
       })
@@ -94,7 +104,11 @@ Page({
 
   // 是否设置商品提醒
   toggleSubscribeItem(e) {
-    let userInfo = Storage.getUserAccountInfo();
+    if(!this.data.didLogin){
+      Tool.navigateTo('/pages/login-wx/login-wx?isBack=true')
+      return
+    }
+    let userInfo = Storage.getUserAccountInfo() || {};
 
     const data = e.currentTarget.dataset;
 
@@ -105,10 +119,10 @@ Page({
       activityId: data.activityId,
       activityType: data.activityType, //activityType  '活动类型 1.秒杀 2.降价拍 3.优惠套餐 4.助力免费领 5.支付有礼 6满减送 7刮刮乐',
       type: typeVal, // 1订阅 0 取消订阅
-      userId: userInfo.id
+      userId: userInfo.code || ""
     }
     API.addActivitySubscribe(params).then((res) => {
-      this.getTopicByCode();
+      this.getTopicByCode(this.data.currentTopicListIndex);
     }).catch((res) => {
       console.log(res)
     })
@@ -132,5 +146,11 @@ Page({
     } else if(data.type == 2){
       Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + data.code)
     }
-  }
+  },
+  didLogin() {
+    Tool.didLogin(this)
+  },
+  onUnload: function () {
+    Event.off('didLogin', this.didLogin);
+  },
 })

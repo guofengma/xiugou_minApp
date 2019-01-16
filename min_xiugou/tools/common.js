@@ -39,6 +39,7 @@ const adsensePage = {
         page: '/pages/discover/discover-detail/discover-detail?articleCode=',
     },
 }
+//  分享跳转
 const pages = {
     1: adsensePage[4].page,
     2: adsensePage[3].page,

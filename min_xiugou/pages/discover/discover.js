@@ -197,7 +197,7 @@ Page({
     } else if (linkType == 5) {
       url = '/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + code;
     } 
-
+    url = url+'&preseat=秀场'
     Tool.navigateTo(url);
   }
 })

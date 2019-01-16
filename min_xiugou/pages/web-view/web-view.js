@@ -11,16 +11,17 @@ Page({
             2: '/static/protocol/service.html',// 用户协议
             3: '/download',//下载页面
             4: '/static/protocol/signInRule.html', //签到协议
-            5: '/topic/first', // h5专题
+            5: '/topic/second', // h5专题
             6: '/static/protocol/about-us.html', //关于我们
         }
     },
     onLoad: function (options) {
+        let userInfo = Storage.getUserAccountInfo() || {}
         let miniparams = {
             'device': Storage.getPlatform() || '', // 设备唯一标识
             'platform': 'mini', // 小程序标识
             'token': Storage.getToken() || '', // 用户token
-            'userid': Storage.getUserAccountInfo().id || '', // 用户ID
+            'userid': userInfo.id || '', // 用户ID
         }
         if (options.webUrl) { // 指定的url地址
             this.setData({

@@ -828,7 +828,7 @@ export default class Tool {
         global.Storage.setUserAccountInfo(datas)
         global.Event.emit('didLogin');
         global.Storage.setWxOpenid(datas.openid)
-        global.Storage.setMemberId(datas.id)
+        global.Storage.setMemberId(datas.code)
         global.Event.emit('refreshMemberInfoNotice');
     }
 
@@ -1080,6 +1080,15 @@ export default class Tool {
                     return "<br/>"
             }
         })
+    }
+
+    // 埋点方法封装
+
+    static sensors(event,params={}){
+        if(!config.sensorsUrl) return
+        params.platformType = 'miniapp'
+        const app = getApp()
+        app.sensors.track(event, params)
     }
 }
 

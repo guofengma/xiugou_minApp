@@ -18,7 +18,7 @@
         <image src='/img/delete.png' mode='widthFix' bindtap='deleteKeyword'></image>
      </view>
      <view class='cell-result'>
-       <view wx:for='{{historyArr}}' wx:key="unique" bindtap='getHotkeyword' data-keyword='{{item.name}}' >{{item.showName }}</view>
+       <view wx:for='{{historyArr}}' wx:key="unique" bindtap='getHotkeyword' data-keyword='{{item.name}}' data-ishistory="true">{{item.showName }}</view>
      </view>
     </view>
     <view class='hotwords' wx:if='{{door==0}}'>
