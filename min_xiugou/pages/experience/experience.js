@@ -30,8 +30,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    // 从哪里点击进来 入口
+    this.data.preseat = options.preseat || ''
     this.ProductFactory = new ProductFactorys(this);
-    this.didLogin();
+    this.didLogin()
     // this.getNewProd();
     this.init(options);
     Tool.isIPhoneX(this);

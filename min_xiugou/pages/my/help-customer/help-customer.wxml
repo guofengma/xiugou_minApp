@@ -42,5 +42,5 @@
   </view>
   </view>
 </view>
-<contact-seller ></contact-seller> 
+<contact-seller  questionType="我的客服页面"></contact-seller>
 

@@ -41,17 +41,21 @@ Page({
     let id = dataset.id;
     let prdType = dataset.type;  //1秒杀 2降价拍 3礼包 4助力免费领 5专题 99普通商品
     let code = dataset.code;
+    let page = ''
     if (prdType == 99 ){
-      Tool.navigateTo('/pages/product-detail/product-detail?productId=' + code + '&door=1')
+      page ='/pages/product-detail/product-detail?productId=' + code + '&door=1'
     } else if (prdType==3){
-      Tool.navigateTo('/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + code + '&door=1')
+      page ='/pages/product-detail/gift-bag-detail/gift-bag-detail?giftBagId=' + code + '&door=1'
     } else if(prdType == 2){
-      Tool.navigateTo('/pages/product-detail/discount-detail/discount-detail?code=' + code)
+      page ='/pages/product-detail/discount-detail/discount-detail?code=' + code
     } else if(prdType == 1) {
-      Tool.navigateTo('/pages/product-detail/seckill-detail/seckill-detail?code=' + code)
+      page ='/pages/product-detail/seckill-detail/seckill-detail?code=' + code
     } else if(prdType == 5) {
-      Tool.navigateTo(`/pages/topic/topic?code=${code}`);
+      page =`/pages/topic/topic?code=${code}`
     }
+    //埋点需求
+    page = page +"&preseat=专题页"
+    Tool.navigateTo(page)
   },
   // 获取专题信息列表
   getTopicByCode(tabIndex) {

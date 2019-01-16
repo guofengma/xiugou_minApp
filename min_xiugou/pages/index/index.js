@@ -143,7 +143,7 @@ Page({
             }
         }
         if (options.type) { // 页面跳转
-            Tool.navigateTo(this.data.redirectTo[options.type] + options.id)
+            Tool.navigateTo(this.data.redirectTo[options.type] + options.id+"&preseat=分享查询")
             delete options.type
         }
 
@@ -284,6 +284,7 @@ Page({
         let prodtype = e.currentTarget.dataset.prodtype
         let index = e.currentTarget.dataset.index
         let key = e.currentTarget.dataset.key
+        let preseat = e.currentTarget.dataset.preseat || ''
         if (adType == 10) {
             Tool.navigateTo('/pages/web-view/web-view?webUrl='+val)
             return
@@ -313,7 +314,7 @@ Page({
                 page = this.data.pageArr[1].page +val
             }
         }
-
+        page=`${page}&preseat=${preseat}`
         if(this.data.pageArr[adType].tabbar){
             Tool.switchTab(page)
         }else {

@@ -32,4 +32,4 @@
 
 <!--联系卖家  -->
 
- <contact-seller></contact-seller> 
+ <contact-seller questionType="仅退款咨询"></contact-seller>

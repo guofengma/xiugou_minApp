@@ -6,7 +6,7 @@
     <view class='gray'>9:00-17:00</view> -->
      <button class="go-cart-view contact flexC" 
       session-from="nickName={{userInfos.nickname}}|avatarUrl={{userInfos.headImg}}|referrerTitle={{ysf.title}}"
-      open-type="contact"
+      open-type="contact"  bindtap='contact
       >
         <view>在线客服</view>
         <view class='gray'>9:00-22:00</view>

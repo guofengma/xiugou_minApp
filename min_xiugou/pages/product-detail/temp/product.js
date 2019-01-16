@@ -4,7 +4,15 @@ export default class ProductFactorys {
     constructor(page) {
         this.page = page
     }
-
+    getSensors(){
+        return {
+            commodityID:this.page.data.productInfo.prodCode,//商品ID
+            commodityName:this.page.data.productInfo.name,//商品名称
+            firstCommodity:this.page.data.productInfo.firstCategoryName,//商品一级类目
+            secondCommodity:this.page.data.selectType.secCategoryName,//商品二级类目
+            pricePerCommodity:this.page.data.productInfo.originalPrice,//商品单价
+        }
+    }
     requestFindProductByIdApp(callBack = () => {
     }) { // 产品详情接口请求
         API.getProductDetailByCode({
@@ -53,7 +61,10 @@ export default class ProductFactorys {
             })
             // 渲染表格
             this.renderTable(datas.paramList || {}, 'paramName', 'paramValue')
-
+            Tool.sensors("CommodityDetail",{
+                ...this.getSensors(),
+                preseat:this.page.data.preseat || "",
+            })
             // 渲染详情图文
             // this.page.selectComponent("#productInfos").initDatas()
             // 执行额外需要做的操作
@@ -147,10 +158,8 @@ export default class ProductFactorys {
             shoppingCartParamList: [params]
         }).then((res) => {
             Tool.sensors('AddToShoppingcart', {
+                ...this.getSensors(),
                 commodityID: this.page.data.selectType.skuCode,
-                commodityName: this.page.data.productInfo.name,
-                firstCommodity: this.page.data.productInfo.firstCategoryName,
-                secondCommodity: this.page.data.selectType.secCategoryName,
                 pricePerCommodity: this.page.data.selectType.price,
                 commodityNumber: this.page.data.selectType.buyCount,
                 shoppingcartEntrance: sourceName || "产品详情页'",
@@ -336,14 +345,10 @@ export default class ProductFactorys {
         let imgUrl = this.page.data.productInfo.imgUrl ? this.page.data.productInfo.imgUrl : ''
         let name = this.page.data.productInfo.name || ""
         name = this.page.data.productInfo.name.length > 10 ? this.page.data.productInfo.name.slice(0, 10) + "..." : this.page.data.productInfo.name
-    //     Tool.sensors('Share', {
-    //         commodityID: commodityName,
-    //     this.page.data.productInfo.name,
-    //         firstCommodity
-    //     secondCommodity
-    //     pricePerCommodity
-    //     shareMethod
-    // })
+        Tool.sensors('Share', {
+            ...this.getSensors(),
+            shareMethod:"微信"
+        })
         return {
             title: name,
             path: `/pages/index/index?type=${typeId}&id=${id}&inviteId=${inviteCode}`,

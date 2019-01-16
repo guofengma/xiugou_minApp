@@ -33,6 +33,7 @@ Page({
       door: options.door || '',
       inviteId: options.inviteId || ''
     })
+    this.data.preseat = options.preseat || ''
     this.ProductFactory = new ProductFactorys(this)
     this.didLogin()    
     Tool.isIPhoneX(this)

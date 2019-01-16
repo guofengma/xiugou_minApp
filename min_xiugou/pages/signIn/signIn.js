@@ -59,6 +59,10 @@ Page({
     API.exchangeTokenCoin({}).then((res) => {
       this.data.btnCllick = false
       Tool.showSuccessToast("兑换成功")
+      Tool.sensors("ReceiveOneyuan",{
+        yiYuanCouponsAmount:1,
+        YiYuanCouponsGetMethod:"秀豆兑换"
+      })
       this.getLevel()
     }).catch((res) => {
       this.data.btnCllick = false

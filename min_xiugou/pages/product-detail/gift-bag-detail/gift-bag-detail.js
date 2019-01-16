@@ -22,6 +22,7 @@ Page({
     this.setData({
       giftBagId: options.giftBagId || ''
     })
+    this.data.preseat = options.preseat || ''
     this.ProductFactory = new ProductFactorys(this)
     this.didLogin()
     Event.on('didLogin', this.didLogin, this);
@@ -111,14 +112,18 @@ Page({
       this.setData({
         imgUrls: datas.imgFileList,
         productInfo: datas,
-        // priceList: datas.priceList,
         productId: datas.id,
         productTypeList: specPriceList
       })
 
       // 渲染表格
       this.ProductFactory.renderTable(datas.paramValueList || {}, 'paramName', 'paramValue')
-
+      Tool.sensors("CommodityDetail",{
+        preseat:this.data.preseat,
+        commodityID:datas.packageCode,
+        commodityName:datas.name,
+        pricePerCommodity:datas.levelPrice
+      })
       // this.selectComponent("#productInfos").initDatas()
     }).catch((res) => {
       console.log(res)

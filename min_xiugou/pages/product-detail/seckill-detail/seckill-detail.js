@@ -37,6 +37,7 @@ Page({
     this.setData({
       prodCode: options.code
     })
+    this.data.preseat = options.preseat || ''
     this.ProductFactory = new ProductFactorys(this)
     this.didLogin()
     this.getTopicActivityData();    
