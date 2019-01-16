@@ -336,14 +336,14 @@ export default class ProductFactorys {
         let imgUrl = this.page.data.productInfo.imgUrl ? this.page.data.productInfo.imgUrl : ''
         let name = this.page.data.productInfo.name || ""
         name = this.page.data.productInfo.name.length > 10 ? this.page.data.productInfo.name.slice(0, 10) + "..." : this.page.data.productInfo.name
-        Tool.sensors('Share', {
-            commodityID:
-            commodityName:this.page.data.productInfo.name,
-            firstCommodity
-        secondCommodity
-        pricePerCommodity
-        shareMethod
-    })
+    //     Tool.sensors('Share', {
+    //         commodityID: commodityName,
+    //     this.page.data.productInfo.name,
+    //         firstCommodity
+    //     secondCommodity
+    //     pricePerCommodity
+    //     shareMethod
+    // })
         return {
             title: name,
             path: `/pages/index/index?type=${typeId}&id=${id}&inviteId=${inviteCode}`,
