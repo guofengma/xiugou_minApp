@@ -27,7 +27,7 @@ Page({
     if (options.inviteId == 'null' || options.inviteId == 'undefined' || !options.inviteId) {
       inviteId = ''
     }
-    app.deleteInviteId()
+    // app.deleteInviteId()
     let upUserId = Storage.getUpUserId() || {}
     // Tool.showAlert(upUserId.id)
     this.setData({

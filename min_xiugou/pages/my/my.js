@@ -9,6 +9,7 @@ Page({
       userInfos:'',
       tabClicked:1,
       num:0,
+      isShowLevel:false,
       pageArr:[
         "/pages/my/setting/setting", // 设置
         "/pages/my/information/information",//我的消息
@@ -94,6 +95,7 @@ Page({
         this.setData({
           userInfos: datas,
           range: (Number(datas.experience) - Number(datas.levelFloor)) / (Number(datas.levelCeil) - Number(datas.levelFloor)) * 100,
+          isShowLevel:true
         })
         this.initDatas()
         this.render()
@@ -133,7 +135,11 @@ Page({
       if (!Tool.didLogin(this)){
         if (isGoLogin){
           Tool.navigateTo('/pages/login-wx/login-wx')
-        }   
+        } else{
+          this.setData({
+            isShowLevel:false
+          })
+        }
         return false
       }
       return true

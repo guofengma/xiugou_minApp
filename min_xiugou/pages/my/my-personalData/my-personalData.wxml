@@ -26,7 +26,7 @@
                 <text>会员号</text>
             </view>
             <view>
-                <text>{{userInfos.code||''}}</text>
+                <text> {{userInfos.code ||''}}</text>
             </view>
         </view>
         <view class="item line">

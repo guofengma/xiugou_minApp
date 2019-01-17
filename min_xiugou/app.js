@@ -26,7 +26,7 @@ App({
         this.getSystemInfo();
         this.wxLogin()
         let systemInfo = wx.getSystemInfoSync()
-        this.deleteInviteId()
+        // this.deleteInviteId()
     },
     onShow: function () {
 
@@ -61,7 +61,7 @@ App({
     },
     shareClick(userId) {
         if (userId !== 'null' && userId !== 'undefined' && userId) {
-            API.shareClick({userId: userId}).then(res => {
+            API.shareClick({userCode: userId}).then(res => {
             });
         }
     },

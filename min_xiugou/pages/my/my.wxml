@@ -19,13 +19,13 @@
         </view>
 
         <view class='my-rank' wx:if='{{didLogin}}'>
-          会员号 {{userInfos.code || ''}}
+          会员号 {{userInfos.code  || ''}}
         </view>
       </view>
     </view>
-    <view class='my-save flexR-sb' catchtap='levelClicked'>
+    <view class='my-save flexR-sb' wx:if="{{isShowLevel}}" catchtap='levelClicked'>
      <view class='level-circle'>
-      <canvas style="width: 80rpx; height: 80rpx;" canvas-id="firstCanvas"></canvas>
+      <canvas  style="width: 80rpx; height: 80rpx;" canvas-id="firstCanvas"></canvas>
      </view>
      <view class='level-content'>
         <view class='levelName'>{{userInfos.levelName || ''}}品鉴官</view>
