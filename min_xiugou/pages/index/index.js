@@ -1,20 +1,14 @@
 //index.js
 //获取应用实例
 const app = getApp()
-import {pages,adsensePage} from '../../tools/common.js'
+import {pages,adsensePage,indexIcon} from '../../tools/common.js'
 let {Tool, Event, Storage, API} = global;
 
 Page({
     data: {
         pageArr: adsensePage,
         redirectTo: pages,
-        iconArr: [ // icon 图标
-            {name: '分享', img: 'home_icon_fenxing_nor@3x.png', page: '/pages/topic/topic?code=ZT2018000001'},
-            {name: '秀场', img: 'home_icon_xiuchang_nor@3x.png', page: '/pages/discover/discover', tabbar: true},
-            {name: '签到', img: 'home_icon_qiangdao_nor@3x.png', page: '/pages/signIn/signIn', login: true},
-            {name: '必看', img: 'home_icon_bikan_nor@3x.png', page: '/pages/discover/discover-detail/discover-detail?articleCode=FX181226000001'},
-            {name: '秒杀', img: 'home_icon_miaoshao_nor@3x.png', page: '/pages/topic/topic?code=ZT2018000002'},
-        ],
+        iconArr: [...indexIcon],
         imgUrls: [],// 轮播
         adArr: [],// 广告位
         starShop: [], // 明星店铺
@@ -121,7 +115,8 @@ Page({
             todayList: [], // 今日榜单
             fineQuality: [],//精品推荐
             noticeArr: [],// 头条
-            recommendArr: []
+            recommendArr: [],
+            iconArr: [...indexIcon],
         })
         this.data.params.page =1
         this.didLogin()
@@ -151,6 +146,10 @@ Page({
     initRequset(){
         //  轮播图片
         this.queryAdList(1, 'imgUrls')
+
+        //  icon请求
+        this.indexQueryCategoryList()
+
         // 推荐位
         this.queryAdList(2, 'adArr')
         // 今日榜单
@@ -175,7 +174,6 @@ Page({
             })
         })
         this.queryFeaturedList()
-        this.indexQueryCategoryList()
     },
     onUnload(){
         Storage.setUpUserId(null)

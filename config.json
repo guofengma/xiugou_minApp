@@ -30,7 +30,7 @@
     "rasClient":"miniapp",
     "imgSizeParams":{
       "m_fixed":"?x-oss-process=image/resize,m_fixed,h_300,w_300",
-      "m_fill": "?x-oss-process=image/resize,p_65",
+      "m_fill": "?x-oss-process=image/resize,p_85",
       "m_mfit": "?x-oss-process=image/resize,m_mfit,h_300,w_300"
     }
   },

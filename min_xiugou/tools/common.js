@@ -51,4 +51,14 @@ const pages = {
     101: '/pages/register/register?inviteId=',
     102: '/pages/discover/discover-detail/discover-detail?articleId='
 }
-export {pages, adsensePage}
+
+// 首页标签
+
+const indexIcon = [
+    {name: '分享', img: 'home_icon_fenxing_nor@3x.png', page: `${adsensePage[2].page}ZT2018000001`},
+    {name: '秀场', img: 'home_icon_xiuchang_nor@3x.png', page: '/pages/discover/discover', tabbar: true},
+    {name: '签到', img: 'home_icon_qiangdao_nor@3x.png', page: '/pages/signIn/signIn', login: true},
+    {name: '必看', img: 'home_icon_bikan_nor@3x.png', page: `${adsensePage[11].page}FX181226000001`},
+    {name: '秒杀', img: 'home_icon_miaoshao_nor@3x.png', page: `${adsensePage[2].page}ZT2018000002`},
+]
+export {pages, adsensePage,indexIcon}
